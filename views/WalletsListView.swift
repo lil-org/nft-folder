@@ -28,10 +28,7 @@ struct WalletsListView: View {
                                 Circle()
                                     .frame(width: 30, height: 30)
                                     .overlay(
-                                        Image(nsImage: Blockies(seed: wallet.address.lowercased()).createImage() ?? NSImage())
-                                            .resizable()
-                                            .scaledToFit()
-                                            .clipShape(Circle())
+                                        WalletImageView(wallet: wallet)
                                     )
                                 Text(wallet.displayName)
                             }
