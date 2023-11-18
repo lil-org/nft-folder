@@ -5,7 +5,7 @@ import SwiftUI
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
-
+    
     private enum Request {
         case showWallets, addWallet
         
@@ -19,7 +19,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     private var window: NSWindow?
-
+    private var timer: Timer?
+    private let fileManager = FileManager.default
     private var didFinishLaunching = false
     private var initialRequest: Request?
     
@@ -43,7 +44,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         initialRequest = nil
     }
-
+    
     func application(_ application: NSApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([NSUserActivityRestoring]) -> Void) -> Bool {
         processInput(urlString: userActivity.webpageURL?.absoluteString)
         return true
@@ -76,6 +77,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window?.contentView = NSHostingView(rootView: contentView)
         NSApp.activate(ignoringOtherApps: true)
         window?.makeKeyAndOrderFront(nil)
+        checkFolders()
     }
     
     @objc private func getUrl(_ event: NSAppleEventDescriptor, withReplyEvent replyEvent: NSAppleEventDescriptor) {
@@ -89,9 +91,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             processRequest(.addWallet)
         case "show":
             processRequest(.showWallets)
+        case "monitor":
+            startTimer()
+        case "stop-monitoring":
+            stopTimer()
         default:
-            processRequest(.showWallets)
+            return
         }
+    }
+    
+    private func startTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(checkFolders), userInfo: nil, repeats: true)
+    }
+    
+    private func stopTimer() {
+        timer?.invalidate()
+        timer = nil
+        checkFolders()
+    }
+    
+    @objc private func checkFolders() {
+        guard let path = URL.nftDirectory?.path, let files = try? fileManager.contentsOfDirectory(atPath: path) else { return }
+        // TODO: catch addresses
     }
     
     private func processRequest(_ request: Request) {

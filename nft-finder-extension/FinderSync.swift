@@ -18,15 +18,16 @@ class FinderSync: FIFinderSync {
     // MARK: - Primary Finder Sync protocol methods
     
     override func beginObservingDirectory(at url: URL) {
-        // The user is now seeing the container's contents.
-        // If they see it in more than one view at a time, we're only told once.
-        NSLog("beginObservingDirectoryAtURL: %@", url.path as NSString)
+        if url.lastPathComponent == URL.nftDirectory?.lastPathComponent, let deeplink = URL(string: URL.deeplinkScheme + "?monitor") {
+            DispatchQueue.main.async { NSWorkspace.shared.open(deeplink) }
+        }
     }
     
     
     override func endObservingDirectory(at url: URL) {
-        // The user is no longer seeing the container's contents.
-        NSLog("endObservingDirectoryAtURL: %@", url.path as NSString)
+        if url.lastPathComponent == URL.nftDirectory?.lastPathComponent, let deeplink = URL(string: URL.deeplinkScheme + "?stop-monitoring") {
+            DispatchQueue.main.async { NSWorkspace.shared.open(deeplink) }
+        }
     }
     
     override func requestBadgeIdentifier(for url: URL) {
@@ -100,4 +101,3 @@ class FinderSync: FIFinderSync {
     }
 
 }
-
