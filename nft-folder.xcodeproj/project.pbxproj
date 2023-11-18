@@ -9,27 +9,27 @@
 /* Begin PBXBuildFile section */
 		2CA34B3C2B082BA200DAB623 /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = 2CA34B3B2B082BA200DAB623 /* web3.swift */; };
 		2CA34B3D2B082BDF00DAB623 /* WalletsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCFED972B08246800D98A2E /* WalletsListView.swift */; };
-		2CA34B452B082CFB00DAB623 /* FinderSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B442B082CFB00DAB623 /* FinderSync.swift */; };
-		2CA34B4A2B082CFB00DAB623 /* finder-extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 2CA34B422B082CFB00DAB623 /* finder-extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2CA34B512B08B33C00DAB623 /* WatchOnlyWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B502B08B33C00DAB623 /* WatchOnlyWallet.swift */; };
-		2CA34B522B08B33C00DAB623 /* WatchOnlyWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B502B08B33C00DAB623 /* WatchOnlyWallet.swift */; };
 		2CA34B542B08B54100DAB623 /* NFTMetadataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B532B08B54100DAB623 /* NFTMetadataView.swift */; };
 		2CA34B562B08B6A200DAB623 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B552B08B6A200DAB623 /* Codable.swift */; };
-		2CA34B572B08B6A200DAB623 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B552B08B6A200DAB623 /* Codable.swift */; };
 		2CA34B5A2B08B7CF00DAB623 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B592B08B7CF00DAB623 /* URL.swift */; };
-		2CA34B5B2B08B7CF00DAB623 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B592B08B7CF00DAB623 /* URL.swift */; };
+		2CA34B652B08C01300DAB623 /* FinderSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B642B08C01300DAB623 /* FinderSync.swift */; };
+		2CA34B6A2B08C01300DAB623 /* nft-finder-extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 2CA34B622B08C01300DAB623 /* nft-finder-extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		2CA34B6E2B08C02500DAB623 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B592B08B7CF00DAB623 /* URL.swift */; };
+		2CA34B6F2B08C02500DAB623 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B552B08B6A200DAB623 /* Codable.swift */; };
+		2CA34B702B08C02B00DAB623 /* WatchOnlyWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B502B08B33C00DAB623 /* WatchOnlyWallet.swift */; };
 		2CA4CF552B07F75F00CC75F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA4CF542B07F75F00CC75F4 /* AppDelegate.swift */; };
 		2CA4CF592B07F76000CC75F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CA4CF582B07F76000CC75F4 /* Assets.xcassets */; };
 		2CA4CF5C2B07F76000CC75F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CA4CF5A2B07F76000CC75F4 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		2CA34B482B082CFB00DAB623 /* PBXContainerItemProxy */ = {
+		2CA34B682B08C01300DAB623 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2CA4CF492B07F75E00CC75F4 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 2CA34B412B082CFB00DAB623;
-			remoteInfo = "finder-extension";
+			remoteGlobalIDString = 2CA34B612B08C01300DAB623;
+			remoteInfo = "nft-finder-extension";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -40,7 +40,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				2CA34B4A2B082CFB00DAB623 /* finder-extension.appex in Embed Foundation Extensions */,
+				2CA34B6A2B08C01300DAB623 /* nft-finder-extension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -48,14 +48,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2CA34B422B082CFB00DAB623 /* finder-extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "finder-extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2CA34B442B082CFB00DAB623 /* FinderSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderSync.swift; sourceTree = "<group>"; };
-		2CA34B462B082CFB00DAB623 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2CA34B472B082CFB00DAB623 /* finder_extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = finder_extension.entitlements; sourceTree = "<group>"; };
 		2CA34B502B08B33C00DAB623 /* WatchOnlyWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchOnlyWallet.swift; sourceTree = "<group>"; };
 		2CA34B532B08B54100DAB623 /* NFTMetadataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTMetadataView.swift; sourceTree = "<group>"; };
 		2CA34B552B08B6A200DAB623 /* Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
 		2CA34B592B08B7CF00DAB623 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
+		2CA34B622B08C01300DAB623 /* nft-finder-extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "nft-finder-extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CA34B642B08C01300DAB623 /* FinderSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderSync.swift; sourceTree = "<group>"; };
+		2CA34B662B08C01300DAB623 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2CA34B672B08C01300DAB623 /* nft_finder_extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = nft_finder_extension.entitlements; sourceTree = "<group>"; };
 		2CA4CF512B07F75F00CC75F4 /* nft-folder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nft-folder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CA4CF542B07F75F00CC75F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2CA4CF582B07F76000CC75F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -67,7 +67,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		2CA34B3F2B082CFB00DAB623 /* Frameworks */ = {
+		2CA34B5F2B08C01300DAB623 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -85,16 +85,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2CA34B432B082CFB00DAB623 /* finder-extension */ = {
-			isa = PBXGroup;
-			children = (
-				2CA34B442B082CFB00DAB623 /* FinderSync.swift */,
-				2CA34B462B082CFB00DAB623 /* Info.plist */,
-				2CA34B472B082CFB00DAB623 /* finder_extension.entitlements */,
-			);
-			path = "finder-extension";
-			sourceTree = "<group>";
-		};
 		2CA34B4F2B08B32600DAB623 /* shared */ = {
 			isa = PBXGroup;
 			children = (
@@ -113,12 +103,22 @@
 			path = extensions;
 			sourceTree = "<group>";
 		};
+		2CA34B632B08C01300DAB623 /* nft-finder-extension */ = {
+			isa = PBXGroup;
+			children = (
+				2CA34B642B08C01300DAB623 /* FinderSync.swift */,
+				2CA34B662B08C01300DAB623 /* Info.plist */,
+				2CA34B672B08C01300DAB623 /* nft_finder_extension.entitlements */,
+			);
+			path = "nft-finder-extension";
+			sourceTree = "<group>";
+		};
 		2CA4CF482B07F75E00CC75F4 = {
 			isa = PBXGroup;
 			children = (
 				2CA4CF532B07F75F00CC75F4 /* nft-folder */,
 				2CA34B4F2B08B32600DAB623 /* shared */,
-				2CA34B432B082CFB00DAB623 /* finder-extension */,
+				2CA34B632B08C01300DAB623 /* nft-finder-extension */,
 				2CA4CF522B07F75F00CC75F4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -127,7 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				2CA4CF512B07F75F00CC75F4 /* nft-folder.app */,
-				2CA34B422B082CFB00DAB623 /* finder-extension.appex */,
+				2CA34B622B08C01300DAB623 /* nft-finder-extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -150,21 +150,21 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2CA34B412B082CFB00DAB623 /* finder-extension */ = {
+		2CA34B612B08C01300DAB623 /* nft-finder-extension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2CA34B4B2B082CFB00DAB623 /* Build configuration list for PBXNativeTarget "finder-extension" */;
+			buildConfigurationList = 2CA34B6B2B08C01300DAB623 /* Build configuration list for PBXNativeTarget "nft-finder-extension" */;
 			buildPhases = (
-				2CA34B3E2B082CFB00DAB623 /* Sources */,
-				2CA34B3F2B082CFB00DAB623 /* Frameworks */,
-				2CA34B402B082CFB00DAB623 /* Resources */,
+				2CA34B5E2B08C01300DAB623 /* Sources */,
+				2CA34B5F2B08C01300DAB623 /* Frameworks */,
+				2CA34B602B08C01300DAB623 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "finder-extension";
-			productName = "finder-extension";
-			productReference = 2CA34B422B082CFB00DAB623 /* finder-extension.appex */;
+			name = "nft-finder-extension";
+			productName = "nft-finder-extension";
+			productReference = 2CA34B622B08C01300DAB623 /* nft-finder-extension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		2CA4CF502B07F75E00CC75F4 /* nft-folder */ = {
@@ -180,7 +180,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				2CA34B492B082CFB00DAB623 /* PBXTargetDependency */,
+				2CA34B692B08C01300DAB623 /* PBXTargetDependency */,
 			);
 			name = "nft-folder";
 			packageProductDependencies = (
@@ -200,7 +200,7 @@
 				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
-					2CA34B412B082CFB00DAB623 = {
+					2CA34B612B08C01300DAB623 = {
 						CreatedOnToolsVersion = 15.0.1;
 					};
 					2CA4CF502B07F75E00CC75F4 = {
@@ -225,13 +225,13 @@
 			projectRoot = "";
 			targets = (
 				2CA4CF502B07F75E00CC75F4 /* nft-folder */,
-				2CA34B412B082CFB00DAB623 /* finder-extension */,
+				2CA34B612B08C01300DAB623 /* nft-finder-extension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		2CA34B402B082CFB00DAB623 /* Resources */ = {
+		2CA34B602B08C01300DAB623 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -272,14 +272,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		2CA34B3E2B082CFB00DAB623 /* Sources */ = {
+		2CA34B5E2B08C01300DAB623 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CA34B522B08B33C00DAB623 /* WatchOnlyWallet.swift in Sources */,
-				2CA34B452B082CFB00DAB623 /* FinderSync.swift in Sources */,
-				2CA34B572B08B6A200DAB623 /* Codable.swift in Sources */,
-				2CA34B5B2B08B7CF00DAB623 /* URL.swift in Sources */,
+				2CA34B652B08C01300DAB623 /* FinderSync.swift in Sources */,
+				2CA34B6E2B08C02500DAB623 /* URL.swift in Sources */,
+				2CA34B702B08C02B00DAB623 /* WatchOnlyWallet.swift in Sources */,
+				2CA34B6F2B08C02500DAB623 /* Codable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,10 +299,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		2CA34B492B082CFB00DAB623 /* PBXTargetDependency */ = {
+		2CA34B692B08C01300DAB623 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2CA34B412B082CFB00DAB623 /* finder-extension */;
-			targetProxy = 2CA34B482B082CFB00DAB623 /* PBXContainerItemProxy */;
+			target = 2CA34B612B08C01300DAB623 /* nft-finder-extension */;
+			targetProxy = 2CA34B682B08C01300DAB623 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -318,18 +318,18 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		2CA34B4C2B082CFB00DAB623 /* Debug */ = {
+		2CA34B6C2B08C01300DAB623 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "finder-extension/finder_extension.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "nft-finder-extension/nft_finder_extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8DXC3N7E7P;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "finder-extension/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "finder-extension";
+				INFOPLIST_FILE = "nft-finder-extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "nft-finder-extension";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -338,7 +338,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder.finder-extension";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder.nft-finder-extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -346,18 +346,18 @@
 			};
 			name = Debug;
 		};
-		2CA34B4D2B082CFB00DAB623 /* Release */ = {
+		2CA34B6D2B08C01300DAB623 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "finder-extension/finder_extension.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "nft-finder-extension/nft_finder_extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8DXC3N7E7P;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "finder-extension/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "finder-extension";
+				INFOPLIST_FILE = "nft-finder-extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "nft-finder-extension";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -366,7 +366,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder.finder-extension";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder.nft-finder-extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -505,6 +505,7 @@
 				DEVELOPMENT_TEAM = 8DXC3N7E7P;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
@@ -535,6 +536,7 @@
 				DEVELOPMENT_TEAM = 8DXC3N7E7P;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
@@ -555,11 +557,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2CA34B4B2B082CFB00DAB623 /* Build configuration list for PBXNativeTarget "finder-extension" */ = {
+		2CA34B6B2B08C01300DAB623 /* Build configuration list for PBXNativeTarget "nft-finder-extension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2CA34B4C2B082CFB00DAB623 /* Debug */,
-				2CA34B4D2B082CFB00DAB623 /* Release */,
+				2CA34B6C2B08C01300DAB623 /* Debug */,
+				2CA34B6D2B08C01300DAB623 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
