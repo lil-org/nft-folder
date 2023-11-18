@@ -5,6 +5,7 @@ import SwiftUI
 
 struct WalletsListView: View {
     
+    @State private var isWaiting = false
     @State private var showAddWalletPopup: Bool
     @State private var newWalletAddress = ""
     @State private var wallets = WalletsService.shared.wallets
@@ -63,10 +64,19 @@ struct WalletsListView: View {
                     Spacer()
                     Button("cancel", action: {
                         showAddWalletPopup = false
+                        newWalletAddress = ""
+                        isWaiting = false
                     })
-                    Button("ok", action: {
-                        addWallet()
-                    })
+                    
+                    if isWaiting {
+                        ProgressView().progressViewStyle(.circular).scaleEffect(0.5)
+                    } else {
+                        Button("ok", action: {
+                            addWallet()
+                        })
+                    }
+                    
+                    
                 }
             }.frame(width: 320)
                 .padding()
@@ -74,15 +84,19 @@ struct WalletsListView: View {
     }
     
     func addWallet() {
+        isWaiting = true
         WalletsService.shared.resolveENS(newWalletAddress) { result in
             if case .success(let response) = result {
-                let wallet = WatchOnlyWallet(address: response.address, name: response.name, avatar: response.avatar)
-                Defaults.addWallet(wallet)
-                updateDisplayedWallets()
+                if showAddWalletPopup {
+                    let wallet = WatchOnlyWallet(address: response.address, name: response.name, avatar: response.avatar)
+                    Defaults.addWallet(wallet)
+                    updateDisplayedWallets()
+                }
                 showAddWalletPopup = false
                 newWalletAddress = ""
+                isWaiting = false
             } else {
-                // TODO: smth
+                isWaiting = false
             }
         }
     }
