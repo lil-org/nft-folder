@@ -7,11 +7,11 @@ import SwiftUI
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     private enum Request {
-        case showWallets
+        case showWallets, addWallet
         
         var isNotShowWallets: Bool {
             switch self {
-            case .showWallets:
+            case .showWallets, .addWallet:
                 return false
             }
         }
@@ -45,7 +45,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func application(_ application: NSApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([NSUserActivityRestoring]) -> Void) -> Bool {
-        processInput(url: userActivity.webpageURL?.absoluteString)
+        processInput(urlString: userActivity.webpageURL?.absoluteString)
         return true
     }
     
@@ -53,10 +53,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         _ = URL.nftDirectory
     }
     
-    private func showPopup() {
-        // TODO: tune depending on a request
-        let contentView = WalletsListView(showAddWalletPopup: false)
-        
+    private func showPopup(addWallet: Bool) {
+        window?.close()
+        let contentView = WalletsListView(showAddWalletPopup: addWallet)
         window = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: 300, height: 400),
             styleMask: [.closable, .fullSizeContentView, .titled],
@@ -80,12 +79,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc private func getUrl(_ event: NSAppleEventDescriptor, withReplyEvent replyEvent: NSAppleEventDescriptor) {
-        processInput(url: event.paramDescriptor(forKeyword: keyDirectObject)?.stringValue)
+        processInput(urlString: event.paramDescriptor(forKeyword: keyDirectObject)?.stringValue)
     }
     
-    private func processInput(url: String?) {
-        guard let url = url else { return }
-        if url.hasPrefix(URL.deeplinkScheme) {
+    private func processInput(urlString: String?) {
+        guard let urlString = urlString, urlString.hasPrefix(URL.deeplinkScheme), let url = URL(string: urlString), let q = url.query() else { return }
+        switch q {
+        case "add":
+            processRequest(.addWallet)
+        case "show":
+            processRequest(.showWallets)
+        default:
             processRequest(.showWallets)
         }
     }
@@ -94,7 +98,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if didFinishLaunching {
             switch request {
             case .showWallets:
-                showPopup()
+                showPopup(addWallet: false)
+            case .addWallet:
+                showPopup(addWallet: true)
             }
         } else {
             initialRequest = request

@@ -59,7 +59,6 @@ class FinderSync: FIFinderSync {
             menu.addItem(withTitle: "💎 view nft", action: #selector(nftView(_:)), keyEquivalent: "")
         case .toolbarItemMenu:
             menu.addItem(withTitle: "📂 open nft folder", action: #selector(openNFTDirectory(_:)), keyEquivalent: "")
-            menu.addItem(withTitle: "🔄 force refresh", action: #selector(forceRefresh(_:)), keyEquivalent: "")
             menu.addItem(withTitle: "🪪 edit wallets list", action: #selector(showWallets(_:)), keyEquivalent: "")
             menu.addItem(withTitle: "🆕 add a wallet", action: #selector(addWallet(_:)), keyEquivalent: "")
         case .contextualMenuForContainer, .contextualMenuForSidebar:
@@ -70,18 +69,14 @@ class FinderSync: FIFinderSync {
         return menu
     }
     
-    @IBAction private func forceRefresh(_ sender: AnyObject?) {
-        // TODO: implement
-        showWallets(nil)
-    }
-    
     @IBAction private func addWallet(_ sender: AnyObject?) {
-        // TODO: implement
-        showWallets(nil)
+        if let url = URL(string: URL.deeplinkScheme + "?add") {
+            DispatchQueue.main.async { NSWorkspace.shared.open(url) }
+        }
     }
     
     @IBAction private func showWallets(_ sender: AnyObject?) {
-        if let url = URL(string: URL.deeplinkScheme) {
+        if let url = URL(string: URL.deeplinkScheme + "?show") {
             DispatchQueue.main.async { NSWorkspace.shared.open(url) }
         }
     }
