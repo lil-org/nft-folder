@@ -50,21 +50,34 @@ class FinderSync: FIFinderSync {
     }
     
     override var toolbarItemToolTip: String {
-        return "nft-folder: click the toolbar item for a menu."
+        return "click for a menu"
     }
     
     override var toolbarItemImage: NSImage {
-        return NSImage(named: NSImage.cautionName)!
+        return NSImage(named: "icon")!
     }
     
     override func menu(for menuKind: FIMenuKind) -> NSMenu {
         // Produce a menu for the extension.
         let menu = NSMenu(title: "")
-        menu.addItem(withTitle: "open nft folder", action: #selector(sampleAction(_:)), keyEquivalent: "")
+        menu.addItem(withTitle: "📁 open nft folder", action: #selector(openNFTDirectory(_:)), keyEquivalent: "")
+        menu.addItem(withTitle: "🪪 show wallets", action: #selector(openNFTDirectory(_:)), keyEquivalent: "")
+        
+        // menu.addItem(withTitle: "sample action", action: #selector(sampleAction(_:)), keyEquivalent: "")
         return menu
     }
     
-    @IBAction func sampleAction(_ sender: AnyObject?) {
+    @IBAction func showWallets(_ sender: AnyObject?) {
+        // TODO: implement
+    }
+    
+    @IBAction func openNFTDirectory(_ sender: AnyObject?) {
+        if let url = URL.nftDirectory {
+            NSWorkspace().open(url)
+        }
+    }
+    
+    private func sampleAction(_ sender: AnyObject?) {
         let target = FIFinderSyncController.default().targetedURL()
         let items = FIFinderSyncController.default().selectedItemURLs()
         

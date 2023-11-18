@@ -18,6 +18,7 @@
 		2CA34B6E2B08C02500DAB623 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B592B08B7CF00DAB623 /* URL.swift */; };
 		2CA34B6F2B08C02500DAB623 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B552B08B6A200DAB623 /* Codable.swift */; };
 		2CA34B702B08C02B00DAB623 /* WatchOnlyWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B502B08B33C00DAB623 /* WatchOnlyWallet.swift */; };
+		2CA34B732B08C71800DAB623 /* ExtensionAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CA34B722B08C71800DAB623 /* ExtensionAssets.xcassets */; };
 		2CA4CF552B07F75F00CC75F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA4CF542B07F75F00CC75F4 /* AppDelegate.swift */; };
 		2CA4CF592B07F76000CC75F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CA4CF582B07F76000CC75F4 /* Assets.xcassets */; };
 		2CA4CF5C2B07F76000CC75F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CA4CF5A2B07F76000CC75F4 /* Main.storyboard */; };
@@ -56,6 +57,7 @@
 		2CA34B642B08C01300DAB623 /* FinderSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderSync.swift; sourceTree = "<group>"; };
 		2CA34B662B08C01300DAB623 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2CA34B672B08C01300DAB623 /* nft_finder_extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = nft_finder_extension.entitlements; sourceTree = "<group>"; };
+		2CA34B722B08C71800DAB623 /* ExtensionAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ExtensionAssets.xcassets; sourceTree = "<group>"; };
 		2CA4CF512B07F75F00CC75F4 /* nft-folder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nft-folder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CA4CF542B07F75F00CC75F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2CA4CF582B07F76000CC75F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 		2CA34B632B08C01300DAB623 /* nft-finder-extension */ = {
 			isa = PBXGroup;
 			children = (
+				2CA34B722B08C71800DAB623 /* ExtensionAssets.xcassets */,
 				2CA34B642B08C01300DAB623 /* FinderSync.swift */,
 				2CA34B662B08C01300DAB623 /* Info.plist */,
 				2CA34B672B08C01300DAB623 /* nft_finder_extension.entitlements */,
@@ -235,6 +238,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CA34B732B08C71800DAB623 /* ExtensionAssets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
