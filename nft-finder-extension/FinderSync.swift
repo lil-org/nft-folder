@@ -46,11 +46,11 @@ class FinderSync: FIFinderSync {
     // MARK: - Menu and toolbar item support
     
     override var toolbarItemName: String {
-        return "FinderSy"
+        return "nft"
     }
     
     override var toolbarItemToolTip: String {
-        return "FinderSy: Click the toolbar item for a menu."
+        return "nft-folder: click the toolbar item for a menu."
     }
     
     override var toolbarItemImage: NSImage {
@@ -60,7 +60,7 @@ class FinderSync: FIFinderSync {
     override func menu(for menuKind: FIMenuKind) -> NSMenu {
         // Produce a menu for the extension.
         let menu = NSMenu(title: "")
-        menu.addItem(withTitle: "Example Menu Item", action: #selector(sampleAction(_:)), keyEquivalent: "")
+        menu.addItem(withTitle: "open nft folder", action: #selector(sampleAction(_:)), keyEquivalent: "")
         return menu
     }
     
