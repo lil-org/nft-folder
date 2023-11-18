@@ -5,8 +5,8 @@ import Foundation
 struct WatchOnlyWallet: Codable {
     
     let address: String
-    let ens: String?
-    let avatarURLString: String?
+    let name: String?
+    let avatar: String?
     let markedAsMy: Bool
     
 }

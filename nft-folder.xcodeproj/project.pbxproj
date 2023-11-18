@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2CA34B3C2B082BA200DAB623 /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = 2CA34B3B2B082BA200DAB623 /* web3.swift */; };
+		2C0D86C42B08E67000106915 /* WalletsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C32B08E67000106915 /* WalletsService.swift */; };
+		2C0D86C52B08E67000106915 /* WalletsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C32B08E67000106915 /* WalletsService.swift */; };
+		2C0D86C72B08E7BF00106915 /* ENSResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C62B08E7BF00106915 /* ENSResponse.swift */; };
+		2C0D86C82B08E7BF00106915 /* ENSResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C62B08E7BF00106915 /* ENSResponse.swift */; };
 		2CA34B3D2B082BDF00DAB623 /* WalletsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCFED972B08246800D98A2E /* WalletsListView.swift */; };
 		2CA34B512B08B33C00DAB623 /* WatchOnlyWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B502B08B33C00DAB623 /* WatchOnlyWallet.swift */; };
 		2CA34B542B08B54100DAB623 /* NFTMetadataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B532B08B54100DAB623 /* NFTMetadataView.swift */; };
@@ -49,6 +52,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2C0D86C32B08E67000106915 /* WalletsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsService.swift; sourceTree = "<group>"; };
+		2C0D86C62B08E7BF00106915 /* ENSResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENSResponse.swift; sourceTree = "<group>"; };
 		2CA34B502B08B33C00DAB623 /* WatchOnlyWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchOnlyWallet.swift; sourceTree = "<group>"; };
 		2CA34B532B08B54100DAB623 /* NFTMetadataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTMetadataView.swift; sourceTree = "<group>"; };
 		2CA34B552B08B6A200DAB623 /* Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
@@ -81,17 +86,34 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CA34B3C2B082BA200DAB623 /* web3.swift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2CA34B4F2B08B32600DAB623 /* shared */ = {
+		2C0D86C92B08E7C600106915 /* models */ = {
 			isa = PBXGroup;
 			children = (
 				2CA34B502B08B33C00DAB623 /* WatchOnlyWallet.swift */,
+				2C0D86C62B08E7BF00106915 /* ENSResponse.swift */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		2C0D86CA2B08E7D900106915 /* services */ = {
+			isa = PBXGroup;
+			children = (
+				2C0D86C32B08E67000106915 /* WalletsService.swift */,
+			);
+			path = services;
+			sourceTree = "<group>";
+		};
+		2CA34B4F2B08B32600DAB623 /* shared */ = {
+			isa = PBXGroup;
+			children = (
+				2C0D86CA2B08E7D900106915 /* services */,
+				2C0D86C92B08E7C600106915 /* models */,
 				2CA34B582B08B7BF00DAB623 /* extensions */,
 			);
 			path = shared;
@@ -189,7 +211,6 @@
 			);
 			name = "nft-folder";
 			packageProductDependencies = (
-				2CA34B3B2B082BA200DAB623 /* web3.swift */,
 			);
 			productName = "nft-folder";
 			productReference = 2CA4CF512B07F75F00CC75F4 /* nft-folder.app */;
@@ -223,7 +244,6 @@
 			);
 			mainGroup = 2CA4CF482B07F75E00CC75F4;
 			packageReferences = (
-				2CA34B3A2B082BA200DAB623 /* XCRemoteSwiftPackageReference "web3" */,
 			);
 			productRefGroup = 2CA4CF522B07F75F00CC75F4 /* Products */;
 			projectDirPath = "";
@@ -283,6 +303,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CA34B652B08C01300DAB623 /* FinderSync.swift in Sources */,
+				2C0D86C82B08E7BF00106915 /* ENSResponse.swift in Sources */,
+				2C0D86C52B08E67000106915 /* WalletsService.swift in Sources */,
 				2CA34B6E2B08C02500DAB623 /* URL.swift in Sources */,
 				2CA34B702B08C02B00DAB623 /* WatchOnlyWallet.swift in Sources */,
 				2CA34B6F2B08C02500DAB623 /* Codable.swift in Sources */,
@@ -294,9 +316,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CA34B542B08B54100DAB623 /* NFTMetadataView.swift in Sources */,
+				2C0D86C72B08E7BF00106915 /* ENSResponse.swift in Sources */,
 				2CA34B3D2B082BDF00DAB623 /* WalletsListView.swift in Sources */,
 				2CA34B512B08B33C00DAB623 /* WatchOnlyWallet.swift in Sources */,
 				2CA34B562B08B6A200DAB623 /* Codable.swift in Sources */,
+				2C0D86C42B08E67000106915 /* WalletsService.swift in Sources */,
 				2CA4CF552B07F75F00CC75F4 /* AppDelegate.swift in Sources */,
 				2CA34B5A2B08B7CF00DAB623 /* URL.swift in Sources */,
 			);
@@ -336,6 +360,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "nft-finder-extension/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "nft-finder-extension";
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -364,6 +389,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "nft-finder-extension/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "nft-finder-extension";
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -595,25 +621,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		2CA34B3A2B082BA200DAB623 /* XCRemoteSwiftPackageReference "web3" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/argentlabs/web3.swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.6.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		2CA34B3B2B082BA200DAB623 /* web3.swift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2CA34B3A2B082BA200DAB623 /* XCRemoteSwiftPackageReference "web3" */;
-			productName = web3.swift;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2CA4CF492B07F75E00CC75F4 /* Project object */;
 }
