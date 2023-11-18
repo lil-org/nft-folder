@@ -8,7 +8,7 @@ struct WalletsListView: View {
     var body: some View {
         VStack {
             List {
-                Text("123")
+                Text("gm")
             }
         }
     }
