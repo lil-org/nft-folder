@@ -12,7 +12,6 @@
 		2C0D86C72B08E7BF00106915 /* ENSResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C62B08E7BF00106915 /* ENSResponse.swift */; };
 		2C0D86C82B08E7BF00106915 /* ENSResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C62B08E7BF00106915 /* ENSResponse.swift */; };
 		2C91131A2B08F71200A8EE80 /* NFTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9113192B08F71200A8EE80 /* NFTService.swift */; };
-		2C91131B2B08F71200A8EE80 /* NFTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9113192B08F71200A8EE80 /* NFTService.swift */; };
 		2C91131E2B09110900A8EE80 /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91131D2B09110900A8EE80 /* Asset.swift */; };
 		2C91131F2B09110900A8EE80 /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91131D2B09110900A8EE80 /* Asset.swift */; };
 		2CA34B3D2B082BDF00DAB623 /* WalletsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCFED972B08246800D98A2E /* WalletsListView.swift */; };
@@ -318,7 +317,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C91131B2B08F71200A8EE80 /* NFTService.swift in Sources */,
 				2CA34B652B08C01300DAB623 /* FinderSync.swift in Sources */,
 				2C0D86C82B08E7BF00106915 /* ENSResponse.swift in Sources */,
 				2C0D86C52B08E67000106915 /* WalletsService.swift in Sources */,

@@ -32,6 +32,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        NFTService.shared.study(address: "0xE26067c76fdbe877F48b0a8400cf5Db8B47aF0fE")
+        
         createDirectoryIfNeeded()
         didFinishLaunching = true
         
