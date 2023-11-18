@@ -81,6 +81,14 @@ struct WalletsListView: View {
             }.frame(width: 320)
                 .padding()
         }
+        if !wallets.isEmpty {
+            Button("show nft folder", action: {
+                if let nftDirectory = URL.nftDirectory {
+                    NSWorkspace.shared.open(nftDirectory)
+                }
+                NSApplication.shared.windows.forEach { $0.close() }
+            }).frame(height: 36).offset(CGSize(width: 0, height: -6)).keyboardShortcut(.defaultAction)
+        }
     }
     
     func addWallet() {
