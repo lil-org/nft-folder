@@ -2,7 +2,7 @@
 
 import Foundation
 
-struct WatchOnlyWallet {
+struct WatchOnlyWallet: Codable {
     
     let address: String
     let ens: String?

@@ -9,6 +9,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var window: NSWindow?
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        _ = URL.nftDirectory
         showPopup()
     }
 

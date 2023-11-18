@@ -14,6 +14,10 @@
 		2CA34B512B08B33C00DAB623 /* WatchOnlyWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B502B08B33C00DAB623 /* WatchOnlyWallet.swift */; };
 		2CA34B522B08B33C00DAB623 /* WatchOnlyWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B502B08B33C00DAB623 /* WatchOnlyWallet.swift */; };
 		2CA34B542B08B54100DAB623 /* NFTMetadataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B532B08B54100DAB623 /* NFTMetadataView.swift */; };
+		2CA34B562B08B6A200DAB623 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B552B08B6A200DAB623 /* Codable.swift */; };
+		2CA34B572B08B6A200DAB623 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B552B08B6A200DAB623 /* Codable.swift */; };
+		2CA34B5A2B08B7CF00DAB623 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B592B08B7CF00DAB623 /* URL.swift */; };
+		2CA34B5B2B08B7CF00DAB623 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B592B08B7CF00DAB623 /* URL.swift */; };
 		2CA4CF552B07F75F00CC75F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA4CF542B07F75F00CC75F4 /* AppDelegate.swift */; };
 		2CA4CF592B07F76000CC75F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CA4CF582B07F76000CC75F4 /* Assets.xcassets */; };
 		2CA4CF5C2B07F76000CC75F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CA4CF5A2B07F76000CC75F4 /* Main.storyboard */; };
@@ -50,6 +54,8 @@
 		2CA34B472B082CFB00DAB623 /* finder_extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = finder_extension.entitlements; sourceTree = "<group>"; };
 		2CA34B502B08B33C00DAB623 /* WatchOnlyWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchOnlyWallet.swift; sourceTree = "<group>"; };
 		2CA34B532B08B54100DAB623 /* NFTMetadataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTMetadataView.swift; sourceTree = "<group>"; };
+		2CA34B552B08B6A200DAB623 /* Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
+		2CA34B592B08B7CF00DAB623 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		2CA4CF512B07F75F00CC75F4 /* nft-folder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nft-folder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CA4CF542B07F75F00CC75F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2CA4CF582B07F76000CC75F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -93,15 +99,25 @@
 			isa = PBXGroup;
 			children = (
 				2CA34B502B08B33C00DAB623 /* WatchOnlyWallet.swift */,
+				2CA34B582B08B7BF00DAB623 /* extensions */,
 			);
 			path = shared;
+			sourceTree = "<group>";
+		};
+		2CA34B582B08B7BF00DAB623 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2CA34B592B08B7CF00DAB623 /* URL.swift */,
+				2CA34B552B08B6A200DAB623 /* Codable.swift */,
+			);
+			path = extensions;
 			sourceTree = "<group>";
 		};
 		2CA4CF482B07F75E00CC75F4 = {
 			isa = PBXGroup;
 			children = (
-				2CA34B4F2B08B32600DAB623 /* shared */,
 				2CA4CF532B07F75F00CC75F4 /* nft-folder */,
+				2CA34B4F2B08B32600DAB623 /* shared */,
 				2CA34B432B082CFB00DAB623 /* finder-extension */,
 				2CA4CF522B07F75F00CC75F4 /* Products */,
 			);
@@ -239,6 +255,8 @@
 			files = (
 				2CA34B522B08B33C00DAB623 /* WatchOnlyWallet.swift in Sources */,
 				2CA34B452B082CFB00DAB623 /* FinderSync.swift in Sources */,
+				2CA34B572B08B6A200DAB623 /* Codable.swift in Sources */,
+				2CA34B5B2B08B7CF00DAB623 /* URL.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,7 +267,9 @@
 				2CA34B542B08B54100DAB623 /* NFTMetadataView.swift in Sources */,
 				2CA34B3D2B082BDF00DAB623 /* WalletsListView.swift in Sources */,
 				2CA34B512B08B33C00DAB623 /* WatchOnlyWallet.swift in Sources */,
+				2CA34B562B08B6A200DAB623 /* Codable.swift in Sources */,
 				2CA4CF552B07F75F00CC75F4 /* AppDelegate.swift in Sources */,
+				2CA34B5A2B08B7CF00DAB623 /* URL.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
