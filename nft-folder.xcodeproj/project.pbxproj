@@ -171,6 +171,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2CA4CF602B07F76000CC75F4 /* Build configuration list for PBXNativeTarget "nft-folder" */;
 			buildPhases = (
+				2CA34B5C2B08BE5500DAB623 /* ShellScript */,
 				2CA4CF4D2B07F75E00CC75F4 /* Sources */,
 				2CA4CF4E2B07F75E00CC75F4 /* Frameworks */,
 				2CA4CF4F2B07F75E00CC75F4 /* Resources */,
@@ -247,6 +248,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2CA34B5C2B08BE5500DAB623 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "killall nft-folder\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2CA34B3E2B082CFB00DAB623 /* Sources */ = {
