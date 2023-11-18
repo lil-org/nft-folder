@@ -38,7 +38,7 @@ struct WalletsListView: View {
                             .contentShape(Rectangle())
                             .contextMenu {
                                 Button("remove", action: {
-                                    Defaults.removeWallet(wallet)
+                                    WalletsService.shared.removeWallet(wallet)
                                     updateDisplayedWallets()
                                 })
                             }
@@ -97,7 +97,7 @@ struct WalletsListView: View {
             if case .success(let response) = result {
                 if showAddWalletPopup {
                     let wallet = WatchOnlyWallet(address: response.address, name: response.name, avatar: response.avatar)
-                    Defaults.addWallet(wallet)
+                    WalletsService.shared.addWallet(wallet)
                     updateDisplayedWallets()
                 }
                 showAddWalletPopup = false

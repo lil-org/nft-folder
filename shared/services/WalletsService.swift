@@ -16,12 +16,12 @@ struct WalletsService {
         return Defaults.watchWallets
     }
     
-    private func isEthAddress(_ input: String) -> Bool {
-        if input.hasSuffix(".eth") { return true }
-        guard input.hasPrefix("0x") && input.count == 42 else { return false }
-        let hexSet = CharacterSet(charactersIn: "0123456789abcdefABCDEF")
-        let addressSet = CharacterSet(charactersIn: String(input.dropFirst(2)))
-        return hexSet.isSuperset(of: addressSet)
+    func addWallet(_ wallet: WatchOnlyWallet) {
+        Defaults.addWallet(wallet)
+    }
+    
+    func removeWallet(_ wallet: WatchOnlyWallet) {
+        Defaults.removeWallet(wallet)
     }
     
     func resolveENS(_ input: String, completion: @escaping (Result<ENSResponse, WalletsServiceError>) -> Void) {
@@ -42,4 +42,39 @@ struct WalletsService {
         dataTask.resume()
     }
     
+    private func isEthAddress(_ input: String) -> Bool {
+        if input.hasSuffix(".eth") { return true }
+        guard input.hasPrefix("0x") && input.count == 42 else { return false }
+        let hexSet = CharacterSet(charactersIn: "0123456789abcdefABCDEF")
+        let addressSet = CharacterSet(charactersIn: String(input.dropFirst(2)))
+        return hexSet.isSuperset(of: addressSet)
+    }
+    
 }
+
+private struct Defaults {
+    
+    private static let userDefaults = UserDefaults(suiteName: "group.org.lil.nft-folder")!
+
+    static func removeWallet(_ wallet: WatchOnlyWallet) {
+        watchWallets.removeAll(where: { $0.address == wallet.address })
+    }
+    
+    static func addWallet(_ wallet: WatchOnlyWallet) {
+        guard !watchWallets.contains(where: { $0.address == wallet.address }) else { return }
+        watchWallets += [wallet]
+    }
+    
+    static var watchWallets: [WatchOnlyWallet] {
+        get {
+            let stored = userDefaults.value(forKey: "watch-wallets")
+            return WatchOnlyWallet.arrayFrom(stored) ?? []
+        }
+        set {
+            let dicts = newValue.compactMap { $0.toDictionary() }
+            userDefaults.set(dicts, forKey: "watch-wallets")
+        }
+    }
+    
+}
+
