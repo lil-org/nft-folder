@@ -73,7 +73,7 @@ struct WalletsListView: View {
                     } else {
                         Button("ok", action: {
                             addWallet()
-                        })
+                        }).keyboardShortcut(.defaultAction)
                     }
                     
                     
