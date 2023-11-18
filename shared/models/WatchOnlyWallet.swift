@@ -13,7 +13,7 @@ struct WatchOnlyWallet: Codable, Hashable {
             return name
         } else {
             let clean = address.dropFirst(2)
-            let cropped = clean.prefix(4) + "..." + clean.suffix(4)
+            let cropped = clean.prefix(4) + "…" + clean.suffix(4)
             return String(cropped)
         }
     }

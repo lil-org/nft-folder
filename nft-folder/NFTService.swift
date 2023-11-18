@@ -21,30 +21,30 @@ struct NFTService {
     private let urlSession = URLSession.shared
     private let apiKey: String
     
-    func study(address: String, offset: Int = 0) {
+    func study(wallet: WatchOnlyWallet, offset: Int = 0) {
         print("will study offset \(offset)")
-        getNFTs(address: address, limit: 200, offset: offset) { assets in
+        getNFTs(address: wallet.address, limit: 200, offset: offset) { assets in
             print("\(assets.count) items at offset \(offset)")
             
             for asset in assets {
                 uniqueIds.insert(asset.id)
             }
             
-            downloadSomeFiles(address: address, assets: assets)
+            downloadSomeFiles(wallet: wallet, assets: assets)
             
             print("uniqs count is \(uniqueIds.count)")
             
             if !assets.isEmpty {
-                study(address: address, offset: offset + assets.count)
+                study(wallet: wallet, offset: offset + assets.count)
             }
         }
     }
     
-    private func downloadSomeFiles(address: String, assets: [Asset]) {
+    private func downloadSomeFiles(wallet: WatchOnlyWallet, assets: [Asset]) {
         let someURLs = assets.compactMap { $0.imageOriginalUrl?.hasPrefix("https") == true ? $0.imageOriginalUrl : nil }
         let urls = Array(Set(someURLs)) // TODO: handle identical files too
         
-        guard let destination = URL.nftDirectory(address: address) else { return }
+        guard let destination = URL.nftDirectory(wallet: wallet) else { return }
         
         let downloadQueue = DispatchQueue(label: "downloadQueue")
             for urlString in urls {

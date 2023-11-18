@@ -31,8 +31,11 @@ struct WalletsListView: View {
                                         WalletImageView(wallet: wallet)
                                     )
                                 Text(wallet.displayName)
+                                Spacer()
                             }
-                            .contentShape(Rectangle())
+                            .contentShape(Rectangle()).onTapGesture {
+                                openFolderForWallet(wallet)
+                            }
                             .contextMenu {
                                 Button("remove", action: {
                                     WalletsService.shared.removeWallet(wallet)
@@ -88,7 +91,14 @@ struct WalletsListView: View {
         }
     }
     
-    func addWallet() {
+    private func openFolderForWallet(_ wallet: WatchOnlyWallet) {
+        if let nftDirectory = URL.nftDirectory(wallet: wallet) {
+            NSWorkspace.shared.open(nftDirectory)
+        }
+        NSApplication.shared.windows.forEach { $0.close() }
+    }
+    
+    private func addWallet() {
         isWaiting = true
         WalletsService.shared.resolveENS(newWalletAddress) { result in
             if case .success(let response) = result {

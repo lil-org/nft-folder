@@ -6,6 +6,15 @@ extension URL {
     
     static let deeplinkScheme = "nft-folder://"
     
+    static func nftDirectory(wallet: WatchOnlyWallet) -> URL? {
+        let fileManager = FileManager.default
+        guard let addressDirectoryURL = nftDirectory?.appendingPathComponent(wallet.displayName) else { return nil }
+        if !fileManager.fileExists(atPath: addressDirectoryURL.path) {
+            try? fileManager.createDirectory(at: addressDirectoryURL, withIntermediateDirectories: true, attributes: nil)
+        }
+        return addressDirectoryURL
+    }
+    
     static var nftDirectory: URL? {
         let fileManager = FileManager.default
         let musicDirectoryURL = fileManager.urls(for: .musicDirectory, in: .userDomainMask).first
@@ -16,15 +25,6 @@ extension URL {
         }
         
         return nftDirectoryURL
-    }
-    
-    static func nftDirectory(address: String) -> URL? {
-        let fileManager = FileManager.default
-        guard let addressDirectoryURL = nftDirectory?.appendingPathComponent(address.lowercased()) else { return nil }
-        if !fileManager.fileExists(atPath: addressDirectoryURL.path) {
-            try? fileManager.createDirectory(at: addressDirectoryURL, withIntermediateDirectories: true, attributes: nil)
-        }
-        return addressDirectoryURL
     }
     
 }
