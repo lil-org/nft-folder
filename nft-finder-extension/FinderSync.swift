@@ -58,8 +58,8 @@ class FinderSync: FIFinderSync {
         case .contextualMenuForItems:
             menu.addItem(withTitle: "⚽️ sample action", action: #selector(sampleAction(_:)), keyEquivalent: "")
         case .toolbarItemMenu:
-            menu.addItem(withTitle: "📁 open nft folder", action: #selector(openNFTDirectory(_:)), keyEquivalent: "")
-            menu.addItem(withTitle: "📇 show wallets list", action: #selector(showWallets(_:)), keyEquivalent: "")
+            menu.addItem(withTitle: "📂 open nft folder", action: #selector(openNFTDirectory(_:)), keyEquivalent: "")
+            menu.addItem(withTitle: "🪪 show wallets list", action: #selector(showWallets(_:)), keyEquivalent: "")
             menu.addItem(withTitle: "🆕 add a wallet", action: #selector(addWallet(_:)), keyEquivalent: "")
         case .contextualMenuForContainer, .contextualMenuForSidebar:
             break

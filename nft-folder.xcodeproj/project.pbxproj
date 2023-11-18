@@ -144,9 +144,9 @@
 		2CA34B632B08C01300DAB623 /* nft-finder-extension */ = {
 			isa = PBXGroup;
 			children = (
-				2CA34B722B08C71800DAB623 /* ExtensionAssets.xcassets */,
-				2CA34B642B08C01300DAB623 /* FinderSync.swift */,
 				2CA34B662B08C01300DAB623 /* Info.plist */,
+				2CA34B642B08C01300DAB623 /* FinderSync.swift */,
+				2CA34B722B08C71800DAB623 /* ExtensionAssets.xcassets */,
 				2CA34B672B08C01300DAB623 /* nft_finder_extension.entitlements */,
 			);
 			path = "nft-finder-extension";
