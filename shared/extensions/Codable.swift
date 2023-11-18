@@ -18,6 +18,19 @@ extension Encodable {
 
 extension Decodable {
     
+    static func arrayFrom(_ object: Any?) -> [Self]? {
+        if let array = object as? [[String: Any]] {
+            let mapped = array.compactMap { from($0) }
+            if mapped.count == array.count {
+                return mapped
+            } else {
+                return nil
+            }
+        } else {
+            return nil
+        }
+    }
+    
     static func from(_ object: Any?) -> Self? {
         if let dict = object as? [String: Any],
            let data = try? JSONSerialization.data(withJSONObject: dict, options: []),

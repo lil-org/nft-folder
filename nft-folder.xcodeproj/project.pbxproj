@@ -15,6 +15,8 @@
 		2C91131E2B09110900A8EE80 /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91131D2B09110900A8EE80 /* Asset.swift */; };
 		2C91131F2B09110900A8EE80 /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91131D2B09110900A8EE80 /* Asset.swift */; };
 		2C9113212B09253500A8EE80 /* Blockies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9113202B09253500A8EE80 /* Blockies.swift */; };
+		2C9113232B0939D700A8EE80 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9113222B0939D700A8EE80 /* Defaults.swift */; };
+		2C9113252B093EE000A8EE80 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9113222B0939D700A8EE80 /* Defaults.swift */; };
 		2CA34B3D2B082BDF00DAB623 /* WalletsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCFED972B08246800D98A2E /* WalletsListView.swift */; };
 		2CA34B512B08B33C00DAB623 /* WatchOnlyWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B502B08B33C00DAB623 /* WatchOnlyWallet.swift */; };
 		2CA34B542B08B54100DAB623 /* NFTMetadataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B532B08B54100DAB623 /* NFTMetadataView.swift */; };
@@ -61,6 +63,7 @@
 		2C9113192B08F71200A8EE80 /* NFTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTService.swift; sourceTree = "<group>"; };
 		2C91131D2B09110900A8EE80 /* Asset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
 		2C9113202B09253500A8EE80 /* Blockies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blockies.swift; sourceTree = "<group>"; };
+		2C9113222B0939D700A8EE80 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		2CA34B502B08B33C00DAB623 /* WatchOnlyWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchOnlyWallet.swift; sourceTree = "<group>"; };
 		2CA34B532B08B54100DAB623 /* NFTMetadataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTMetadataView.swift; sourceTree = "<group>"; };
 		2CA34B552B08B6A200DAB623 /* Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
@@ -113,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				2C0D86C32B08E67000106915 /* WalletsService.swift */,
+				2C9113222B0939D700A8EE80 /* Defaults.swift */,
 			);
 			path = services;
 			sourceTree = "<group>";
@@ -122,9 +126,16 @@
 			children = (
 				2CCFED972B08246800D98A2E /* WalletsListView.swift */,
 				2CA34B532B08B54100DAB623 /* NFTMetadataView.swift */,
-				2C9113202B09253500A8EE80 /* Blockies.swift */,
 			);
 			path = views;
+			sourceTree = "<group>";
+		};
+		2C9113262B093EE800A8EE80 /* helpers */ = {
+			isa = PBXGroup;
+			children = (
+				2C9113202B09253500A8EE80 /* Blockies.swift */,
+			);
+			path = helpers;
 			sourceTree = "<group>";
 		};
 		2CA34B4F2B08B32600DAB623 /* shared */ = {
@@ -162,6 +173,7 @@
 			children = (
 				2CA4CF532B07F75F00CC75F4 /* nft-folder */,
 				2C91131C2B08FCDF00A8EE80 /* views */,
+				2C9113262B093EE800A8EE80 /* helpers */,
 				2CA34B4F2B08B32600DAB623 /* shared */,
 				2CA34B632B08C01300DAB623 /* nft-finder-extension */,
 				2CA4CF522B07F75F00CC75F4 /* Products */,
@@ -321,6 +333,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CA34B652B08C01300DAB623 /* FinderSync.swift in Sources */,
+				2C9113252B093EE000A8EE80 /* Defaults.swift in Sources */,
 				2C0D86C82B08E7BF00106915 /* ENSResponse.swift in Sources */,
 				2C0D86C52B08E67000106915 /* WalletsService.swift in Sources */,
 				2CA34B6E2B08C02500DAB623 /* URL.swift in Sources */,
@@ -343,6 +356,7 @@
 				2CA34B562B08B6A200DAB623 /* Codable.swift in Sources */,
 				2C0D86C42B08E67000106915 /* WalletsService.swift in Sources */,
 				2CA4CF552B07F75F00CC75F4 /* AppDelegate.swift in Sources */,
+				2C9113232B0939D700A8EE80 /* Defaults.swift in Sources */,
 				2C9113212B09253500A8EE80 /* Blockies.swift in Sources */,
 				2CA34B5A2B08B7CF00DAB623 /* URL.swift in Sources */,
 			);

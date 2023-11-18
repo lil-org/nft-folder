@@ -12,6 +12,10 @@ struct WalletsService {
     static let shared = WalletsService()
     private let urlSession = URLSession.shared
     
+    var wallets: [WatchOnlyWallet] {
+        return Defaults.watchWallets
+    }
+    
     func isEthAddress(_ input: String) -> Bool {
         if input.hasSuffix(".eth") { return true }
         guard input.hasPrefix("0x") && input.count == 42 else { return false }
