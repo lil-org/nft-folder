@@ -18,5 +18,14 @@ extension URL {
         return nftDirectoryURL
     }
     
+    static func nftDirectory(address: String) -> URL? {
+        let fileManager = FileManager.default
+        guard let addressDirectoryURL = nftDirectory?.appendingPathComponent(address.lowercased()) else { return nil }
+        if !fileManager.fileExists(atPath: addressDirectoryURL.path) {
+            try? fileManager.createDirectory(at: addressDirectoryURL, withIntermediateDirectories: true, attributes: nil)
+        }
+        return addressDirectoryURL
+    }
+    
 }
 

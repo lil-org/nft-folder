@@ -30,12 +30,69 @@ struct NFTService {
                 uniqueIds.insert(asset.id)
             }
             
+            downloadSomeFiles(address: address, assets: assets)
+            
             print("uniqs count is \(uniqueIds.count)")
             
             if !assets.isEmpty {
                 study(address: address, offset: offset + assets.count)
             }
         }
+    }
+    
+    private func downloadSomeFiles(address: String, assets: [Asset]) {
+        let someURLs = assets.compactMap { $0.imageOriginalUrl?.hasPrefix("https") == true ? $0.imageOriginalUrl : nil }
+        let urls = Array(Set(someURLs)) // TODO: handle identical files too
+        
+        guard let destination = URL.nftDirectory(address: address) else { return }
+        
+        let downloadQueue = DispatchQueue(label: "downloadQueue")
+            for urlString in urls {
+                guard let url = URL(string: urlString) else { continue }
+                downloadQueue.async {
+                    let semaphore = DispatchSemaphore(value: 0)
+                    var success = false
+
+                    while !success {
+                        downloadFile(from: url, to: destination) { isSuccess in
+                            let itsOk = true // TODO: better downloading logic
+                            success = isSuccess || itsOk
+                            if !success {
+                                print("Retrying in 3 seconds...")
+                                Thread.sleep(forTimeInterval: 3) // Retry after 3 seconds
+                            }
+                            semaphore.signal()
+                        }
+                        semaphore.wait()
+                    }
+                }
+            }
+    }
+
+    func downloadFile(from url: URL, to destinationURL: URL, completion: @escaping (Bool) -> Void) {
+        print("yo will download \(url)")
+        let task = URLSession.shared.downloadTask(with: url) { location, response, error in
+            guard let location = location, error == nil else {
+                print("Error downloading file: \(error!)")
+                completion(false)
+                return
+            }
+            let pathExtension = url.pathExtension.isEmpty ? ".png" : "" // TODO: do not png everything
+            let name = url.lastPathComponent + pathExtension
+            let destinationURL = destinationURL.appendingPathComponent(name)
+            do {
+                if FileManager.default.fileExists(atPath: destinationURL.path) {
+                    try FileManager.default.removeItem(at: destinationURL)
+                }
+                try FileManager.default.moveItem(at: location, to: destinationURL)
+                print("File downloaded to: \(destinationURL.path)")
+                completion(true)
+            } catch {
+                print("Error saving file: \(error)")
+                completion(false)
+            }
+        }
+        task.resume()
     }
     
     private func getNFTs(address: String, limit: Int, offset: Int, completion: @escaping ([Asset]) -> Void) {
