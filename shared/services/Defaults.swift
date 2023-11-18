@@ -6,6 +6,15 @@ struct Defaults {
     
     private static let userDefaults = UserDefaults(suiteName: "group.org.lil.nft-folder")!
 
+    static func removeWallet(_ wallet: WatchOnlyWallet) {
+        watchWallets.removeAll(where: { $0.address == wallet.address })
+    }
+    
+    static func addWallet(_ wallet: WatchOnlyWallet) {
+        guard !watchWallets.contains(where: { $0.address == wallet.address }) else { return }
+        watchWallets += [wallet]
+    }
+    
     static var watchWallets: [WatchOnlyWallet] {
         get {
             let stored = userDefaults.value(forKey: "watch-wallets")

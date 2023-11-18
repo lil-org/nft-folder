@@ -7,8 +7,7 @@ struct WalletsListView: View {
     
     @State private var showAddWalletPopup: Bool
     @State private var newWalletAddress = ""
-    
-    private let wallets = WalletsService.shared.wallets
+    @State private var wallets = WalletsService.shared.wallets
     
     init(showAddWalletPopup: Bool) {
         self.showAddWalletPopup = showAddWalletPopup
@@ -38,7 +37,8 @@ struct WalletsListView: View {
                             .contentShape(Rectangle())
                             .contextMenu {
                                 Button("remove", action: {
-                                    // TODO: implement
+                                    Defaults.removeWallet(wallet)
+                                    updateDisplayedWallets()
                                 })
                             }
                         }
@@ -74,7 +74,21 @@ struct WalletsListView: View {
     }
     
     func addWallet() {
-        // TODO: add a wallet
+        WalletsService.shared.resolveENS(newWalletAddress) { result in
+            if case .success(let response) = result {
+                let wallet = WatchOnlyWallet(address: response.address, name: response.name, avatar: response.avatar)
+                Defaults.addWallet(wallet)
+                updateDisplayedWallets()
+                showAddWalletPopup = false
+                newWalletAddress = ""
+            } else {
+                // TODO: smth
+            }
+        }
+    }
+    
+    private func updateDisplayedWallets() {
+        wallets = WalletsService.shared.wallets
     }
     
 }
