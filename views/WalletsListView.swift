@@ -5,10 +5,14 @@ import SwiftUI
 
 struct WalletsListView: View {
     
-    @State private var showAddWalletPopup = false
+    @State private var showAddWalletPopup: Bool
     @State private var newWalletAddress = ""
     
     private let wallets = WalletsService.shared.wallets
+    
+    init(showAddWalletPopup: Bool) {
+        self.showAddWalletPopup = showAddWalletPopup
+    }
     
     var body: some View {
         Group {

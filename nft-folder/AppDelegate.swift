@@ -54,7 +54,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     private func showPopup() {
-        let contentView = WalletsListView()
+        // TODO: tune depending on a request
+        let contentView = WalletsListView(showAddWalletPopup: false)
         
         window = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: 300, height: 400),
