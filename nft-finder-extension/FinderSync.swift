@@ -58,22 +58,22 @@ class FinderSync: FIFinderSync {
     }
     
     override func menu(for menuKind: FIMenuKind) -> NSMenu {
-        // Produce a menu for the extension.
         let menu = NSMenu(title: "")
         menu.addItem(withTitle: "📁 open nft folder", action: #selector(openNFTDirectory(_:)), keyEquivalent: "")
-        menu.addItem(withTitle: "🪪 show wallets", action: #selector(openNFTDirectory(_:)), keyEquivalent: "")
-        
+        menu.addItem(withTitle: "🪪 show wallets", action: #selector(showWallets(_:)), keyEquivalent: "")
         // menu.addItem(withTitle: "sample action", action: #selector(sampleAction(_:)), keyEquivalent: "")
         return menu
     }
     
     @IBAction func showWallets(_ sender: AnyObject?) {
-        // TODO: implement
+        if let url = URL(string: "nft-folder://") {
+            DispatchQueue.main.async { NSWorkspace.shared.open(url) }
+        }
     }
     
     @IBAction func openNFTDirectory(_ sender: AnyObject?) {
         if let url = URL.nftDirectory {
-            NSWorkspace().open(url)
+            DispatchQueue.main.async { NSWorkspace.shared.open(url) }
         }
     }
     
