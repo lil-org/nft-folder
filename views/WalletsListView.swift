@@ -28,7 +28,7 @@ struct WalletsListView: View {
                                 Circle()
                                     .frame(width: 30, height: 30)
                                     .overlay(
-                                        Image(systemName: "person.fill") // TODO: avatar or blockies
+                                        Image(nsImage: Blockies(seed: wallet.address.lowercased()).createImage() ?? NSImage())
                                             .resizable()
                                             .scaledToFit()
                                             .clipShape(Circle())
@@ -82,7 +82,7 @@ struct WalletsListView: View {
                 .padding()
         }
         if !wallets.isEmpty {
-            Button("show nft folder", action: {
+            Button("open nft folder", action: {
                 if let nftDirectory = URL.nftDirectory {
                     NSWorkspace.shared.open(nftDirectory)
                 }

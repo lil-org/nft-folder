@@ -21,7 +21,6 @@ final class Blockies {
     public var scale: Int
 
     public typealias Color = NSColor
-    public typealias Image = NSImage
 
     public var color: Color
     public var bgColor: Color
@@ -84,7 +83,7 @@ final class Blockies {
      *
      * - returns: The generated image or `nil` if something went wrong.
      */
-    public func createImage(customScale: Int = 1) -> Image? {
+    public func createImage(customScale: Int = 1) -> NSImage? {
         let imageData = createImageData()
 
         return image(data: imageData, customScale: customScale)
@@ -141,7 +140,7 @@ final class Blockies {
         return data
     }
 
-    private func image(data: [Double], customScale: Int) -> Image? {
+    private func image(data: [Double], customScale: Int) -> NSImage? {
         let finalSize = size * scale * customScale
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
