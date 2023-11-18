@@ -4,16 +4,11 @@ import Cocoa
 import FinderSync
 
 class FinderSync: FIFinderSync {
-
-    var myFolderURL = URL(fileURLWithPath: "/Users/Shared/MySyncExtension Documents")
     
     override init() {
         super.init()
-        
         NSLog("FinderSync() launched from %@", Bundle.main.bundlePath as NSString)
-        
-        // Set up the directory we are syncing.
-        FIFinderSyncController.default().directoryURLs = [self.myFolderURL]
+        FIFinderSyncController.default().directoryURLs = [URL.nftDirectory!]
         
         // Set up images for our badge identifiers. For demonstration purposes, this uses off-the-shelf images.
         FIFinderSyncController.default().setBadgeImage(NSImage(named: NSImage.colorPanelName)!, label: "Status One" , forBadgeIdentifier: "One")
@@ -59,25 +54,33 @@ class FinderSync: FIFinderSync {
     
     override func menu(for menuKind: FIMenuKind) -> NSMenu {
         let menu = NSMenu(title: "")
-        menu.addItem(withTitle: "📁 open nft folder", action: #selector(openNFTDirectory(_:)), keyEquivalent: "")
-        menu.addItem(withTitle: "🪪 show wallets", action: #selector(showWallets(_:)), keyEquivalent: "")
-        // menu.addItem(withTitle: "sample action", action: #selector(sampleAction(_:)), keyEquivalent: "")
+        switch menuKind {
+        case .contextualMenuForItems:
+            menu.addItem(withTitle: "⚽️ sample action", action: #selector(sampleAction(_:)), keyEquivalent: "")
+        case .toolbarItemMenu:
+            menu.addItem(withTitle: "📁 open nft folder", action: #selector(openNFTDirectory(_:)), keyEquivalent: "")
+            menu.addItem(withTitle: "🪪 show wallets list", action: #selector(showWallets(_:)), keyEquivalent: "")
+        case .contextualMenuForContainer, .contextualMenuForSidebar:
+            break
+        @unknown default:
+            break
+        }
         return menu
     }
     
-    @IBAction func showWallets(_ sender: AnyObject?) {
-        if let url = URL(string: "nft-folder://") {
+    @IBAction private func showWallets(_ sender: AnyObject?) {
+        if let url = URL(string: URL.deeplinkScheme) {
             DispatchQueue.main.async { NSWorkspace.shared.open(url) }
         }
     }
     
-    @IBAction func openNFTDirectory(_ sender: AnyObject?) {
+    @IBAction private func openNFTDirectory(_ sender: AnyObject?) {
         if let url = URL.nftDirectory {
             DispatchQueue.main.async { NSWorkspace.shared.open(url) }
         }
     }
     
-    private func sampleAction(_ sender: AnyObject?) {
+    @IBAction private func sampleAction(_ sender: AnyObject?) {
         let target = FIFinderSyncController.default().targetedURL()
         let items = FIFinderSyncController.default().selectedItemURLs()
         

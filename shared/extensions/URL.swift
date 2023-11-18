@@ -4,6 +4,8 @@ import Cocoa
 
 extension URL {
     
+    static let deeplinkScheme = "nft-folder://"
+    
     static var nftDirectory: URL? {
         let fileManager = FileManager.default
         let musicDirectoryURL = fileManager.urls(for: .musicDirectory, in: .userDomainMask).first
