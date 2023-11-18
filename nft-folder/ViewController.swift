@@ -6,7 +6,7 @@ import web3
 class ViewController: NSViewController {
 
     @IBAction func buttonTapped(_ sender: Any) {
-        showPopup()
+        
     }
     
 }
