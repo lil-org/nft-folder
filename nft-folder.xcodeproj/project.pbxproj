@@ -154,6 +154,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2CA34B6B2B08C01300DAB623 /* Build configuration list for PBXNativeTarget "nft-finder-extension" */;
 			buildPhases = (
+				2CA34B712B08C0E800DAB623 /* ShellScript */,
 				2CA34B5E2B08C01300DAB623 /* Sources */,
 				2CA34B5F2B08C01300DAB623 /* Frameworks */,
 				2CA34B602B08C01300DAB623 /* Resources */,
@@ -267,6 +268,25 @@
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "killall nft-folder\n";
+			showEnvVarsInLog = 0;
+		};
+		2CA34B712B08C0E800DAB623 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "killall nft-finder-extension\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
