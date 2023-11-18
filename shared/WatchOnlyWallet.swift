@@ -6,6 +6,7 @@ struct WatchOnlyWallet {
     
     let address: String
     let ens: String?
+    let avatarURLString: String?
     let markedAsMy: Bool
     
 }
