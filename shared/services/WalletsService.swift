@@ -42,7 +42,11 @@ struct WalletsService {
         dataTask.resume()
     }
     
-    private func isEthAddress(_ input: String) -> Bool {
+    func hasWallet(name: String) -> Bool {
+        return wallets.contains(where: { $0.displayName == name })
+    }
+    
+    func isEthAddress(_ input: String) -> Bool {
         if input.hasSuffix(".eth") { return true }
         guard input.hasPrefix("0x") && input.count == 42 else { return false }
         let hexSet = CharacterSet(charactersIn: "0123456789abcdefABCDEF")

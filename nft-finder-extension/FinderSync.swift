@@ -23,7 +23,6 @@ class FinderSync: FIFinderSync {
         }
     }
     
-    
     override func endObservingDirectory(at url: URL) {
         if url.lastPathComponent == URL.nftDirectory?.lastPathComponent, let deeplink = URL(string: URL.deeplinkScheme + "?stop-monitoring") {
             DispatchQueue.main.async { NSWorkspace.shared.open(deeplink) }

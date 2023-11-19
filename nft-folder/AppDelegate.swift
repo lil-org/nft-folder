@@ -6,6 +6,8 @@ import SwiftUI
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
     
+    private let walletsService = WalletsService.shared
+    
     private enum Request {
         case showWallets, addWallet
         
@@ -112,7 +114,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @objc private func checkFolders() {
         guard let path = URL.nftDirectory?.path, let files = try? fileManager.contentsOfDirectory(atPath: path) else { return }
-        // TODO: catch addresses
+        for name in files {
+            if walletsService.isEthAddress(name) && !walletsService.hasWallet(name: name) {
+                walletsService.resolveENS(name) { [weak self] result in
+                    switch result {
+                    case .success(let response):
+                        let wallet = WatchOnlyWallet(address: response.address, name: response.name, avatar: response.avatar)
+                        self?.walletsService.addWallet(wallet)
+                    case .failure:
+                        return
+                    }
+                }
+            }
+        }
     }
     
     private func processRequest(_ request: Request) {
