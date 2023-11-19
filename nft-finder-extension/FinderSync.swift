@@ -34,7 +34,7 @@ class FinderSync: FIFinderSync {
     }
     
     private func setupBadgeImages() {
-        for badge in Badge.allCases {
+        for badge in [Badge.ok, Badge.base] {
             FIFinderSyncController.default().setBadgeImage(badge.image, label: "", forBadgeIdentifier: badge.rawValue)
         }
     }
@@ -56,9 +56,9 @@ class FinderSync: FIFinderSync {
                 if let url = URL(string: URL.deeplinkScheme + "?check") {
                     DispatchQueue.main.async { NSWorkspace.shared.open(url) }
                 }
-                badge = .unknown
+                badge = nil
             } else {
-                badge = .wrong
+                badge = nil
             }
         } else {
             badge = nil
