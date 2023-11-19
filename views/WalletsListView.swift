@@ -22,7 +22,7 @@ struct WalletsListView: View {
                 }).frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
                 List {
-                    Section(header: Text("wallets")) {
+                    Section(header: Text("wallets").font(.system(size: 36, weight: .bold)).foregroundColor(.black)) {
                         ForEach(wallets, id: \.self) { wallet in
                             HStack {
                                 Circle()
@@ -30,7 +30,7 @@ struct WalletsListView: View {
                                     .overlay(
                                         WalletImageView(wallet: wallet)
                                     )
-                                Text(wallet.displayName)
+                                Text(wallet.displayName).font(.system(size: 15, weight: .medium))
                                 Spacer()
                             }
                             .contentShape(Rectangle()).onTapGesture {
@@ -93,7 +93,7 @@ struct WalletsListView: View {
                     NSWorkspace.shared.open(nftDirectory)
                 }
                 NSApplication.shared.windows.forEach { $0.close() }
-            }).frame(height: 36).offset(CGSize(width: 0, height: -6)).keyboardShortcut(.defaultAction)
+            }).frame(height: 36).offset(CGSize(width: 0, height: -6)).keyboardShortcut(.defaultAction).buttonStyle(LinkButtonStyle())
         }
     }
     
