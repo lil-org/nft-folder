@@ -80,7 +80,9 @@ struct WalletsListView: View {
                 }
             }.frame(width: 320)
                 .padding()
-        }
+        }.onReceive(NotificationCenter.default.publisher(for: Notification.Name("walletsUpdate")), perform: { _ in
+            self.updateDisplayedWallets()
+        })
         if !wallets.isEmpty {
             Button("open nft folder", action: {
                 if let nftDirectory = URL.nftDirectory {
