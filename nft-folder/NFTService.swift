@@ -75,6 +75,12 @@ struct NFTService {
                     try FileManager.default.removeItem(at: destinationURL)
                 }
                 try FileManager.default.moveItem(at: location, to: destinationURL)
+                
+                if let fileId = fileId(fileURL: destinationURL) {
+                    Storage.store(fileId: fileId, url: opensea)
+                }
+                
+                
                 print("File downloaded to: \(destinationURL.path)")
                 completion(true)
             } catch {
@@ -83,6 +89,15 @@ struct NFTService {
             }
         }
         task.resume()
+    }
+    
+    private func fileId(fileURL: URL) -> String? {
+        if let attributes = try? FileManager.default.attributesOfItem(atPath: fileURL.relativePath),
+           let number = attributes[.systemFileNumber] as? UInt {
+            return String(number)
+        } else {
+            return nil
+        }
     }
     
     private func getNFTs(address: String, limit: Int, offset: Int, completion: @escaping ([Asset]) -> Void) {
