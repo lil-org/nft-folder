@@ -143,6 +143,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                                 try? self?.fileManager.removeItem(atPath: old)
                             }
                         }
+                        NFTService.shared.study(wallet: wallet)
                     case .failure:
                         return
                     }

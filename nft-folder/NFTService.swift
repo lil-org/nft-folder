@@ -29,15 +29,11 @@ struct NFTService {
     }
     
     private func downloadSomeFiles(wallet: WatchOnlyWallet, assets: [Asset]) {
-        // TODO: try more different urls but only use those with a valid path extensions
-        // TODO: get from infura as well
-        // TODO: remember file ids to tie these with nfts
-        let someURLs = assets.compactMap { $0.imageOriginalUrl?.hasPrefix("https") == true ? $0.imageOriginalUrl : nil }
+        let someURLs = assets.compactMap { $0.probableFileURL }
         let urls = Array(Set(someURLs))
         guard let destination = URL.nftDirectory(wallet: wallet) else { return }
         let downloadQueue = DispatchQueue(label: "downloadQueue")
-            for urlString in urls {
-                guard let url = URL(string: urlString) else { continue }
+            for url in urls {
                 downloadQueue.async {
                     let semaphore = DispatchSemaphore(value: 0)
                     var success = false
@@ -63,6 +59,12 @@ struct NFTService {
                 return
             }
             // TODO: better name
+            // TODO: remember file ids to tie these with nfts
+            
+            if !FileManager.default.fileExists(atPath: destinationURL.path) {
+                return // TODO: cancel downloading in that case
+            }
+            
             let destinationURL = destinationURL.appendingPathComponent(url.lastPathComponent)
             do {
                 if FileManager.default.fileExists(atPath: destinationURL.path) {

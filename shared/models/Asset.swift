@@ -13,6 +13,16 @@ struct Asset: Codable {
     let externalLink: String?
     let chainId: Int
     let assetContract: AssetContract
+    
+    var probableFileURL: URL? {
+        let urlStrings = [animationOriginalUrl, imageOriginalUrl, permalink, externalLink].compactMap { $0 }
+        let urls = urlStrings.compactMap { $0.hasPrefix("https") ? URL(string: $0) : nil }
+        if let ok = urls.first(where: { !$0.pathExtension.isEmpty }) {
+            return ok
+        } else {
+            return nil
+        }
+    }
 
     enum CodingKeys: String, CodingKey {
         case id
