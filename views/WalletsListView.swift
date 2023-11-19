@@ -111,6 +111,7 @@ struct WalletsListView: View {
                 if showAddWalletPopup {
                     let wallet = WatchOnlyWallet(address: response.address, name: response.name, avatar: response.avatar)
                     WalletsService.shared.addWallet(wallet)
+                    FolderIcon.set(for: wallet)
                     updateDisplayedWallets()
                 }
                 showAddWalletPopup = false

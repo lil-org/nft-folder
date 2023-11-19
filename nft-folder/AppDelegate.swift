@@ -131,9 +131,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     case .success(let response):
                         let wallet = WatchOnlyWallet(address: response.address, name: response.name, avatar: response.avatar)
                         self?.walletsService.addWallet(wallet)
+                        FolderIcon.set(for: wallet)
                         let old = path + "/" + name
                         let new = path + "/" + wallet.displayName
-                        try? self?.fileManager.moveItem(atPath: old, toPath: new)
+                        do {
+                            try self?.fileManager.moveItem(atPath: old, toPath: new)
+                        } catch {
+                            if self?.fileManager.fileExists(atPath: new) == true {
+                                try? self?.fileManager.removeItem(atPath: old)
+                            }
+                        }
                     case .failure:
                         return
                     }
