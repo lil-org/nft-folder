@@ -22,7 +22,7 @@ struct WalletsListView: View {
                 }).frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
                 List {
-                    Section(header: Text("wallets").font(.system(size: 36, weight: .bold)).foregroundColor(.black)) {
+                    Section(header: Text("wallets").font(.system(size: 36, weight: .bold)).foregroundColor(.primary)) {
                         ForEach(wallets, id: \.self) { wallet in
                             HStack {
                                 Circle()
