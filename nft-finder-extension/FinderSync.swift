@@ -6,6 +6,7 @@ import FinderSync
 class FinderSync: FIFinderSync {
     
     private let home = URL.nftDirectory!
+    private let monitor: DirectoryMonitor
     
     private enum Badge: String, CaseIterable {
         case base, unknown, wrong, ok
@@ -25,9 +26,11 @@ class FinderSync: FIFinderSync {
     }
     
     override init() {
+        self.monitor = DirectoryMonitor(directoryURL: home)
         super.init()
         FIFinderSyncController.default().directoryURLs = [home]
         setupBadgeImages()
+        monitor.startMonitoring()
     }
     
     private func setupBadgeImages() {
@@ -135,4 +138,47 @@ class FinderSync: FIFinderSync {
         }
     }
 
+}
+
+private class DirectoryMonitor {
+    private let directoryURL: URL
+    private var fileDescriptor: CInt = -1
+    private var source: DispatchSourceFileSystemObject?
+
+    init(directoryURL: URL) {
+        self.directoryURL = directoryURL
+    }
+
+    func startMonitoring() {
+        guard fileDescriptor == -1 else { return }
+
+        fileDescriptor = open(directoryURL.path, O_EVTONLY)
+        guard fileDescriptor != -1 else { return }
+
+        source = DispatchSource.makeFileSystemObjectSource(fileDescriptor: fileDescriptor, eventMask: .write, queue: DispatchQueue.main)
+
+        source?.setEventHandler {
+            let fileManager = FileManager.default
+            do {
+                let contents = try fileManager.contentsOfDirectory(at: self.directoryURL, includingPropertiesForKeys: nil)
+                if let url = URL(string: URL.deeplinkScheme + "?check") {
+                    DispatchQueue.main.async { NSWorkspace.shared.open(url) }
+                }
+            } catch {
+                print("Error reading directory contents: \(error)")
+            }
+        }
+
+        source?.setCancelHandler {
+            close(self.fileDescriptor)
+            self.fileDescriptor = -1
+            self.source = nil
+        }
+
+        source?.resume()
+    }
+
+    func stopMonitoring() {
+        source?.cancel()
+    }
 }
