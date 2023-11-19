@@ -1,6 +1,7 @@
 // nft-folder-macos 2023 ethistanbul
 
 import Foundation
+import Cocoa
 
 struct NFTService {
     
@@ -54,6 +55,14 @@ struct NFTService {
             }
     }
 
+    func showOpensea(filePath: String) {
+        if let fileURL = URL(string: "file://" + filePath), let fileId = fileId(fileURL: fileURL), let opensea = Storage.opensea(fileId: fileId) {
+            DispatchQueue.main.async {
+                NSWorkspace.shared.open(opensea)
+            }
+        }
+    }
+    
     func downloadFile(name: String, opensea: URL, from url: URL, to destinationURL: URL, completion: @escaping (Bool) -> Void) {
         print("yo will download \(url)")
         let task = URLSession.shared.downloadTask(with: url) { location, response, error in
