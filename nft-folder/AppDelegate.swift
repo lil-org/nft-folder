@@ -109,6 +109,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if q.hasPrefix(viewPrefix), let encodedPath = q.dropFirst(viewPrefix.count).removingPercentEncoding {
             NFTService.shared.showOpensea(filePath: encodedPath)
             // TODO: different for wallet folders
+            // TODO: open multiple files
         }
     }
     
