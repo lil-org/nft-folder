@@ -97,6 +97,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             startTimer()
         case "stop-monitoring":
             stopTimer()
+        case "check":
+            checkFolders()
         default:
             break
         }

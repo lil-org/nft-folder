@@ -47,8 +47,16 @@ class FinderSync: FIFinderSync {
         if folder == "nft" {
             badge = .base
         } else if base == "nft" {
-            // TODO: act depending on a folder
-            badge = .unknown
+            if WalletsService.shared.hasWallet(name: folder) {
+                badge = .ok
+            } else if WalletsService.shared.isEthAddress(folder) {
+                if let url = URL(string: URL.deeplinkScheme + "?check") {
+                    DispatchQueue.main.async { NSWorkspace.shared.open(url) }
+                }
+                badge = .unknown
+            } else {
+                badge = .wrong
+            }
         } else {
             badge = nil
         }
