@@ -57,6 +57,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     private func showPopup(addWallet: Bool) {
+        checkFolders()
         window?.close()
         let contentView = WalletsListView(showAddWalletPopup: addWallet)
         window = NSWindow(
@@ -79,7 +80,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window?.contentView = NSHostingView(rootView: contentView)
         NSApp.activate(ignoringOtherApps: true)
         window?.makeKeyAndOrderFront(nil)
-        checkFolders()
     }
     
     @objc private func getUrl(_ event: NSAppleEventDescriptor, withReplyEvent replyEvent: NSAppleEventDescriptor) {
@@ -114,7 +114,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @objc private func checkFolders() {
         guard let path = URL.nftDirectory?.path, let files = try? fileManager.contentsOfDirectory(atPath: path) else { return }
+        var knownWallets = Set(walletsService.wallets.map { $0.displayName })
         for name in files {
+            if knownWallets.contains(name) {
+                knownWallets.remove(name)
+            }
             if walletsService.isEthAddress(name) && !walletsService.hasWallet(name: name) {
                 walletsService.resolveENS(name) { [weak self] result in
                     switch result {
@@ -129,6 +133,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     }
                 }
             }
+        }
+        
+        for remaining in knownWallets {
+            walletsService.removeWallet(displayName: remaining)
         }
     }
     

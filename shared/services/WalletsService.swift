@@ -24,6 +24,12 @@ struct WalletsService {
         Defaults.removeWallet(wallet)
     }
     
+    func removeWallet(displayName: String) {
+        if let toRemove = wallets.first(where: { $0.displayName == displayName }) {
+            removeWallet(toRemove)
+        }
+    }
+    
     func resolveENS(_ input: String, completion: @escaping (Result<ENSResponse, WalletsServiceError>) -> Void) {
         guard isEthAddress(input),
               let path = input.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed),
