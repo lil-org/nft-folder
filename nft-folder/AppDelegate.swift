@@ -113,12 +113,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     private func syncIfNeeded() {
-        if WalletsService.shared.wallets.isEmpty {
-            processRequest(.addWallet)
-        } else {
-            for wallet in walletsService.wallets {
-                NFTService.shared.study(wallet: wallet)
-            }
+        for wallet in walletsService.wallets {
+            NFTService.shared.study(wallet: wallet)
         }
     }
     
