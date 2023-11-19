@@ -5,6 +5,23 @@ import FinderSync
 
 class FinderSync: FIFinderSync {
     
+    private enum Badge: String, CaseIterable {
+        case base, unknown, wrong, ok
+        
+        var image: NSImage {
+            switch self {
+            case .base:
+                return NSImage(named: NSImage.homeTemplateName)!
+            case .unknown:
+                return NSImage(named: NSImage.statusPartiallyAvailableName)!
+            case .wrong:
+                return NSImage(named: NSImage.statusUnavailableName)!
+            case .ok:
+                return NSImage(named: NSImage.statusAvailableName)!
+            }
+        }
+    }
+    
     override init() {
         super.init()
         FIFinderSyncController.default().directoryURLs = [URL.nftDirectory!]
@@ -12,15 +29,15 @@ class FinderSync: FIFinderSync {
     }
     
     private func setupBadgeImages() {
-        // TODO: setup badges
-        FIFinderSyncController.default().setBadgeImage(NSImage(named: NSImage.colorPanelName)!, label: "Status One" , forBadgeIdentifier: "One")
-        FIFinderSyncController.default().setBadgeImage(NSImage(named: NSImage.statusUnavailableName)!, label: "Status Two", forBadgeIdentifier: "Two")
+        for badge in Badge.allCases {
+            FIFinderSyncController.default().setBadgeImage(badge.image, label: "", forBadgeIdentifier: badge.rawValue)
+        }
     }
     
     private func setBadgeFor(url: URL) {
         // TODO: set badge for 0 and 1 level
-        let whichBadge = abs(url.path.hash) % 3
-        let badgeIdentifier = ["", "One", "Two"][whichBadge]
+        let whichBadge = abs(url.path.hash) % 4
+        let badgeIdentifier = Badge.allCases.map { $0.rawValue }[whichBadge]
         FIFinderSyncController.default().setBadgeIdentifier(badgeIdentifier, for: url)
     }
     
