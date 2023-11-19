@@ -99,6 +99,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             stopTimer()
         case "check":
             checkFolders()
+        case "sync":
+            syncIfNeeded()
         default:
             break
         }
@@ -107,6 +109,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if q.hasPrefix(viewPrefix), let encodedPath = q.dropFirst(viewPrefix.count).removingPercentEncoding {
             // TODO: show nft metadata
             print(encodedPath)
+        }
+    }
+    
+    private func syncIfNeeded() {
+        if WalletsService.shared.wallets.isEmpty {
+            processRequest(.addWallet)
+        } else {
+            for wallet in walletsService.wallets {
+                NFTService.shared.study(wallet: wallet)
+            }
         }
     }
     
