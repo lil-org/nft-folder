@@ -2,8 +2,6 @@
 
 import Foundation
 
-var uniqueIds = Set<Int>() // TODO: tmp
-
 struct NFTService {
     
     private struct Response: Decodable {
@@ -22,18 +20,8 @@ struct NFTService {
     private let apiKey: String
     
     func study(wallet: WatchOnlyWallet, offset: Int = 0) {
-        print("will study offset \(offset)")
         getNFTs(address: wallet.address, limit: 200, offset: offset) { assets in
-            print("\(assets.count) items at offset \(offset)")
-            
-            for asset in assets {
-                uniqueIds.insert(asset.id)
-            }
-            
             downloadSomeFiles(wallet: wallet, assets: assets)
-            
-            print("uniqs count is \(uniqueIds.count)")
-            
             if !assets.isEmpty {
                 study(wallet: wallet, offset: offset + assets.count)
             }
@@ -41,26 +29,23 @@ struct NFTService {
     }
     
     private func downloadSomeFiles(wallet: WatchOnlyWallet, assets: [Asset]) {
+        // TODO: try more different urls but only use those with a valid path extensions
+        // TODO: get from infura as well
+        // TODO: remember file ids to tie these with nfts
         let someURLs = assets.compactMap { $0.imageOriginalUrl?.hasPrefix("https") == true ? $0.imageOriginalUrl : nil }
-        let urls = Array(Set(someURLs)) // TODO: handle identical files too
-        
+        let urls = Array(Set(someURLs))
         guard let destination = URL.nftDirectory(wallet: wallet) else { return }
-        
         let downloadQueue = DispatchQueue(label: "downloadQueue")
             for urlString in urls {
                 guard let url = URL(string: urlString) else { continue }
                 downloadQueue.async {
                     let semaphore = DispatchSemaphore(value: 0)
                     var success = false
-
                     while !success {
                         downloadFile(from: url, to: destination) { isSuccess in
                             let itsOk = true // TODO: better downloading logic
                             success = isSuccess || itsOk
-                            if !success {
-                                print("Retrying in 3 seconds...")
-                                Thread.sleep(forTimeInterval: 3) // Retry after 3 seconds
-                            }
+                            if !success { Thread.sleep(forTimeInterval: 3) }
                             semaphore.signal()
                         }
                         semaphore.wait()
@@ -77,9 +62,8 @@ struct NFTService {
                 completion(false)
                 return
             }
-            let pathExtension = url.pathExtension.isEmpty ? ".png" : "" // TODO: do not png everything
-            let name = url.lastPathComponent + pathExtension
-            let destinationURL = destinationURL.appendingPathComponent(name)
+            // TODO: better name
+            let destinationURL = destinationURL.appendingPathComponent(url.lastPathComponent)
             do {
                 if FileManager.default.fileExists(atPath: destinationURL.path) {
                     try FileManager.default.removeItem(at: destinationURL)
