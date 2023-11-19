@@ -5,13 +5,15 @@ import FinderSync
 
 class FinderSync: FIFinderSync {
     
+    private let home = URL.nftDirectory!
+    
     private enum Badge: String, CaseIterable {
         case base, unknown, wrong, ok
         
         var image: NSImage {
             switch self {
             case .base:
-                return NSImage(named: NSImage.homeTemplateName)!
+                return NSImage(named: NSImage.statusAvailableName)!
             case .unknown:
                 return NSImage(named: NSImage.statusPartiallyAvailableName)!
             case .wrong:
@@ -24,7 +26,7 @@ class FinderSync: FIFinderSync {
     
     override init() {
         super.init()
-        FIFinderSyncController.default().directoryURLs = [URL.nftDirectory!]
+        FIFinderSyncController.default().directoryURLs = [home]
         setupBadgeImages()
     }
     
@@ -35,10 +37,25 @@ class FinderSync: FIFinderSync {
     }
     
     private func setBadgeFor(url: URL) {
-        // TODO: set badge for 0 and 1 level
-        let whichBadge = abs(url.path.hash) % 4
-        let badgeIdentifier = Badge.allCases.map { $0.rawValue }[whichBadge]
-        FIFinderSyncController.default().setBadgeIdentifier(badgeIdentifier, for: url)
+        let badge: Badge?
+        var components = url.pathComponents
+        guard components.count > 2 else { return }
+        
+        let folder = components.removeLast()
+        let base = components.removeLast()
+        
+        if folder == "nft" {
+            badge = .base
+        } else if base == "nft" {
+            // TODO: act depending on a folder
+            badge = .unknown
+        } else {
+            badge = nil
+        }
+        
+        if let id = badge?.rawValue {
+            FIFinderSyncController.default().setBadgeIdentifier(id, for: url)
+        }
     }
     
     // MARK: - Primary Finder Sync protocol methods
