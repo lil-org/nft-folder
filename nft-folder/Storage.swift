@@ -7,11 +7,13 @@ struct Storage {
     private static let defaults = UserDefaults.standard
     
     static func store(fileId: String, url: URL) {
-        defaults.setValue(url, forKey: fileId)
+        let a = url.absoluteString
+        defaults.setValue(a, forKey: fileId)
     }
     
     static func opensea(fileId: String) -> URL? {
-        defaults.url(forKey: fileId)
+        guard let a = defaults.string(forKey: fileId), let url = URL(string: a) else { return nil }
+        return url
     }
     
 }
