@@ -7,35 +7,39 @@ class FinderSync: FIFinderSync {
     
     override init() {
         super.init()
-        NSLog("FinderSync() launched from %@", Bundle.main.bundlePath as NSString)
         FIFinderSyncController.default().directoryURLs = [URL.nftDirectory!]
-        
-        // Set up images for our badge identifiers. For demonstration purposes, this uses off-the-shelf images.
+        setupBadgeImages()
+    }
+    
+    private func setupBadgeImages() {
+        // TODO: setup badges
         FIFinderSyncController.default().setBadgeImage(NSImage(named: NSImage.colorPanelName)!, label: "Status One" , forBadgeIdentifier: "One")
-        FIFinderSyncController.default().setBadgeImage(NSImage(named: NSImage.cautionName)!, label: "Status Two", forBadgeIdentifier: "Two")
+        FIFinderSyncController.default().setBadgeImage(NSImage(named: NSImage.statusUnavailableName)!, label: "Status Two", forBadgeIdentifier: "Two")
+    }
+    
+    private func setBadgeFor(url: URL) {
+        // TODO: set badge for 0 and 1 level
+        let whichBadge = abs(url.path.hash) % 3
+        let badgeIdentifier = ["", "One", "Two"][whichBadge]
+        FIFinderSyncController.default().setBadgeIdentifier(badgeIdentifier, for: url)
     }
     
     // MARK: - Primary Finder Sync protocol methods
     
     override func beginObservingDirectory(at url: URL) {
-        if url.lastPathComponent == URL.nftDirectory?.lastPathComponent, let deeplink = URL(string: URL.deeplinkScheme + "?monitor") {
+        if url.path == URL.nftDirectory?.path, let deeplink = URL(string: URL.deeplinkScheme + "?monitor") {
             DispatchQueue.main.async { NSWorkspace.shared.open(deeplink) }
         }
     }
     
     override func endObservingDirectory(at url: URL) {
-        if url.lastPathComponent == URL.nftDirectory?.lastPathComponent, let deeplink = URL(string: URL.deeplinkScheme + "?stop-monitoring") {
+        if url.path == URL.nftDirectory?.path, let deeplink = URL(string: URL.deeplinkScheme + "?stop-monitoring") {
             DispatchQueue.main.async { NSWorkspace.shared.open(deeplink) }
         }
     }
     
     override func requestBadgeIdentifier(for url: URL) {
-        NSLog("requestBadgeIdentifierForURL: %@", url.path as NSString)
-        
-        // For demonstration purposes, this picks one of our two badges, or no badge at all, based on the filename.
-        let whichBadge = abs(url.path.hash) % 3
-        let badgeIdentifier = ["", "One", "Two"][whichBadge]
-        FIFinderSyncController.default().setBadgeIdentifier(badgeIdentifier, for: url)
+        setBadgeFor(url: url)
     }
     
     // MARK: - Menu and toolbar item support
@@ -81,14 +85,11 @@ class FinderSync: FIFinderSync {
     }
     
     @IBAction private func nftView(_ sender: AnyObject?) {
-        // TODO: implement
-        let target = FIFinderSyncController.default().targetedURL()
-        let items = FIFinderSyncController.default().selectedItemURLs()
-        
-        let item = sender as! NSMenuItem
-        NSLog("sampleAction: menu item: %@, target = %@, items = ", item.title as NSString, target!.path as NSString)
-        for obj in items! {
-            NSLog("    %@", obj.path as NSString)
+        guard let selectedItems = FIFinderSyncController.default().selectedItemURLs(),
+              selectedItems.count == 1,
+              let selectedPath = selectedItems.first?.path.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
+        if let url = URL(string: URL.deeplinkScheme + "?view=\(selectedPath)") {
+            DispatchQueue.main.async { NSWorkspace.shared.open(url) }
         }
     }
 

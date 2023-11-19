@@ -98,7 +98,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         case "stop-monitoring":
             stopTimer()
         default:
-            return
+            break
+        }
+        
+        let viewPrefix = "view="
+        if q.hasPrefix(viewPrefix), let encodedPath = q.dropFirst(viewPrefix.count).removingPercentEncoding {
+            // TODO: show nft metadata
+            print(encodedPath)
         }
     }
     
