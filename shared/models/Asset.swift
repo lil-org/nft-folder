@@ -25,7 +25,7 @@ struct Asset: Codable {
     }
     
     var fileDisplayName: String {
-        return "\(assetContract.name) - \(name ?? tokenId)."
+        return "\(assetContract.name) - \(name ?? tokenId)"
     }
     
     var openseaURL: URL? {

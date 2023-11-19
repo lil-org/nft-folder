@@ -62,14 +62,14 @@ struct NFTService {
                 completion(false)
                 return
             }
-            // TODO: better name
             // TODO: remember file ids to tie these with nfts
             
             if !FileManager.default.fileExists(atPath: destinationURL.path) {
                 return // TODO: cancel downloading in that case
             }
             
-            let destinationURL = destinationURL.appendingPathComponent(name + url.pathExtension)
+            let finalName = name.hasSuffix(url.pathExtension) ? name : (name + "." + url.pathExtension)
+            let destinationURL = destinationURL.appendingPathComponent(finalName)
             do {
                 if FileManager.default.fileExists(atPath: destinationURL.path) {
                     try FileManager.default.removeItem(at: destinationURL)
