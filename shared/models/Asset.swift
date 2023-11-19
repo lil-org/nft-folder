@@ -23,6 +23,18 @@ struct Asset: Codable {
             return nil
         }
     }
+    
+    var fileDisplayName: String {
+        return assetContract.address + tokenId + "." // TODO: better name
+    }
+    
+    var openseaURL: URL? {
+        if let url = URL(string: "https://opensea.io/assets/ethereum/\(assetContract.address)/\(tokenId)") {
+            return url
+        } else {
+            return nil
+        }
+    }
 
     enum CodingKeys: String, CodingKey {
         case id
