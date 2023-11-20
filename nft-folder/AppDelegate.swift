@@ -10,16 +10,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     private enum Request {
         case showWallets, addWallet
-        
-        var isNotShowWallets: Bool {
-            switch self {
-            case .showWallets, .addWallet:
-                return false
-            }
-        }
-        
     }
     
+    private var didProcessInput = false
     private var window: NSWindow?
     private var timer: Timer?
     private let fileManager = FileManager.default
@@ -38,9 +31,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         createDirectoryIfNeeded()
         didFinishLaunching = true
         
-        if let initialRequest = initialRequest, initialRequest.isNotShowWallets {
+        if let initialRequest = initialRequest {
             processRequest(initialRequest)
-        } else {
+        } else if !didProcessInput {
             processRequest(.showWallets)
         }
         
@@ -50,6 +43,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func application(_ application: NSApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([NSUserActivityRestoring]) -> Void) -> Bool {
         processInput(urlString: userActivity.webpageURL?.absoluteString)
         return true
+    }
+    
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+        return false
     }
     
     private func createDirectoryIfNeeded() {
@@ -88,6 +85,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     private func processInput(urlString: String?) {
         guard let urlString = urlString, urlString.hasPrefix(URL.deeplinkScheme), let url = URL(string: urlString), let q = url.query() else { return }
+        didProcessInput = true
         switch q {
         case "add":
             processRequest(.addWallet)
