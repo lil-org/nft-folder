@@ -111,7 +111,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        NSApplication.shared.windows.forEach { $0.close() }
+        showPopup(addWallet: false)
+        return true
+    }
+    
     private func syncIfNeeded() {
+        checkFolders()
         for wallet in walletsService.wallets {
             NFTService.shared.study(wallet: wallet)
         }
