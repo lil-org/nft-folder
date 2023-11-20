@@ -30,31 +30,38 @@ struct NFTService {
     }
     
     private func downloadSomeFiles(wallet: WatchOnlyWallet, assets: [Asset]) {
-        let someURLs = assets.compactMap { $0.probableFileURL }
+        guard let destination = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return }
         var dict = [URL: (String, URL)]()
         for asset in assets {
             guard let url = asset.probableFileURL, let openseaURL = asset.openseaURL else { continue }
             dict[url] = (asset.fileDisplayName, openseaURL)
         }
-        guard let destination = URL.nftDirectory(wallet: wallet) else { return }
         let downloadQueue = DispatchQueue(label: "downloadQueue")
-            for (url, (name, opensea)) in dict {
-                downloadQueue.async {
-                    let semaphore = DispatchSemaphore(value: 0)
-                    var success = false
-                    while !success {
-                        downloadFile(name: name, opensea: opensea, from: url, to: destination) { isSuccess in
-                            let itsOk = true // TODO: better downloading logic
-                            success = isSuccess || itsOk
-                            if !success { Thread.sleep(forTimeInterval: 3) }
-                            semaphore.signal()
+        var isCanceled = false
+        for (url, (name, opensea)) in dict {
+            downloadQueue.async {
+                let semaphore = DispatchSemaphore(value: 0)
+                var success = false
+                var retryCount = 0
+                while !success && !isCanceled && retryCount < 3 {
+                    downloadFile(name: name, opensea: opensea, from: url, to: destination) { result in
+                        switch result {
+                        case .success:
+                            success = true
+                        case .cancel:
+                            isCanceled = true
+                        case .failure:
+                            retryCount += 1
+                            Thread.sleep(forTimeInterval: 3)
                         }
-                        semaphore.wait()
+                        semaphore.signal()
                     }
+                    semaphore.wait()
                 }
             }
+        }
     }
-
+    
     func showOpensea(filePath: String) {
         if let fileURL = URL(string: "file://" + filePath), let fileId = fileId(fileURL: fileURL), let opensea = Storage.opensea(fileId: fileId) {
             DispatchQueue.main.async {
@@ -63,18 +70,22 @@ struct NFTService {
         }
     }
     
-    func downloadFile(name: String, opensea: URL, from url: URL, to destinationURL: URL, completion: @escaping (Bool) -> Void) {
+    private enum DownloadFileResult {
+        case success, cancel, failure
+    }
+    
+    private func downloadFile(name: String, opensea: URL, from url: URL, to destinationURL: URL, completion: @escaping (DownloadFileResult) -> Void) {
         print("yo will download \(url)")
         let task = URLSession.shared.downloadTask(with: url) { location, response, error in
             guard let location = location, error == nil else {
-                print("Error downloading file: \(error!)")
-                completion(false)
+                print("Error downloading file: \(error)")
+                completion(.failure)
                 return
             }
-            // TODO: remember file ids to tie these with nfts
             
-            if !FileManager.default.fileExists(atPath: destinationURL.path) {
-                return // TODO: cancel downloading in that case
+            guard FileManager.default.fileExists(atPath: destinationURL.path) else {
+                completion(.cancel)
+                return
             }
             
             let finalName = name.hasSuffix(url.pathExtension) ? name : (name + "." + url.pathExtension)
@@ -91,10 +102,10 @@ struct NFTService {
                 
                 
                 print("File downloaded to: \(destinationURL.path)")
-                completion(true)
+                completion(.success)
             } catch {
                 print("Error saving file: \(error)")
-                completion(false)
+                completion(.cancel)
             }
         }
         task.resume()

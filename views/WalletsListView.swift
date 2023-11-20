@@ -98,7 +98,7 @@ struct WalletsListView: View {
     }
     
     private func openFolderForWallet(_ wallet: WatchOnlyWallet) {
-        if let nftDirectory = URL.nftDirectory(wallet: wallet) {
+        if let nftDirectory = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: true) {
             NSWorkspace.shared.open(nftDirectory)
         }
         NSApplication.shared.windows.forEach { $0.close() }

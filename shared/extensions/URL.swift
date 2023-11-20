@@ -6,11 +6,15 @@ extension URL {
     
     static let deeplinkScheme = "nft-folder://"
     
-    static func nftDirectory(wallet: WatchOnlyWallet) -> URL? {
+    static func nftDirectory(wallet: WatchOnlyWallet, createIfDoesNotExist: Bool) -> URL? {
         let fileManager = FileManager.default
         guard let addressDirectoryURL = nftDirectory?.appendingPathComponent(wallet.displayName) else { return nil }
         if !fileManager.fileExists(atPath: addressDirectoryURL.path) {
-            try? fileManager.createDirectory(at: addressDirectoryURL, withIntermediateDirectories: true, attributes: nil)
+            if createIfDoesNotExist {
+                try? fileManager.createDirectory(at: addressDirectoryURL, withIntermediateDirectories: true, attributes: nil)
+            } else {
+                return nil
+            }
         }
         return addressDirectoryURL
     }
