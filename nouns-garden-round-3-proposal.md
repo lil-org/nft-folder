@@ -6,6 +6,7 @@
 ![folders](https://github.com/grachyov/nft-folder-macos/assets/7680193/60bfac17-ac8e-40ae-b2a4-4cd082712bc1)
 
 ### testflight @ [nft-folder.lil.org](https://nft-folder.lil.org)
+[made @ ethglobal instanbul]
 
 ## why
 * sync for a backup / instant offline access
