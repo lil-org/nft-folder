@@ -28,4 +28,4 @@
 * future improvements go to both apps
 
 ### would love your feedback!
-ivan@lil.org / [telegram](https://t.ivan.lol) / [twitter](https://x.ivan.lol) / [farcaster](https://x.ivan.lol)
+ivan@lil.org / [telegram](https://t.ivan.lol) / [twitter](https://x.ivan.lol) / [farcaster](https://f.ivan.lol)
