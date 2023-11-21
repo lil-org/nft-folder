@@ -1,6 +1,6 @@
 # nft-folder-macos
 
-### 🖥️📂💎 view nfts in a macos folder by setting it's name to eth address
+### ☁️📂💎 view nfts in a macos folder by setting it's name to eth address
 
 ![finder-extension](https://github.com/grachyov/nft-folder-macos/assets/7680193/35e8c756-6a9d-44aa-aa27-5d3ffcc864eb)
 ![folders](https://github.com/grachyov/nft-folder-macos/assets/7680193/60bfac17-ac8e-40ae-b2a4-4cd082712bc1)
