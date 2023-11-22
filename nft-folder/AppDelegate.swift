@@ -62,8 +62,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             styleMask: [.closable, .fullSizeContentView, .titled],
             backing: .buffered, defer: false)
         window?.center()
-        window?.titleVisibility = .hidden
-        window?.titlebarAppearsTransparent = true
+        window?.titleVisibility = .visible
+        window?.titlebarAppearsTransparent = false
         window?.isMovableByWindowBackground = true
         window?.backgroundColor = NSColor.windowBackgroundColor
         window?.isOpaque = false
