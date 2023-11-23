@@ -32,6 +32,7 @@
 		2CA4CF5C2B07F76000CC75F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CA4CF5A2B07F76000CC75F4 /* Main.storyboard */; };
 		2CAFA62B2B09C3610054160D /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA62A2B09C3610054160D /* Storage.swift */; };
 		2CC096F52B099F3400F24DD2 /* FolderIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC096F42B099F3400F24DD2 /* FolderIcon.swift */; };
+		2CF7339E2B0ED50000B1AC68 /* ZoraAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7339D2B0ED50000B1AC68 /* ZoraAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		2CAFA62A2B09C3610054160D /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		2CC096F42B099F3400F24DD2 /* FolderIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderIcon.swift; sourceTree = "<group>"; };
 		2CCFED972B08246800D98A2E /* WalletsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsListView.swift; sourceTree = "<group>"; };
+		2CF7339D2B0ED50000B1AC68 /* ZoraAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoraAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +202,7 @@
 				2CA4CF542B07F75F00CC75F4 /* AppDelegate.swift */,
 				2CAFA62A2B09C3610054160D /* Storage.swift */,
 				2C9113192B08F71200A8EE80 /* NFTService.swift */,
+				2CF7339D2B0ED50000B1AC68 /* ZoraAPI.swift */,
 				2CA4CF582B07F76000CC75F4 /* Assets.xcassets */,
 				2CA4CF5A2B07F76000CC75F4 /* Main.storyboard */,
 				2CA4CF5D2B07F76000CC75F4 /* nft_folder.entitlements */,
@@ -365,6 +368,7 @@
 				2CA4CF552B07F75F00CC75F4 /* AppDelegate.swift in Sources */,
 				2C9113212B09253500A8EE80 /* Blockies.swift in Sources */,
 				2CA34B5A2B08B7CF00DAB623 /* URL.swift in Sources */,
+				2CF7339E2B0ED50000B1AC68 /* ZoraAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
