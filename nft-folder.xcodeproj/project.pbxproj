@@ -108,60 +108,60 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2C0D86C92B08E7C600106915 /* models */ = {
+		2C0D86C92B08E7C600106915 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				2CA34B502B08B33C00DAB623 /* WatchOnlyWallet.swift */,
 				2C0D86C62B08E7BF00106915 /* ENSResponse.swift */,
 				2C91131D2B09110900A8EE80 /* Asset.swift */,
 			);
-			path = models;
+			path = Models;
 			sourceTree = "<group>";
 		};
-		2C0D86CA2B08E7D900106915 /* services */ = {
+		2C0D86CA2B08E7D900106915 /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				2C0D86C32B08E67000106915 /* WalletsService.swift */,
 			);
-			path = services;
+			path = Services;
 			sourceTree = "<group>";
 		};
-		2C91131C2B08FCDF00A8EE80 /* views */ = {
+		2C91131C2B08FCDF00A8EE80 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				2CCFED972B08246800D98A2E /* WalletsListView.swift */,
 				2C9113272B09751D00A8EE80 /* WalletImageView.swift */,
 				2CA34B532B08B54100DAB623 /* NFTMetadataView.swift */,
 			);
-			path = views;
+			path = Views;
 			sourceTree = "<group>";
 		};
-		2C9113262B093EE800A8EE80 /* helpers */ = {
+		2C9113262B093EE800A8EE80 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				2C9113202B09253500A8EE80 /* Blockies.swift */,
 				2CC096F42B099F3400F24DD2 /* FolderIcon.swift */,
 			);
-			path = helpers;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
-		2CA34B4F2B08B32600DAB623 /* shared */ = {
+		2CA34B4F2B08B32600DAB623 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				2C0D86CA2B08E7D900106915 /* services */,
-				2C0D86C92B08E7C600106915 /* models */,
-				2CA34B582B08B7BF00DAB623 /* extensions */,
+				2C0D86CA2B08E7D900106915 /* Services */,
+				2C0D86C92B08E7C600106915 /* Models */,
+				2CA34B582B08B7BF00DAB623 /* Extensions */,
 			);
-			path = shared;
+			path = Shared;
 			sourceTree = "<group>";
 		};
-		2CA34B582B08B7BF00DAB623 /* extensions */ = {
+		2CA34B582B08B7BF00DAB623 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				2CA34B592B08B7CF00DAB623 /* URL.swift */,
 				2CA34B552B08B6A200DAB623 /* Codable.swift */,
 			);
-			path = extensions;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		2CA34B632B08C01300DAB623 /* nft-finder-extension */ = {
@@ -179,9 +179,9 @@
 			isa = PBXGroup;
 			children = (
 				2CA4CF532B07F75F00CC75F4 /* nft-folder */,
-				2C91131C2B08FCDF00A8EE80 /* views */,
-				2C9113262B093EE800A8EE80 /* helpers */,
-				2CA34B4F2B08B32600DAB623 /* shared */,
+				2C91131C2B08FCDF00A8EE80 /* Views */,
+				2C9113262B093EE800A8EE80 /* Helpers */,
+				2CA34B4F2B08B32600DAB623 /* Shared */,
 				2CA34B632B08C01300DAB623 /* nft-finder-extension */,
 				2CD488FD2B10C6B000A53950 /* Supporting Files */,
 				2CA4CF522B07F75F00CC75F4 /* Products */,
