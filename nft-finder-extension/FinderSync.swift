@@ -109,7 +109,7 @@ class FinderSync: FIFinderSync {
         case .toolbarItemMenu:
             menu.addItem(withTitle: "📂 open nft folder", action: #selector(openNFTDirectory(_:)), keyEquivalent: "")
             menu.addItem(withTitle: "☁️ sync nfts", action: #selector(syncNFTs(_:)), keyEquivalent: "")
-            menu.addItem(withTitle: "🆕 add a wallet", action: #selector(addWallet(_:)), keyEquivalent: "")
+            menu.addItem(withTitle: "⚙️ settings", action: #selector(didSelectSettings(_:)), keyEquivalent: "")
         case .contextualMenuForContainer, .contextualMenuForSidebar:
             break
         @unknown default:
@@ -124,8 +124,8 @@ class FinderSync: FIFinderSync {
         }
     }
     
-    @IBAction private func addWallet(_ sender: AnyObject?) {
-        if let url = URL(string: URL.deeplinkScheme + "?add") {
+    @IBAction private func didSelectSettings(_ sender: AnyObject?) {
+        if let url = URL(string: URL.deeplinkScheme + "?show") {
             DispatchQueue.main.async { NSWorkspace.shared.open(url) }
         }
     }
