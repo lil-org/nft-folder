@@ -15,10 +15,12 @@ struct Asset: Codable {
     let assetContract: AssetContract
     
     var probableFileURL: URL? {
-        let urlStrings = [animationOriginalUrl, imageOriginalUrl, permalink, externalLink].compactMap { $0 }
-        let urls = urlStrings.compactMap { $0.hasPrefix("https") ? URL(string: $0) : nil }
-        if let ok = urls.first(where: { !$0.pathExtension.isEmpty }) {
-            return ok
+        guard var urlString = (animationOriginalUrl ?? imageOriginalUrl) ?? externalLink else { return nil }
+        if urlString.hasPrefix(URL.ipfsScheme) {
+            urlString = "https://ipfs.io/ipfs/" + urlString.dropFirst(URL.ipfsScheme.count)
+        }
+        if let url = URL(string: urlString) {
+            return url
         } else {
             return nil
         }

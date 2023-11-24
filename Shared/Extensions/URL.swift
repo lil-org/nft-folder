@@ -4,6 +4,7 @@ import Cocoa
 
 extension URL {
     
+    static let ipfsScheme = "ipfs://"
     static let deeplinkScheme = "nft-folder://"
     
     static func nftDirectory(wallet: WatchOnlyWallet, createIfDoesNotExist: Bool) -> URL? {
