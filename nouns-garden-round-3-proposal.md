@@ -5,7 +5,7 @@
 ![finder-extension](https://github.com/grachyov/nft-folder-macos/assets/7680193/35e8c756-6a9d-44aa-aa27-5d3ffcc864eb)
 ![folders](https://github.com/grachyov/nft-folder-macos/assets/7680193/60bfac17-ac8e-40ae-b2a4-4cd082712bc1)
 
-### testflight @ [nft-folder.lil.org](https://nft-folder.lil.org)
+### testflight @ [folder.lil.org](https://folder.lil.org)
 [made @ ethglobal instanbul]
 
 ## why
@@ -23,7 +23,7 @@
 * create as many .eth folders as you wish
 
 ## todo
-- [x] the alpha version is already on a [testflight](https://nft-folder.lil.org)
+- [x] the alpha version is already on a [testflight](https://folder.lil.org)
 - [ ] make a reliable version
 - [ ] handle all kinds of nft syncing errors / scenarios
 - [ ] release nounish nft-folder app on the app store (4-5 weeks)

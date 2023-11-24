@@ -81,11 +81,12 @@
 		2CA4CF582B07F76000CC75F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2CA4CF5B2B07F76000CC75F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2CA4CF5D2B07F76000CC75F4 /* nft_folder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = nft_folder.entitlements; sourceTree = "<group>"; };
-		2CA4CF632B07F9EA00CC75F4 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		2CA4CF642B07FAC600CC75F4 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
 		2CAFA62A2B09C3610054160D /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		2CC096F42B099F3400F24DD2 /* FolderIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderIcon.swift; sourceTree = "<group>"; };
 		2CCFED972B08246800D98A2E /* WalletsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsListView.swift; sourceTree = "<group>"; };
+		2CD488FE2B10C6FA00A53950 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		2CD488FF2B10C6FA00A53950 /* nouns-garden-round-3-proposal.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "nouns-garden-round-3-proposal.md"; sourceTree = SOURCE_ROOT; };
 		2CF7339D2B0ED50000B1AC68 /* ZoraAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoraAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -182,6 +183,7 @@
 				2C9113262B093EE800A8EE80 /* helpers */,
 				2CA34B4F2B08B32600DAB623 /* shared */,
 				2CA34B632B08C01300DAB623 /* nft-finder-extension */,
+				2CD488FD2B10C6B000A53950 /* Supporting Files */,
 				2CA4CF522B07F75F00CC75F4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -206,9 +208,18 @@
 				2CA4CF582B07F76000CC75F4 /* Assets.xcassets */,
 				2CA4CF5A2B07F76000CC75F4 /* Main.storyboard */,
 				2CA4CF5D2B07F76000CC75F4 /* nft_folder.entitlements */,
-				2CA4CF632B07F9EA00CC75F4 /* README.md */,
 				2CA4CF642B07FAC600CC75F4 /* .gitignore */,
 			);
+			path = "nft-folder";
+			sourceTree = "<group>";
+		};
+		2CD488FD2B10C6B000A53950 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2CD488FE2B10C6FA00A53950 /* README.md */,
+				2CD488FF2B10C6FA00A53950 /* nouns-garden-round-3-proposal.md */,
+			);
+			name = "Supporting Files";
 			path = "nft-folder";
 			sourceTree = "<group>";
 		};
