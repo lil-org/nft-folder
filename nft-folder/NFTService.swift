@@ -2,6 +2,7 @@
 
 import Foundation
 import Cocoa
+import UniformTypeIdentifiers
 
 struct NFTService {
     
@@ -88,7 +89,20 @@ struct NFTService {
                 return
             }
             
-            let finalName = name.hasSuffix(url.pathExtension) ? name : (name + "." + url.pathExtension)
+            var pathExtension = url.pathExtension
+            if pathExtension.isEmpty {
+                if let httpResponse = response as? HTTPURLResponse,
+                   let mimeType = httpResponse.mimeType,
+                   let utType = UTType(mimeType: mimeType),
+                   let fileExtension = utType.preferredFilenameExtension {
+                    pathExtension = fileExtension
+                } else {
+                    pathExtension = "png"
+                }
+            }
+            
+            pathExtension = "." + pathExtension
+            let finalName = name.hasSuffix(pathExtension) ? name : (name + pathExtension)
             let destinationURL = destinationURL.appendingPathComponent(finalName)
             do {
                 if FileManager.default.fileExists(atPath: destinationURL.path) {
