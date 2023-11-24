@@ -87,14 +87,12 @@ struct WalletsListView: View {
         }.onReceive(NotificationCenter.default.publisher(for: Notification.Name("walletsUpdate")), perform: { _ in
             self.updateDisplayedWallets()
         })
-        if !wallets.isEmpty {
-            Button("open nft folder", action: {
-                if let nftDirectory = URL.nftDirectory {
-                    NSWorkspace.shared.open(nftDirectory)
-                }
-                NSApplication.shared.windows.forEach { $0.close() }
-            }).frame(height: 36).offset(CGSize(width: 0, height: -6)).keyboardShortcut(.defaultAction).buttonStyle(LinkButtonStyle())
-        }
+        Button("open nft folder", action: {
+            if let nftDirectory = URL.nftDirectory {
+                NSWorkspace.shared.open(nftDirectory)
+            }
+            NSApplication.shared.windows.forEach { $0.close() }
+        }).frame(height: 36).offset(CGSize(width: 0, height: -6)).keyboardShortcut(.defaultAction).buttonStyle(LinkButtonStyle())
     }
     
     private func openFolderForWallet(_ wallet: WatchOnlyWallet) {
