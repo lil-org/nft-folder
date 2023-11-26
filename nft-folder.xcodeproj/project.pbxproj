@@ -31,6 +31,7 @@
 		2CA4CF592B07F76000CC75F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CA4CF582B07F76000CC75F4 /* Assets.xcassets */; };
 		2CA4CF5C2B07F76000CC75F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CA4CF5A2B07F76000CC75F4 /* Main.storyboard */; };
 		2CAFA62B2B09C3610054160D /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA62A2B09C3610054160D /* Storage.swift */; };
+		2CB0BC462B13A2C200603E68 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB0BC452B13A2C200603E68 /* Secrets.swift */; };
 		2CC096F52B099F3400F24DD2 /* FolderIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC096F42B099F3400F24DD2 /* FolderIcon.swift */; };
 		2CF7339E2B0ED50000B1AC68 /* ZoraAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7339D2B0ED50000B1AC68 /* ZoraAPI.swift */; };
 /* End PBXBuildFile section */
@@ -83,10 +84,12 @@
 		2CA4CF5D2B07F76000CC75F4 /* nft_folder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = nft_folder.entitlements; sourceTree = "<group>"; };
 		2CA4CF642B07FAC600CC75F4 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
 		2CAFA62A2B09C3610054160D /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		2CB0BC432B13A25E00603E68 /* nouns-garden-round-3-proposal.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = "nouns-garden-round-3-proposal.md"; path = "Supporting Files/nouns-garden-round-3-proposal.md"; sourceTree = SOURCE_ROOT; };
+		2CB0BC442B13A28E00603E68 /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Secrets.plist; path = "Supporting Files/Secrets.plist"; sourceTree = SOURCE_ROOT; };
+		2CB0BC452B13A2C200603E68 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Secrets.swift; path = "Supporting Files/Secrets.swift"; sourceTree = SOURCE_ROOT; };
 		2CC096F42B099F3400F24DD2 /* FolderIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderIcon.swift; sourceTree = "<group>"; };
 		2CCFED972B08246800D98A2E /* WalletsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsListView.swift; sourceTree = "<group>"; };
 		2CD488FE2B10C6FA00A53950 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
-		2CD488FF2B10C6FA00A53950 /* nouns-garden-round-3-proposal.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "nouns-garden-round-3-proposal.md"; sourceTree = SOURCE_ROOT; };
 		2CF7339D2B0ED50000B1AC68 /* ZoraAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoraAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -216,8 +219,10 @@
 		2CD488FD2B10C6B000A53950 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2CB0BC452B13A2C200603E68 /* Secrets.swift */,
+				2CB0BC442B13A28E00603E68 /* Secrets.plist */,
 				2CD488FE2B10C6FA00A53950 /* README.md */,
-				2CD488FF2B10C6FA00A53950 /* nouns-garden-round-3-proposal.md */,
+				2CB0BC432B13A25E00603E68 /* nouns-garden-round-3-proposal.md */,
 			);
 			name = "Supporting Files";
 			path = "nft-folder";
@@ -252,6 +257,7 @@
 				2CA4CF4E2B07F75E00CC75F4 /* Frameworks */,
 				2CA4CF4F2B07F75E00CC75F4 /* Resources */,
 				2CA34B4E2B082CFB00DAB623 /* Embed Foundation Extensions */,
+				2CB0BC472B13A5E600603E68 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -344,6 +350,27 @@
 			shellScript = "killall nft-folder\nkillall nft-finder-extension\nkillall Finder\n";
 			showEnvVarsInLog = 0;
 		};
+		2CB0BC472B13A5E600603E68 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$SRCROOT/Supporting Files/Secrets.plist",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Secrets.plist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ -f \"${HOME}/Developer/secrets/nft-folder/Secrets.plist\" ]; then\n    cp -f \"${HOME}/Developer/secrets/nft-folder/Secrets.plist\" \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Secrets.plist\"\nelse\n    echo \"warning: 🟢🔴 YO BUNDLING EMPTY SECRETS\"\n    cp -f \"$SRCROOT/Supporting Files/Secrets.plist\" \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Secrets.plist\"\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -366,6 +393,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CA34B542B08B54100DAB623 /* NFTMetadataView.swift in Sources */,
+				2CB0BC462B13A2C200603E68 /* Secrets.swift in Sources */,
 				2CAFA62B2B09C3610054160D /* Storage.swift in Sources */,
 				2C0D86C72B08E7BF00106915 /* ENSResponse.swift in Sources */,
 				2C91131E2B09110900A8EE80 /* Asset.swift in Sources */,

@@ -10,16 +10,9 @@ struct NFTService {
         let assets: [Asset]
     }
     
-    private init() {
-        if let environmentApiKey = ProcessInfo.processInfo.environment["1inch-api-key"] {
-            self.apiKey = environmentApiKey
-        } else {
-            self.apiKey = ""; if apiKey.isEmpty { fatalError("get api key at https://portal.1inch.dev") }
-        }
-    }
     static let shared = NFTService()
     private let urlSession = URLSession.shared
-    private let apiKey: String
+    private let apiKey = Secrets.oneInchApiKey
     
     func study(wallet: WatchOnlyWallet, offset: Int = 0) {
         getNFTs(address: wallet.address, limit: 200, offset: offset) { assets in
