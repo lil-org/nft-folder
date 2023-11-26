@@ -255,9 +255,9 @@
 				2CA34B5C2B08BE5500DAB623 /* ShellScript */,
 				2CA4CF4D2B07F75E00CC75F4 /* Sources */,
 				2CA4CF4E2B07F75E00CC75F4 /* Frameworks */,
+				2CB0BC472B13A5E600603E68 /* Run Script */,
 				2CA4CF4F2B07F75E00CC75F4 /* Resources */,
 				2CA34B4E2B082CFB00DAB623 /* Embed Foundation Extensions */,
-				2CB0BC472B13A5E600603E68 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -350,7 +350,7 @@
 			shellScript = "killall nft-folder\nkillall nft-finder-extension\nkillall Finder\n";
 			showEnvVarsInLog = 0;
 		};
-		2CB0BC472B13A5E600603E68 /* ShellScript */ = {
+		2CB0BC472B13A5E600603E68 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -361,6 +361,7 @@
 			inputPaths = (
 				"$SRCROOT/Supporting Files/Secrets.plist",
 			);
+			name = "Run Script";
 			outputFileListPaths = (
 			);
 			outputPaths = (
