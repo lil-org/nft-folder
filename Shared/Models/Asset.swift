@@ -13,6 +13,22 @@ struct Asset: Codable {
     let externalLink: String?
     let chainId: Int
     let assetContract: AssetContract
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case tokenId = "token_id"
+        case animationOriginalUrl = "animation_original_url"
+        case description
+        case permalink
+        case name
+        case imageOriginalUrl = "image_original_url"
+        case externalLink = "external_link"
+        case chainId = "chainId"
+        case assetContract = "asset_contract"
+    }
+}
+
+extension Asset: DownloadableNFT {
     
     var probableFileURL: URL? {
         guard var urlString = (animationOriginalUrl ?? imageOriginalUrl) ?? externalLink else { return nil }
@@ -37,19 +53,11 @@ struct Asset: Codable {
             return nil
         }
     }
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case tokenId = "token_id"
-        case animationOriginalUrl = "animation_original_url"
-        case description
-        case permalink
-        case name
-        case imageOriginalUrl = "image_original_url"
-        case externalLink = "external_link"
-        case chainId = "chainId"
-        case assetContract = "asset_contract"
+    
+    var mimeType: String? {
+        return nil
     }
+    
 }
 
 struct AssetContract: Codable {

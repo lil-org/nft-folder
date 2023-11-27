@@ -23,7 +23,7 @@ struct NFTService {
         }
     }
     
-    private func downloadSomeFiles(wallet: WatchOnlyWallet, assets: [Asset]) {
+    private func downloadSomeFiles(wallet: WatchOnlyWallet, assets: [DownloadableNFT]) {
         guard let destination = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return }
         var dict = [URL: (String, URL)]()
         for asset in assets {
