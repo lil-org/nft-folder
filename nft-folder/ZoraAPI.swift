@@ -4,42 +4,52 @@ import Foundation
 
 struct ZoraAPI {
     
-    enum Network {
-        case ethereum
-        // TODO: add all supported networks
+    enum Network: String {
+        case ethereum, optimism, zora, base, pgn
         
-        var networkStringValue: String {
-            return "ETHEREUM"
+        private var networkStringValue: String {
+            return rawValue.uppercased()
         }
         
-        var chainStringValue: String {
-            return "MAINNET"
+        private var chainStringValue: String {
+            let mainnet = "MAINNET"
+            switch self {
+            case .ethereum:
+                return mainnet
+            default:
+                return networkStringValue + "_" + mainnet
+            }
+        }
+        
+        var query: String {
+            return "{network: \(networkStringValue), chain: \(chainStringValue)}"
         }
     }
     
     private static let urlSession = URLSession.shared
     
-    static func get(owner: String, networks: [Network], endCursor: String?) {
+    static func get(owner: String, networks: [Network], endCursor: String?, completion: @escaping (TokensData?) -> Void) {
         let whereString = "{ownerAddresses: [\"\(owner)\"]}"
-        get(whereString: whereString, networks: networks, endCursor: endCursor)
+        get(whereString: whereString, networks: networks, endCursor: endCursor, completion: completion)
     }
     
-    static func get(collection: String, networks: [Network], endCursor: String?) {
+    static func get(collection: String, networks: [Network], endCursor: String?, completion: @escaping (TokensData?) -> Void) {
         let whereString = "{collectionAddresses: [\"\(collection)\"]}"
-        get(whereString: whereString, networks: networks, endCursor: endCursor)
+        get(whereString: whereString, networks: networks, endCursor: endCursor, completion: completion)
     }
     
-    static private func get(whereString: String, networks: [Network], endCursor: String?) {
+    static private func get(whereString: String, networks: [Network], endCursor: String?, completion: @escaping (TokensData?) -> Void) {
         let endString: String
         if let endCursor = endCursor {
             endString = ", after:\"\(endCursor)\""
         } else {
             endString = ""
         }
+        let networksString = networks.map { $0.query }.joined(separator: ", ")
         
         let queryString = """
         {
-          tokens(networks: [{network: ETHEREUM, chain: MAINNET}],
+          tokens(networks: [\(networksString)],
                  pagination: {limit: 50\(endString)},
                  sort: {sortKey: MINTED, sortDirection: ASC},
                  where: \(whereString))
@@ -77,21 +87,52 @@ struct ZoraAPI {
         request.httpBody = jsonData
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         let task = urlSession.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {
+            guard let data = data, error == nil, let zoraResponse = try? JSONDecoder().decode(ZoraResponse.self, from: data) else {
                 print("Error: \(error?.localizedDescription ?? "Unknown error")")
+                completion(nil)
                 return
             }
 
-            do {
-                if let jsonObject = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                    print(jsonObject)
-                }
-            } catch {
-                print("Error: \(error.localizedDescription)")
-            }
+            completion(zoraResponse.data.tokens)
         }
 
         task.resume()
     }
     
+}
+
+private struct ZoraResponse: Codable {
+    let data: TokensResponse
+}
+
+private struct TokensResponse: Codable {
+    let tokens: TokensData
+}
+
+struct TokensData: Codable {
+    let pageInfo: PageInfo
+    let nodes: [Node]
+}
+
+struct PageInfo: Codable {
+    let endCursor: String?
+    let hasNextPage: Bool
+}
+
+struct Node: Codable {
+    let token: Token
+}
+
+struct Token: Codable {
+    let tokenId: String
+    let name: String?
+    let owner: String?
+    let collectionName: String?
+    let image: Media?
+    let content: Media?
+}
+
+struct Media: Codable {
+    let url: String?
+    let mimeType: String?
 }
