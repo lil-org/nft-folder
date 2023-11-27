@@ -4,16 +4,45 @@ import Foundation
 
 struct ZoraAPI {
     
-    static func yo() {
-        // TODO: where: {ownerAddresses: "jacob.eth"}
-        // TODO: add after: endCursor to pagination in request
+    enum Network {
+        case ethereum
+        // TODO: add all supported networks
+        
+        var networkStringValue: String {
+            return "ETHEREUM"
+        }
+        
+        var chainStringValue: String {
+            return "MAINNET"
+        }
+    }
+    
+    private static let urlSession = URLSession.shared
+    
+    static func get(owner: String, networks: [Network], endCursor: String?) {
+        let whereString = "{ownerAddresses: [\"\(owner)\"]}"
+        get(whereString: whereString, networks: networks, endCursor: endCursor)
+    }
+    
+    static func get(collection: String, networks: [Network], endCursor: String?) {
+        let whereString = "{collectionAddresses: [\"\(collection)\"]}"
+        get(whereString: whereString, networks: networks, endCursor: endCursor)
+    }
+    
+    static private func get(whereString: String, networks: [Network], endCursor: String?) {
+        let endString: String
+        if let endCursor = endCursor {
+            endString = ", after:\"\(endCursor)\""
+        } else {
+            endString = ""
+        }
         
         let queryString = """
         {
           tokens(networks: [{network: ETHEREUM, chain: MAINNET}],
-                 pagination: {limit: 50},
+                 pagination: {limit: 50\(endString)},
                  sort: {sortKey: MINTED, sortDirection: ASC},
-                 where: {collectionAddresses: ["0xc729Ce9bF1030fbb639849a96fA8BBD013680B64"]})
+                 where: \(whereString))
           {
             pageInfo { 
               endCursor
@@ -47,7 +76,7 @@ struct ZoraAPI {
         request.httpMethod = "POST"
         request.httpBody = jsonData
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        let task = urlSession.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
                 print("Error: \(error?.localizedDescription ?? "Unknown error")")
                 return
