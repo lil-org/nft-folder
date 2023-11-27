@@ -136,3 +136,31 @@ struct Media: Codable {
     let url: String?
     let mimeType: String?
 }
+
+extension Token: DownloadableNFT {
+    
+    var probableFileURL: URL? {
+        if var urlString = content?.url ?? image?.url {
+            // TODO: refactor preparing urls
+            if urlString.hasPrefix(URL.ipfsScheme) {
+                urlString = "https://ipfs.io/ipfs/" + urlString.dropFirst(URL.ipfsScheme.count)
+            }
+            return URL(string: urlString)
+        } else {
+            return nil
+        }
+    }
+    
+    var openseaURL: URL? {
+        return URL(string: "https://www.youtube.com/watch?v=dQw4w9WgXcQ") // TODO: implement
+    }
+    
+    var fileDisplayName: String {
+        return "\(collectionName ?? "untitled") - \(name ?? tokenId)"
+    }
+    
+    var mimeType: String? {
+        return nil // TODO: implement
+    }
+    
+}

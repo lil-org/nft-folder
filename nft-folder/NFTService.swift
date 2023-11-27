@@ -15,10 +15,21 @@ struct NFTService {
     private let apiKey = Secrets.oneInchApiKey
     
     func study(wallet: WatchOnlyWallet, offset: Int = 0) {
+        goThroughZora(wallet: wallet)
         getNFTs(address: wallet.address, limit: 200, offset: offset) { assets in
             downloadSomeFiles(wallet: wallet, assets: assets)
             if !assets.isEmpty {
                 study(wallet: wallet, offset: offset + assets.count)
+            }
+        }
+    }
+    
+    private func goThroughZora(wallet: WatchOnlyWallet, endCursor: String? = nil) {
+        ZoraAPI.get(owner: wallet.address, networks: [.zora, .base], endCursor: nil) { result in
+            guard let result = result else { return } // TODO: handle errors, retry
+            downloadSomeFiles(wallet: wallet, assets: result.nodes.map { $0.token })
+            if result.pageInfo.hasNextPage, let endCursor = result.pageInfo.endCursor {
+                goThroughZora(wallet: wallet, endCursor: endCursor)
             }
         }
     }
