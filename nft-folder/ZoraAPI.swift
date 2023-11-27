@@ -139,16 +139,21 @@ struct Media: Codable {
 
 extension Token: DownloadableNFT {
     
+    // TODO: refactor, do not duplicate
     var probableFileURL: URL? {
-        if var urlString = content?.url ?? image?.url {
-            // TODO: refactor preparing urls
-            if urlString.hasPrefix(URL.ipfsScheme) {
-                urlString = "https://ipfs.io/ipfs/" + urlString.dropFirst(URL.ipfsScheme.count)
-            }
-            return URL(string: urlString)
+        var urlString: String
+        if let contentURL = content?.url, contentURL.hasPrefix(URL.ipfsScheme) || contentURL.hasPrefix("https://") {
+            urlString = contentURL
+        } else if let imageURL = image?.url, imageURL.hasPrefix(URL.ipfsScheme) || imageURL.hasPrefix("https://") {
+            urlString = imageURL
         } else {
             return nil
         }
+        
+        if urlString.hasPrefix(URL.ipfsScheme) {
+            urlString = "https://ipfs.io/ipfs/" + urlString.dropFirst(URL.ipfsScheme.count)
+        }
+        return URL(string: urlString)
     }
     
     var openseaURL: URL? {
