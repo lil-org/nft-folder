@@ -31,15 +31,12 @@ struct Asset: Codable {
 extension Asset: DownloadableNFT {
     
     var probableFileURL: URL? {
-        guard var urlString = (animationOriginalUrl ?? imageOriginalUrl) ?? externalLink else { return nil }
-        if urlString.hasPrefix(URL.ipfsScheme) {
-            urlString = "https://ipfs.io/ipfs/" + urlString.dropFirst(URL.ipfsScheme.count)
+        for link in [animationOriginalUrl, imageOriginalUrl, externalLink] {
+            if let url = URL.withProbableFile(urlString: link) {
+                return url
+            }
         }
-        if let url = URL(string: urlString) {
-            return url
-        } else {
-            return nil
-        }
+        return nil
     }
     
     var fileDisplayName: String {

@@ -5,7 +5,20 @@ import Cocoa
 extension URL {
     
     static let ipfsScheme = "ipfs://"
+    static let arScheme = "ar://"
     static let deeplinkScheme = "nft-folder://"
+    
+    static func withProbableFile(urlString: String?) -> URL? {
+        guard let urlString = urlString else { return nil }
+        
+        if urlString.hasPrefix(URL.ipfsScheme) {
+            return URL(string: "https://ipfs.io/ipfs/" + urlString.dropFirst(URL.ipfsScheme.count))
+        } else if urlString.hasPrefix(URL.arScheme) {
+            return URL(string: "https://arweave.net/" + urlString.dropFirst(URL.arScheme.count))
+        } else {
+            return URL(string: urlString)
+        }
+    }
     
     static func nftDirectory(wallet: WatchOnlyWallet, createIfDoesNotExist: Bool) -> URL? {
         let fileManager = FileManager.default

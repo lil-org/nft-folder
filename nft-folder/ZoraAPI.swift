@@ -130,6 +130,7 @@ struct Token: Codable {
     let collectionName: String?
     let image: Media?
     let content: Media?
+    let tokenUrl: String?
 }
 
 struct Media: Codable {
@@ -139,21 +140,13 @@ struct Media: Codable {
 
 extension Token: DownloadableNFT {
     
-    // TODO: refactor, do not duplicate
     var probableFileURL: URL? {
-        var urlString: String
-        if let contentURL = content?.url, contentURL.hasPrefix(URL.ipfsScheme) || contentURL.hasPrefix("https://") {
-            urlString = contentURL
-        } else if let imageURL = image?.url, imageURL.hasPrefix(URL.ipfsScheme) || imageURL.hasPrefix("https://") {
-            urlString = imageURL
-        } else {
-            return nil
+        for link in [content?.url, image?.url, tokenUrl] {
+            if let url = URL.withProbableFile(urlString: link) {
+                return url
+            }
         }
-        
-        if urlString.hasPrefix(URL.ipfsScheme) {
-            urlString = "https://ipfs.io/ipfs/" + urlString.dropFirst(URL.ipfsScheme.count)
-        }
-        return URL(string: urlString)
+        return nil
     }
     
     var openseaURL: URL? {
