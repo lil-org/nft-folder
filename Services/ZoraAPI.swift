@@ -88,7 +88,7 @@ struct ZoraAPI {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         let task = urlSession.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil, let zoraResponse = try? JSONDecoder().decode(ZoraResponse.self, from: data) else {
-                print("Error: \(error?.localizedDescription ?? "Unknown error")")
+                print("ZORA API Error: \(error?.localizedDescription ?? "Unknown error")")
                 completion(nil)
                 return
             }

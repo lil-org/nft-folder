@@ -11,6 +11,7 @@
 		2C0D86C52B08E67000106915 /* WalletsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C32B08E67000106915 /* WalletsService.swift */; };
 		2C0D86C72B08E7BF00106915 /* ENSResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C62B08E7BF00106915 /* ENSResponse.swift */; };
 		2C0D86C82B08E7BF00106915 /* ENSResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C62B08E7BF00106915 /* ENSResponse.swift */; };
+		2C4D84122B1888A400952BF5 /* InchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4D84112B1888A400952BF5 /* InchAPI.swift */; };
 		2C625BA52B14A05B00902306 /* DownloadableNFT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C625BA42B14A05B00902306 /* DownloadableNFT.swift */; };
 		2C91131A2B08F71200A8EE80 /* NFTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9113192B08F71200A8EE80 /* NFTService.swift */; };
 		2C91131E2B09110900A8EE80 /* OneInchAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91131D2B09110900A8EE80 /* OneInchAsset.swift */; };
@@ -62,6 +63,7 @@
 /* Begin PBXFileReference section */
 		2C0D86C32B08E67000106915 /* WalletsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsService.swift; sourceTree = "<group>"; };
 		2C0D86C62B08E7BF00106915 /* ENSResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENSResponse.swift; sourceTree = "<group>"; };
+		2C4D84112B1888A400952BF5 /* InchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InchAPI.swift; sourceTree = "<group>"; };
 		2C625BA42B14A05B00902306 /* DownloadableNFT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadableNFT.swift; sourceTree = "<group>"; };
 		2C9113192B08F71200A8EE80 /* NFTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTService.swift; sourceTree = "<group>"; };
 		2C91131D2B09110900A8EE80 /* OneInchAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneInchAsset.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				2C9113192B08F71200A8EE80 /* NFTService.swift */,
 				2CAFA62A2B09C3610054160D /* Storage.swift */,
 				2CF7339D2B0ED50000B1AC68 /* ZoraAPI.swift */,
+				2C4D84112B1888A400952BF5 /* InchAPI.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C4D84122B1888A400952BF5 /* InchAPI.swift in Sources */,
 				2CB0BC462B13A2C200603E68 /* Secrets.swift in Sources */,
 				2CAFA62B2B09C3610054160D /* Storage.swift in Sources */,
 				2C0D86C72B08E7BF00106915 /* ENSResponse.swift in Sources */,

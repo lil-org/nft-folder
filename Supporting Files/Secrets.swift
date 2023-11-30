@@ -4,7 +4,7 @@ import Foundation
 
 struct Secrets {
     
-    static let oneInchApiKey: String = {
+    static let inchApiKey: String = {
         if let apiKey = plist["1inch"] as? String, !apiKey.isEmpty {
             return apiKey
         } else {
