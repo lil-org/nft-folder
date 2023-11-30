@@ -27,6 +27,7 @@
 		2CA34B6F2B08C02500DAB623 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B552B08B6A200DAB623 /* Codable.swift */; };
 		2CA34B702B08C02B00DAB623 /* WatchOnlyWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B502B08B33C00DAB623 /* WatchOnlyWallet.swift */; };
 		2CA34B732B08C71800DAB623 /* ExtensionAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CA34B722B08C71800DAB623 /* ExtensionAssets.xcassets */; };
+		2CA3C2A12B18C91600AF33D6 /* DownloadsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3C2A02B18C91600AF33D6 /* DownloadsService.swift */; };
 		2CA4CF552B07F75F00CC75F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA4CF542B07F75F00CC75F4 /* AppDelegate.swift */; };
 		2CA4CF592B07F76000CC75F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CA4CF582B07F76000CC75F4 /* Assets.xcassets */; };
 		2CA4CF5C2B07F76000CC75F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CA4CF5A2B07F76000CC75F4 /* Main.storyboard */; };
@@ -78,6 +79,7 @@
 		2CA34B672B08C01300DAB623 /* nft_finder_extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = nft_finder_extension.entitlements; sourceTree = "<group>"; };
 		2CA34B722B08C71800DAB623 /* ExtensionAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ExtensionAssets.xcassets; sourceTree = "<group>"; };
 		2CA34B742B08CA8200DAB623 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		2CA3C2A02B18C91600AF33D6 /* DownloadsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsService.swift; sourceTree = "<group>"; };
 		2CA4CF512B07F75F00CC75F4 /* nft-folder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nft-folder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CA4CF542B07F75F00CC75F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2CA4CF582B07F76000CC75F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				2C9113192B08F71200A8EE80 /* NFTService.swift */,
+				2CA3C2A02B18C91600AF33D6 /* DownloadsService.swift */,
 				2CAFA62A2B09C3610054160D /* Storage.swift */,
 				2CF7339D2B0ED50000B1AC68 /* ZoraAPI.swift */,
 				2C4D84112B1888A400952BF5 /* InchAPI.swift */,
@@ -413,6 +416,7 @@
 				2C4D84122B1888A400952BF5 /* InchAPI.swift in Sources */,
 				2CB0BC462B13A2C200603E68 /* Secrets.swift in Sources */,
 				2CAFA62B2B09C3610054160D /* Storage.swift in Sources */,
+				2CA3C2A12B18C91600AF33D6 /* DownloadsService.swift in Sources */,
 				2C0D86C72B08E7BF00106915 /* ENSResponse.swift in Sources */,
 				2C91131E2B09110900A8EE80 /* OneInchAsset.swift in Sources */,
 				2CC096F52B099F3400F24DD2 /* FolderIcon.swift in Sources */,
