@@ -6,8 +6,8 @@ import UniformTypeIdentifiers
 
 struct NFTService {
     
-    private struct Response: Decodable {
-        let assets: [Asset]
+    private struct OneInchResponse: Decodable {
+        let assets: [OneInchAsset]
     }
     
     static let shared = NFTService()
@@ -138,14 +138,14 @@ struct NFTService {
         }
     }
     
-    private func getNFTs(address: String, limit: Int, offset: Int, completion: @escaping ([Asset]) -> Void) {
+    private func getNFTs(address: String, limit: Int, offset: Int, completion: @escaping ([OneInchAsset]) -> Void) {
         print("will request offset \(offset)")
         let urlString = "https://api.1inch.dev/nft/v1/byaddress?chainIds=1&address=\(address)&limit=\(limit)&offset=\(offset)"
         guard let url = URL(string: urlString) else { return }
         var request = URLRequest(url: url)
         request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         let task = urlSession.dataTask(with: request) { data, _, _ in
-            if let data = data, !data.isEmpty, let response = try? JSONDecoder().decode(Response.self, from: data) {
+            if let data = data, !data.isEmpty, let response = try? JSONDecoder().decode(OneInchResponse.self, from: data) {
                 completion(response.assets)
             } else {
                 print("it did not go well at offset \(offset)")

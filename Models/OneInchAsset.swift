@@ -2,7 +2,7 @@
 
 import Foundation
 
-struct Asset: Codable {
+struct OneInchAsset: Codable {
     let id: Int
     let tokenId: String
     let permalink: String?
@@ -12,7 +12,7 @@ struct Asset: Codable {
     let imageOriginalUrl: String?
     let externalLink: String?
     let chainId: Int
-    let assetContract: AssetContract
+    let assetContract: OneInchAssetContract
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -28,7 +28,7 @@ struct Asset: Codable {
     }
 }
 
-extension Asset: DownloadableNFT {
+extension OneInchAsset: DownloadableNFT {
     
     var probableFileURL: URL? {
         for link in [animationOriginalUrl, imageOriginalUrl, externalLink] {
@@ -57,7 +57,7 @@ extension Asset: DownloadableNFT {
     
 }
 
-struct AssetContract: Codable {
+struct OneInchAssetContract: Codable {
     let address: String
     let name: String
     let description: String?
