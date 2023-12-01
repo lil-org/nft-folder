@@ -39,7 +39,7 @@ class DownloadsService {
     }
     
     private func downloadNextIfNeeded() {
-        guard downloadsInProgress < 9 else { return }
+        guard downloadsInProgress < 15 else { return }
         guard let (url, (destination, name, nftURL)) = downloadsDict.first else { return }
         downloadsDict.removeValue(forKey: url)
         downloadsInProgress += 1
@@ -87,7 +87,8 @@ class DownloadsService {
     
     private func save(name: String, nftURL: URL, tmpLocation: URL? = nil, data: Data? = nil, fileExtension: String, destinationURL: URL) {
         let pathExtension = "." + fileExtension
-        let finalName = name.hasSuffix(pathExtension) ? name : (name + pathExtension)
+        var finalName = name.hasSuffix(pathExtension) ? name : (name + pathExtension)
+        finalName = finalName.replacingOccurrences(of: "/", with: "-")
         let destinationURL = destinationURL.appendingPathComponent(finalName)
         do {
             if FileManager.default.fileExists(atPath: destinationURL.path) {
