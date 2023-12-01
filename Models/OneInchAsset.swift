@@ -43,7 +43,7 @@ extension InchAsset: DownloadableNFT {
         return "\(assetContract.name) - \(name ?? tokenId)"
     }
     
-    var openseaURL: URL? {
+    var nftURL: URL? {
         if let url = URL(string: "https://opensea.io/assets/ethereum/\(assetContract.address)/\(tokenId)") {
             return url
         } else {

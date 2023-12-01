@@ -25,7 +25,7 @@ struct NFTService {
     }
     
     private func goThroughZora(wallet: WatchOnlyWallet, endCursor: String? = nil) {
-        ZoraAPI.get(owner: wallet.address, networks: [.zora], endCursor: nil) { result in
+        ZoraAPI.get(owner: wallet.address, networks: [.zora], endCursor: endCursor) { result in
             guard let result = result else { return } // TODO: handle errors, retry
             downloadsService.downloadFiles(wallet: wallet, downloadables: result.nodes.map { $0.token })
             if result.pageInfo.hasNextPage, let endCursor = result.pageInfo.endCursor {

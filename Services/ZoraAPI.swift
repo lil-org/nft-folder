@@ -150,7 +150,7 @@ extension Token: DownloadableNFT {
         return nil
     }
     
-    var openseaURL: URL? {
+    var nftURL: URL? {
         return URL(string: "https://www.youtube.com/watch?v=dQw4w9WgXcQ") // TODO: implement
     }
     

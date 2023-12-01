@@ -11,7 +11,7 @@ struct Storage {
         defaults.setValue(a, forKey: fileId)
     }
     
-    static func opensea(fileId: String) -> URL? {
+    static func nftURL(fileId: String) -> URL? {
         guard let a = defaults.string(forKey: fileId), let url = URL(string: a) else { return nil }
         return url
     }

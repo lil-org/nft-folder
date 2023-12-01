@@ -19,25 +19,25 @@ class DownloadsService {
         guard let destination = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return }
         var dict = [URL: (String, URL)]()
         for downloadable in downloadables {
-            guard let dataOrURL = downloadable.probableDataOrURL, let openseaURL = downloadable.openseaURL else { continue }
+            guard let dataOrURL = downloadable.probableDataOrURL, let nftURL = downloadable.nftURL else { continue }
             switch dataOrURL {
             case .data(let data, let fileExtension):
-                save(name: downloadable.fileDisplayName, nftURL: openseaURL, data: data, fileExtension: fileExtension, destinationURL: destination)
+                save(name: downloadable.fileDisplayName, nftURL: nftURL, data: data, fileExtension: fileExtension, destinationURL: destination)
             case .url(let url):
                 if !uniqueLinks.contains(url) {
                     uniqueLinks.insert(url)
-                    dict[url] = (downloadable.fileDisplayName, openseaURL)
+                    dict[url] = (downloadable.fileDisplayName, nftURL)
                 }
             }
         }
         var isCanceled = false
-        for (url, (name, opensea)) in dict {
+        for (url, (name, nftURL)) in dict {
             downloadQueue.async {
                 let semaphore = DispatchSemaphore(value: 0)
                 var success = false
                 var retryCount = 0
                 while !success && !isCanceled && retryCount < 2 {
-                    self.downloadFile(name: name, opensea: opensea, from: url, to: destination) { result in
+                    self.downloadFile(name: name, nftURL: nftURL, from: url, to: destination) { result in
                         switch result {
                         case .success:
                             success = true
@@ -56,14 +56,14 @@ class DownloadsService {
     }
     
     func showOpensea(filePath: String) {
-        if let fileURL = URL(string: "file://" + filePath), let fileId = fileId(fileURL: fileURL), let opensea = Storage.opensea(fileId: fileId) {
+        if let fileURL = URL(string: "file://" + filePath), let fileId = fileId(fileURL: fileURL), let nftURL = Storage.nftURL(fileId: fileId) {
             DispatchQueue.main.async {
-                NSWorkspace.shared.open(opensea)
+                NSWorkspace.shared.open(nftURL)
             }
         }
     }
     
-    private func downloadFile(name: String, opensea: URL, from url: URL, to destinationURL: URL, completion: @escaping (DownloadFileResult) -> Void) {
+    private func downloadFile(name: String, nftURL: URL, from url: URL, to destinationURL: URL, completion: @escaping (DownloadFileResult) -> Void) {
         print("yo will download \(url)")
         let task = urlSession.downloadTask(with: url) { location, response, error in
             print("download completion \(url)")
@@ -86,7 +86,7 @@ class DownloadsService {
                 }
             }
             print("will save \(url)")
-            self.save(name: name, nftURL: opensea, tmpLocation: location, fileExtension: fileExtension, destinationURL: destinationURL)
+            self.save(name: name, nftURL: nftURL, tmpLocation: location, fileExtension: fileExtension, destinationURL: destinationURL)
             completion(.success)
             print("did save \(url)")
         }
