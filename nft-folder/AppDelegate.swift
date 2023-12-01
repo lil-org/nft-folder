@@ -105,7 +105,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         let viewPrefix = "view="
         if q.hasPrefix(viewPrefix), let encodedPath = q.dropFirst(viewPrefix.count).removingPercentEncoding {
-            DownloadsService.shared.showOpensea(filePath: encodedPath)
+            DownloadsService.shared.showNFT(filePath: encodedPath)
             // TODO: different for wallet folders
             // TODO: open multiple files
         }

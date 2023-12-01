@@ -12,55 +12,47 @@ class DownloadsService {
     
     private init() {}
     private let urlSession = URLSession.shared
-    private let downloadQueue = DispatchQueue(label: "downloadQueue")
-    private var uniqueLinks = Set<URL>() // TODO: dev tmp
+    
+    private var downloadsDict = [URL: (URL, String, URL)]() // TODO: dev tmp
+    private var downloadsInProgress = 0
     
     func downloadFiles(wallet: WatchOnlyWallet, downloadables: [DownloadableNFT]) {
         guard let destination = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return }
-        var dict = [URL: (String, URL)]()
         for downloadable in downloadables {
             guard let dataOrURL = downloadable.probableDataOrURL, let nftURL = downloadable.nftURL else { continue }
             switch dataOrURL {
             case .data(let data, let fileExtension):
                 save(name: downloadable.fileDisplayName, nftURL: nftURL, data: data, fileExtension: fileExtension, destinationURL: destination)
             case .url(let url):
-                if !uniqueLinks.contains(url) {
-                    uniqueLinks.insert(url)
-                    dict[url] = (downloadable.fileDisplayName, nftURL)
-                }
+                downloadsDict[url] = (destination, downloadable.fileDisplayName, nftURL)
             }
         }
-        var isCanceled = false
-        for (url, (name, nftURL)) in dict {
-            downloadQueue.async {
-                let semaphore = DispatchSemaphore(value: 0)
-                var success = false
-                var retryCount = 0
-                while !success && !isCanceled && retryCount < 2 {
-                    self.downloadFile(name: name, nftURL: nftURL, from: url, to: destination) { result in
-                        switch result {
-                        case .success:
-                            success = true
-                        case .cancel:
-                            isCanceled = true
-                        case .failure:
-                            retryCount += 1
-                            Thread.sleep(forTimeInterval: 1)
-                        }
-                        semaphore.signal()
-                    }
-                    semaphore.wait()
-                }
-            }
-        }
+        downloadNextIfNeeded()
     }
     
-    func showOpensea(filePath: String) {
+    func showNFT(filePath: String) {
         if let fileURL = URL(string: "file://" + filePath), let fileId = fileId(fileURL: fileURL), let nftURL = Storage.nftURL(fileId: fileId) {
             DispatchQueue.main.async {
                 NSWorkspace.shared.open(nftURL)
             }
         }
+    }
+    
+    private func downloadNextIfNeeded() {
+        guard downloadsInProgress < 9 else { return }
+        guard let (url, (destination, name, nftURL)) = downloadsDict.first else { return }
+        downloadsDict.removeValue(forKey: url)
+        downloadsInProgress += 1
+        downloadFile(name: name, nftURL: nftURL, from: url, to: destination) { [weak self] result in
+            self?.downloadsInProgress -= 1
+            switch result {
+            case .success, .failure:
+                self?.downloadNextIfNeeded()
+            case .cancel:
+                self?.downloadNextIfNeeded() // TODO: clean up for a removed filder
+            }
+        }
+        downloadNextIfNeeded()
     }
     
     private func downloadFile(name: String, nftURL: URL, from url: URL, to destinationURL: URL, completion: @escaping (DownloadFileResult) -> Void) {
@@ -95,8 +87,7 @@ class DownloadsService {
     
     private func save(name: String, nftURL: URL, tmpLocation: URL? = nil, data: Data? = nil, fileExtension: String, destinationURL: URL) {
         let pathExtension = "." + fileExtension
-        var finalName = name.hasSuffix(pathExtension) ? name : (name + pathExtension)
-        finalName = finalName.replacingOccurrences(of: "/", with: "-")
+        let finalName = name.hasSuffix(pathExtension) ? name : (name + pathExtension)
         let destinationURL = destinationURL.appendingPathComponent(finalName)
         do {
             if FileManager.default.fileExists(atPath: destinationURL.path) {
