@@ -39,6 +39,7 @@ struct ZoraAPI {
     }
     
     static private func get(whereString: String, networks: [Network], endCursor: String?, completion: @escaping (TokensData?) -> Void) {
+        print("requesting zora api \(String(describing: endCursor))")
         let endString: String
         if let endCursor = endCursor {
             endString = ", after:\"\(endCursor)\""

@@ -2,7 +2,7 @@
 
 import Cocoa
 
-struct DownloadsService {
+class DownloadsService {
     
     private enum DownloadFileResult {
         case success, cancel, failure
@@ -13,6 +13,7 @@ struct DownloadsService {
     private init() {}
     private let urlSession = URLSession.shared
     private let downloadQueue = DispatchQueue(label: "downloadQueue")
+    private var uniqueLinks = Set<URL>() // TODO: dev tmp
     
     func downloadFiles(wallet: WatchOnlyWallet, downloadables: [DownloadableNFT]) {
         guard let destination = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return }
@@ -23,7 +24,10 @@ struct DownloadsService {
             case .data(let data, let fileExtension):
                 save(name: downloadable.fileDisplayName, nftURL: openseaURL, data: data, fileExtension: fileExtension, destinationURL: destination)
             case .url(let url):
-                dict[url] = (downloadable.fileDisplayName, openseaURL)
+                if !uniqueLinks.contains(url) {
+                    uniqueLinks.insert(url)
+                    dict[url] = (downloadable.fileDisplayName, openseaURL)
+                }
             }
         }
         var isCanceled = false
@@ -32,8 +36,8 @@ struct DownloadsService {
                 let semaphore = DispatchSemaphore(value: 0)
                 var success = false
                 var retryCount = 0
-                while !success && !isCanceled && retryCount < 3 {
-                    downloadFile(name: name, opensea: opensea, from: url, to: destination) { result in
+                while !success && !isCanceled && retryCount < 2 {
+                    self.downloadFile(name: name, opensea: opensea, from: url, to: destination) { result in
                         switch result {
                         case .success:
                             success = true
@@ -41,7 +45,7 @@ struct DownloadsService {
                             isCanceled = true
                         case .failure:
                             retryCount += 1
-                            Thread.sleep(forTimeInterval: 3)
+                            Thread.sleep(forTimeInterval: 1)
                         }
                         semaphore.signal()
                     }
@@ -62,12 +66,14 @@ struct DownloadsService {
     private func downloadFile(name: String, opensea: URL, from url: URL, to destinationURL: URL, completion: @escaping (DownloadFileResult) -> Void) {
         print("yo will download \(url)")
         let task = urlSession.downloadTask(with: url) { location, response, error in
+            print("download completion \(url)")
             guard let location = location, error == nil else {
                 print("Error downloading file: \(String(describing: error))")
                 completion(.failure)
                 return
             }
             guard FileManager.default.fileExists(atPath: destinationURL.path) else {
+                print("cancel download")
                 completion(.cancel) // TODO: review cancel logic
                 return
             }
@@ -79,8 +85,10 @@ struct DownloadsService {
                     fileExtension = FileExtension.placeholder
                 }
             }
-            save(name: name, nftURL: opensea, tmpLocation: location, fileExtension: fileExtension, destinationURL: destinationURL)
+            print("will save \(url)")
+            self.save(name: name, nftURL: opensea, tmpLocation: location, fileExtension: fileExtension, destinationURL: destinationURL)
             completion(.success)
+            print("did save \(url)")
         }
         task.resume()
     }
