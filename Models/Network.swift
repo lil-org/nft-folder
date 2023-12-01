@@ -2,7 +2,7 @@
 
 import Foundation
 
-enum Network: String {
+enum Network: String, CaseIterable {
     
     case ethereum, optimism, zora, base, pgn
     
