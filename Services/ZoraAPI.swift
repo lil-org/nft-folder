@@ -4,28 +4,6 @@ import Foundation
 
 struct ZoraAPI {
     
-    enum Network: String {
-        case ethereum, optimism, zora, base, pgn
-        
-        private var networkStringValue: String {
-            return rawValue.uppercased()
-        }
-        
-        private var chainStringValue: String {
-            let mainnet = "MAINNET"
-            switch self {
-            case .ethereum:
-                return mainnet
-            default:
-                return networkStringValue + "_" + mainnet
-            }
-        }
-        
-        var query: String {
-            return "{network: \(networkStringValue), chain: \(chainStringValue)}"
-        }
-    }
-    
     private static let urlSession = URLSession.shared
     
     static func get(owner: String, networks: [Network], endCursor: String?, completion: @escaping (TokensData?) -> Void) {
@@ -152,8 +130,21 @@ extension Token: DownloadableNFT {
         return nil
     }
     
-    var nftURL: URL? {
-        return URL(string: "https://zora.co/collect/eth:\(collectionAddress)/\(tokenId)") // TODO: implement
+    func nftURL(network: Network) -> URL? {
+        let prefix: String
+        switch network {
+        case .ethereum:
+            prefix = "eth"
+        case .optimism:
+            prefix = "optimism"
+        case .zora:
+            prefix = "zora"
+        case .base:
+            prefix = "base"
+        case .pgn:
+            prefix = "pgn"
+        }
+        return URL(string: "https://zora.co/collect/\(prefix):\(collectionAddress)/\(tokenId)")
     }
     
     var fileDisplayName: String {

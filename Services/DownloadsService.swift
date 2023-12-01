@@ -16,10 +16,10 @@ class DownloadsService {
     private var downloadsDict = [URL: (URL, String, URL)]() // TODO: dev tmp
     private var downloadsInProgress = 0
     
-    func downloadFiles(wallet: WatchOnlyWallet, downloadables: [DownloadableNFT]) {
+    func downloadFiles(wallet: WatchOnlyWallet, downloadables: [DownloadableNFT], network: Network) {
         guard let destination = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return }
         for downloadable in downloadables {
-            guard let dataOrURL = downloadable.probableDataOrURL, let nftURL = downloadable.nftURL else { continue }
+            guard let dataOrURL = downloadable.probableDataOrURL, let nftURL = downloadable.nftURL(network: network) else { continue }
             switch dataOrURL {
             case .data(let data, let fileExtension):
                 save(name: downloadable.fileDisplayName, nftURL: nftURL, data: data, fileExtension: fileExtension, destinationURL: destination)

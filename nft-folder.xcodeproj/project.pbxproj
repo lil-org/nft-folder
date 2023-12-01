@@ -13,6 +13,7 @@
 		2C0D86C82B08E7BF00106915 /* ENSResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C62B08E7BF00106915 /* ENSResponse.swift */; };
 		2C4D84122B1888A400952BF5 /* InchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4D84112B1888A400952BF5 /* InchAPI.swift */; };
 		2C625BA52B14A05B00902306 /* DownloadableNFT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C625BA42B14A05B00902306 /* DownloadableNFT.swift */; };
+		2C8A42EA2B1A272600BE4166 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A42E92B1A272600BE4166 /* Network.swift */; };
 		2C91131A2B08F71200A8EE80 /* NFTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9113192B08F71200A8EE80 /* NFTService.swift */; };
 		2C91131E2B09110900A8EE80 /* OneInchAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91131D2B09110900A8EE80 /* OneInchAsset.swift */; };
 		2C9113212B09253500A8EE80 /* Blockies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9113202B09253500A8EE80 /* Blockies.swift */; };
@@ -68,6 +69,7 @@
 		2C0D86C62B08E7BF00106915 /* ENSResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENSResponse.swift; sourceTree = "<group>"; };
 		2C4D84112B1888A400952BF5 /* InchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InchAPI.swift; sourceTree = "<group>"; };
 		2C625BA42B14A05B00902306 /* DownloadableNFT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadableNFT.swift; sourceTree = "<group>"; };
+		2C8A42E92B1A272600BE4166 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		2C9113192B08F71200A8EE80 /* NFTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTService.swift; sourceTree = "<group>"; };
 		2C91131D2B09110900A8EE80 /* OneInchAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneInchAsset.swift; sourceTree = "<group>"; };
 		2C9113202B09253500A8EE80 /* Blockies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blockies.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 			children = (
 				2CFA24702B19F956009B58FD /* DataOrURL.swift */,
 				2C91131D2B09110900A8EE80 /* OneInchAsset.swift */,
+				2C8A42E92B1A272600BE4166 /* Network.swift */,
 				2C625BA42B14A05B00902306 /* DownloadableNFT.swift */,
 			);
 			path = Models;
@@ -424,6 +427,7 @@
 				2CAFA62B2B09C3610054160D /* Storage.swift in Sources */,
 				2CA3C2A12B18C91600AF33D6 /* DownloadsService.swift in Sources */,
 				2C0D86C72B08E7BF00106915 /* ENSResponse.swift in Sources */,
+				2C8A42EA2B1A272600BE4166 /* Network.swift in Sources */,
 				2C91131E2B09110900A8EE80 /* OneInchAsset.swift in Sources */,
 				2CC096F52B099F3400F24DD2 /* FolderIcon.swift in Sources */,
 				2CFA24712B19F956009B58FD /* DataOrURL.swift in Sources */,
