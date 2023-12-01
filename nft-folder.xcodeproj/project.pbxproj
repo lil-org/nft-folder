@@ -35,6 +35,8 @@
 		2CB0BC462B13A2C200603E68 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB0BC452B13A2C200603E68 /* Secrets.swift */; };
 		2CC096F52B099F3400F24DD2 /* FolderIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC096F42B099F3400F24DD2 /* FolderIcon.swift */; };
 		2CF7339E2B0ED50000B1AC68 /* ZoraAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7339D2B0ED50000B1AC68 /* ZoraAPI.swift */; };
+		2CFA24712B19F956009B58FD /* DataOrURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFA24702B19F956009B58FD /* DataOrURL.swift */; };
+		2CFA24732B19FB92009B58FD /* FileExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFA24722B19FB92009B58FD /* FileExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +96,8 @@
 		2CCFED972B08246800D98A2E /* WalletsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsListView.swift; sourceTree = "<group>"; };
 		2CD488FE2B10C6FA00A53950 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		2CF7339D2B0ED50000B1AC68 /* ZoraAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoraAPI.swift; sourceTree = "<group>"; };
+		2CFA24702B19F956009B58FD /* DataOrURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataOrURL.swift; sourceTree = "<group>"; };
+		2CFA24722B19FB92009B58FD /* FileExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +150,7 @@
 		2C4D84102B1886D600952BF5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2CFA24702B19F956009B58FD /* DataOrURL.swift */,
 				2C91131D2B09110900A8EE80 /* OneInchAsset.swift */,
 				2C625BA42B14A05B00902306 /* DownloadableNFT.swift */,
 			);
@@ -165,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				2C9113202B09253500A8EE80 /* Blockies.swift */,
+				2CFA24722B19FB92009B58FD /* FileExtension.swift */,
 				2CC096F42B099F3400F24DD2 /* FolderIcon.swift */,
 			);
 			path = Helpers;
@@ -420,9 +426,11 @@
 				2C0D86C72B08E7BF00106915 /* ENSResponse.swift in Sources */,
 				2C91131E2B09110900A8EE80 /* OneInchAsset.swift in Sources */,
 				2CC096F52B099F3400F24DD2 /* FolderIcon.swift in Sources */,
+				2CFA24712B19F956009B58FD /* DataOrURL.swift in Sources */,
 				2CA34B3D2B082BDF00DAB623 /* WalletsListView.swift in Sources */,
 				2CA34B512B08B33C00DAB623 /* WatchOnlyWallet.swift in Sources */,
 				2C91131A2B08F71200A8EE80 /* NFTService.swift in Sources */,
+				2CFA24732B19FB92009B58FD /* FileExtension.swift in Sources */,
 				2CA34B562B08B6A200DAB623 /* Codable.swift in Sources */,
 				2C9113282B09751D00A8EE80 /* WalletImageView.swift in Sources */,
 				2C0D86C42B08E67000106915 /* WalletsService.swift in Sources */,

@@ -4,7 +4,7 @@ import Foundation
 
 protocol DownloadableNFT {
     
-    var probableFileURL: URL? { get }
+    var probableDataOrURL: DataOrURL? { get }
     var openseaURL: URL? { get }
     var fileDisplayName: String { get }
     var mimeType: String? { get }

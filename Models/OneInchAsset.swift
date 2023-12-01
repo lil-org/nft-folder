@@ -30,10 +30,10 @@ struct InchAsset: Codable {
 
 extension InchAsset: DownloadableNFT {
     
-    var probableFileURL: URL? {
+    var probableDataOrURL: DataOrURL? {
         for link in [animationOriginalUrl, imageOriginalUrl, externalLink] {
-            if let url = URL.withProbableFile(urlString: link) {
-                return url
+            if let dataOrURL = DataOrURL(urlString: link) {
+                return dataOrURL
             }
         }
         return nil

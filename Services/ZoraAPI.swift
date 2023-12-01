@@ -140,10 +140,10 @@ struct Media: Codable {
 
 extension Token: DownloadableNFT {
     
-    var probableFileURL: URL? {
+    var probableDataOrURL: DataOrURL? {
         for link in [content?.url, image?.url, tokenUrl] {
-            if let url = URL.withProbableFile(urlString: link) {
-                return url
+            if let dataOrURL = DataOrURL(urlString: link) {
+                return dataOrURL
             }
         }
         return nil

@@ -1,7 +1,6 @@
 // nft-folder-macos 2023
 
 import Cocoa
-import UniformTypeIdentifiers
 
 struct DownloadsService {
     
@@ -19,8 +18,13 @@ struct DownloadsService {
         guard let destination = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return }
         var dict = [URL: (String, URL)]()
         for downloadable in downloadables {
-            guard let url = downloadable.probableFileURL, let openseaURL = downloadable.openseaURL else { continue }
-            dict[url] = (downloadable.fileDisplayName, openseaURL)
+            guard let dataOrURL = downloadable.probableDataOrURL, let openseaURL = downloadable.openseaURL else { continue }
+            switch dataOrURL {
+            case .data(let data, let fileExtension):
+                save(name: downloadable.fileDisplayName, nftURL: openseaURL, data: data, fileExtension: fileExtension, destinationURL: destination)
+            case .url(let url):
+                dict[url] = (downloadable.fileDisplayName, openseaURL)
+            }
         }
         var isCanceled = false
         for (url, (name, opensea)) in dict {
@@ -59,50 +63,51 @@ struct DownloadsService {
         print("yo will download \(url)")
         let task = urlSession.downloadTask(with: url) { location, response, error in
             guard let location = location, error == nil else {
-                print("Error downloading file: \(error)")
+                print("Error downloading file: \(String(describing: error))")
                 completion(.failure)
                 return
             }
-            
             guard FileManager.default.fileExists(atPath: destinationURL.path) else {
-                completion(.cancel)
+                completion(.cancel) // TODO: review cancel logic
+                return
+            }
+            var fileExtension = url.pathExtension
+            if fileExtension.isEmpty {
+                if let httpResponse = response as? HTTPURLResponse, let mimeType = httpResponse.mimeType {
+                    fileExtension = FileExtension.forMimeType(mimeType)
+                } else {
+                    fileExtension = FileExtension.placeholder
+                }
+            }
+            save(name: name, nftURL: opensea, tmpLocation: location, fileExtension: fileExtension, destinationURL: destinationURL)
+            completion(.success)
+        }
+        task.resume()
+    }
+    
+    private func save(name: String, nftURL: URL, tmpLocation: URL? = nil, data: Data? = nil, fileExtension: String, destinationURL: URL) {
+        let pathExtension = "." + fileExtension
+        let finalName = name.hasSuffix(pathExtension) ? name : (name + pathExtension)
+        let destinationURL = destinationURL.appendingPathComponent(finalName)
+        do {
+            if FileManager.default.fileExists(atPath: destinationURL.path) {
+                try FileManager.default.removeItem(at: destinationURL) // TODO: review file exists logic
+            }
+            
+            if let tmpLocation = tmpLocation {
+                try FileManager.default.moveItem(at: tmpLocation, to: destinationURL)
+            } else if let data = data {
+                try data.write(to: destinationURL)
+            } else {
                 return
             }
             
-            var pathExtension = url.pathExtension
-            if pathExtension.isEmpty {
-                if let httpResponse = response as? HTTPURLResponse,
-                   let mimeType = httpResponse.mimeType,
-                   let utType = UTType(mimeType: mimeType),
-                   let fileExtension = utType.preferredFilenameExtension {
-                    pathExtension = fileExtension
-                } else {
-                    pathExtension = "png"
-                }
+            if let fileId = fileId(fileURL: destinationURL) {
+                Storage.store(fileId: fileId, url: nftURL)
             }
-            
-            pathExtension = "." + pathExtension
-            let finalName = name.hasSuffix(pathExtension) ? name : (name + pathExtension)
-            let destinationURL = destinationURL.appendingPathComponent(finalName)
-            do {
-                if FileManager.default.fileExists(atPath: destinationURL.path) {
-                    try FileManager.default.removeItem(at: destinationURL)
-                }
-                try FileManager.default.moveItem(at: location, to: destinationURL)
-                
-                if let fileId = fileId(fileURL: destinationURL) {
-                    Storage.store(fileId: fileId, url: opensea)
-                }
-                
-                
-                print("File downloaded to: \(destinationURL.path)")
-                completion(.success)
-            } catch {
-                print("Error saving file: \(error)")
-                completion(.cancel)
-            }
+        } catch {
+            print("Error saving file: \(error)")
         }
-        task.resume()
     }
     
     private func fileId(fileURL: URL) -> String? {
