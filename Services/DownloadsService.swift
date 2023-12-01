@@ -31,7 +31,7 @@ class DownloadsService {
     }
     
     func showNFT(filePath: String) {
-        if let fileURL = URL(string: "file://" + filePath), let fileId = fileId(fileURL: fileURL), let nftURL = Storage.nftURL(fileId: fileId) {
+        if let fileId = fileId(path: filePath), let nftURL = Storage.nftURL(fileId: fileId) {
             DispatchQueue.main.async {
                 NSWorkspace.shared.open(nftURL)
             }
@@ -103,7 +103,7 @@ class DownloadsService {
                 return
             }
             
-            if let fileId = fileId(fileURL: destinationURL) {
+            if let fileId = fileId(path: destinationURL.path) {
                 Storage.store(fileId: fileId, url: nftURL)
             }
         } catch {
@@ -111,8 +111,8 @@ class DownloadsService {
         }
     }
     
-    private func fileId(fileURL: URL) -> String? {
-        if let attributes = try? FileManager.default.attributesOfItem(atPath: fileURL.relativePath),
+    private func fileId(path: String) -> String? {
+        if let attributes = try? FileManager.default.attributesOfItem(atPath: path),
            let number = attributes[.systemFileNumber] as? UInt {
             return String(number)
         } else {

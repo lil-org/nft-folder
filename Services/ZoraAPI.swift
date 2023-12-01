@@ -65,6 +65,7 @@ struct ZoraAPI {
                 name
                 owner
                 collectionName
+                collectionAddress
                 tokenUrl
                 image {
                   url
@@ -129,6 +130,7 @@ struct Token: Codable {
     let name: String?
     let owner: String?
     let collectionName: String?
+    let collectionAddress: String
     let image: Media?
     let content: Media?
     let tokenUrl: String?
@@ -151,7 +153,7 @@ extension Token: DownloadableNFT {
     }
     
     var nftURL: URL? {
-        return URL(string: "https://www.youtube.com/watch?v=dQw4w9WgXcQ") // TODO: implement
+        return URL(string: "https://zora.co/collect/eth:\(collectionAddress)/\(tokenId)") // TODO: implement
     }
     
     var fileDisplayName: String {
