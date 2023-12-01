@@ -87,7 +87,8 @@ struct DownloadsService {
     
     private func save(name: String, nftURL: URL, tmpLocation: URL? = nil, data: Data? = nil, fileExtension: String, destinationURL: URL) {
         let pathExtension = "." + fileExtension
-        let finalName = name.hasSuffix(pathExtension) ? name : (name + pathExtension)
+        var finalName = name.hasSuffix(pathExtension) ? name : (name + pathExtension)
+        finalName = finalName.replacingOccurrences(of: "/", with: "-")
         let destinationURL = destinationURL.appendingPathComponent(finalName)
         do {
             if FileManager.default.fileExists(atPath: destinationURL.path) {
