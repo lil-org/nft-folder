@@ -86,23 +86,58 @@ class DownloadsService {
         task.resume()
     }
     
-    private func save(name: String, nftURL: URL, tmpLocation: URL? = nil, data: Data? = nil, fileExtension: String, destinationURL: URL) {
-        if let tmpLocation = tmpLocation,
-           fileExtension.lowercased() == "json" || fileExtension.lowercased() == "txt",
-           let mbJsonData = try? Data(contentsOf: tmpLocation),
-           let dict = try? JSONSerialization.jsonObject(with: mbJsonData) as? [String: Any],
-           let imageString = (dict["image"] as? String) ?? (dict["image_data"] as? String) ?? (dict["svg_image_data"] as? String),
-           let dataOrURL = DataOrURL(urlString: imageString) {
-            switch dataOrURL {
-            case .data(let data, let fileExtension):
-                save(name: name, nftURL: nftURL, data: data, fileExtension: fileExtension, destinationURL: destinationURL)
-            case .url(let url):
-                downloadsDict[url] = (destinationURL, name, nftURL)
+    private func extractValueFromJson(jsonString: String) -> DataOrURL? {
+        let jsonString = jsonString.removingPercentEncoding ?? jsonString
+        for key in ["animation_url", "image", "svg_image_data", "image_data"] {
+            if let rangeOfKey = jsonString.range(of: "\"\(key)\"") {
+                var start = jsonString.index(rangeOfKey.upperBound, offsetBy: 1)
+                while start < jsonString.endIndex, jsonString[start] != "\"" {
+                    start = jsonString.index(after: start)
+                }
+                if start < jsonString.endIndex, jsonString[start] == "\"" {
+                    var end = jsonString.index(after: start)
+                    while end < jsonString.endIndex, jsonString[end] != "\"" {
+                        end = jsonString.index(after: end)
+                    }
+                    if end < jsonString.endIndex {
+                        let valueStart = jsonString.index(after: start)
+                        let result = String(jsonString[valueStart..<end])
+                        if let dataOrURL = DataOrURL(urlString: result) {
+                            return dataOrURL
+                        }
+                    }
+                }
             }
-            try? FileManager.default.removeItem(at: tmpLocation)
-            return
         }
-        
+        return nil
+    }
+    
+    private func save(name: String, nftURL: URL, tmpLocation: URL? = nil, data: Data? = nil, fileExtension: String, destinationURL: URL) {
+        if fileExtension.lowercased() == "json" || fileExtension.lowercased() == "txt" {
+            let mbJsonData: Data?
+            if let tmpLocation = tmpLocation, let tmpData = try? Data(contentsOf: tmpLocation) {
+                mbJsonData = tmpData
+            } else if let data = data {
+                mbJsonData = data
+            } else {
+                mbJsonData = nil
+            }
+            if let mbJsonData = mbJsonData,
+               let jsonString = String(data: mbJsonData, encoding: .utf8),
+               !jsonString.isEmpty,
+               let dataOrURL = extractValueFromJson(jsonString: jsonString) {
+                switch dataOrURL {
+                case .data(let data, let fileExtension):
+                    save(name: name, nftURL: nftURL, data: data, fileExtension: fileExtension, destinationURL: destinationURL)
+                case .url(let url):
+                    downloadsDict[url] = (destinationURL, name, nftURL)
+                }
+                if let tmpLocation = tmpLocation {
+                    try? FileManager.default.removeItem(at: tmpLocation)
+                }
+                return
+            }
+        }
         let pathExtension = "." + fileExtension
         var finalName = name.hasSuffix(pathExtension) ? name : (name + pathExtension)
         finalName = finalName.replacingOccurrences(of: "/", with: "-")
