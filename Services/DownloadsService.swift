@@ -87,6 +87,22 @@ class DownloadsService {
     }
     
     private func save(name: String, nftURL: URL, tmpLocation: URL? = nil, data: Data? = nil, fileExtension: String, destinationURL: URL) {
+        if let tmpLocation = tmpLocation,
+           fileExtension.lowercased() == "json" || fileExtension.lowercased() == "txt",
+           let mbJsonData = try? Data(contentsOf: tmpLocation),
+           let dict = try? JSONSerialization.jsonObject(with: mbJsonData) as? [String: Any],
+           let imageString = (dict["image"] as? String) ?? (dict["image_data"] as? String) ?? (dict["svg_image_data"] as? String),
+           let dataOrURL = DataOrURL(urlString: imageString) {
+            switch dataOrURL {
+            case .data(let data, let fileExtension):
+                save(name: name, nftURL: nftURL, data: data, fileExtension: fileExtension, destinationURL: destinationURL)
+            case .url(let url):
+                downloadsDict[url] = (destinationURL, name, nftURL)
+            }
+            try? FileManager.default.removeItem(at: tmpLocation)
+            return
+        }
+        
         let pathExtension = "." + fileExtension
         var finalName = name.hasSuffix(pathExtension) ? name : (name + pathExtension)
         finalName = finalName.replacingOccurrences(of: "/", with: "-")
