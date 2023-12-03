@@ -58,9 +58,10 @@ class DownloadsService {
     private func downloadFile(name: String, nftURL: URL, from url: URL, to destinationURL: URL, completion: @escaping (DownloadFileResult) -> Void) {
         print("yo will download \(url)")
         let task = urlSession.downloadTask(with: url) { location, response, error in
+            let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
             print("download completion \(url)")
-            guard let location = location, error == nil else {
-                print("Error downloading file: \(String(describing: error))")
+            guard let location = location, error == nil, (200...299).contains(statusCode) else {
+                print("Status code \(statusCode). Error downloading file: \(String(describing: error))")
                 completion(.failure)
                 return
             }
