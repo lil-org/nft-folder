@@ -3,7 +3,8 @@
 ### bring nfts to macos folders
 
 
-### [testflight](https://folder.lil.org) / [github](https://github.com/lil-org/nft-folder-macos)
+### [💻 testflight](https://folder.lil.org)
+### [🛠️ github](https://github.com/lil-org/nft-folder-macos)
 
 
 ## why
@@ -26,8 +27,9 @@
 - [ ] **release nft-folder app on the app store** (5-6 weeks)
 
 ```
-garden round 3 prop included bundling nft-folder extension into the tokenary wallet.
-i have removed it from this prop in favor of standalone app simplicity.
+garden round 3 prop included bundling nft-folder extension into the tokenary wallet
+
+i have removed it from this prop in favor of standalone app simplicity
 ```
 
 ## who
