@@ -9,7 +9,9 @@
 			<key>QLIsDataBasedPreview</key>
 			<false/>
 			<key>QLSupportedContentTypes</key>
-			<array/>
+			<array>
+				<string>org.lil.html</string>
+			</array>
 			<key>QLSupportsSearchableItems</key>
 			<false/>
 		</dict>
