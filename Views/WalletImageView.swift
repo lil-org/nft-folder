@@ -1,4 +1,4 @@
-// nft-folder-macos 2023 ethistanbul
+// nft-folder-macos 2024
 
 import SwiftUI
 import Combine

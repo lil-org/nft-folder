@@ -1,4 +1,4 @@
-// nft-folder-macos 2023
+// nft-folder-macos 2024
 
 import Cocoa
 
