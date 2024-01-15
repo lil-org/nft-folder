@@ -167,7 +167,7 @@ private class DirectoryMonitor {
         source?.setEventHandler {
             let fileManager = FileManager.default
             do {
-                let contents = try fileManager.contentsOfDirectory(at: self.directoryURL, includingPropertiesForKeys: nil)
+                _ = try fileManager.contentsOfDirectory(at: self.directoryURL, includingPropertiesForKeys: nil)
                 if let url = URL(string: URL.deeplinkScheme + "?check") {
                     DispatchQueue.main.async { NSWorkspace.shared.open(url) }
                 }
