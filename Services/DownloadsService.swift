@@ -22,7 +22,7 @@ class DownloadsService {
             guard let dataOrURL = downloadable.probableDataOrURL, let nftURL = downloadable.nftURL(network: network) else { continue }
             switch dataOrURL {
             case .data(let data, let fileExtension):
-                save(name: downloadable.fileDisplayName, nftURL: nftURL, data: data, fileExtension: fileExtension, destinationURL: destination)
+                save(name: downloadable.fileDisplayName, nftURL: nftURL, data: data, fileExtension: fileExtension, destinationURL: destination, downloadedFromURL: nil)
             case .url(let url):
                 downloadsDict[url] = (destination, downloadable.fileDisplayName, nftURL)
             }
@@ -79,7 +79,7 @@ class DownloadsService {
                 }
             }
             print("will save \(url)")
-            self.save(name: name, nftURL: nftURL, tmpLocation: location, fileExtension: fileExtension, destinationURL: destinationURL)
+            self.save(name: name, nftURL: nftURL, tmpLocation: location, fileExtension: fileExtension, destinationURL: destinationURL, downloadedFromURL: url)
             completion(.success)
             print("did save \(url)")
         }
@@ -112,8 +112,31 @@ class DownloadsService {
         return nil
     }
     
-    private func save(name: String, nftURL: URL, tmpLocation: URL? = nil, data: Data? = nil, fileExtension: String, destinationURL: URL) {
-        if fileExtension.lowercased() == "json" || fileExtension.lowercased() == "txt" {
+    private func save(name: String, nftURL: URL, tmpLocation: URL? = nil, data: Data? = nil, fileExtension: String, destinationURL: URL, downloadedFromURL: URL?) {
+        if fileExtension.lowercased() == "html", let downloadedFromURL = downloadedFromURL {
+            let linkString = downloadedFromURL.absoluteString
+                .replacingOccurrences(of: "&", with: "&amp;")
+                .replacingOccurrences(of: "\"", with: "&quot;")
+                .replacingOccurrences(of: "'", with: "&apos;")
+                .replacingOccurrences(of: "<", with: "&lt;")
+                .replacingOccurrences(of: ">", with: "&gt;")
+            let weblocContent = """
+                <?xml version="1.0" encoding="UTF-8"?>
+                <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+                <plist version="1.0">
+                <dict>
+                    <key>URL</key>
+                    <string>\(linkString)</string>
+                </dict>
+                </plist>
+                """
+            let webloc = weblocContent.data(using: .utf8)
+            save(name: name, nftURL: nftURL, data: webloc, fileExtension: "webloc", destinationURL: destinationURL, downloadedFromURL: nil)
+            if let tmpLocation = tmpLocation {
+                try? FileManager.default.removeItem(at: tmpLocation)
+            }
+            return
+        } else if fileExtension.lowercased() == "json" || fileExtension.lowercased() == "txt" {
             let mbJsonData: Data?
             if let tmpLocation = tmpLocation, let tmpData = try? Data(contentsOf: tmpLocation) {
                 mbJsonData = tmpData
@@ -128,7 +151,7 @@ class DownloadsService {
                let dataOrURL = extractValueFromJson(jsonString: jsonString) {
                 switch dataOrURL {
                 case .data(let data, let fileExtension):
-                    save(name: name, nftURL: nftURL, data: data, fileExtension: fileExtension, destinationURL: destinationURL)
+                    save(name: name, nftURL: nftURL, data: data, fileExtension: fileExtension, destinationURL: destinationURL, downloadedFromURL: downloadedFromURL)
                 case .url(let url):
                     downloadsDict[url] = (destinationURL, name, nftURL)
                 }
@@ -139,7 +162,7 @@ class DownloadsService {
             }
         }
         let pathExtension = "." + fileExtension
-        var finalName = name.hasSuffix(pathExtension) ? name : (name + pathExtension)
+        var finalName = name.hasSuffix(pathExtension) ? name : (name.trimmingCharacters(in: .whitespacesAndNewlines) + pathExtension)
         finalName = finalName.replacingOccurrences(of: "/", with: "-")
         let destinationURL = destinationURL.appendingPathComponent(finalName)
         do {
