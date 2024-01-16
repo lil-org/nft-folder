@@ -114,13 +114,19 @@ class DownloadsService {
     
     private func save(name: String, nftURL: URL, tmpLocation: URL? = nil, data: Data? = nil, fileExtension: String, destinationURL: URL, downloadedFromURL: URL?) {
         if fileExtension.lowercased() == "html", let downloadedFromURL = downloadedFromURL {
+            let linkString = downloadedFromURL.absoluteString
+                .replacingOccurrences(of: "&", with: "&amp;")
+                .replacingOccurrences(of: "\"", with: "&quot;")
+                .replacingOccurrences(of: "'", with: "&apos;")
+                .replacingOccurrences(of: "<", with: "&lt;")
+                .replacingOccurrences(of: ">", with: "&gt;")
             let weblocContent = """
                 <?xml version="1.0" encoding="UTF-8"?>
                 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
                 <plist version="1.0">
                 <dict>
                     <key>URL</key>
-                    <string>\(downloadedFromURL.absoluteString)</string>
+                    <string>\(linkString)</string>
                 </dict>
                 </plist>
                 """
