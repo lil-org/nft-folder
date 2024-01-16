@@ -16,7 +16,7 @@ enum DataOrURL {
         } else if !urlString.hasPrefix("http") {
             let components = urlString.components(separatedBy: ",")
             guard components.count == 2, let mimeType = components.first?.split(separator: ";").first?.split(separator: ":").last else { return nil }
-            let base64String = components[1]
+            let base64String = components[1].trimmingCharacters(in: .whitespacesAndNewlines)
             guard let decodedData = Data(base64Encoded: base64String) else { return nil }
             let fileExtension = FileExtension.forMimeType(String(mimeType))
             self = .data(decodedData, fileExtension)

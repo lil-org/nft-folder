@@ -162,7 +162,7 @@ class DownloadsService {
             }
         }
         let pathExtension = "." + fileExtension
-        var finalName = name.hasSuffix(pathExtension) ? name : (name + pathExtension)
+        var finalName = name.hasSuffix(pathExtension) ? name : (name.trimmingCharacters(in: .whitespacesAndNewlines) + pathExtension)
         finalName = finalName.replacingOccurrences(of: "/", with: "-")
         let destinationURL = destinationURL.appendingPathComponent(finalName)
         do {
