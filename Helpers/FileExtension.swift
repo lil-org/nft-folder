@@ -15,6 +15,6 @@ struct FileExtension {
         }
     }
     
-    static let placeholder = "dat"
+    static let placeholder = "gif"
     
 }
