@@ -148,7 +148,11 @@ extension Token: DownloadableNFT {
     }
     
     var fileDisplayName: String {
-        return "\(collectionName ?? "untitled") - \(name ?? tokenId)"
+        if let name = name, let collectionName = collectionName, name.localizedCaseInsensitiveContains(collectionName) {
+            return name
+        } else {
+            return "\(collectionName ?? "untitled") - \(name ?? tokenId)"
+        }
     }
     
     var mimeType: String? {
