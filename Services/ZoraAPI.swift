@@ -70,6 +70,13 @@ struct ZoraAPI {
             guard let data = data, error == nil, let zoraResponse = try? JSONDecoder().decode(ZoraResponse.self, from: data) else {
                 let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
                 print("ZORA API Error: \(error?.localizedDescription ?? "Unknown error") CODE: \(statusCode)")
+                
+                if let data = data, let dataString = String(data: data, encoding: .utf8) {
+                    print("ZORA ERROR DATA " + dataString)
+                } else {
+                    print("ZORA ERROR DATA NONE")
+                }
+                
                 completion(nil)
                 return
             }
