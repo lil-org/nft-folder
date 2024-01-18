@@ -29,7 +29,7 @@ struct ZoraAPI {
         let queryString = """
         {
           tokens(networks: [\(networksString)],
-                 pagination: {limit: 23\(endString)},
+                 pagination: {limit: 20\(endString)},
                  sort: {sortKey: MINTED, sortDirection: ASC},
                  where: \(whereString))
           {
