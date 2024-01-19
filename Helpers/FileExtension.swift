@@ -8,8 +8,12 @@ struct FileExtension {
     private init() {}
     
     static func forMimeType(_ mimeType: String) -> String {
-        if let utType = UTType(mimeType: mimeType) {
-            return utType.preferredFilenameExtension ?? FileExtension.placeholder
+        if let preferred = UTType(mimeType: mimeType)?.preferredFilenameExtension {
+            return preferred
+        } else if mimeType == "model/gltf-binary" {
+            return "glb"
+        } else if mimeType == "model/gltf+json" {
+            return "gltf"
         } else {
             return FileExtension.placeholder
         }
