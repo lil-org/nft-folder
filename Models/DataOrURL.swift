@@ -9,7 +9,7 @@ enum DataOrURL {
     
     init?(urlString: String?) {
         guard let urlString = urlString else { return nil }
-        if urlString.hasPrefix(URL.ipfsScheme), let url = URL(string: "https://ipfs.io/ipfs/" + urlString.dropFirst(URL.ipfsScheme.count)) {
+        if urlString.hasPrefix(URL.ipfsScheme), let url = URL(string: "https://ipfs.decentralized-content.com/ipfs/" + urlString.dropFirst(URL.ipfsScheme.count)) {
             self = .url(url)
         } else if urlString.hasPrefix(URL.arScheme), let url = URL(string: "https://arweave.net/" + urlString.dropFirst(URL.arScheme.count)) {
             self = .url(url)
