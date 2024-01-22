@@ -158,7 +158,15 @@ extension Token: DownloadableNFT {
         if let name = name, let collectionName = collectionName, name.localizedCaseInsensitiveContains(collectionName) {
             return name
         } else {
-            return "\(collectionName ?? "untitled") - \(name ?? tokenId)"
+            let collectionDisplayName: String
+            if let collectionName = collectionName, !collectionName.isEmpty {
+                collectionDisplayName = collectionName
+            } else if collectionAddress == "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85" {
+                collectionDisplayName = "ENS"
+            } else {
+                collectionDisplayName = String(collectionAddress.prefix(7))
+            }
+            return "\(collectionDisplayName) - \(name ?? tokenId)"
         }
     }
     
