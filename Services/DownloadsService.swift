@@ -86,8 +86,16 @@ class DownloadsService {
         task.resume()
     }
     
-    private func extractValueFromJson(jsonString: String) -> DataOrURL? {
-        let jsonString = jsonString.removingPercentEncoding ?? jsonString
+    private func extractValueFromJson(jsonData: Data) -> DataOrURL? {
+        if let inlineContentJSON = try? JSONDecoder().decode(InlineContentJSON.self, from: jsonData),
+           let inlineDataString = inlineContentJSON.dataString,
+           let dataOrURL = DataOrURL(urlString: inlineDataString) {
+            return dataOrURL
+        }
+        
+        guard let jsonStringRaw = String(data: jsonData, encoding: .utf8), !jsonStringRaw.isEmpty else { return nil }
+        
+        let jsonString = jsonStringRaw.removingPercentEncoding ?? jsonStringRaw
         for key in ["animation_url", "image", "svg_image_data", "image_data"] {
             if let rangeOfKey = jsonString.range(of: "\"\(key)\"") {
                 var start = jsonString.index(rangeOfKey.upperBound, offsetBy: 1)
@@ -145,10 +153,7 @@ class DownloadsService {
             } else {
                 mbJsonData = nil
             }
-            if let mbJsonData = mbJsonData,
-               let jsonString = String(data: mbJsonData, encoding: .utf8),
-               !jsonString.isEmpty,
-               let dataOrURL = extractValueFromJson(jsonString: jsonString) {
+            if let mbJsonData = mbJsonData, let dataOrURL = extractValueFromJson(jsonData: mbJsonData) {
                 switch dataOrURL {
                 case .data(let data, let fileExtension):
                     save(name: name, nftURL: nftURL, data: data, fileExtension: fileExtension, destinationURL: destinationURL, downloadedFromURL: downloadedFromURL)

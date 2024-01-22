@@ -167,3 +167,23 @@ extension Token: DownloadableNFT {
     }
     
 }
+
+struct InlineContentJSON: Decodable {
+    
+    private let animationURL: String?
+    private let image: String?
+    private let svgImageData: String?
+    private let imageData: String?
+    
+    var dataString: String? {
+        return animationURL ?? image ?? svgImageData ?? imageData
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case animationURL = "animation_url"
+        case image = "image"
+        case svgImageData = "svg_image_data"
+        case imageData = "image_data"
+    }
+    
+}

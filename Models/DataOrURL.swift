@@ -16,8 +16,17 @@ enum DataOrURL {
         } else if !urlString.hasPrefix("http") {
             let components = urlString.components(separatedBy: ",")
             guard components.count == 2, let mimeType = components.first?.split(separator: ";").first?.split(separator: ":").last else { return nil }
-            let base64String = components[1].trimmingCharacters(in: .whitespacesAndNewlines)
-            guard let decodedData = Data(base64Encoded: base64String) else { return nil }
+            let dataString = components[1].trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            let decodedData: Data?
+            if components.first?.hasSuffix("base64") == true {
+                decodedData = Data(base64Encoded: dataString)
+            } else {
+                let cleanString = dataString.removingPercentEncoding ?? dataString
+                decodedData = cleanString.data(using: .utf8)
+            }
+            
+            guard let decodedData = decodedData else { return nil }
             let fileExtension = FileExtension.forMimeType(String(mimeType))
             self = .data(decodedData, fileExtension)
         } else if let url = URL(string: urlString) {
