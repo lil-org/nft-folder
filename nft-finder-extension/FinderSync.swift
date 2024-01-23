@@ -1,4 +1,4 @@
-// nft-folder-macos 2024
+// ∅ nft-folder-macos 2024
 
 import Cocoa
 import FinderSync
