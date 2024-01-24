@@ -177,7 +177,6 @@ class DownloadsService {
     private func saveAvoidingCollisions(tmpLocation: URL?, data: Data?, destinationURL: URL, nftURL: URL) {
         let fileManager = FileManager.default
 
-        // TODO: try appending token id instead
         func uniqueURL(for url: URL) -> URL {
             var newURL = url
             var count = 1
@@ -190,27 +189,36 @@ class DownloadsService {
             return newURL
         }
 
-        // TODO: compare two urls when possible without reading data when it is not necessary
-        func areFilesDifferent(url: URL, data: Data) -> Bool {
-            guard let fileAttributes = try? fileManager.attributesOfItem(atPath: url.path),
+        func areFilesDifferent(url1: URL, url2: URL?, data: Data?) -> Bool {
+            guard let fileAttributes = try? fileManager.attributesOfItem(atPath: url1.path),
                   let fileSize = fileAttributes[.size] as? NSNumber else { return true }
-            if fileSize.intValue != data.count { return true }
-            guard let fileData = try? Data(contentsOf: url) else { return true }
-            return fileData != data
+            
+            if let data = data {
+                if fileSize.intValue != data.count { return true }
+                guard let fileData = try? Data(contentsOf: url1) else { return true }
+                return fileData != data
+            } else if let url2 = url2 {
+                guard let file2Attributes = try? fileManager.attributesOfItem(atPath: url2.path),
+                      let file2Size = file2Attributes[.size] as? NSNumber else { return true }
+                if fileSize.intValue != file2Size.intValue { return true }
+                guard let fileData = try? Data(contentsOf: url1) else { return true }
+                guard let file2Data = try? Data(contentsOf: url2) else { return true }
+                return fileData != file2Data
+            } else {
+                return true
+            }
         }
 
         do {
             if let tmpLocation = tmpLocation {
-                if let data = try? Data(contentsOf: tmpLocation),
-                   fileManager.fileExists(atPath: destinationURL.path),
-                   areFilesDifferent(url: destinationURL, data: data) {
+                if fileManager.fileExists(atPath: destinationURL.path), areFilesDifferent(url1: destinationURL, url2: tmpLocation, data: nil) {
                     let uniqueURL = uniqueURL(for: destinationURL)
                     try fileManager.moveItem(at: tmpLocation, to: uniqueURL)
                 } else {
                     try fileManager.moveItem(at: tmpLocation, to: destinationURL)
                 }
             } else if let data = data {
-                if fileManager.fileExists(atPath: destinationURL.path) && areFilesDifferent(url: destinationURL, data: data) {
+                if fileManager.fileExists(atPath: destinationURL.path) && areFilesDifferent(url1: destinationURL, url2: nil, data: data) {
                     let uniqueURL = uniqueURL(for: destinationURL)
                     try data.write(to: uniqueURL)
                 } else {
