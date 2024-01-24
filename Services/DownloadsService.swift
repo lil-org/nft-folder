@@ -66,6 +66,7 @@ class DownloadsService {
                 return
             }
             guard FileManager.default.fileExists(atPath: destinationURL.path) else {
+                // if there is no folder anymore
                 print("cancel download")
                 completion(.cancel) // TODO: review cancel logic
                 return
@@ -170,24 +171,65 @@ class DownloadsService {
         var finalName = name.hasSuffix(pathExtension) ? name : (name.trimmingCharacters(in: .whitespacesAndNewlines) + pathExtension)
         finalName = finalName.replacingOccurrences(of: "/", with: "-")
         let destinationURL = destinationURL.appendingPathComponent(finalName)
-        do {
-            if FileManager.default.fileExists(atPath: destinationURL.path) {
-                try FileManager.default.removeItem(at: destinationURL) // TODO: review file exists logic
+        saveAvoidingCollisions(tmpLocation: tmpLocation, data: data, destinationURL: destinationURL, nftURL: nftURL)
+    }
+    
+    private func saveAvoidingCollisions(tmpLocation: URL?, data: Data?, destinationURL: URL, nftURL: URL) {
+        let fileManager = FileManager.default
+
+        func uniqueURL(for url: URL) -> URL {
+            var newURL = url
+            var count = 1
+            while fileManager.fileExists(atPath: newURL.path) {
+                let fileName = url.deletingPathExtension().lastPathComponent
+                let fileExtension = url.pathExtension
+                newURL = url.deletingLastPathComponent().appendingPathComponent("\(fileName)_\(count)").appendingPathExtension(fileExtension)
+                count += 1
             }
+            return newURL
+        }
+
+        func areFilesDifferent(url1: URL, url2: URL?, data: Data?) -> Bool {
+            guard let fileAttributes = try? fileManager.attributesOfItem(atPath: url1.path),
+                  let fileSize = fileAttributes[.size] as? NSNumber else { return true }
             
+            if let data = data {
+                if fileSize.intValue != data.count { return true }
+                guard let fileData = try? Data(contentsOf: url1) else { return true }
+                return fileData != data
+            } else if let url2 = url2 {
+                guard let file2Attributes = try? fileManager.attributesOfItem(atPath: url2.path),
+                      let file2Size = file2Attributes[.size] as? NSNumber else { return true }
+                if fileSize.intValue != file2Size.intValue { return true }
+                guard let fileData = try? Data(contentsOf: url1) else { return true }
+                guard let file2Data = try? Data(contentsOf: url2) else { return true }
+                return fileData != file2Data
+            } else {
+                return true
+            }
+        }
+
+        var finalDestinationURL = destinationURL
+        do {
             if let tmpLocation = tmpLocation {
-                try FileManager.default.moveItem(at: tmpLocation, to: destinationURL)
+                if fileManager.fileExists(atPath: destinationURL.path), areFilesDifferent(url1: destinationURL, url2: tmpLocation, data: nil) {
+                    finalDestinationURL = uniqueURL(for: destinationURL)
+                }
+                try fileManager.moveItem(at: tmpLocation, to: finalDestinationURL)
             } else if let data = data {
-                try data.write(to: destinationURL)
+                if fileManager.fileExists(atPath: destinationURL.path) && areFilesDifferent(url1: destinationURL, url2: nil, data: data) {
+                    finalDestinationURL = uniqueURL(for: destinationURL)
+                }
+                try data.write(to: finalDestinationURL)
             } else {
                 return
             }
-            
-            if let fileId = fileId(path: destinationURL.path) {
-                Storage.store(fileId: fileId, url: nftURL)
-            }
         } catch {
-            print("Error saving file: \(error)")
+            print("error saving file: \(error)")
+        }
+        
+        if let fileId = fileId(path: finalDestinationURL.path) {
+            Storage.store(fileId: fileId, url: nftURL)
         }
     }
     
