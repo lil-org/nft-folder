@@ -66,6 +66,7 @@ class DownloadsService {
                 return
             }
             guard FileManager.default.fileExists(atPath: destinationURL.path) else {
+                // if there is no folder anymore
                 print("cancel download")
                 completion(.cancel) // TODO: review cancel logic
                 return
@@ -171,6 +172,9 @@ class DownloadsService {
         finalName = finalName.replacingOccurrences(of: "/", with: "-")
         let destinationURL = destinationURL.appendingPathComponent(finalName)
         do {
+            // TODO: save with a different name if file is different
+            // TODO: try appending id
+            // TODO: then check for a collision again with an appended id
             if FileManager.default.fileExists(atPath: destinationURL.path) {
                 try FileManager.default.removeItem(at: destinationURL) // TODO: review file exists logic
             }
