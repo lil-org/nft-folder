@@ -5,18 +5,19 @@ import Foundation
 struct ZoraAPI {
     
     private static let urlSession = URLSession.shared
+    private static let queue = DispatchQueue(label: "org.lil.nft-folder.zora", qos: .default)
     
     static func get(owner: String, networks: [Network], endCursor: String?, completion: @escaping (TokensData?) -> Void) {
         let whereString = "{ownerAddresses: [\"\(owner)\"]}"
-        get(whereString: whereString, networks: networks, endCursor: endCursor, completion: completion)
+        get(whereString: whereString, networks: networks, endCursor: endCursor, retryCount: 0, completion: completion)
     }
     
     static func get(collection: String, networks: [Network], endCursor: String?, completion: @escaping (TokensData?) -> Void) {
         let whereString = "{collectionAddresses: [\"\(collection)\"]}"
-        get(whereString: whereString, networks: networks, endCursor: endCursor, completion: completion)
+        get(whereString: whereString, networks: networks, endCursor: endCursor, retryCount: 0, completion: completion)
     }
     
-    static private func get(whereString: String, networks: [Network], endCursor: String?, completion: @escaping (TokensData?) -> Void) {
+    static private func get(whereString: String, networks: [Network], endCursor: String?, retryCount: Int, completion: @escaping (TokensData?) -> Void) {
         print("requesting zora api \(String(describing: endCursor)) NETWORKS \(networks.first?.rawValue ?? "???")")
         let endString: String
         if let endCursor = endCursor {
@@ -29,7 +30,7 @@ struct ZoraAPI {
         let queryString = """
         {
           tokens(networks: [\(networksString)],
-                 pagination: {limit: 20\(endString)},
+                 pagination: {limit: 50\(endString)},
                  where: \(whereString))
           {
             pageInfo { 
@@ -76,7 +77,14 @@ struct ZoraAPI {
                     print("ZORA ERROR DATA NONE")
                 }
                 
-                completion(nil)
+                if retryCount == 3 {
+                    completion(nil)
+                } else {
+                    print("ZORA API WILL RETRY")
+                    queue.asyncAfter(deadline: .now() + .seconds(retryCount + 1)) {
+                        get(whereString: whereString, networks: networks, endCursor: endCursor, retryCount: retryCount + 1, completion: completion)
+                    }
+                }
                 return
             }
 
