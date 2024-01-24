@@ -2,18 +2,19 @@
 
 import Foundation
 
-struct Storage {
+struct MetadataStorage {
     
+    // TODO: wipe defaults on a migration update
     private static let defaults = UserDefaults.standard
     
     static func store(fileId: String, url: URL) {
         let a = url.absoluteString
-        defaults.setValue(a, forKey: fileId)
+        // TODO: store in a separate file
     }
     
     static func nftURL(fileId: String) -> URL? {
-        guard let a = defaults.string(forKey: fileId), let url = URL(string: a) else { return nil }
-        return url
+        // TODO: read from file
+        return nil
     }
     
 }
