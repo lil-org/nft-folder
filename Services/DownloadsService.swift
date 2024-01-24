@@ -171,28 +171,62 @@ class DownloadsService {
         var finalName = name.hasSuffix(pathExtension) ? name : (name.trimmingCharacters(in: .whitespacesAndNewlines) + pathExtension)
         finalName = finalName.replacingOccurrences(of: "/", with: "-")
         let destinationURL = destinationURL.appendingPathComponent(finalName)
-        do {
-            // TODO: save with a different name if file is different
-            // TODO: try appending id
-            // TODO: then check for a collision again with an appended id
-            if FileManager.default.fileExists(atPath: destinationURL.path) {
-                try FileManager.default.removeItem(at: destinationURL) // TODO: review file exists logic
+        saveAvoidingCollisions(tmpLocation: tmpLocation, data: data, destinationURL: destinationURL, nftURL: nftURL)
+    }
+    
+    private func saveAvoidingCollisions(tmpLocation: URL?, data: Data?, destinationURL: URL, nftURL: URL) {
+        let fileManager = FileManager.default
+
+        // TODO: try appending token id instead
+        func uniqueURL(for url: URL) -> URL {
+            var newURL = url
+            var count = 1
+            while fileManager.fileExists(atPath: newURL.path) {
+                let fileName = url.deletingPathExtension().lastPathComponent
+                let fileExtension = url.pathExtension
+                newURL = url.deletingLastPathComponent().appendingPathComponent("\(fileName)_\(count)").appendingPathExtension(fileExtension)
+                count += 1
             }
-            
+            return newURL
+        }
+
+        // TODO: compare two urls when possible without reading data when it is not necessary
+        func areFilesDifferent(url: URL, data: Data) -> Bool {
+            guard let fileAttributes = try? fileManager.attributesOfItem(atPath: url.path),
+                  let fileSize = fileAttributes[.size] as? NSNumber else { return true }
+            if fileSize.intValue != data.count { return true }
+            guard let fileData = try? Data(contentsOf: url) else { return true }
+            return fileData != data
+        }
+
+        do {
             if let tmpLocation = tmpLocation {
-                try FileManager.default.moveItem(at: tmpLocation, to: destinationURL)
+                if let data = try? Data(contentsOf: tmpLocation),
+                   fileManager.fileExists(atPath: destinationURL.path),
+                   areFilesDifferent(url: destinationURL, data: data) {
+                    let uniqueURL = uniqueURL(for: destinationURL)
+                    try fileManager.moveItem(at: tmpLocation, to: uniqueURL)
+                } else {
+                    try fileManager.moveItem(at: tmpLocation, to: destinationURL)
+                }
             } else if let data = data {
-                try data.write(to: destinationURL)
+                if fileManager.fileExists(atPath: destinationURL.path) && areFilesDifferent(url: destinationURL, data: data) {
+                    let uniqueURL = uniqueURL(for: destinationURL)
+                    try data.write(to: uniqueURL)
+                } else {
+                    try data.write(to: destinationURL)
+                }
             } else {
                 return
             }
-            
-            if let fileId = fileId(path: destinationURL.path) {
-                Storage.store(fileId: fileId, url: nftURL)
-            }
         } catch {
-            print("Error saving file: \(error)")
+            print("error saving file: \(error)")
         }
+        
+        // TODO: implement
+//        if let fileId = fileId(path: finalDestinationURL.path) {
+//            Storage.store(fileId: fileId, url: nftURL)
+//        }
     }
     
     private func fileId(path: String) -> String? {
