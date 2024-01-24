@@ -29,7 +29,8 @@ class NFTService {
     private func goThroughZora(wallet: WatchOnlyWallet, networkIndex: Int, endCursor: String?) {
         let network = networks[networkIndex]
         ZoraAPI.get(owner: wallet.address, networks: [network], endCursor: endCursor) { result in
-            guard let result = result else {
+            print("zora api result: \(String(describing: result))")
+            guard let result = result, !result.nodes.isEmpty else {
                 self.nextStepForZora(wallet: wallet, networkIndex: networkIndex, endCursor: nil, hasNextPage: false)
                 // TODO: retry, handle errors
                 return
