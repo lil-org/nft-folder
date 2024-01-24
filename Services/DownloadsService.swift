@@ -209,21 +209,18 @@ class DownloadsService {
             }
         }
 
+        var finalDestinationURL = destinationURL
         do {
             if let tmpLocation = tmpLocation {
                 if fileManager.fileExists(atPath: destinationURL.path), areFilesDifferent(url1: destinationURL, url2: tmpLocation, data: nil) {
-                    let uniqueURL = uniqueURL(for: destinationURL)
-                    try fileManager.moveItem(at: tmpLocation, to: uniqueURL)
-                } else {
-                    try fileManager.moveItem(at: tmpLocation, to: destinationURL)
+                    finalDestinationURL = uniqueURL(for: destinationURL)
                 }
+                try fileManager.moveItem(at: tmpLocation, to: finalDestinationURL)
             } else if let data = data {
                 if fileManager.fileExists(atPath: destinationURL.path) && areFilesDifferent(url1: destinationURL, url2: nil, data: data) {
-                    let uniqueURL = uniqueURL(for: destinationURL)
-                    try data.write(to: uniqueURL)
-                } else {
-                    try data.write(to: destinationURL)
+                    finalDestinationURL = uniqueURL(for: destinationURL)
                 }
+                try data.write(to: finalDestinationURL)
             } else {
                 return
             }
@@ -231,10 +228,9 @@ class DownloadsService {
             print("error saving file: \(error)")
         }
         
-        // TODO: implement
-//        if let fileId = fileId(path: finalDestinationURL.path) {
-//            Storage.store(fileId: fileId, url: nftURL)
-//        }
+        if let fileId = fileId(path: finalDestinationURL.path) {
+            Storage.store(fileId: fileId, url: nftURL)
+        }
     }
     
     private func fileId(path: String) -> String? {
