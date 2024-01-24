@@ -30,7 +30,7 @@ struct ZoraAPI {
         let queryString = """
         {
           tokens(networks: [\(networksString)],
-                 pagination: {limit: 50\(endString)},
+                 pagination: {limit: 30\(endString)},
                  where: \(whereString))
           {
             pageInfo { 

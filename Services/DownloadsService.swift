@@ -39,7 +39,7 @@ class DownloadsService {
     }
     
     private func downloadNextIfNeeded() {
-        guard downloadsInProgress < 42 else { return }
+        guard downloadsInProgress < 23 else { return }
         guard let (url, (destination, name, nftURL)) = downloadsDict.first else { return }
         downloadsDict.removeValue(forKey: url)
         downloadsInProgress += 1
