@@ -5,17 +5,16 @@ import Foundation
 struct MetadataStorage {
     
     static func store(metadata: MinimalTokenMetadata, filePath: String) {
-        // TODO: separate folder for each tracked address
         if let fileId = fileId(path: filePath),
            let data = try? JSONEncoder().encode(metadata),
-           var url = URL.metadataDirectory() {
+           var url = URL.metadataDirectory(filePath: filePath) {
             url.append(path: fileId)
             try? data.write(to: url)
         }
     }
     
     static func nftURL(filePath: String) -> URL? {
-        if let fileId = fileId(path: filePath), var url = URL.metadataDirectory() {
+        if let fileId = fileId(path: filePath), var url = URL.metadataDirectory(filePath: filePath) {
             url.append(path: fileId)
             if let data = try? Data(contentsOf: url),
                let metadata = try? JSONDecoder().decode(MinimalTokenMetadata.self, from: data) {
