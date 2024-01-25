@@ -179,14 +179,14 @@ class DownloadsService {
     private func saveAvoidingCollisions(tmpLocation: URL?, data: Data?, destinationURL: URL, metadata: MinimalTokenMetadata) {
         let fileManager = FileManager.default
 
-        // TODO: try with token id first
-        func uniqueURL(for url: URL) -> URL {
-            var newURL = url
+        func uniqueURL(for url: URL, tmpLocation: URL?, data: Data?) -> URL {
+            let fileName = url.deletingPathExtension().lastPathComponent
+            let fileExtension = url.pathExtension
+            let newName = fileName.contains(metadata.tokenId) ? fileName : "\(fileName) #\(metadata.tokenId)"
+            var newURL = url.deletingLastPathComponent().appendingPathComponent(newName).appendingPathExtension(fileExtension)
             var count = 1
-            while fileManager.fileExists(atPath: newURL.path) {
-                let fileName = url.deletingPathExtension().lastPathComponent
-                let fileExtension = url.pathExtension
-                newURL = url.deletingLastPathComponent().appendingPathComponent("\(fileName)_\(count)").appendingPathExtension(fileExtension)
+            while fileManager.fileExists(atPath: newURL.path) && areFilesDifferent(url1: newURL, url2: tmpLocation, data: data) {
+                newURL = url.deletingLastPathComponent().appendingPathComponent("\(newName) \(count)").appendingPathExtension(fileExtension)
                 count += 1
             }
             return newURL
@@ -203,7 +203,7 @@ class DownloadsService {
             } else if let url2 = url2 {
                 guard let file2Attributes = try? fileManager.attributesOfItem(atPath: url2.path),
                       let file2Size = file2Attributes[.size] as? NSNumber else { return true }
-                if fileSize.intValue != file2Size.intValue { return true }
+                if fileSize.int64Value != file2Size.int64Value { return true }
                 guard let fileData = try? Data(contentsOf: url1) else { return true }
                 guard let file2Data = try? Data(contentsOf: url2) else { return true }
                 return fileData != file2Data
@@ -216,12 +216,12 @@ class DownloadsService {
         do {
             if let tmpLocation = tmpLocation {
                 if fileManager.fileExists(atPath: destinationURL.path), areFilesDifferent(url1: destinationURL, url2: tmpLocation, data: nil) {
-                    finalDestinationURL = uniqueURL(for: destinationURL)
+                    finalDestinationURL = uniqueURL(for: destinationURL, tmpLocation: tmpLocation, data: nil)
                 }
                 try fileManager.moveItem(at: tmpLocation, to: finalDestinationURL)
             } else if let data = data {
                 if fileManager.fileExists(atPath: destinationURL.path) && areFilesDifferent(url1: destinationURL, url2: nil, data: data) {
-                    finalDestinationURL = uniqueURL(for: destinationURL)
+                    finalDestinationURL = uniqueURL(for: destinationURL, tmpLocation: nil, data: data)
                 }
                 try data.write(to: finalDestinationURL)
             } else {
