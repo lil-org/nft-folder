@@ -7,8 +7,7 @@ struct MetadataStorage {
     // TODO: wipe defaults on a migration update
     private static let defaults = UserDefaults.standard
     
-    static func store(fileId: String, url: URL) {
-        let a = url.absoluteString
+    static func store(fileId: String, metadata: MinimalTokenMetadata) {
         // TODO: store in a separate file
     }
     

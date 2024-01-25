@@ -2,12 +2,23 @@
 
 import Foundation
 
-enum Network: String, CaseIterable {
+enum Network: Int, CaseIterable {
     
-    case ethereum, optimism, zora, base, pgn
+    case ethereum = 1, optimism = 10, zora = 7777777, base = 8453, pgn = 424
     
-    private var networkStringValue: String {
-        return rawValue.uppercased()
+    var name: String {
+        switch self {
+        case .ethereum:
+            return "ETHEREUM"
+        case .optimism:
+            return "OPTIMISM"
+        case .zora:
+            return "ZORA"
+        case .base:
+            return "BASE"
+        case .pgn:
+            return "PGN"
+        }
     }
     
     private var chainStringValue: String {
@@ -16,12 +27,12 @@ enum Network: String, CaseIterable {
         case .ethereum:
             return mainnet
         default:
-            return networkStringValue + "_" + mainnet
+            return name + "_" + mainnet
         }
     }
     
     var query: String {
-        return "{network: \(networkStringValue), chain: \(chainStringValue)}"
+        return "{network: \(name), chain: \(chainStringValue)}"
     }
     
 }

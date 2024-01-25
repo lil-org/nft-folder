@@ -18,7 +18,7 @@ struct ZoraAPI {
     }
     
     static private func get(whereString: String, networks: [Network], endCursor: String?, retryCount: Int, completion: @escaping (TokensData?) -> Void) {
-        print("requesting zora api \(String(describing: endCursor)) NETWORKS \(networks.first?.rawValue ?? "???")")
+        print("requesting zora api \(String(describing: endCursor)) NETWORKS \(networks.first?.name ?? "???")")
         let endString: String
         if let endCursor = endCursor {
             endString = ", after:\"\(endCursor)\""
@@ -145,6 +145,7 @@ extension Token: DownloadableNFT {
         return nil
     }
     
+    // TODO: move from here
     func nftURL(network: Network) -> URL? {
         let prefix: String
         switch network {
@@ -176,10 +177,6 @@ extension Token: DownloadableNFT {
             }
             return "\(collectionDisplayName) - \(name ?? tokenId)"
         }
-    }
-    
-    var mimeType: String? {
-        return nil // TODO: implement
     }
     
 }
