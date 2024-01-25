@@ -6,8 +6,7 @@ protocol DownloadableNFT {
     
     var probableDataOrURL: DataOrURL? { get }
     var fileDisplayName: String { get }
-    var mimeType: String? { get }
-    
-    func nftURL(network: Network) -> URL?
+    var tokenId: String { get }
+    var collectionAddress: String { get }
     
 }

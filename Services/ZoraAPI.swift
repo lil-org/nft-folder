@@ -18,7 +18,7 @@ struct ZoraAPI {
     }
     
     static private func get(whereString: String, networks: [Network], endCursor: String?, retryCount: Int, completion: @escaping (TokensData?) -> Void) {
-        print("requesting zora api \(String(describing: endCursor)) NETWORKS \(networks.first?.rawValue ?? "???")")
+        print("requesting zora api \(String(describing: endCursor)) NETWORKS \(networks.first?.name ?? "???")")
         let endString: String
         if let endCursor = endCursor {
             endString = ", after:\"\(endCursor)\""
@@ -145,23 +145,6 @@ extension Token: DownloadableNFT {
         return nil
     }
     
-    func nftURL(network: Network) -> URL? {
-        let prefix: String
-        switch network {
-        case .ethereum:
-            prefix = "eth"
-        case .optimism:
-            prefix = "optimism"
-        case .zora:
-            prefix = "zora"
-        case .base:
-            prefix = "base"
-        case .pgn:
-            prefix = "pgn"
-        }
-        return URL(string: "https://zora.co/collect/\(prefix):\(collectionAddress)/\(tokenId)")
-    }
-    
     var fileDisplayName: String {
         if let name = name, let collectionName = collectionName, name.localizedCaseInsensitiveContains(collectionName) {
             return name
@@ -174,12 +157,8 @@ extension Token: DownloadableNFT {
             } else {
                 collectionDisplayName = String(collectionAddress.prefix(7))
             }
-            return "\(collectionDisplayName) - \(name ?? tokenId)"
+            return "\(collectionDisplayName) - \(name ?? tokenId)".trimmingCharacters(in: ["."])
         }
-    }
-    
-    var mimeType: String? {
-        return nil // TODO: implement
     }
     
 }

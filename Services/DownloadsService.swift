@@ -13,25 +13,26 @@ class DownloadsService {
     private init() {}
     private let urlSession = URLSession.shared
     
-    private var downloadsDict = [URL: (URL, String, URL)]() // TODO: dev tmp
+    private var downloadsDict = [URL: (URL, String, MinimalTokenMetadata)]() // TODO: dev tmp
     private var downloadsInProgress = 0
     
     func downloadFiles(wallet: WatchOnlyWallet, downloadables: [DownloadableNFT], network: Network) {
         guard let destination = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return }
         for downloadable in downloadables {
-            guard let dataOrURL = downloadable.probableDataOrURL, let nftURL = downloadable.nftURL(network: network) else { continue }
+            guard let dataOrURL = downloadable.probableDataOrURL else { continue }
+            let metadata = MinimalTokenMetadata(tokenId: downloadable.tokenId, collectionAddress: downloadable.collectionAddress, network: network)
             switch dataOrURL {
             case .data(let data, let fileExtension):
-                save(name: downloadable.fileDisplayName, nftURL: nftURL, data: data, fileExtension: fileExtension, destinationURL: destination, downloadedFromURL: nil)
+                save(name: downloadable.fileDisplayName, metadata: metadata, data: data, fileExtension: fileExtension, destinationURL: destination, downloadedFromURL: nil)
             case .url(let url):
-                downloadsDict[url] = (destination, downloadable.fileDisplayName, nftURL)
+                downloadsDict[url] = (destination, downloadable.fileDisplayName, metadata)
             }
         }
         downloadNextIfNeeded()
     }
     
     func showNFT(filePath: String) {
-        if let fileId = fileId(path: filePath), let nftURL = Storage.nftURL(fileId: fileId) {
+        if let nftURL = MetadataStorage.nftURL(filePath: filePath) {
             DispatchQueue.main.async {
                 NSWorkspace.shared.open(nftURL)
             }
@@ -40,10 +41,10 @@ class DownloadsService {
     
     private func downloadNextIfNeeded() {
         guard downloadsInProgress < 23 else { return }
-        guard let (url, (destination, name, nftURL)) = downloadsDict.first else { return }
+        guard let (url, (destination, name, metadata)) = downloadsDict.first else { return }
         downloadsDict.removeValue(forKey: url)
         downloadsInProgress += 1
-        downloadFile(name: name, nftURL: nftURL, from: url, to: destination) { [weak self] result in
+        downloadFile(name: name, metadata: metadata, from: url, to: destination) { [weak self] result in
             self?.downloadsInProgress -= 1
             switch result {
             case .success, .failure:
@@ -55,7 +56,7 @@ class DownloadsService {
         downloadNextIfNeeded()
     }
     
-    private func downloadFile(name: String, nftURL: URL, from url: URL, to destinationURL: URL, completion: @escaping (DownloadFileResult) -> Void) {
+    private func downloadFile(name: String, metadata: MinimalTokenMetadata, from url: URL, to destinationURL: URL, completion: @escaping (DownloadFileResult) -> Void) {
         print("yo will download \(url)")
         let task = urlSession.downloadTask(with: url) { location, response, error in
             let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
@@ -80,7 +81,7 @@ class DownloadsService {
                 }
             }
             print("will save \(url)")
-            self.save(name: name, nftURL: nftURL, tmpLocation: location, fileExtension: fileExtension, destinationURL: destinationURL, downloadedFromURL: url)
+            self.save(name: name, metadata: metadata, tmpLocation: location, fileExtension: fileExtension, destinationURL: destinationURL, downloadedFromURL: url)
             completion(.success)
             print("did save \(url)")
         }
@@ -121,7 +122,7 @@ class DownloadsService {
         return nil
     }
     
-    private func save(name: String, nftURL: URL, tmpLocation: URL? = nil, data: Data? = nil, fileExtension: String, destinationURL: URL, downloadedFromURL: URL?) {
+    private func save(name: String, metadata: MinimalTokenMetadata, tmpLocation: URL? = nil, data: Data? = nil, fileExtension: String, destinationURL: URL, downloadedFromURL: URL?) {
         if fileExtension.lowercased() == "html", let downloadedFromURL = downloadedFromURL {
             let linkString = downloadedFromURL.absoluteString
                 .replacingOccurrences(of: "&", with: "&amp;")
@@ -140,7 +141,7 @@ class DownloadsService {
                 </plist>
                 """
             let webloc = weblocContent.data(using: .utf8)
-            save(name: name, nftURL: nftURL, data: webloc, fileExtension: "webloc", destinationURL: destinationURL, downloadedFromURL: nil)
+            save(name: name, metadata: metadata, data: webloc, fileExtension: "webloc", destinationURL: destinationURL, downloadedFromURL: nil)
             if let tmpLocation = tmpLocation {
                 try? FileManager.default.removeItem(at: tmpLocation)
             }
@@ -157,9 +158,9 @@ class DownloadsService {
             if let mbJsonData = mbJsonData, let dataOrURL = extractValueFromJson(jsonData: mbJsonData) {
                 switch dataOrURL {
                 case .data(let data, let fileExtension):
-                    save(name: name, nftURL: nftURL, data: data, fileExtension: fileExtension, destinationURL: destinationURL, downloadedFromURL: downloadedFromURL)
+                    save(name: name, metadata: metadata, data: data, fileExtension: fileExtension, destinationURL: destinationURL, downloadedFromURL: downloadedFromURL)
                 case .url(let url):
-                    downloadsDict[url] = (destinationURL, name, nftURL)
+                    downloadsDict[url] = (destinationURL, name, metadata)
                 }
                 if let tmpLocation = tmpLocation {
                     try? FileManager.default.removeItem(at: tmpLocation)
@@ -171,19 +172,20 @@ class DownloadsService {
         var finalName = name.hasSuffix(pathExtension) ? name : (name.trimmingCharacters(in: .whitespacesAndNewlines) + pathExtension)
         finalName = finalName.replacingOccurrences(of: "/", with: "-")
         let destinationURL = destinationURL.appendingPathComponent(finalName)
-        saveAvoidingCollisions(tmpLocation: tmpLocation, data: data, destinationURL: destinationURL, nftURL: nftURL)
+        saveAvoidingCollisions(tmpLocation: tmpLocation, data: data, destinationURL: destinationURL, metadata: metadata)
     }
     
-    private func saveAvoidingCollisions(tmpLocation: URL?, data: Data?, destinationURL: URL, nftURL: URL) {
+    private func saveAvoidingCollisions(tmpLocation: URL?, data: Data?, destinationURL: URL, metadata: MinimalTokenMetadata) {
         let fileManager = FileManager.default
 
-        func uniqueURL(for url: URL) -> URL {
-            var newURL = url
+        func uniqueURL(for url: URL, tmpLocation: URL?, data: Data?) -> URL {
+            let fileName = url.deletingPathExtension().lastPathComponent
+            let fileExtension = url.pathExtension
+            let newName = fileName.contains(metadata.tokenId) ? fileName : "\(fileName) #\(metadata.tokenId)"
+            var newURL = url.deletingLastPathComponent().appendingPathComponent(newName).appendingPathExtension(fileExtension)
             var count = 1
-            while fileManager.fileExists(atPath: newURL.path) {
-                let fileName = url.deletingPathExtension().lastPathComponent
-                let fileExtension = url.pathExtension
-                newURL = url.deletingLastPathComponent().appendingPathComponent("\(fileName)_\(count)").appendingPathExtension(fileExtension)
+            while fileManager.fileExists(atPath: newURL.path) && areFilesDifferent(url1: newURL, url2: tmpLocation, data: data) {
+                newURL = url.deletingLastPathComponent().appendingPathComponent("\(newName) \(count)").appendingPathExtension(fileExtension)
                 count += 1
             }
             return newURL
@@ -200,7 +202,7 @@ class DownloadsService {
             } else if let url2 = url2 {
                 guard let file2Attributes = try? fileManager.attributesOfItem(atPath: url2.path),
                       let file2Size = file2Attributes[.size] as? NSNumber else { return true }
-                if fileSize.intValue != file2Size.intValue { return true }
+                if fileSize.int64Value != file2Size.int64Value { return true }
                 guard let fileData = try? Data(contentsOf: url1) else { return true }
                 guard let file2Data = try? Data(contentsOf: url2) else { return true }
                 return fileData != file2Data
@@ -213,12 +215,12 @@ class DownloadsService {
         do {
             if let tmpLocation = tmpLocation {
                 if fileManager.fileExists(atPath: destinationURL.path), areFilesDifferent(url1: destinationURL, url2: tmpLocation, data: nil) {
-                    finalDestinationURL = uniqueURL(for: destinationURL)
+                    finalDestinationURL = uniqueURL(for: destinationURL, tmpLocation: tmpLocation, data: nil)
                 }
                 try fileManager.moveItem(at: tmpLocation, to: finalDestinationURL)
             } else if let data = data {
                 if fileManager.fileExists(atPath: destinationURL.path) && areFilesDifferent(url1: destinationURL, url2: nil, data: data) {
-                    finalDestinationURL = uniqueURL(for: destinationURL)
+                    finalDestinationURL = uniqueURL(for: destinationURL, tmpLocation: nil, data: data)
                 }
                 try data.write(to: finalDestinationURL)
             } else {
@@ -228,18 +230,7 @@ class DownloadsService {
             print("error saving file: \(error)")
         }
         
-        if let fileId = fileId(path: finalDestinationURL.path) {
-            Storage.store(fileId: fileId, url: nftURL)
-        }
-    }
-    
-    private func fileId(path: String) -> String? {
-        if let attributes = try? FileManager.default.attributesOfItem(atPath: path),
-           let number = attributes[.systemFileNumber] as? UInt {
-            return String(number)
-        } else {
-            return nil
-        }
+        MetadataStorage.store(metadata: metadata, filePath: finalDestinationURL.path)
     }
     
 }

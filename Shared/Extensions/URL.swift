@@ -21,6 +21,24 @@ extension URL {
         return addressDirectoryURL
     }
     
+    static func metadataDirectory(filePath: String) -> URL? {
+        let relativePath: Substring
+        if filePath.hasPrefix(nftDirectoryPath) {
+            relativePath = filePath.dropFirst(nftDirectoryPath.count)
+        } else if filePath.hasPrefix(nftDirectoryPathResolved) {
+            relativePath = filePath.dropFirst(nftDirectoryPathResolved.count)
+        } else {
+            return nil
+        }
+        let folderName = relativePath.prefix(while: { $0 != "/" })
+        let fileManager = FileManager.default
+        guard let metadataDirectoryURL = nftDirectory?.appendingPathComponent(folderName + "/.nft") else { return nil }
+        if !fileManager.fileExists(atPath: metadataDirectoryURL.path) {
+            try? fileManager.createDirectory(at: metadataDirectoryURL, withIntermediateDirectories: true, attributes: nil)
+        }
+        return metadataDirectoryURL
+    }
+    
     static var nftDirectory: URL? {
         let fileManager = FileManager.default
         let musicDirectoryURL = fileManager.urls(for: .musicDirectory, in: .userDomainMask).first
@@ -32,5 +50,13 @@ extension URL {
         
         return nftDirectoryURL
     }
+    
+    static let nftDirectoryPathResolved: String = {
+        return nftDirectory?.resolvingSymlinksInPath().path() ?? ""
+    }()
+    
+    static let nftDirectoryPath: String = {
+        return nftDirectory?.path() ?? ""
+    }()
     
 }
