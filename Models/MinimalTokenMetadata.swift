@@ -2,7 +2,7 @@
 
 import Foundation
 
-struct MinimalTokenMetadata {
+struct MinimalTokenMetadata: Codable {
     
     let tokenId: String
     let collectionAddress: String

@@ -32,12 +32,11 @@ class DownloadsService {
     }
     
     func showNFT(filePath: String) {
-        // TODO: implement
-//        if let fileId = fileId(path: filePath), let nftURL = Storage.nftURL(fileId: fileId) {
-//            DispatchQueue.main.async {
-//                NSWorkspace.shared.open(nftURL)
-//            }
-//        }
+        if let fileId = fileId(path: filePath), let nftURL = MetadataStorage.nftURL(fileId: fileId) {
+            DispatchQueue.main.async {
+                NSWorkspace.shared.open(nftURL)
+            }
+        }
     }
     
     private func downloadNextIfNeeded() {

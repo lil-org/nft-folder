@@ -4,22 +4,28 @@ import Foundation
 
 struct MetadataStorage {
     
-    // TODO: wipe defaults on a migration update
-    private static let defaults = UserDefaults.standard
-    
     static func store(fileId: String, metadata: MinimalTokenMetadata) {
-        // TODO: store in a separate file
+        // TODO: separate folder for each tracked address
+        if let data = try? JSONEncoder().encode(metadata), var url = URL.metadataDirectory() {
+            url.append(path: fileId)
+            try? data.write(to: url)
+        }
     }
     
     static func nftURL(fileId: String) -> URL? {
-        // TODO: read from file
+        if var url = URL.metadataDirectory() {
+            url.append(path: fileId)
+            if let data = try? Data(contentsOf: url),
+               let metadata = try? JSONDecoder().decode(MinimalTokenMetadata.self, from: data) {
+                return nftURL(metadata: metadata)
+            }
+        }
         return nil
     }
     
-    // TODO: refactor
-    private static func nftURL(metadata: MinimalTokenMetadata, network: Network) -> URL? {
+    private static func nftURL(metadata: MinimalTokenMetadata) -> URL? {
         let prefix: String
-        switch network {
+        switch metadata.network {
         case .ethereum:
             prefix = "eth"
         case .optimism:

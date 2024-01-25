@@ -21,6 +21,16 @@ extension URL {
         return addressDirectoryURL
     }
     
+    // TODO: put it in some private app location instead
+    static func metadataDirectory() -> URL? {
+        let fileManager = FileManager.default
+        guard let metadataDirectoryURL = nftDirectory?.appendingPathComponent(".nft") else { return nil }
+        if !fileManager.fileExists(atPath: metadataDirectoryURL.path) {
+            try? fileManager.createDirectory(at: metadataDirectoryURL, withIntermediateDirectories: true, attributes: nil)
+        }
+        return metadataDirectoryURL
+    }
+    
     static var nftDirectory: URL? {
         let fileManager = FileManager.default
         let musicDirectoryURL = fileManager.urls(for: .musicDirectory, in: .userDomainMask).first

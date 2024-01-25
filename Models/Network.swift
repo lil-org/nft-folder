@@ -2,7 +2,7 @@
 
 import Foundation
 
-enum Network: Int, CaseIterable {
+enum Network: Int, CaseIterable, Codable {
     
     case ethereum = 1, optimism = 10, zora = 7777777, base = 8453, pgn = 424
     
