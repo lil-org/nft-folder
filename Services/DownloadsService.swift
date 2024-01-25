@@ -31,8 +31,8 @@ class DownloadsService {
         downloadNextIfNeeded()
     }
     
-    func showNFT(filePath: String) {
-        if let nftURL = MetadataStorage.nftURL(filePath: filePath) {
+    func showNFT(filePath: String, gallery: WebGallery) {
+        if let nftURL = MetadataStorage.nftURL(filePath: filePath, gallery: gallery) {
             DispatchQueue.main.async {
                 NSWorkspace.shared.open(nftURL)
             }

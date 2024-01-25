@@ -140,7 +140,7 @@ class FinderSync: FIFinderSync {
         guard let selectedItems = FIFinderSyncController.default().selectedItemURLs(),
               selectedItems.count == 1,
               let selectedPath = selectedItems.first?.path.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
-        if let url = URL(string: URL.deeplinkScheme + "?view=\(selectedPath)") {
+        if let url = URL(string: URL.deeplinkScheme + "?view=\(selectedPath)z") {
             DispatchQueue.main.async { NSWorkspace.shared.open(url) }
         }
     }

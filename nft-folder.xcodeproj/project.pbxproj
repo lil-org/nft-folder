@@ -31,6 +31,7 @@
 		2CA4CF592B07F76000CC75F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CA4CF582B07F76000CC75F4 /* Assets.xcassets */; };
 		2CA4CF5C2B07F76000CC75F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CA4CF5A2B07F76000CC75F4 /* Main.storyboard */; };
 		2CA979AA2B627B3900DB3AC8 /* MinimalTokenMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA979A92B627B3900DB3AC8 /* MinimalTokenMetadata.swift */; };
+		2CA979AC2B62BA2400DB3AC8 /* WebGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA979AB2B62BA2400DB3AC8 /* WebGallery.swift */; };
 		2CAFA62B2B09C3610054160D /* MetadataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA62A2B09C3610054160D /* MetadataStorage.swift */; };
 		2CC096F52B099F3400F24DD2 /* FolderIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC096F42B099F3400F24DD2 /* FolderIcon.swift */; };
 		2CF7339E2B0ED50000B1AC68 /* ZoraAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7339D2B0ED50000B1AC68 /* ZoraAPI.swift */; };
@@ -87,6 +88,7 @@
 		2CA4CF5D2B07F76000CC75F4 /* nft_folder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = nft_folder.entitlements; sourceTree = "<group>"; };
 		2CA4CF642B07FAC600CC75F4 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
 		2CA979A92B627B3900DB3AC8 /* MinimalTokenMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimalTokenMetadata.swift; sourceTree = "<group>"; };
+		2CA979AB2B62BA2400DB3AC8 /* WebGallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebGallery.swift; sourceTree = "<group>"; };
 		2CAFA62A2B09C3610054160D /* MetadataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataStorage.swift; sourceTree = "<group>"; };
 		2CB0BC432B13A25E00603E68 /* nouns-garden-round-3-proposal.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = "nouns-garden-round-3-proposal.md"; path = "Supporting Files/nouns-garden-round-3-proposal.md"; sourceTree = SOURCE_ROOT; };
 		2CB7A3EF2B29BD3F004BEE3A /* nouns-garden-round-4-proposal.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = "nouns-garden-round-4-proposal.md"; path = "Supporting Files/nouns-garden-round-4-proposal.md"; sourceTree = SOURCE_ROOT; };
@@ -150,6 +152,7 @@
 				2CFA24702B19F956009B58FD /* DataOrURL.swift */,
 				2C8A42E92B1A272600BE4166 /* Network.swift */,
 				2C625BA42B14A05B00902306 /* DownloadableNFT.swift */,
+				2CA979AB2B62BA2400DB3AC8 /* WebGallery.swift */,
 				2CA979A92B627B3900DB3AC8 /* MinimalTokenMetadata.swift */,
 			);
 			path = Models;
@@ -398,6 +401,7 @@
 				2CA3C2A12B18C91600AF33D6 /* DownloadsService.swift in Sources */,
 				2C0D86C72B08E7BF00106915 /* ENSResponse.swift in Sources */,
 				2C8A42EA2B1A272600BE4166 /* Network.swift in Sources */,
+				2CA979AC2B62BA2400DB3AC8 /* WebGallery.swift in Sources */,
 				2CC096F52B099F3400F24DD2 /* FolderIcon.swift in Sources */,
 				2CFA24712B19F956009B58FD /* DataOrURL.swift in Sources */,
 				2CA34B3D2B082BDF00DAB623 /* WalletsListView.swift in Sources */,
