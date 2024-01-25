@@ -157,7 +157,7 @@ extension Token: DownloadableNFT {
             } else {
                 collectionDisplayName = String(collectionAddress.prefix(7))
             }
-            return "\(collectionDisplayName) - \(name ?? tokenId)"
+            return "\(collectionDisplayName) - \(name ?? tokenId)".trimmingCharacters(in: ["."])
         }
     }
     

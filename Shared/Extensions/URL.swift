@@ -22,9 +22,17 @@ extension URL {
     }
     
     static func metadataDirectory(filePath: String) -> URL? {
-        // TODO: when keeping inside of a separate directory, make sure that that separate directory exists, and only then create .nft when needed
+        let relativePath: Substring
+        if filePath.hasPrefix(nftDirectoryPath) {
+            relativePath = filePath.dropFirst(nftDirectoryPath.count)
+        } else if filePath.hasPrefix(nftDirectoryPathResolved) {
+            relativePath = filePath.dropFirst(nftDirectoryPathResolved.count)
+        } else {
+            return nil
+        }
+        let folderName = relativePath.prefix(while: { $0 != "/" })
         let fileManager = FileManager.default
-        guard let metadataDirectoryURL = nftDirectory?.appendingPathComponent(".nft") else { return nil }
+        guard let metadataDirectoryURL = nftDirectory?.appendingPathComponent(folderName + "/.nft") else { return nil }
         if !fileManager.fileExists(atPath: metadataDirectoryURL.path) {
             try? fileManager.createDirectory(at: metadataDirectoryURL, withIntermediateDirectories: true, attributes: nil)
         }
@@ -42,5 +50,13 @@ extension URL {
         
         return nftDirectoryURL
     }
+    
+    static let nftDirectoryPathResolved: String = {
+        return nftDirectory?.resolvingSymlinksInPath().path() ?? ""
+    }()
+    
+    static let nftDirectoryPath: String = {
+        return nftDirectory?.path() ?? ""
+    }()
     
 }
