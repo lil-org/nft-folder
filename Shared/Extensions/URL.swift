@@ -21,8 +21,8 @@ extension URL {
         return addressDirectoryURL
     }
     
-    // TODO: put it in some private app location instead
     static func metadataDirectory() -> URL? {
+        // TODO: when keeping inside of a separate directory, make sure that that separate directory exists, and only then create .nft when needed
         let fileManager = FileManager.default
         guard let metadataDirectoryURL = nftDirectory?.appendingPathComponent(".nft") else { return nil }
         if !fileManager.fileExists(atPath: metadataDirectoryURL.path) {

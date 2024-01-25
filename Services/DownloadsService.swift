@@ -32,7 +32,7 @@ class DownloadsService {
     }
     
     func showNFT(filePath: String) {
-        if let fileId = fileId(path: filePath), let nftURL = MetadataStorage.nftURL(fileId: fileId) {
+        if let nftURL = MetadataStorage.nftURL(filePath: filePath) {
             DispatchQueue.main.async {
                 NSWorkspace.shared.open(nftURL)
             }
@@ -230,18 +230,7 @@ class DownloadsService {
             print("error saving file: \(error)")
         }
         
-        if let fileId = fileId(path: finalDestinationURL.path) {
-            MetadataStorage.store(fileId: fileId, metadata: metadata)
-        }
-    }
-    
-    private func fileId(path: String) -> String? {
-        if let attributes = try? FileManager.default.attributesOfItem(atPath: path),
-           let number = attributes[.systemFileNumber] as? UInt {
-            return String(number)
-        } else {
-            return nil
-        }
+        MetadataStorage.store(metadata: metadata, filePath: finalDestinationURL.path)
     }
     
 }

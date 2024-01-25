@@ -4,16 +4,18 @@ import Foundation
 
 struct MetadataStorage {
     
-    static func store(fileId: String, metadata: MinimalTokenMetadata) {
+    static func store(metadata: MinimalTokenMetadata, filePath: String) {
         // TODO: separate folder for each tracked address
-        if let data = try? JSONEncoder().encode(metadata), var url = URL.metadataDirectory() {
+        if let fileId = fileId(path: filePath),
+           let data = try? JSONEncoder().encode(metadata),
+           var url = URL.metadataDirectory() {
             url.append(path: fileId)
             try? data.write(to: url)
         }
     }
     
-    static func nftURL(fileId: String) -> URL? {
-        if var url = URL.metadataDirectory() {
+    static func nftURL(filePath: String) -> URL? {
+        if let fileId = fileId(path: filePath), var url = URL.metadataDirectory() {
             url.append(path: fileId)
             if let data = try? Data(contentsOf: url),
                let metadata = try? JSONDecoder().decode(MinimalTokenMetadata.self, from: data) {
@@ -38,6 +40,15 @@ struct MetadataStorage {
             prefix = "pgn"
         }
         return URL(string: "https://zora.co/collect/\(prefix):\(metadata.collectionAddress)/\(metadata.tokenId)")
+    }
+    
+    private static func fileId(path: String) -> String? {
+        if let attributes = try? FileManager.default.attributesOfItem(atPath: path),
+           let number = attributes[.systemFileNumber] as? UInt {
+            return String(number)
+        } else {
+            return nil
+        }
     }
     
 }
