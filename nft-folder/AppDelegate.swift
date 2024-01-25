@@ -105,8 +105,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         let viewPrefix = "view="
-        if q.hasPrefix(viewPrefix), let encodedPath = q.dropFirst(viewPrefix.count).removingPercentEncoding {
-            DownloadsService.shared.showNFT(filePath: encodedPath)
+        if q.hasPrefix(viewPrefix),
+           let rawGallery = q.last,
+           let gallery = WebGallery(rawValue: String(rawGallery)),
+           let encodedPath = q.dropFirst(viewPrefix.count).dropLast().removingPercentEncoding {
+            DownloadsService.shared.showNFT(filePath: encodedPath, gallery: gallery)
             // TODO: different for wallet folders
             // TODO: open multiple files
         }
