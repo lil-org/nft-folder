@@ -105,7 +105,15 @@ class FinderSync: FIFinderSync {
         let menu = NSMenu(title: "")
         switch menuKind {
         case .contextualMenuForItems:
-            menu.addItem(withTitle: "💎 view nft", action: #selector(nftView(_:)), keyEquivalent: "")
+            let zoraItem = NSMenuItem(title: "zora", action: #selector(viewOnZora(_:)), keyEquivalent: "")
+            zoraItem.image = NSImage(named: NSImage.Name(stringLiteral: "zora"))
+            let funItem = NSMenuItem(title: "mint.fun", action: #selector(viewOnMintFun(_:)), keyEquivalent: "")
+            funItem.image = NSImage(named: NSImage.Name(stringLiteral: "fun"))
+            let seaItem = NSMenuItem(title: "opensea", action: #selector(viewOnOpenSea(_:)), keyEquivalent: "")
+            seaItem.image = NSImage(named: NSImage.Name(stringLiteral: "sea"))
+            menu.addItem(zoraItem)
+            menu.addItem(funItem)
+            menu.addItem(seaItem)
         case .toolbarItemMenu:
             menu.addItem(withTitle: "📂 open nft folder", action: #selector(openNFTDirectory(_:)), keyEquivalent: "")
             menu.addItem(withTitle: "☁️ sync nfts", action: #selector(syncNFTs(_:)), keyEquivalent: "")
@@ -136,11 +144,23 @@ class FinderSync: FIFinderSync {
         }
     }
     
-    @IBAction private func nftView(_ sender: AnyObject?) {
+    @IBAction private func viewOnZora(_ sender: AnyObject?) {
+        viewOn(letter: "z")
+    }
+    
+    @IBAction private func viewOnMintFun(_ sender: AnyObject?) {
+        viewOn(letter: "f")
+    }
+    
+    @IBAction private func viewOnOpenSea(_ sender: AnyObject?) {
+        viewOn(letter: "o")
+    }
+    
+    private func viewOn(letter: String) {
         guard let selectedItems = FIFinderSyncController.default().selectedItemURLs(),
               selectedItems.count == 1,
               let selectedPath = selectedItems.first?.path.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
-        if let url = URL(string: URL.deeplinkScheme + "?view=\(selectedPath)z") {
+        if let url = URL(string: URL.deeplinkScheme + "?view=\(selectedPath)\(letter)") {
             DispatchQueue.main.async { NSWorkspace.shared.open(url) }
         }
     }
