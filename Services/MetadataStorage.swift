@@ -16,4 +16,22 @@ struct MetadataStorage {
         return nil
     }
     
+    // TODO: refactor
+    private static func nftURL(metadata: MinimalTokenMetadata, network: Network) -> URL? {
+        let prefix: String
+        switch network {
+        case .ethereum:
+            prefix = "eth"
+        case .optimism:
+            prefix = "optimism"
+        case .zora:
+            prefix = "zora"
+        case .base:
+            prefix = "base"
+        case .pgn:
+            prefix = "pgn"
+        }
+        return URL(string: "https://zora.co/collect/\(prefix):\(metadata.collectionAddress)/\(metadata.tokenId)")
+    }
+    
 }

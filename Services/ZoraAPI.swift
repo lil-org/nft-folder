@@ -145,24 +145,6 @@ extension Token: DownloadableNFT {
         return nil
     }
     
-    // TODO: move from here
-    func nftURL(network: Network) -> URL? {
-        let prefix: String
-        switch network {
-        case .ethereum:
-            prefix = "eth"
-        case .optimism:
-            prefix = "optimism"
-        case .zora:
-            prefix = "zora"
-        case .base:
-            prefix = "base"
-        case .pgn:
-            prefix = "pgn"
-        }
-        return URL(string: "https://zora.co/collect/\(prefix):\(collectionAddress)/\(tokenId)")
-    }
-    
     var fileDisplayName: String {
         if let name = name, let collectionName = collectionName, name.localizedCaseInsensitiveContains(collectionName) {
             return name
