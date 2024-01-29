@@ -18,6 +18,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private let fileManager = FileManager.default
     private var didFinishLaunching = false
     private var initialRequest: Request?
+    private let currentInstanceId = UUID().uuidString
     
     override init() {
         super.init()
@@ -38,6 +39,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         initialRequest = nil
+        DistributedNotificationCenter.default().post(name: Notification.mustTerminate, object: currentInstanceId)
+        DistributedNotificationCenter.default().addObserver(self, selector: #selector(terminateInstance(_:)), name: Notification.mustTerminate, object: nil, suspensionBehavior: .deliverImmediately)
+    }
+    
+    func applicationWillTerminate(_ aNotification: Notification) {
+        DistributedNotificationCenter.default().removeObserver(self)
+    }
+    
+    @objc func terminateInstance(_ notification: Notification) {
+        guard let senderId = notification.object as? String else { return }
+        if senderId != currentInstanceId {
+            NSApplication.shared.terminate(nil)
+        }
     }
     
     func application(_ application: NSApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([NSUserActivityRestoring]) -> Void) -> Bool {
