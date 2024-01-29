@@ -32,6 +32,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         createDirectoryIfNeeded()
         didFinishLaunching = true
         
+        NSApplication.shared.servicesProvider = RightClickServiceProvider()
+        NSUpdateDynamicServices()
+        
         if let initialRequest = initialRequest {
             processRequest(initialRequest)
         } else if !didProcessInput {

@@ -11,6 +11,7 @@
 		2C0D86C52B08E67000106915 /* WalletsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C32B08E67000106915 /* WalletsService.swift */; };
 		2C0D86C72B08E7BF00106915 /* ENSResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C62B08E7BF00106915 /* ENSResponse.swift */; };
 		2C0D86C82B08E7BF00106915 /* ENSResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C62B08E7BF00106915 /* ENSResponse.swift */; };
+		2C2329DA2B68367F00001936 /* RightClickServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2329D92B68367F00001936 /* RightClickServiceProvider.swift */; };
 		2C508C9D2B6830E6005F548A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
 		2C508C9E2B6830E6005F548A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
 		2C625BA52B14A05B00902306 /* DownloadableNFT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C625BA42B14A05B00902306 /* DownloadableNFT.swift */; };
@@ -68,6 +69,7 @@
 /* Begin PBXFileReference section */
 		2C0D86C32B08E67000106915 /* WalletsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsService.swift; sourceTree = "<group>"; };
 		2C0D86C62B08E7BF00106915 /* ENSResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENSResponse.swift; sourceTree = "<group>"; };
+		2C2329D92B68367F00001936 /* RightClickServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightClickServiceProvider.swift; sourceTree = "<group>"; };
 		2C508C9C2B6830E6005F548A /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		2C625BA42B14A05B00902306 /* DownloadableNFT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadableNFT.swift; sourceTree = "<group>"; };
 		2C8A42E92B1A272600BE4166 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				2C9113192B08F71200A8EE80 /* NFTService.swift */,
 				2CA3C2A02B18C91600AF33D6 /* DownloadsService.swift */,
 				2CAFA62A2B09C3610054160D /* MetadataStorage.swift */,
+				2C2329D92B68367F00001936 /* RightClickServiceProvider.swift */,
 				2CF7339D2B0ED50000B1AC68 /* ZoraAPI.swift */,
 			);
 			path = Services;
@@ -401,6 +404,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C2329DA2B68367F00001936 /* RightClickServiceProvider.swift in Sources */,
 				2CA979AA2B627B3900DB3AC8 /* MinimalTokenMetadata.swift in Sources */,
 				2CAFA62B2B09C3610054160D /* MetadataStorage.swift in Sources */,
 				2CA3C2A12B18C91600AF33D6 /* DownloadsService.swift in Sources */,

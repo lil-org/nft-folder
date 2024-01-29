@@ -24,5 +24,31 @@
 	</dict>
 	<key>NSSupportsSuddenTermination</key>
 	<true/>
+	<key>NSServices</key>
+	<array>
+		<dict>
+			<key>NSMenuItem</key>
+			<dict>
+				<key>default</key>
+				<string>mint on zora</string>
+			</dict>
+			<key>NSMessage</key>
+			<string>rightClickMint</string>
+			<key>NSRequiredContext</key>
+			<dict>
+				<key>NSApplicationIdentifier</key>
+				<array>
+					<string>com.apple.finder</string>
+				</array>
+				<key>NSTextContent</key>
+				<string>FilePath</string>
+			</dict>
+			<key>NSSendFileTypes</key>
+			<array>
+				<string>public.png</string>
+				<string>public.jpeg</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>
