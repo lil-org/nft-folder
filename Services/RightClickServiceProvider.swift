@@ -30,6 +30,9 @@ class RightClickServiceProvider: NSObject {
                   let ipfsResponse = try? JSONDecoder().decode(IPFSResponse.self, from: data),
                   let url = URL(string: "https://zora.co/create?image=ipfs://\(ipfsResponse.hash)") else {
                 print("ipfs upload error \(error?.localizedDescription ?? "unknown")")
+                DispatchQueue.main.async { [weak self] in
+                    self?.showErrorAlert(fileURL: fileURL)
+                }
                 return
             }
             
@@ -40,6 +43,23 @@ class RightClickServiceProvider: NSObject {
             }
         }
         task.resume()
+    }
+    
+    func showErrorAlert(fileURL: URL) {
+        let alert = NSAlert()
+        alert.messageText = "did not upload"
+        alert.informativeText = fileURL.lastPathComponent
+        alert.alertStyle = .warning
+        alert.addButton(withTitle: "retry")
+        alert.addButton(withTitle: "cancel")
+        alert.buttons.last?.keyEquivalent = "\u{1b}"
+        let response = alert.runModal()
+        switch response {
+        case .alertFirstButtonReturn:
+            sendIt(fileURL: fileURL)
+        default:
+            break
+        }
     }
     
 }
