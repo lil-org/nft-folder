@@ -11,6 +11,9 @@
 		2C0D86C52B08E67000106915 /* WalletsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C32B08E67000106915 /* WalletsService.swift */; };
 		2C0D86C72B08E7BF00106915 /* ENSResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C62B08E7BF00106915 /* ENSResponse.swift */; };
 		2C0D86C82B08E7BF00106915 /* ENSResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C62B08E7BF00106915 /* ENSResponse.swift */; };
+		2C2329DA2B68367F00001936 /* RightClickServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2329D92B68367F00001936 /* RightClickServiceProvider.swift */; };
+		2C508C9D2B6830E6005F548A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
+		2C508C9E2B6830E6005F548A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
 		2C625BA52B14A05B00902306 /* DownloadableNFT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C625BA42B14A05B00902306 /* DownloadableNFT.swift */; };
 		2C8A42EA2B1A272600BE4166 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A42E92B1A272600BE4166 /* Network.swift */; };
 		2C91131A2B08F71200A8EE80 /* NFTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9113192B08F71200A8EE80 /* NFTService.swift */; };
@@ -34,6 +37,7 @@
 		2CA979AC2B62BA2400DB3AC8 /* WebGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA979AB2B62BA2400DB3AC8 /* WebGallery.swift */; };
 		2CAFA62B2B09C3610054160D /* MetadataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA62A2B09C3610054160D /* MetadataStorage.swift */; };
 		2CC096F52B099F3400F24DD2 /* FolderIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC096F42B099F3400F24DD2 /* FolderIcon.swift */; };
+		2CD4FC8A2B684A0900C965F6 /* IPFSResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD4FC892B684A0900C965F6 /* IPFSResponse.swift */; };
 		2CF7339E2B0ED50000B1AC68 /* ZoraAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7339D2B0ED50000B1AC68 /* ZoraAPI.swift */; };
 		2CFA24712B19F956009B58FD /* DataOrURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFA24702B19F956009B58FD /* DataOrURL.swift */; };
 		2CFA24732B19FB92009B58FD /* FileExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFA24722B19FB92009B58FD /* FileExtension.swift */; };
@@ -66,6 +70,8 @@
 /* Begin PBXFileReference section */
 		2C0D86C32B08E67000106915 /* WalletsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsService.swift; sourceTree = "<group>"; };
 		2C0D86C62B08E7BF00106915 /* ENSResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENSResponse.swift; sourceTree = "<group>"; };
+		2C2329D92B68367F00001936 /* RightClickServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightClickServiceProvider.swift; sourceTree = "<group>"; };
+		2C508C9C2B6830E6005F548A /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		2C625BA42B14A05B00902306 /* DownloadableNFT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadableNFT.swift; sourceTree = "<group>"; };
 		2C8A42E92B1A272600BE4166 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		2C9113192B08F71200A8EE80 /* NFTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTService.swift; sourceTree = "<group>"; };
@@ -95,6 +101,7 @@
 		2CC096F42B099F3400F24DD2 /* FolderIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderIcon.swift; sourceTree = "<group>"; };
 		2CCFED972B08246800D98A2E /* WalletsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsListView.swift; sourceTree = "<group>"; };
 		2CD488FE2B10C6FA00A53950 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		2CD4FC892B684A0900C965F6 /* IPFSResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPFSResponse.swift; sourceTree = "<group>"; };
 		2CF7339D2B0ED50000B1AC68 /* ZoraAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoraAPI.swift; sourceTree = "<group>"; };
 		2CFA24702B19F956009B58FD /* DataOrURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataOrURL.swift; sourceTree = "<group>"; };
 		2CFA24722B19FB92009B58FD /* FileExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileExtension.swift; sourceTree = "<group>"; };
@@ -141,6 +148,7 @@
 				2C9113192B08F71200A8EE80 /* NFTService.swift */,
 				2CA3C2A02B18C91600AF33D6 /* DownloadsService.swift */,
 				2CAFA62A2B09C3610054160D /* MetadataStorage.swift */,
+				2C2329D92B68367F00001936 /* RightClickServiceProvider.swift */,
 				2CF7339D2B0ED50000B1AC68 /* ZoraAPI.swift */,
 			);
 			path = Services;
@@ -151,6 +159,7 @@
 			children = (
 				2CFA24702B19F956009B58FD /* DataOrURL.swift */,
 				2C8A42E92B1A272600BE4166 /* Network.swift */,
+				2CD4FC892B684A0900C965F6 /* IPFSResponse.swift */,
 				2C625BA42B14A05B00902306 /* DownloadableNFT.swift */,
 				2CA979AB2B62BA2400DB3AC8 /* WebGallery.swift */,
 				2CA979A92B627B3900DB3AC8 /* MinimalTokenMetadata.swift */,
@@ -191,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				2CA34B592B08B7CF00DAB623 /* URL.swift */,
+				2C508C9C2B6830E6005F548A /* Notification.swift */,
 				2CA34B552B08B6A200DAB623 /* Codable.swift */,
 			);
 			path = Extensions;
@@ -373,7 +383,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "killall nft-folder\nkillall nft-finder-extension\nkillall nft-quick-look\nkillall Finder\n";
+			shellScript = "/System/Library/CoreServices/pbs -flush\nkillall nft-folder\nkillall nft-finder-extension\nkillall nft-quick-look\nkillall Finder\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -386,6 +396,7 @@
 				2CA34B652B08C01300DAB623 /* FinderSync.swift in Sources */,
 				2C0D86C82B08E7BF00106915 /* ENSResponse.swift in Sources */,
 				2C0D86C52B08E67000106915 /* WalletsService.swift in Sources */,
+				2C508C9E2B6830E6005F548A /* Notification.swift in Sources */,
 				2CA34B6E2B08C02500DAB623 /* URL.swift in Sources */,
 				2CA34B702B08C02B00DAB623 /* WatchOnlyWallet.swift in Sources */,
 				2CA34B6F2B08C02500DAB623 /* Codable.swift in Sources */,
@@ -396,6 +407,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CD4FC8A2B684A0900C965F6 /* IPFSResponse.swift in Sources */,
+				2C2329DA2B68367F00001936 /* RightClickServiceProvider.swift in Sources */,
 				2CA979AA2B627B3900DB3AC8 /* MinimalTokenMetadata.swift in Sources */,
 				2CAFA62B2B09C3610054160D /* MetadataStorage.swift in Sources */,
 				2CA3C2A12B18C91600AF33D6 /* DownloadsService.swift in Sources */,
@@ -413,6 +426,7 @@
 				2C0D86C42B08E67000106915 /* WalletsService.swift in Sources */,
 				2C625BA52B14A05B00902306 /* DownloadableNFT.swift in Sources */,
 				2CA4CF552B07F75F00CC75F4 /* AppDelegate.swift in Sources */,
+				2C508C9D2B6830E6005F548A /* Notification.swift in Sources */,
 				2C9113212B09253500A8EE80 /* Blockies.swift in Sources */,
 				2CA34B5A2B08B7CF00DAB623 /* URL.swift in Sources */,
 				2CF7339E2B0ED50000B1AC68 /* ZoraAPI.swift in Sources */,

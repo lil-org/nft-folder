@@ -24,5 +24,44 @@
 	</dict>
 	<key>NSSupportsSuddenTermination</key>
 	<true/>
+	<key>NSServices</key>
+	<array>
+		<dict>
+			<key>NSMenuItem</key>
+			<dict>
+				<key>default</key>
+				<string>⊕ Mint</string>
+			</dict>
+			<key>NSMessage</key>
+			<string>rightClickMint</string>
+			<key>NSRequiredContext</key>
+			<dict>
+				<key>NSApplicationIdentifier</key>
+				<array>
+					<string>com.apple.finder</string>
+				</array>
+				<key>NSTextContent</key>
+				<string>FilePath</string>
+			</dict>
+			<key>NSSendFileTypes</key>
+			<array>
+				<string>public.image</string>
+				<string>public.png</string>
+				<string>public.jpeg</string>
+				<string>com.compuserve.gif</string>
+				<string>public.tiff</string>
+				<string>com.microsoft.bmp</string>
+				<string>com.microsoft.ico</string>
+				<string>public.camera-raw-image</string>
+				<string>com.adobe.photoshop-image</string>
+				<string>public.svg-image</string>
+				<string>com.adobe.encapsulated-postscript</string>
+				<string>com.adobe.pdf</string>
+				<string>public.heic</string>
+				<string>public.heif</string>
+				<string>com.google.webp</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>
