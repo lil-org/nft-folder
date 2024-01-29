@@ -1,6 +1,7 @@
 // ∅ nft-folder-macos 2024
 
 import Cocoa
+import UniformTypeIdentifiers
 
 extension URL {
     
@@ -58,5 +59,14 @@ extension URL {
     static let nftDirectoryPath: String = {
         return nftDirectory?.path() ?? ""
     }()
+    
+    var mimeType: String {
+        if let typeIdentifier = (try? resourceValues(forKeys: [.typeIdentifierKey]))?.typeIdentifier,
+            let utType = UTType(typeIdentifier) {
+            return utType.preferredMIMEType ?? "application/octet-stream"
+        } else {
+            return "application/octet-stream"
+        }
+    }
     
 }
