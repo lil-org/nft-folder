@@ -8,6 +8,8 @@ class RightClickServiceProvider: NSObject {
         if let urls = pasteboard.readObjects(forClasses: [NSURL.self], options: nil) as? [URL], let url = urls.first {
             // TODO: implement upload and zora redirect
             print(url)
+            let data = try? Data(contentsOf: url)
+            print(data?.count)
         }
     }
     
