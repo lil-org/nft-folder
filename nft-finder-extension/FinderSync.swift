@@ -94,7 +94,7 @@ class FinderSync: FIFinderSync {
     }
     
     override var toolbarItemToolTip: String {
-        return "click for a menu"
+        return "click for nft menu"
     }
     
     override var toolbarItemImage: NSImage {
