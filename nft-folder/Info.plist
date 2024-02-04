@@ -22,8 +22,6 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>NSSupportsSuddenTermination</key>
-	<true/>
 	<key>NSServices</key>
 	<array>
 		<dict>
@@ -63,5 +61,7 @@
 			</array>
 		</dict>
 	</array>
+	<key>NSSupportsSuddenTermination</key>
+	<true/>
 </dict>
 </plist>
