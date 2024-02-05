@@ -157,12 +157,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @objc private func checkFolders() {
         guard let path = URL.nftDirectory?.path, let files = try? fileManager.contentsOfDirectory(atPath: path) else { return }
-        var knownWallets = Set(walletsService.wallets.map { $0.displayName })
+        var knownWallets = Set(walletsService.wallets)
         for name in files {
-            if knownWallets.contains(name) {
-                knownWallets.remove(name)
+            if let known = knownWallets.first(where: { $0.folderDisplayName == name }) {
+                knownWallets.remove(known)
             }
-            if walletsService.isEthAddress(name) && !walletsService.hasWallet(name: name) {
+            if walletsService.isEthAddress(name) && !walletsService.hasWallet(folderName: name) {
                 walletsService.resolveENS(name) { [weak self] result in
                     switch result {
                     case .success(let response):
@@ -170,7 +170,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                         self?.walletsService.addWallet(wallet)
                         FolderIcon.set(for: wallet)
                         let old = path + "/" + name
-                        let new = path + "/" + wallet.displayName
+                        let new = path + "/" + wallet.folderDisplayName
                         do {
                             try self?.fileManager.moveItem(atPath: old, toPath: new)
                         } catch {
@@ -187,7 +187,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         for remaining in knownWallets {
-            walletsService.removeWallet(displayName: remaining)
+            walletsService.removeWallet(address: remaining.address)
         }
     }
     

@@ -24,8 +24,8 @@ struct WalletsService {
         Defaults.removeWallet(wallet)
     }
     
-    func removeWallet(displayName: String) {
-        if let toRemove = wallets.first(where: { $0.displayName == displayName }) {
+    func removeWallet(address: String) {
+        if let toRemove = wallets.first(where: { $0.address == address }) {
             removeWallet(toRemove)
         }
     }
@@ -48,8 +48,8 @@ struct WalletsService {
         dataTask.resume()
     }
     
-    func hasWallet(name: String) -> Bool {
-        return wallets.contains(where: { $0.displayName == name })
+    func hasWallet(folderName: String) -> Bool {
+        return wallets.contains(where: { $0.folderDisplayName == folderName })
     }
     
     func isEthAddress(_ input: String) -> Bool {

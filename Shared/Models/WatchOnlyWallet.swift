@@ -8,13 +8,21 @@ struct WatchOnlyWallet: Codable, Hashable {
     let name: String?
     let avatar: String?
     
-    var displayName: String {
+    var listDisplayName: String {
         if let name = name {
             return name
         } else {
             let clean = address.dropFirst(2)
             let cropped = clean.prefix(4) + "…" + clean.suffix(4)
             return String(cropped)
+        }
+    }
+    
+    var folderDisplayName: String {
+        if let name = name {
+            return name
+        } else {
+            return address
         }
     }
     

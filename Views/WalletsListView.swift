@@ -30,7 +30,7 @@ struct WalletsListView: View {
                                     .overlay(
                                         WalletImageView(wallet: wallet)
                                     )
-                                Text(wallet.displayName).font(.system(size: 15, weight: .medium))
+                                Text(wallet.listDisplayName).font(.system(size: 15, weight: .medium))
                                 Spacer()
                             }
                             .contentShape(Rectangle()).onTapGesture {
@@ -40,7 +40,7 @@ struct WalletsListView: View {
                                 Button("remove", action: {
                                     WalletsService.shared.removeWallet(wallet)
                                     if let path = URL.nftDirectory?.path {
-                                        let pathToRemove = path + "/" + wallet.displayName
+                                        let pathToRemove = path + "/" + wallet.folderDisplayName
                                         try? FileManager.default.removeItem(atPath: pathToRemove)
                                     }
                                     updateDisplayedWallets()

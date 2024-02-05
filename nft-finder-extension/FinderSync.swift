@@ -50,7 +50,7 @@ class FinderSync: FIFinderSync {
         if folder == "nft" {
             badge = .base
         } else if base == "nft" {
-            if WalletsService.shared.hasWallet(name: folder) {
+            if WalletsService.shared.hasWallet(folderName: folder) {
                 badge = .ok
             } else if WalletsService.shared.isEthAddress(folder) {
                 if let url = URL(string: URL.deeplinkScheme + "?check") {

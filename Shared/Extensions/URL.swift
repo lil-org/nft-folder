@@ -11,7 +11,7 @@ extension URL {
     
     static func nftDirectory(wallet: WatchOnlyWallet, createIfDoesNotExist: Bool) -> URL? {
         let fileManager = FileManager.default
-        guard let addressDirectoryURL = nftDirectory?.appendingPathComponent(wallet.displayName) else { return nil }
+        guard let addressDirectoryURL = nftDirectory?.appendingPathComponent(wallet.folderDisplayName) else { return nil }
         if !fileManager.fileExists(atPath: addressDirectoryURL.path) {
             if createIfDoesNotExist {
                 try? fileManager.createDirectory(at: addressDirectoryURL, withIntermediateDirectories: true, attributes: nil)
