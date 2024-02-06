@@ -116,8 +116,8 @@ class FinderSync: FIFinderSync {
             menu.addItem(seaItem)
         case .toolbarItemMenu:
             menu.addItem(withTitle: "📂 open nft folder", action: #selector(openNFTDirectory(_:)), keyEquivalent: "")
-            menu.addItem(withTitle: "☁️ sync nfts", action: #selector(syncNFTs(_:)), keyEquivalent: "")
-            menu.addItem(withTitle: "⚙️ settings", action: #selector(didSelectSettings(_:)), keyEquivalent: "")
+            menu.addItem(withTitle: "⬇️ sync nfts", action: #selector(syncNFTs(_:)), keyEquivalent: "")
+            menu.addItem(withTitle: "🎛️ control center", action: #selector(didSelectSettings(_:)), keyEquivalent: "")
         case .contextualMenuForContainer, .contextualMenuForSidebar:
             break
         @unknown default:
