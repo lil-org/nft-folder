@@ -4,7 +4,7 @@ import Foundation
 
 enum Network: Int, CaseIterable, Codable {
     
-    case ethereum = 1, optimism = 10, zora = 7777777, base = 8453, pgn = 424
+    case ethereum = 1, optimism = 10, zora = 7777777, base = 8453, arbitrum = 42161
     
     var name: String {
         switch self {
@@ -16,8 +16,8 @@ enum Network: Int, CaseIterable, Codable {
             return "ZORA"
         case .base:
             return "BASE"
-        case .pgn:
-            return "PGN"
+        case .arbitrum:
+            return "ARBITRUM"
         }
     }
     

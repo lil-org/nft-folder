@@ -37,8 +37,8 @@ struct MetadataStorage {
                 prefix = "zora"
             case .base:
                 prefix = "base"
-            case .pgn:
-                prefix = "pgn"
+            case .arbitrum:
+                prefix = "arbitrum"
             }
             return URL(string: "https://zora.co/collect/\(prefix):\(metadata.collectionAddress)/\(metadata.tokenId)")
         case .mintfun:
@@ -52,8 +52,8 @@ struct MetadataStorage {
                 prefix = "zora"
             case .base:
                 prefix = "base"
-            case .pgn:
-                prefix = "pgn"
+            case .arbitrum:
+                prefix = "arbitrum"
             }
             return URL(string: "https://mint.fun/\(prefix)/\(metadata.collectionAddress)")
         case .opensea:
@@ -67,8 +67,8 @@ struct MetadataStorage {
                 prefix = "zora"
             case .base:
                 prefix = "base"
-            case .pgn:
-                prefix = "pgn"
+            case .arbitrum:
+                prefix = "arbitrum"
             }
             return URL(string: "https://opensea.io/assets/\(prefix)/\(metadata.collectionAddress)/\(metadata.tokenId)")
         }
