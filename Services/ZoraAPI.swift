@@ -182,3 +182,197 @@ struct InlineContentJSON: Decodable {
     }
     
 }
+
+
+// TODO: use to get fallback data
+// TODO: query events for updates — there is a separate events query, events not needed within tokens query
+
+//query MyQuery {
+//  tokens(sort: {sortKey: TRANSFERRED, sortDirection: DESC}) {
+//    nodes {
+//      token {
+//        image {
+//          mediaEncoding {
+//            ... on ImageEncodingTypes {
+//              large
+//              poster
+//              original
+//              thumbnail
+//            }
+//            ... on VideoEncodingTypes {
+//              large
+//              poster
+//              original
+//              preview
+//              thumbnail
+//            }
+//            ... on UnsupportedEncodingTypes {
+//              __typename
+//              original
+//            }
+//            ... on AudioEncodingTypes {
+//              large
+//              original
+//            }
+//          }
+//          mimeType
+//          size
+//          url
+//        }
+//        description
+//        collectionName
+//        collectionAddress
+//        content {
+//          mediaEncoding {
+//            ... on ImageEncodingTypes {
+//              large
+//              poster
+//              original
+//              thumbnail
+//            }
+//            ... on VideoEncodingTypes {
+//              large
+//              poster
+//              original
+//              preview
+//              thumbnail
+//            }
+//            ... on AudioEncodingTypes {
+//              large
+//              original
+//            }
+//            ... on UnsupportedEncodingTypes {
+//              __typename
+//              original
+//            }
+//          }
+//          mimeType
+//          size
+//          url
+//        }
+//        lastRefreshTime
+//        metadata
+//        mintInfo {
+//          originatorAddress
+//          mintContext
+//          toAddress
+//          price
+//        }
+//        name
+//        networkInfo
+//        owner
+//        tokenContract {
+//          chain
+//          collectionAddress
+//          description
+//          name
+//          symbol
+//          totalSupply
+//        }
+//        tokenId
+//        tokenStandard
+//        tokenUrl
+//        tokenUrlMimeType
+//      }
+//      events {
+//        eventType
+//        properties {
+//          ... on ApprovalEvent {
+//            tokenId
+//            approved
+//            approvalEventType
+//            approvedAddress
+//            collectionAddress
+//            ownerAddress
+//          }
+//          ... on MintEvent {
+//            __typename
+//            collectionAddress
+//            originatorAddress
+//            toAddress
+//            tokenId
+//          }
+//          ... on NounsAuctionEvent {
+//            __typename
+//            address
+//            collectionAddress
+//            nounsAuctionEventType
+//            properties
+//          }
+//          ... on Sale {
+//            saleContractAddress
+//            buyerAddress
+//            collectionAddress
+//            networkInfo
+//            price
+//            saleType
+//            sellerAddress
+//            tokenId
+//            transactionInfo {
+//              transactionHash
+//              logIndex
+//              blockTimestamp
+//              blockNumber
+//            }
+//          }
+//          ... on V3ReserveAuctionEvent {
+//            __typename
+//          }
+//          ... on V3ModuleManagerEvent {
+//            __typename
+//          }
+//          ... on V3AskEvent {
+//            __typename
+//          }
+//          ... on V2AuctionEvent {
+//            __typename
+//          }
+//          ... on V1MediaEvent {
+//            __typename
+//          }
+//          ... on V1MarketEvent {
+//            __typename
+//            address
+//            collectionAddress
+//            properties {
+//              ... on V1MarketAskCreatedEventProperties {
+//                __typename
+//              }
+//            }
+//            tokenId
+//          }
+//          ... on TransferEvent {
+//            __typename
+//            collectionAddress
+//            fromAddress
+//            toAddress
+//            tokenId
+//          }
+//          ... on SeaportEvent {
+//            orderHash
+//            zone
+//            address
+//            eventType
+//            offerer
+//            properties {
+//              ... on SeaportOrderFulfilledProperties {
+//                __typename
+//              }
+//              ... on SeaportCounterIncrementedProperties {
+//                __typename
+//              }
+//            }
+//          }
+//        }
+//        networkInfo {
+//          chain
+//          network
+//        }
+//        collectionAddress
+//        transactionInfo
+//        tokenId
+//      }
+//    }
+//    pageInfo
+//  }
+//}
