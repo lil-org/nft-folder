@@ -29,15 +29,12 @@ class RightClickServiceProvider: NSObject {
                   error == nil,
                   let ipfsResponse = try? JSONDecoder().decode(IPFSResponse.self, from: data),
                   let url = URL(string: "https://zora.co/create?image=ipfs://\(ipfsResponse.hash)") else {
-                print("ipfs upload error \(error?.localizedDescription ?? "unknown")")
                 DispatchQueue.main.async { [weak self] in
                     self?.showErrorAlert(fileURL: fileURL)
                 }
                 return
             }
-            
-            print("got ipfs response \(ipfsResponse)")
-            
+                        
             DispatchQueue.main.async {
                 NSWorkspace.shared.open(url)
             }

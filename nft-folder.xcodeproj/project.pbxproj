@@ -146,10 +146,10 @@
 			isa = PBXGroup;
 			children = (
 				2C9113192B08F71200A8EE80 /* NFTService.swift */,
+				2CF7339D2B0ED50000B1AC68 /* ZoraAPI.swift */,
 				2CA3C2A02B18C91600AF33D6 /* DownloadsService.swift */,
 				2CAFA62A2B09C3610054160D /* MetadataStorage.swift */,
 				2C2329D92B68367F00001936 /* RightClickServiceProvider.swift */,
-				2CF7339D2B0ED50000B1AC68 /* ZoraAPI.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
