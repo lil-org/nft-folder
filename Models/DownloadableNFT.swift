@@ -4,7 +4,7 @@ import Foundation
 
 protocol DownloadableNFT {
     
-    var probableDataOrURL: DataOrURL? { get }
+    var probableDataOrURLs: [DataOrURL] { get }
     var fileDisplayName: String { get }
     var tokenId: String { get }
     var collectionAddress: String { get }

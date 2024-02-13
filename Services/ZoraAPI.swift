@@ -151,13 +151,15 @@ struct Media: Codable {
 
 extension Token: DownloadableNFT {
     
-    var probableDataOrURL: DataOrURL? {
-        for link in [content?.url, image?.url, tokenUrl] {
+    var probableDataOrURLs: [DataOrURL] {
+        let mapped = [content?.url, image?.url, image?.mediaEncoding?.thumbnail, tokenUrl].compactMap { (link) -> DataOrURL? in
             if let dataOrURL = DataOrURL(urlString: link) {
                 return dataOrURL
+            } else {
+                return nil
             }
         }
-        return nil
+        return mapped
     }
     
     var fileDisplayName: String {

@@ -13,22 +13,29 @@ class DownloadsService {
     private init() {}
     private let urlSession = URLSession.shared
     
-    private var downloadsDict = [URL: (URL, String, MinimalTokenMetadata)]() // TODO: dev tmp
+    private var downloadsDict = [URL: (URL, String, MinimalTokenMetadata, [DataOrURL])]() // TODO: dev tmp
+    // TODO: this dict might prevent downloading the same files in some cases. make this logic explicit
+    
     private var downloadsInProgress = 0
     
     func downloadFiles(wallet: WatchOnlyWallet, downloadables: [DownloadableNFT], network: Network) {
         guard let destination = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return }
         for downloadable in downloadables {
-            guard let dataOrURL = downloadable.probableDataOrURL else { continue }
+            let dataOrURLs = downloadable.probableDataOrURLs
             let metadata = MinimalTokenMetadata(tokenId: downloadable.tokenId, collectionAddress: downloadable.collectionAddress, network: network)
-            switch dataOrURL {
-            case .data(let data, let fileExtension):
-                save(name: downloadable.fileDisplayName, metadata: metadata, data: data, fileExtension: fileExtension, destinationURL: destination, downloadedFromURL: nil)
-            case .url(let url):
-                downloadsDict[url] = (destination, downloadable.fileDisplayName, metadata)
-            }
+            process(dataOrURLs: dataOrURLs, metadata: metadata, name: downloadable.fileDisplayName, destination: destination)
         }
         downloadNextIfNeeded()
+    }
+    
+    private func process(dataOrURLs: [DataOrURL], metadata: MinimalTokenMetadata, name: String, destination: URL) {
+        guard !dataOrURLs.isEmpty else { return }
+        switch dataOrURLs[0] {
+        case .data(let data, let fileExtension):
+            save(name: name, metadata: metadata, data: data, fileExtension: fileExtension, destinationURL: destination, downloadedFromURL: nil)
+        case .url(let url):
+            downloadsDict[url] = (destination, name, metadata, Array(dataOrURLs.dropFirst()))
+        }
     }
     
     func showNFT(filePath: String, gallery: WebGallery) {
@@ -41,13 +48,19 @@ class DownloadsService {
     
     private func downloadNextIfNeeded() {
         guard downloadsInProgress < 23 else { return }
-        guard let (url, (destination, name, metadata)) = downloadsDict.first else { return }
+        guard let (url, (destination, name, metadata, dataOrURLs)) = downloadsDict.first else { return }
         downloadsDict.removeValue(forKey: url)
         downloadsInProgress += 1
         downloadFile(name: name, metadata: metadata, from: url, to: destination) { [weak self] result in
             self?.downloadsInProgress -= 1
             switch result {
-            case .success, .failure:
+            case .success:
+                self?.downloadNextIfNeeded()
+            case .failure:
+                if !dataOrURLs.isEmpty {
+                    print("⭐️ will retry and get a fallback content for \(name)")
+                    self?.process(dataOrURLs: dataOrURLs, metadata: metadata, name: name, destination: destination)
+                }
                 self?.downloadNextIfNeeded()
             case .cancel:
                 self?.downloadNextIfNeeded() // TODO: clean up for a removed filder
@@ -156,7 +169,7 @@ class DownloadsService {
                 case .data(let data, let fileExtension):
                     save(name: name, metadata: metadata, data: data, fileExtension: fileExtension, destinationURL: destinationURL, downloadedFromURL: downloadedFromURL)
                 case .url(let url):
-                    downloadsDict[url] = (destinationURL, name, metadata)
+                    downloadsDict[url] = (destinationURL, name, metadata, [])
                 }
                 if let tmpLocation = tmpLocation {
                     try? FileManager.default.removeItem(at: tmpLocation)
