@@ -42,12 +42,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         initialRequest = nil
-        DistributedNotificationCenter.default().post(name: Notification.mustTerminate, object: currentInstanceId)
-        DistributedNotificationCenter.default().addObserver(self, selector: #selector(terminateInstance(_:)), name: Notification.mustTerminate, object: nil, suspensionBehavior: .deliverImmediately)
+        
+        let dNotificationCenter = DistributedNotificationCenter.default()
+        dNotificationCenter.post(name: .mustTerminate, object: currentInstanceId)
+        dNotificationCenter.addObserver(self, selector: #selector(terminateInstance(_:)), name: .mustTerminate, object: nil, suspensionBehavior: .deliverImmediately)
+        dNotificationCenter.addObserver(self, selector: #selector(processFinderMessage(_:)), name: .fromFinder, object: nil, suspensionBehavior: .deliverImmediately)
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
         DistributedNotificationCenter.default().removeObserver(self)
+    }
+    
+    @objc func processFinderMessage(_ notification: Notification) {
+        // TODO: implement
     }
     
     @objc func terminateInstance(_ notification: Notification) {

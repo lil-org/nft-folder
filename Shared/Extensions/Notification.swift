@@ -2,8 +2,9 @@
 
 import Foundation
 
-extension Notification {
+extension Notification.Name {
     
     static let mustTerminate = Notification.Name("TerminatePreviousInstance")
+    static let fromFinder = Notification.Name("FromFinder")
     
 }
