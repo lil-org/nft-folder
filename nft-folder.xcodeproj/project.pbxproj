@@ -15,7 +15,8 @@
 		2C1B60BB2B7D3279009949C2 /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60BA2B7D3279009949C2 /* Badge.swift */; };
 		2C1B60BD2B7D3505009949C2 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60BC2B7D3505009949C2 /* Strings.swift */; };
 		2C1B60BE2B7D3505009949C2 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60BC2B7D3505009949C2 /* Strings.swift */; };
-		2C1B60C02B7D3700009949C2 /* ExtensionImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60BF2B7D3700009949C2 /* ExtensionImages.swift */; };
+		2C1B60C22B7D3F47009949C2 /* ExtensionImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60BF2B7D3700009949C2 /* ExtensionImages.swift */; };
+		2C1B60C42B7D41D1009949C2 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60C32B7D41D1009949C2 /* Images.swift */; };
 		2C2329DA2B68367F00001936 /* RightClickServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2329D92B68367F00001936 /* RightClickServiceProvider.swift */; };
 		2C508C9D2B6830E6005F548A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
 		2C508C9E2B6830E6005F548A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
@@ -79,6 +80,7 @@
 		2C1B60BA2B7D3279009949C2 /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
 		2C1B60BC2B7D3505009949C2 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		2C1B60BF2B7D3700009949C2 /* ExtensionImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionImages.swift; sourceTree = "<group>"; };
+		2C1B60C32B7D41D1009949C2 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		2C2329D92B68367F00001936 /* RightClickServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightClickServiceProvider.swift; sourceTree = "<group>"; };
 		2C508C9C2B6830E6005F548A /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		2C625BA42B14A05B00902306 /* DownloadableNFT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadableNFT.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				2CFA24702B19F956009B58FD /* DataOrURL.swift */,
+				2C1B60C32B7D41D1009949C2 /* Images.swift */,
 				2C8A42E92B1A272600BE4166 /* Network.swift */,
 				2CD4FC892B684A0900C965F6 /* IPFSResponse.swift */,
 				2C625BA42B14A05B00902306 /* DownloadableNFT.swift */,
@@ -410,7 +413,7 @@
 				2C0D86C82B08E7BF00106915 /* ENSResponse.swift in Sources */,
 				2C1B60BE2B7D3505009949C2 /* Strings.swift in Sources */,
 				2C0D86C52B08E67000106915 /* WalletsService.swift in Sources */,
-				2C1B60C02B7D3700009949C2 /* ExtensionImages.swift in Sources */,
+				2C1B60C22B7D3F47009949C2 /* ExtensionImages.swift in Sources */,
 				2C508C9E2B6830E6005F548A /* Notification.swift in Sources */,
 				2CA34B6E2B08C02500DAB623 /* URL.swift in Sources */,
 				2CA34B702B08C02B00DAB623 /* WatchOnlyWallet.swift in Sources */,
@@ -446,6 +449,7 @@
 				2CA4CF552B07F75F00CC75F4 /* AppDelegate.swift in Sources */,
 				2C508C9D2B6830E6005F548A /* Notification.swift in Sources */,
 				2C9113212B09253500A8EE80 /* Blockies.swift in Sources */,
+				2C1B60C42B7D41D1009949C2 /* Images.swift in Sources */,
 				2CA34B5A2B08B7CF00DAB623 /* URL.swift in Sources */,
 				2CF7339E2B0ED50000B1AC68 /* ZoraAPI.swift in Sources */,
 			);

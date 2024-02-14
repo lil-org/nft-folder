@@ -73,7 +73,7 @@ private struct Defaults {
     static func addWallet(_ wallet: WatchOnlyWallet) {
         guard !watchWallets.contains(where: { $0.address == wallet.address }) else { return }
         watchWallets += [wallet]
-        NotificationCenter.default.post(name: Notification.Name("walletsUpdate"), object: nil)
+        NotificationCenter.default.post(name: .walletsUpdate, object: nil)
         _ = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: true)
     }
     

@@ -15,4 +15,12 @@ struct Strings {
     static let syncMenuItem = "⬇️ sync nfts"
     static let controlCenterMenuItem = "🎛️ control center"
     
+    static let wallets = "wallets"
+    static let addWallet = "add a wallet"
+    static let remove = "remove"
+    static let addressOrEns = "address or ens"
+    static let cancel = "cancel"
+    static let openNftFolder = "open nft folder"
+    static let ok = "ok"
+    
 }

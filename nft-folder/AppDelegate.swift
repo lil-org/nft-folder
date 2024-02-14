@@ -110,7 +110,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private func processInput(urlString: String?) {
         guard let urlString = urlString, urlString.hasPrefix(URL.deeplinkScheme), let url = URL(string: urlString), let q = url.query() else { return }
         didProcessInput = true
-        // TODO: add model for a messaging
+        // TODO: add model for messaging
         switch q {
         case "add":
             processRequest(.addWallet)
