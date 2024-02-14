@@ -82,7 +82,7 @@ struct WalletsListView: View {
                     
                     
                 }
-            }.frame(width: 320)
+            }.frame(width: 230)
                 .padding()
         }.onReceive(NotificationCenter.default.publisher(for: Notification.Name("walletsUpdate")), perform: { _ in
             self.updateDisplayedWallets()
