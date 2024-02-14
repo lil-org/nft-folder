@@ -8,19 +8,6 @@ class FinderSync: FIFinderSync {
     private let home = URL.nftDirectory!
     private let monitor: DirectoryMonitor
     
-    private enum Badge: String, CaseIterable {
-        case base, ok
-        
-        var image: NSImage {
-            switch self {
-            case .base:
-                return NSImage(named: NSImage.statusAvailableName)!
-            case .ok:
-                return NSImage(named: NSImage.statusAvailableName)!
-            }
-        }
-    }
-    
     override init() {
         self.monitor = DirectoryMonitor(directoryURL: home)
         super.init()
@@ -38,7 +25,7 @@ class FinderSync: FIFinderSync {
     private func setBadgeFor(url: URL) {
         let badge: Badge?
         var components = url.pathComponents
-        guard components.count > 2 else { return }
+        guard components.count > 2 else { return } // TODO: straightforward folder matching
         
         let folder = components.removeLast()
         let base = components.removeLast()
@@ -65,7 +52,7 @@ class FinderSync: FIFinderSync {
         }
     }
     
-    // MARK: - Primary Finder Sync protocol methods
+    // MARK: - directory observing
     
     override func beginObservingDirectory(at url: URL) {
         if url.path == URL.nftDirectory?.path, let deeplink = URL(string: URL.deeplinkScheme + "?monitor") {
@@ -83,7 +70,7 @@ class FinderSync: FIFinderSync {
         setBadgeFor(url: url)
     }
     
-    // MARK: - Menu and toolbar item support
+    // MARK: - menu items
     
     override var toolbarItemName: String {
         return "nft"
@@ -161,47 +148,4 @@ class FinderSync: FIFinderSync {
         }
     }
 
-}
-
-private class DirectoryMonitor {
-    private let directoryURL: URL
-    private var fileDescriptor: CInt = -1
-    private var source: DispatchSourceFileSystemObject?
-
-    init(directoryURL: URL) {
-        self.directoryURL = directoryURL
-    }
-
-    func startMonitoring() {
-        guard fileDescriptor == -1 else { return }
-
-        fileDescriptor = open(directoryURL.path, O_EVTONLY)
-        guard fileDescriptor != -1 else { return }
-
-        source = DispatchSource.makeFileSystemObjectSource(fileDescriptor: fileDescriptor, eventMask: .write, queue: DispatchQueue.main)
-
-        source?.setEventHandler {
-            let fileManager = FileManager.default
-            do {
-                _ = try fileManager.contentsOfDirectory(at: self.directoryURL, includingPropertiesForKeys: nil)
-                if let url = URL(string: URL.deeplinkScheme + "?check") {
-                    DispatchQueue.main.async { NSWorkspace.shared.open(url) }
-                }
-            } catch {
-                print("Error reading directory contents: \(error)")
-            }
-        }
-
-        source?.setCancelHandler {
-            close(self.fileDescriptor)
-            self.fileDescriptor = -1
-            self.source = nil
-        }
-
-        source?.resume()
-    }
-
-    func stopMonitoring() {
-        source?.cancel()
-    }
 }

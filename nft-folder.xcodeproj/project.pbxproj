@@ -11,6 +11,8 @@
 		2C0D86C52B08E67000106915 /* WalletsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C32B08E67000106915 /* WalletsService.swift */; };
 		2C0D86C72B08E7BF00106915 /* ENSResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C62B08E7BF00106915 /* ENSResponse.swift */; };
 		2C0D86C82B08E7BF00106915 /* ENSResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C62B08E7BF00106915 /* ENSResponse.swift */; };
+		2C1B60B92B7D3245009949C2 /* DirectoryMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60B82B7D3245009949C2 /* DirectoryMonitor.swift */; };
+		2C1B60BB2B7D3279009949C2 /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60BA2B7D3279009949C2 /* Badge.swift */; };
 		2C2329DA2B68367F00001936 /* RightClickServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2329D92B68367F00001936 /* RightClickServiceProvider.swift */; };
 		2C508C9D2B6830E6005F548A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
 		2C508C9E2B6830E6005F548A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
@@ -70,6 +72,8 @@
 /* Begin PBXFileReference section */
 		2C0D86C32B08E67000106915 /* WalletsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsService.swift; sourceTree = "<group>"; };
 		2C0D86C62B08E7BF00106915 /* ENSResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENSResponse.swift; sourceTree = "<group>"; };
+		2C1B60B82B7D3245009949C2 /* DirectoryMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryMonitor.swift; sourceTree = "<group>"; };
+		2C1B60BA2B7D3279009949C2 /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
 		2C2329D92B68367F00001936 /* RightClickServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightClickServiceProvider.swift; sourceTree = "<group>"; };
 		2C508C9C2B6830E6005F548A /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		2C625BA42B14A05B00902306 /* DownloadableNFT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadableNFT.swift; sourceTree = "<group>"; };
@@ -209,10 +213,12 @@
 		2CA34B632B08C01300DAB623 /* nft-finder-extension */ = {
 			isa = PBXGroup;
 			children = (
-				2CA34B662B08C01300DAB623 /* Info.plist */,
 				2CA34B642B08C01300DAB623 /* FinderSync.swift */,
+				2C1B60B82B7D3245009949C2 /* DirectoryMonitor.swift */,
+				2C1B60BA2B7D3279009949C2 /* Badge.swift */,
 				2CA34B722B08C71800DAB623 /* ExtensionAssets.xcassets */,
 				2CA34B672B08C01300DAB623 /* nft_finder_extension.entitlements */,
+				2CA34B662B08C01300DAB623 /* Info.plist */,
 			);
 			path = "nft-finder-extension";
 			sourceTree = "<group>";
@@ -399,6 +405,8 @@
 				2C508C9E2B6830E6005F548A /* Notification.swift in Sources */,
 				2CA34B6E2B08C02500DAB623 /* URL.swift in Sources */,
 				2CA34B702B08C02B00DAB623 /* WatchOnlyWallet.swift in Sources */,
+				2C1B60B92B7D3245009949C2 /* DirectoryMonitor.swift in Sources */,
+				2C1B60BB2B7D3279009949C2 /* Badge.swift in Sources */,
 				2CA34B6F2B08C02500DAB623 /* Codable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
