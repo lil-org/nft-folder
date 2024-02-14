@@ -9,16 +9,12 @@ class FinderSync: FIFinderSync {
     private let monitor: DirectoryMonitor
     
     private enum Badge: String, CaseIterable {
-        case base, unknown, wrong, ok
+        case base, ok
         
         var image: NSImage {
             switch self {
             case .base:
                 return NSImage(named: NSImage.statusAvailableName)!
-            case .unknown:
-                return NSImage(named: NSImage.statusPartiallyAvailableName)!
-            case .wrong:
-                return NSImage(named: NSImage.statusUnavailableName)!
             case .ok:
                 return NSImage(named: NSImage.statusAvailableName)!
             }
@@ -53,7 +49,7 @@ class FinderSync: FIFinderSync {
             if WalletsService.shared.hasWallet(folderName: folder) {
                 badge = .ok
             } else if WalletsService.shared.isEthAddress(folder) {
-                if let url = URL(string: URL.deeplinkScheme + "?check") {
+                if let url = URL(string: URL.deeplinkScheme + "?check") { // TODO: do not perform checks on badge request
                     DispatchQueue.main.async { NSWorkspace.shared.open(url) }
                 }
                 badge = nil
