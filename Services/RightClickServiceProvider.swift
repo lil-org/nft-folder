@@ -44,11 +44,11 @@ class RightClickServiceProvider: NSObject {
     
     func showErrorAlert(fileURL: URL) {
         let alert = NSAlert()
-        alert.messageText = "did not upload"
+        alert.messageText = Strings.didNotUpload
         alert.informativeText = fileURL.lastPathComponent
         alert.alertStyle = .warning
-        alert.addButton(withTitle: "retry")
-        alert.addButton(withTitle: "cancel")
+        alert.addButton(withTitle: Strings.retry)
+        alert.addButton(withTitle: Strings.cancel)
         alert.buttons.last?.keyEquivalent = "\u{1b}"
         let response = alert.runModal()
         switch response {

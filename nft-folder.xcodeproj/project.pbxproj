@@ -260,12 +260,12 @@
 		2CA4CF532B07F75F00CC75F4 /* nft-folder */ = {
 			isa = PBXGroup;
 			children = (
-				2CA34B742B08CA8200DAB623 /* Info.plist */,
 				2CA4CF542B07F75F00CC75F4 /* AppDelegate.swift */,
 				2CA4CF582B07F76000CC75F4 /* Assets.xcassets */,
 				2CA4CF5A2B07F76000CC75F4 /* Main.storyboard */,
 				2CA4CF5D2B07F76000CC75F4 /* nft_folder.entitlements */,
 				2CA4CF642B07FAC600CC75F4 /* .gitignore */,
+				2CA34B742B08CA8200DAB623 /* Info.plist */,
 			);
 			path = "nft-folder";
 			sourceTree = "<group>";

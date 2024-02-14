@@ -23,4 +23,8 @@ struct Strings {
     static let openNftFolder = "open nft folder"
     static let ok = "ok"
     
+    static let ens = "ENS"
+    static let didNotUpload = "did not upload"
+    static let retry = "retry"
+    
 }

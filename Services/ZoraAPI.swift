@@ -170,7 +170,7 @@ extension Token: DownloadableNFT {
             if let collectionName = collectionName, !collectionName.isEmpty {
                 collectionDisplayName = collectionName
             } else if collectionAddress == "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85" {
-                collectionDisplayName = "ENS"
+                collectionDisplayName = Strings.ens
             } else {
                 collectionDisplayName = String(collectionAddress.prefix(7))
             }
