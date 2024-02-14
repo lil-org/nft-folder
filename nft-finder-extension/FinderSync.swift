@@ -27,10 +27,12 @@ class FinderSync: FIFinderSync {
         var components = url.pathComponents
         guard components.count > 2 else { return } // TODO: straightforward folder matching
         
+        // TODO: return quickly when asking for a badge deep inside
+        
         let folder = components.removeLast()
         let base = components.removeLast()
         
-        if folder == "nft" {
+        if folder == "nft" { // TODO: exact full path folder matching
             badge = .base
         } else if base == "nft" {
             if WalletsService.shared.hasWallet(folderName: folder) {
@@ -73,34 +75,34 @@ class FinderSync: FIFinderSync {
     // MARK: - menu items
     
     override var toolbarItemName: String {
-        return "nft"
+        return Strings.toolbarItemName
     }
     
     override var toolbarItemToolTip: String {
-        return "click for nft menu"
+        return Strings.toolbarItemToolTip
     }
     
     override var toolbarItemImage: NSImage {
-        return NSImage(named: "icon")!
+        return ExtensionImages.icon
     }
     
     override func menu(for menuKind: FIMenuKind) -> NSMenu {
         let menu = NSMenu(title: "")
         switch menuKind {
         case .contextualMenuForItems:
-            let zoraItem = NSMenuItem(title: "zora", action: #selector(viewOnZora(_:)), keyEquivalent: "")
-            zoraItem.image = NSImage(named: NSImage.Name(stringLiteral: "zora"))
-            let funItem = NSMenuItem(title: "mint.fun", action: #selector(viewOnMintFun(_:)), keyEquivalent: "")
-            funItem.image = NSImage(named: NSImage.Name(stringLiteral: "fun"))
-            let seaItem = NSMenuItem(title: "opensea", action: #selector(viewOnOpenSea(_:)), keyEquivalent: "")
-            seaItem.image = NSImage(named: NSImage.Name(stringLiteral: "sea"))
+            let zoraItem = NSMenuItem(title: Strings.zora, action: #selector(viewOnZora(_:)), keyEquivalent: "")
+            zoraItem.image = ExtensionImages.zora
+            let funItem = NSMenuItem(title: Strings.mintfun, action: #selector(viewOnMintFun(_:)), keyEquivalent: "")
+            funItem.image = ExtensionImages.mintfun
+            let seaItem = NSMenuItem(title: Strings.opensea, action: #selector(viewOnOpenSea(_:)), keyEquivalent: "")
+            seaItem.image = ExtensionImages.opensea
             menu.addItem(zoraItem)
             menu.addItem(funItem)
             menu.addItem(seaItem)
         case .toolbarItemMenu:
-            menu.addItem(withTitle: "📂 open nft folder", action: #selector(openNFTDirectory(_:)), keyEquivalent: "")
-            menu.addItem(withTitle: "⬇️ sync nfts", action: #selector(syncNFTs(_:)), keyEquivalent: "")
-            menu.addItem(withTitle: "🎛️ control center", action: #selector(didSelectSettings(_:)), keyEquivalent: "")
+            menu.addItem(withTitle: Strings.openFolderMenuItem, action: #selector(openNFTDirectory(_:)), keyEquivalent: "")
+            menu.addItem(withTitle: Strings.syncMenuItem, action: #selector(syncNFTs(_:)), keyEquivalent: "")
+            menu.addItem(withTitle: Strings.controlCenterMenuItem, action: #selector(didSelectSettings(_:)), keyEquivalent: "")
         case .contextualMenuForContainer, .contextualMenuForSidebar:
             break
         @unknown default:
@@ -128,7 +130,7 @@ class FinderSync: FIFinderSync {
     }
     
     @IBAction private func viewOnZora(_ sender: AnyObject?) {
-        viewOn(letter: "z")
+        viewOn(letter: "z") // TODO: pass explicit values
     }
     
     @IBAction private func viewOnMintFun(_ sender: AnyObject?) {
