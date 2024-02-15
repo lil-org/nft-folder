@@ -5,6 +5,10 @@ import Cocoa
 // TODO: refactor
 struct HostAppMessenger {
     
+    static var hostIsRunning: Bool {
+        return !NSRunningApplication.runningApplications(withBundleIdentifier: Bundle.hostBundleId).isEmpty
+    }
+    
     static func didSelectSyncMenuItem() {
         if let url = URL(string: URL.deeplinkScheme + "?sync") {
             DispatchQueue.main.async { NSWorkspace.shared.open(url) }

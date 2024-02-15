@@ -24,6 +24,8 @@
 		2C1B60CE2B7E2699009949C2 /* HostAppMessenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60CD2B7E2699009949C2 /* HostAppMessenger.swift */; };
 		2C1B60D02B7E26CB009949C2 /* ExtensionMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60CF2B7E26CB009949C2 /* ExtensionMessage.swift */; };
 		2C1B60D12B7E26D1009949C2 /* ExtensionMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60CF2B7E26CB009949C2 /* ExtensionMessage.swift */; };
+		2C1B60D32B7EA27E009949C2 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60D22B7EA27E009949C2 /* Bundle.swift */; };
+		2C1B60D42B7EA27E009949C2 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60D22B7EA27E009949C2 /* Bundle.swift */; };
 		2C2329DA2B68367F00001936 /* RightClickServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2329D92B68367F00001936 /* RightClickServiceProvider.swift */; };
 		2C508C9D2B6830E6005F548A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
 		2C508C9E2B6830E6005F548A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
@@ -92,6 +94,7 @@
 		2C1B60CA2B7E2481009949C2 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		2C1B60CD2B7E2699009949C2 /* HostAppMessenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostAppMessenger.swift; sourceTree = "<group>"; };
 		2C1B60CF2B7E26CB009949C2 /* ExtensionMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionMessage.swift; sourceTree = "<group>"; };
+		2C1B60D22B7EA27E009949C2 /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		2C2329D92B68367F00001936 /* RightClickServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightClickServiceProvider.swift; sourceTree = "<group>"; };
 		2C508C9C2B6830E6005F548A /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		2C625BA42B14A05B00902306 /* NftToDownload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftToDownload.swift; sourceTree = "<group>"; };
@@ -228,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				2CA34B592B08B7CF00DAB623 /* URL.swift */,
+				2C1B60D22B7EA27E009949C2 /* Bundle.swift */,
 				2C508C9C2B6830E6005F548A /* Notification.swift */,
 				2CA34B552B08B6A200DAB623 /* Codable.swift */,
 			);
@@ -437,6 +441,7 @@
 				2C1B60C92B7E1DD7009949C2 /* WebGallery.swift in Sources */,
 				2C1B60CE2B7E2699009949C2 /* HostAppMessenger.swift in Sources */,
 				2C1B60BB2B7D3279009949C2 /* Badge.swift in Sources */,
+				2C1B60D42B7EA27E009949C2 /* Bundle.swift in Sources */,
 				2CA34B6F2B08C02500DAB623 /* Codable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -458,6 +463,7 @@
 				2CA979AC2B62BA2400DB3AC8 /* WebGallery.swift in Sources */,
 				2CC096F52B099F3400F24DD2 /* FolderIcon.swift in Sources */,
 				2CFA24712B19F956009B58FD /* DataOrUrl.swift in Sources */,
+				2C1B60D32B7EA27E009949C2 /* Bundle.swift in Sources */,
 				2C1B60BD2B7D3505009949C2 /* Strings.swift in Sources */,
 				2CA34B3D2B082BDF00DAB623 /* WalletsListView.swift in Sources */,
 				2CA34B512B08B33C00DAB623 /* WatchOnlyWallet.swift in Sources */,
