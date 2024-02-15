@@ -8,15 +8,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     private let walletsService = WalletsService.shared
     
+    // TODO: deprecate
     private enum Request {
         case showWallets, addWallet
     }
     
-    private var didProcessInput = false
     private var window: NSWindow?
     private let fileManager = FileManager.default
     private var didFinishLaunching = false
     private var initialRequest: Request?
+    
+    private var initialMessage: ExtensionMessage?
+    
     private let currentInstanceId = UUID().uuidString
     
     override init() {
@@ -34,18 +37,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSApplication.shared.servicesProvider = RightClickServiceProvider()
         NSUpdateDynamicServices()
         
-        if let initialRequest = initialRequest {
-            processRequest(initialRequest)
-        } else if !didProcessInput {
+        if let initialMessage = initialMessage {
+            processMessage(initialMessage)
+            self.initialMessage = nil
+        } else {
             processRequest(.showWallets)
         }
         
-        initialRequest = nil
-        
-        let dNotificationCenter = DistributedNotificationCenter.default()
-        dNotificationCenter.post(name: .mustTerminate, object: currentInstanceId)
-        dNotificationCenter.addObserver(self, selector: #selector(terminateInstance(_:)), name: .mustTerminate, object: nil, suspensionBehavior: .deliverImmediately)
-        dNotificationCenter.addObserver(self, selector: #selector(processFinderMessage(_:)), name: .fromFinder, object: nil, suspensionBehavior: .deliverImmediately)
+        let notificationCenter = DistributedNotificationCenter.default()
+        notificationCenter.post(name: .mustTerminate, object: currentInstanceId)
+        notificationCenter.addObserver(self, selector: #selector(terminateInstance(_:)), name: .mustTerminate, object: nil, suspensionBehavior: .deliverImmediately)
+        notificationCenter.addObserver(self, selector: #selector(processFinderMessage(_:)), name: .fromFinder, object: nil, suspensionBehavior: .deliverImmediately)
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -53,7 +55,34 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func processFinderMessage(_ notification: Notification) {
-        // TODO: implement
+        guard let messageString = notification.object as? String,
+              let message = ExtensionMessage.decodedFrom(string: messageString) else { return }
+        processMessage(message)
+    }
+    
+    private func processMessage(_ message: ExtensionMessage) {
+        guard didFinishLaunching else {
+            initialMessage = message
+            return
+        }
+        
+        switch message {
+        case .didSelectSyncMenuItem:
+            break // TODO: implement
+        case .didSelectControlCenterMenuItem:
+            processRequest(.showWallets) // TODO: tmp dev test. deprecate request model
+            break // TODO: implement
+        case .didSelectViewOnMenuItem(let path, let gallery):
+            break // TODO: implement
+        case .didBeginObservingDirectory(let mbAddressName):
+            break // TODO: implement
+        case .didEndObservingDirectory(let mbAddressName):
+            break // TODO: implement
+        case .somethingChangedInHomeDirectory:
+            break // TODO: implement
+        }
+        
+        NSLog("✅ " + (message.toDictionary()?.debugDescription ?? "hmmm"))
     }
     
     @objc func terminateInstance(_ notification: Notification) {
@@ -76,6 +105,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         _ = URL.nftDirectory
     }
     
+    // TODO: move it from here
     private func showPopup(addWallet: Bool) {
         checkFolders()
         window?.close()
@@ -107,35 +137,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     private func processInput(urlString: String?) {
-        guard let urlString = urlString, urlString.hasPrefix(URL.deeplinkScheme), let url = URL(string: urlString), let q = url.query() else { return }
-        didProcessInput = true
-        // TODO: add model for messaging
-        switch q {
-        case "add":
-            processRequest(.addWallet)
-        case "show":
-            processRequest(.showWallets)
-        case "monitor":
-            break // TODO: start sync if needed
-        case "stop-monitoring":
-            break // TODO: start sync if needed
-        case "check":
-            checkFolders()
-        case "sync":
-            syncIfNeeded()
-        default:
-            break
-        }
-        
-        let viewPrefix = "view="
-        if q.hasPrefix(viewPrefix),
-           let ch = q.last,
-           let rawGallery = Int(String(ch)),
-           let gallery = WebGallery(rawValue: rawGallery), // TODO: message explicit WebGallery models
-           let encodedPath = q.dropFirst(viewPrefix.count).dropLast().removingPercentEncoding {
-            FileDownloader.shared.showNFT(filePath: encodedPath, gallery: gallery)
-            // TODO: different for wallet folders
-            // TODO: open multiple files
+        if let urlString = urlString, urlString.hasPrefix(URL.deeplinkScheme),
+           let message = ExtensionMessage.decodedFrom(string: String(urlString.dropFirst(URL.deeplinkScheme.count))) {
+            processMessage(message)
         }
     }
     
@@ -145,6 +149,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return true
     }
     
+    // TODO: move it from here
     private func syncIfNeeded() {
         checkFolders()
         for wallet in walletsService.wallets {
@@ -152,6 +157,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
+    // TODO: move it from here
     @objc private func checkFolders() {
         guard let path = URL.nftDirectory?.path, let files = try? fileManager.contentsOfDirectory(atPath: path) else { return }
         var knownWallets = Set(walletsService.wallets)
@@ -188,6 +194,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
+    // TODO: deprecate
     private func processRequest(_ request: Request) {
         if didFinishLaunching {
             switch request {
