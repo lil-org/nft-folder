@@ -2,7 +2,7 @@
 
 import Cocoa
 
-enum WebGallery: Int, CaseIterable {
+enum WebGallery: Int, CaseIterable, Codable {
     
     case zora, mintfun, opensea
     

@@ -2,8 +2,16 @@
 
 import Foundation
 
-enum ExtensionMessage {
+enum ExtensionMessage: Codable {
     
-    // TODO: implement
+    case didSelectSyncMenuItem
+    case didSelectControlCenterMenuItem
+    
+    case didSelectViewOnMenuItem(path: String, gallery: WebGallery)
+    
+    case didBeginObservingDirectory(mbAddressName: String?)
+    case didEndObservingDirectory(mbAddressName: String?)
+    
+    case somethingChangedInHomeDirectory
     
 }

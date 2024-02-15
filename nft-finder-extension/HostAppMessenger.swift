@@ -5,7 +5,7 @@ import Cocoa
 // TODO: refactor
 struct HostAppMessenger {
     
-    static var hostIsRunning: Bool {
+    private static var hostIsRunning: Bool {
         return !NSRunningApplication.runningApplications(withBundleIdentifier: Bundle.hostBundleId).isEmpty
     }
     
