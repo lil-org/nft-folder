@@ -6,18 +6,14 @@ import SwiftUI
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
     
-    private let walletsService = WalletsService.shared
-    
-    private enum Request {
-        case showWallets, addWallet
-    }
-    
-    private var didProcessInput = false
-    private var window: NSWindow?
-    private let fileManager = FileManager.default
     private var didFinishLaunching = false
-    private var initialRequest: Request?
+    private var window: NSWindow?
     private let currentInstanceId = UUID().uuidString
+    
+    private let walletsService = WalletsService.shared
+    private let fileManager = FileManager.default
+    
+    private var initialMessage: ExtensionMessage?
     
     override init() {
         super.init()
@@ -34,29 +30,54 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSApplication.shared.servicesProvider = RightClickServiceProvider()
         NSUpdateDynamicServices()
         
-        if let initialRequest = initialRequest {
-            processRequest(initialRequest)
-        } else if !didProcessInput {
-            processRequest(.showWallets)
+        if let initialMessage = initialMessage {
+            processMessage(initialMessage)
+            self.initialMessage = nil
+        } else {
+            showPopup(addWallet: false)
         }
         
-        initialRequest = nil
-        
-        let dNotificationCenter = DistributedNotificationCenter.default()
-        dNotificationCenter.post(name: .mustTerminate, object: currentInstanceId)
-        dNotificationCenter.addObserver(self, selector: #selector(terminateInstance(_:)), name: .mustTerminate, object: nil, suspensionBehavior: .deliverImmediately)
-        dNotificationCenter.addObserver(self, selector: #selector(processFinderMessage(_:)), name: .fromFinder, object: nil, suspensionBehavior: .deliverImmediately)
+        let notificationCenter = DistributedNotificationCenter.default()
+        notificationCenter.post(name: .mustTerminate, object: currentInstanceId)
+        notificationCenter.addObserver(self, selector: #selector(terminateInstance(_:)), name: .mustTerminate, object: nil, suspensionBehavior: .deliverImmediately)
+        notificationCenter.addObserver(self, selector: #selector(processFinderMessage(_:)), name: .fromFinder, object: nil, suspensionBehavior: .deliverImmediately)
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
         DistributedNotificationCenter.default().removeObserver(self)
     }
     
-    @objc func processFinderMessage(_ notification: Notification) {
-        // TODO: implement
+    @objc private func processFinderMessage(_ notification: Notification) {
+        guard let messageString = notification.object as? String,
+              let message = ExtensionMessage.decodedFrom(string: messageString) else { return }
+        processMessage(message)
     }
     
-    @objc func terminateInstance(_ notification: Notification) {
+    private func processMessage(_ message: ExtensionMessage) {
+        guard didFinishLaunching else {
+            initialMessage = message
+            return
+        }
+        
+        switch message {
+        case .didSelectSyncMenuItem:
+            syncIfNeeded()
+        case .didSelectControlCenterMenuItem:
+            showPopup(addWallet: false)
+        case .didSelectViewOnMenuItem(let path, let gallery):
+            if let filePath = path.removingPercentEncoding {
+                FileDownloader.shared.showNFT(filePath: filePath, gallery: gallery)
+            }
+        case .didBeginObservingDirectory(let mbAddressName):
+            break // TODO: gently prioritize syncing if needed
+        case .didEndObservingDirectory:
+            break
+        case .somethingChangedInHomeDirectory:
+            checkFolders()
+        }
+    }
+    
+    @objc private func terminateInstance(_ notification: Notification) {
         guard let senderId = notification.object as? String else { return }
         if senderId != currentInstanceId {
             NSApplication.shared.terminate(nil)
@@ -76,6 +97,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         _ = URL.nftDirectory
     }
     
+    // TODO: move it from here
     private func showPopup(addWallet: Bool) {
         checkFolders()
         window?.close()
@@ -107,35 +129,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     private func processInput(urlString: String?) {
-        guard let urlString = urlString, urlString.hasPrefix(URL.deeplinkScheme), let url = URL(string: urlString), let q = url.query() else { return }
-        didProcessInput = true
-        // TODO: add model for messaging
-        switch q {
-        case "add":
-            processRequest(.addWallet)
-        case "show":
-            processRequest(.showWallets)
-        case "monitor":
-            break // TODO: start sync if needed
-        case "stop-monitoring":
-            break // TODO: start sync if needed
-        case "check":
-            checkFolders()
-        case "sync":
-            syncIfNeeded()
-        default:
-            break
-        }
-        
-        let viewPrefix = "view="
-        if q.hasPrefix(viewPrefix),
-           let ch = q.last,
-           let rawGallery = Int(String(ch)),
-           let gallery = WebGallery(rawValue: rawGallery), // TODO: message explicit WebGallery models
-           let encodedPath = q.dropFirst(viewPrefix.count).dropLast().removingPercentEncoding {
-            FileDownloader.shared.showNFT(filePath: encodedPath, gallery: gallery)
-            // TODO: different for wallet folders
-            // TODO: open multiple files
+        if let urlString = urlString, urlString.hasPrefix(URL.deeplinkScheme),
+           let message = ExtensionMessage.decodedFrom(string: String(urlString.dropFirst(URL.deeplinkScheme.count))) {
+            processMessage(message)
         }
     }
     
@@ -145,13 +141,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return true
     }
     
+    // TODO: move it from here. always check for running syncs before starting new ones
     private func syncIfNeeded() {
-        checkFolders()
         for wallet in walletsService.wallets {
             WalletDownloader.shared.study(wallet: wallet)
         }
     }
     
+    // TODO: move it from here
     @objc private func checkFolders() {
         guard let path = URL.nftDirectory?.path, let files = try? fileManager.contentsOfDirectory(atPath: path) else { return }
         var knownWallets = Set(walletsService.wallets)
@@ -184,22 +181,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         for remaining in knownWallets {
+            // TODO: stop downloads for that wallet as well
             walletsService.removeWallet(address: remaining.address)
         }
     }
     
-    private func processRequest(_ request: Request) {
-        if didFinishLaunching {
-            switch request {
-            case .showWallets:
-                showPopup(addWallet: false)
-            case .addWallet:
-                showPopup(addWallet: true)
-            }
-        } else {
-            initialRequest = request
-        }
-    }
-    
 }
-
