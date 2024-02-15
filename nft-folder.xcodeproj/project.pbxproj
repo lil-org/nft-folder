@@ -21,6 +21,9 @@
 		2C1B60C92B7E1DD7009949C2 /* WebGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA979AB2B62BA2400DB3AC8 /* WebGallery.swift */; };
 		2C1B60CB2B7E2481009949C2 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60CA2B7E2481009949C2 /* Images.swift */; };
 		2C1B60CC2B7E2481009949C2 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60CA2B7E2481009949C2 /* Images.swift */; };
+		2C1B60CE2B7E2699009949C2 /* HostAppMessenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60CD2B7E2699009949C2 /* HostAppMessenger.swift */; };
+		2C1B60D02B7E26CB009949C2 /* ExtensionMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60CF2B7E26CB009949C2 /* ExtensionMessage.swift */; };
+		2C1B60D12B7E26D1009949C2 /* ExtensionMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60CF2B7E26CB009949C2 /* ExtensionMessage.swift */; };
 		2C2329DA2B68367F00001936 /* RightClickServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2329D92B68367F00001936 /* RightClickServiceProvider.swift */; };
 		2C508C9D2B6830E6005F548A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
 		2C508C9E2B6830E6005F548A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
@@ -87,6 +90,8 @@
 		2C1B60C52B7E1145009949C2 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		2C1B60C72B7E118B009949C2 /* MetadataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataView.swift; sourceTree = "<group>"; };
 		2C1B60CA2B7E2481009949C2 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		2C1B60CD2B7E2699009949C2 /* HostAppMessenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostAppMessenger.swift; sourceTree = "<group>"; };
+		2C1B60CF2B7E26CB009949C2 /* ExtensionMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionMessage.swift; sourceTree = "<group>"; };
 		2C2329D92B68367F00001936 /* RightClickServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightClickServiceProvider.swift; sourceTree = "<group>"; };
 		2C508C9C2B6830E6005F548A /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		2C625BA42B14A05B00902306 /* NftToDownload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftToDownload.swift; sourceTree = "<group>"; };
@@ -150,6 +155,7 @@
 				2C1B60CA2B7E2481009949C2 /* Images.swift */,
 				2C1B60BC2B7D3505009949C2 /* Strings.swift */,
 				2C0D86C62B08E7BF00106915 /* EnsResponse.swift */,
+				2C1B60CF2B7E26CB009949C2 /* ExtensionMessage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -232,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				2CA34B642B08C01300DAB623 /* FinderSync.swift */,
+				2C1B60CD2B7E2699009949C2 /* HostAppMessenger.swift */,
 				2C1B60B82B7D3245009949C2 /* DirectoryMonitor.swift */,
 				2C1B60BA2B7D3279009949C2 /* Badge.swift */,
 				2CA34B722B08C71800DAB623 /* ExtensionAssets.xcassets */,
@@ -422,11 +429,13 @@
 				2C1B60BE2B7D3505009949C2 /* Strings.swift in Sources */,
 				2C0D86C52B08E67000106915 /* WalletsService.swift in Sources */,
 				2C1B60CC2B7E2481009949C2 /* Images.swift in Sources */,
+				2C1B60D02B7E26CB009949C2 /* ExtensionMessage.swift in Sources */,
 				2C508C9E2B6830E6005F548A /* Notification.swift in Sources */,
 				2CA34B6E2B08C02500DAB623 /* URL.swift in Sources */,
 				2CA34B702B08C02B00DAB623 /* WatchOnlyWallet.swift in Sources */,
 				2C1B60B92B7D3245009949C2 /* DirectoryMonitor.swift in Sources */,
 				2C1B60C92B7E1DD7009949C2 /* WebGallery.swift in Sources */,
+				2C1B60CE2B7E2699009949C2 /* HostAppMessenger.swift in Sources */,
 				2C1B60BB2B7D3279009949C2 /* Badge.swift in Sources */,
 				2CA34B6F2B08C02500DAB623 /* Codable.swift in Sources */,
 			);
@@ -436,6 +445,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C1B60D12B7E26D1009949C2 /* ExtensionMessage.swift in Sources */,
 				2CD4FC8A2B684A0900C965F6 /* IpfsResponse.swift in Sources */,
 				2C2329DA2B68367F00001936 /* RightClickServiceProvider.swift in Sources */,
 				2CA979AA2B627B3900DB3AC8 /* MinimalTokenMetadata.swift in Sources */,
