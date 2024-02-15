@@ -4,10 +4,14 @@ import Cocoa
 
 enum Badge: String, CaseIterable {
     
-    case base, ok
+    case nftFolder
     
     var image: NSImage {
         return NSImage(named: NSImage.statusAvailableName)!
+    }
+    
+    var label: String {
+        return Strings.nftFolder
     }
     
 }
