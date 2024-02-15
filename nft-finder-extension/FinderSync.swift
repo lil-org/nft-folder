@@ -57,6 +57,8 @@ class FinderSync: FIFinderSync {
     // MARK: - directory observing
     
     override func beginObservingDirectory(at url: URL) {
+        // TODO: there is a chance it all works wrong rn because of unresolved urls
+        // TODO: see logs
         if url.path == URL.nftDirectory?.path, let deeplink = URL(string: URL.deeplinkScheme + "?monitor") {
             DispatchQueue.main.async { NSWorkspace.shared.open(deeplink) }
         }
