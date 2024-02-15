@@ -23,13 +23,15 @@ struct HostAppMessenger {
         }
     }
     
-    static func didBeginObservingDirectory() {
+    static func didBeginObservingDirectory(mbAddressName: String?) {
+        // TODO: pass address folder name
         if let deeplink = URL(string: URL.deeplinkScheme + "?monitor") {
             DispatchQueue.main.async { NSWorkspace.shared.open(deeplink) }
         }
     }
     
-    static func didEndObservingDirectory() {
+    static func didEndObservingDirectory(mbAddressName: String?) {
+        // TODO: pass address folder name
         if let deeplink = URL(string: URL.deeplinkScheme + "?stop-monitoring") {
             DispatchQueue.main.async { NSWorkspace.shared.open(deeplink) }
         }

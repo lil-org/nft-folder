@@ -17,8 +17,8 @@ class FinderSync: FIFinderSync {
     }
     
     private func setupBadgeImages() {
-        for badge in [Badge.ok, Badge.base] {
-            FIFinderSyncController.default().setBadgeImage(badge.image, label: Strings.nftFolder, forBadgeIdentifier: badge.rawValue)
+        for badge in Badge.allCases {
+            FIFinderSyncController.default().setBadgeImage(badge.image, label: badge.label, forBadgeIdentifier: badge.rawValue)
         }
     }
     
@@ -33,10 +33,10 @@ class FinderSync: FIFinderSync {
         let base = components.removeLast()
         
         if folder == "nft" { // TODO: exact full path folder matching
-            badge = .base
+            badge = .nftFolder
         } else if base == "nft" {
             if WalletsService.shared.hasWallet(folderName: folder) {
-                badge = .ok
+                badge = .nftFolder
             } else if WalletsService.shared.isEthAddress(folder) {
                 // TODO: not sure if it's ok to do that on badge requests
                 HostAppMessenger.didNoticeNewAddressFolder()
@@ -56,17 +56,20 @@ class FinderSync: FIFinderSync {
     // MARK: - directory observing
     
     override func beginObservingDirectory(at url: URL) {
-        // TODO: there is a chance it all works wrong rn because of unresolved urls
-        // TODO: see logs
-        if url.path == URL.nftDirectory?.path {
-            HostAppMessenger.didBeginObservingDirectory()
+        let pathComponents = url.pathComponents
+        if pathComponents.count == URL.nftDirectoryPathComponentsCount {
+            HostAppMessenger.didBeginObservingDirectory(mbAddressName: nil)
+        } else if pathComponents.count - 1 == URL.nftDirectoryPathComponentsCount, let last = pathComponents.last {
+            HostAppMessenger.didBeginObservingDirectory(mbAddressName: last)
         }
     }
     
     override func endObservingDirectory(at url: URL) {
-        // TODO: make sure it is triggered only on the root nft directory
-        if url.path == URL.nftDirectory?.path {
-            HostAppMessenger.didEndObservingDirectory()
+        let pathComponents = url.pathComponents
+        if pathComponents.count == URL.nftDirectoryPathComponentsCount {
+            HostAppMessenger.didEndObservingDirectory(mbAddressName: nil)
+        } else if pathComponents.count - 1 == URL.nftDirectoryPathComponentsCount, let last = pathComponents.last {
+            HostAppMessenger.didEndObservingDirectory(mbAddressName: last)
         }
     }
     
