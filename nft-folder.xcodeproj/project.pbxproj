@@ -26,6 +26,7 @@
 		2C1B60D12B7E26D1009949C2 /* ExtensionMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60CF2B7E26CB009949C2 /* ExtensionMessage.swift */; };
 		2C1B60D32B7EA27E009949C2 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60D22B7EA27E009949C2 /* Bundle.swift */; };
 		2C1B60D42B7EA27E009949C2 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60D22B7EA27E009949C2 /* Bundle.swift */; };
+		2C1B60D62B7EBD18009949C2 /* AllDownloadsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60D52B7EBD18009949C2 /* AllDownloadsManager.swift */; };
 		2C2329DA2B68367F00001936 /* RightClickServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2329D92B68367F00001936 /* RightClickServiceProvider.swift */; };
 		2C508C9D2B6830E6005F548A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
 		2C508C9E2B6830E6005F548A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
@@ -95,6 +96,7 @@
 		2C1B60CD2B7E2699009949C2 /* HostAppMessenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostAppMessenger.swift; sourceTree = "<group>"; };
 		2C1B60CF2B7E26CB009949C2 /* ExtensionMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionMessage.swift; sourceTree = "<group>"; };
 		2C1B60D22B7EA27E009949C2 /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
+		2C1B60D52B7EBD18009949C2 /* AllDownloadsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllDownloadsManager.swift; sourceTree = "<group>"; };
 		2C2329D92B68367F00001936 /* RightClickServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightClickServiceProvider.swift; sourceTree = "<group>"; };
 		2C508C9C2B6830E6005F548A /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		2C625BA42B14A05B00902306 /* NftToDownload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftToDownload.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 		2C4D840F2B18869400952BF5 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				2C1B60D52B7EBD18009949C2 /* AllDownloadsManager.swift */,
 				2C9113192B08F71200A8EE80 /* WalletDownloader.swift */,
 				2CF7339D2B0ED50000B1AC68 /* ZoraApi.swift */,
 				2CA3C2A02B18C91600AF33D6 /* FileDownloader.swift */,
@@ -471,6 +474,7 @@
 				2CFA24732B19FB92009B58FD /* FileExtension.swift in Sources */,
 				2CA34B562B08B6A200DAB623 /* Codable.swift in Sources */,
 				2C9113282B09751D00A8EE80 /* WalletImageView.swift in Sources */,
+				2C1B60D62B7EBD18009949C2 /* AllDownloadsManager.swift in Sources */,
 				2C0D86C42B08E67000106915 /* WalletsService.swift in Sources */,
 				2C625BA52B14A05B00902306 /* NftToDownload.swift in Sources */,
 				2C1B60CB2B7E2481009949C2 /* Images.swift in Sources */,
