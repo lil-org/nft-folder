@@ -23,7 +23,7 @@ class DirectoryMonitor {
             let fileManager = FileManager.default
             do {
                 _ = try fileManager.contentsOfDirectory(at: urlToMonitor, includingPropertiesForKeys: nil)
-                HostAppMessenger.somethingChangedInHomeDirectory()
+                HostAppMessenger.send(.somethingChangedInHomeDirectory)
             } catch { }
         }
 

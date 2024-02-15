@@ -38,18 +38,18 @@ class FinderSync: FIFinderSync {
     override func beginObservingDirectory(at url: URL) {
         let pathComponents = url.pathComponents
         if pathComponents.count == URL.nftDirectoryPathComponentsCount {
-            HostAppMessenger.didBeginObservingDirectory(mbAddressName: nil)
+            HostAppMessenger.send(.didBeginObservingDirectory(mbAddressName: nil))
         } else if pathComponents.count - 1 == URL.nftDirectoryPathComponentsCount, let last = pathComponents.last {
-            HostAppMessenger.didBeginObservingDirectory(mbAddressName: last)
+            HostAppMessenger.send(.didBeginObservingDirectory(mbAddressName: last))
         }
     }
     
     override func endObservingDirectory(at url: URL) {
         let pathComponents = url.pathComponents
         if pathComponents.count == URL.nftDirectoryPathComponentsCount {
-            HostAppMessenger.didEndObservingDirectory(mbAddressName: nil)
+            HostAppMessenger.send(.didEndObservingDirectory(mbAddressName: nil))
         } else if pathComponents.count - 1 == URL.nftDirectoryPathComponentsCount, let last = pathComponents.last {
-            HostAppMessenger.didEndObservingDirectory(mbAddressName: last)
+            HostAppMessenger.send(.didEndObservingDirectory(mbAddressName: last))
         }
     }
     
@@ -95,11 +95,11 @@ class FinderSync: FIFinderSync {
     }
     
     @IBAction private func syncNFTs(_ sender: AnyObject?) {
-        HostAppMessenger.didSelectSyncMenuItem()
+        HostAppMessenger.send(.didSelectSyncMenuItem)
     }
     
     @IBAction private func didSelectControlCenterMenuItem(_ sender: AnyObject?) {
-        HostAppMessenger.didSelectControlCenterMenuItem()
+        HostAppMessenger.send(.didSelectControlCenterMenuItem)
     }
     
     @IBAction private func openNFTDirectory(_ sender: AnyObject?) {
@@ -112,7 +112,7 @@ class FinderSync: FIFinderSync {
         guard let gallery = WebGallery(rawValue: sender.tag),
               let selectedItems = FIFinderSyncController.default().selectedItemURLs(), selectedItems.count == 1,
               let selectedPath = selectedItems.first?.path.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
-        HostAppMessenger.didSelectViewOnMenuItem(path: selectedPath, gallery: gallery)
+        HostAppMessenger.send(.didSelectViewOnMenuItem(path: selectedPath, gallery: gallery))
     }
 
 }
