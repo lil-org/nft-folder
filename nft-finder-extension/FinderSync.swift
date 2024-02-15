@@ -18,7 +18,7 @@ class FinderSync: FIFinderSync {
     
     private func setupBadgeImages() {
         for badge in [Badge.ok, Badge.base] {
-            FIFinderSyncController.default().setBadgeImage(badge.image, label: "", forBadgeIdentifier: badge.rawValue)
+            FIFinderSyncController.default().setBadgeImage(badge.image, label: Strings.nftFolder, forBadgeIdentifier: badge.rawValue)
         }
     }
     
