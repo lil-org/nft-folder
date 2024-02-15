@@ -10,6 +10,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var window: NSWindow?
     private let currentInstanceId = UUID().uuidString
     
+    private let allDownloadsManager = AllDownloadsManager.shared
     private let walletsService = WalletsService.shared
     private let fileManager = FileManager.default
     
@@ -69,7 +70,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 FileDownloader.shared.showNFT(filePath: filePath, gallery: gallery)
             }
         case .didBeginObservingDirectory(let mbAddressName):
-            break // TODO: gently prioritize syncing if needed
+            allDownloadsManager.prioritizeDownloads(mbAddressFolderName: mbAddressName)
         case .didEndObservingDirectory:
             break
         case .somethingChangedInHomeDirectory:

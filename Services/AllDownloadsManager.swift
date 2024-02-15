@@ -9,4 +9,8 @@ class AllDownloadsManager {
     
     // TODO: implement
     
+    func prioritizeDownloads(mbAddressFolderName: String?) {
+        // TODO: implement
+    }
+    
 }
