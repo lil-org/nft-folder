@@ -61,17 +61,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         switch message {
         case .didSelectSyncMenuItem:
-            break // TODO: implement
+            syncIfNeeded()
         case .didSelectControlCenterMenuItem:
             showPopup(addWallet: false)
         case .didSelectViewOnMenuItem(let path, let gallery):
-            break // TODO: implement
+            if let filePath = path.removingPercentEncoding {
+                FileDownloader.shared.showNFT(filePath: filePath, gallery: gallery)
+            }
         case .didBeginObservingDirectory(let mbAddressName):
-            break // TODO: implement
-        case .didEndObservingDirectory(let mbAddressName):
-            break // TODO: implement
+            break // TODO: gently prioritize syncing if needed
+        case .didEndObservingDirectory:
+            break
         case .somethingChangedInHomeDirectory:
-            break // TODO: implement
+            checkFolders()
         }
     }
     
@@ -139,9 +141,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return true
     }
     
-    // TODO: move it from here
+    // TODO: move it from here. always check for running syncs before starting new ones
     private func syncIfNeeded() {
-        checkFolders()
         for wallet in walletsService.wallets {
             WalletDownloader.shared.study(wallet: wallet)
         }
@@ -180,6 +181,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         for remaining in knownWallets {
+            // TODO: stop downloads for that wallet as well
             walletsService.removeWallet(address: remaining.address)
         }
     }
