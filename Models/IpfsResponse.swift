@@ -2,7 +2,7 @@
 
 import Foundation
 
-struct IPFSResponse: Codable {
+struct IpfsResponse: Codable {
     let name: String
     let hash: String
     let size: String

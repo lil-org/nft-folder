@@ -2,9 +2,9 @@
 
 import Foundation
 
-protocol DownloadableNFT {
+protocol NftToDownload {
     
-    var probableDataOrURLs: [DataOrURL] { get }
+    var probableDataOrUrls: [DataOrUrl] { get }
     var fileDisplayName: String { get }
     var tokenId: String { get }
     var collectionAddress: String { get }

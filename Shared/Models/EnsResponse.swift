@@ -2,7 +2,7 @@
 
 import Foundation
 
-struct ENSResponse: Codable {
+struct EnsResponse: Codable {
     
     let address: String // in checksum format
     let name: String?

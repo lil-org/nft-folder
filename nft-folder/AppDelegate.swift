@@ -133,7 +133,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
            let rawGallery = q.last,
            let gallery = WebGallery(rawValue: String(rawGallery)),
            let encodedPath = q.dropFirst(viewPrefix.count).dropLast().removingPercentEncoding {
-            DownloadsService.shared.showNFT(filePath: encodedPath, gallery: gallery)
+            FileDownloader.shared.showNFT(filePath: encodedPath, gallery: gallery)
             // TODO: different for wallet folders
             // TODO: open multiple files
         }
@@ -148,7 +148,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private func syncIfNeeded() {
         checkFolders()
         for wallet in walletsService.wallets {
-            NFTService.shared.study(wallet: wallet)
+            WalletDownloader.shared.study(wallet: wallet)
         }
     }
     
@@ -185,7 +185,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                                 try? self?.fileManager.removeItem(atPath: old)
                             }
                         }
-                        NFTService.shared.study(wallet: wallet)
+                        WalletDownloader.shared.study(wallet: wallet)
                     case .failure:
                         return
                     }

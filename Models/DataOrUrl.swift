@@ -2,7 +2,7 @@
 
 import Foundation
 
-enum DataOrURL {
+enum DataOrUrl {
     
     case data(Data, String)
     case url(URL)

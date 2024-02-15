@@ -27,7 +27,7 @@ class RightClickServiceProvider: NSObject {
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data,
                   error == nil,
-                  let ipfsResponse = try? JSONDecoder().decode(IPFSResponse.self, from: data),
+                  let ipfsResponse = try? JSONDecoder().decode(IpfsResponse.self, from: data),
                   let url = URL(string: "https://zora.co/create?image=ipfs://\(ipfsResponse.hash)") else {
                 DispatchQueue.main.async { [weak self] in
                     self?.showErrorAlert(fileURL: fileURL)

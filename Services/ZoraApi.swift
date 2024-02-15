@@ -2,7 +2,7 @@
 
 import Foundation
 
-struct ZoraAPI {
+struct ZoraApi {
     
     private static let urlSession = URLSession.shared
     private static let queue = DispatchQueue(label: "org.lil.nft-folder.zora", qos: .default)
@@ -149,11 +149,11 @@ struct Media: Codable {
     }
 }
 
-extension Token: DownloadableNFT {
+extension Token: NftToDownload {
     
-    var probableDataOrURLs: [DataOrURL] {
-        let mapped = [content?.url, image?.url, image?.mediaEncoding?.thumbnail, tokenUrl].compactMap { (link) -> DataOrURL? in
-            if let dataOrURL = DataOrURL(urlString: link) {
+    var probableDataOrUrls: [DataOrUrl] {
+        let mapped = [content?.url, image?.url, image?.mediaEncoding?.thumbnail, tokenUrl].compactMap { (link) -> DataOrUrl? in
+            if let dataOrURL = DataOrUrl(urlString: link) {
                 return dataOrURL
             } else {
                 return nil

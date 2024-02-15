@@ -111,7 +111,7 @@ struct WalletsListView: View {
                     WalletsService.shared.addWallet(wallet)
                     FolderIcon.set(for: wallet)
                     updateDisplayedWallets()
-                    NFTService.shared.study(wallet: wallet)
+                    WalletDownloader.shared.study(wallet: wallet)
                 }
                 showAddWalletPopup = false
                 newWalletAddress = ""
