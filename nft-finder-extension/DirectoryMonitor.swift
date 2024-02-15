@@ -25,9 +25,7 @@ class DirectoryMonitor {
             let fileManager = FileManager.default
             do {
                 _ = try fileManager.contentsOfDirectory(at: self.directoryURL, includingPropertiesForKeys: nil)
-                if let url = URL(string: URL.deeplinkScheme + "?check") {
-                    DispatchQueue.main.async { NSWorkspace.shared.open(url) }
-                }
+                HostAppMessenger.didFireDirectoryMonitorEvent() // TODO: clarify what happend here
             } catch {
                 print("Error reading directory contents: \(error)")
             }

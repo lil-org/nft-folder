@@ -38,9 +38,8 @@ class FinderSync: FIFinderSync {
             if WalletsService.shared.hasWallet(folderName: folder) {
                 badge = .ok
             } else if WalletsService.shared.isEthAddress(folder) {
-                if let url = URL(string: URL.deeplinkScheme + "?check") { // TODO: do not perform checks on badge request
-                    DispatchQueue.main.async { NSWorkspace.shared.open(url) }
-                }
+                // TODO: not sure if it's ok to do that on badge requests
+                HostAppMessenger.didNoticeNewAddressFolder()
                 badge = nil
             } else {
                 badge = nil
@@ -59,14 +58,15 @@ class FinderSync: FIFinderSync {
     override func beginObservingDirectory(at url: URL) {
         // TODO: there is a chance it all works wrong rn because of unresolved urls
         // TODO: see logs
-        if url.path == URL.nftDirectory?.path, let deeplink = URL(string: URL.deeplinkScheme + "?monitor") {
-            DispatchQueue.main.async { NSWorkspace.shared.open(deeplink) }
+        if url.path == URL.nftDirectory?.path {
+            HostAppMessenger.didBeginObservingDirectory()
         }
     }
     
     override func endObservingDirectory(at url: URL) {
-        if url.path == URL.nftDirectory?.path, let deeplink = URL(string: URL.deeplinkScheme + "?stop-monitoring") {
-            DispatchQueue.main.async { NSWorkspace.shared.open(deeplink) }
+        // TODO: make sure it is triggered only on the root nft directory
+        if url.path == URL.nftDirectory?.path {
+            HostAppMessenger.didEndObservingDirectory()
         }
     }
     
@@ -102,7 +102,7 @@ class FinderSync: FIFinderSync {
         case .toolbarItemMenu:
             menu.addItem(withTitle: Strings.openFolderMenuItem, action: #selector(openNFTDirectory(_:)), keyEquivalent: "")
             menu.addItem(withTitle: Strings.syncMenuItem, action: #selector(syncNFTs(_:)), keyEquivalent: "")
-            menu.addItem(withTitle: Strings.controlCenterMenuItem, action: #selector(didSelectSettings(_:)), keyEquivalent: "")
+            menu.addItem(withTitle: Strings.controlCenterMenuItem, action: #selector(didSelectControlCenterMenuItem(_:)), keyEquivalent: "")
         case .contextualMenuForContainer, .contextualMenuForSidebar:
             break
         @unknown default:
@@ -112,15 +112,11 @@ class FinderSync: FIFinderSync {
     }
     
     @IBAction private func syncNFTs(_ sender: AnyObject?) {
-        if let url = URL(string: URL.deeplinkScheme + "?sync") {
-            DispatchQueue.main.async { NSWorkspace.shared.open(url) }
-        }
+        HostAppMessenger.didSelectSyncMenuItem()
     }
     
-    @IBAction private func didSelectSettings(_ sender: AnyObject?) {
-        if let url = URL(string: URL.deeplinkScheme + "?show") {
-            DispatchQueue.main.async { NSWorkspace.shared.open(url) }
-        }
+    @IBAction private func didSelectControlCenterMenuItem(_ sender: AnyObject?) {
+        HostAppMessenger.didSelectControlCenterMenuItem()
     }
     
     @IBAction private func openNFTDirectory(_ sender: AnyObject?) {
@@ -133,9 +129,7 @@ class FinderSync: FIFinderSync {
         guard let gallery = WebGallery(rawValue: sender.tag),
               let selectedItems = FIFinderSyncController.default().selectedItemURLs(), selectedItems.count == 1,
               let selectedPath = selectedItems.first?.path.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
-        if let url = URL(string: URL.deeplinkScheme + "?view=\(selectedPath)\(gallery.rawValue)") {
-            DispatchQueue.main.async { NSWorkspace.shared.open(url) }
-        }
+        HostAppMessenger.didSelectViewOnMenuItem(path: selectedPath, gallery: gallery)
     }
 
 }
