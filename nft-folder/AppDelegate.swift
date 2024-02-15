@@ -6,21 +6,14 @@ import SwiftUI
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
     
-    private let walletsService = WalletsService.shared
-    
-    // TODO: deprecate
-    private enum Request {
-        case showWallets, addWallet
-    }
-    
-    private var window: NSWindow?
-    private let fileManager = FileManager.default
     private var didFinishLaunching = false
-    private var initialRequest: Request?
+    private var window: NSWindow?
+    private let currentInstanceId = UUID().uuidString
+    
+    private let walletsService = WalletsService.shared
+    private let fileManager = FileManager.default
     
     private var initialMessage: ExtensionMessage?
-    
-    private let currentInstanceId = UUID().uuidString
     
     override init() {
         super.init()
@@ -41,7 +34,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             processMessage(initialMessage)
             self.initialMessage = nil
         } else {
-            processRequest(.showWallets)
+            showPopup(addWallet: false)
         }
         
         let notificationCenter = DistributedNotificationCenter.default()
@@ -54,7 +47,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         DistributedNotificationCenter.default().removeObserver(self)
     }
     
-    @objc func processFinderMessage(_ notification: Notification) {
+    @objc private func processFinderMessage(_ notification: Notification) {
         guard let messageString = notification.object as? String,
               let message = ExtensionMessage.decodedFrom(string: messageString) else { return }
         processMessage(message)
@@ -70,8 +63,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         case .didSelectSyncMenuItem:
             break // TODO: implement
         case .didSelectControlCenterMenuItem:
-            processRequest(.showWallets) // TODO: tmp dev test. deprecate request model
-            break // TODO: implement
+            showPopup(addWallet: false)
         case .didSelectViewOnMenuItem(let path, let gallery):
             break // TODO: implement
         case .didBeginObservingDirectory(let mbAddressName):
@@ -81,11 +73,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         case .somethingChangedInHomeDirectory:
             break // TODO: implement
         }
-        
-        NSLog("✅ " + (message.toDictionary()?.debugDescription ?? "hmmm"))
     }
     
-    @objc func terminateInstance(_ notification: Notification) {
+    @objc private func terminateInstance(_ notification: Notification) {
         guard let senderId = notification.object as? String else { return }
         if senderId != currentInstanceId {
             NSApplication.shared.terminate(nil)
@@ -194,19 +184,4 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
-    // TODO: deprecate
-    private func processRequest(_ request: Request) {
-        if didFinishLaunching {
-            switch request {
-            case .showWallets:
-                showPopup(addWallet: false)
-            case .addWallet:
-                showPopup(addWallet: true)
-            }
-        } else {
-            initialRequest = request
-        }
-    }
-    
 }
-
