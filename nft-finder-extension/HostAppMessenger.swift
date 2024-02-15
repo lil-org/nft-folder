@@ -37,12 +37,6 @@ struct HostAppMessenger {
         }
     }
     
-    static func didNoticeNewAddressFolder() { // TODO: not sure about this one. maybe checking from host is enough
-        if let url = URL(string: URL.deeplinkScheme + "?check") {
-            DispatchQueue.main.async { NSWorkspace.shared.open(url) }
-        }
-    }
-    
     static func somethingChangedInHomeDirectory() {
         if let url = URL(string: URL.deeplinkScheme + "?check") { // TODO: clarify. do not ask for a check directly, notify of event instead
             DispatchQueue.main.async { NSWorkspace.shared.open(url) }

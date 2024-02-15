@@ -23,33 +23,13 @@ class FinderSync: FIFinderSync {
     }
     
     private func setBadgeFor(url: URL) {
-        let badge: Badge?
-        var components = url.pathComponents
-        guard components.count > 2 else { return } // TODO: straightforward folder matching
-        
-        // TODO: return quickly when asking for a badge deep inside
-        
-        let folder = components.removeLast()
-        let base = components.removeLast()
-        
-        if folder == "nft" { // TODO: exact full path folder matching
-            badge = .nftFolder
-        } else if base == "nft" {
-            if WalletsService.shared.hasWallet(folderName: folder) {
-                badge = .nftFolder
-            } else if WalletsService.shared.isEthAddress(folder) {
-                // TODO: not sure if it's ok to do that on badge requests
-                HostAppMessenger.didNoticeNewAddressFolder()
-                badge = nil
-            } else {
-                badge = nil
+        let pathComponents = url.pathComponents
+        if pathComponents.count == URL.nftDirectoryPathComponentsCount {
+            FIFinderSyncController.default().setBadgeIdentifier(Badge.nftFolder.rawValue, for: url)
+        } else if pathComponents.count - 1 == URL.nftDirectoryPathComponentsCount, let name = pathComponents.last {
+            if WalletsService.shared.hasWallet(folderName: name) {
+                FIFinderSyncController.default().setBadgeIdentifier(Badge.nftFolder.rawValue, for: url)
             }
-        } else {
-            badge = nil
-        }
-        
-        if let id = badge?.rawValue {
-            FIFinderSyncController.default().setBadgeIdentifier(id, for: url)
         }
     }
     
