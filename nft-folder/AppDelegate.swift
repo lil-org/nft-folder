@@ -14,7 +14,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     private var didProcessInput = false
     private var window: NSWindow?
-    private var timer: Timer?
     private let fileManager = FileManager.default
     private var didFinishLaunching = false
     private var initialRequest: Request?
@@ -117,9 +116,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         case "show":
             processRequest(.showWallets)
         case "monitor":
-            startTimer()
+            break // TODO: start sync if needed
         case "stop-monitoring":
-            stopTimer()
+            break // TODO: start sync if needed
         case "check":
             checkFolders()
         case "sync":
@@ -151,16 +150,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         for wallet in walletsService.wallets {
             WalletDownloader.shared.study(wallet: wallet)
         }
-    }
-    
-    private func startTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(checkFolders), userInfo: nil, repeats: true)
-    }
-    
-    private func stopTimer() {
-        timer?.invalidate()
-        timer = nil
-        checkFolders()
     }
     
     @objc private func checkFolders() {
