@@ -2,7 +2,7 @@
 
 import Cocoa
 
-struct ExtensionImages {
+struct Images {
     
     static var icon: NSImage { named("icon") }
     static var zora: NSImage { named("zora") }
@@ -18,3 +18,4 @@ struct ExtensionImages {
     }
     
 }
+

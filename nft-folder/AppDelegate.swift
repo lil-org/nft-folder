@@ -130,8 +130,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         let viewPrefix = "view="
         if q.hasPrefix(viewPrefix),
-           let rawGallery = q.last,
-           let gallery = WebGallery(rawValue: String(rawGallery)),
+           let ch = q.last,
+           let rawGallery = Int(String(ch)),
+           let gallery = WebGallery(rawValue: rawGallery), // TODO: message explicit WebGallery models
            let encodedPath = q.dropFirst(viewPrefix.count).dropLast().removingPercentEncoding {
             FileDownloader.shared.showNFT(filePath: encodedPath, gallery: gallery)
             // TODO: different for wallet folders

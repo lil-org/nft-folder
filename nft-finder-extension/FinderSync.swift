@@ -83,22 +83,20 @@ class FinderSync: FIFinderSync {
     }
     
     override var toolbarItemImage: NSImage {
-        return ExtensionImages.icon
+        return Images.icon
     }
     
     override func menu(for menuKind: FIMenuKind) -> NSMenu {
         let menu = NSMenu(title: "")
         switch menuKind {
         case .contextualMenuForItems:
-            let zoraItem = NSMenuItem(title: Strings.zora, action: #selector(viewOnZora(_:)), keyEquivalent: "")
-            zoraItem.image = ExtensionImages.zora
-            let funItem = NSMenuItem(title: Strings.mintfun, action: #selector(viewOnMintFun(_:)), keyEquivalent: "")
-            funItem.image = ExtensionImages.mintfun
-            let seaItem = NSMenuItem(title: Strings.opensea, action: #selector(viewOnOpenSea(_:)), keyEquivalent: "")
-            seaItem.image = ExtensionImages.opensea
-            menu.addItem(zoraItem)
-            menu.addItem(funItem)
-            menu.addItem(seaItem)
+            for gallery in WebGallery.allCases {
+                let item = NSMenuItem(title: gallery.title, action: #selector(viewOnWeb(_:)), keyEquivalent: "")
+                item.tag = gallery.rawValue
+                item.image = gallery.image
+                menu.addItem(item)
+            }
+            
         case .toolbarItemMenu:
             menu.addItem(withTitle: Strings.openFolderMenuItem, action: #selector(openNFTDirectory(_:)), keyEquivalent: "")
             menu.addItem(withTitle: Strings.syncMenuItem, action: #selector(syncNFTs(_:)), keyEquivalent: "")
@@ -129,23 +127,11 @@ class FinderSync: FIFinderSync {
         }
     }
     
-    @IBAction private func viewOnZora(_ sender: AnyObject?) {
-        viewOn(letter: "z") // TODO: pass explicit values
-    }
-    
-    @IBAction private func viewOnMintFun(_ sender: AnyObject?) {
-        viewOn(letter: "f")
-    }
-    
-    @IBAction private func viewOnOpenSea(_ sender: AnyObject?) {
-        viewOn(letter: "o")
-    }
-    
-    private func viewOn(letter: String) {
-        guard let selectedItems = FIFinderSyncController.default().selectedItemURLs(),
-              selectedItems.count == 1,
+    @objc private func viewOnWeb(_ sender: NSMenuItem) {
+        guard let gallery = WebGallery(rawValue: sender.tag),
+              let selectedItems = FIFinderSyncController.default().selectedItemURLs(), selectedItems.count == 1,
               let selectedPath = selectedItems.first?.path.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
-        if let url = URL(string: URL.deeplinkScheme + "?view=\(selectedPath)\(letter)") {
+        if let url = URL(string: URL.deeplinkScheme + "?view=\(selectedPath)\(gallery.rawValue)") {
             DispatchQueue.main.async { NSWorkspace.shared.open(url) }
         }
     }

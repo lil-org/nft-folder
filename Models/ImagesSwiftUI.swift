@@ -2,7 +2,7 @@
 
 import SwiftUI
 
-struct Images {
+extension Images {
     
     static let plus = Image(systemName: "plus")
     
