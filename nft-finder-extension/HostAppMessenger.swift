@@ -41,8 +41,8 @@ struct HostAppMessenger {
         }
     }
     
-    static func didFireDirectoryMonitorEvent() { // TODO: clarify. do not ask for a check directly, notify of event instead
-        if let url = URL(string: URL.deeplinkScheme + "?check") {
+    static func somethingChangedInHomeDirectory() {
+        if let url = URL(string: URL.deeplinkScheme + "?check") { // TODO: clarify. do not ask for a check directly, notify of event instead
             DispatchQueue.main.async { NSWorkspace.shared.open(url) }
         }
     }

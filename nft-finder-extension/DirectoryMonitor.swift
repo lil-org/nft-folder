@@ -2,7 +2,6 @@
 
 import Cocoa
 
-// TODO: review and clean up
 class DirectoryMonitor {
     
     private let directoryURL: URL
@@ -15,26 +14,24 @@ class DirectoryMonitor {
 
     func startMonitoring() {
         guard fileDescriptor == -1 else { return }
-
         fileDescriptor = open(directoryURL.path, O_EVTONLY)
         guard fileDescriptor != -1 else { return }
-
         source = DispatchSource.makeFileSystemObjectSource(fileDescriptor: fileDescriptor, eventMask: .write, queue: DispatchQueue.main)
-
+        let urlToMonitor = directoryURL
+        
         source?.setEventHandler {
             let fileManager = FileManager.default
             do {
-                _ = try fileManager.contentsOfDirectory(at: self.directoryURL, includingPropertiesForKeys: nil)
-                HostAppMessenger.didFireDirectoryMonitorEvent() // TODO: clarify what happend here
-            } catch {
-                print("Error reading directory contents: \(error)")
-            }
+                _ = try fileManager.contentsOfDirectory(at: urlToMonitor, includingPropertiesForKeys: nil)
+                HostAppMessenger.somethingChangedInHomeDirectory()
+            } catch { }
         }
 
-        source?.setCancelHandler {
-            close(self.fileDescriptor)
-            self.fileDescriptor = -1
-            self.source = nil
+        let fileDescriptorToClose = fileDescriptor
+        source?.setCancelHandler { [weak self] in
+            close(fileDescriptorToClose)
+            self?.fileDescriptor = -1
+            self?.source = nil
         }
 
         source?.resume()
