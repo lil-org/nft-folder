@@ -27,7 +27,7 @@ class RightClickServiceProvider: NSObject {
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data,
                   error == nil,
-                  let ipfsResponse = try? JSONDecoder().decode(IPFSResponse.self, from: data),
+                  let ipfsResponse = try? JSONDecoder().decode(IpfsResponse.self, from: data),
                   let url = URL(string: "https://zora.co/create?image=ipfs://\(ipfsResponse.hash)") else {
                 DispatchQueue.main.async { [weak self] in
                     self?.showErrorAlert(fileURL: fileURL)
@@ -44,11 +44,11 @@ class RightClickServiceProvider: NSObject {
     
     func showErrorAlert(fileURL: URL) {
         let alert = NSAlert()
-        alert.messageText = "did not upload"
+        alert.messageText = Strings.didNotUpload
         alert.informativeText = fileURL.lastPathComponent
         alert.alertStyle = .warning
-        alert.addButton(withTitle: "retry")
-        alert.addButton(withTitle: "cancel")
+        alert.addButton(withTitle: Strings.retry)
+        alert.addButton(withTitle: Strings.cancel)
         alert.buttons.last?.keyEquivalent = "\u{1b}"
         let response = alert.runModal()
         switch response {

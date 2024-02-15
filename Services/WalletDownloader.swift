@@ -2,12 +2,12 @@
 
 import Foundation
 
-class NFTService {
+class WalletDownloader {
     
-    static let shared = NFTService()
+    static let shared = WalletDownloader()
     private init() {}
     private let urlSession = URLSession.shared
-    private let downloadsService = DownloadsService.shared
+    private let fileDownloader = FileDownloader.shared
     private var networks = Network.allCases
     
     func study(wallet: WatchOnlyWallet) {
@@ -28,14 +28,14 @@ class NFTService {
     
     private func goThroughZora(wallet: WatchOnlyWallet, networkIndex: Int, endCursor: String?) {
         let network = networks[networkIndex]
-        ZoraAPI.get(owner: wallet.address, networks: [network], endCursor: endCursor) { result in
+        ZoraApi.get(owner: wallet.address, networks: [network], endCursor: endCursor) { result in
             guard let result = result, !result.nodes.isEmpty else {
                 print("zora api empty result: \(String(describing: result))")
                 self.nextStepForZora(wallet: wallet, networkIndex: networkIndex, endCursor: nil, hasNextPage: false)
                 // TODO: retry, handle errors
                 return
             }
-            self.downloadsService.downloadFiles(wallet: wallet, downloadables: result.nodes.map { $0.token }, network: network)
+            self.fileDownloader.downloadFiles(wallet: wallet, downloadables: result.nodes.map { $0.token }, network: network)
             if let endCursor = result.pageInfo.endCursor {
                 self.nextStepForZora(wallet: wallet, networkIndex: networkIndex, endCursor: endCursor, hasNextPage: result.pageInfo.hasNextPage)
             }

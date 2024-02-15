@@ -14,7 +14,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     private var didProcessInput = false
     private var window: NSWindow?
-    private var timer: Timer?
     private let fileManager = FileManager.default
     private var didFinishLaunching = false
     private var initialRequest: Request?
@@ -42,12 +41,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         initialRequest = nil
-        DistributedNotificationCenter.default().post(name: Notification.mustTerminate, object: currentInstanceId)
-        DistributedNotificationCenter.default().addObserver(self, selector: #selector(terminateInstance(_:)), name: Notification.mustTerminate, object: nil, suspensionBehavior: .deliverImmediately)
+        
+        let dNotificationCenter = DistributedNotificationCenter.default()
+        dNotificationCenter.post(name: .mustTerminate, object: currentInstanceId)
+        dNotificationCenter.addObserver(self, selector: #selector(terminateInstance(_:)), name: .mustTerminate, object: nil, suspensionBehavior: .deliverImmediately)
+        dNotificationCenter.addObserver(self, selector: #selector(processFinderMessage(_:)), name: .fromFinder, object: nil, suspensionBehavior: .deliverImmediately)
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
         DistributedNotificationCenter.default().removeObserver(self)
+    }
+    
+    @objc func processFinderMessage(_ notification: Notification) {
+        // TODO: implement
     }
     
     @objc func terminateInstance(_ notification: Notification) {
@@ -103,16 +109,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private func processInput(urlString: String?) {
         guard let urlString = urlString, urlString.hasPrefix(URL.deeplinkScheme), let url = URL(string: urlString), let q = url.query() else { return }
         didProcessInput = true
-        // TODO: add model for a messaging
+        // TODO: add model for messaging
         switch q {
         case "add":
             processRequest(.addWallet)
         case "show":
             processRequest(.showWallets)
         case "monitor":
-            startTimer()
+            break // TODO: start sync if needed
         case "stop-monitoring":
-            stopTimer()
+            break // TODO: start sync if needed
         case "check":
             checkFolders()
         case "sync":
@@ -123,10 +129,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         let viewPrefix = "view="
         if q.hasPrefix(viewPrefix),
-           let rawGallery = q.last,
-           let gallery = WebGallery(rawValue: String(rawGallery)),
+           let ch = q.last,
+           let rawGallery = Int(String(ch)),
+           let gallery = WebGallery(rawValue: rawGallery), // TODO: message explicit WebGallery models
            let encodedPath = q.dropFirst(viewPrefix.count).dropLast().removingPercentEncoding {
-            DownloadsService.shared.showNFT(filePath: encodedPath, gallery: gallery)
+            FileDownloader.shared.showNFT(filePath: encodedPath, gallery: gallery)
             // TODO: different for wallet folders
             // TODO: open multiple files
         }
@@ -141,18 +148,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private func syncIfNeeded() {
         checkFolders()
         for wallet in walletsService.wallets {
-            NFTService.shared.study(wallet: wallet)
+            WalletDownloader.shared.study(wallet: wallet)
         }
-    }
-    
-    private func startTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(checkFolders), userInfo: nil, repeats: true)
-    }
-    
-    private func stopTimer() {
-        timer?.invalidate()
-        timer = nil
-        checkFolders()
     }
     
     @objc private func checkFolders() {
@@ -178,7 +175,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                                 try? self?.fileManager.removeItem(atPath: old)
                             }
                         }
-                        NFTService.shared.study(wallet: wallet)
+                        WalletDownloader.shared.study(wallet: wallet)
                     case .failure:
                         return
                     }

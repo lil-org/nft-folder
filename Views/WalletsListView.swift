@@ -17,12 +17,12 @@ struct WalletsListView: View {
     var body: some View {
         Group {
             if wallets.isEmpty {
-                Button("add a wallet", action: {
+                Button(Strings.addWallet, action: {
                     showAddWalletPopup = true
                 }).frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
                 List {
-                    Section(header: Text("wallets").font(.system(size: 36, weight: .bold)).foregroundColor(.primary)) {
+                    Section(header: Text(Strings.wallets).font(.system(size: 36, weight: .bold)).foregroundColor(.primary)) {
                         ForEach(wallets, id: \.self) { wallet in
                             HStack {
                                 Circle()
@@ -37,7 +37,7 @@ struct WalletsListView: View {
                                 openFolderForWallet(wallet)
                             }
                             .contextMenu {
-                                Button("remove", action: {
+                                Button(Strings.remove, action: {
                                     WalletsService.shared.removeWallet(wallet)
                                     if let path = URL.nftDirectory?.path {
                                         let pathToRemove = path + "/" + wallet.folderDisplayName
@@ -55,18 +55,18 @@ struct WalletsListView: View {
                         Button(action: {
                             showAddWalletPopup = true
                         }) {
-                            Image(systemName: "plus")
+                            Images.plus
                         }
                     }
                 }
             }
         }.sheet(isPresented: $showAddWalletPopup) {
             VStack {
-                Text("add a wallet").fontWeight(.medium)
-                TextField("address or ens", text: $newWalletAddress)
+                Text(Strings.addWallet).fontWeight(.medium)
+                TextField(Strings.addressOrEns, text: $newWalletAddress)
                 HStack {
                     Spacer()
-                    Button("cancel", action: {
+                    Button(Strings.cancel, action: {
                         showAddWalletPopup = false
                         newWalletAddress = ""
                         isWaiting = false
@@ -75,7 +75,7 @@ struct WalletsListView: View {
                     if isWaiting {
                         ProgressView().progressViewStyle(.circular).scaleEffect(0.5)
                     } else {
-                        Button("ok", action: {
+                        Button(Strings.ok, action: {
                             addWallet()
                         }).keyboardShortcut(.defaultAction)
                     }
@@ -84,10 +84,10 @@ struct WalletsListView: View {
                 }
             }.frame(width: 230)
                 .padding()
-        }.onReceive(NotificationCenter.default.publisher(for: Notification.Name("walletsUpdate")), perform: { _ in
+        }.onReceive(NotificationCenter.default.publisher(for: .walletsUpdate), perform: { _ in
             self.updateDisplayedWallets()
         })
-        Button("open nft folder", action: {
+        Button(Strings.openNftFolder, action: {
             if let nftDirectory = URL.nftDirectory {
                 NSWorkspace.shared.open(nftDirectory)
             }
@@ -111,7 +111,7 @@ struct WalletsListView: View {
                     WalletsService.shared.addWallet(wallet)
                     FolderIcon.set(for: wallet)
                     updateDisplayedWallets()
-                    NFTService.shared.study(wallet: wallet)
+                    WalletDownloader.shared.study(wallet: wallet)
                 }
                 showAddWalletPopup = false
                 newWalletAddress = ""

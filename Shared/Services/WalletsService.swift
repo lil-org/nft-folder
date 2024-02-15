@@ -30,7 +30,7 @@ struct WalletsService {
         }
     }
     
-    func resolveENS(_ input: String, completion: @escaping (Result<ENSResponse, WalletsServiceError>) -> Void) {
+    func resolveENS(_ input: String, completion: @escaping (Result<EnsResponse, WalletsServiceError>) -> Void) {
         guard isEthAddress(input),
               let path = input.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed),
               let url = URL(string: "https://api.ensideas.com/ens/resolve/\(path)") else {
@@ -39,7 +39,7 @@ struct WalletsService {
         }
         let dataTask = urlSession.dataTask(with: URLRequest(url: url)) { data, response, error in
             let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
-            if error == nil, (200...299).contains(statusCode), let data = data, let response = try? JSONDecoder().decode(ENSResponse.self, from: data) {
+            if error == nil, (200...299).contains(statusCode), let data = data, let response = try? JSONDecoder().decode(EnsResponse.self, from: data) {
                 DispatchQueue.main.async { completion(.success(response)) }
             } else {
                 DispatchQueue.main.async { completion(.failure(.notAnAddress)) }
@@ -73,7 +73,7 @@ private struct Defaults {
     static func addWallet(_ wallet: WatchOnlyWallet) {
         guard !watchWallets.contains(where: { $0.address == wallet.address }) else { return }
         watchWallets += [wallet]
-        NotificationCenter.default.post(name: Notification.Name("walletsUpdate"), object: nil)
+        NotificationCenter.default.post(name: .walletsUpdate, object: nil)
         _ = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: true)
     }
     

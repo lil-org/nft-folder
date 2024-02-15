@@ -52,8 +52,16 @@ extension URL {
         return nftDirectoryURL
     }
     
+    static let nftDirectoryResolved: URL? = {
+        return nftDirectory?.resolvingSymlinksInPath()
+    }()
+    
+    static let nftDirectoryPathComponentsCount: Int = {
+        return nftDirectoryResolved?.pathComponents.count ?? 0
+    }()
+    
     static let nftDirectoryPathResolved: String = {
-        return nftDirectory?.resolvingSymlinksInPath().path() ?? ""
+        return nftDirectoryResolved?.path() ?? ""
     }()
     
     static let nftDirectoryPath: String = {

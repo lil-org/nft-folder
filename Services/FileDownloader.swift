@@ -2,33 +2,33 @@
 
 import Cocoa
 
-class DownloadsService {
+class FileDownloader {
     
     private enum DownloadFileResult {
         case success, cancel, failure
     }
     
-    static let shared = DownloadsService()
+    static let shared = FileDownloader()
     
     private init() {}
     private let urlSession = URLSession.shared
     
-    private var downloadsDict = [URL: (URL, String, MinimalTokenMetadata, [DataOrURL])]() // TODO: dev tmp
+    private var downloadsDict = [URL: (URL, String, MinimalTokenMetadata, [DataOrUrl])]() // TODO: dev tmp
     // TODO: this dict might prevent downloading the same files in some cases. make this logic explicit
     
     private var downloadsInProgress = 0
     
-    func downloadFiles(wallet: WatchOnlyWallet, downloadables: [DownloadableNFT], network: Network) {
+    func downloadFiles(wallet: WatchOnlyWallet, downloadables: [NftToDownload], network: Network) {
         guard let destination = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return }
         for downloadable in downloadables {
-            let dataOrURLs = downloadable.probableDataOrURLs
+            let dataOrURLs = downloadable.probableDataOrUrls
             let metadata = MinimalTokenMetadata(tokenId: downloadable.tokenId, collectionAddress: downloadable.collectionAddress, network: network)
             process(dataOrURLs: dataOrURLs, metadata: metadata, name: downloadable.fileDisplayName, destination: destination)
         }
         downloadNextIfNeeded()
     }
     
-    private func process(dataOrURLs: [DataOrURL], metadata: MinimalTokenMetadata, name: String, destination: URL) {
+    private func process(dataOrURLs: [DataOrUrl], metadata: MinimalTokenMetadata, name: String, destination: URL) {
         guard !dataOrURLs.isEmpty else { return }
         switch dataOrURLs[0] {
         case .data(let data, let fileExtension):
@@ -97,10 +97,10 @@ class DownloadsService {
         task.resume()
     }
     
-    private func extractValueFromJson(jsonData: Data) -> DataOrURL? {
+    private func extractValueFromJson(jsonData: Data) -> DataOrUrl? {
         if let inlineContentJSON = try? JSONDecoder().decode(InlineContentJSON.self, from: jsonData),
            let inlineDataString = inlineContentJSON.dataString,
-           let dataOrURL = DataOrURL(urlString: inlineDataString) {
+           let dataOrURL = DataOrUrl(urlString: inlineDataString) {
             return dataOrURL
         }
         
@@ -121,7 +121,7 @@ class DownloadsService {
                     if end < jsonString.endIndex {
                         let valueStart = jsonString.index(after: start)
                         let result = String(jsonString[valueStart..<end])
-                        if let dataOrURL = DataOrURL(urlString: result) {
+                        if let dataOrURL = DataOrUrl(urlString: result) {
                             return dataOrURL
                         }
                     }
