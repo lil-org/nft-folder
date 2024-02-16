@@ -75,8 +75,8 @@ class FinderSync: FIFinderSync {
         let menu = NSMenu(title: "")
         switch menuKind {
         case .contextualMenuForItems:
-            for gallery in WebGallery.allCases {
-                let item = NSMenuItem(title: gallery.title, action: #selector(viewOnWeb(_:)), keyEquivalent: "")
+            for gallery in NftGallery.allCases {
+                let item = NSMenuItem(title: gallery.title, action: #selector(viewOn(_:)), keyEquivalent: "")
                 item.tag = gallery.rawValue
                 item.image = gallery.image
                 menu.addItem(item)
@@ -84,7 +84,6 @@ class FinderSync: FIFinderSync {
             
         case .toolbarItemMenu:
             menu.addItem(withTitle: Strings.openFolderMenuItem, action: #selector(openNFTDirectory(_:)), keyEquivalent: "")
-            menu.addItem(withTitle: Strings.syncMenuItem, action: #selector(syncNFTs(_:)), keyEquivalent: "")
             menu.addItem(withTitle: Strings.controlCenterMenuItem, action: #selector(didSelectControlCenterMenuItem(_:)), keyEquivalent: "")
         case .contextualMenuForContainer, .contextualMenuForSidebar:
             break
@@ -92,10 +91,6 @@ class FinderSync: FIFinderSync {
             break
         }
         return menu
-    }
-    
-    @IBAction private func syncNFTs(_ sender: AnyObject?) {
-        HostAppMessenger.send(.didSelectSyncMenuItem)
     }
     
     @IBAction private func didSelectControlCenterMenuItem(_ sender: AnyObject?) {
@@ -108,8 +103,8 @@ class FinderSync: FIFinderSync {
         }
     }
     
-    @objc private func viewOnWeb(_ sender: NSMenuItem) {
-        guard let gallery = WebGallery(rawValue: sender.tag), let selectedItems = FIFinderSyncController.default().selectedItemURLs() else { return }
+    @objc private func viewOn(_ sender: NSMenuItem) {
+        guard let gallery = NftGallery(rawValue: sender.tag), let selectedItems = FIFinderSyncController.default().selectedItemURLs() else { return }
         let paths = selectedItems.compactMap({ $0.path.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) })
         HostAppMessenger.send(.didSelectViewOnMenuItem(paths: paths, gallery: gallery))
     }
