@@ -34,7 +34,7 @@ struct Navigator {
     
     // TODO: refactor, clean up
     static func showNftMetadata(filePath: String) {
-        let contentView = MetadataView()
+        let contentView = MetadataView(metadata: MetadataStorage.detailedMetadata(nftFilePath: filePath))
         let window = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: 300, height: 400),
             styleMask: [.closable, .fullSizeContentView, .titled, .resizable],

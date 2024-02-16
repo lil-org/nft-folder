@@ -53,7 +53,7 @@ extension URL {
         }
         let folderName = relativePath.prefix(while: { $0 != "/" })
         let fileManager = FileManager.default
-        guard let metadataDirectoryURL = nftDirectory?.appendingPathComponent(folderName + "/.nft") else { return nil }
+        guard let metadataDirectoryURL = nftDirectory?.appendingPathComponent(folderName + path) else { return nil }
         if !fileManager.fileExists(atPath: metadataDirectoryURL.path) {
             try? fileManager.createDirectory(at: metadataDirectoryURL, withIntermediateDirectories: true, attributes: nil)
         }
