@@ -8,6 +8,5 @@ struct DetailedTokenMetadata: Codable {
     let name: String?
     let collectionName: String?
     let tokenUrl: String?
-    let selectedFileSourceUrl: String?
     
 }

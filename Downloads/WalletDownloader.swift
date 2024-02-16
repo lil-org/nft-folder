@@ -35,7 +35,15 @@ class WalletDownloader {
                 // TODO: retry, handle errors
                 return
             }
-            self.fileDownloader.downloadFiles(wallet: wallet, downloadables: result.nodes.map { $0.token }, network: network)
+            
+            let tokens = result.nodes.map { $0.token }
+            for token in tokens {
+                let minimal = MinimalTokenMetadata(tokenId: token.tokenId, collectionAddress: token.collectionAddress, network: network)
+                let detailed = DetailedTokenMetadata(name: token.name, collectionName: token.collectionName, tokenUrl: token.tokenUrl)
+                MetadataStorage.store(detailedMetadata: detailed, correspondingTo: minimal, wallet: wallet)
+            }
+            
+            self.fileDownloader.downloadFiles(wallet: wallet, downloadables: tokens, network: network)
             if let endCursor = result.pageInfo.endCursor {
                 self.nextStepForZora(wallet: wallet, networkIndex: networkIndex, endCursor: endCursor, hasNextPage: result.pageInfo.hasNextPage)
             }

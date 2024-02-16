@@ -4,17 +4,40 @@ import Foundation
 
 struct MetadataStorage {
     
+    static func store(detailedMetadata: DetailedTokenMetadata, correspondingTo minimal: MinimalTokenMetadata, wallet: WatchOnlyWallet) {
+        let fileName = fileNameCorrespondingTo(minimalMetadata: minimal)
+        if let data = try? JSONEncoder().encode(detailedMetadata), var url = URL.detailedMetadataDirectory(wallet: wallet) {
+            url.append(path: fileNameCorrespondingTo(minimalMetadata: minimal))
+            try? data.write(to: url)
+        }
+    }
+    
+    static func detailedMetadata(nftFilePath: String) -> DetailedTokenMetadata? {
+        if let fileId = fileId(path: nftFilePath), var url = URL.minimalMetadataDirectory(filePath: nftFilePath) {
+            url.append(path: fileId)
+            if let data = try? Data(contentsOf: url), let minimal = try? JSONDecoder().decode(MinimalTokenMetadata.self, from: data),
+               var url = URL.detailedMetadataDirectory(filePath: nftFilePath) {
+                url.append(path: fileNameCorrespondingTo(minimalMetadata: minimal))
+                if let data = try? Data(contentsOf: url),
+                   let metadata = try? JSONDecoder().decode(DetailedTokenMetadata.self, from: data) {
+                    return metadata
+                }
+            }
+        }
+        return nil
+    }
+    
     static func store(metadata: MinimalTokenMetadata, filePath: String) {
         if let fileId = fileId(path: filePath),
            let data = try? JSONEncoder().encode(metadata),
-           var url = URL.metadataDirectory(filePath: filePath) {
+           var url = URL.minimalMetadataDirectory(filePath: filePath) {
             url.append(path: fileId)
             try? data.write(to: url)
         }
     }
     
     static func nftURL(filePath: String, gallery: NftGallery) -> URL? {
-        if let fileId = fileId(path: filePath), var url = URL.metadataDirectory(filePath: filePath) {
+        if let fileId = fileId(path: filePath), var url = URL.minimalMetadataDirectory(filePath: filePath) {
             url.append(path: fileId)
             if let data = try? Data(contentsOf: url),
                let metadata = try? JSONDecoder().decode(MinimalTokenMetadata.self, from: data) {
@@ -74,6 +97,10 @@ struct MetadataStorage {
             }
             return URL(string: "https://opensea.io/assets/\(prefix)/\(metadata.collectionAddress)/\(metadata.tokenId)")
         }
+    }
+    
+    private static func fileNameCorrespondingTo(minimalMetadata: MinimalTokenMetadata) -> String {
+        return "\(minimalMetadata.network.rawValue)\(minimalMetadata.collectionAddress)\(minimalMetadata.tokenId)"
     }
     
     private static func fileId(path: String) -> String? {
