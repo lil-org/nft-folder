@@ -13,7 +13,18 @@ struct MetadataStorage {
     }
     
     static func detailedMetadata(nftFilePath: String) -> DetailedTokenMetadata? {
-        return nil // TODO: implement
+        if let fileId = fileId(path: nftFilePath), var url = URL.minimalMetadataDirectory(filePath: nftFilePath) {
+            url.append(path: fileId)
+            if let data = try? Data(contentsOf: url), let minimal = try? JSONDecoder().decode(MinimalTokenMetadata.self, from: data),
+               var url = URL.detailedMetadataDirectory(filePath: nftFilePath) {
+                url.append(path: fileNameCorrespondingTo(minimalMetadata: minimal))
+                if let data = try? Data(contentsOf: url),
+                   let metadata = try? JSONDecoder().decode(DetailedTokenMetadata.self, from: data) {
+                    return metadata
+                }
+            }
+        }
+        return nil
     }
     
     static func store(metadata: MinimalTokenMetadata, filePath: String) {

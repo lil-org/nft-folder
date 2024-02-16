@@ -22,6 +22,7 @@ extension URL {
         return addressDirectoryURL
     }
     
+    // TODO: refactor
     static func detailedMetadataDirectory(wallet: WatchOnlyWallet) -> URL? {
         guard let url = nftDirectory(wallet: wallet, createIfDoesNotExist: false)?.appendingPathComponent("/.nft/detailed") else { return nil }
         let fileManager = FileManager.default
@@ -31,7 +32,17 @@ extension URL {
         return url
     }
     
+    // TODO: refactor
+    static func detailedMetadataDirectory(filePath: String) -> URL? {
+        return metadataDirectory(filePath: filePath, path: "/.nft/detailed")
+    }
+    
+    // TODO: refactor
     static func minimalMetadataDirectory(filePath: String) -> URL? {
+        return metadataDirectory(filePath: filePath, path: "/.nft")
+    }
+    
+    private static func metadataDirectory(filePath: String, path: String) -> URL? {
         let relativePath: Substring
         if filePath.hasPrefix(nftDirectoryPath) {
             relativePath = filePath.dropFirst(nftDirectoryPath.count)
