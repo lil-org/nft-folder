@@ -61,9 +61,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             allDownloadsManager.syncOnUserRequestIfNeeded()
         case .didSelectControlCenterMenuItem:
             Navigator.showControlCenter(addWallet: false)
-        case .didSelectViewOnMenuItem(let path, let gallery):
-            if let filePath = path.removingPercentEncoding {
-                Navigator.show(filePath: filePath, on: gallery)
+        case .didSelectViewOnMenuItem(let paths, let gallery):
+            for path in paths {
+                if let filePath = path.removingPercentEncoding {
+                    Navigator.show(filePath: filePath, on: gallery)
+                }
             }
         case .didBeginObservingDirectory(let mbAddressName):
             allDownloadsManager.prioritizeDownloads(mbAddressFolderName: mbAddressName)

@@ -109,10 +109,9 @@ class FinderSync: FIFinderSync {
     }
     
     @objc private func viewOnWeb(_ sender: NSMenuItem) {
-        guard let gallery = WebGallery(rawValue: sender.tag),
-              let selectedItems = FIFinderSyncController.default().selectedItemURLs(), selectedItems.count == 1,
-              let selectedPath = selectedItems.first?.path.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
-        HostAppMessenger.send(.didSelectViewOnMenuItem(path: selectedPath, gallery: gallery))
+        guard let gallery = WebGallery(rawValue: sender.tag), let selectedItems = FIFinderSyncController.default().selectedItemURLs() else { return }
+        let paths = selectedItems.compactMap({ $0.path.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) })
+        HostAppMessenger.send(.didSelectViewOnMenuItem(paths: paths, gallery: gallery))
     }
 
 }
