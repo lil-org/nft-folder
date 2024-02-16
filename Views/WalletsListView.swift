@@ -111,7 +111,7 @@ struct WalletsListView: View {
                     WalletsService.shared.addWallet(wallet)
                     FolderIcon.set(for: wallet)
                     updateDisplayedWallets()
-                    WalletDownloader.shared.study(wallet: wallet)
+                    WalletDownloader.shared.study(wallet: wallet) // TODO: proxy through AllDownloadsManager
                 }
                 showAddWalletPopup = false
                 newWalletAddress = ""

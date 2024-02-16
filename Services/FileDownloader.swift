@@ -38,14 +38,6 @@ class FileDownloader {
         }
     }
     
-    func showNFT(filePath: String, gallery: WebGallery) {
-        if let nftURL = MetadataStorage.nftURL(filePath: filePath, gallery: gallery) {
-            DispatchQueue.main.async {
-                NSWorkspace.shared.open(nftURL)
-            }
-        }
-    }
-    
     private func downloadNextIfNeeded() {
         guard downloadsInProgress < 23 else { return }
         guard let (url, (destination, name, metadata, dataOrURLs)) = downloadsDict.first else { return }
