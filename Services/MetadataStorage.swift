@@ -13,7 +13,7 @@ struct MetadataStorage {
         }
     }
     
-    static func nftURL(filePath: String, gallery: WebGallery) -> URL? {
+    static func nftURL(filePath: String, gallery: NftGallery) -> URL? {
         if let fileId = fileId(path: filePath), var url = URL.metadataDirectory(filePath: filePath) {
             url.append(path: fileId)
             if let data = try? Data(contentsOf: url),
@@ -24,8 +24,10 @@ struct MetadataStorage {
         return nil
     }
     
-    private static func nftURL(metadata: MinimalTokenMetadata, gallery: WebGallery) -> URL? {
+    private static func nftURL(metadata: MinimalTokenMetadata, gallery: NftGallery) -> URL? {
         switch gallery {
+        case .local:
+            return nil
         case .zora:
             let prefix: String
             switch metadata.network {

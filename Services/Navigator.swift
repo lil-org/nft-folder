@@ -32,7 +32,7 @@ struct Navigator {
         window?.makeKeyAndOrderFront(nil)
     }
     
-    static func show(filePath: String, on gallery: WebGallery) {
+    static func show(filePath: String, on gallery: NftGallery) {
         if let url = URL(string: filePath), url.pathComponents.count - 1 == URL.nftDirectoryPathComponentsCount {
             if let wallet = WalletsService.shared.wallet(folderName: url.lastPathComponent), let galleryURL = gallery.url(walletAddress: wallet.address) {
                 DispatchQueue.main.async { NSWorkspace.shared.open(galleryURL) }

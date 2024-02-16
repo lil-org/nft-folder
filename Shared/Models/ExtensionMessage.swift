@@ -7,7 +7,7 @@ enum ExtensionMessage: Codable {
     case didSelectSyncMenuItem
     case didSelectControlCenterMenuItem
     
-    case didSelectViewOnMenuItem(paths: [String], gallery: WebGallery)
+    case didSelectViewOnMenuItem(paths: [String], gallery: NftGallery)
     
     case didBeginObservingDirectory(mbAddressName: String?)
     case didEndObservingDirectory(mbAddressName: String?)
