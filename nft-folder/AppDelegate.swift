@@ -105,7 +105,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let contentView = WalletsListView(showAddWalletPopup: addWallet)
         window = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: 300, height: 400),
-            styleMask: [.closable, .fullSizeContentView, .titled],
+            styleMask: [.closable, .fullSizeContentView, .titled, .resizable],
             backing: .buffered, defer: false)
         window?.center()
         window?.titleVisibility = .visible
@@ -120,7 +120,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window?.contentView?.layer?.masksToBounds = true
         
         window?.isReleasedWhenClosed = false
-        window?.contentView = NSHostingView(rootView: contentView)
+        window?.contentView = NSHostingView(rootView: contentView.frame(minWidth: 300, minHeight: 300))
         NSApp.activate(ignoringOtherApps: true)
         window?.makeKeyAndOrderFront(nil)
     }
