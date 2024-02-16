@@ -48,6 +48,10 @@ struct WalletsService {
         dataTask.resume()
     }
     
+    func wallet(folderName: String) -> WatchOnlyWallet? {
+        return wallets.first(where: { $0.folderDisplayName == folderName })
+    }
+    
     func hasWallet(folderName: String) -> Bool {
         return wallets.contains(where: { $0.folderDisplayName == folderName })
     }

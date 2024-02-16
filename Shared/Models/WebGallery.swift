@@ -28,4 +28,15 @@ enum WebGallery: Int, CaseIterable, Codable {
         }
     }
     
+    func url(walletAddress: String) -> URL? {
+        switch self {
+        case .zora:
+            return URL(string: "https://zora.co/\(walletAddress)")
+        case .mintfun:
+            return URL(string: "https://mint.fun/profile/\(walletAddress)")
+        case .opensea:
+            return URL(string: "https://opensea.io/\(walletAddress)")
+        }
+    }
+    
 }
