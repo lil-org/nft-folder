@@ -33,6 +33,9 @@ struct Navigator {
     }
     
     static func show(filePath: String, on gallery: NftGallery) {
+        // TODO: for root nft folder and nft info on address folder — show control center
+        // TODO: nft metadata view for local nfts
+        
         if let url = URL(string: filePath), url.pathComponents.count - 1 == URL.nftDirectoryPathComponentsCount {
             if let wallet = WalletsService.shared.wallet(folderName: url.lastPathComponent), let galleryURL = gallery.url(walletAddress: wallet.address) {
                 DispatchQueue.main.async { NSWorkspace.shared.open(galleryURL) }
