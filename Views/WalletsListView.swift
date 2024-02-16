@@ -7,6 +7,7 @@ struct WalletsListView: View {
     
     @State private var isWaiting = false
     @State private var showAddWalletPopup: Bool
+    @State private var showSettingsPopup = false
     @State private var newWalletAddress = ""
     @State private var wallets = WalletsService.shared.wallets
     
@@ -50,8 +51,14 @@ struct WalletsListView: View {
                     }
                 }
                 .toolbar {
-                    ToolbarItemGroup(placement: .confirmationAction) {
+                    ToolbarItemGroup {
                         Spacer()
+                        Button(action: {
+                            showSettingsPopup = true
+                        }) {
+                            Images.gearshape
+                        }
+                        
                         Button(action: {
                             showAddWalletPopup = true
                         }) {
@@ -84,6 +91,19 @@ struct WalletsListView: View {
                 }
             }.frame(width: 230)
                 .padding()
+        }.sheet(isPresented: $showSettingsPopup) {
+            VStack {
+                PreferencesView()
+                HStack {
+                    Spacer()
+                    Button(Strings.cancel, action: {
+                        showSettingsPopup = false
+                    })
+                    Button(Strings.ok, action: {
+                        showSettingsPopup = false
+                    }).keyboardShortcut(.defaultAction)
+                }
+            }.frame(width: 230).padding()
         }.onReceive(NotificationCenter.default.publisher(for: .walletsUpdate), perform: { _ in
             self.updateDisplayedWallets()
         })

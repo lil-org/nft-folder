@@ -15,7 +15,7 @@ struct Navigator {
             styleMask: [.closable, .fullSizeContentView, .titled, .resizable],
             backing: .buffered, defer: false)
         window?.center()
-        window?.titleVisibility = .visible
+        window?.titleVisibility = .hidden
         window?.titlebarAppearsTransparent = false
         window?.isMovableByWindowBackground = true
         window?.backgroundColor = NSColor.windowBackgroundColor
@@ -40,7 +40,7 @@ struct Navigator {
             styleMask: [.closable, .fullSizeContentView, .titled, .resizable],
             backing: .buffered, defer: false)
         window.center()
-        window.titleVisibility = .visible
+        window.titleVisibility = .hidden
         window.titlebarAppearsTransparent = false
         window.isMovableByWindowBackground = true
         window.backgroundColor = NSColor.windowBackgroundColor
