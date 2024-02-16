@@ -10,6 +10,10 @@ class AllDownloadsManager {
     private let walletsService = WalletsService.shared
     private let fileManager = FileManager.default
         
+    func syncNewWallet(wallet: WatchOnlyWallet) {
+        WalletDownloader.shared.study(wallet: wallet) // TODO: make if fit within ongoing downloads
+    }
+    
     // TODO: clean up, refactor
     func checkFolders() {
         guard let path = URL.nftDirectory?.path, let files = try? fileManager.contentsOfDirectory(atPath: path) else { return }

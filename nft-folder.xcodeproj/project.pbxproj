@@ -178,13 +178,9 @@
 		2C4D840F2B18869400952BF5 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				2C1B60D52B7EBD18009949C2 /* AllDownloadsManager.swift */,
-				2CF4C49A2B7F567B000AB4A6 /* Navigator.swift */,
-				2C9113192B08F71200A8EE80 /* WalletDownloader.swift */,
-				2CF7339D2B0ED50000B1AC68 /* ZoraApi.swift */,
-				2CA3C2A02B18C91600AF33D6 /* FileDownloader.swift */,
 				2CAFA62A2B09C3610054160D /* MetadataStorage.swift */,
 				2C2329D92B68367F00001936 /* RightClickServiceProvider.swift */,
+				2CF4C49A2B7F567B000AB4A6 /* Navigator.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -263,6 +259,7 @@
 			children = (
 				2CA4CF532B07F75F00CC75F4 /* nft-folder */,
 				2C91131C2B08FCDF00A8EE80 /* Views */,
+				2CF4C49C2B7FB0AC000AB4A6 /* Downloads */,
 				2C4D840F2B18869400952BF5 /* Services */,
 				2C4D84102B1886D600952BF5 /* Models */,
 				2C9113262B093EE800A8EE80 /* Helpers */,
@@ -304,6 +301,17 @@
 			);
 			name = "Supporting Files";
 			path = "nft-folder";
+			sourceTree = "<group>";
+		};
+		2CF4C49C2B7FB0AC000AB4A6 /* Downloads */ = {
+			isa = PBXGroup;
+			children = (
+				2C1B60D52B7EBD18009949C2 /* AllDownloadsManager.swift */,
+				2C9113192B08F71200A8EE80 /* WalletDownloader.swift */,
+				2CF7339D2B0ED50000B1AC68 /* ZoraApi.swift */,
+				2CA3C2A02B18C91600AF33D6 /* FileDownloader.swift */,
+			);
+			path = Downloads;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
