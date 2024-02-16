@@ -84,7 +84,6 @@ class FinderSync: FIFinderSync {
             
         case .toolbarItemMenu:
             menu.addItem(withTitle: Strings.openFolderMenuItem, action: #selector(openNFTDirectory(_:)), keyEquivalent: "")
-            menu.addItem(withTitle: Strings.syncMenuItem, action: #selector(syncNFTs(_:)), keyEquivalent: "")
             menu.addItem(withTitle: Strings.controlCenterMenuItem, action: #selector(didSelectControlCenterMenuItem(_:)), keyEquivalent: "")
         case .contextualMenuForContainer, .contextualMenuForSidebar:
             break
@@ -92,10 +91,6 @@ class FinderSync: FIFinderSync {
             break
         }
         return menu
-    }
-    
-    @IBAction private func syncNFTs(_ sender: AnyObject?) {
-        HostAppMessenger.send(.didSelectSyncMenuItem)
     }
     
     @IBAction private func didSelectControlCenterMenuItem(_ sender: AnyObject?) {
