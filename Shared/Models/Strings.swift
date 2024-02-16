@@ -29,4 +29,7 @@ struct Strings {
     static let nftFolder = "nft folder"
     static let nftInfo = "nft info"
     
+    static let maxFileSize50mb = "max file size 50 mb"
+    static let downloadGlb = "download .glb files"
+    
 }

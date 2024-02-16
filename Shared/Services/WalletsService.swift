@@ -13,15 +13,15 @@ struct WalletsService {
     private let urlSession = URLSession.shared
     
     var wallets: [WatchOnlyWallet] {
-        return Defaults.watchWallets
+        return SharedDefaults.watchWallets
     }
     
     func addWallet(_ wallet: WatchOnlyWallet) {
-        Defaults.addWallet(wallet)
+        SharedDefaults.addWallet(wallet)
     }
     
     func removeWallet(_ wallet: WatchOnlyWallet) {
-        Defaults.removeWallet(wallet)
+        SharedDefaults.removeWallet(wallet)
     }
     
     func removeWallet(address: String) {
@@ -66,7 +66,7 @@ struct WalletsService {
     
 }
 
-private struct Defaults {
+private struct SharedDefaults {
     
     private static let userDefaults = UserDefaults(suiteName: "group.org.lil.nft-folder")!
 

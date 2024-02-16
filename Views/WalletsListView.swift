@@ -96,9 +96,6 @@ struct WalletsListView: View {
                 PreferencesView()
                 HStack {
                     Spacer()
-                    Button(Strings.cancel, action: {
-                        showSettingsPopup = false
-                    })
                     Button(Strings.ok, action: {
                         showSettingsPopup = false
                     }).keyboardShortcut(.defaultAction)
