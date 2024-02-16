@@ -22,7 +22,16 @@ extension URL {
         return addressDirectoryURL
     }
     
-    static func metadataDirectory(filePath: String) -> URL? {
+    static func detailedMetadataDirectory(wallet: WatchOnlyWallet) -> URL? {
+        guard let url = nftDirectory(wallet: wallet, createIfDoesNotExist: false)?.appendingPathComponent("/.nft/detailed") else { return nil }
+        let fileManager = FileManager.default
+        if !fileManager.fileExists(atPath: url.path) {
+            try? fileManager.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+        }
+        return url
+    }
+    
+    static func minimalMetadataDirectory(filePath: String) -> URL? {
         let relativePath: Substring
         if filePath.hasPrefix(nftDirectoryPath) {
             relativePath = filePath.dropFirst(nftDirectoryPath.count)
