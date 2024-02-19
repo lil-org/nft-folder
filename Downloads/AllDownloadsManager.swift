@@ -15,6 +15,7 @@ class AllDownloadsManager {
     }
     
     // TODO: clean up, refactor
+    // TODO: move folders logic from here
     func checkFolders() {
         guard let path = URL.nftDirectory?.path, let files = try? fileManager.contentsOfDirectory(atPath: path) else { return }
         var knownWallets = Set(walletsService.wallets)

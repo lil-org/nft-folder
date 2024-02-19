@@ -89,6 +89,7 @@ class FileDownloader {
         task.resume()
     }
     
+    // TODO: move it from here
     private func extractValueFromJson(jsonData: Data) -> DataOrUrl? {
         if let inlineContentJSON = try? JSONDecoder().decode(InlineContentJSON.self, from: jsonData),
            let inlineDataString = inlineContentJSON.dataString,
@@ -123,6 +124,8 @@ class FileDownloader {
         return nil
     }
     
+    // TODO: move it from here
+    // TODO: clean up and refactor
     private func save(name: String, metadata: MinimalTokenMetadata, tmpLocation: URL? = nil, data: Data? = nil, fileExtension: String, destinationURL: URL, downloadedFromURL: URL?) {
         if fileExtension.lowercased() == "html", let downloadedFromURL = downloadedFromURL {
             let linkString = downloadedFromURL.absoluteString
@@ -176,6 +179,7 @@ class FileDownloader {
         saveAvoidingCollisions(tmpLocation: tmpLocation, data: data, destinationURL: destinationURL, metadata: metadata)
     }
     
+    // TODO: move it from here
     private func saveAvoidingCollisions(tmpLocation: URL?, data: Data?, destinationURL: URL, metadata: MinimalTokenMetadata) {
         let fileManager = FileManager.default
 
