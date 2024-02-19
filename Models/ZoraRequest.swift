@@ -4,7 +4,19 @@ import Foundation
 
 struct ZoraRequest {
     
-    static func query(whereString: String, networks: [Network], endCursor: String?) -> [String: String] {
+    enum Kind {
+        case owner(address: String)
+        case collection(address: String)
+    }
+    
+    static func query(kind: Kind, networks: [Network], endCursor: String?) -> [String: String] {
+        let whereString: String
+        switch kind {
+        case .owner(let address):
+            whereString = "{ownerAddresses: [\"\(address)\"]}"
+        case .collection(let address):
+            whereString = "{collectionAddresses: [\"\(address)\"]}"
+        }
         let endString: String
         if let endCursor = endCursor {
             endString = ", after:\"\(endCursor)\""
