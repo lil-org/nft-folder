@@ -8,6 +8,7 @@ struct Navigator {
     private static var window: NSWindow?
     
     static func showControlCenter(addWallet: Bool) {
+        NSApplication.shared.windows.forEach { $0.close() }
         window?.close()
         let contentView = WalletsListView(showAddWalletPopup: addWallet)
         window = NSWindow(
