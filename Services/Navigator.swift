@@ -57,10 +57,11 @@ struct Navigator {
     }
     
     static func show(filePath: String, on gallery: NftGallery) {
-        let fileUrl = URL(string: filePath)
-        if fileUrl?.pathComponents.count == URL.nftDirectoryPathComponentsCount {
+        let fileUrl = URL(filePath: filePath)
+        if fileUrl.pathComponents.count == URL.nftDirectoryPathComponentsCount {
             DispatchQueue.main.async { showControlCenter(addWallet: false) }
-        } else if fileUrl?.pathComponents.count == URL.nftDirectoryPathComponentsCount + 1, let name = fileUrl?.lastPathComponent {
+        } else if fileUrl.pathComponents.count == URL.nftDirectoryPathComponentsCount + 1 {
+            let name = fileUrl.lastPathComponent
             if case gallery = .local {
                 DispatchQueue.main.async { showControlCenter(addWallet: false) }
             } else if let wallet = WalletsService.shared.wallet(folderName: name), let galleryURL = gallery.url(walletAddress: wallet.address) {
