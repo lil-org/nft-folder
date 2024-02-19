@@ -40,6 +40,7 @@ struct WalletsListView: View {
                             .contextMenu {
                                 Button(Strings.remove, action: {
                                     WalletsService.shared.removeWallet(wallet)
+                                    AllDownloadsManager.shared.stopDownloads(wallet: wallet)
                                     if let path = URL.nftDirectory?.path {
                                         let pathToRemove = path + "/" + wallet.folderDisplayName
                                         try? FileManager.default.removeItem(atPath: pathToRemove)

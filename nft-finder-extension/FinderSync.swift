@@ -27,7 +27,7 @@ class FinderSync: FIFinderSync {
         if pathComponents.count == URL.nftDirectoryPathComponentsCount {
             FIFinderSyncController.default().setBadgeIdentifier(Badge.nftFolder.rawValue, for: url)
         } else if pathComponents.count - 1 == URL.nftDirectoryPathComponentsCount, let name = pathComponents.last {
-            if WalletsService.shared.hasWallet(folderName: name) {
+            if SharedDefaults.hasWallet(folderName: name) {
                 FIFinderSyncController.default().setBadgeIdentifier(Badge.nftFolder.rawValue, for: url)
             }
         }

@@ -8,49 +8,31 @@ class AllDownloadsManager {
     private init() {}
     
     private let walletsService = WalletsService.shared
-    private let fileManager = FileManager.default
         
-    func syncNewWallet(wallet: WatchOnlyWallet) {
-        WalletDownloader.shared.study(wallet: wallet) // TODO: make if fit within ongoing downloads
+    func start() {
+        // TODO: implement
+        // TODO: start refresh maybe
+        // TODO: check folders after launch — maybe they changed
+        // TODO: maybe there are already some downloads running — started with explicit launch request
     }
     
-    // TODO: clean up, refactor
-    // TODO: move folders logic from here
-    func checkFolders() {
-        guard let path = URL.nftDirectory?.path, let files = try? fileManager.contentsOfDirectory(atPath: path) else { return }
-        var knownWallets = Set(walletsService.wallets)
-        for name in files {
-            if let known = knownWallets.first(where: { $0.folderDisplayName == name }) {
-                knownWallets.remove(known)
-            }
-            if walletsService.isEthAddress(name) && !walletsService.hasWallet(folderName: name) {
-                walletsService.resolveENS(name) { [weak self] result in
-                    switch result {
-                    case .success(let response):
-                        let wallet = WatchOnlyWallet(address: response.address, name: response.name, avatar: response.avatar)
-                        self?.walletsService.addWallet(wallet)
-                        FolderIcon.set(for: wallet)
-                        let old = path + "/" + name
-                        let new = path + "/" + wallet.folderDisplayName
-                        do {
-                            try self?.fileManager.moveItem(atPath: old, toPath: new)
-                        } catch {
-                            if self?.fileManager.fileExists(atPath: new) == true {
-                                try? self?.fileManager.removeItem(atPath: old)
-                            }
-                        }
-                        WalletDownloader.shared.study(wallet: wallet)
-                    case .failure:
-                        return
-                    }
-                }
-            }
+    func syncNewWallet(wallet: WatchOnlyWallet) {
+        // TODO: make it fit within ongoing downloads
+        // TODO: make sure not to start twice for any wallet
+        WalletDownloader.shared.study(wallet: wallet)
+    }
+    
+    func walletsFoldersChanged() {
+        let removedWallets = walletsService.checkFoldersForNewWalletsAndRemovedWallets { newWallet in
+            self.syncNewWallet(wallet: newWallet)
         }
-        
-        for remaining in knownWallets {
-            // TODO: stop downloads for that wallet as well
-            walletsService.removeWallet(address: remaining.address)
+        for removedWallet in removedWallets {
+            stopDownloads(wallet: removedWallet)
         }
+    }
+    
+    func stopDownloads(wallet: WatchOnlyWallet) {
+        // TODO: implement
     }
     
     func prioritizeDownloads(mbAddressFolderName: String?) {

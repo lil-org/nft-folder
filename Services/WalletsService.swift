@@ -11,6 +11,7 @@ struct WalletsService {
     private init() {}
     static let shared = WalletsService()
     private let urlSession = URLSession.shared
+    private let fileManager = FileManager.default
     
     var wallets: [WatchOnlyWallet] {
         return SharedDefaults.watchWallets
@@ -53,7 +54,7 @@ struct WalletsService {
     }
     
     func hasWallet(folderName: String) -> Bool {
-        return wallets.contains(where: { $0.folderDisplayName == folderName })
+        return SharedDefaults.hasWallet(folderName: folderName)
     }
     
     func isEthAddress(_ input: String) -> Bool {
@@ -64,33 +65,41 @@ struct WalletsService {
         return hexSet.isSuperset(of: addressSet)
     }
     
-}
-
-private struct SharedDefaults {
-    
-    private static let userDefaults = UserDefaults(suiteName: "group.org.lil.nft-folder")!
-
-    static func removeWallet(_ wallet: WatchOnlyWallet) {
-        watchWallets.removeAll(where: { $0.address == wallet.address })
-    }
-    
-    static func addWallet(_ wallet: WatchOnlyWallet) {
-        guard !watchWallets.contains(where: { $0.address == wallet.address }) else { return }
-        watchWallets += [wallet]
-        NotificationCenter.default.post(name: .walletsUpdate, object: nil)
-        _ = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: true)
-    }
-    
-    static var watchWallets: [WatchOnlyWallet] {
-        get {
-            let stored = userDefaults.value(forKey: "watch-wallets")
-            return WatchOnlyWallet.arrayFrom(stored) ?? []
+    func checkFoldersForNewWalletsAndRemovedWallets(onNewWallet: @escaping (WatchOnlyWallet) -> Void) -> [WatchOnlyWallet] {
+        guard let path = URL.nftDirectory?.path, let files = try? fileManager.contentsOfDirectory(atPath: path) else { return [] }
+        var knownWallets = Set(wallets)
+        for name in files {
+            if let known = knownWallets.first(where: { $0.folderDisplayName == name }) {
+                knownWallets.remove(known)
+            }
+            if isEthAddress(name) && !hasWallet(folderName: name) {
+                resolveENS(name) { result in
+                    switch result {
+                    case .success(let response):
+                        let wallet = WatchOnlyWallet(address: response.address, name: response.name, avatar: response.avatar)
+                        self.addWallet(wallet)
+                        FolderIcon.set(for: wallet)
+                        let old = path + "/" + name
+                        let new = path + "/" + wallet.folderDisplayName
+                        do {
+                            try self.fileManager.moveItem(atPath: old, toPath: new)
+                        } catch {
+                            if self.fileManager.fileExists(atPath: new) == true {
+                                try? self.fileManager.removeItem(atPath: old)
+                            }
+                        }
+                        onNewWallet(wallet)
+                    case .failure:
+                        return
+                    }
+                }
+            }
         }
-        set {
-            let dicts = newValue.compactMap { $0.toDictionary() }
-            userDefaults.set(dicts, forKey: "watch-wallets")
+        
+        for remaining in knownWallets {
+            removeWallet(address: remaining.address)
         }
+        return Array(knownWallets)
     }
     
 }
-

@@ -38,6 +38,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         notificationCenter.post(name: .mustTerminate, object: currentInstanceId)
         notificationCenter.addObserver(self, selector: #selector(terminateInstance(_:)), name: .mustTerminate, object: nil, suspensionBehavior: .deliverImmediately)
         notificationCenter.addObserver(self, selector: #selector(processFinderMessage(_:)), name: .fromFinder, object: nil, suspensionBehavior: .deliverImmediately)
+        
+        allDownloadsManager.start()
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -72,7 +74,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         case .didEndObservingDirectory:
             break
         case .somethingChangedInHomeDirectory:
-            allDownloadsManager.checkFolders()
+            allDownloadsManager.walletsFoldersChanged()
         }
     }
     
