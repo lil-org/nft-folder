@@ -5,7 +5,6 @@ import Foundation
 struct MetadataStorage {
     
     static func store(detailedMetadata: DetailedTokenMetadata, correspondingTo minimal: MinimalTokenMetadata, wallet: WatchOnlyWallet) {
-        let fileName = fileNameCorrespondingTo(minimalMetadata: minimal)
         if let data = try? JSONEncoder().encode(detailedMetadata), var url = URL.detailedMetadataDirectory(wallet: wallet) {
             url.append(path: fileNameCorrespondingTo(minimalMetadata: minimal))
             try? data.write(to: url)
