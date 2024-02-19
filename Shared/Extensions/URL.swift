@@ -9,6 +9,10 @@ extension URL {
     static let arScheme = "ar://"
     static let deeplinkScheme = "nft-folder://"
     
+    private enum MetadataKind: String {
+        case minimal, detailed
+    }
+    
     static func nftDirectory(wallet: WatchOnlyWallet, createIfDoesNotExist: Bool) -> URL? {
         let fileManager = FileManager.default
         guard let addressDirectoryURL = nftDirectory?.appendingPathComponent(wallet.folderDisplayName) else { return nil }
@@ -22,38 +26,30 @@ extension URL {
         return addressDirectoryURL
     }
     
-    // TODO: refactor
     static func detailedMetadataDirectory(wallet: WatchOnlyWallet) -> URL? {
-        guard let url = nftDirectory(wallet: wallet, createIfDoesNotExist: false)?.appendingPathComponent("/.nft/detailed") else { return nil }
-        let fileManager = FileManager.default
-        if !fileManager.fileExists(atPath: url.path) {
-            try? fileManager.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
-        }
-        return url
+        guard let url = nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return nil }
+        return metadataDirectory(walletFolderURL: url, metadataKind: .detailed)
     }
     
-    // TODO: refactor
     static func detailedMetadataDirectory(filePath: String) -> URL? {
-        return metadataDirectory(filePath: filePath, path: "/.nft/detailed")
+        return metadataDirectory(filePath: filePath, metadataKind: .detailed)
     }
     
-    // TODO: refactor
     static func minimalMetadataDirectory(filePath: String) -> URL? {
-        return metadataDirectory(filePath: filePath, path: "/.nft")
+        return metadataDirectory(filePath: filePath, metadataKind: .minimal)
     }
     
-    private static func metadataDirectory(filePath: String, path: String) -> URL? {
-        let relativePath: Substring
-        if filePath.hasPrefix(nftDirectoryPath) {
-            relativePath = filePath.dropFirst(nftDirectoryPath.count)
-        } else if filePath.hasPrefix(nftDirectoryPathResolved) {
-            relativePath = filePath.dropFirst(nftDirectoryPathResolved.count)
-        } else {
-            return nil
-        }
-        let folderName = relativePath.prefix(while: { $0 != "/" })
+    private static func metadataDirectory(filePath: String, metadataKind: MetadataKind) -> URL? {
+        let fileURL = URL(filePath: filePath).resolvingSymlinksInPath()
+        guard fileURL.pathComponents.count > nftDirectoryPathComponentsCount && fileURL.path.hasPrefix(nftDirectoryPathResolved) else { return nil }
+        let folderName = fileURL.pathComponents[nftDirectoryPathComponentsCount]
+        guard let walletFolderURL = nftDirectory?.appendingPathComponent(folderName) else { return nil }
+        return metadataDirectory(walletFolderURL: walletFolderURL, metadataKind: metadataKind)
+    }
+    
+    private static func metadataDirectory(walletFolderURL: URL, metadataKind: MetadataKind) -> URL? {
         let fileManager = FileManager.default
-        guard let metadataDirectoryURL = nftDirectory?.appendingPathComponent(folderName + path) else { return nil }
+        let metadataDirectoryURL = walletFolderURL.appendingPathComponent("/.nft/\(metadataKind.rawValue)")
         if !fileManager.fileExists(atPath: metadataDirectoryURL.path) {
             try? fileManager.createDirectory(at: metadataDirectoryURL, withIntermediateDirectories: true, attributes: nil)
         }
