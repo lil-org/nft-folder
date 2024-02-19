@@ -30,9 +30,7 @@ class WalletDownloader {
         let network = networks[networkIndex]
         ZoraApi.get(owner: wallet.address, networks: [network], endCursor: endCursor) { result in
             guard let result = result, !result.nodes.isEmpty else {
-                print("zora api empty result: \(String(describing: result))")
                 self.nextStepForZora(wallet: wallet, networkIndex: networkIndex, endCursor: nil, hasNextPage: false)
-                // TODO: retry, handle errors
                 return
             }
             
