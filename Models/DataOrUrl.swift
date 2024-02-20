@@ -2,7 +2,7 @@
 
 import Foundation
 
-enum DataOrUrl {
+enum DataOrUrl: Codable {
     
     case data(Data, String)
     case url(URL)

@@ -2,35 +2,22 @@
 
 import Foundation
 
-// TODO: implement with more links, more data
 struct DetailedTokenMetadata: Codable {
     
     let name: String?
     let collectionName: String?
+    let collectionAddress: String
+    let tokenId: String
     let tokenUrl: String?
+    
+    // TODO: more info from Token
+    
+    var probableDataOrUrls: [DataOrUrl] // TODO: clarify links model - file type, size, etc.
     
 }
 
-extension Token {
+extension DetailedTokenMetadata {
     
-    var detailedMetadata: DetailedTokenMetadata {
-        return DetailedTokenMetadata(name: name, collectionName: collectionName, tokenUrl: tokenUrl)
-    }
-        
-    // TODO: implement as a part of DetailedTokenMetadata
-    // TODO: replace with explicit logic depending on file type and user preferences
-    var probableDataOrUrls: [DataOrUrl] {
-        let mapped = [content?.url, image?.url, image?.mediaEncoding?.thumbnail, tokenUrl].compactMap { (link) -> DataOrUrl? in
-            if let dataOrURL = DataOrUrl(urlString: link) {
-                return dataOrURL
-            } else {
-                return nil
-            }
-        }
-        return mapped
-    }
-    
-    // TODO: implement as a part of DetailedTokenMetadata
     var fileDisplayName: String {
         if let name = name, let collectionName = collectionName, name.localizedCaseInsensitiveContains(collectionName) {
             return name

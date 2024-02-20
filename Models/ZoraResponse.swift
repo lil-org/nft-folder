@@ -71,3 +71,23 @@ struct InlineContentJSON: Decodable {
     }
     
 }
+
+extension Token {
+    
+    var detailedMetadata: DetailedTokenMetadata {
+        let probableDataOrUrls = [content?.url, image?.url, image?.mediaEncoding?.thumbnail, tokenUrl].compactMap { (link) -> DataOrUrl? in
+            if let dataOrURL = DataOrUrl(urlString: link) {
+                return dataOrURL
+            } else {
+                return nil
+            }
+        }
+        return DetailedTokenMetadata(name: name,
+                                     collectionName: collectionName,
+                                     collectionAddress: collectionAddress,
+                                     tokenId: tokenId,
+                                     tokenUrl: tokenUrl,
+                                     probableDataOrUrls: probableDataOrUrls)
+    }
+    
+}
