@@ -49,10 +49,13 @@ struct ZoraRequest {
                         collectionName
                         collectionAddress
                         tokenUrl
+                        tokenUrlMimeType
                         tokenStandard
+                        description
                         image {
                             url
                             mimeType
+                            size
                             mediaEncoding {
                                 ... on ImageEncodingTypes {
                                     original
@@ -63,6 +66,17 @@ struct ZoraRequest {
                         content {
                             url
                             mimeType
+                            size
+                            mediaEncoding {
+                                ... on VideoEncodingTypes {
+                                    original
+                                    preview
+                                }
+                                ... on AudioEncodingTypes {
+                                    large
+                                    original
+                                }
+                            }
                         }
                     }
                 }

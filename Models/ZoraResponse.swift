@@ -33,6 +33,8 @@ struct Token: Codable {
     let image: Media?
     let content: Media?
     let tokenUrl: String?
+    let tokenUrlMimeType: String?
+    let description: String?
     let tokenStandard: String?
 }
 
@@ -45,11 +47,14 @@ struct Media: Codable {
     struct Encoding: Codable {
         let original: String?
         let thumbnail: String?
+        let preview: String?
+        let large: String?
     }
 }
 
 extension Token: NftToDownload {
     
+    // TODO: replace with explicit logic depending on file type and user preferences
     var probableDataOrUrls: [DataOrUrl] {
         let mapped = [content?.url, image?.url, image?.mediaEncoding?.thumbnail, tokenUrl].compactMap { (link) -> DataOrUrl? in
             if let dataOrURL = DataOrUrl(urlString: link) {
