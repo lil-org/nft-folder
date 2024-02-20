@@ -55,7 +55,7 @@ class WalletDownloader {
             return DownloadFileTask(destinationDirectory: destination, minimalMetadata: minimal, detailedMetadata: detailed)
         }
         
-        fileDownloader.downloadFiles(tasks)
+        fileDownloader.addTasks(tasks)
     }
     
 }

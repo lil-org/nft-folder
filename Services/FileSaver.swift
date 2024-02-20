@@ -9,8 +9,19 @@ struct FileSaver {
     
     private let fileManager = FileManager.default
     
-    func save(name: String, metadata: MinimalTokenMetadata, tmpLocation: URL?, data: Data?, fileExtension: String, destinationURL: URL, downloadedFromURL: URL?) -> URL? {
-        if fileExtension.lowercased() == "html", let downloadedFromURL = downloadedFromURL {
+    func saveForTask(_ task: DownloadFileTask, tmpLocation: URL?, data: Data?, fileExtension: String) -> URL? {
+        return save(name: task.fileName,
+                    metadata: task.minimalMetadata,
+                    tmpLocation: tmpLocation,
+                    data: data,
+                    fileExtension: fileExtension,
+                    destinationURL: task.destinationDirectory,
+                    downloadedFromURL: task.currentURL)
+    }
+    
+    // TODO: cleanup and refactor
+    private func save(name: String, metadata: MinimalTokenMetadata, tmpLocation: URL?, data: Data?, fileExtension: String, destinationURL: URL, downloadedFromURL: URL?) -> URL? {
+        if fileExtension.lowercased() == "html", let downloadedFromURL = downloadedFromURL { // TODO: clean up html logic. maybe won't need downloadedFromURL at all
             let linkString = downloadedFromURL.absoluteString
                 .replacingOccurrences(of: "&", with: "&amp;")
                 .replacingOccurrences(of: "\"", with: "&quot;")
