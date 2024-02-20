@@ -4,7 +4,7 @@ import Foundation
 
 struct EnsResponse: Codable {
     
-    let address: String // in checksum format
+    let address: String
     let name: String?
     let avatar: String?
     

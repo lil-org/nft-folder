@@ -2,6 +2,8 @@
 
 import Cocoa
 
+// TODO: make sure it does not download the same files again and again — there was an implicit logic for that here
+
 class FileDownloader {
     
     private enum DownloadFileResult {
@@ -18,8 +20,7 @@ class FileDownloader {
     
     private var downloadsInProgress = 0
     
-    func downloadFiles(wallet: WatchOnlyWallet, downloadables: [NftToDownload], network: Network) {
-        guard let destination = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return }
+    func downloadFiles(_ tasks: [DownloadFileTask], wallet: WatchOnlyWallet) {
         for downloadable in downloadables {
             let dataOrURLs = downloadable.probableDataOrUrls
             let metadata = MinimalTokenMetadata(tokenId: downloadable.tokenId, collectionAddress: downloadable.collectionAddress, network: network)
