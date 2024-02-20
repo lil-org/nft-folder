@@ -5,5 +5,7 @@ import Foundation
 struct DownloadFileTask {
     
     let destinationDirectory: URL
+    let minimalMetadata: MinimalTokenMetadata
+    let detailedMetadata: DetailedTokenMetadata
     
 }

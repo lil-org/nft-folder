@@ -11,9 +11,13 @@ struct DetailedTokenMetadata: Codable {
     
 }
 
-// TODO: implement as a part of DetailedTokenMetadata
 extension Token {
     
+    var detailedMetadata: DetailedTokenMetadata {
+        return DetailedTokenMetadata(name: name, collectionName: collectionName, tokenUrl: tokenUrl)
+    }
+        
+    // TODO: implement as a part of DetailedTokenMetadata
     // TODO: replace with explicit logic depending on file type and user preferences
     var probableDataOrUrls: [DataOrUrl] {
         let mapped = [content?.url, image?.url, image?.mediaEncoding?.thumbnail, tokenUrl].compactMap { (link) -> DataOrUrl? in
@@ -26,6 +30,7 @@ extension Token {
         return mapped
     }
     
+    // TODO: implement as a part of DetailedTokenMetadata
     var fileDisplayName: String {
         if let name = name, let collectionName = collectionName, name.localizedCaseInsensitiveContains(collectionName) {
             return name
