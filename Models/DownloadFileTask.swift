@@ -4,6 +4,6 @@ import Foundation
 
 struct DownloadFileTask {
     
-    let destinationDirectory: URL // guard let destination = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return }
+    let destinationDirectory: URL
     
 }

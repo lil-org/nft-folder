@@ -7,5 +7,6 @@ struct MinimalTokenMetadata: Codable {
     let tokenId: String
     let collectionAddress: String
     let network: Network
+    var dowloadedFileSourceURL: URL?
     
 }
