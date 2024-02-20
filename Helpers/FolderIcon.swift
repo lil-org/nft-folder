@@ -18,6 +18,7 @@ struct FolderIcon {
             }
             DispatchQueue.main.async {
                 NSWorkspace.shared.setIcon(image, forFile: folderURL.path, options: [])
+                // TODO: cache
             }
         }
         task.resume()

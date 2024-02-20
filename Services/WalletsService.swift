@@ -78,7 +78,6 @@ struct WalletsService {
                     case .success(let response):
                         let wallet = WatchOnlyWallet(address: response.address, name: response.name, avatar: response.avatar)
                         self.addWallet(wallet)
-                        FolderIcon.set(for: wallet)
                         let old = path + "/" + name
                         let new = path + "/" + wallet.folderDisplayName
                         do {
@@ -88,6 +87,7 @@ struct WalletsService {
                                 try? self.fileManager.removeItem(atPath: old)
                             }
                         }
+                        FolderIcon.set(for: wallet)
                         onNewWallet(wallet)
                     case .failure:
                         return
