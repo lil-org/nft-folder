@@ -12,6 +12,7 @@ struct DetailedTokenMetadata: Codable {
     
     // TODO: more info from Token
     
+    // TODO: make sure these links are unique
     var probableDataOrUrls: [DataOrUrl] // TODO: clarify links model - file type, size, etc.
     
 }
