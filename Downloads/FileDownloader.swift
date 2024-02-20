@@ -2,6 +2,8 @@
 
 import Cocoa
 
+// TODO: make sure it does not download the same files again and again — there was an implicit logic for that here
+
 class FileDownloader {
     
     private enum DownloadFileResult {
@@ -13,63 +15,63 @@ class FileDownloader {
     private init() {}
     private let urlSession = URLSession.shared
     
-    private var downloadsDict = [URL: (URL, String, MinimalTokenMetadata, [DataOrUrl])]() // TODO: dev tmp
-    // TODO: this dict might prevent downloading the same files in some cases. make this logic explicit
-    
+    private var downloadTasks = [DownloadFileTask]()
     private var downloadsInProgress = 0
     
-    func downloadFiles(wallet: WatchOnlyWallet, downloadables: [NftToDownload], network: Network) {
-        guard let destination = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return }
-        for downloadable in downloadables {
-            let dataOrURLs = downloadable.probableDataOrUrls
-            let metadata = MinimalTokenMetadata(tokenId: downloadable.tokenId, collectionAddress: downloadable.collectionAddress, network: network)
-            process(dataOrURLs: dataOrURLs, metadata: metadata, name: downloadable.fileDisplayName, destination: destination)
+    func addTasks(_ tasks: [DownloadFileTask]) {
+        for task in tasks {
+            preprocess(task: task)
         }
         downloadNextIfNeeded()
     }
     
-    private func process(dataOrURLs: [DataOrUrl], metadata: MinimalTokenMetadata, name: String, destination: URL) {
-        guard !dataOrURLs.isEmpty else { return }
-        switch dataOrURLs[0] {
+    private func preprocess(task: DownloadFileTask) {
+        switch task.currentDataOrURL {
         case .data(let data, let fileExtension):
-            save(name: name, metadata: metadata, tmpLocation: nil, data: data, fileExtension: fileExtension, destinationURL: destination, downloadedFromURL: nil)
+            save(task, tmpLocation: nil, data: data, fileExtension: fileExtension)
         case .url(let url):
-            downloadsDict[url] = (destination, name, metadata, Array(dataOrURLs.dropFirst()))
+            downloadTasks.append(task)
+        case .none:
+            return
         }
     }
     
     private func downloadNextIfNeeded() {
-        guard downloadsInProgress < 23 else { return }
-        guard let (url, (destination, name, metadata, dataOrURLs)) = downloadsDict.first else { return }
-        downloadsDict.removeValue(forKey: url)
+        guard downloadsInProgress < 23 && !downloadTasks.isEmpty else { return }
+        var task = downloadTasks.removeFirst()
         downloadsInProgress += 1
-        downloadFile(name: name, metadata: metadata, from: url, to: destination) { [weak self] result in
+        downloadFile(task: task) { [weak self] result in
             self?.downloadsInProgress -= 1
             switch result {
             case .success:
                 self?.downloadNextIfNeeded()
             case .failure:
-                if !dataOrURLs.isEmpty {
-                    print("⭐️ will retry and get a fallback content for \(name)")
-                    self?.process(dataOrURLs: dataOrURLs, metadata: metadata, name: name, destination: destination)
+                if task.willTryAnotherSource() {
+                    print("⭐️ will retry and get a fallback content for \(task.fileName)")
+                    self?.preprocess(task: task)
                 }
                 self?.downloadNextIfNeeded()
             case .cancel:
-                self?.downloadNextIfNeeded() // TODO: clean up for a removed filder
+                self?.downloadNextIfNeeded() // TODO: clean up for a removed folder
             }
         }
         downloadNextIfNeeded()
     }
     
-    private func downloadFile(name: String, metadata: MinimalTokenMetadata, from url: URL, to destinationURL: URL, completion: @escaping (DownloadFileResult) -> Void) {
-        let task = urlSession.downloadTask(with: url) { location, response, error in
+    private func downloadFile(task: DownloadFileTask, completion: @escaping (DownloadFileResult) -> Void) {
+        guard let url = task.currentURL else {
+            completion(.failure)
+            return
+        }
+        
+        let urlSessionDownloadTask = urlSession.downloadTask(with: url) { location, response, error in
             let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
             guard let location = location, error == nil, (200...299).contains(statusCode) else {
                 print("Status code \(statusCode). Error downloading file: \(String(describing: error))")
                 completion(.failure)
                 return
             }
-            guard FileManager.default.fileExists(atPath: destinationURL.path) else {
+            guard FileManager.default.fileExists(atPath: task.destinationDirectory.path) else {
                 // if there is no folder anymore
                 print("cancel download")
                 completion(.cancel) // TODO: review cancel logic
@@ -83,15 +85,16 @@ class FileDownloader {
                     fileExtension = FileExtension.placeholder
                 }
             }
-            self.save(name: name, metadata: metadata, tmpLocation: location, data: nil, fileExtension: fileExtension, destinationURL: destinationURL, downloadedFromURL: url)
+            
+            self.save(task, tmpLocation: location, data: nil, fileExtension: fileExtension)
             completion(.success)
         }
-        task.resume()
+        urlSessionDownloadTask.resume()
     }
     
-    private func save(name: String, metadata: MinimalTokenMetadata, tmpLocation: URL?, data: Data?, fileExtension: String, destinationURL: URL, downloadedFromURL: URL?) {
-        if let url = FileSaver.shared.save(name: name, metadata: metadata, tmpLocation: tmpLocation, data: data, fileExtension: fileExtension, destinationURL: destinationURL, downloadedFromURL: downloadedFromURL) {
-            downloadsDict[url] = (destinationURL, name, metadata, [])
+    private func save(_ task: DownloadFileTask, tmpLocation: URL?, data: Data?, fileExtension: String) {
+        if let redirectURL = FileSaver.shared.saveForTask(task, tmpLocation: tmpLocation, data: data, fileExtension: fileExtension) {
+            // TODO: queue updated or new task for that redirectURL
         }
     }
     

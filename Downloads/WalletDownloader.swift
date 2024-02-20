@@ -34,18 +34,28 @@ class WalletDownloader {
                 return
             }
             
-            let tokens = result.nodes.map { $0.token }
-            for token in tokens {
-                let minimal = MinimalTokenMetadata(tokenId: token.tokenId, collectionAddress: token.collectionAddress, network: network)
-                let detailed = DetailedTokenMetadata(name: token.name, collectionName: token.collectionName, tokenUrl: token.tokenUrl)
-                MetadataStorage.store(detailedMetadata: detailed, correspondingTo: minimal, wallet: wallet)
-            }
+            self.processResultTokensNodes(result.nodes, wallet: wallet, network: network)
             
-            self.fileDownloader.downloadFiles(wallet: wallet, downloadables: tokens, network: network)
             if let endCursor = result.pageInfo.endCursor {
                 self.nextStepForZora(wallet: wallet, networkIndex: networkIndex, endCursor: endCursor, hasNextPage: result.pageInfo.hasNextPage)
             }
         }
+    }
+    
+    private func processResultTokensNodes(_ nodes: [Node], wallet: WatchOnlyWallet, network: Network) {
+        guard let destination = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return }
+        
+        let tasks = nodes.map { node -> DownloadFileTask in
+            let token = node.token
+            
+            let minimal = MinimalTokenMetadata(tokenId: token.tokenId, collectionAddress: token.collectionAddress, network: network)
+            let detailed = token.detailedMetadata
+            MetadataStorage.store(detailedMetadata: detailed, correspondingTo: minimal, wallet: wallet)
+            
+            return DownloadFileTask(destinationDirectory: destination, minimalMetadata: minimal, detailedMetadata: detailed)
+        }
+        
+        fileDownloader.addTasks(tasks)
     }
     
 }
