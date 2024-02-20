@@ -33,39 +33,40 @@ struct ZoraRequest {
         {
             tokens(sort: {sortKey: \(sort.rawValue.uppercased()), sortDirection: DESC},
                 networks: [\(networksString)],
-                 pagination: {limit: 30\(endString)},
-                 where: \(whereString))
-          {
-            pageInfo {
-              endCursor
-              hasNextPage
-            }
-            nodes {
-              token {
-                tokenId
-                name
-                owner
-                collectionName
-                collectionAddress
-                tokenUrl
-                tokenStandard
-                image {
-                  url
-                  mimeType
-                  mediaEncoding {
-                  ... on ImageEncodingTypes {
-                      original
-                      thumbnail
+                pagination: {limit: 30\(endString)},
+                where: \(whereString)) {
+            
+                pageInfo {
+                    endCursor
+                    hasNextPage
+                }
+            
+                nodes {
+                    token {
+                        tokenId
+                        name
+                        owner
+                        collectionName
+                        collectionAddress
+                        tokenUrl
+                        tokenStandard
+                        image {
+                            url
+                            mimeType
+                            mediaEncoding {
+                                ... on ImageEncodingTypes {
+                                    original
+                                    thumbnail
+                                }
+                            }
+                        }
+                        content {
+                            url
+                            mimeType
+                        }
                     }
-                  }
                 }
-                content {
-                    url
-                    mimeType
-                }
-              }
             }
-          }
         }
         """
         return ["query": queryString]
