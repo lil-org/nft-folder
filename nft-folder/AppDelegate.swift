@@ -31,7 +31,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             processMessage(initialMessage)
             self.initialMessage = nil
         } else if (aNotification.userInfo?[NSApplication.launchIsDefaultUserInfoKey] as? Bool) != false {
-            Navigator.showControlCenter(addWallet: false)
+            Navigator.shared.showControlCenter(addWallet: false)
         }
         
         let notificationCenter = DistributedNotificationCenter.default()
@@ -62,11 +62,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         case .didSelectSyncMenuItem:
             allDownloadsManager.syncOnUserRequestIfNeeded()
         case .didSelectControlCenterMenuItem:
-            Navigator.showControlCenter(addWallet: false)
+            Navigator.shared.showControlCenter(addWallet: false)
         case .didSelectViewOnMenuItem(let paths, let gallery):
             for path in paths {
                 if let filePath = path.removingPercentEncoding {
-                    Navigator.show(filePath: filePath, on: gallery)
+                    Navigator.shared.show(filePath: filePath, on: gallery)
                 }
             }
         case .didBeginObservingDirectory(let mbAddressName):
@@ -111,7 +111,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
         NSApplication.shared.windows.forEach { $0.close() }
-        Navigator.showControlCenter(addWallet: false)
+        Navigator.shared.showControlCenter(addWallet: false)
         return true
     }
     

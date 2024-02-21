@@ -24,5 +24,21 @@ struct Defaults {
         }
     }
     
+    static var controlCenterWindowSize: CGSize {
+        get {
+            let width = userDefaults.double(forKey: "controlCenterWindowSize.width")
+            let height = userDefaults.double(forKey: "controlCenterWindowSize.height")
+            if width > 0 && height > 0 {
+                return CGSize(width: width, height: height)
+            } else {
+                return CGSize(width: 300, height: 400)
+            }
+        }
+        set {
+            userDefaults.set(newValue.width, forKey: "controlCenterWindowSize.width")
+            userDefaults.set(newValue.height, forKey: "controlCenterWindowSize.height")
+        }
+    }
+    
 }
 

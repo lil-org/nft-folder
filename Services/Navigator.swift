@@ -3,21 +3,25 @@
 import Cocoa
 import SwiftUI
 
-struct Navigator {
+class Navigator: NSObject {
     
-    private static var window: NSWindow?
+    private var window: NSWindow?
     
-    static func showControlCenter(addWallet: Bool) {
+    private override init() { super.init() }
+    static let shared = Navigator()
+    
+    func showControlCenter(addWallet: Bool) {
         NSApplication.shared.windows.forEach { $0.close() }
         window?.close()
         let contentView = WalletsListView(showAddWalletPopup: addWallet)
         window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 300, height: 400),
+            contentRect: NSRect(origin: .zero, size: Defaults.controlCenterWindowSize),
             styleMask: [.closable, .fullSizeContentView, .titled, .resizable],
             backing: .buffered, defer: false)
         window?.center()
         window?.titleVisibility = .hidden
         window?.titlebarAppearsTransparent = false
+        window?.delegate = self
         window?.isMovableByWindowBackground = true
         window?.backgroundColor = NSColor.windowBackgroundColor
         window?.isOpaque = false
@@ -34,7 +38,7 @@ struct Navigator {
     }
     
     // TODO: refactor, clean up
-    static func showNftMetadata(filePath: String) {
+    func showNftMetadata(filePath: String) {
         let contentView = MetadataView(metadata: MetadataStorage.detailedMetadata(nftFilePath: filePath))
         let window = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: 300, height: 400),
@@ -56,14 +60,14 @@ struct Navigator {
         window.makeKeyAndOrderFront(nil)
     }
     
-    static func show(filePath: String, on gallery: NftGallery) {
+    func show(filePath: String, on gallery: NftGallery) {
         let fileUrl = URL(filePath: filePath)
         if fileUrl.pathComponents.count == URL.nftDirectoryPathComponentsCount {
-            DispatchQueue.main.async { showControlCenter(addWallet: false) }
+            DispatchQueue.main.async { self.showControlCenter(addWallet: false) }
         } else if fileUrl.pathComponents.count == URL.nftDirectoryPathComponentsCount + 1 {
             let name = fileUrl.lastPathComponent
             if case gallery = .local {
-                DispatchQueue.main.async { showControlCenter(addWallet: false) }
+                DispatchQueue.main.async { self.showControlCenter(addWallet: false) }
             } else if let wallet = WalletsService.shared.wallet(folderName: name), let galleryURL = gallery.url(walletAddress: wallet.address) {
                 DispatchQueue.main.async { NSWorkspace.shared.open(galleryURL) }
             }
@@ -71,6 +75,16 @@ struct Navigator {
             showNftMetadata(filePath: filePath)
         } else if let nftURL = MetadataStorage.nftURL(filePath: filePath, gallery: gallery) {
             DispatchQueue.main.async { NSWorkspace.shared.open(nftURL) }
+        }
+    }
+    
+}
+
+extension Navigator: NSWindowDelegate {
+    
+    func windowWillClose(_ notification: Notification) {
+        if let window = notification.object as? NSWindow {
+            Defaults.controlCenterWindowSize = window.frame.size
         }
     }
     
