@@ -47,8 +47,8 @@ struct PreferencesView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Link(destination: FooterLink.nounsURL) {
                         Text(Strings.noggles).font(.title3)
-                    }.foregroundColor(Color.secondary)
-                    Link(Strings.poweredByZoraApi, destination: FooterLink.zoraURL).foregroundColor(Color.secondary)
+                    }.foregroundColor(.secondary)
+                    Link(Strings.poweredByZoraApi, destination: FooterLink.zoraURL).foregroundColor(.secondary)
                 }
                 .padding()
                 
@@ -59,9 +59,7 @@ struct PreferencesView: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 20, height: 20)
-                                .clipShape(Circle())
-                                .background(Circle().fill(Color.gray))
-                                .foregroundColor(.white)
+                                .foregroundColor(.secondary)
                         }
                     }
                 }

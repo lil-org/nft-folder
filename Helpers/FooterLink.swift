@@ -11,12 +11,11 @@ struct FooterLink: Hashable {
         return Image(imageName)
     }
     
-    // TODO: setup images
     static let all = [
-        FooterLink(url: URL(string: "mailto:ivan@lil.org")!, imageName: ""),
-        FooterLink(url: URL(string: "https://github.com/lil-org/nft-folder-macos")!, imageName: ""),
-        FooterLink(url: URL(string: "https://x.ivan.lol")!, imageName: ""),
-        FooterLink(url: URL(string: "https://f.ivan.lol")!, imageName: "")
+        FooterLink(url: URL(string: "mailto:ivan@lil.org")!, imageName: "mail"),
+        FooterLink(url: URL(string: "https://github.com/lil-org/nft-folder-macos")!, imageName: "github"),
+        FooterLink(url: URL(string: "https://x.ivan.lol")!, imageName: "x"),
+        FooterLink(url: URL(string: "https://f.ivan.lol")!, imageName: "fc")
     ]
     
     static let nounsURL = URL(string: "https://prop.house")!
