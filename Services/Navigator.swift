@@ -15,10 +15,9 @@ class Navigator: NSObject {
         window?.close()
         let contentView = WalletsListView(showAddWalletPopup: addWallet)
         window = NSWindow(
-            contentRect: NSRect(origin: .zero, size: Defaults.controlCenterWindowSize),
+            contentRect: Defaults.controlCenterWindowFrame,
             styleMask: [.closable, .fullSizeContentView, .titled, .resizable],
             backing: .buffered, defer: false)
-        window?.center()
         window?.titleVisibility = .hidden
         window?.titlebarAppearsTransparent = false
         window?.delegate = self
@@ -35,6 +34,10 @@ class Navigator: NSObject {
         window?.contentView = NSHostingView(rootView: contentView.frame(minWidth: 300, minHeight: 300))
         NSApp.activate(ignoringOtherApps: true)
         window?.makeKeyAndOrderFront(nil)
+        
+        if window?.frame.origin == .zero || window?.isOnActiveSpace == false || window?.isVisible == false {
+            window?.center()
+        }
     }
     
     // TODO: refactor, clean up
@@ -84,7 +87,7 @@ extension Navigator: NSWindowDelegate {
     
     func windowWillClose(_ notification: Notification) {
         if let window = notification.object as? NSWindow {
-            Defaults.controlCenterWindowSize = window.frame.size
+            Defaults.controlCenterWindowFrame = window.frame
         }
     }
     

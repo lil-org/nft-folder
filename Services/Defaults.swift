@@ -24,21 +24,24 @@ struct Defaults {
         }
     }
     
-    static var controlCenterWindowSize: CGSize {
+    static var controlCenterWindowFrame: CGRect {
         get {
-            let width = userDefaults.double(forKey: "controlCenterWindowSize.width")
-            let height = userDefaults.double(forKey: "controlCenterWindowSize.height")
+            let width = userDefaults.double(forKey: "controlCenterWindow.width")
+            let height = userDefaults.double(forKey: "controlCenterWindow.height")
+            let x = userDefaults.double(forKey: "controlCenterWindow.x")
+            let y = userDefaults.double(forKey: "controlCenterWindow.y")
             if width > 0 && height > 0 {
-                return CGSize(width: width, height: height)
+                return CGRect(origin: CGPoint(x: x, y: y), size: CGSize(width: width, height: height))
             } else {
-                return CGSize(width: 300, height: 400)
+                return CGRect(origin: .zero, size: CGSize(width: 300, height: 400))
             }
         }
         set {
-            userDefaults.set(newValue.width, forKey: "controlCenterWindowSize.width")
-            userDefaults.set(newValue.height, forKey: "controlCenterWindowSize.height")
+            userDefaults.set(newValue.width, forKey: "controlCenterWindow.width")
+            userDefaults.set(newValue.height, forKey: "controlCenterWindow.height")
+            userDefaults.set(newValue.origin.x, forKey: "controlCenterWindow.x")
+            userDefaults.set(newValue.origin.y, forKey: "controlCenterWindow.y")
         }
     }
     
 }
-
