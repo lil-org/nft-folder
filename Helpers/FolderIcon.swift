@@ -5,29 +5,18 @@ import Cocoa
 struct FolderIcon {
     
     static func set(for wallet: WatchOnlyWallet) {
-        guard let avatar = wallet.avatar,
-              let imageURL = URL(string: avatar),
-              let folderURL = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else {
-            setBlockies(for: wallet)
-            return
-        }
-        let task = URLSession.shared.dataTask(with: imageURL) { data, response, error in
-            guard let data = data, error == nil, let image = NSImage(data: data) else {
-                setBlockies(for: wallet)
-                return
-            }
+        guard let folderURL = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return }
+        setBlockies(for: wallet, folderURL: folderURL)
+        AvatarService.getAvatar(wallet: wallet) { avatar in
             DispatchQueue.main.async {
-                NSWorkspace.shared.setIcon(image, forFile: folderURL.path, options: [])
-                // TODO: cache
+                NSWorkspace.shared.setIcon(avatar, forFile: folderURL.path, options: [])
             }
         }
-        task.resume()
     }
     
-    static private func setBlockies(for wallet: WatchOnlyWallet) {
+    static private func setBlockies(for wallet: WatchOnlyWallet, folderURL: URL) {
         DispatchQueue.main.async {
-            if let image = Blockies(seed: wallet.address.lowercased()).createImage(),
-               let folderURL = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) {
+            if let image = Blockies(seed: wallet.address.lowercased()).createImage() {
                 NSWorkspace.shared.setIcon(image, forFile: folderURL.path, options: [])
             }
         }
