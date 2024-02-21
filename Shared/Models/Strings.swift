@@ -31,5 +31,7 @@ struct Strings {
     
     static let maxFileSize50mb = "max file size 50 mb"
     static let downloadGlb = "download .glb files"
+    static let noggles = "⌐◨-◨"
+    static let poweredByZoraApi = "powered by zora api"
     
 }

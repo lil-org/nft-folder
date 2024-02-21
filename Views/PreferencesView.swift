@@ -3,26 +3,71 @@
 import SwiftUI
 
 struct PreferencesView: View {
-
+    
     @State private var maxFileSizeLimitPreference = !Defaults.unlimitedFileSize
     @State private var glbPreference = Defaults.downloadGlb
     
     var body: some View {
-        Form {
-            Section {
-                Toggle(isOn: $maxFileSizeLimitPreference) {
-                    Text(Strings.maxFileSize50mb)
-                }.onChange(of: maxFileSizeLimitPreference) { newValue in
-                    Defaults.unlimitedFileSize = !newValue
-                }
-                
-                Toggle(isOn: $glbPreference) {
-                    Text(Strings.downloadGlb)
-                }.onChange(of: glbPreference) { newValue in
-                    Defaults.downloadGlb = newValue
-                }
+        VStack(alignment: .leading) {
+            HStack {
+                Images.logo
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 20, height: 20)
+                Text(Strings.nftFolder)
+                    .font(.title)
+                    .padding(.leading, 8)
             }
-            Spacer()
+            .padding(.leading)
+            
+            VStack {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color(NSColor.windowBackgroundColor))
+                    .frame(height: 150)
+                    .overlay(
+                        VStack {
+                            Toggle(isOn: $maxFileSizeLimitPreference) {
+                                Text(Strings.maxFileSize50mb)
+                            }.onChange(of: maxFileSizeLimitPreference) { newValue in
+                                Defaults.unlimitedFileSize = !newValue
+                            }
+                            Toggle(isOn: $glbPreference) {
+                                Text(Strings.downloadGlb)
+                            }.onChange(of: glbPreference) { newValue in
+                                Defaults.downloadGlb = newValue
+                            }
+                        }
+                            .padding()
+                    )
+                    .padding()
+            }
+            
+            
+            VStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    Link(destination: FooterLink.nounsURL) {
+                        Text(Strings.noggles).font(.title3)
+                    }.foregroundColor(Color.secondary)
+                    Link(Strings.poweredByZoraApi, destination: FooterLink.zoraURL).foregroundColor(Color.secondary)
+                }
+                .padding()
+                
+                HStack(spacing: 20) {
+                    ForEach(FooterLink.all, id: \.self) { link in
+                        Link(destination: link.url) {
+                            link.image
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 20, height: 20)
+                                .clipShape(Circle())
+                                .background(Circle().fill(Color.gray))
+                                .foregroundColor(.white)
+                        }
+                    }
+                }
+                .padding(.bottom)
+            }
         }
     }
+    
 }
