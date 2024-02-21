@@ -9,11 +9,14 @@ struct DetailedTokenMetadata: Codable {
     let collectionAddress: String
     let tokenId: String
     let tokenUrl: String?
+    let description: String?
     
     // TODO: more info from Token
     
     // TODO: make sure these links are unique
-    var probableDataOrUrls: [DataOrUrl] // TODO: clarify links model - file type, size, etc.
+    // TODO: clarify links model - file type, size, etc.
+    
+    var probableDataOrUrls: [DataOrUrl]
     
 }
 

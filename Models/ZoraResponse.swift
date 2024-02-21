@@ -87,6 +87,7 @@ extension Token {
                                      collectionAddress: collectionAddress,
                                      tokenId: tokenId,
                                      tokenUrl: tokenUrl,
+                                     description: description,
                                      probableDataOrUrls: probableDataOrUrls)
     }
     
