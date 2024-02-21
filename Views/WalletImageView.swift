@@ -4,54 +4,45 @@ import SwiftUI
 import Combine
 
 struct WalletImageView: View {
-    @StateObject private var imageLoader = ImageLoader()
-    let url: URL?
-    let address: String
-
+    
+    @StateObject private var avatarLoader = AvatarLoader()
+    let wallet: WatchOnlyWallet
+    
     init(wallet: WatchOnlyWallet) {
-        self.address = wallet.address
-        if let avatar = wallet.avatar, let url = URL(string: avatar) {
-            self.url = url
-        } else {
-            self.url = nil
-        }
-        _imageLoader = StateObject(wrappedValue: ImageLoader())
+        self.wallet = wallet
+        _avatarLoader = StateObject(wrappedValue: AvatarLoader())
     }
-
+    
     var body: some View {
         Group {
-            if let imageData = imageLoader.imageData, let nsImage = NSImage(data: imageData) {
+            if let nsImage = avatarLoader.avatar {
                 Image(nsImage: nsImage)
                     .resizable()
                     .scaledToFit()
                     .clipShape(Circle())
             } else {
-                Image(nsImage: Blockies(seed: address.lowercased()).createImage() ?? NSImage())
+                Image(nsImage: Blockies(seed: wallet.address.lowercased()).createImage() ?? NSImage())
                     .resizable()
                     .scaledToFit()
                     .clipShape(Circle())
             }
         }
         .onAppear {
-            if let url = url {
-                imageLoader.loadImage(from: url)
+            avatarLoader.loadAvatar(wallet: wallet)
+        }
+    }
+    
+}
+
+private class AvatarLoader: ObservableObject {
+    @Published var avatar: NSImage?
+    
+    func loadAvatar(wallet: WatchOnlyWallet) {
+        AvatarService.getAvatar(wallet: wallet) { image in
+            DispatchQueue.main.async {
+                self.avatar = image
             }
         }
     }
-}
-
-private class ImageLoader: ObservableObject {
-    @Published var imageData: Data?
-
-    func loadImage(from url: URL) {
-        // TODO: cache / use from cache
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data, error == nil else {
-                return
-            }
-            DispatchQueue.main.async {
-                self.imageData = data
-            }
-        }.resume()
-    }
+    
 }
