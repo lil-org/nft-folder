@@ -15,8 +15,8 @@ struct Strings {
     static let syncMenuItem = "⬇️ sync nfts"
     static let controlCenterMenuItem = "🎛️ control center"
     
-    static let wallets = "wallets"
-    static let addWallet = "add a wallet"
+    static let wallets = "folders"
+    static let addWallet = "new folder"
     static let remove = "remove"
     static let addressOrEns = "address or ens"
     static let cancel = "cancel"
