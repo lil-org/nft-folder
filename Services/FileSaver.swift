@@ -127,6 +127,7 @@ struct FileSaver {
             print("error saving file: \(error)") // TODO: test on lots of data to see if it happens
         }
         
+        // TODO: create minimal metadata with detailed metadata right here, do not pass it all the way through
         MetadataStorage.store(minimalMetadata: minimalMetadata, filePath: finalDestinationURL.path)
         MetadataStorage.store(detailedMetadata: detailedMetadata, correspondingTo: minimalMetadata, filePath: finalDestinationURL.path)
     }
