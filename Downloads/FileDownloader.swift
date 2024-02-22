@@ -11,6 +11,7 @@ class FileDownloader {
     private let urlSession = URLSession.shared
     private var downloadTasks = [DownloadFileTask]()
     private var downloadsInProgress = 0
+    private var ongoingUrlSessionTasks = [String: URLSessionDownloadTask]()
     
     func addTasks(_ tasks: [DownloadFileTask]) {
         for task in tasks {
@@ -46,7 +47,7 @@ class FileDownloader {
             case .success:
                 self?.downloadNextIfNeeded()
             case .failure:
-                if task.willTryAnotherSource() {
+                if self != nil, task.willTryAnotherSource() {
                     print("⭐️ will retry and get a fallback content for \(task.fileName)")
                     self?.preprocess(task: task)
                 }
@@ -64,7 +65,9 @@ class FileDownloader {
             return
         }
         
+        let id = UUID().uuidString
         let urlSessionDownloadTask = urlSession.downloadTask(with: url) { [weak self] location, response, error in
+            self?.ongoingUrlSessionTasks.removeValue(forKey: id)
             let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
             guard let location = location, error == nil, (200...299).contains(statusCode) else {
                 print("Status code \(statusCode). Error downloading file: \(String(describing: error))")
@@ -90,11 +93,13 @@ class FileDownloader {
             completion(.success)
         }
         urlSessionDownloadTask.resume()
+        ongoingUrlSessionTasks[id] = urlSessionDownloadTask
     }
     
     deinit {
-        // TODO: cancel all pending tasks
-        print("deinit file downloader. gotta stop tasks here")
+        for task in ongoingUrlSessionTasks.values {
+            task.cancel()
+        }
     }
     
     private func save(_ task: DownloadFileTask, tmpLocation: URL?, data: Data?, fileExtension: String) {
