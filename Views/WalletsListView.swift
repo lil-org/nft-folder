@@ -118,6 +118,7 @@ struct WalletsListView: View {
             NSWorkspace.shared.open(nftDirectory)
         }
         NSApplication.shared.windows.forEach { $0.close() }
+        AllDownloadsManager.shared.prioritizeDownloads(wallet: wallet)
     }
     
     private func addWallet() {

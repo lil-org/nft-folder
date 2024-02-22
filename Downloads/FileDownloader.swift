@@ -2,8 +2,6 @@
 
 import Cocoa
 
-// TODO: make sure it does not download the same files again and again — there was an implicit logic for that here
-
 class FileDownloader {
     
     private enum DownloadFileResult {
@@ -30,7 +28,9 @@ class FileDownloader {
         case .data(let data, let fileExtension):
             save(task, tmpLocation: nil, data: data, fileExtension: fileExtension)
         case .url(let url):
-            downloadTasks.append(task)
+            if let contentHash = url.fnv1aHash(), !MetadataStorage.has(contentHash: contentHash, addressDirectoryURL: task.destinationDirectory) {
+                downloadTasks.append(task)
+            }
         case .none:
             return
         }

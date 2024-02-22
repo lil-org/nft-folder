@@ -22,6 +22,12 @@ class AllDownloadsManager {
         WalletDownloader.shared.study(wallet: wallet)
     }
     
+    func prioritizeDownloads(wallet: WatchOnlyWallet) {
+        // TODO: make it fit within ongoing downloads
+        // TODO: make sure not to start twice for any wallet
+        WalletDownloader.shared.study(wallet: wallet)
+    }
+    
     func walletsFoldersChanged() {
         let removedWallets = walletsService.checkFoldersForNewWalletsAndRemovedWallets { newWallet in
             self.syncNewWallet(wallet: newWallet)
@@ -36,7 +42,11 @@ class AllDownloadsManager {
     }
     
     func prioritizeDownloads(mbAddressFolderName: String?) {
-        // TODO: implement
+        if let folderName = mbAddressFolderName, let wallet = walletsService.wallet(folderName: folderName) {
+            // TODO: implement
+        } else {
+            // TODO: implement
+        }
     }
     
     // TODO: always check for running syncs before starting new ones
