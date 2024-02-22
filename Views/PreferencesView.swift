@@ -16,16 +16,16 @@ struct PreferencesView: View {
                     .frame(width: 20, height: 20)
                 Text(Strings.nftFolder)
                     .font(.title)
-                    .padding(.leading, 8)
+                    .padding(.leading, 8).foregroundColor(.secondary)
             }
             .padding(.leading)
             
             VStack {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color(NSColor.windowBackgroundColor))
-                    .frame(height: 150)
+                    .frame(height: 110)
                     .overlay(
-                        VStack {
+                        VStack(alignment: .leading) {
                             Toggle(isOn: $maxFileSizeLimitPreference) {
                                 Text(Strings.maxFileSize50mb)
                             }.onChange(of: maxFileSizeLimitPreference) { newValue in

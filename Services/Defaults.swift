@@ -33,7 +33,7 @@ struct Defaults {
             if width > 0 && height > 0 {
                 return CGRect(origin: CGPoint(x: x, y: y), size: CGSize(width: width, height: height))
             } else {
-                return CGRect(origin: .zero, size: CGSize(width: 300, height: 400))
+                return CGRect(origin: .zero, size: CGSize(width: 300, height: 420))
             }
         }
         set {
