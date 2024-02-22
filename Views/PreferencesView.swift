@@ -8,17 +8,17 @@ struct PreferencesView: View {
     @State private var glbPreference = Defaults.downloadGlb
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .center, spacing: 0) {
             HStack {
                 Images.logo
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 20, height: 20)
                 Text(Strings.nftFolder)
-                    .font(.title)
-                    .padding(.leading, 8).foregroundColor(.secondary)
-            }
-            .padding(.leading)
+                    .font(.system(size: 20))
+                    .foregroundColor(.secondary)
+            }.padding(.top, 4)
+            
             
             VStack {
                 RoundedRectangle(cornerRadius: 10)
@@ -37,14 +37,14 @@ struct PreferencesView: View {
                                 Defaults.downloadGlb = newValue
                             }
                         }
-                            .padding()
+                        .padding()
                     )
-                    .padding()
+                    .padding(.horizontal).padding(.top)
             }
             
             
             VStack {
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .center, spacing: 16) {
                     Link(destination: FooterLink.nounsURL) {
                         Text(Strings.noggles).font(.title3)
                     }.foregroundColor(.secondary)
