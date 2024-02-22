@@ -8,11 +8,7 @@ class FileDownloader {
         case success, cancel, failure
     }
     
-    static let shared = FileDownloader()
-    
-    private init() {}
     private let urlSession = URLSession.shared
-    
     private var downloadTasks = [DownloadFileTask]()
     private var downloadsInProgress = 0
     
@@ -68,7 +64,7 @@ class FileDownloader {
             return
         }
         
-        let urlSessionDownloadTask = urlSession.downloadTask(with: url) { location, response, error in
+        let urlSessionDownloadTask = urlSession.downloadTask(with: url) { [weak self] location, response, error in
             let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
             guard let location = location, error == nil, (200...299).contains(statusCode) else {
                 print("Status code \(statusCode). Error downloading file: \(String(describing: error))")
@@ -90,10 +86,15 @@ class FileDownloader {
                 }
             }
             
-            self.save(task, tmpLocation: location, data: nil, fileExtension: fileExtension)
+            self?.save(task, tmpLocation: location, data: nil, fileExtension: fileExtension)
             completion(.success)
         }
         urlSessionDownloadTask.resume()
+    }
+    
+    deinit {
+        // TODO: cancel all pending tasks
+        print("deinit file downloader. gotta stop tasks here")
     }
     
     private func save(_ task: DownloadFileTask, tmpLocation: URL?, data: Data?, fileExtension: String) {

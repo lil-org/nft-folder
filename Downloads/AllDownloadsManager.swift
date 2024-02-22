@@ -8,25 +8,27 @@ class AllDownloadsManager {
         case downloading, notDownloading
     }
     
+    private(set) var statuses = [WatchOnlyWallet: Status]()
+    
     static let shared = AllDownloadsManager()
     private init() {}
     
     private let walletsService = WalletsService.shared
-    var statuses = [WatchOnlyWallet: Status]()
+    private var walletDownloaders = [WatchOnlyWallet: WalletDownloader]()
     
     func start() {}
     
     func startDownloads(wallet: WatchOnlyWallet) {
         statuses[wallet] = .downloading
-        // TODO: make it fit within ongoing downloads
-        // TODO: make sure not to start twice for any wallet
-        WalletDownloader.shared.study(wallet: wallet)
+        let walletDownloader = WalletDownloader()
+        walletDownloader.study(wallet: wallet)
         postStatusUpdateNotification()
+        walletDownloaders[wallet] = walletDownloader
     }
     
     func stopDownloads(wallet: WatchOnlyWallet) {
-        statuses[wallet] = .notDownloading
-        // TODO: implement
+        statuses.removeValue(forKey: wallet)
+        walletDownloaders.removeValue(forKey: wallet)
         postStatusUpdateNotification()
     }
     

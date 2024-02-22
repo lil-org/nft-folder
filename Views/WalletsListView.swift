@@ -137,7 +137,6 @@ struct WalletsListView: View {
         if let nftDirectory = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: true) {
             NSWorkspace.shared.open(nftDirectory)
         }
-        NSApplication.shared.windows.forEach { $0.close() }
         AllDownloadsManager.shared.prioritizeDownloads(wallet: wallet)
     }
     

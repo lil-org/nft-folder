@@ -4,10 +4,7 @@ import Foundation
 
 class WalletDownloader {
     
-    static let shared = WalletDownloader()
-    private init() {}
-    private let urlSession = URLSession.shared
-    private let fileDownloader = FileDownloader.shared
+    private let fileDownloader = FileDownloader()
     private var networks = Network.allCases
     
     func study(wallet: WatchOnlyWallet) {
@@ -28,16 +25,16 @@ class WalletDownloader {
     
     private func goThroughZora(wallet: WatchOnlyWallet, networkIndex: Int, endCursor: String?) {
         let network = networks[networkIndex]
-        ZoraApi.get(owner: wallet.address, networks: [network], endCursor: endCursor) { result in
+        ZoraApi.get(owner: wallet.address, networks: [network], endCursor: endCursor) { [weak self] result in
             guard let result = result, !result.nodes.isEmpty else {
-                self.nextStepForZora(wallet: wallet, networkIndex: networkIndex, endCursor: nil, hasNextPage: false)
+                self?.nextStepForZora(wallet: wallet, networkIndex: networkIndex, endCursor: nil, hasNextPage: false)
                 return
             }
             
-            self.processResultTokensNodes(result.nodes, wallet: wallet, network: network)
+            self?.processResultTokensNodes(result.nodes, wallet: wallet, network: network)
             
             if let endCursor = result.pageInfo.endCursor {
-                self.nextStepForZora(wallet: wallet, networkIndex: networkIndex, endCursor: endCursor, hasNextPage: result.pageInfo.hasNextPage)
+                self?.nextStepForZora(wallet: wallet, networkIndex: networkIndex, endCursor: endCursor, hasNextPage: result.pageInfo.hasNextPage)
             }
         }
     }
