@@ -69,11 +69,19 @@ struct FileSaver {
         var finalName = name.hasSuffix(pathExtension) ? name : (name.trimmingCharacters(in: .whitespacesAndNewlines) + pathExtension)
         finalName = finalName.replacingOccurrences(of: "/", with: "-")
         let destinationFileURL = destinationURL.appendingPathComponent(finalName)
-        saveAvoidingCollisions(tmpLocation: tmpLocation, data: data, destinationURL: destinationFileURL, addressDirectoryURL: destinationURL, metadata: detailedMetadata)
+        saveAvoidingCollisions(tmpLocation: tmpLocation, data: data, destinationURL: destinationFileURL, addressDirectoryURL: destinationURL, metadata: detailedMetadata, downloadedFromURL: downloadedFromURL)
         return nil
     }
     
-    private func saveAvoidingCollisions(tmpLocation: URL?, data: Data?, destinationURL: URL, addressDirectoryURL: URL, metadata: DetailedTokenMetadata) {
+    private func saveAvoidingCollisions(tmpLocation: URL?, data: Data?, destinationURL: URL, addressDirectoryURL: URL, metadata: DetailedTokenMetadata, downloadedFromURL: URL?) {
+        guard let contentHash = downloadedFromURL?.fnv1aHash() ?? data?.fnv1aHash(),
+              !MetadataStorage.has(contentHash: contentHash, addressDirectoryURL: addressDirectoryURL) else {
+            if let tmpLocation = tmpLocation {
+                try? FileManager.default.removeItem(at: tmpLocation)
+            }
+            return
+        }
+        
         func uniqueURL(for url: URL, tmpLocation: URL?, data: Data?) -> URL {
             let fileName = url.deletingPathExtension().lastPathComponent
             let fileExtension = url.pathExtension
@@ -86,7 +94,7 @@ struct FileSaver {
             }
             return newURL
         }
-
+        
         func areFilesDifferent(url1: URL, url2: URL?, data: Data?) -> Bool {
             guard let fileAttributes = try? fileManager.attributesOfItem(atPath: url1.path),
                   let fileSize = fileAttributes[.size] as? NSNumber else { return true }
@@ -106,7 +114,7 @@ struct FileSaver {
                 return true
             }
         }
-
+        
         var finalDestinationURL = destinationURL
         do {
             if let tmpLocation = tmpLocation {
@@ -129,6 +137,7 @@ struct FileSaver {
         let minimalMetadata = metadata.minimal
         MetadataStorage.store(minimalMetadata: minimalMetadata, filePath: finalDestinationURL.path)
         MetadataStorage.store(detailedMetadata: metadata, correspondingTo: minimalMetadata, addressDirectoryURL: addressDirectoryURL)
+        MetadataStorage.store(contentHash: contentHash, addressDirectoryURL: addressDirectoryURL)
     }
     
     private func extractValueFromJson(jsonData: Data) -> DataOrUrl? {

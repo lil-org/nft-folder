@@ -10,7 +10,7 @@ extension URL {
     static let deeplinkScheme = "nft-folder://"
     
     private enum MetadataKind: String {
-        case address, minimal, detailed
+        case address, minimal, detailed, hashed
     }
     
     static func nftDirectory(wallet: WatchOnlyWallet, createIfDoesNotExist: Bool) -> URL? {
@@ -38,6 +38,10 @@ extension URL {
     
     static func detailedMetadataDirectory(addressDirectoryURL: URL) -> URL? {
         return metadataDirectory(walletFolderURL: addressDirectoryURL, metadataKind: .detailed)
+    }
+    
+    static func hashedMetadataDirectory(addressDirectoryURL: URL) -> URL? {
+        return metadataDirectory(walletFolderURL: addressDirectoryURL, metadataKind: .hashed)
     }
     
     static func detailedMetadataDirectory(filePath: String) -> URL? {
@@ -100,6 +104,10 @@ extension URL {
         } else {
             return "application/octet-stream"
         }
+    }
+    
+    func fnv1aHash() -> UInt64? {
+        return absoluteString.data(using: .utf8)?.fnv1aHash()
     }
     
 }

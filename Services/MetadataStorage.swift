@@ -4,6 +4,8 @@ import Foundation
 
 struct MetadataStorage {
     
+    private static let fileManager = FileManager.default
+    
     static func detailedMetadata(nftFilePath: String) -> DetailedTokenMetadata? {
         if let fileId = fileId(path: nftFilePath), var url = URL.minimalMetadataDirectory(filePath: nftFilePath) {
             url.append(path: fileId)
@@ -17,6 +19,22 @@ struct MetadataStorage {
             }
         }
         return nil
+    }
+    
+    static func has(contentHash: UInt64, addressDirectoryURL: URL) -> Bool {
+        if var url = URL.hashedMetadataDirectory(addressDirectoryURL: addressDirectoryURL) {
+            url.append(path: String(contentHash))
+            return fileManager.fileExists(atPath: url.path)
+        } else {
+            return false
+        }
+    }
+    
+    static func store(contentHash: UInt64, addressDirectoryURL: URL) {
+        if var url = URL.hashedMetadataDirectory(addressDirectoryURL: addressDirectoryURL) {
+            url.append(path: String(contentHash))
+            try? Data().write(to: url)
+        }
     }
     
     static func store(detailedMetadata: DetailedTokenMetadata, correspondingTo minimal: MinimalTokenMetadata, addressDirectoryURL: URL) {
