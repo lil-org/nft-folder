@@ -4,56 +4,49 @@ import Foundation
 
 class AllDownloadsManager {
  
+    enum Status {
+        case downloading, notDownloading
+    }
+    
     static let shared = AllDownloadsManager()
     private init() {}
     
     private let walletsService = WalletsService.shared
-        
-    func start() {
+    var statuses = [WatchOnlyWallet: Status]()
+    
+    func start() {}
+    
+    func startDownloads(wallet: WatchOnlyWallet) {
+        statuses[wallet] = .downloading
+        // TODO: make it fit within ongoing downloads
+        // TODO: make sure not to start twice for any wallet
+        WalletDownloader.shared.study(wallet: wallet)
+        postStatusUpdateNotification()
+    }
+    
+    func stopDownloads(wallet: WatchOnlyWallet) {
+        statuses[wallet] = .notDownloading
         // TODO: implement
-        // TODO: start refresh maybe
-        // TODO: check folders after launch — maybe they changed
-        // TODO: maybe there are already some downloads running — started with explicit launch request
-    }
-    
-    func syncNewWallet(wallet: WatchOnlyWallet) {
-        // TODO: make it fit within ongoing downloads
-        // TODO: make sure not to start twice for any wallet
-        WalletDownloader.shared.study(wallet: wallet)
-    }
-    
-    func prioritizeDownloads(wallet: WatchOnlyWallet) {
-        // TODO: make it fit within ongoing downloads
-        // TODO: make sure not to start twice for any wallet
-        WalletDownloader.shared.study(wallet: wallet)
+        postStatusUpdateNotification()
     }
     
     func walletsFoldersChanged() {
         let removedWallets = walletsService.checkFoldersForNewWalletsAndRemovedWallets { newWallet in
-            self.syncNewWallet(wallet: newWallet)
+            self.startDownloads(wallet: newWallet)
         }
         for removedWallet in removedWallets {
             stopDownloads(wallet: removedWallet)
         }
     }
     
-    func stopDownloads(wallet: WatchOnlyWallet) {
-        // TODO: implement
-    }
+    func prioritizeDownloads(mbAddressFolderName: String?) {}
     
-    func prioritizeDownloads(mbAddressFolderName: String?) {
-        if let folderName = mbAddressFolderName, let wallet = walletsService.wallet(folderName: folderName) {
-            // TODO: implement
-        } else {
-            // TODO: implement
-        }
-    }
+    func prioritizeDownloads(wallet: WatchOnlyWallet) {}
     
-    // TODO: always check for running syncs before starting new ones
-    func syncOnUserRequestIfNeeded() {
-        for wallet in walletsService.wallets {
-            WalletDownloader.shared.study(wallet: wallet)
-        }
+    func syncOnUserRequestIfNeeded() {}
+    
+    private func postStatusUpdateNotification() {
+        NotificationCenter.default.post(name: .downloadsStatusUpdate, object: nil)
     }
     
 }

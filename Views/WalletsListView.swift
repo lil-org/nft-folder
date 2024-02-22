@@ -10,6 +10,7 @@ struct WalletsListView: View {
     @State private var showSettingsPopup = false
     @State private var newWalletAddress = ""
     @State private var wallets = WalletsService.shared.wallets
+    @State private var downloadsStatuses = AllDownloadsManager.shared.statuses
     
     init(showAddWalletPopup: Bool) {
         self.showAddWalletPopup = showAddWalletPopup
@@ -33,7 +34,24 @@ struct WalletsListView: View {
                                     )
                                 Text(wallet.listDisplayName).font(.system(size: 15, weight: .medium))
                                 Spacer()
-                            }
+                                let status = downloadsStatuses[wallet] ?? .notDownloading
+                                switch status {
+                                case .downloading:
+                                    ProgressView()
+                                        .progressViewStyle(CircularProgressViewStyle()).scaleEffect(0.5)
+                                    Button(action: {
+                                        AllDownloadsManager.shared.stopDownloads(wallet: wallet)
+                                    }) {
+                                        Images.pause
+                                    }.buttonStyle(BorderlessButtonStyle())
+                                case .notDownloading:
+                                    Button(action: {
+                                        AllDownloadsManager.shared.startDownloads(wallet: wallet)
+                                    }) {
+                                        Images.sync
+                                    }
+                                }
+                            }.frame(height: 32)
                             .contentShape(Rectangle()).onTapGesture {
                                 openFolderForWallet(wallet)
                             }
@@ -68,7 +86,9 @@ struct WalletsListView: View {
                     }
                 }
             }
-        }.sheet(isPresented: $showAddWalletPopup) {
+        }.onReceive(NotificationCenter.default.publisher(for: .downloadsStatusUpdate), perform: { _ in
+            self.updateDisplayedWallets()
+        }).sheet(isPresented: $showAddWalletPopup) {
             VStack {
                 Text(Strings.addWallet).fontWeight(.medium)
                 TextField(Strings.addressOrEns, text: $newWalletAddress)
@@ -130,7 +150,7 @@ struct WalletsListView: View {
                     WalletsService.shared.addWallet(wallet)
                     FolderIcon.set(for: wallet)
                     updateDisplayedWallets()
-                    AllDownloadsManager.shared.syncNewWallet(wallet: wallet)
+                    AllDownloadsManager.shared.startDownloads(wallet: wallet)
                 }
                 showAddWalletPopup = false
                 newWalletAddress = ""
@@ -143,6 +163,7 @@ struct WalletsListView: View {
     
     private func updateDisplayedWallets() {
         wallets = WalletsService.shared.wallets
+        downloadsStatuses = AllDownloadsManager.shared.statuses
     }
     
 }
