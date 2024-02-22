@@ -12,6 +12,7 @@ class FileDownloader {
     private var downloadTasks = [DownloadFileTask]()
     private var downloadsInProgress = 0
     private var ongoingUrlSessionTasks = [String: URLSessionDownloadTask]()
+    private var queuedURLsHashes = Set<UInt64>()
     
     func addTasks(_ tasks: [DownloadFileTask]) {
         for task in tasks {
@@ -28,8 +29,10 @@ class FileDownloader {
             }
         case .url(let url):
             if let contentHash = url.fnv1aHash(),
+               !queuedURLsHashes.contains(contentHash),
                !MetadataStorage.has(contentHash: contentHash, addressDirectoryURL: task.destinationDirectory),
                !MetadataStorage.hasSomethingFor(detailedMetadata: task.detailedMetadata, addressDirectoryURL: task.destinationDirectory) {
+                queuedURLsHashes.insert(contentHash)
                 downloadTasks.append(task)
             }
         case .none:
@@ -42,6 +45,10 @@ class FileDownloader {
         var task = downloadTasks.removeFirst()
         downloadsInProgress += 1
         downloadFile(task: task) { [weak self] result in
+            if let url = task.currentURL, let contentHash = url.fnv1aHash() {
+                self?.queuedURLsHashes.remove(contentHash)
+            }
+            
             self?.downloadsInProgress -= 1
             switch result {
             case .success:
