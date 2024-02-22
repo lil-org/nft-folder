@@ -10,9 +10,9 @@ struct DetailedTokenMetadata: Codable {
     let tokenId: String
     let tokenUrl: String?
     let description: String?
+    let network: Network
     
     // TODO: more info from Token
-    
     // TODO: make sure these links are unique
     // TODO: clarify links model - file type, size, etc.
     
@@ -36,6 +36,10 @@ extension DetailedTokenMetadata {
             }
             return "\(collectionDisplayName) - \(name ?? tokenId)".trimmingCharacters(in: ["."])
         }
+    }
+    
+    var minimal: MinimalTokenMetadata {
+        return MinimalTokenMetadata(tokenId: tokenId, collectionAddress: collectionAddress, network: network)
     }
     
 }

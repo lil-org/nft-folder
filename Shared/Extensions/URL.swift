@@ -36,6 +36,10 @@ extension URL {
         return metadataDirectory(walletFolderURL: url, metadataKind: .detailed)
     }
     
+    static func detailedMetadataDirectory(addressDirectoryURL: URL) -> URL? {
+        return metadataDirectory(walletFolderURL: addressDirectoryURL, metadataKind: .detailed)
+    }
+    
     static func detailedMetadataDirectory(filePath: String) -> URL? {
         return metadataDirectory(filePath: filePath, metadataKind: .detailed)
     }

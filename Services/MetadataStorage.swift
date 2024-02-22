@@ -19,8 +19,8 @@ struct MetadataStorage {
         return nil
     }
     
-    static func store(detailedMetadata: DetailedTokenMetadata, correspondingTo minimal: MinimalTokenMetadata, filePath: String) {
-        if let data = try? JSONEncoder().encode(detailedMetadata), var url = URL.detailedMetadataDirectory(filePath: filePath) {
+    static func store(detailedMetadata: DetailedTokenMetadata, correspondingTo minimal: MinimalTokenMetadata, addressDirectoryURL: URL) {
+        if let data = try? JSONEncoder().encode(detailedMetadata), var url = URL.detailedMetadataDirectory(addressDirectoryURL: addressDirectoryURL) {
             url.append(path: fileNameCorrespondingTo(minimalMetadata: minimal))
             try? data.write(to: url)
         }
