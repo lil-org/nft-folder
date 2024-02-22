@@ -26,9 +26,13 @@ class FileDownloader {
     private func preprocess(task: DownloadFileTask) {
         switch task.currentDataOrURL {
         case .data(let data, let fileExtension):
-            save(task, tmpLocation: nil, data: data, fileExtension: fileExtension)
+            if !MetadataStorage.hasSomethingFor(detailedMetadata: task.detailedMetadata, addressDirectoryURL: task.destinationDirectory) {
+                save(task, tmpLocation: nil, data: data, fileExtension: fileExtension)
+            }
         case .url(let url):
-            if let contentHash = url.fnv1aHash(), !MetadataStorage.has(contentHash: contentHash, addressDirectoryURL: task.destinationDirectory) {
+            if let contentHash = url.fnv1aHash(),
+               !MetadataStorage.has(contentHash: contentHash, addressDirectoryURL: task.destinationDirectory),
+               !MetadataStorage.hasSomethingFor(detailedMetadata: task.detailedMetadata, addressDirectoryURL: task.destinationDirectory) {
                 downloadTasks.append(task)
             }
         case .none:

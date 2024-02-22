@@ -30,6 +30,15 @@ struct MetadataStorage {
         }
     }
     
+    static func hasSomethingFor(detailedMetadata: DetailedTokenMetadata, addressDirectoryURL: URL) -> Bool {
+        if var url = URL.detailedMetadataDirectory(addressDirectoryURL: addressDirectoryURL) {
+            url.append(path: fileNameCorrespondingTo(minimalMetadata: detailedMetadata.minimal))
+            return fileManager.fileExists(atPath: url.path)
+        } else {
+            return false
+        }
+    }
+    
     static func store(contentHash: UInt64, addressDirectoryURL: URL) {
         if var url = URL.hashedMetadataDirectory(addressDirectoryURL: addressDirectoryURL) {
             url.append(path: String(contentHash))
