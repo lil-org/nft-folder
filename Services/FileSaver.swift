@@ -134,7 +134,7 @@ struct FileSaver {
             print("error saving file: \(error)") // TODO: test on lots of data to see if it happens
         }
         
-        let minimalMetadata = metadata.minimal
+        let minimalMetadata = metadata.minimalMetadata(dowloadedFileSourceURL: downloadedFromURL)
         MetadataStorage.store(minimalMetadata: minimalMetadata, filePath: finalDestinationURL.path)
         MetadataStorage.store(detailedMetadata: metadata, correspondingTo: minimalMetadata, addressDirectoryURL: addressDirectoryURL)
         MetadataStorage.store(contentHash: contentHash, addressDirectoryURL: addressDirectoryURL)

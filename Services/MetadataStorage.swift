@@ -32,7 +32,7 @@ struct MetadataStorage {
     
     static func hasSomethingFor(detailedMetadata: DetailedTokenMetadata, addressDirectoryURL: URL) -> Bool {
         if var url = URL.detailedMetadataDirectory(addressDirectoryURL: addressDirectoryURL) {
-            url.append(path: fileNameCorrespondingTo(minimalMetadata: detailedMetadata.minimal))
+            url.append(path: fileNameCorrespondingTo(minimalMetadata: detailedMetadata.minimalMetadata()))
             return fileManager.fileExists(atPath: url.path)
         } else {
             return false

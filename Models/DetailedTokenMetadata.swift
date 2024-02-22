@@ -38,8 +38,8 @@ extension DetailedTokenMetadata {
         }
     }
     
-    var minimal: MinimalTokenMetadata {
-        return MinimalTokenMetadata(tokenId: tokenId, collectionAddress: collectionAddress, network: network)
+    func minimalMetadata(dowloadedFileSourceURL: URL? = nil) -> MinimalTokenMetadata {
+        return MinimalTokenMetadata(tokenId: tokenId, collectionAddress: collectionAddress, network: network, dowloadedFileSourceURL: dowloadedFileSourceURL)
     }
     
 }
