@@ -94,7 +94,10 @@ class FileDownloader {
     
     private func save(_ task: DownloadFileTask, tmpLocation: URL?, data: Data?, fileExtension: String) {
         if let redirectURL = FileSaver.shared.saveForTask(task, tmpLocation: tmpLocation, data: data, fileExtension: fileExtension) {
-            // TODO: queue updated or new task for that redirectURL
+            var updatedTask = task
+            if updatedTask.setRedirectURL(redirectURL) {
+                addTasks([updatedTask])
+            }
         }
     }
     

@@ -10,9 +10,20 @@ struct DownloadFileTask {
     let minimalMetadata: MinimalTokenMetadata
     let detailedMetadata: DetailedTokenMetadata
     
-    private var sourceIndex = 0 // TODO: not sure about this one
+    private var sourceIndex = 0
+    private var redirectURL: URL?
+    
+    mutating func setRedirectURL(_ url: URL) -> Bool {
+        if redirectURL == nil {
+            redirectURL = url
+            return true
+        } else {
+            return false
+        }
+    }
     
     mutating func willTryAnotherSource() -> Bool {
+        redirectURL = nil
         if sourceIndex + 1 < detailedMetadata.probableDataOrUrls.count {
             sourceIndex += 1
             return true
@@ -21,12 +32,15 @@ struct DownloadFileTask {
         }
     }
     
-    var currentDataOrURL: DataOrUrl? { // TODO: not sure about this one
+    var currentDataOrURL: DataOrUrl? {
+        if let redirectURL = redirectURL {
+            return DataOrUrl.url(redirectURL)
+        }
         guard detailedMetadata.probableDataOrUrls.count > sourceIndex else { return nil }
         return detailedMetadata.probableDataOrUrls[sourceIndex]
     }
     
-    var currentURL: URL? { // TODO: not sure about this one
+    var currentURL: URL? {
         if case let .url(url) = currentDataOrURL {
             return url
         } else {
