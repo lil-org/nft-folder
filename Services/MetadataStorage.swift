@@ -4,13 +4,6 @@ import Foundation
 
 struct MetadataStorage {
     
-    static func store(detailedMetadata: DetailedTokenMetadata, correspondingTo minimal: MinimalTokenMetadata, wallet: WatchOnlyWallet) {
-        if let data = try? JSONEncoder().encode(detailedMetadata), var url = URL.detailedMetadataDirectory(wallet: wallet) {
-            url.append(path: fileNameCorrespondingTo(minimalMetadata: minimal))
-            try? data.write(to: url)
-        }
-    }
-    
     static func detailedMetadata(nftFilePath: String) -> DetailedTokenMetadata? {
         if let fileId = fileId(path: nftFilePath), var url = URL.minimalMetadataDirectory(filePath: nftFilePath) {
             url.append(path: fileId)
@@ -26,9 +19,16 @@ struct MetadataStorage {
         return nil
     }
     
-    static func store(metadata: MinimalTokenMetadata, filePath: String) {
+    static func store(detailedMetadata: DetailedTokenMetadata, correspondingTo minimal: MinimalTokenMetadata, filePath: String) {
+        if let data = try? JSONEncoder().encode(detailedMetadata), var url = URL.detailedMetadataDirectory(filePath: filePath) {
+            url.append(path: fileNameCorrespondingTo(minimalMetadata: minimal))
+            try? data.write(to: url)
+        }
+    }
+    
+    static func store(minimalMetadata: MinimalTokenMetadata, filePath: String) {
         if let fileId = fileId(path: filePath),
-           let data = try? JSONEncoder().encode(metadata),
+           let data = try? JSONEncoder().encode(minimalMetadata),
            var url = URL.minimalMetadataDirectory(filePath: filePath) {
             url.append(path: fileId)
             try? data.write(to: url)

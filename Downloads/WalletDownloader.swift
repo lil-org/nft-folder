@@ -47,11 +47,8 @@ class WalletDownloader {
         
         let tasks = nodes.map { node -> DownloadFileTask in
             let token = node.token
-            
             let minimal = MinimalTokenMetadata(tokenId: token.tokenId, collectionAddress: token.collectionAddress, network: network)
             let detailed = token.detailedMetadata
-            MetadataStorage.store(detailedMetadata: detailed, correspondingTo: minimal, wallet: wallet)
-            
             return DownloadFileTask(destinationDirectory: destination, minimalMetadata: minimal, detailedMetadata: detailed)
         }
         
