@@ -11,9 +11,7 @@ struct DetailedTokenMetadata: Codable {
     let description: String?
     let network: Network
     let tokenStandard: String?
-    
-    var probableDataOrUrls: [DataOrUrl]
-    let representations: Representations
+    let contentRepresentations: [ContentRepresentation]
     
 }
 

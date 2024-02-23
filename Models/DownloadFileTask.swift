@@ -22,7 +22,7 @@ struct DownloadFileTask {
     
     mutating func willTryAnotherSource() -> Bool {
         redirectURL = nil
-        if sourceIndex + 1 < detailedMetadata.probableDataOrUrls.count {
+        if sourceIndex + 1 < detailedMetadata.contentRepresentations.count {
             sourceIndex += 1
             return true
         } else {
@@ -34,8 +34,8 @@ struct DownloadFileTask {
         if let redirectURL = redirectURL {
             return DataOrUrl.url(redirectURL)
         }
-        guard detailedMetadata.probableDataOrUrls.count > sourceIndex else { return nil }
-        return detailedMetadata.probableDataOrUrls[sourceIndex]
+        guard detailedMetadata.contentRepresentations.count > sourceIndex else { return nil }
+        return detailedMetadata.contentRepresentations[sourceIndex].dataOrUrl
     }
     
     var currentURL: URL? {

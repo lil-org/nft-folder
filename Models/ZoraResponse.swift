@@ -72,42 +72,30 @@ struct Media: Codable {
     }
 }
 
-struct Representations: Codable {
-    let contentUrl: String?
-    
-    let contentPreviewUrl: String?
-    let contentLargeUrl: String?
-    
-    let contentMimeType: String?
-    let contentSize: String?
-    
-    let image: String?
-    let thumbnailImage: String?
-    let imageSize: String?
-    
-    let tokenUrl: String?
-}
-
 extension Token {
     
     func detailedMetadata(network: Network) -> DetailedTokenMetadata {
-        let probableDataOrUrls = [content?.url, image?.url, image?.mediaEncoding?.thumbnail, tokenUrl].compactMap { (link) -> DataOrUrl? in
-            if let dataOrURL = DataOrUrl(urlString: link) {
-                return dataOrURL
+        let rawContentRepresentations = [
+            ContentRepresentation(url: content?.url, size: content?.size, mimeType: content?.mimeType, knownKind: nil),
+            ContentRepresentation(url: content?.mediaEncoding?.preview ?? content?.mediaEncoding?.large, size: nil, mimeType: content?.mimeType, knownKind: nil),
+            ContentRepresentation(url: image?.url, size: image?.size, mimeType: image?.mimeType, knownKind: .image),
+            ContentRepresentation(url: image?.mediaEncoding?.thumbnail, size: nil, mimeType: image?.mimeType, knownKind: .image),
+            ContentRepresentation(url: tokenUrl, size: nil, mimeType: tokenUrlMimeType, knownKind: nil)
+        ]
+        
+        var contentRepresentations = [ContentRepresentation]()
+        var hasDataRepresentation = false
+        for item in rawContentRepresentations {
+            guard let item = item else { continue }
+            if case .data = item.dataOrUrl {
+                if !hasDataRepresentation {
+                    hasDataRepresentation = true
+                    contentRepresentations.append(item)
+                }
             } else {
-                return nil
+                contentRepresentations.append(item)
             }
         }
-        
-        let representations = Representations(contentUrl: content?.url,
-                                              contentPreviewUrl: content?.mediaEncoding?.preview,
-                                              contentLargeUrl: content?.mediaEncoding?.large,
-                                              contentMimeType: content?.mimeType,
-                                              contentSize: content?.size,
-                                              image: image?.url,
-                                              thumbnailImage: image?.mediaEncoding?.thumbnail,
-                                              imageSize: image?.size,
-                                              tokenUrl: tokenUrl)
         
         return DetailedTokenMetadata(name: name,
                                      collectionName: collectionName,
@@ -116,8 +104,7 @@ extension Token {
                                      description: description,
                                      network: network,
                                      tokenStandard: tokenStandard,
-                                     probableDataOrUrls: probableDataOrUrls,
-                                     representations: representations)
+                                     contentRepresentations: contentRepresentations)
     }
     
 }
