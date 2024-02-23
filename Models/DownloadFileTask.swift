@@ -52,7 +52,7 @@ struct DownloadFileTask {
         self.detailedMetadata = detailedMetadata
         self.fileName = detailedMetadata.fileDisplayName
         self.dataOrURLs = detailedMetadata.contentRepresentations.compactMap { content -> (DataOrUrl?) in
-            if let size = content.size, !Defaults.unlimitedFileSize, size > 50000000 {
+            if let size = content.size, !Defaults.unlimitedFileSize, size > Int.defaultFileSizeLimit {
                 return nil
             } else if content.kind == .html || (!Defaults.downloadGlb && content.kind == .glb) {
                 return nil

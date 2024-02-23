@@ -4,6 +4,6 @@ import Foundation
 
 extension Int {
     
-    static let defaultFileSizeLimit = 50000000
+    static let defaultFileSizeLimit = 52428800
     
 }
