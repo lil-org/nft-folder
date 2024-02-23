@@ -8,6 +8,7 @@ struct DownloadFileTask {
     let fileName: String
     let detailedMetadata: DetailedTokenMetadata
     
+    private let dataOrURLs: [DataOrUrl]
     private var sourceIndex = 0
     private var redirectURL: URL?
     
@@ -22,7 +23,7 @@ struct DownloadFileTask {
     
     mutating func willTryAnotherSource() -> Bool {
         redirectURL = nil
-        if sourceIndex + 1 < detailedMetadata.contentRepresentations.count {
+        if sourceIndex + 1 < dataOrURLs.count {
             sourceIndex += 1
             return true
         } else {
@@ -34,8 +35,8 @@ struct DownloadFileTask {
         if let redirectURL = redirectURL {
             return DataOrUrl.url(redirectURL)
         }
-        guard detailedMetadata.contentRepresentations.count > sourceIndex else { return nil }
-        return detailedMetadata.contentRepresentations[sourceIndex].dataOrUrl
+        guard dataOrURLs.count > sourceIndex else { return nil }
+        return dataOrURLs[sourceIndex]
     }
     
     var currentURL: URL? {
@@ -50,6 +51,15 @@ struct DownloadFileTask {
         self.destinationDirectory = destinationDirectory
         self.detailedMetadata = detailedMetadata
         self.fileName = detailedMetadata.fileDisplayName
+        self.dataOrURLs = detailedMetadata.contentRepresentations.compactMap { content -> (DataOrUrl?) in
+            if let size = content.size, !Defaults.unlimitedFileSize, size > 50000000 {
+                return nil
+            } else if content.kind == .html || (!Defaults.downloadGlb && content.kind == .glb) {
+                return nil
+            } else {
+                return content.dataOrUrl
+            }
+        }
     }
     
 }
