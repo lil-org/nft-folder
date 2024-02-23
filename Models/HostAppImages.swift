@@ -8,6 +8,6 @@ extension Images {
     static let gearshape = Image(systemName: "gearshape")
     static let logo = Image("folderLogo")
     static let pause = Image(systemName: "pause.fill")
-    static let sync = Image(systemName: "arrow.triangle.2.circlepath")
+    static let sync = Image(systemName: "arrow.clockwise")
     
 }

@@ -25,6 +25,8 @@ struct Strings {
     static let cancel = "cancel"
     static let openNftFolder = "open nft folder"
     static let ok = "ok"
+    static let sync = "↻ sync"
+    static let stopDownloads = "❙❙ pause"
     
     static let ens = "ENS"
     static let didNotUpload = "did not upload"

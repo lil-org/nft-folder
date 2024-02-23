@@ -26,6 +26,7 @@ struct WalletsListView: View {
                 List {
                     Section(header: Text(Strings.wallets).font(.system(size: 36, weight: .bold)).foregroundColor(.primary)) {
                         ForEach(wallets, id: \.self) { wallet in
+                            let status = downloadsStatuses[wallet] ?? .notDownloading
                             HStack {
                                 Circle()
                                     .frame(width: 30, height: 30)
@@ -34,7 +35,6 @@ struct WalletsListView: View {
                                     )
                                 Text(wallet.listDisplayName).font(.system(size: 15, weight: .medium))
                                 Spacer()
-                                let status = downloadsStatuses[wallet] ?? .notDownloading
                                 switch status {
                                 case .downloading:
                                     ProgressView()
@@ -56,6 +56,17 @@ struct WalletsListView: View {
                                 openFolderForWallet(wallet)
                             }
                             .contextMenu {
+                                switch status {
+                                case .downloading:
+                                    Button(Strings.stopDownloads, action: {
+                                        AllDownloadsManager.shared.stopDownloads(wallet: wallet)
+                                    })
+                                case .notDownloading:
+                                    Button(Strings.sync, action: {
+                                        AllDownloadsManager.shared.startDownloads(wallet: wallet)
+                                    })
+                                }
+                                Divider()
                                 Button(Strings.viewOnZora, action: {
                                     if let galleryURL = NftGallery.zora.url(walletAddress: wallet.address) {
                                         DispatchQueue.main.async { NSWorkspace.shared.open(galleryURL) }
