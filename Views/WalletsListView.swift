@@ -57,15 +57,17 @@ struct WalletsListView: View {
                             }
                             .contextMenu {
                                 Button(Strings.viewOnZora, action: {
-                                    // TODO: implement
+                                    if let galleryURL = NftGallery.zora.url(walletAddress: wallet.address) {
+                                        DispatchQueue.main.async { NSWorkspace.shared.open(galleryURL) }
+                                    }
                                 })
-                                
                                 Button(Strings.viewOnOpensea, action: {
-                                    // TODO: implement
+                                    if let galleryURL = NftGallery.opensea.url(walletAddress: wallet.address) {
+                                        DispatchQueue.main.async { NSWorkspace.shared.open(galleryURL) }
+                                    }
                                 })
-                                
                                 Button(Strings.hardReset, action: {
-                                    // TODO: implement
+                                    hardReset(wallet: wallet)
                                 })
                                 Button(Strings.removeFolder, action: {
                                     WalletsService.shared.removeWallet(wallet)
@@ -149,6 +151,10 @@ struct WalletsListView: View {
             NSWorkspace.shared.open(nftDirectory)
         }
         AllDownloadsManager.shared.prioritizeDownloads(wallet: wallet)
+    }
+    
+    private func hardReset(wallet: WatchOnlyWallet) {
+        // TODO: implement
     }
     
     private func addWallet() {
