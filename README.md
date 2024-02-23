@@ -1,10 +1,8 @@
 # nft-folder-macos
 
-testflight @ [folder.lil.org](https://folder.lil.org)
+### [folder.lil.org](https://folder.lil.org)
 
-
-![1](https://github.com/grachyov/nft-folder-macos/assets/7680193/232036e1-28cc-4f11-a1cc-67e52e9ee049)
-![2](https://github.com/grachyov/nft-folder-macos/assets/7680193/f4fd6811-291b-4015-abcd-8cfc041b3291)
+![1](https://github.com/lil-org/nft-folder-macos/assets/7680193/7ea5a8cf-f2d6-4631-aba4-0bbab41a4467)
 
 ## development
 * run the xcode project
