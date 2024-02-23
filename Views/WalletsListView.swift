@@ -66,6 +66,7 @@ struct WalletsListView: View {
                                         DispatchQueue.main.async { NSWorkspace.shared.open(galleryURL) }
                                     }
                                 })
+                                Divider()
                                 Button(Strings.hardReset, action: {
                                     hardReset(wallet: wallet)
                                 })
@@ -78,7 +79,6 @@ struct WalletsListView: View {
                                     updateDisplayedWallets()
                                 })
                             }
-
                         }
                     }
                 }
