@@ -4,8 +4,19 @@ import Foundation
 
 class WalletDownloader {
     
-    private let fileDownloader = FileDownloader()
     private var networks = Network.allCases
+    private var didStudy = false
+    private var completion: () -> Void
+    
+    private lazy var fileDownloader = FileDownloader { [weak self] in
+        if self?.didStudy == true {
+            self?.completion()
+        }
+    }
+    
+    init(completion: @escaping () -> Void) {
+        self.completion = completion
+    }
     
     func study(wallet: WatchOnlyWallet) {
         goThroughZora(wallet: wallet)
@@ -20,6 +31,11 @@ class WalletDownloader {
             goThroughZora(wallet: wallet, networkIndex: networkIndex, endCursor: endCursor)
         } else if networkIndex + 1 < networks.count {
             goThroughZora(wallet: wallet, networkIndex: networkIndex + 1, endCursor: nil)
+        } else {
+            didStudy = true
+            if !fileDownloader.hasPendingTasks {
+                completion()
+            }
         }
     }
     

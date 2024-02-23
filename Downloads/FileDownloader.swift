@@ -4,6 +4,8 @@ import Cocoa
 
 class FileDownloader {
     
+    var hasPendingTasks: Bool { !queuedURLsHashes.isEmpty }
+    
     private enum DownloadFileResult {
         case success, cancel, failure
     }
@@ -13,6 +15,11 @@ class FileDownloader {
     private var downloadsInProgress = 0
     private var ongoingUrlSessionTasks = [String: URLSessionDownloadTask]()
     private var queuedURLsHashes = Set<UInt64>()
+    private var completion: () -> Void
+    
+    init(completion: @escaping () -> Void) {
+        self.completion = completion
+    }
     
     func addTasks(_ tasks: [DownloadFileTask]) {
         for task in tasks {
@@ -41,6 +48,7 @@ class FileDownloader {
     }
     
     private func downloadNextIfNeeded() {
+        guard hasPendingTasks else { completion(); return }
         guard downloadsInProgress < 23 && !downloadTasks.isEmpty else { return }
         var task = downloadTasks.removeFirst()
         downloadsInProgress += 1
