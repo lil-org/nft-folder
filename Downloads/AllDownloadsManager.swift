@@ -21,7 +21,9 @@ class AllDownloadsManager {
     func startDownloads(wallet: WatchOnlyWallet) {
         statuses[wallet] = .downloading
         let walletDownloader = WalletDownloader { [weak self] in
-            self?.stopDownloads(wallet: wallet)
+            DispatchQueue.main.async {
+                self?.stopDownloads(wallet: wallet)
+            }
         }
         walletDownloader.study(wallet: wallet)
         postStatusUpdateNotification()
