@@ -42,7 +42,16 @@ class Navigator: NSObject {
     
     // TODO: refactor, clean up
     func showNftMetadata(filePath: String) {
-        let contentView = MetadataView(metadata: MetadataStorage.detailedMetadata(nftFilePath: filePath))
+        guard let metadata = MetadataStorage.detailedMetadata(nftFilePath: filePath) else {
+            let alert = NSAlert()
+            alert.messageText = Strings.somethingWentWrong
+            alert.alertStyle = .informational
+            alert.addButton(withTitle: Strings.ok)
+            _ = alert.runModal()
+            return
+        }
+        
+        let contentView = MetadataView(metadata: metadata)
         let window = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: 300, height: 400),
             styleMask: [.closable, .fullSizeContentView, .titled, .resizable],

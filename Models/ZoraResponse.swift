@@ -87,13 +87,16 @@ extension Token {
         var hasDataRepresentation = false
         for item in rawContentRepresentations {
             guard let item = item else { continue }
-            if case .data = item.dataOrUrl {
+            switch item.dataOrUrl {
+            case .data:
                 if !hasDataRepresentation {
                     hasDataRepresentation = true
                     contentRepresentations.append(item)
                 }
-            } else {
-                contentRepresentations.append(item)
+            case .url(let url):
+                if !contentRepresentations.contains(where: { $0.dataOrUrl == item.dataOrUrl }) {
+                    contentRepresentations.append(item)
+                }
             }
         }
         

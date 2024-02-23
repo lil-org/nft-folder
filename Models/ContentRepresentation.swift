@@ -5,7 +5,7 @@ import UniformTypeIdentifiers
 
 struct ContentRepresentation: Codable {
     
-    enum Kind: Codable {
+    enum Kind: String, Codable {
         case image, audio, video, html, glb, other
     }
     

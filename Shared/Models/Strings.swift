@@ -33,6 +33,7 @@ struct Strings {
     static let retry = "retry"
     static let nftFolder = "nft folder"
     static let nftInfo = "metadata"
+    static let somethingWentWrong = "something went wrong"
     
     static let maxFileSize50mb = "max file size 50 mb"
     static let downloadGlb = "download .glb files"
