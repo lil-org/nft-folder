@@ -38,20 +38,6 @@ struct Token: Codable {
     let tokenStandard: String?
 }
 
-struct Media: Codable {
-    let url: String?
-    let mimeType: String?
-    let mediaEncoding: Encoding?
-    let size: String?
-    
-    struct Encoding: Codable {
-        let original: String?
-        let thumbnail: String?
-        let preview: String?
-        let large: String?
-    }
-}
-
 struct InlineContentJSON: Decodable {
     
     private let animationURL: String?
@@ -72,24 +58,53 @@ struct InlineContentJSON: Decodable {
     
 }
 
+struct Media: Codable {
+    let url: String?
+    let mimeType: String?
+    let mediaEncoding: Encoding?
+    let size: String?
+    
+    struct Encoding: Codable {
+        let original: String?
+        let thumbnail: String?
+        let preview: String?
+        let large: String?
+    }
+}
+
 extension Token {
     
     func detailedMetadata(network: Network) -> DetailedTokenMetadata {
-        let probableDataOrUrls = [content?.url, image?.url, image?.mediaEncoding?.thumbnail, tokenUrl].compactMap { (link) -> DataOrUrl? in
-            if let dataOrURL = DataOrUrl(urlString: link) {
-                return dataOrURL
+        let rawContentRepresentations = [
+            ContentRepresentation(url: content?.url, size: content?.size, mimeType: content?.mimeType, knownKind: nil),
+            ContentRepresentation(url: content?.mediaEncoding?.preview ?? content?.mediaEncoding?.large, size: nil, mimeType: content?.mimeType, knownKind: nil),
+            ContentRepresentation(url: image?.url, size: image?.size, mimeType: image?.mimeType, knownKind: .image),
+            ContentRepresentation(url: image?.mediaEncoding?.thumbnail, size: nil, mimeType: image?.mimeType, knownKind: .image),
+            ContentRepresentation(url: tokenUrl, size: nil, mimeType: tokenUrlMimeType, knownKind: nil)
+        ]
+        
+        var contentRepresentations = [ContentRepresentation]()
+        var hasDataRepresentation = false
+        for item in rawContentRepresentations {
+            guard let item = item else { continue }
+            if case .data = item.dataOrUrl {
+                if !hasDataRepresentation {
+                    hasDataRepresentation = true
+                    contentRepresentations.append(item)
+                }
             } else {
-                return nil
+                contentRepresentations.append(item)
             }
         }
+        
         return DetailedTokenMetadata(name: name,
                                      collectionName: collectionName,
                                      collectionAddress: collectionAddress,
                                      tokenId: tokenId,
-                                     tokenUrl: tokenUrl,
                                      description: description,
                                      network: network,
-                                     probableDataOrUrls: probableDataOrUrls)
+                                     tokenStandard: tokenStandard,
+                                     contentRepresentations: contentRepresentations)
     }
     
 }

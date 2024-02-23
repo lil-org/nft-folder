@@ -8,15 +8,10 @@ struct DetailedTokenMetadata: Codable {
     let collectionName: String?
     let collectionAddress: String
     let tokenId: String
-    let tokenUrl: String?
     let description: String?
     let network: Network
-    
-    // TODO: more info from Token
-    // TODO: make sure these links are unique
-    // TODO: clarify links model - file type, size, etc.
-    
-    var probableDataOrUrls: [DataOrUrl]
+    let tokenStandard: String?
+    let contentRepresentations: [ContentRepresentation]
     
 }
 

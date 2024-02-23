@@ -6,7 +6,7 @@ enum NftGallery: Int, CaseIterable, Codable {
     
     static let referrer = "0xE26067c76fdbe877F48b0a8400cf5Db8B47aF0fE"
     
-    case local, zora, mintfun, opensea
+    case zora, mintfun, opensea, local
     
     var image: NSImage {
         switch self {
