@@ -9,7 +9,8 @@ struct AvatarService {
     static func getAvatar(wallet: WatchOnlyWallet, completion: @escaping (NSImage) -> Void) {
         guard let urlString = wallet.avatar,
               let url = URL(string: urlString),
-              let fileURL = URL.avatarOnDisk(wallet: wallet) else { return }
+              let fileURL = URL.avatarOnDisk(wallet: wallet),
+              let folderURL = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return }
         
         if let diskCachedData = try? Data(contentsOf: fileURL), let image = NSImage(data: diskCachedData) {
             completion(image)
@@ -30,6 +31,7 @@ struct AvatarService {
             guard let data = data, error == nil, let image = NSImage(data: data) else { return }
             completion(image)
             try? data.write(to: fileURL, options: .atomic)
+            DispatchQueue.main.async { NSWorkspace.shared.setIcon(image, forFile: folderURL.path, options: []) }
         }.resume()
     }
     
