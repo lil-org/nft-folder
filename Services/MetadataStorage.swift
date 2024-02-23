@@ -74,7 +74,6 @@ struct MetadataStorage {
     }
     
     private static func nftURL(metadata: MinimalTokenMetadata, gallery: NftGallery) -> URL? {
-        let referrer = "0xE26067c76fdbe877F48b0a8400cf5Db8B47aF0fE"
         switch gallery {
         case .local:
             return nil
@@ -92,7 +91,7 @@ struct MetadataStorage {
             case .arbitrum:
                 prefix = "arbitrum"
             }
-            return URL(string: "https://zora.co/collect/\(prefix):\(metadata.collectionAddress)/\(metadata.tokenId)?referrer=\(referrer)")
+            return URL(string: "https://zora.co/collect/\(prefix):\(metadata.collectionAddress)/\(metadata.tokenId)?referrer=\(NftGallery.referrer)")
         case .mintfun:
             let prefix: String
             switch metadata.network {
@@ -107,7 +106,7 @@ struct MetadataStorage {
             case .arbitrum:
                 prefix = "arbitrum"
             }
-            return URL(string: "https://mint.fun/\(prefix)/\(metadata.collectionAddress)?ref=\(referrer)")
+            return URL(string: "https://mint.fun/\(prefix)/\(metadata.collectionAddress)?ref=\(NftGallery.referrer)")
         case .opensea:
             let prefix: String
             switch metadata.network {

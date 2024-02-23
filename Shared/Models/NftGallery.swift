@@ -4,6 +4,8 @@ import Cocoa
 
 enum NftGallery: Int, CaseIterable, Codable {
     
+    static let referrer = "0xE26067c76fdbe877F48b0a8400cf5Db8B47aF0fE"
+    
     case local, zora, mintfun, opensea
     
     var image: NSImage {
@@ -37,9 +39,9 @@ enum NftGallery: Int, CaseIterable, Codable {
         case .local:
             return nil
         case .zora:
-            return URL(string: "https://zora.co/\(walletAddress)")
+            return URL(string: "https://zora.co/\(walletAddress)?referrer=\(NftGallery.referrer)")
         case .mintfun:
-            return URL(string: "https://mint.fun/profile/\(walletAddress)")
+            return URL(string: "https://mint.fun/profile/\(walletAddress)?ref=\(NftGallery.referrer)")
         case .opensea:
             return URL(string: "https://opensea.io/\(walletAddress)")
         }
