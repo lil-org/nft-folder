@@ -19,31 +19,8 @@ struct FileSaver {
                     detailedMetadata: task.detailedMetadata)
     }
     
-    // TODO: cleanup and refactor
     private func save(name: String, tmpLocation: URL?, data: Data?, fileExtension: String, destinationURL: URL, downloadedFromURL: URL?, detailedMetadata: DetailedTokenMetadata) -> URL? {
-        if fileExtension.lowercased() == "html", let downloadedFromURL = downloadedFromURL { // TODO: clean up html logic. maybe won't need downloadedFromURL at all
-            let linkString = downloadedFromURL.absoluteString
-                .replacingOccurrences(of: "&", with: "&amp;")
-                .replacingOccurrences(of: "\"", with: "&quot;")
-                .replacingOccurrences(of: "'", with: "&apos;")
-                .replacingOccurrences(of: "<", with: "&lt;")
-                .replacingOccurrences(of: ">", with: "&gt;")
-            let weblocContent = """
-                <?xml version="1.0" encoding="UTF-8"?>
-                <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-                <plist version="1.0">
-                <dict>
-                    <key>URL</key>
-                    <string>\(linkString)</string>
-                </dict>
-                </plist>
-                """
-            let webloc = weblocContent.data(using: .utf8)
-            if let tmpLocation = tmpLocation {
-                try? FileManager.default.removeItem(at: tmpLocation)
-            }
-            return save(name: name, tmpLocation: nil, data: webloc, fileExtension: "webloc", destinationURL: destinationURL, downloadedFromURL: nil, detailedMetadata: detailedMetadata)
-        } else if fileExtension.lowercased() == "json" || fileExtension.lowercased() == "txt" {
+        if fileExtension.lowercased() == "json" || fileExtension.lowercased() == "txt" {
             let mbJsonData: Data?
             if let tmpLocation = tmpLocation, let tmpData = try? Data(contentsOf: tmpLocation) {
                 mbJsonData = tmpData
@@ -130,9 +107,7 @@ struct FileSaver {
             } else {
                 return
             }
-        } catch {
-            print("error saving file: \(error)") // TODO: test on lots of data to see if it happens
-        }
+        } catch { }
         
         let minimalMetadata = metadata.minimalMetadata(dowloadedFileSourceURL: downloadedFromURL)
         MetadataStorage.store(minimalMetadata: minimalMetadata, filePath: finalDestinationURL.path)

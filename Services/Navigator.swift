@@ -40,7 +40,6 @@ class Navigator: NSObject {
         }
     }
     
-    // TODO: refactor, clean up
     func showNftMetadata(filePath: String) {
         guard let metadata = MetadataStorage.detailedMetadata(nftFilePath: filePath) else {
             let alert = NSAlert()
