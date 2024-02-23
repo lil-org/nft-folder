@@ -154,7 +154,15 @@ struct WalletsListView: View {
     }
     
     private func hardReset(wallet: WatchOnlyWallet) {
-        // TODO: implement
+        AllDownloadsManager.shared.stopDownloads(wallet: wallet)
+        if let nftDirectory = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) {
+            let fileManager = FileManager.default
+            try? fileManager.removeItem(at: nftDirectory)
+            if let _ = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: true) {
+                FolderIcon.set(for: wallet)
+                AllDownloadsManager.shared.startDownloads(wallet: wallet)
+            }
+        }
     }
     
     private func addWallet() {
