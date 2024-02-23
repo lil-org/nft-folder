@@ -38,20 +38,6 @@ struct Token: Codable {
     let tokenStandard: String?
 }
 
-struct Media: Codable {
-    let url: String?
-    let mimeType: String?
-    let mediaEncoding: Encoding?
-    let size: String?
-    
-    struct Encoding: Codable {
-        let original: String?
-        let thumbnail: String?
-        let preview: String?
-        let large: String?
-    }
-}
-
 struct InlineContentJSON: Decodable {
     
     private let animationURL: String?
@@ -72,6 +58,36 @@ struct InlineContentJSON: Decodable {
     
 }
 
+struct Media: Codable {
+    let url: String?
+    let mimeType: String?
+    let mediaEncoding: Encoding?
+    let size: String?
+    
+    struct Encoding: Codable {
+        let original: String?
+        let thumbnail: String?
+        let preview: String?
+        let large: String?
+    }
+}
+
+struct Representations: Codable {
+    let contentUrl: String?
+    
+    let contentPreviewUrl: String?
+    let contentLargeUrl: String?
+    
+    let contentMimeType: String?
+    let contentSize: String?
+    
+    let image: String?
+    let thumbnailImage: String?
+    let imageSize: String?
+    
+    let tokenUrl: String?
+}
+
 extension Token {
     
     func detailedMetadata(network: Network) -> DetailedTokenMetadata {
@@ -82,14 +98,26 @@ extension Token {
                 return nil
             }
         }
+        
+        let representations = Representations(contentUrl: content?.url,
+                                              contentPreviewUrl: content?.mediaEncoding?.preview,
+                                              contentLargeUrl: content?.mediaEncoding?.large,
+                                              contentMimeType: content?.mimeType,
+                                              contentSize: content?.size,
+                                              image: image?.url,
+                                              thumbnailImage: image?.mediaEncoding?.thumbnail,
+                                              imageSize: image?.size,
+                                              tokenUrl: tokenUrl)
+        
         return DetailedTokenMetadata(name: name,
                                      collectionName: collectionName,
                                      collectionAddress: collectionAddress,
                                      tokenId: tokenId,
-                                     tokenUrl: tokenUrl,
                                      description: description,
                                      network: network,
-                                     probableDataOrUrls: probableDataOrUrls)
+                                     tokenStandard: tokenStandard,
+                                     probableDataOrUrls: probableDataOrUrls,
+                                     representations: representations)
     }
     
 }
