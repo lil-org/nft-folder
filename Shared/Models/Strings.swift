@@ -13,7 +13,7 @@ struct Strings {
     
     static let openFolderMenuItem = "↗︎ open nft folder"
     static let syncMenuItem = "⟳ sync nfts"
-    static let controlCenterMenuItem = "❒ control center"
+    static let controlCenterMenuItem = "❑ control center"
     
     static let wallets = "folders"
     static let addWallet = "new folder"
