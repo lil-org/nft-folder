@@ -63,12 +63,11 @@ class FileDownloader {
                 self?.downloadNextIfNeeded()
             case .failure:
                 if self != nil, task.willTryAnotherSource() {
-                    print("⭐️ will retry and get a fallback content for \(task.fileName)")
                     self?.preprocess(task: task)
                 }
                 self?.downloadNextIfNeeded()
             case .cancel:
-                self?.downloadNextIfNeeded() // TODO: clean up for a removed folder
+                self?.cancelOngoingUrlSessionTasks()
             }
         }
         downloadNextIfNeeded()
@@ -85,14 +84,11 @@ class FileDownloader {
             self?.ongoingUrlSessionTasks.removeValue(forKey: id)
             let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
             guard let location = location, error == nil, (200...299).contains(statusCode) else {
-                print("Status code \(statusCode). Error downloading file: \(String(describing: error))")
                 completion(.failure)
                 return
             }
             guard FileManager.default.fileExists(atPath: task.destinationDirectory.path) else {
-                // if there is no folder anymore
-                print("cancel download")
-                completion(.cancel) // TODO: review cancel logic
+                completion(.cancel)
                 return
             }
             var fileExtension = url.pathExtension
@@ -111,10 +107,14 @@ class FileDownloader {
         ongoingUrlSessionTasks[id] = urlSessionDownloadTask
     }
     
-    deinit {
+    private func cancelOngoingUrlSessionTasks() {
         for task in ongoingUrlSessionTasks.values {
             task.cancel()
         }
+    }
+    
+    deinit {
+        cancelOngoingUrlSessionTasks()
     }
     
     private func save(_ task: DownloadFileTask, tmpLocation: URL?, data: Data?, fileExtension: String) {
