@@ -75,7 +75,7 @@ class FinderSync: FIFinderSync {
         let menu = NSMenu(title: "")
         switch menuKind {
         case .contextualMenuForItems:
-            for gallery in NftGallery.allCases {
+            for gallery in [NftGallery.zora, NftGallery.mintfun, NftGallery.opensea] {
                 let item = NSMenuItem(title: gallery.title, action: #selector(viewOn(_:)), keyEquivalent: "")
                 item.tag = gallery.rawValue
                 item.image = gallery.image
