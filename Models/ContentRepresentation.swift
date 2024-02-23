@@ -1,6 +1,7 @@
 // ∅ nft-folder-macos 2024
 
 import Foundation
+import UniformTypeIdentifiers
 
 struct ContentRepresentation: Codable {
     
@@ -25,7 +26,23 @@ struct ContentRepresentation: Codable {
         if let knownKind = knownKind {
             self.kind = knownKind
         } else if let mimeType = mimeType {
-            self.kind = .other // TODO: implement
+            if mimeType == "model/gltf-binary" || mimeType == "model/gltf+json" {
+                self.kind = .glb
+            } else if let utType = UTType(mimeType: mimeType) {
+                if utType.conforms(to: .image) {
+                    self.kind = .image
+                } else if utType.conforms(to: .audio) {
+                    self.kind = .audio
+                } else if utType.conforms(to: .movie) {
+                    self.kind = .video
+                } else if utType.conforms(to: .html) {
+                    self.kind = .html
+                } else {
+                    self.kind = .other
+                }
+            } else {
+                self.kind = .other
+            }
         } else {
             self.kind = nil
         }
