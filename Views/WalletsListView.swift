@@ -56,16 +56,27 @@ struct WalletsListView: View {
                                 openFolderForWallet(wallet)
                             }
                             .contextMenu {
-                                Button(Strings.remove, action: {
+                                Button(Strings.viewOnZora, action: {
+                                    // TODO: implement
+                                })
+                                
+                                Button(Strings.viewOnOpensea, action: {
+                                    // TODO: implement
+                                })
+                                
+                                Button(Strings.hardReset, action: {
+                                    // TODO: implement
+                                })
+                                Button(Strings.removeFolder, action: {
                                     WalletsService.shared.removeWallet(wallet)
                                     AllDownloadsManager.shared.stopDownloads(wallet: wallet)
-                                    if let path = URL.nftDirectory?.path {
-                                        let pathToRemove = path + "/" + wallet.folderDisplayName
-                                        try? FileManager.default.removeItem(atPath: pathToRemove)
+                                    if let path = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false)?.path {
+                                        try? FileManager.default.removeItem(atPath: path)
                                     }
                                     updateDisplayedWallets()
                                 })
                             }
+
                         }
                     }
                 }
