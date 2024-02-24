@@ -5,8 +5,11 @@ import Cocoa
 struct Window {
     
     static func closeAll() {
-        // TODO: not status tho
-        NSApplication.shared.windows.forEach { $0.close() }
+        NSApplication.shared.windows.forEach {
+            if !($0.className == "NSStatusBarWindow") {
+                $0.close()
+            }
+        }
     }
     
 }
