@@ -39,5 +39,6 @@ struct Strings {
     static let downloadGlb = "download .glb files"
     static let noggles = "⌐◨-◨"
     static let poweredByZoraApi = "☀︎ powered by zora api ☀︎"
+    static let quit = "quit"
     
 }
