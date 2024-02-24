@@ -5,38 +5,35 @@ import SwiftUI
 
 class Navigator: NSObject {
     
-    private var window: NSWindow?
-    
     private override init() { super.init() }
     static let shared = Navigator()
     
     func showControlCenter(addWallet: Bool) {
-        NSApplication.shared.windows.forEach { $0.close() }
-        window?.close()
+        Window.closeAll()
         let contentView = WalletsListView(showAddWalletPopup: addWallet)
-        window = NSWindow(
+        let window = NSWindow(
             contentRect: Defaults.controlCenterWindowFrame,
             styleMask: [.closable, .fullSizeContentView, .titled, .resizable],
             backing: .buffered, defer: false)
-        window?.titleVisibility = .hidden
-        window?.titlebarAppearsTransparent = false
-        window?.delegate = self
-        window?.isMovableByWindowBackground = true
-        window?.backgroundColor = NSColor.windowBackgroundColor
-        window?.isOpaque = false
-        window?.hasShadow = true
+        window.titleVisibility = .hidden
+        window.titlebarAppearsTransparent = false
+        window.delegate = self
+        window.isMovableByWindowBackground = true
+        window.backgroundColor = NSColor.windowBackgroundColor
+        window.isOpaque = false
+        window.hasShadow = true
         
-        window?.contentView?.wantsLayer = true
-        window?.contentView?.layer?.cornerRadius = 10
-        window?.contentView?.layer?.masksToBounds = true
+        window.contentView?.wantsLayer = true
+        window.contentView?.layer?.cornerRadius = 10
+        window.contentView?.layer?.masksToBounds = true
         
-        window?.isReleasedWhenClosed = false
-        window?.contentView = NSHostingView(rootView: contentView.frame(minWidth: 300, minHeight: 300))
+        window.isReleasedWhenClosed = false
+        window.contentView = NSHostingView(rootView: contentView.frame(minWidth: 300, minHeight: 300))
         NSApp.activate(ignoringOtherApps: true)
-        window?.makeKeyAndOrderFront(nil)
+        window.makeKeyAndOrderFront(nil)
         
-        if window?.frame.origin == .zero || window?.isOnActiveSpace == false || window?.isVisible == false {
-            window?.center()
+        if window.frame.origin == .zero || !window.isOnActiveSpace || !window.isVisible {
+            window.center()
         }
     }
     

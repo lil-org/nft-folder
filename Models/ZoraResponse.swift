@@ -93,7 +93,7 @@ extension Token {
                     hasDataRepresentation = true
                     contentRepresentations.append(item)
                 }
-            case .url(let url):
+            case .url:
                 if !contentRepresentations.contains(where: { $0.dataOrUrl == item.dataOrUrl }) {
                     contentRepresentations.append(item)
                 }

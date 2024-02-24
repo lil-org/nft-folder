@@ -40,6 +40,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         notificationCenter.addObserver(self, selector: #selector(processFinderMessage(_:)), name: .fromFinder, object: nil, suspensionBehavior: .deliverImmediately)
         
         allDownloadsManager.start()
+        StatusBarItem.shared.showIfNeeded()
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -110,7 +111,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
-        NSApplication.shared.windows.forEach { $0.close() }
+        Window.closeAll()
         Navigator.shared.showControlCenter(addWallet: false)
         return true
     }

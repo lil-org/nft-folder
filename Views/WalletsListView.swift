@@ -153,7 +153,7 @@ struct WalletsListView: View {
             if let nftDirectory = URL.nftDirectory {
                 NSWorkspace.shared.open(nftDirectory)
             }
-            NSApplication.shared.windows.forEach { $0.close() }
+            Window.closeAll()
         }).frame(height: 36).offset(CGSize(width: 0, height: -6)).keyboardShortcut(.defaultAction).buttonStyle(LinkButtonStyle())
     }
     
