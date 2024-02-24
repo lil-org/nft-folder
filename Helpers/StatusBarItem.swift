@@ -30,7 +30,7 @@ class StatusBarItem {
         
         menu.addItem(openFolderItem)
         menu.addItem(controlCenterItem)
-        menu.addItem(NSMenuItem.separator())
+        menu.addItem(.separator())
         menu.addItem(quitItem)
         
         statusBarItem?.menu = menu
