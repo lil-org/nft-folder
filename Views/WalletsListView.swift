@@ -67,6 +67,9 @@ struct WalletsListView: View {
                                     })
                                 }
                                 Divider()
+                                Button(Strings.viewinFinder, action: {
+                                    openFolderForWallet(wallet)
+                                })
                                 Button(Strings.viewOnZora, action: {
                                     if let galleryURL = NftGallery.zora.url(walletAddress: wallet.address) {
                                         DispatchQueue.main.async { NSWorkspace.shared.open(galleryURL) }

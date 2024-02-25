@@ -20,6 +20,7 @@ struct Strings {
     static let removeFolder = "⨂ remove folder"
     static let hardReset = "↯ hard reset"
     static let viewOnOpensea = "⛵︎ view on opensea"
+    static let viewinFinder = "↗︎ view in finder"
     static let viewOnZora = "☀︎ view on zora"
     static let addressOrEns = "address or ens"
     static let cancel = "cancel"
