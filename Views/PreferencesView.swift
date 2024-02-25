@@ -16,7 +16,6 @@ struct PreferencesView: View {
                     .frame(width: 20, height: 20)
                 Text(Strings.nftFolder)
                     .font(.system(size: 20))
-                    .foregroundColor(.secondary)
             }.padding(.top, 4)
             
             
@@ -45,12 +44,9 @@ struct PreferencesView: View {
             
             VStack {
                 VStack(alignment: .center, spacing: 16) {
-                    Link(destination: FooterLink.nounsURL) {
-                        Text(Strings.noggles).font(.title3)
-                    }.foregroundColor(.secondary)
-                    Link(Strings.poweredByZoraApi, destination: FooterLink.zoraURL).foregroundColor(.secondary)
+                    Link(Strings.poweredByZoraApi, destination: FooterLink.zoraURL).foregroundColor(.secondary).italic()
                 }
-                .padding()
+                .padding(.top).padding(.bottom, 4)
                 
                 HStack(spacing: 20) {
                     ForEach(FooterLink.all, id: \.self) { link in
