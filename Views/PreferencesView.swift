@@ -6,6 +6,7 @@ struct PreferencesView: View {
     
     @State private var maxFileSizeLimitPreference = !Defaults.unlimitedFileSize
     @State private var glbPreference = Defaults.downloadGlb
+    @State private var showInMenuBar = !Defaults.hideFromMenuBar
     
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
@@ -34,6 +35,16 @@ struct PreferencesView: View {
                                 Text(Strings.downloadGlb)
                             }.onChange(of: glbPreference) { newValue in
                                 Defaults.downloadGlb = newValue
+                            }
+                            Toggle(isOn: $showInMenuBar) {
+                                Text(Strings.showInMenuBar)
+                            }.onChange(of: showInMenuBar) { newValue in
+                                Defaults.hideFromMenuBar = !newValue
+                                if newValue {
+                                    StatusBarItem.shared.showIfNeeded()
+                                } else {
+                                    StatusBarItem.shared.hideFromMenuBar()
+                                }
                             }
                         }
                         .padding()

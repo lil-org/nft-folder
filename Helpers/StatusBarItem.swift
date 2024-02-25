@@ -10,6 +10,7 @@ class StatusBarItem {
     private var statusBarItem: NSStatusItem?
     
     func showIfNeeded() {
+        guard !Defaults.hideFromMenuBar else { return }
         let statusBar = NSStatusBar.system
         statusBarItem = statusBar.statusItem(withLength: NSStatusItem.squareLength)
         statusBarItem?.button?.image = Images.icon
@@ -22,7 +23,7 @@ class StatusBarItem {
             item.attributedTitle = NSAttributedString(string: item.title, attributes: [.font: NSFont.systemFont(ofSize: 15, weight: .medium)])
         }
         
-        let hideItem = NSMenuItem(title: Strings.hideFromHere, action: #selector(hideFromMenuBar), keyEquivalent: "")
+        let hideItem = NSMenuItem(title: Strings.hideFromHere, action: #selector(hideFromHere), keyEquivalent: "")
         let quitItem = NSMenuItem(title: Strings.quit, action: #selector(warnBeforeQuitting), keyEquivalent: "q")
         
         controlCenterItem.target = self
@@ -45,7 +46,12 @@ class StatusBarItem {
         }
     }
     
-    @objc private func hideFromMenuBar() {
+    @objc private func hideFromHere() {
+        Defaults.hideFromMenuBar = true
+        hideFromMenuBar()
+    }
+    
+    @objc func hideFromMenuBar() {
         if let item = statusBarItem {
             NSStatusBar.system.removeStatusItem(item)
         }

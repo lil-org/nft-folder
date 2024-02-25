@@ -42,5 +42,6 @@ struct Strings {
     static let quit = "quit"
     
     static let hideFromHere = "hide from here"
+    static let showInMenuBar = "show in menu bar"
     
 }
