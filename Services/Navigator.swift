@@ -9,6 +9,7 @@ class Navigator: NSObject {
     static let shared = Navigator()
     
     func showControlCenter(addWallet: Bool) {
+        AllDownloadsManager.shared.checkFolders()
         Window.closeAll()
         let contentView = WalletsListView(showAddWalletPopup: addWallet)
         let window = NSWindow(

@@ -75,7 +75,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         case .didEndObservingDirectory:
             break
         case .somethingChangedInHomeDirectory:
-            allDownloadsManager.walletsFoldersChanged()
+            allDownloadsManager.checkFolders()
         }
     }
     

@@ -36,7 +36,13 @@ class AllDownloadsManager {
         postStatusUpdateNotification()
     }
     
-    func walletsFoldersChanged() {
+    func prioritizeDownloads(mbAddressFolderName: String?) {}
+    
+    func prioritizeDownloads(wallet: WatchOnlyWallet) {}
+    
+    func syncOnUserRequestIfNeeded() {}
+    
+    func checkFolders() {
         let removedWallets = walletsService.checkFoldersForNewWalletsAndRemovedWallets { newWallet in
             self.startDownloads(wallet: newWallet)
         }
@@ -44,12 +50,6 @@ class AllDownloadsManager {
             stopDownloads(wallet: removedWallet)
         }
     }
-    
-    func prioritizeDownloads(mbAddressFolderName: String?) {}
-    
-    func prioritizeDownloads(wallet: WatchOnlyWallet) {}
-    
-    func syncOnUserRequestIfNeeded() {}
     
     private func postStatusUpdateNotification() {
         NotificationCenter.default.post(name: .downloadsStatusUpdate, object: nil)
