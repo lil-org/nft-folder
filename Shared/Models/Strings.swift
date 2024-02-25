@@ -41,4 +41,6 @@ struct Strings {
     static let poweredByZoraApi = "powered by zora api"
     static let quit = "quit"
     
+    static let hideFromHere = "hide from here"
+    
 }

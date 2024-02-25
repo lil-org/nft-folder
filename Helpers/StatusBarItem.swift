@@ -22,15 +22,18 @@ class StatusBarItem {
             item.attributedTitle = NSAttributedString(string: item.title, attributes: [.font: NSFont.systemFont(ofSize: 15, weight: .medium)])
         }
         
+        let hideItem = NSMenuItem(title: Strings.hideFromHere, action: #selector(hideFromMenuBar), keyEquivalent: "")
         let quitItem = NSMenuItem(title: Strings.quit, action: #selector(warnBeforeQuitting), keyEquivalent: "q")
         
         controlCenterItem.target = self
         openFolderItem.target = self
+        hideItem.target = self
         quitItem.target = self
         
         menu.addItem(openFolderItem)
         menu.addItem(controlCenterItem)
         menu.addItem(.separator())
+        menu.addItem(hideItem)
         menu.addItem(quitItem)
         
         statusBarItem?.menu = menu
@@ -39,6 +42,12 @@ class StatusBarItem {
     @objc private func openNftFolder() {
         if let url = URL.nftDirectory {
             NSWorkspace.shared.open(url)
+        }
+    }
+    
+    @objc private func hideFromMenuBar() {
+        if let item = statusBarItem {
+            NSStatusBar.system.removeStatusItem(item)
         }
     }
     
