@@ -72,7 +72,7 @@ extension URL {
     static var nftDirectory: URL? {
         let fileManager = FileManager.default
         let musicDirectoryURL = fileManager.urls(for: .musicDirectory, in: .userDomainMask).first
-        guard let nftDirectoryURL = musicDirectoryURL?.appendingPathComponent("nft") else { return nil }
+        guard let nftDirectoryURL = musicDirectoryURL?.appendingPathComponent("nft folder") else { return nil }
         
         if !fileManager.fileExists(atPath: nftDirectoryURL.path) {
             try? fileManager.createDirectory(at: nftDirectoryURL, withIntermediateDirectories: true, attributes: nil)
