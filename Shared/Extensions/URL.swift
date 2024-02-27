@@ -81,7 +81,7 @@ extension URL {
         return nftDirectoryURL
     }
     
-    static let nftDirectoryResolved: URL? = {
+    private static let nftDirectoryResolved: URL? = {
         return nftDirectory?.resolvingSymlinksInPath()
     }()
     
@@ -89,12 +89,8 @@ extension URL {
         return nftDirectoryResolved?.pathComponents.count ?? 0
     }()
     
-    static let nftDirectoryPathResolved: String = {
-        return nftDirectoryResolved?.path() ?? ""
-    }()
-    
-    static let nftDirectoryPath: String = {
-        return nftDirectory?.path() ?? ""
+    private static let nftDirectoryPathResolved: String = {
+        return nftDirectoryResolved?.path ?? ""
     }()
     
     var mimeType: String {
