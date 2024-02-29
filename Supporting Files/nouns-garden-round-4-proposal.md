@@ -22,9 +22,9 @@
 
 ## todo
 - [x] the alpha version is on a [testflight](https://folder.lil.org)
-- [ ] **make a reliable version**
-- [ ] handle all kinds of nft syncing errors / scenarios
-- [ ] **release nft-folder app on the app store** (5-6 weeks)
+- [x] **make a reliable version**
+- [x] handle all kinds of nft syncing errors / scenarios
+- [x] **release nft-folder app on the app store** (5-6 weeks)
 
 ```
 garden round 3 prop included bundling nft-folder extension into the tokenary wallet
