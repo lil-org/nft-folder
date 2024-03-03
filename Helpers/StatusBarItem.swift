@@ -14,6 +14,8 @@ class StatusBarItem {
         let statusBar = NSStatusBar.system
         statusBarItem = statusBar.statusItem(withLength: NSStatusItem.squareLength)
         statusBarItem?.button?.image = Images.icon
+        statusBarItem?.button?.imagePosition = .imageOnly
+        statusBarItem?.button?.imageScaling = .scaleProportionallyDown
 
         let menu = NSMenu(title: Strings.nftFolder)
         let openFolderItem = NSMenuItem(title: Strings.openFolderMenuItem, action: #selector(openNftFolder), keyEquivalent: "")
