@@ -68,4 +68,8 @@ class WalletDownloader {
         fileDownloader.addTasks(tasks)
     }
     
+    deinit {
+        fileDownloader.invalidateAndCancel()
+    }
+    
 }

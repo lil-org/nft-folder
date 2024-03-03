@@ -2,23 +2,34 @@
 
 import Cocoa
 
-class FileDownloader {
+class FileDownloader: NSObject {
     
     var hasPendingTasks: Bool { !queuedURLsHashes.isEmpty }
     
     private enum DownloadFileResult {
         case success, cancel, failure
     }
+        
+    private lazy var urlSession: URLSession? = {
+        var configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = 15
+        let session = URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
+        return session
+    }()
     
-    private let urlSession = URLSession.shared
+    private var ongoingTasksAndCompletions = [Int: (DownloadFileTask, (DownloadFileResult) -> Void)]()
     private var downloadTasks = [DownloadFileTask]()
     private var downloadsInProgress = 0
-    private var ongoingUrlSessionTasks = [String: URLSessionDownloadTask]()
     private var queuedURLsHashes = Set<UInt64>()
     private var completion: () -> Void
     
     init(completion: @escaping () -> Void) {
         self.completion = completion
+        super.init()
+    }
+    
+    func invalidateAndCancel() {
+        urlSession?.invalidateAndCancel()
     }
     
     func addTasks(_ tasks: [DownloadFileTask]) {
@@ -67,7 +78,7 @@ class FileDownloader {
                 }
                 self?.downloadNextIfNeeded()
             case .cancel:
-                self?.cancelOngoingUrlSessionTasks()
+                self?.invalidateAndCancel()
             }
         }
         downloadNextIfNeeded()
@@ -79,42 +90,9 @@ class FileDownloader {
             return
         }
         
-        let id = UUID().uuidString
-        let urlSessionDownloadTask = urlSession.downloadTask(with: url) { [weak self] location, response, error in
-            self?.ongoingUrlSessionTasks.removeValue(forKey: id)
-            let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
-            guard let location = location, error == nil, (200...299).contains(statusCode) else {
-                completion(.failure)
-                return
-            }
-            guard FileManager.default.fileExists(atPath: task.destinationDirectory.path) else {
-                completion(.cancel)
-                return
-            }
-            var fileExtension = url.pathExtension
-            if fileExtension.isEmpty {
-                if let httpResponse = response as? HTTPURLResponse, let mimeType = httpResponse.mimeType {
-                    fileExtension = FileExtension.forMimeType(mimeType)
-                } else {
-                    fileExtension = FileExtension.placeholder
-                }
-            }
-            
-            self?.save(task, tmpLocation: location, data: nil, fileExtension: fileExtension)
-            completion(.success)
-        }
+        guard let urlSessionDownloadTask = urlSession?.downloadTask(with: url) else { return }
+        ongoingTasksAndCompletions[urlSessionDownloadTask.taskIdentifier] = (task, completion)
         urlSessionDownloadTask.resume()
-        ongoingUrlSessionTasks[id] = urlSessionDownloadTask
-    }
-    
-    private func cancelOngoingUrlSessionTasks() {
-        for task in ongoingUrlSessionTasks.values {
-            task.cancel()
-        }
-    }
-    
-    deinit {
-        cancelOngoingUrlSessionTasks()
     }
     
     private func save(_ task: DownloadFileTask, tmpLocation: URL?, data: Data?, fileExtension: String) {
@@ -122,6 +100,52 @@ class FileDownloader {
             var updatedTask = task
             if updatedTask.setRedirectURL(redirectURL) {
                 addTasks([updatedTask])
+            }
+        }
+    }
+    
+    deinit {
+        invalidateAndCancel()
+    }
+    
+}
+
+extension FileDownloader: URLSessionDownloadDelegate {
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        guard let (task, completion) = ongoingTasksAndCompletions[downloadTask.taskIdentifier] else { return }
+        ongoingTasksAndCompletions.removeValue(forKey: downloadTask.taskIdentifier)
+        let statusCode = (downloadTask.response as? HTTPURLResponse)?.statusCode ?? 0
+        
+        guard downloadTask.error == nil, (200...299).contains(statusCode) else {
+            completion(.failure)
+            return
+        }
+        
+        guard FileManager.default.fileExists(atPath: task.destinationDirectory.path) else {
+            completion(.cancel)
+            return
+        }
+        
+        let fileExtension: String
+        if let requestExtension = downloadTask.originalRequest?.url?.pathExtension, !requestExtension.isEmpty {
+            fileExtension = requestExtension
+        } else if let httpResponse = downloadTask.response as? HTTPURLResponse, let mimeType = httpResponse.mimeType {
+            fileExtension = FileExtension.forMimeType(mimeType)
+        } else {
+            fileExtension = FileExtension.placeholder
+        }
+        
+        save(task, tmpLocation: location, data: nil, fileExtension: fileExtension)
+        completion(.success)
+    }
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+        if totalBytesExpectedToWrite > Int.defaultFileSizeLimit {
+            downloadTask.cancel()
+            if let (_, completion) = ongoingTasksAndCompletions[downloadTask.taskIdentifier] {
+                ongoingTasksAndCompletions.removeValue(forKey: downloadTask.taskIdentifier)
+                completion(.failure)
             }
         }
     }
