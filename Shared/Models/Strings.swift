@@ -11,9 +11,9 @@ struct Strings {
     static let opensea = "opensea"
     static let mintfun = "mint.fun"
     
-    static let openFolderMenuItem = "↗︎ open nft folder"
+    static let openFolderMenuItem = "↗︎ open nft folder..."
     static let syncMenuItem = "⟳ sync nfts"
-    static let controlCenterMenuItem = "❒ control center"
+    static let controlCenterMenuItem = "❒ control center..."
     
     static let wallets = "folders"
     static let addWallet = "new folder"
