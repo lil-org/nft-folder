@@ -85,12 +85,25 @@ class FinderSync: FIFinderSync {
         case .toolbarItemMenu:
             menu.addItem(withTitle: Strings.openFolderMenuItem, action: #selector(openNFTDirectory(_:)), keyEquivalent: "")
             menu.addItem(withTitle: Strings.controlCenterMenuItem, action: #selector(didSelectControlCenterMenuItem(_:)), keyEquivalent: "")
+            if SharedDefaults.downloadsInProgress {
+                menu.addItem(withTitle: Strings.pauseAllDownloads, action: #selector(pauseAllDownloads(_:)), keyEquivalent: "")
+            } else {
+                menu.addItem(withTitle: Strings.sync, action: #selector(didSelectSyncMenuItem(_:)), keyEquivalent: "")
+            }
         case .contextualMenuForContainer, .contextualMenuForSidebar:
             break
         @unknown default:
             break
         }
         return menu
+    }
+    
+    @IBAction private func pauseAllDownloads(_ sender: AnyObject?) {
+        HostAppMessenger.send(.didSelectPauseAllDownloadsMenuItem)
+    }
+    
+    @IBAction private func didSelectSyncMenuItem(_ sender: AnyObject?) {
+        HostAppMessenger.send(.didSelectSyncMenuItem)
     }
     
     @IBAction private func didSelectControlCenterMenuItem(_ sender: AnyObject?) {

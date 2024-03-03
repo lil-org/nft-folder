@@ -20,6 +20,12 @@ class AllDownloadsManager {
         SharedDefaults.downloadsInProgress = false
     }
     
+    func stopAllDownloads() {
+        for wallet in walletDownloaders.keys {
+            stopDownloads(wallet: wallet)
+        }
+    }
+    
     func startDownloads(wallet: WatchOnlyWallet) {
         SharedDefaults.downloadsInProgress = true
         statuses[wallet] = .downloading

@@ -58,7 +58,7 @@ struct WalletsListView: View {
                             .contextMenu {
                                 switch status {
                                 case .downloading:
-                                    Button(Strings.stopDownloads, action: {
+                                    Button(Strings.pause, action: {
                                         AllDownloadsManager.shared.stopDownloads(wallet: wallet)
                                     })
                                 case .notDownloading:

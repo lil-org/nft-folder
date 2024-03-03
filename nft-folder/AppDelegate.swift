@@ -76,6 +76,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             break
         case .somethingChangedInHomeDirectory:
             allDownloadsManager.checkFolders()
+        case .didSelectPauseAllDownloadsMenuItem:
+            allDownloadsManager.stopAllDownloads()
         }
     }
     
