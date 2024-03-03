@@ -16,9 +16,12 @@ class AllDownloadsManager {
     private let walletsService = WalletsService.shared
     private var walletDownloaders = [WatchOnlyWallet: WalletDownloader]()
     
-    func start() {}
+    func start() {
+        SharedDefaults.downloadsInProgress = false
+    }
     
     func startDownloads(wallet: WatchOnlyWallet) {
+        SharedDefaults.downloadsInProgress = true
         statuses[wallet] = .downloading
         let walletDownloader = WalletDownloader { [weak self] in
             DispatchQueue.main.async {
@@ -34,6 +37,10 @@ class AllDownloadsManager {
         statuses.removeValue(forKey: wallet)
         walletDownloaders.removeValue(forKey: wallet)
         postStatusUpdateNotification()
+        
+        if walletDownloaders.isEmpty {
+            SharedDefaults.downloadsInProgress = false
+        }
     }
     
     func prioritizeDownloads(mbAddressFolderName: String?) {}

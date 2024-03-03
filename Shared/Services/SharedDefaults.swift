@@ -32,4 +32,13 @@ struct SharedDefaults {
         }
     }
     
+    static var downloadsInProgress: Bool {
+        get {
+            userDefaults.bool(forKey: "downloadsInProgress")
+        }
+        set {
+            userDefaults.set(newValue, forKey: "downloadsInProgress")
+        }
+    }
+    
 }
