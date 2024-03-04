@@ -9,7 +9,7 @@ class Navigator: NSObject {
     static let shared = Navigator()
     
     func showNewFolderInput() {
-        // TODO: implement
+        showControlCenter(addWallet: true)
     }
     
     func showControlCenter(addWallet: Bool) {

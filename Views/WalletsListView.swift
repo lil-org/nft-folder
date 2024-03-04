@@ -189,6 +189,7 @@ struct WalletsListView: View {
                     FolderIcon.set(for: wallet)
                     updateDisplayedWallets()
                     AllDownloadsManager.shared.startDownloads(wallet: wallet)
+                    openFolderForWallet(wallet)
                 }
                 showAddWalletPopup = false
                 newWalletAddress = ""
