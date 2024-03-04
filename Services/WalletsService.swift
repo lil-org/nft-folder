@@ -14,7 +14,7 @@ struct WalletsService {
     private let fileManager = FileManager.default
     
     var wallets: [WatchOnlyWallet] {
-        return SharedDefaults.watchWallets
+        return SharedDefaults.watchWallets.reversed()
     }
     
     func addWallet(_ wallet: WatchOnlyWallet) {
