@@ -11,12 +11,12 @@ struct Strings {
     static let opensea = "opensea"
     static let mintfun = "mint.fun"
     
-    static let openFolderMenuItem = "↗︎ open nft folder..."
+    static let openFolderMenuItem = "↗︎ \(openNftFolder)..."
     static let syncMenuItem = "⟳ sync nfts"
     static let controlCenterMenuItem = "❒ control center..."
     
     static let wallets = "folders"
-    static let addWallet = "new folder"
+    static let newFolder = "new folder"
     static let removeFolder = "⨂ remove folder"
     static let hardReset = "↯ hard reset"
     static let viewOnOpensea = "⛵︎ view on opensea"
@@ -29,6 +29,7 @@ struct Strings {
     static let sync = "↻ sync"
     static let pause = "❙❙ pause"
     static let stopAllDownloads = "⏹ stop downloads"
+    static let newFolderMenuItem = "+ " + newFolder
     
     static let ens = "ENS"
     static let didNotUpload = "did not upload"

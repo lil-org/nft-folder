@@ -83,6 +83,7 @@ class FinderSync: FIFinderSync {
             }
             
         case .toolbarItemMenu:
+            menu.addItem(withTitle: Strings.newFolderMenuItem, action: #selector(didSelectNewFolderMenuItem(_:)), keyEquivalent: "")
             menu.addItem(withTitle: Strings.openFolderMenuItem, action: #selector(openNFTDirectory(_:)), keyEquivalent: "")
             menu.addItem(withTitle: Strings.controlCenterMenuItem, action: #selector(didSelectControlCenterMenuItem(_:)), keyEquivalent: "")
             if SharedDefaults.downloadsInProgress {
@@ -100,6 +101,10 @@ class FinderSync: FIFinderSync {
     
     @IBAction private func stopAllDownloads(_ sender: AnyObject?) {
         HostAppMessenger.send(.didSelectStopAllDownloadsMenuItem)
+    }
+    
+    @IBAction private func didSelectNewFolderMenuItem(_ sender: AnyObject?) {
+        HostAppMessenger.send(.didSelectNewFolderMenuItem)
     }
     
     @IBAction private func didSelectSyncMenuItem(_ sender: AnyObject?) {

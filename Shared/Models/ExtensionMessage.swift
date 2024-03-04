@@ -5,6 +5,7 @@ import Foundation
 enum ExtensionMessage: Codable {
     
     case didSelectSyncMenuItem
+    case didSelectNewFolderMenuItem
     case didSelectStopAllDownloadsMenuItem
     case didSelectControlCenterMenuItem
     

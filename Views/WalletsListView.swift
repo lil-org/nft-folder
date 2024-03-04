@@ -19,7 +19,7 @@ struct WalletsListView: View {
     var body: some View {
         Group {
             if wallets.isEmpty {
-                Button(Strings.addWallet, action: {
+                Button(Strings.newFolder, action: {
                     showAddWalletPopup = true
                 }).frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
@@ -117,7 +117,7 @@ struct WalletsListView: View {
             self.updateDisplayedWallets()
         }).sheet(isPresented: $showAddWalletPopup) {
             VStack {
-                Text(Strings.addWallet).fontWeight(.medium)
+                Text(Strings.newFolder).fontWeight(.medium)
                 TextField(Strings.addressOrEns, text: $newWalletAddress)
                 HStack {
                     Spacer()

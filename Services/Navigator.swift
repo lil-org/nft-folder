@@ -8,6 +8,10 @@ class Navigator: NSObject {
     private override init() { super.init() }
     static let shared = Navigator()
     
+    func showNewFolderInput() {
+        // TODO: implement
+    }
+    
     func showControlCenter(addWallet: Bool) {
         AllDownloadsManager.shared.checkFolders()
         Window.closeAll()

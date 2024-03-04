@@ -78,6 +78,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             allDownloadsManager.checkFolders()
         case .didSelectStopAllDownloadsMenuItem:
             allDownloadsManager.stopAllDownloads()
+        case .didSelectNewFolderMenuItem:
+            Navigator.shared.showNewFolderInput()
         }
     }
     

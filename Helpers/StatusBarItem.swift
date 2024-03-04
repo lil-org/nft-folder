@@ -26,10 +26,6 @@ class StatusBarItem: NSObject {
         let openFolderItem = NSMenuItem(title: Strings.openFolderMenuItem, action: #selector(openNftFolder), keyEquivalent: "")
         let controlCenterItem = NSMenuItem(title: Strings.controlCenterMenuItem, action: #selector(showControlCenter), keyEquivalent: "")
         
-        for item in [controlCenterItem, openFolderItem] {
-            item.attributedTitle = NSAttributedString(string: item.title, attributes: [.font: NSFont.systemFont(ofSize: 15, weight: .medium)])
-        }
-        
         let syncToggleItem: NSMenuItem
         if SharedDefaults.downloadsInProgress {
             syncToggleItem = NSMenuItem(title: Strings.stopAllDownloads, action: #selector(stopAllDownloads(_:)), keyEquivalent: "")
@@ -37,18 +33,20 @@ class StatusBarItem: NSObject {
             syncToggleItem = NSMenuItem(title: Strings.sync, action: #selector(didSelectSyncMenuItem(_:)), keyEquivalent: "")
         }
         
+        let newFolderItem = NSMenuItem(title: Strings.newFolderMenuItem, action: #selector(didSelectNewFolderMenuItem), keyEquivalent: "")
         let hideItem = NSMenuItem(title: Strings.hideFromHere, action: #selector(hideFromHere), keyEquivalent: "")
         let quitItem = NSMenuItem(title: Strings.quit, action: #selector(warnBeforeQuitting), keyEquivalent: "q")
         
         controlCenterItem.target = self
         openFolderItem.target = self
         syncToggleItem.target = self
+        newFolderItem.target = self
         hideItem.target = self
         quitItem.target = self
         
+        menu.addItem(newFolderItem)
         menu.addItem(openFolderItem)
         menu.addItem(controlCenterItem)
-        menu.addItem(.separator())
         menu.addItem(syncToggleItem)
         menu.addItem(.separator())
         menu.addItem(hideItem)
@@ -58,6 +56,10 @@ class StatusBarItem: NSObject {
     
     @objc private func stopAllDownloads(_ sender: AnyObject?) {
         AllDownloadsManager.shared.stopAllDownloads()
+    }
+    
+    @objc private func didSelectNewFolderMenuItem(_ sender: AnyObject?) {
+        Navigator.shared.showNewFolderInput()
     }
     
     @objc private func didSelectSyncMenuItem(_ sender: AnyObject?) {
