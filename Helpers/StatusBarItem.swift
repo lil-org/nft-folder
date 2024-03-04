@@ -2,10 +2,10 @@
 
 import Cocoa
 
-class StatusBarItem {
+class StatusBarItem: NSObject {
     
     static let shared = StatusBarItem()
-    private init() {}
+    private override init() { super.init() }
     
     private var statusBarItem: NSStatusItem?
     
@@ -16,8 +16,13 @@ class StatusBarItem {
         statusBarItem?.button?.image = Images.icon
         statusBarItem?.button?.imagePosition = .imageOnly
         statusBarItem?.button?.imageScaling = .scaleProportionallyDown
-
+        statusBarItem?.button?.target = self
+        statusBarItem?.button?.action = #selector(statusBarButtonClicked(sender:))
+    }
+    
+    private func createMenu() -> NSMenu {
         let menu = NSMenu(title: Strings.nftFolder)
+        menu.delegate = self
         let openFolderItem = NSMenuItem(title: Strings.openFolderMenuItem, action: #selector(openNftFolder), keyEquivalent: "")
         let controlCenterItem = NSMenuItem(title: Strings.controlCenterMenuItem, action: #selector(showControlCenter), keyEquivalent: "")
         
@@ -38,8 +43,13 @@ class StatusBarItem {
         menu.addItem(.separator())
         menu.addItem(hideItem)
         menu.addItem(quitItem)
-        
-        statusBarItem?.menu = menu
+        return menu
+    }
+    
+    @objc private func statusBarButtonClicked(sender: NSStatusBarButton) {
+        guard let event = NSApp.currentEvent, event.type == .rightMouseUp || event.type == .leftMouseUp else { return }
+        statusBarItem?.menu = createMenu()
+        statusBarItem?.button?.performClick(nil)
     }
     
     @objc private func openNftFolder() {
@@ -77,6 +87,14 @@ class StatusBarItem {
         default:
             break
         }
+    }
+    
+}
+
+extension StatusBarItem: NSMenuDelegate {
+    
+    func menuDidClose(_ menu: NSMenu) {
+        statusBarItem?.menu = nil
     }
     
 }
