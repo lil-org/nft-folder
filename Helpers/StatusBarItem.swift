@@ -32,7 +32,7 @@ class StatusBarItem: NSObject {
         
         let syncToggleItem: NSMenuItem
         if SharedDefaults.downloadsInProgress {
-            syncToggleItem = NSMenuItem(title: Strings.pauseAllDownloads, action: #selector(pauseAllDownloads(_:)), keyEquivalent: "")
+            syncToggleItem = NSMenuItem(title: Strings.stopAllDownloads, action: #selector(stopAllDownloads(_:)), keyEquivalent: "")
         } else {
             syncToggleItem = NSMenuItem(title: Strings.sync, action: #selector(didSelectSyncMenuItem(_:)), keyEquivalent: "")
         }
@@ -56,7 +56,7 @@ class StatusBarItem: NSObject {
         return menu
     }
     
-    @objc private func pauseAllDownloads(_ sender: AnyObject?) {
+    @objc private func stopAllDownloads(_ sender: AnyObject?) {
         AllDownloadsManager.shared.stopAllDownloads()
     }
     

@@ -5,7 +5,7 @@ import Foundation
 enum ExtensionMessage: Codable {
     
     case didSelectSyncMenuItem
-    case didSelectPauseAllDownloadsMenuItem
+    case didSelectStopAllDownloadsMenuItem
     case didSelectControlCenterMenuItem
     
     case didSelectViewOnMenuItem(paths: [String], gallery: NftGallery)
