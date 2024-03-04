@@ -30,20 +30,38 @@ class StatusBarItem: NSObject {
             item.attributedTitle = NSAttributedString(string: item.title, attributes: [.font: NSFont.systemFont(ofSize: 15, weight: .medium)])
         }
         
+        let syncToggleItem: NSMenuItem
+        if SharedDefaults.downloadsInProgress {
+            syncToggleItem = NSMenuItem(title: Strings.pauseAllDownloads, action: #selector(pauseAllDownloads(_:)), keyEquivalent: "")
+        } else {
+            syncToggleItem = NSMenuItem(title: Strings.sync, action: #selector(didSelectSyncMenuItem(_:)), keyEquivalent: "")
+        }
+        
         let hideItem = NSMenuItem(title: Strings.hideFromHere, action: #selector(hideFromHere), keyEquivalent: "")
         let quitItem = NSMenuItem(title: Strings.quit, action: #selector(warnBeforeQuitting), keyEquivalent: "q")
         
         controlCenterItem.target = self
         openFolderItem.target = self
+        syncToggleItem.target = self
         hideItem.target = self
         quitItem.target = self
         
         menu.addItem(openFolderItem)
         menu.addItem(controlCenterItem)
         menu.addItem(.separator())
+        menu.addItem(syncToggleItem)
+        menu.addItem(.separator())
         menu.addItem(hideItem)
         menu.addItem(quitItem)
         return menu
+    }
+    
+    @objc private func pauseAllDownloads(_ sender: AnyObject?) {
+        AllDownloadsManager.shared.stopAllDownloads()
+    }
+    
+    @objc private func didSelectSyncMenuItem(_ sender: AnyObject?) {
+        AllDownloadsManager.shared.syncOnUserRequestIfNeeded()
     }
     
     @objc private func statusBarButtonClicked(sender: NSStatusBarButton) {
