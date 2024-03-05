@@ -157,7 +157,7 @@ struct WalletsListView: View {
                 NSWorkspace.shared.open(nftDirectory)
             }
             Window.closeAll()
-        }).frame(height: 36).offset(CGSize(width: 0, height: -6)).keyboardShortcut(.defaultAction).buttonStyle(LinkButtonStyle())
+        }).frame(height: 36).offset(CGSize(width: 0, height: -6)).buttonStyle(LinkButtonStyle())
     }
     
     private func openFolderForWallet(_ wallet: WatchOnlyWallet) {
