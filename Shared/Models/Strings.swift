@@ -28,7 +28,7 @@ struct Strings {
     static let ok = "ok"
     static let sync = "↻ sync"
     static let pause = "❙❙ pause"
-    static let stopAllDownloads = "⏹ stop downloads"
+    static let stopAllDownloads = "⏹ stop all downloads"
     static let newFolderMenuItem = "+ " + newFolder
     
     static let ens = "ENS"
