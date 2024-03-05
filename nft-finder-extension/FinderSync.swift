@@ -84,8 +84,8 @@ class FinderSync: FIFinderSync {
             
         case .toolbarItemMenu:
             menu.addItem(withTitle: Strings.newFolderMenuItem, action: #selector(didSelectNewFolderMenuItem(_:)), keyEquivalent: "")
-            menu.addItem(withTitle: Strings.openFolderMenuItem, action: #selector(openNFTDirectory(_:)), keyEquivalent: "")
             menu.addItem(withTitle: Strings.controlCenterMenuItem, action: #selector(didSelectControlCenterMenuItem(_:)), keyEquivalent: "")
+            menu.addItem(withTitle: Strings.openFolderMenuItem, action: #selector(openNFTDirectory(_:)), keyEquivalent: "")
             if SharedDefaults.downloadsInProgress {
                 menu.addItem(withTitle: Strings.stopAllDownloads, action: #selector(stopAllDownloads(_:)), keyEquivalent: "")
             } else {

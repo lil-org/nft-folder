@@ -45,8 +45,8 @@ class StatusBarItem: NSObject {
         quitItem.target = self
         
         menu.addItem(newFolderItem)
-        menu.addItem(openFolderItem)
         menu.addItem(controlCenterItem)
+        menu.addItem(openFolderItem)
         menu.addItem(syncToggleItem)
         menu.addItem(.separator())
         menu.addItem(hideItem)
