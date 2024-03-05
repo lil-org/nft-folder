@@ -52,9 +52,10 @@ struct WalletsListView: View {
                                     }
                                 }
                             }.frame(height: 32)
-                            .contentShape(Rectangle()).onTapGesture {
+                            .contentShape(Rectangle())
+                            .simultaneousGesture(TapGesture().onEnded { _ in
                                 openFolderForWallet(wallet)
-                            }
+                            })
                             .contextMenu {
                                 switch status {
                                 case .downloading:
