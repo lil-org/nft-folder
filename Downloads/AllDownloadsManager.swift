@@ -53,7 +53,14 @@ class AllDownloadsManager {
     
     func prioritizeDownloads(wallet: WatchOnlyWallet) {}
     
-    func syncOnUserRequestIfNeeded() {}
+    func syncOnUserRequestIfNeeded(mbAddressFolderName: String?) {
+        if let folderName = mbAddressFolderName,
+           let wallet = walletsService.wallet(folderName: folderName), statuses[wallet] != .downloading {
+            startDownloads(wallet: wallet)
+        } else {
+            // TODO: mass sync
+        }
+    }
     
     func checkFolders() {
         let removedWallets = walletsService.checkFoldersForNewWalletsAndRemovedWallets { newWallet in

@@ -63,7 +63,7 @@ class StatusBarItem: NSObject {
     }
     
     @objc private func didSelectSyncMenuItem(_ sender: AnyObject?) {
-        AllDownloadsManager.shared.syncOnUserRequestIfNeeded()
+        AllDownloadsManager.shared.syncOnUserRequestIfNeeded(mbAddressFolderName: nil)
     }
     
     @objc private func statusBarButtonClicked(sender: NSStatusBarButton) {

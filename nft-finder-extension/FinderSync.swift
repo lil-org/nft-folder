@@ -108,7 +108,15 @@ class FinderSync: FIFinderSync {
     }
     
     @IBAction private func didSelectSyncMenuItem(_ sender: AnyObject?) {
-        HostAppMessenger.send(.didSelectSyncMenuItem)
+        var mbAddressName: String?
+        if let pathComponents = FIFinderSyncController.default().targetedURL()?.pathComponents,
+           pathComponents.count - 1 == URL.nftDirectoryPathComponentsCount,
+           let last = pathComponents.last {
+            mbAddressName = last
+        } else {
+            mbAddressName = nil
+        }
+        HostAppMessenger.send(.didSelectSyncMenuItem(mbAddressName: mbAddressName))
     }
     
     @IBAction private func didSelectControlCenterMenuItem(_ sender: AnyObject?) {

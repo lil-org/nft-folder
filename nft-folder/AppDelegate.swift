@@ -60,8 +60,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         switch message {
-        case .didSelectSyncMenuItem:
-            allDownloadsManager.syncOnUserRequestIfNeeded()
+        case .didSelectSyncMenuItem(let mbAddressFolderName):
+            allDownloadsManager.syncOnUserRequestIfNeeded(mbAddressFolderName: mbAddressFolderName)
         case .didSelectControlCenterMenuItem:
             Navigator.shared.showControlCenter(addWallet: false)
         case .didSelectViewOnMenuItem(let paths, let gallery):
