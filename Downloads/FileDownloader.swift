@@ -4,16 +4,20 @@ import Cocoa
 
 class FileDownloader: NSObject {
     
-    var hasPendingTasks: Bool { !queuedURLsHashes.isEmpty }
+    var hasPendingTasks: Bool { FileDownloader.queue.sync { [weak self] in self?.queuedURLsHashes.isEmpty != true } }
+    
+    private static let queue = DispatchQueue(label: "\(Bundle.hostBundleId).FileDownloader", qos: .default)
     
     private enum DownloadFileResult {
         case success, cancel, failure
     }
-        
+    
     private lazy var urlSession: URLSession? = {
         var configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForRequest = 15
-        let session = URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
+        let delegateQueue = OperationQueue()
+        delegateQueue.underlyingQueue = FileDownloader.queue
+        let session = URLSession(configuration: configuration, delegate: self, delegateQueue: delegateQueue)
         return session
     }()
     
@@ -33,10 +37,12 @@ class FileDownloader: NSObject {
     }
     
     func addTasks(_ tasks: [DownloadFileTask]) {
-        for task in tasks {
-            preprocess(task: task)
+        FileDownloader.queue.async { [weak self] in
+            for task in tasks {
+                self?.preprocess(task: task)
+            }
+            self?.downloadNextIfNeeded()
         }
-        downloadNextIfNeeded()
     }
     
     private func preprocess(task: DownloadFileTask) {
@@ -59,7 +65,7 @@ class FileDownloader: NSObject {
     }
     
     private func downloadNextIfNeeded() {
-        guard hasPendingTasks else { completion(); return }
+        guard !queuedURLsHashes.isEmpty else { completion(); return }
         guard downloadsInProgress < 23 && !downloadTasks.isEmpty else { return }
         var task = downloadTasks.removeFirst()
         downloadsInProgress += 1

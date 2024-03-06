@@ -5,7 +5,7 @@ import Foundation
 struct ZoraApi {
     
     private static let urlSession = URLSession.shared
-    private static let queue = DispatchQueue(label: Bundle.hostBundleId + ".zora", qos: .default)
+    private static let queue = DispatchQueue(label: "\(Bundle.hostBundleId).ZoraApi", qos: .default)
     
     static func get(owner: String, networks: [Network], endCursor: String?, completion: @escaping (TokensData?) -> Void) {
         let kind = ZoraRequest.Kind.owner(address: owner)
