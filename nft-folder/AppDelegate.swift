@@ -50,7 +50,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @objc private func processFinderMessage(_ notification: Notification) {
         guard let messageString = notification.object as? String,
               let message = ExtensionMessage.decodedFrom(string: messageString) else { return }
-        processMessage(message)
+        DispatchQueue.main.async { [weak self] in
+            self?.processMessage(message)
+        }
     }
     
     private func processMessage(_ message: ExtensionMessage) {
@@ -110,7 +112,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private func processInput(urlString: String?) {
         if let urlString = urlString, urlString.hasPrefix(URL.deeplinkScheme),
            let message = ExtensionMessage.decodedFrom(string: String(urlString.dropFirst(URL.deeplinkScheme.count))) {
-            processMessage(message)
+            DispatchQueue.main.async { [weak self] in
+                self?.processMessage(message)
+            }
         }
     }
     
