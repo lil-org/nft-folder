@@ -26,20 +26,14 @@ class StatusBarItem: NSObject {
         let openFolderItem = NSMenuItem(title: Strings.openFolderMenuItem, action: #selector(openNftFolder), keyEquivalent: "")
         let controlCenterItem = NSMenuItem(title: Strings.controlCenterMenuItem, action: #selector(showControlCenter), keyEquivalent: "")
         
-        let syncToggleItem: NSMenuItem
-        if SharedDefaults.downloadsInProgress {
-            syncToggleItem = NSMenuItem(title: Strings.stopAllDownloads, action: #selector(stopAllDownloads(_:)), keyEquivalent: "")
-        } else {
-            syncToggleItem = NSMenuItem(title: Strings.sync, action: #selector(didSelectSyncMenuItem(_:)), keyEquivalent: "")
-        }
-        
+        let syncItem = NSMenuItem(title: Strings.sync, action: #selector(didSelectSyncMenuItem(_:)), keyEquivalent: "")
         let newFolderItem = NSMenuItem(title: Strings.newFolderMenuItem, action: #selector(didSelectNewFolderMenuItem), keyEquivalent: "")
         let hideItem = NSMenuItem(title: Strings.hideFromHere, action: #selector(hideFromHere), keyEquivalent: "")
         let quitItem = NSMenuItem(title: Strings.quit, action: #selector(warnBeforeQuitting), keyEquivalent: "q")
         
         controlCenterItem.target = self
         openFolderItem.target = self
-        syncToggleItem.target = self
+        syncItem.target = self
         newFolderItem.target = self
         hideItem.target = self
         quitItem.target = self
@@ -47,7 +41,14 @@ class StatusBarItem: NSObject {
         menu.addItem(newFolderItem)
         menu.addItem(controlCenterItem)
         menu.addItem(openFolderItem)
-        menu.addItem(syncToggleItem)
+        menu.addItem(syncItem)
+        
+        if SharedDefaults.downloadsInProgress {
+            let stopDownloadsItem = NSMenuItem(title: Strings.stopAllDownloads, action: #selector(stopAllDownloads(_:)), keyEquivalent: "")
+            stopDownloadsItem.target = self
+            menu.addItem(stopDownloadsItem)
+        }
+        
         menu.addItem(.separator())
         menu.addItem(hideItem)
         menu.addItem(quitItem)
