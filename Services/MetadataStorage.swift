@@ -90,6 +90,8 @@ struct MetadataStorage {
                 prefix = "base"
             case .arbitrum:
                 prefix = "arbitrum"
+            case .blast:
+                prefix = "blast"
             }
             return URL(string: "https://zora.co/collect/\(prefix):\(metadata.collectionAddress)/\(metadata.tokenId)?referrer=\(NftGallery.referrer)")
         case .mintfun:
@@ -105,6 +107,8 @@ struct MetadataStorage {
                 prefix = "base"
             case .arbitrum:
                 prefix = "arbitrum"
+            case .blast:
+                prefix = "blast"
             }
             return URL(string: "https://mint.fun/\(prefix)/\(metadata.collectionAddress)?ref=\(NftGallery.referrer)")
         case .opensea:
@@ -120,6 +124,8 @@ struct MetadataStorage {
                 prefix = "base"
             case .arbitrum:
                 prefix = "arbitrum"
+            case .blast:
+                prefix = "blast"
             }
             return URL(string: "https://opensea.io/assets/\(prefix)/\(metadata.collectionAddress)/\(metadata.tokenId)")
         }
