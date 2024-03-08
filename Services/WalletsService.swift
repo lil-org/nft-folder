@@ -17,6 +17,10 @@ struct WalletsService {
         return SharedDefaults.watchWallets.reversed()
     }
     
+    func updateWithReorderedWallets(_ wallets: [WatchOnlyWallet]) {
+        SharedDefaults.watchWallets = wallets.reversed()
+    }
+    
     func addWallet(_ wallet: WatchOnlyWallet) {
         SharedDefaults.addWallet(wallet)
     }

@@ -162,7 +162,7 @@ struct WalletsListView: View {
     
     private func moveWallets(from source: IndexSet, to destination: Int) {
         wallets.move(fromOffsets: source, toOffset: destination)
-        // TODO: persist state
+        WalletsService.shared.updateWithReorderedWallets(wallets)
     }
     
     private func openFolderForWallet(_ wallet: WatchOnlyWallet) {
