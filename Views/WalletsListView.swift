@@ -94,7 +94,7 @@ struct WalletsListView: View {
                                     updateDisplayedWallets()
                                 })
                             }
-                        }
+                        }.onMove(perform: moveWallets)
                     }
                 }
                 .toolbar {
@@ -159,6 +159,11 @@ struct WalletsListView: View {
             }
             Window.closeAll()
         }).frame(height: 36).offset(CGSize(width: 0, height: -6)).buttonStyle(LinkButtonStyle())
+    }
+    
+    private func moveWallets(from source: IndexSet, to destination: Int) {
+        wallets.move(fromOffsets: source, toOffset: destination)
+        // TODO: persist state
     }
     
     private func openFolderForWallet(_ wallet: WatchOnlyWallet) {

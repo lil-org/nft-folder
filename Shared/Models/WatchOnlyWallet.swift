@@ -2,7 +2,9 @@
 
 import Foundation
 
-struct WatchOnlyWallet: Codable, Hashable {
+struct WatchOnlyWallet: Codable, Hashable, Identifiable {
+    
+    var id: String { address }
     
     let address: String
     let name: String?
