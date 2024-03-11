@@ -118,6 +118,15 @@ struct FileSaver {
         MetadataStorage.store(minimalMetadata: minimalMetadata, filePath: finalDestinationURL.path)
         MetadataStorage.store(detailedMetadata: metadata, correspondingTo: minimalMetadata, addressDirectoryURL: addressDirectoryURL)
         MetadataStorage.store(contentHash: contentHash, addressDirectoryURL: addressDirectoryURL)
+        createAlias(url: finalDestinationURL)
+    }
+    
+    private func createAlias(url: URL) {
+        guard let newNftsDirectory = URL.newNftsDirectory else { return }
+        let originalFileName = url.lastPathComponent
+        let targetAliasURL = newNftsDirectory.appendingPathComponent(originalFileName)
+        if fileManager.fileExists(atPath: targetAliasURL.path) { return }
+        try? fileManager.createSymbolicLink(at: targetAliasURL, withDestinationURL: url)
     }
     
     private func extractValueFromJson(jsonData: Data) -> DataOrUrl? {
