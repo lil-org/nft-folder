@@ -5,7 +5,6 @@ import Foundation
 struct FileSaver {
     
     static let shared = FileSaver()
-    private let queue = DispatchQueue(label: "\(Bundle.hostBundleId).FileSaver", qos: .default)
     private init() {}
     
     private let fileManager = FileManager.default
@@ -47,11 +46,12 @@ struct FileSaver {
         var finalName = name.hasSuffix(pathExtension) ? name : (name.trimmingCharacters(in: .whitespacesAndNewlines) + pathExtension)
         finalName = finalName.replacingOccurrences(of: "/", with: "-")
         let destinationFileURL = destinationURL.appendingPathComponent(finalName)
-        
-        queue.async {
-            saveAvoidingCollisions(tmpLocation: tmpLocation, data: data, destinationURL: destinationFileURL, addressDirectoryURL: destinationURL, metadata: detailedMetadata, downloadedFromURL: downloadedFromURL)
-        }
-        
+        saveAvoidingCollisions(tmpLocation: tmpLocation,
+                               data: data, destinationURL:
+                                destinationFileURL,
+                               addressDirectoryURL: destinationURL,
+                               metadata: detailedMetadata,
+                               downloadedFromURL: downloadedFromURL)
         return nil
     }
     
