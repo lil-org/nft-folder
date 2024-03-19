@@ -13,15 +13,6 @@ extension URL {
         case address, minimal, detailed, hashed
     }
     
-    static var newNftsDirectory: URL? {
-        let fileManager = FileManager.default
-        guard let url = nftDirectory?.appendingPathComponent("🆕") else { return nil }
-        if !fileManager.fileExists(atPath: url.path) {
-            try? fileManager.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
-        }
-        return url
-    }
-    
     static func nftDirectory(wallet: WatchOnlyWallet, createIfDoesNotExist: Bool) -> URL? {
         let fileManager = FileManager.default
         guard let addressDirectoryURL = nftDirectory?.appendingPathComponent(wallet.folderDisplayName) else { return nil }
