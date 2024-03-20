@@ -139,7 +139,7 @@
 		2CA34B722B08C71800DAB623 /* ExtensionAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ExtensionAssets.xcassets; sourceTree = "<group>"; };
 		2CA34B742B08CA8200DAB623 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2CA3C2A02B18C91600AF33D6 /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
-		2CA4CF512B07F75F00CC75F4 /* nft-folder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nft-folder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CA4CF512B07F75F00CC75F4 /* nft folder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nft folder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CA4CF542B07F75F00CC75F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2CA4CF582B07F76000CC75F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2CA4CF5B2B07F76000CC75F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -318,7 +318,7 @@
 		2CA4CF522B07F75F00CC75F4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2CA4CF512B07F75F00CC75F4 /* nft-folder.app */,
+				2CA4CF512B07F75F00CC75F4 /* nft folder.app */,
 				2CA34B622B08C01300DAB623 /* nft-finder-extension.appex */,
 			);
 			name = Products;
@@ -378,9 +378,9 @@
 			productReference = 2CA34B622B08C01300DAB623 /* nft-finder-extension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		2CA4CF502B07F75E00CC75F4 /* nft-folder */ = {
+		2CA4CF502B07F75E00CC75F4 /* nft folder */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2CA4CF602B07F76000CC75F4 /* Build configuration list for PBXNativeTarget "nft-folder" */;
+			buildConfigurationList = 2CA4CF602B07F76000CC75F4 /* Build configuration list for PBXNativeTarget "nft folder" */;
 			buildPhases = (
 				2CA34B5C2B08BE5500DAB623 /* ShellScript */,
 				2CA4CF4D2B07F75E00CC75F4 /* Sources */,
@@ -393,11 +393,11 @@
 			dependencies = (
 				2CA34B692B08C01300DAB623 /* PBXTargetDependency */,
 			);
-			name = "nft-folder";
+			name = "nft folder";
 			packageProductDependencies = (
 			);
 			productName = "nft-folder";
-			productReference = 2CA4CF512B07F75F00CC75F4 /* nft-folder.app */;
+			productReference = 2CA4CF512B07F75F00CC75F4 /* nft folder.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -433,7 +433,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2CA4CF502B07F75E00CC75F4 /* nft-folder */,
+				2CA4CF502B07F75E00CC75F4 /* nft folder */,
 				2CA34B612B08C01300DAB623 /* nft-finder-extension */,
 			);
 		};
@@ -858,7 +858,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2CA4CF602B07F76000CC75F4 /* Build configuration list for PBXNativeTarget "nft-folder" */ = {
+		2CA4CF602B07F76000CC75F4 /* Build configuration list for PBXNativeTarget "nft folder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2CA4CF612B07F76000CC75F4 /* Debug */,
