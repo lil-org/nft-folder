@@ -41,7 +41,7 @@ struct Strings {
     static let mintfun = "mint.fun"
     static let ens = "ENS"
     
-    private static func loc(_ string: LocalizedStringResource) -> String {
+    private static func loc(_ string: String.LocalizationValue) -> String {
         return String(localized: string)
     }
     
