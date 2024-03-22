@@ -14,20 +14,20 @@ struct MetadataView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 10) {
                 if let name = metadata.name, !name.isEmpty {
-                    Text("name: \(name)")
+                    Text(name)
                         .font(.headline)
                 }
                 if let collectionName = metadata.collectionName, !collectionName.isEmpty {
-                    Text("collection: \(collectionName)")
+                    Text(collectionName)
                 }
-                Text("collection address: \(metadata.collectionAddress)")
-                Text("token id: \(metadata.tokenId)")
+                Text(metadata.collectionAddress)
+                Text(metadata.tokenId)
                 if let description = metadata.description, !description.isEmpty {
-                    Text("description: \(description)")
+                    Text(description)
                 }
-                Text("network: \(metadata.network.name.lowercased())")
+                Text(metadata.network.name.lowercased())
                 if let tokenStandard = metadata.tokenStandard {
-                    Text("\(tokenStandard)")
+                    Text(tokenStandard)
                 }
                 
                 ForEach(metadata.contentRepresentations, id: \.self.size) { representation in

@@ -4,46 +4,45 @@ import Foundation
 
 struct Strings {
     
-    static let toolbarItemToolTip = "click for nft menu"
-    static let toolbarItemName = "nft"
+    static let toolbarItemToolTip = loc("click for nft menu")
+    static let toolbarItemName = loc("nft")
+    static let openFolderMenuItem = "☺︎ " + openNftFolder
+    static let syncMenuItem = "⟳ " + loc("sync nfts")
+    static let controlCenterMenuItem = "❒ " + loc("control center")
+    static let wallets = loc("folders")
+    static let newFolder = loc("new folder")
+    static let removeFolder = "⨂ " + loc("remove folder")
+    static let hardReset = "↯ " + loc("hard reset")
+    static let viewOnOpensea = "⛵︎ " + loc("view on opensea")
+    static let viewinFinder = "☺︎ " + loc("show in finder")
+    static let viewOnZora = "☀︎ " + loc("view on zora")
+    static let addressOrEns = loc("address or ens")
+    static let cancel = loc("cancel")
+    static let openNftFolder = loc("show in finder")
+    static let ok = loc("ok")
+    static let sync = "↻ " + loc("sync")
+    static let pause = "❙❙ " + loc("pause")
+    static let stopAllDownloads = "⏹ " + loc("stop all downloads")
+    static let newFolderMenuItem = "+ " + newFolder
+    static let didNotUpload = loc("did not upload")
+    static let retry = loc("retry")
+    static let nftFolder = loc("nft folder")
+    static let nftInfo = loc("metadata")
+    static let somethingWentWrong = loc("something went wrong")
+    static let maxFileSize50mb = loc("max file size 50 mb")
+    static let downloadGlb = loc("download .glb files")
+    static let poweredByZoraApi = loc("powered by zora api")
+    static let quit = loc("quit")
+    static let hideFromHere = loc("hide from here")
+    static let showInMenuBar = loc("show in menu bar")
     
     static let zora = "zora"
     static let opensea = "opensea"
     static let mintfun = "mint.fun"
-    
-    static let openFolderMenuItem = "☺︎ \(openNftFolder)"
-    static let syncMenuItem = "⟳ sync nfts"
-    static let controlCenterMenuItem = "❒ control center"
-    
-    static let wallets = "folders"
-    static let newFolder = "new folder"
-    static let removeFolder = "⨂ remove folder"
-    static let hardReset = "↯ hard reset"
-    static let viewOnOpensea = "⛵︎ view on opensea"
-    static let viewinFinder = "☺︎ show in finder"
-    static let viewOnZora = "☀︎ view on zora"
-    static let addressOrEns = "address or ens"
-    static let cancel = "cancel"
-    static let openNftFolder = "show in finder"
-    static let ok = "ok"
-    static let sync = "↻ sync"
-    static let pause = "❙❙ pause"
-    static let stopAllDownloads = "⏹ stop all downloads"
-    static let newFolderMenuItem = "+ " + newFolder
-    
     static let ens = "ENS"
-    static let didNotUpload = "did not upload"
-    static let retry = "retry"
-    static let nftFolder = "nft folder"
-    static let nftInfo = "metadata"
-    static let somethingWentWrong = "something went wrong"
     
-    static let maxFileSize50mb = "max file size 50 mb"
-    static let downloadGlb = "download .glb files"
-    static let poweredByZoraApi = "powered by zora api"
-    static let quit = "quit"
-    
-    static let hideFromHere = "hide from here"
-    static let showInMenuBar = "show in menu bar"
+    private static func loc(_ string: LocalizedStringResource) -> String {
+        return String(localized: string)
+    }
     
 }
