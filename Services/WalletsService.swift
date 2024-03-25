@@ -92,6 +92,7 @@ struct WalletsService {
                             }
                         }
                         FolderIcon.set(for: wallet)
+                        // TODO: check if address is a collection here
                         onNewWallet(wallet)
                     case .failure:
                         return
