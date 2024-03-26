@@ -23,7 +23,6 @@ struct ZoraApi {
     }
     
     static private func get(kind: ZoraRequest.Kind, networks: [Network], sort: ZoraRequest.Sort, endCursor: String?, retryCount: Int, completion: @escaping (ZoraResponseData?) -> Void) {
-        // TODO: more actively retry when requesting collection tokens
         let query = ZoraRequest.query(kind: kind, sort: sort, networks: networks, endCursor: endCursor)
         guard let jsonData = try? JSONSerialization.data(withJSONObject: query) else { return }
         let url = URL(string: "https://api.zora.co/graphql")!
@@ -32,8 +31,19 @@ struct ZoraApi {
         request.httpBody = jsonData
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         let task = urlSession.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil, let zoraResponse = try? JSONDecoder().decode(ZoraResponse.self, from: data) else {
-                if retryCount > 3 {
+            let requireNonEmptyTokensResponse: Bool
+            
+            if case .collection = kind {
+                requireNonEmptyTokensResponse = endCursor != nil
+            } else {
+                requireNonEmptyTokensResponse = false
+            }
+            
+            let maxRetryCount = requireNonEmptyTokensResponse ? 10 : 3
+            
+            guard let data = data, error == nil, let zoraResponse = try? JSONDecoder().decode(ZoraResponse.self, from: data),
+                  !requireNonEmptyTokensResponse || zoraResponse.data.tokens?.nodes.isEmpty == false else {
+                if retryCount > maxRetryCount {
                     completion(nil)
                 } else {
                     queue.asyncAfter(deadline: .now() + .seconds(retryCount + 1)) {
