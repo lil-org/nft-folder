@@ -83,15 +83,7 @@ struct WalletsService {
                     case .success(let response):
                         let wallet = WatchOnlyWallet(address: response.address, name: response.name, avatar: response.avatar, collections: nil)
                         self.addWallet(wallet)
-                        let old = path + "/" + name
-                        let new = path + "/" + wallet.folderDisplayName
-                        do {
-                            try self.fileManager.moveItem(atPath: old, toPath: new)
-                        } catch {
-                            if self.fileManager.fileExists(atPath: new) == true {
-                                try? self.fileManager.removeItem(atPath: old)
-                            }
-                        }
+                        renameFolder(path: path, name: name, wallet: wallet)
                         FolderIcon.set(for: wallet)
                         onNewWallet(wallet)
                     case .failure:
@@ -126,6 +118,18 @@ struct WalletsService {
                     // TODO: rename folder in finder and in the list
                     AllDownloadsManager.shared.downloadCollections(wallet: updatedWallet)
                 }
+            }
+        }
+    }
+    
+    private func renameFolder(path: String, name: String, wallet: WatchOnlyWallet) {
+        let old = path + "/" + name
+        let new = path + "/" + wallet.folderDisplayName
+        do {
+            try self.fileManager.moveItem(atPath: old, toPath: new)
+        } catch {
+            if self.fileManager.fileExists(atPath: new) == true {
+                try? self.fileManager.removeItem(atPath: old)
             }
         }
     }
