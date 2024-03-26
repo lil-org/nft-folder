@@ -79,6 +79,17 @@ struct Media: Codable {
     let mediaEncoding: Encoding?
     let size: String?
     
+    var customImageEncoding: String? {
+        if let url = url,
+           url.hasPrefix(URL.ipfsScheme),
+           let urlQueryEncoded = ("https://ipfs.decentralized-content.com/ipfs/" + url.dropFirst(URL.ipfsScheme.count)).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            let custom = "https://remote-image.decentralized-content.com/image?url=\(urlQueryEncoded)&w=1920&q=75"
+            return custom
+        } else {
+            return nil
+        }
+    }
+    
     struct Encoding: Codable {
         let original: String?
         let thumbnail: String?
@@ -94,6 +105,7 @@ extension Token {
             ContentRepresentation(url: content?.url, size: content?.size, mimeType: content?.mimeType, knownKind: nil),
             ContentRepresentation(url: content?.mediaEncoding?.preview ?? content?.mediaEncoding?.large, size: nil, mimeType: content?.mimeType, knownKind: nil),
             ContentRepresentation(url: image?.url, size: image?.size, mimeType: image?.mimeType, knownKind: .image),
+            ContentRepresentation(url: image?.customImageEncoding, size: nil, mimeType: image?.mimeType, knownKind: .image),
             ContentRepresentation(url: image?.mediaEncoding?.thumbnail, size: nil, mimeType: image?.mimeType, knownKind: .image),
             ContentRepresentation(url: tokenUrl, size: nil, mimeType: tokenUrlMimeType, knownKind: nil)
         ]
