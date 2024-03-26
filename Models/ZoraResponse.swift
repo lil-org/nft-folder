@@ -3,11 +3,26 @@
 import Foundation
 
 struct ZoraResponse: Codable {
-    let data: TokensResponse
+    let data: ZoraResponseData
 }
 
-struct TokensResponse: Codable {
+struct ZoraResponseData: Codable {
     let tokens: TokensData
+    let collections: CollectionsData?
+}
+
+struct CollectionsData: Codable {
+    let nodes: [CollectionNode]
+}
+
+struct CollectionNode: Codable {
+    let name: String
+    let networkInfo: NetworkInfoResponse
+}
+
+struct NetworkInfoResponse: Codable {
+    let chain: String
+    let network: String
 }
 
 struct TokensData: Codable {

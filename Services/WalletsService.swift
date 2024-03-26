@@ -92,8 +92,8 @@ struct WalletsService {
                             }
                         }
                         FolderIcon.set(for: wallet)
-                        // TODO: check if address is a collection here
                         onNewWallet(wallet)
+                        checkIfCollection(wallet: wallet)
                     case .failure:
                         return
                     }
@@ -105,6 +105,10 @@ struct WalletsService {
             removeWallet(address: remaining.address)
         }
         return Array(knownWallets)
+    }
+    
+    private func checkIfCollection(wallet: WatchOnlyWallet) {
+        // TODO: implement
     }
     
 }

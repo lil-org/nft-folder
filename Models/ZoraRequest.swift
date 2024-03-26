@@ -7,6 +7,7 @@ struct ZoraRequest {
     enum Kind {
         case owner(address: String)
         case collection(address: String)
+        case checkIfCollection(address: String)
     }
     
     enum Sort: String {
@@ -18,7 +19,7 @@ struct ZoraRequest {
         switch kind {
         case .owner(let address):
             whereString = "{ownerAddresses: [\"\(address)\"]}"
-        case .collection(let address):
+        case .collection(let address), .checkIfCollection(let address):
             whereString = "{collectionAddresses: [\"\(address)\"]}"
         }
         let endString: String
@@ -29,6 +30,7 @@ struct ZoraRequest {
         }
         let networksString = networks.map { $0.query }.joined(separator: ", ")
         
+        // TODO: different query for checkIfCollection
         let queryString = """
         {
             tokens(sort: {sortKey: \(sort.rawValue.uppercased()), sortDirection: DESC},
