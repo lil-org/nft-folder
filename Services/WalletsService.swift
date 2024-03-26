@@ -23,6 +23,7 @@ struct WalletsService {
     
     func addWallet(_ wallet: WatchOnlyWallet) {
         SharedDefaults.addWallet(wallet)
+        checkIfCollection(wallet: wallet)
     }
     
     func removeWallet(_ wallet: WatchOnlyWallet) {
@@ -93,7 +94,6 @@ struct WalletsService {
                         }
                         FolderIcon.set(for: wallet)
                         onNewWallet(wallet)
-                        checkIfCollection(wallet: wallet)
                     case .failure:
                         return
                     }
@@ -107,8 +107,13 @@ struct WalletsService {
         return Array(knownWallets)
     }
     
-    private func checkIfCollection(wallet: WatchOnlyWallet) {
-        // TODO: implement
+    func checkIfCollection(wallet: WatchOnlyWallet) {
+        ZoraApi.checkIfCollection(address: wallet.address) { response in
+            if let collections = response?.collections?.nodes, !collections.isEmpty {
+                // TODO: store in defaults, get tokens
+                print(collections.first!.name)
+            }
+        }
     }
     
 }

@@ -42,15 +42,15 @@ class WalletDownloader {
     private func goThroughZora(wallet: WatchOnlyWallet, networkIndex: Int, endCursor: String?) {
         let network = networks[networkIndex]
         ZoraApi.get(owner: wallet.address, networks: [network], endCursor: endCursor) { [weak self] result in
-            guard let result = result, !result.tokens.nodes.isEmpty else {
+            guard let result = result?.tokens, !result.nodes.isEmpty else {
                 self?.nextStepForZora(wallet: wallet, networkIndex: networkIndex, endCursor: nil, hasNextPage: false)
                 return
             }
             
-            self?.processResultTokensNodes(result.tokens.nodes, wallet: wallet, network: network)
+            self?.processResultTokensNodes(result.nodes, wallet: wallet, network: network)
             
-            if let endCursor = result.tokens.pageInfo.endCursor {
-                self?.nextStepForZora(wallet: wallet, networkIndex: networkIndex, endCursor: endCursor, hasNextPage: result.tokens.pageInfo.hasNextPage)
+            if let endCursor = result.pageInfo.endCursor {
+                self?.nextStepForZora(wallet: wallet, networkIndex: networkIndex, endCursor: endCursor, hasNextPage: result.pageInfo.hasNextPage)
             }
         }
     }

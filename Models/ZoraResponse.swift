@@ -7,7 +7,7 @@ struct ZoraResponse: Codable {
 }
 
 struct ZoraResponseData: Codable {
-    let tokens: TokensData
+    let tokens: TokensData?
     let collections: CollectionsData?
 }
 
