@@ -14,7 +14,7 @@ struct ZoraApi {
     
     static func get(collection: String, networks: [Network], endCursor: String?, completion: @escaping (ZoraResponseData?) -> Void) {
         let kind = ZoraRequest.Kind.collection(address: collection)
-        get(kind: kind, networks: networks, sort: .minted, endCursor: endCursor, retryCount: 0, completion: completion)
+        get(kind: kind, networks: networks, sort: .none, endCursor: endCursor, retryCount: 0, completion: completion)
     }
     
     static func checkIfCollection(address: String, completion: @escaping (ZoraResponseData?) -> Void) {

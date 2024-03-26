@@ -27,7 +27,7 @@ struct ZoraRequest {
         case .owner(let address):
             whereString = "{ownerAddresses: [\"\(address)\"]}"
         case .collection(let address), .checkIfCollection(let address):
-            whereString = "{collectionAddresses: [\"\(address)\"]}"
+            whereString = "{collectionAddresses: \"\(address)\"}"
         }
         let endString: String
         if let endCursor = endCursor {
@@ -43,7 +43,8 @@ struct ZoraRequest {
         case .owner, .collection:
             queryString = """
             {
-                tokens(sort: {sortKey: \(sort.query), sortDirection: DESC},
+                tokens(
+                    sort: {sortKey: \(sort.query), sortDirection: DESC},
                     networks: [\(networksString)],
                     pagination: {limit: 30\(endString)},
                     where: \(whereString)) {
