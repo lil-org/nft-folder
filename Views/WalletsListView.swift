@@ -180,6 +180,7 @@ struct WalletsListView: View {
             if let _ = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: true) {
                 FolderIcon.set(for: wallet)
                 AllDownloadsManager.shared.startDownloads(wallet: wallet)
+                WalletsService.shared.checkIfCollection(wallet: wallet)
             }
         }
     }
