@@ -109,7 +109,7 @@ struct WalletsService {
     
     func checkIfCollection(wallet: WatchOnlyWallet) {
         ZoraApi.checkIfCollection(address: wallet.address) { response in
-            if let responseCollections = response?.collections?.nodes, !responseCollections.isEmpty {
+            if let responseCollections = response?.collections?.nodes {
                 let collections = responseCollections.compactMap { collectionNode in
                     if let network = Network.withName(collectionNode.networkInfo.network) {
                         return CollectionInfo(name: collectionNode.name, network: network)
@@ -117,6 +117,8 @@ struct WalletsService {
                         return nil
                     }
                 }
+                
+                guard !collections.isEmpty else { return }
                 
                 let updatedWallet = WatchOnlyWallet(address: wallet.address, name: wallet.name, avatar: wallet.avatar, collections: collections)
                 DispatchQueue.main.async {
