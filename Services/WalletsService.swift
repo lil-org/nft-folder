@@ -100,6 +100,7 @@ struct WalletsService {
     }
     
     func checkIfCollection(wallet: WatchOnlyWallet) {
+        guard let path = URL.nftDirectory?.path else { return }
         ZoraApi.checkIfCollection(address: wallet.address) { response in
             if let responseCollections = response?.collections?.nodes {
                 let collections = responseCollections.compactMap { collectionNode in
@@ -110,12 +111,16 @@ struct WalletsService {
                     }
                 }
                 
-                guard !collections.isEmpty else { return }
+                guard var collectionName = collections.first?.name else { return }
+                if hasWallet(folderName: collectionName) {
+                    collectionName += " " + wallet.address.suffix(4)
+                }
                 
-                let updatedWallet = WatchOnlyWallet(address: wallet.address, name: wallet.name, avatar: wallet.avatar, collections: collections)
+                let updatedWallet = WatchOnlyWallet(address: wallet.address, name: collectionName, avatar: wallet.avatar, collections: collections)
                 DispatchQueue.main.async {
+                    renameFolder(path: path, name: wallet.folderDisplayName, wallet: updatedWallet)
                     // TODO: update defaults
-                    // TODO: rename folder in finder and in the list
+                    // TODO: update in the contol center list
                     AllDownloadsManager.shared.downloadCollections(wallet: updatedWallet)
                 }
             }
