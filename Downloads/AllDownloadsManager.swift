@@ -41,7 +41,7 @@ class AllDownloadsManager {
     }
     
     func downloadCollections(wallet: WatchOnlyWallet) {
-        stopDownloads(wallet: wallet) // TODO: tmp, more gentle way switching to collections downloading
+        stopAllDownloads() // TODO: tmp, more gentle way switching to collections downloading
         startDownloads(wallet: wallet)
     }
     

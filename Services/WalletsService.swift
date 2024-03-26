@@ -111,7 +111,7 @@ struct WalletsService {
         ZoraApi.checkIfCollection(address: wallet.address) { response in
             if let responseCollections = response?.collections?.nodes, !responseCollections.isEmpty {
                 let collections = responseCollections.compactMap { collectionNode in
-                    if let network = Network.withName(collectionNode.name) {
+                    if let network = Network.withName(collectionNode.networkInfo.network) {
                         return CollectionInfo(name: collectionNode.name, network: network)
                     } else {
                         return nil

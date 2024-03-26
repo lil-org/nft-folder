@@ -12,6 +12,13 @@ struct ZoraRequest {
     
     enum Sort: String {
         case minted, transferred, none
+        
+        var query: String {
+            switch self {
+            case .minted, .transferred, .none:
+                return rawValue.uppercased()
+            }
+        }
     }
     
     static func query(kind: Kind, sort: Sort, networks: [Network], endCursor: String?) -> [String: String] {
@@ -36,7 +43,7 @@ struct ZoraRequest {
         case .owner, .collection:
             queryString = """
             {
-                tokens(sort: {sortKey: \(sort.rawValue.uppercased()), sortDirection: DESC},
+                tokens(sort: {sortKey: \(sort.query), sortDirection: DESC},
                     networks: [\(networksString)],
                     pagination: {limit: 30\(endString)},
                     where: \(whereString)) {

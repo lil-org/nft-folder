@@ -19,7 +19,6 @@ class WalletDownloader {
     }
     
     func study(wallet: WatchOnlyWallet) {
-        // TODO: implement collections downloading
         goThroughZora(wallet: wallet)
     }
     
@@ -30,7 +29,7 @@ class WalletDownloader {
     private func nextStepForZora(wallet: WatchOnlyWallet, networkIndex: Int, endCursor: String?, hasNextPage: Bool) {
         if hasNextPage {
             goThroughZora(wallet: wallet, networkIndex: networkIndex, endCursor: endCursor)
-        } else if networkIndex + 1 < networks.count {
+        } else if networkIndex + 1 < networks.count && wallet.collections?.first == nil {
             goThroughZora(wallet: wallet, networkIndex: networkIndex + 1, endCursor: nil)
         } else {
             didStudy = true
@@ -41,8 +40,8 @@ class WalletDownloader {
     }
     
     private func goThroughZora(wallet: WatchOnlyWallet, networkIndex: Int, endCursor: String?) {
-        let network = networks[networkIndex]
-        ZoraApi.get(owner: wallet.address, networks: [network], endCursor: endCursor) { [weak self] result in
+        let network = wallet.collections?.first?.network ?? networks[networkIndex]
+        let completion: (ZoraResponseData?) -> Void = { [weak self] result in
             guard let result = result?.tokens, !result.nodes.isEmpty else {
                 self?.nextStepForZora(wallet: wallet, networkIndex: networkIndex, endCursor: nil, hasNextPage: false)
                 return
@@ -53,6 +52,11 @@ class WalletDownloader {
             if let endCursor = result.pageInfo.endCursor {
                 self?.nextStepForZora(wallet: wallet, networkIndex: networkIndex, endCursor: endCursor, hasNextPage: result.pageInfo.hasNextPage)
             }
+        }
+        if let _ = wallet.collections?.first {
+            ZoraApi.get(collection: wallet.address, networks: [network], endCursor: endCursor, completion: completion)
+        } else {
+            ZoraApi.get(owner: wallet.address, networks: [network], endCursor: endCursor, completion: completion)
         }
     }
     

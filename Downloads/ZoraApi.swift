@@ -9,21 +9,21 @@ struct ZoraApi {
     
     static func get(owner: String, networks: [Network], endCursor: String?, completion: @escaping (ZoraResponseData?) -> Void) {
         let kind = ZoraRequest.Kind.owner(address: owner)
-        get(kind: kind, networks: networks, endCursor: endCursor, retryCount: 0, completion: completion)
+        get(kind: kind, networks: networks, sort: .none, endCursor: endCursor, retryCount: 0, completion: completion)
     }
     
     static func get(collection: String, networks: [Network], endCursor: String?, completion: @escaping (ZoraResponseData?) -> Void) {
         let kind = ZoraRequest.Kind.collection(address: collection)
-        get(kind: kind, networks: networks, endCursor: endCursor, retryCount: 0, completion: completion)
+        get(kind: kind, networks: networks, sort: .minted, endCursor: endCursor, retryCount: 0, completion: completion)
     }
     
     static func checkIfCollection(address: String, completion: @escaping (ZoraResponseData?) -> Void) {
         let kind = ZoraRequest.Kind.checkIfCollection(address: address)
-        get(kind: kind, networks: Network.allCases, endCursor: nil, retryCount: 0, completion: completion)
+        get(kind: kind, networks: Network.allCases, sort: .none, endCursor: nil, retryCount: 0, completion: completion)
     }
     
-    static private func get(kind: ZoraRequest.Kind, networks: [Network], endCursor: String?, retryCount: Int, completion: @escaping (ZoraResponseData?) -> Void) {
-        let query = ZoraRequest.query(kind: kind, sort: .none, networks: networks, endCursor: endCursor)
+    static private func get(kind: ZoraRequest.Kind, networks: [Network], sort: ZoraRequest.Sort, endCursor: String?, retryCount: Int, completion: @escaping (ZoraResponseData?) -> Void) {
+        let query = ZoraRequest.query(kind: kind, sort: sort, networks: networks, endCursor: endCursor)
         guard let jsonData = try? JSONSerialization.data(withJSONObject: query) else { return }
         let url = URL(string: "https://api.zora.co/graphql")!
         var request = URLRequest(url: url)
@@ -36,7 +36,7 @@ struct ZoraApi {
                     completion(nil)
                 } else {
                     queue.asyncAfter(deadline: .now() + .seconds(retryCount + 1)) {
-                        get(kind: kind, networks: networks, endCursor: endCursor, retryCount: retryCount + 1, completion: completion)
+                        get(kind: kind, networks: networks, sort: sort, endCursor: endCursor, retryCount: retryCount + 1, completion: completion)
                     }
                 }
                 return
