@@ -23,6 +23,7 @@ struct ZoraApi {
     }
     
     static private func get(kind: ZoraRequest.Kind, networks: [Network], sort: ZoraRequest.Sort, endCursor: String?, retryCount: Int, completion: @escaping (ZoraResponseData?) -> Void) {
+        // TODO: more actively retry when requesting collection tokens
         let query = ZoraRequest.query(kind: kind, sort: sort, networks: networks, endCursor: endCursor)
         guard let jsonData = try? JSONSerialization.data(withJSONObject: query) else { return }
         let url = URL(string: "https://api.zora.co/graphql")!
