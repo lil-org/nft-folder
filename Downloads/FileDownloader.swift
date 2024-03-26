@@ -26,6 +26,7 @@ class FileDownloader: NSObject {
     private var downloadsInProgress = 0
     private var queuedURLsHashes = Set<UInt64>()
     private var completion: () -> Void
+    private var isCanceled = false
     
     init(completion: @escaping () -> Void) {
         self.completion = completion
@@ -33,6 +34,7 @@ class FileDownloader: NSObject {
     }
     
     func invalidateAndCancel() {
+        isCanceled = true
         urlSession?.invalidateAndCancel()
     }
     
@@ -156,6 +158,7 @@ extension FileDownloader: URLSessionDownloadDelegate {
     }
     
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: (any Error)?) {
+        guard !isCanceled else { return }
         if error != nil, let (_, completion) = ongoingTasksAndCompletions[task.taskIdentifier] {
             ongoingTasksAndCompletions.removeValue(forKey: task.taskIdentifier)
             completion(.failure)
