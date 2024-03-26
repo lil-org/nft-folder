@@ -37,4 +37,23 @@ enum Network: Int, CaseIterable, Codable {
         return "{network: \(name), chain: \(chainStringValue)}"
     }
     
+    static func withName(_ name: String) -> Network? {
+        switch name {
+        case "ETHEREUM":
+            return .ethereum
+        case "OPTIMISM":
+            return .optimism
+        case "ZORA":
+            return .zora
+        case "BASE":
+            return .base
+        case "ARBITRUM":
+            return .arbitrum
+        case "BLAST":
+            return .blast
+        default:
+            return nil
+        }
+    }
+    
 }

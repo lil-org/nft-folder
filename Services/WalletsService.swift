@@ -17,7 +17,7 @@ struct WalletsService {
         return SharedDefaults.watchWallets.reversed()
     }
     
-    func updateWithReorderedWallets(_ wallets: [WatchOnlyWallet]) {
+    func updateWithWallets(_ wallets: [WatchOnlyWallet]) {
         SharedDefaults.watchWallets = wallets.reversed()
     }
     
@@ -81,7 +81,7 @@ struct WalletsService {
                 resolveENS(name) { result in
                     switch result {
                     case .success(let response):
-                        let wallet = WatchOnlyWallet(address: response.address, name: response.name, avatar: response.avatar)
+                        let wallet = WatchOnlyWallet(address: response.address, name: response.name, avatar: response.avatar, collections: nil)
                         self.addWallet(wallet)
                         let old = path + "/" + name
                         let new = path + "/" + wallet.folderDisplayName
@@ -109,9 +109,21 @@ struct WalletsService {
     
     func checkIfCollection(wallet: WatchOnlyWallet) {
         ZoraApi.checkIfCollection(address: wallet.address) { response in
-            if let collections = response?.collections?.nodes, !collections.isEmpty {
-                // TODO: store in defaults, get tokens
-                print(collections.first!.name)
+            if let responseCollections = response?.collections?.nodes, !responseCollections.isEmpty {
+                let collections = responseCollections.compactMap { collectionNode in
+                    if let network = Network.withName(collectionNode.name) {
+                        return CollectionInfo(name: collectionNode.name, network: network)
+                    } else {
+                        return nil
+                    }
+                }
+                
+                let updatedWallet = WatchOnlyWallet(address: wallet.address, name: wallet.name, avatar: wallet.avatar, collections: collections)
+                DispatchQueue.main.async {
+                    // TODO: update defaults
+                    // TODO: rename folder in finder and in the list
+                    AllDownloadsManager.shared.downloadCollections(wallet: updatedWallet)
+                }
             }
         }
     }

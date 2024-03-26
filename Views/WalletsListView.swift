@@ -162,7 +162,7 @@ struct WalletsListView: View {
     
     private func moveWallets(from source: IndexSet, to destination: Int) {
         wallets.move(fromOffsets: source, toOffset: destination)
-        WalletsService.shared.updateWithReorderedWallets(wallets)
+        WalletsService.shared.updateWithWallets(wallets)
     }
     
     private func openFolderForWallet(_ wallet: WatchOnlyWallet) {
@@ -190,7 +190,7 @@ struct WalletsListView: View {
         WalletsService.shared.resolveENS(newWalletAddress) { result in
             if case .success(let response) = result {
                 if showAddWalletPopup {
-                    let wallet = WatchOnlyWallet(address: response.address, name: response.name, avatar: response.avatar)
+                    let wallet = WatchOnlyWallet(address: response.address, name: response.name, avatar: response.avatar, collections: nil)
                     WalletsService.shared.addWallet(wallet)
                     FolderIcon.set(for: wallet)
                     updateDisplayedWallets()

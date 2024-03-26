@@ -10,6 +10,8 @@ struct WatchOnlyWallet: Codable, Hashable, Identifiable {
     let name: String?
     let avatar: String?
     
+    let collections: [CollectionInfo]?
+    
     var listDisplayName: String {
         if let name = name {
             return name

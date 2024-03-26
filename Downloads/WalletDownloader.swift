@@ -19,6 +19,7 @@ class WalletDownloader {
     }
     
     func study(wallet: WatchOnlyWallet) {
+        // TODO: implement collections downloading
         goThroughZora(wallet: wallet)
     }
     

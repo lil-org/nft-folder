@@ -27,6 +27,7 @@ class AllDownloadsManager {
     }
     
     func startDownloads(wallet: WatchOnlyWallet) {
+        guard statuses[wallet] != .downloading else { return }
         SharedDefaults.downloadsInProgress = true
         statuses[wallet] = .downloading
         let walletDownloader = WalletDownloader { [weak self] in
@@ -37,6 +38,11 @@ class AllDownloadsManager {
         walletDownloader.study(wallet: wallet)
         postStatusUpdateNotification()
         walletDownloaders[wallet] = walletDownloader
+    }
+    
+    func downloadCollections(wallet: WatchOnlyWallet) {
+        stopDownloads(wallet: wallet) // TODO: tmp, more gentle way switching to collections downloading
+        startDownloads(wallet: wallet)
     }
     
     func stopDownloads(wallet: WatchOnlyWallet) {
