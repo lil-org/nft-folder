@@ -30,61 +30,83 @@ struct ZoraRequest {
         }
         let networksString = networks.map { $0.query }.joined(separator: ", ")
         
-        // TODO: different query for checkIfCollection
-        let queryString = """
-        {
-            tokens(sort: {sortKey: \(sort.rawValue.uppercased()), sortDirection: DESC},
-                networks: [\(networksString)],
-                pagination: {limit: 30\(endString)},
-                where: \(whereString)) {
-            
-                pageInfo {
-                    endCursor
-                    hasNextPage
-                }
-            
-                nodes {
-                    token {
-                        tokenId
-                        name
-                        owner
-                        collectionName
-                        collectionAddress
-                        tokenUrl
-                        tokenUrlMimeType
-                        tokenStandard
-                        description
-                        image {
-                            url
-                            mimeType
-                            size
-                            mediaEncoding {
-                                ... on ImageEncodingTypes {
-                                    original
-                                    thumbnail
+        let queryString: String
+        
+        switch kind {
+        case .owner, .collection:
+            queryString = """
+            {
+                tokens(sort: {sortKey: \(sort.rawValue.uppercased()), sortDirection: DESC},
+                    networks: [\(networksString)],
+                    pagination: {limit: 30\(endString)},
+                    where: \(whereString)) {
+                
+                    pageInfo {
+                        endCursor
+                        hasNextPage
+                    }
+                
+                    nodes {
+                        token {
+                            tokenId
+                            name
+                            owner
+                            collectionName
+                            collectionAddress
+                            tokenUrl
+                            tokenUrlMimeType
+                            tokenStandard
+                            description
+                            image {
+                                url
+                                mimeType
+                                size
+                                mediaEncoding {
+                                    ... on ImageEncodingTypes {
+                                        original
+                                        thumbnail
+                                    }
                                 }
                             }
-                        }
-                        content {
-                            url
-                            mimeType
-                            size
-                            mediaEncoding {
-                                ... on VideoEncodingTypes {
-                                    original
-                                    preview
-                                }
-                                ... on AudioEncodingTypes {
-                                    large
-                                    original
+                            content {
+                                url
+                                mimeType
+                                size
+                                mediaEncoding {
+                                    ... on VideoEncodingTypes {
+                                        original
+                                        preview
+                                    }
+                                    ... on AudioEncodingTypes {
+                                        large
+                                        original
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
+            """
+        case .checkIfCollection:
+            queryString = """
+            {
+                collections(
+                    where: \(whereString)
+                    networks: [\(networksString)]
+                ) {
+                    nodes {
+                        name
+                        networkInfo {
+                            chain
+                            network
+                        }
+                    }
+                }
+            }
+            """
         }
-        """
+        
         return ["query": queryString]
     }
     
