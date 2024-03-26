@@ -95,7 +95,6 @@ class FileDownloader: NSObject {
             completion(.failure)
             return
         }
-        
         guard let urlSessionDownloadTask = urlSession?.downloadTask(with: url) else { return }
         ongoingTasksAndCompletions[urlSessionDownloadTask.taskIdentifier] = (task, completion)
         urlSessionDownloadTask.resume()
@@ -153,6 +152,13 @@ extension FileDownloader: URLSessionDownloadDelegate {
                 ongoingTasksAndCompletions.removeValue(forKey: downloadTask.taskIdentifier)
                 completion(.failure)
             }
+        }
+    }
+    
+    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: (any Error)?) {
+        if error != nil, let (_, completion) = ongoingTasksAndCompletions[task.taskIdentifier] {
+            ongoingTasksAndCompletions.removeValue(forKey: task.taskIdentifier)
+            completion(.failure)
         }
     }
     
