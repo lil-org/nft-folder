@@ -118,10 +118,14 @@ struct WalletsService {
                 
                 let updatedWallet = WatchOnlyWallet(address: wallet.address, name: collectionName, avatar: wallet.avatar, collections: collections)
                 DispatchQueue.main.async {
-                    renameFolder(path: path, name: wallet.folderDisplayName, wallet: updatedWallet)
-                    // TODO: update defaults
-                    // TODO: update in the contol center list
-                    AllDownloadsManager.shared.downloadCollections(wallet: updatedWallet)
+                    var walletsUpdate = wallets
+                    if let index = walletsUpdate.firstIndex(where: { $0.address == updatedWallet.address }) {
+                        renameFolder(path: path, name: wallet.folderDisplayName, wallet: updatedWallet)
+                        walletsUpdate[index] = updatedWallet
+                        updateWithWallets(walletsUpdate)
+                        AllDownloadsManager.shared.downloadCollections(wallet: updatedWallet)
+                        NotificationCenter.default.post(name: .walletsUpdate, object: nil)
+                    }
                 }
             }
         }
