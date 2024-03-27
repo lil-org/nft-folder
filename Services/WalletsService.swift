@@ -123,7 +123,7 @@ struct WalletsService {
                         renameFolder(path: path, name: wallet.folderDisplayName, wallet: updatedWallet)
                         walletsUpdate[index] = updatedWallet
                         updateWithWallets(walletsUpdate)
-                        AllDownloadsManager.shared.downloadCollections(wallet: updatedWallet)
+                        AllDownloadsManager.shared.downloadCollections(collectionsWallet: updatedWallet, initialWallet: wallet)
                         NotificationCenter.default.post(name: .walletsUpdate, object: nil)
                     }
                 }
