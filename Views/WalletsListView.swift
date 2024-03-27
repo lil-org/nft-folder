@@ -73,12 +73,12 @@ struct WalletsListView: View {
                                         openFolderForWallet(wallet)
                                     })
                                     Button(Strings.viewOnZora, action: {
-                                        if let galleryURL = NftGallery.zora.url(walletAddress: wallet.address) {
+                                        if let galleryURL = NftGallery.zora.url(wallet: wallet) {
                                             DispatchQueue.main.async { NSWorkspace.shared.open(galleryURL) }
                                         }
                                     })
                                     Button(Strings.viewOnOpensea, action: {
-                                        if let galleryURL = NftGallery.opensea.url(walletAddress: wallet.address) {
+                                        if let galleryURL = NftGallery.opensea.url(wallet: wallet) {
                                             DispatchQueue.main.async { NSWorkspace.shared.open(galleryURL) }
                                         }
                                     })

@@ -34,7 +34,15 @@ enum NftGallery: Int, CaseIterable, Codable {
         }
     }
     
-    func url(walletAddress: String) -> URL? {
+    func url(wallet: WatchOnlyWallet) -> URL? {
+        if wallet.collections?.isEmpty == false {
+            return url(collectionAddress: wallet.address)
+        } else {
+            return url(walletAddress: wallet.address)
+        }
+    }
+    
+    private func url(walletAddress: String) -> URL? {
         switch self {
         case .local:
             return nil
@@ -47,7 +55,7 @@ enum NftGallery: Int, CaseIterable, Codable {
         }
     }
     
-    func url(collectionAddress: String) -> URL? {
+    private func url(collectionAddress: String) -> URL? {
         // TODO: update links
         switch self {
         case .local:
