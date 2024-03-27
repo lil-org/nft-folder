@@ -74,61 +74,8 @@ struct MetadataStorage {
     }
     
     private static func nftURL(metadata: MinimalTokenMetadata, gallery: NftGallery) -> URL? {
-        switch gallery {
-        case .local:
-            return nil
-        case .zora:
-            let prefix: String
-            switch metadata.network {
-            case .ethereum:
-                prefix = "eth"
-            case .optimism:
-                prefix = "optimism"
-            case .zora:
-                prefix = "zora"
-            case .base:
-                prefix = "base"
-            case .arbitrum:
-                prefix = "arbitrum"
-            case .blast:
-                prefix = "blast"
-            }
-            return URL(string: "https://zora.co/collect/\(prefix):\(metadata.collectionAddress)/\(metadata.tokenId)?referrer=\(NftGallery.referrer)")
-        case .mintfun:
-            let prefix: String
-            switch metadata.network {
-            case .ethereum:
-                prefix = "ethereum"
-            case .optimism:
-                prefix = "op"
-            case .zora:
-                prefix = "zora"
-            case .base:
-                prefix = "base"
-            case .arbitrum:
-                prefix = "arbitrum"
-            case .blast:
-                prefix = "blast"
-            }
-            return URL(string: "https://mint.fun/\(prefix)/\(metadata.collectionAddress)?ref=\(NftGallery.referrer)")
-        case .opensea:
-            let prefix: String
-            switch metadata.network {
-            case .ethereum:
-                prefix = "ethereum"
-            case .optimism:
-                prefix = "optimism"
-            case .zora:
-                prefix = "zora"
-            case .base:
-                prefix = "base"
-            case .arbitrum:
-                prefix = "arbitrum"
-            case .blast:
-                prefix = "blast"
-            }
-            return URL(string: "https://opensea.io/assets/\(prefix)/\(metadata.collectionAddress)/\(metadata.tokenId)")
-        }
+        let url = gallery.url(network: metadata.network, collectionAddress: metadata.collectionAddress, tokenId: metadata.tokenId)
+        return url
     }
     
     private static func fileNameCorrespondingTo(minimalMetadata: MinimalTokenMetadata) -> String {

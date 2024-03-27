@@ -39,7 +39,7 @@ struct ZoraApi {
                 requireNonEmptyTokensResponse = false
             }
             
-            let maxRetryCount = requireNonEmptyTokensResponse ? 10 : 3
+            let maxRetryCount = requireNonEmptyTokensResponse ? 13 : 3
             
             guard let data = data, error == nil, let zoraResponse = try? JSONDecoder().decode(ZoraResponse.self, from: data),
                   !requireNonEmptyTokensResponse || zoraResponse.data.tokens?.nodes.isEmpty == false else {
