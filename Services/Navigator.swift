@@ -81,7 +81,8 @@ class Navigator: NSObject {
             let name = fileUrl.lastPathComponent
             if case gallery = .local {
                 DispatchQueue.main.async { self.showControlCenter(addWallet: false) }
-            } else if let wallet = WalletsService.shared.wallet(folderName: name), let galleryURL = gallery.url(walletAddress: wallet.address) {
+            } else if let wallet = WalletsService.shared.wallet(folderName: name),
+                      let galleryURL = wallet.collections?.isEmpty == false ? gallery.url(collectionAddress: wallet.address) : gallery.url(walletAddress: wallet.address) {
                 DispatchQueue.main.async { NSWorkspace.shared.open(galleryURL) }
             }
         } else if case gallery = .local {

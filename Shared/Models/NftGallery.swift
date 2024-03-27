@@ -47,4 +47,18 @@ enum NftGallery: Int, CaseIterable, Codable {
         }
     }
     
+    func url(collectionAddress: String) -> URL? {
+        // TODO: update links
+        switch self {
+        case .local:
+            return nil
+        case .zora:
+            return URL(string: "https://zora.co/\(collectionAddress)?referrer=\(NftGallery.referrer)")
+        case .mintfun:
+            return URL(string: "https://mint.fun/profile/\(collectionAddress)?ref=\(NftGallery.referrer)")
+        case .opensea:
+            return URL(string: "https://opensea.io/\(collectionAddress)")
+        }
+    }
+    
 }
