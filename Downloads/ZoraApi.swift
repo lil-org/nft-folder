@@ -34,7 +34,7 @@ struct ZoraApi {
             let requireNonEmptyTokensResponse: Bool
             
             if case .collection = kind {
-                requireNonEmptyTokensResponse = endCursor != nil
+                requireNonEmptyTokensResponse = endCursor == nil
             } else {
                 requireNonEmptyTokensResponse = false
             }
