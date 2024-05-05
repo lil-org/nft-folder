@@ -29,10 +29,8 @@ struct WalletsListView: View {
                             let status = downloadsStatuses[wallet] ?? .notDownloading
                             ZStack {
                                 HStack {
-                                    Circle()
-                                        .frame(width: 30, height: 30)
-                                        .overlay(WalletImageView(wallet: wallet))
-                                    Text(wallet.listDisplayName).font(.system(size: 15, weight: .medium))
+                                    Circle().frame(width: 14, height: 14).overlay(WalletImageView(wallet: wallet))
+                                    Text(wallet.listDisplayName).font(.system(size: 12, weight: .regular))
                                     Spacer()
                                 }.overlay(ClickHandler { openFolderForWallet(wallet) })
                                 HStack {
@@ -56,7 +54,7 @@ struct WalletsListView: View {
                                         }
                                     }
                                 }
-                            }.frame(height: 32)
+                            }.frame(height: 18)
                                 .contextMenu {
                                     switch status {
                                     case .downloading:
