@@ -1,4 +1,4 @@
-# nft-folder-macos
+# nft-folder
 
 ### [folder.lil.org](https://folder.lil.org)
 
