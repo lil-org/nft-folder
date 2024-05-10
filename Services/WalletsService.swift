@@ -1,4 +1,4 @@
-// ∅ nft-folder-macos 2024
+// ∅ nft-folder 2024
 
 import Foundation
 
@@ -19,8 +19,17 @@ struct WalletsService {
     
     func getWalletsSections() -> [WalletsSection] {
         var sections = [WalletsSection]()
-        let watchWallets = wallets
-        let collections = [WatchOnlyWallet]() // TODO: setup correctly
+        
+        var watchWallets = [WatchOnlyWallet]()
+        var collections = [WatchOnlyWallet]()
+        
+        for wallet in wallets {
+            if wallet.collections != nil {
+                collections.append(wallet)
+            } else {
+                watchWallets.append(wallet)
+            }
+        }
         
         if !watchWallets.isEmpty {
             sections.append(WalletsSection(items: watchWallets, kind: .watchWallets))

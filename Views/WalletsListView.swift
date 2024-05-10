@@ -1,4 +1,4 @@
-// ∅ nft-folder-macos 2024
+// ∅ nft-folder 2024
 
 import Cocoa
 import SwiftUI
@@ -9,29 +9,29 @@ struct WalletsListView: View {
     @State private var showAddWalletPopup: Bool
     @State private var showSettingsPopup = false
     @State private var newWalletAddress = ""
-    @State private var wallets = WalletsService.shared.wallets
-    @State private var sections: [WalletsSection]
+    @State private var walletsSections = WalletsService.shared.getWalletsSections()
     @State private var downloadsStatuses = AllDownloadsManager.shared.statuses
     
     init(showAddWalletPopup: Bool) {
         self.showAddWalletPopup = showAddWalletPopup
-        self.sections = WalletsService.shared.getWalletsSections()
     }
     
     var body: some View {
         Group {
-            if wallets.isEmpty {
+            if walletsSections.isEmpty {
                 Button(Strings.newFolder, action: {
                     showAddWalletPopup = true
                 }).frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
                 List {
-                    Section(header: Text(Strings.wallets).font(.system(size: 36, weight: .bold)).foregroundColor(.primary)) {
-                        ForEach(wallets, id: \.self) { wallet in
+                    ForEach(walletsSections, id: \.kind) { section in
+                        ForEach(section.items, id: \.self) { wallet in
                             let status = downloadsStatuses[wallet] ?? .notDownloading
                             ZStack {
                                 HStack {
-                                    Circle().frame(width: 14, height: 14).overlay(WalletImageView(wallet: wallet))
+                                    if section.kind == .watchWallets {
+                                        Circle().frame(width: 14, height: 14).overlay(WalletImageView(wallet: wallet))
+                                    }
                                     Text(wallet.listDisplayName).font(.system(size: 12, weight: .regular))
                                     Spacer()
                                 }.overlay(ClickHandler { openFolderForWallet(wallet) })
@@ -95,7 +95,7 @@ struct WalletsListView: View {
                                         updateDisplayedWallets()
                                     })
                                 }
-                        }.onMove(perform: moveWallets)
+                        }.onMove(perform: section.kind == .collections ? moveCollections : moveWallets)
                     }
                 }
                 .toolbar {
@@ -160,9 +160,14 @@ struct WalletsListView: View {
         }).frame(height: 36).offset(CGSize(width: 0, height: -6)).buttonStyle(LinkButtonStyle())
     }
     
+    private func moveCollections(from source: IndexSet, to destination: Int) {
+        walletsSections[1].items.move(fromOffsets: source, toOffset: destination)
+        WalletsService.shared.updateWithWallets(walletsSections[0].items + walletsSections[1].items)
+    }
+    
     private func moveWallets(from source: IndexSet, to destination: Int) {
-        wallets.move(fromOffsets: source, toOffset: destination)
-        WalletsService.shared.updateWithWallets(wallets)
+        walletsSections[0].items.move(fromOffsets: source, toOffset: destination)
+        WalletsService.shared.updateWithWallets(walletsSections[0].items + walletsSections[1].items)
     }
     
     private func openFolderForWallet(_ wallet: WatchOnlyWallet) {
@@ -207,8 +212,7 @@ struct WalletsListView: View {
     }
     
     private func updateDisplayedWallets() {
-        wallets = WalletsService.shared.wallets
-        sections = WalletsService.shared.getWalletsSections()
+        walletsSections = WalletsService.shared.getWalletsSections()
         downloadsStatuses = AllDownloadsManager.shared.statuses
     }
     

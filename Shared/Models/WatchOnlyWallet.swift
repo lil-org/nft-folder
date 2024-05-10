@@ -1,4 +1,4 @@
-// ∅ nft-folder-macos 2024
+// ∅ nft-folder 2024
 
 import Foundation
 
@@ -38,7 +38,7 @@ struct WalletsSection {
         case watchWallets, collections
     }
     
-    let items: [WatchOnlyWallet]
+    var items: [WatchOnlyWallet]
     let kind: Kind
     
 }

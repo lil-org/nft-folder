@@ -1,4 +1,4 @@
-// ∅ nft-folder-macos 2024
+// ∅ nft-folder 2024
 
 import Foundation
 
@@ -9,7 +9,6 @@ struct Strings {
     static let openFolderMenuItem = "☺︎ " + openNftFolder
     static let syncMenuItem = "⟳ " + loc("sync nfts")
     static let controlCenterMenuItem = "❒ " + loc("control center")
-    static let wallets = loc("folders")
     static let newFolder = loc("new folder")
     static let removeFolder = "⨂ " + loc("remove folder")
     static let hardReset = "↯ " + loc("hard reset")
