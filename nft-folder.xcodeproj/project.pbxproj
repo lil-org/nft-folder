@@ -42,7 +42,6 @@
 		2C60AAD12B8A4DE200F2C143 /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60AAD02B8A4DE200F2C143 /* Window.swift */; };
 		2C8A42EA2B1A272600BE4166 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A42E92B1A272600BE4166 /* Network.swift */; };
 		2C91131A2B08F71200A8EE80 /* WalletDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9113192B08F71200A8EE80 /* WalletDownloader.swift */; };
-		2C9113212B09253500A8EE80 /* Blockies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9113202B09253500A8EE80 /* Blockies.swift */; };
 		2C9113282B09751D00A8EE80 /* WalletImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9113272B09751D00A8EE80 /* WalletImageView.swift */; };
 		2C9EF2E42B8A612F00297B32 /* StatusBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9EF2E32B8A612F00297B32 /* StatusBarItem.swift */; };
 		2CA34B3D2B082BDF00DAB623 /* WalletsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCFED972B08246800D98A2E /* WalletsListView.swift */; };
@@ -133,7 +132,6 @@
 		2C60AAD02B8A4DE200F2C143 /* Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
 		2C8A42E92B1A272600BE4166 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		2C9113192B08F71200A8EE80 /* WalletDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDownloader.swift; sourceTree = "<group>"; };
-		2C9113202B09253500A8EE80 /* Blockies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blockies.swift; sourceTree = "<group>"; };
 		2C9113272B09751D00A8EE80 /* WalletImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletImageView.swift; sourceTree = "<group>"; };
 		2C9EF2E32B8A612F00297B32 /* StatusBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarItem.swift; sourceTree = "<group>"; };
 		2CA34B502B08B33C00DAB623 /* WatchOnlyWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchOnlyWallet.swift; sourceTree = "<group>"; };
@@ -261,7 +259,6 @@
 		2C9113262B093EE800A8EE80 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				2C9113202B09253500A8EE80 /* Blockies.swift */,
 				2CDE701F2B9B5E9B0024DDA2 /* ClickHandler.swift */,
 				2C424F452B9775E6007868F8 /* RightClickActivatingWindow.swift */,
 				2C60AAD02B8A4DE200F2C143 /* Window.swift */,
@@ -570,7 +567,6 @@
 				2CF524022BB2ECD200C18344 /* CollectionInfo.swift in Sources */,
 				2CA623E72BEE8A0200BD78FF /* UserDefaults.swift in Sources */,
 				2C508C9D2B6830E6005F548A /* Notification.swift in Sources */,
-				2C9113212B09253500A8EE80 /* Blockies.swift in Sources */,
 				2C1B60C42B7D41D1009949C2 /* HostAppImages.swift in Sources */,
 				2CC943032B825907003219C7 /* ZoraRequest.swift in Sources */,
 				2CE33D9A2B865CFB008473E1 /* AvatarService.swift in Sources */,

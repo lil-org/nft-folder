@@ -30,7 +30,7 @@ struct WalletsListView: View {
                             ZStack {
                                 HStack {
                                     if section.kind == .watchWallets {
-                                        Circle().frame(width: 14, height: 14).overlay(WalletImageView(wallet: wallet))
+                                        Circle().frame(width: 14, height: 14).foregroundStyle(.tertiary).overlay(WalletImageView(wallet: wallet))
                                     }
                                     Text(wallet.listDisplayName).font(.system(size: 12, weight: .regular))
                                     Spacer()

@@ -18,12 +18,8 @@ struct WalletImageView: View {
             if let nsImage = avatarLoader.avatar {
                 Image(nsImage: nsImage)
                     .resizable()
-                    .scaledToFit()
-                    .clipShape(Circle())
-            } else {
-                Image(nsImage: Blockies(seed: wallet.address.lowercased()).createImage() ?? NSImage())
-                    .resizable()
-                    .scaledToFit()
+                    .scaledToFill()
+                    .background(Color.white)
                     .clipShape(Circle())
             }
         }
