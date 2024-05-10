@@ -53,7 +53,7 @@ struct WalletsListView: View {
                                             AllDownloadsManager.shared.startDownloads(wallet: wallet)
                                         }) {
                                             Images.sync
-                                        }
+                                        }.buttonStyle(BorderlessButtonStyle())
                                     }
                                 }
                             }.frame(height: 18)
