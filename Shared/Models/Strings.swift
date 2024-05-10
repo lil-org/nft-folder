@@ -40,6 +40,8 @@ struct Strings {
     static let mintfun = "mint.fun"
     static let ens = "ENS"
     
+    static let controlCenterFrameAutosaveName = "control center"
+    
     private static func loc(_ string: String.LocalizationValue) -> String {
         return String(localized: string)
     }

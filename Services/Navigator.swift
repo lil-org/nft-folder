@@ -17,16 +17,17 @@ class Navigator: NSObject {
         Window.closeAll()
         let contentView = WalletsListView(showAddWalletPopup: addWallet)
         let window = RightClickActivatingWindow(
-            contentRect: Defaults.controlCenterWindowFrame,
+            contentRect: CGRect(origin: .zero, size: CGSize(width: 300, height: 420)),
             styleMask: [.closable, .fullSizeContentView, .titled, .resizable],
             backing: .buffered, defer: false)
         window.titleVisibility = .hidden
         window.titlebarAppearsTransparent = false
-        window.delegate = self
         window.isMovableByWindowBackground = true
         window.backgroundColor = NSColor.windowBackgroundColor
         window.isOpaque = false
         window.hasShadow = true
+        window.isRestorable = true
+        window.setFrameAutosaveName(Strings.controlCenterFrameAutosaveName)
         
         window.contentView?.wantsLayer = true
         window.contentView?.layer?.cornerRadius = 10
@@ -88,16 +89,6 @@ class Navigator: NSObject {
             showNftMetadata(filePath: filePath)
         } else if let nftURL = MetadataStorage.nftURL(filePath: filePath, gallery: gallery) {
             DispatchQueue.main.async { NSWorkspace.shared.open(nftURL) }
-        }
-    }
-    
-}
-
-extension Navigator: NSWindowDelegate {
-    
-    func windowWillClose(_ notification: Notification) {
-        if let window = notification.object as? NSWindow {
-            Defaults.controlCenterWindowFrame = window.frame
         }
     }
     
