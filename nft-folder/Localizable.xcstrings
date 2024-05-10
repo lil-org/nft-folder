@@ -18,6 +18,7 @@
       }
     },
     "address or ens" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -33,7 +34,11 @@
         }
       }
     },
+    "Address or ENS" : {
+
+    },
     "cancel" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -49,7 +54,11 @@
         }
       }
     },
+    "Cancel" : {
+
+    },
     "click for nft menu" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -65,7 +74,11 @@
         }
       }
     },
+    "Click for NFT menu" : {
+
+    },
     "control center" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -81,7 +94,11 @@
         }
       }
     },
+    "Control Center" : {
+
+    },
     "did not upload" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -97,7 +114,11 @@
         }
       }
     },
+    "Did not upload" : {
+
+    },
     "download .glb files" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -113,7 +134,11 @@
         }
       }
     },
+    "Download .glb files" : {
+
+    },
     "hard reset" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -129,7 +154,14 @@
         }
       }
     },
+    "Hard Reset" : {
+
+    },
+    "Hide" : {
+
+    },
     "hide from here" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -146,6 +178,7 @@
       }
     },
     "max file size 50 mb" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -161,7 +194,11 @@
         }
       }
     },
+    "Max file size 50 MB" : {
+
+    },
     "metadata" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -177,7 +214,11 @@
         }
       }
     },
+    "Metadata" : {
+
+    },
     "new folder" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -193,7 +234,11 @@
         }
       }
     },
+    "New Folder" : {
+
+    },
     "nft" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -208,6 +253,9 @@
           }
         }
       }
+    },
+    "NFT" : {
+
     },
     "nft folder" : {
       "localizations" : {
@@ -226,6 +274,7 @@
       }
     },
     "ok" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -241,7 +290,11 @@
         }
       }
     },
+    "OK" : {
+
+    },
     "pause" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -256,6 +309,9 @@
           }
         }
       }
+    },
+    "Pause" : {
+
     },
     "powered by zora api" : {
       "extractionState" : "stale",
@@ -275,6 +331,7 @@
       }
     },
     "quit" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -290,7 +347,11 @@
         }
       }
     },
+    "Quit" : {
+
+    },
     "remove folder" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -306,7 +367,11 @@
         }
       }
     },
+    "Remove Folder" : {
+
+    },
     "retry" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -322,7 +387,11 @@
         }
       }
     },
+    "Retry" : {
+
+    },
     "show in finder" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -338,7 +407,11 @@
         }
       }
     },
+    "Show in Finder" : {
+
+    },
     "show in menu bar" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -354,7 +427,11 @@
         }
       }
     },
+    "Show in menu bar" : {
+
+    },
     "something went wrong" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -370,7 +447,11 @@
         }
       }
     },
+    "Something went wrong" : {
+
+    },
     "stop all downloads" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -386,7 +467,11 @@
         }
       }
     },
+    "Stop Downloads" : {
+
+    },
     "sync" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -402,7 +487,11 @@
         }
       }
     },
+    "Sync" : {
+
+    },
     "sync nfts" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -418,7 +507,11 @@
         }
       }
     },
+    "Sync NFTs" : {
+
+    },
     "view on opensea" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -434,7 +527,11 @@
         }
       }
     },
+    "View on OpenSea" : {
+
+    },
     "view on zora" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -449,6 +546,9 @@
           }
         }
       }
+    },
+    "View on Zora" : {
+
     }
   },
   "version" : "1.0"

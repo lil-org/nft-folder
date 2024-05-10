@@ -4,42 +4,40 @@ import Foundation
 
 struct Strings {
     
-    static let toolbarItemToolTip = loc("click for nft menu")
-    static let toolbarItemName = loc("nft")
+    static let toolbarItemToolTip = loc("Click for NFT menu")
+    static let toolbarItemName = loc("NFT")
     static let openFolderMenuItem = openNftFolder
-    static let syncMenuItem = loc("sync nfts")
-    static let controlCenterMenuItem = loc("control center")
-    static let newFolder = loc("new folder")
-    static let removeFolder = loc("remove folder")
-    static let hardReset = loc("hard reset")
-    static let viewOnOpensea = loc("view on opensea")
-    static let viewinFinder = loc("show in finder")
-    static let viewOnZora = loc("view on zora")
-    static let addressOrEns = loc("address or ens")
-    static let cancel = loc("cancel")
-    static let openNftFolder = loc("show in finder")
-    static let ok = loc("ok")
-    static let sync = loc("sync")
-    static let pause = loc("pause")
-    static let stopAllDownloads = loc("stop all downloads")
+    static let syncMenuItem = loc("Sync NFTs")
+    static let controlCenterMenuItem = loc("Control Center")
+    static let newFolder = loc("New Folder")
+    static let removeFolder = loc("Remove Folder")
+    static let hardReset = loc("Hard Reset")
+    static let viewOnOpensea = loc("View on OpenSea")
+    static let viewinFinder = loc("Show in Finder")
+    static let viewOnZora = loc("View on Zora")
+    static let addressOrEns = loc("Address or ENS")
+    static let cancel = loc("Cancel")
+    static let openNftFolder = loc("Show in Finder")
+    static let ok = loc("OK")
+    static let sync = loc("Sync")
+    static let pause = loc("Pause")
+    static let stopAllDownloads = loc("Stop Downloads")
     static let newFolderMenuItem = newFolder
-    static let didNotUpload = loc("did not upload")
-    static let retry = loc("retry")
+    static let didNotUpload = loc("Did not upload")
+    static let retry = loc("Retry")
     static let nftFolder = loc("nft folder")
-    static let nftInfo = loc("metadata")
-    static let somethingWentWrong = loc("something went wrong")
-    static let maxFileSize50mb = loc("max file size 50 mb")
-    static let downloadGlb = loc("download .glb files")
-    static let quit = loc("quit")
-    static let hideFromHere = loc("hide from here")
-    static let showInMenuBar = loc("show in menu bar")
+    static let nftInfo = loc("Metadata")
+    static let somethingWentWrong = loc("Something went wrong")
+    static let maxFileSize50mb = loc("Max file size 50 MB")
+    static let downloadGlb = loc("Download .glb files")
+    static let quit = loc("Quit")
+    static let hideFromHere = loc("Hide")
+    static let showInMenuBar = loc("Show in menu bar")
     
-    static let zora = "zora"
-    static let opensea = "opensea"
+    static let zora = "Zora"
+    static let opensea = "OpenSea"
     static let mintfun = "mint.fun"
     static let ens = "ENS"
-    
-    static let controlCenterFrameAutosaveName = "control center"
     
     private static func loc(_ string: String.LocalizationValue) -> String {
         return String(localized: string)

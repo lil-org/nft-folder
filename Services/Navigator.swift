@@ -27,7 +27,7 @@ class Navigator: NSObject {
         window.isOpaque = false
         window.hasShadow = true
         window.isRestorable = true
-        window.setFrameAutosaveName(Strings.controlCenterFrameAutosaveName)
+        window.setFrameAutosaveName(Consts.controlCenterFrameAutosaveName)
         
         window.contentView?.wantsLayer = true
         window.contentView?.layer?.cornerRadius = 10
