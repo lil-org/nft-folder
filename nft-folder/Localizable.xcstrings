@@ -17,245 +17,125 @@
         }
       }
     },
-    "address or ens" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "address or ens"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "адрес или енс"
-          }
-        }
-      }
-    },
     "Address or ENS" : {
-
-    },
-    "cancel" : {
-      "extractionState" : "stale",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "cancel"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "отмена"
+            "value" : "Aдрес или ENS"
           }
         }
       }
     },
     "Cancel" : {
-
-    },
-    "click for nft menu" : {
-      "extractionState" : "stale",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "click for nft menu"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "открыть нфт меню"
+            "value" : "Отмена"
           }
         }
       }
     },
     "Click for NFT menu" : {
-
-    },
-    "control center" : {
-      "extractionState" : "stale",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "control center"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "контрол центр"
+            "value" : "Открыть НФТ меню"
           }
         }
       }
     },
     "Control Center" : {
-
-    },
-    "did not upload" : {
-      "extractionState" : "stale",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "did not upload"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "не получилось загрузить"
+            "value" : "Контрол Центр"
           }
         }
       }
     },
     "Did not upload" : {
-
-    },
-    "download .glb files" : {
-      "extractionState" : "stale",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "download .glb files"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "скачивать .glb файлы"
+            "value" : "Не получилось загрузить"
           }
         }
       }
     },
     "Download .glb files" : {
-
-    },
-    "hard reset" : {
-      "extractionState" : "stale",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "hard reset"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "сбросить"
+            "value" : "Скачивать .glb файлы"
           }
         }
       }
     },
     "Hard Reset" : {
-
-    },
-    "Hide" : {
-
-    },
-    "hide from here" : {
-      "extractionState" : "stale",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "hide from here"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "спрятать отсюда"
+            "value" : "Сбросить"
           }
         }
       }
     },
-    "max file size 50 mb" : {
-      "extractionState" : "stale",
+    "Hide" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "max file size 50 mb"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "файлы не больше 50 мб"
+            "value" : "Спрятать"
           }
         }
       }
     },
     "Max file size 50 MB" : {
-
-    },
-    "metadata" : {
-      "extractionState" : "stale",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "metadata"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "метадата"
+            "value" : "Файлы не больше 50 МБ"
           }
         }
       }
     },
     "Metadata" : {
-
-    },
-    "new folder" : {
-      "extractionState" : "stale",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "new folder"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "новая папка"
+            "value" : "Метаданные"
           }
         }
       }
     },
     "New Folder" : {
-
-    },
-    "nft" : {
-      "extractionState" : "stale",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "nft"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "нфт"
+            "value" : "Новая папка"
           }
         }
       }
     },
     "NFT" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "НФТ"
+          }
+        }
+      }
     },
     "nft folder" : {
       "localizations" : {
@@ -273,282 +153,135 @@
         }
       }
     },
-    "ok" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ok"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ок"
-          }
-        }
-      }
-    },
     "OK" : {
-
-    },
-    "pause" : {
-      "extractionState" : "stale",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "pause"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "пауза"
+            "value" : "ОК"
           }
         }
       }
     },
     "Pause" : {
-
-    },
-    "powered by zora api" : {
-      "extractionState" : "stale",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "powered by zora api"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "работает на zora апи"
-          }
-        }
-      }
-    },
-    "quit" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "quit"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "закрыть"
+            "value" : "Пауза"
           }
         }
       }
     },
     "Quit" : {
-
-    },
-    "remove folder" : {
-      "extractionState" : "stale",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "remove folder"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "удалить папку"
+            "value" : "Закрыть"
           }
         }
       }
     },
     "Remove Folder" : {
-
-    },
-    "retry" : {
-      "extractionState" : "stale",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "retry"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "попробовать еще раз"
+            "value" : "Удалить папку"
           }
         }
       }
     },
     "Retry" : {
-
-    },
-    "show in finder" : {
-      "extractionState" : "stale",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "show in finder"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "показать в finder"
+            "value" : "Попробовать еще раз"
           }
         }
       }
     },
     "Show in Finder" : {
-
-    },
-    "show in menu bar" : {
-      "extractionState" : "stale",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "show in menu bar"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "показывать в менюбаре"
+            "value" : "Показать в Finder"
           }
         }
       }
     },
     "Show in menu bar" : {
-
-    },
-    "something went wrong" : {
-      "extractionState" : "stale",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "something went wrong"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "что-то пошло не так"
+            "value" : "Показывать в менюбаре"
           }
         }
       }
     },
     "Something went wrong" : {
-
-    },
-    "stop all downloads" : {
-      "extractionState" : "stale",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "stop all downloads"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "остановить все загрузки"
+            "value" : "Что-то пошло не так"
           }
         }
       }
     },
     "Stop Downloads" : {
-
-    },
-    "sync" : {
-      "extractionState" : "stale",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "sync"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "синхронизировать"
+            "value" : "Остановить загрузки"
           }
         }
       }
     },
     "Sync" : {
-
-    },
-    "sync nfts" : {
-      "extractionState" : "stale",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "sync nfts"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "синхронизировать нфт"
+            "value" : "Синхронизировать"
           }
         }
       }
     },
     "Sync NFTs" : {
-
-    },
-    "view on opensea" : {
-      "extractionState" : "stale",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "view on opensea"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "открыть на opensea"
+            "value" : "Синхронизировать НФТ"
           }
         }
       }
     },
     "View on OpenSea" : {
-
-    },
-    "view on zora" : {
-      "extractionState" : "stale",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "view on zora"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "открыть на zora"
+            "value" : "Открыть на OpenSea"
           }
         }
       }
     },
     "View on Zora" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Открыть на Zora"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

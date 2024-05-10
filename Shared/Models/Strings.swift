@@ -8,7 +8,7 @@ struct Strings {
     static let toolbarItemName = loc("NFT")
     static let openFolderMenuItem = openNftFolder
     static let syncMenuItem = loc("Sync NFTs")
-    static let controlCenterMenuItem = loc("Control Center")
+    static let controlCenterMenuItem = loc("Control Center") + "..."
     static let newFolder = loc("New Folder")
     static let removeFolder = loc("Remove Folder")
     static let hardReset = loc("Hard Reset")
