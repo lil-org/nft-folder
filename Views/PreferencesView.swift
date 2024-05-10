@@ -57,7 +57,7 @@ struct PreferencesView: View {
                 VStack(alignment: .center, spacing: 16) {
                     Link(Strings.poweredByZoraApi, destination: FooterLink.zoraURL).foregroundColor(.secondary).italic()
                 }
-                .padding(.top).padding(.bottom, 4)
+                .padding(.top).padding(.bottom, 12)
                 
                 HStack(spacing: 20) {
                     ForEach(FooterLink.all, id: \.self) { link in
