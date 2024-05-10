@@ -6,6 +6,12 @@ struct SharedDefaults {
     
     private static let userDefaults = UserDefaults(suiteName: "group.org.lil.nft-folder")!
 
+    static func performCleanup(version: Int) {
+        if version < 1 {
+            userDefaults.keepOnly(keys: ["watch-wallets"])
+        }
+    }
+    
     static func hasWallet(folderName: String) -> Bool {
         return watchWallets.contains(where: { $0.folderDisplayName == folderName })
     }

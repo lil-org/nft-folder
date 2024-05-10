@@ -21,6 +21,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        cleanupDefaultsIfNeeded()
         createDirectoryIfNeeded()
         didFinishLaunching = true
         
@@ -41,6 +42,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         allDownloadsManager.start()
         StatusBarItem.shared.showIfNeeded()
+    }
+    
+    private func cleanupDefaultsIfNeeded() {
+        let currentVersion = Defaults.cleanupVersion
+        if currentVersion == 0 {
+            Defaults.performCleanup(version: currentVersion)
+            SharedDefaults.performCleanup(version: currentVersion)
+            Defaults.cleanupVersion = 1
+        }
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
