@@ -51,27 +51,17 @@ struct PreferencesView: View {
                     )
                     .padding(.horizontal).padding(.top)
             }
-            
-            
-            VStack {
-                VStack(alignment: .center, spacing: 16) {
-                    Link(Strings.poweredByZoraApi, destination: FooterLink.zoraURL).foregroundColor(.secondary).italic()
-                }
-                .padding(.top).padding(.bottom, 12)
-                
-                HStack(spacing: 20) {
-                    ForEach(FooterLink.all, id: \.self) { link in
-                        Link(destination: link.url) {
-                            link.image
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 20, height: 20)
-                                .foregroundColor(.secondary)
-                        }
+            HStack(spacing: 20) {
+                ForEach(FooterLink.all, id: \.self) { link in
+                    Link(destination: link.url) {
+                        link.image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(.secondary)
                     }
                 }
-                .padding(.bottom)
-            }
+            }.padding(.top).padding(.bottom)
         }
     }
     
