@@ -10,10 +10,12 @@ struct WalletsListView: View {
     @State private var showSettingsPopup = false
     @State private var newWalletAddress = ""
     @State private var wallets = WalletsService.shared.wallets
+    @State private var sections: [WalletsSection]
     @State private var downloadsStatuses = AllDownloadsManager.shared.statuses
     
     init(showAddWalletPopup: Bool) {
         self.showAddWalletPopup = showAddWalletPopup
+        self.sections = WalletsService.shared.getWalletsSections()
     }
     
     var body: some View {
@@ -206,6 +208,7 @@ struct WalletsListView: View {
     
     private func updateDisplayedWallets() {
         wallets = WalletsService.shared.wallets
+        sections = WalletsService.shared.getWalletsSections()
         downloadsStatuses = AllDownloadsManager.shared.statuses
     }
     
