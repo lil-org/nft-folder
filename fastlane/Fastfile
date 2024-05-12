@@ -1,23 +1,32 @@
-# This file contains the fastlane.tools configuration
-# You can find the documentation at https://docs.fastlane.tools
-#
-# For a list of all available actions, check out
-#
-#     https://docs.fastlane.tools/actions
-#
-# For a list of all available plugins, check out
-#
-#     https://docs.fastlane.tools/plugins/available-plugins
-#
+default_platform(:mac)
 
-# Uncomment the line if you want fastlane to automatically update itself
-# update_fastlane
+platform :mac do
 
-default_platform(:ios)
-
-platform :ios do
-  desc "Description of what the lane does"
-  lane :custom_lane do
-    # add actions here: https://docs.fastlane.tools/actions
+  desc "build for release"
+  lane :build do
+    gym(scheme: "nft-folder", output_directory: "fastlane/build", clean: true)
   end
+
+  desc "deploy to the app store"
+  lane :release do
+    build
+    deliver
+  end
+
+  desc "run the app"
+  lane :dev do
+    gym(
+      scheme: "nft-folder",
+      output_directory: "fastlane/build",
+      configuration: "Debug",
+      clean: false,
+      skip_archive: true,
+      silent: true,
+      skip_package_dependencies_resolution: true,
+      disable_package_automatic_updates: true,
+      xcodebuild_formatter: '',
+    )
+    sh "open #{File.expand_path('build/nft\ folder.app')}"
+  end
+
 end

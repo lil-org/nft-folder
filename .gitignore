@@ -20,6 +20,13 @@ xcuserdata
 *.xcuserstate
 .DS_Store
 
+# Fastlane artifacts
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/test_output
+fastlane/README.md
+fastlane/build
+
 # Bundler
 .bundle
 .cache
