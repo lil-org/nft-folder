@@ -26,7 +26,7 @@ struct WalletsListView: View {
                 GeometryReader { geometry in
                     ScrollView {
                         generateContent(in: geometry).frame(maxWidth: .infinity, alignment: .leading)
-                    }
+                    }.onDrop(of: [.text], delegate: WalletDropDelegate()) // TODO: pass necessary data to the drop delegate
                 }
                 .toolbar {
                     ToolbarItemGroup {
@@ -91,9 +91,7 @@ struct WalletsListView: View {
             Window.closeAll()
         }).frame(height: 36).offset(CGSize(width: 0, height: -6)).buttonStyle(LinkButtonStyle())
     }
-    
-    // TODO: reimplement reordering
-    
+
     private func openFolderForWallet(_ wallet: WatchOnlyWallet) {
         if let nftDirectory = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: true) {
             NSWorkspace.shared.open(nftDirectory)
@@ -143,6 +141,10 @@ struct WalletsListView: View {
                         }
                         return result
                     })
+                    .onDrag {
+                        let itemProvider = NSItemProvider(object: wallet.address as NSString)
+                        return itemProvider
+                    }
             }
         }
     }
@@ -239,6 +241,36 @@ struct WalletsListView: View {
     private func updateDisplayedWallets() {
         wallets = WalletsService.shared.sortedWallets
         downloadsStatuses = AllDownloadsManager.shared.statuses
+    }
+    
+}
+
+// TODO: implement
+
+class WalletDropDelegate: DropDelegate {
+    
+    func performDrop(info: DropInfo) -> Bool {
+        print("performDrop")
+        return false
+    }
+    
+    func dropExited(info: DropInfo) {
+        print("dropExited")
+    }
+    
+    func dropUpdated(info: DropInfo) -> DropProposal? {
+        print(info.location)
+        print("dropUpdated")
+        return DropProposal(operation: .move)
+    }
+    
+    func validateDrop(info: DropInfo) -> Bool {
+        print("validateDrop")
+        return false
+    }
+    
+    func dropEntered(info: DropInfo) {
+        print("dropEntered")
     }
     
 }
