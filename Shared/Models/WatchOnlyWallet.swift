@@ -31,14 +31,3 @@ struct WatchOnlyWallet: Codable, Hashable, Identifiable {
     }
     
 }
-
-struct WalletsSection {
-    
-    enum Kind {
-        case watchWallets, collections
-    }
-    
-    var items: [WatchOnlyWallet]
-    let kind: Kind
-    
-}
