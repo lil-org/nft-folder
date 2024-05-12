@@ -174,6 +174,8 @@ struct WalletsListView: View {
             Spacer().frame(width: 7)
         }.frame(height: 23).background(Color.gray.opacity(0.1)).cornerRadius(5)
             .contextMenu {
+                Text(wallet.listDisplayName)
+                Divider()
                 switch status {
                 case .downloading:
                     Button(Strings.pause, action: {
