@@ -25,7 +25,7 @@ struct WalletsListView: View {
             } else {
                 GeometryReader { geometry in
                     ScrollView {
-                        generateContent(in: geometry)
+                        generateContent(in: geometry).frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
                 .toolbar {
@@ -68,8 +68,7 @@ struct WalletsListView: View {
                         }).keyboardShortcut(.defaultAction)
                     }
                 }
-            }.frame(width: 230)
-                .padding()
+            }.frame(width: 230).padding()
         }.sheet(isPresented: $showSettingsPopup) {
             VStack {
                 PreferencesView()
