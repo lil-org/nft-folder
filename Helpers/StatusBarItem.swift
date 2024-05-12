@@ -96,7 +96,7 @@ class StatusBarItem: NSObject {
     
     @objc private func warnBeforeQuitting() {
         let alert = NSAlert()
-        alert.messageText = Strings.quit + " " + Strings.nftFolder + "?"
+        alert.messageText = Strings.quit + "?"
         alert.alertStyle = .warning
         alert.addButton(withTitle: Strings.ok)
         alert.addButton(withTitle: Strings.cancel)
