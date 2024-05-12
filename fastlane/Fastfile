@@ -10,7 +10,7 @@ platform :mac do
   desc "deploy to the app store"
   lane :release do
     build
-    deliver
+    deliver # https://docs.fastlane.tools/actions/upload_to_app_store/
   end
 
   desc "run the app"
