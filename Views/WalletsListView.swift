@@ -5,6 +5,8 @@ import SwiftUI
 
 struct WalletsListView: View {
     
+    @State private var hoveringOverAddress: String? = nil
+    
     @State private var isWaiting = false
     @State private var showAddWalletPopup: Bool
     @State private var showSettingsPopup = false
@@ -175,7 +177,7 @@ struct WalletsListView: View {
                 }.buttonStyle(BorderlessButtonStyle()).frame(width: 10).foregroundStyle(.tertiary)
             }
             Spacer().frame(width: 7)
-        }.frame(height: 23).background(Color.gray.opacity(0.1)).cornerRadius(5)
+        }.frame(height: 23).background(hoveringOverAddress == wallet.address ? Color.gray.opacity(0.2) : Color.gray.opacity(0.1)).cornerRadius(5)
             .contextMenu {
                 Text(wallet.listDisplayName)
                 Divider()
@@ -215,6 +217,12 @@ struct WalletsListView: View {
                     }
                     updateDisplayedWallets()
                 })
+            }.onHover { hovering in
+                if hovering {
+                    hoveringOverAddress = wallet.address
+                } else {
+                    hoveringOverAddress = nil
+                }
             }
     }
     
