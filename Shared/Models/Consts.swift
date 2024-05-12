@@ -5,5 +5,6 @@ import Foundation
 struct Consts {
     
     static let controlCenterFrameAutosaveName = "control center"
+    static let noggles = "⌐◨-◨"
     
 }

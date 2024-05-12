@@ -31,6 +31,8 @@ struct WalletsListView: View {
                 .toolbar {
                     ToolbarItemGroup {
                         Spacer()
+                        Text(Consts.noggles).fontWeight(.semibold).frame(maxWidth: .infinity, alignment: .center)
+                        Spacer()
                         Button(action: {
                             showSettingsPopup = true
                         }) {
