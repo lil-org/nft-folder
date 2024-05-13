@@ -11,7 +11,7 @@ struct WalletsListView: View {
     @State private var showAddWalletPopup: Bool
     @State private var showSettingsPopup = false
     @State private var newWalletAddress = ""
-    @State private var wallets = WalletsService.shared.sortedWallets
+    @State private var wallets = WalletsService.shared.wallets.first != nil ? [WalletsService.shared.wallets.first!] : [] // TODO: tmp, make a proper pagination
     @State private var downloadsStatuses = AllDownloadsManager.shared.statuses
     
     init(showAddWalletPopup: Bool) {
@@ -28,7 +28,7 @@ struct WalletsListView: View {
                 GeometryReader { geometry in
                     ScrollView {
                         generateContent(in: geometry).frame(maxWidth: .infinity, alignment: .leading).padding([.horizontal], 4).padding([.top], 2)
-                    }.onDrop(of: [.text], delegate: WalletDropDelegate(wallets: $wallets))
+                    }.onDrop(of: [.text], delegate: WalletDropDelegate(wallets: $wallets)).background(Color(nsColor: .controlBackgroundColor))
                 }
                 .toolbar {
                     ToolbarItemGroup {
@@ -92,6 +92,11 @@ struct WalletsListView: View {
             }
             Window.closeAll()
         }).frame(height: 36).offset(CGSize(width: 0, height: -6)).buttonStyle(LinkButtonStyle())
+            .onAppear() {
+                DispatchQueue.main.async {
+                    self.updateDisplayedWallets()
+                }
+            }
     }
     
     private func openFolderForWallet(_ wallet: WatchOnlyWallet) {
