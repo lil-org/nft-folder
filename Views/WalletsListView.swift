@@ -174,7 +174,7 @@ struct WalletsListView: View {
                     AllDownloadsManager.shared.startDownloads(wallet: wallet)
                 }) {
                     Images.sync
-                }.buttonStyle(BorderlessButtonStyle()).frame(width: 10).foregroundStyle(.tertiary)
+                }.buttonStyle(BorderlessButtonStyle()).frame(width: 10).foregroundStyle(.tertiary).opacity(0.8)
             }
             Spacer().frame(width: 7)
         }.frame(height: 32).background(hoveringOverAddress == wallet.address ? Color.gray.opacity(0.2) : Color.gray.opacity(0.1)).cornerRadius(5)
