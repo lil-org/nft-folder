@@ -34,7 +34,7 @@ class Navigator: NSObject {
         window.contentView?.layer?.masksToBounds = true
         
         window.isReleasedWhenClosed = false
-        window.contentView = NSHostingView(rootView: contentView.frame(minWidth: 300, minHeight: 300))
+        window.contentView = NSHostingView(rootView: contentView.frame(minWidth: 230, minHeight: 130))
         NSApp.activate(ignoringOtherApps: true)
         window.makeKeyAndOrderFront(nil)
         

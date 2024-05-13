@@ -121,7 +121,7 @@ struct WalletsListView: View {
         return ZStack(alignment: .topLeading) {
             ForEach(wallets, id: \.self) { wallet in
                 item(for: wallet)
-                    .padding([.horizontal, .vertical], 4)
+                    .padding([.horizontal, .vertical], 2)
                     .alignmentGuide(.leading, computeValue: { d in
                         if (abs(width - d.width) > g.size.width)
                         {
@@ -157,7 +157,7 @@ struct WalletsListView: View {
             Group {
                 Spacer().frame(width: 7)
                 if wallet.collections == nil {
-                    Circle().frame(width: 15, height: 15).foregroundStyle(.tertiary).overlay(WalletImageView(wallet: wallet))
+                    Circle().frame(width: 23, height: 23).foregroundStyle(.tertiary).overlay(WalletImageView(wallet: wallet))
                 }
                 Text(wallet.listDisplayName).font(.system(size: 15, weight: .regular))
             }.overlay(ClickHandler { openFolderForWallet(wallet) })
@@ -177,7 +177,7 @@ struct WalletsListView: View {
                 }.buttonStyle(BorderlessButtonStyle()).frame(width: 10).foregroundStyle(.tertiary)
             }
             Spacer().frame(width: 7)
-        }.frame(height: 23).background(hoveringOverAddress == wallet.address ? Color.gray.opacity(0.2) : Color.gray.opacity(0.1)).cornerRadius(5)
+        }.frame(height: 32).background(hoveringOverAddress == wallet.address ? Color.gray.opacity(0.2) : Color.gray.opacity(0.1)).cornerRadius(5)
             .contextMenu {
                 Text(wallet.listDisplayName)
                 Divider()

@@ -18,8 +18,9 @@ struct WalletImageView: View {
             if let nsImage = avatarLoader.avatar {
                 Image(nsImage: nsImage)
                     .resizable()
-                    .scaledToFill()
                     .background(Color.white)
+                    .scaleEffect(1.042)
+                    .scaledToFill()
                     .clipShape(Circle())
             }
         }
