@@ -27,8 +27,8 @@ struct WalletsListView: View {
             } else {
                 GeometryReader { geometry in
                     ScrollView {
-                        generateContent(in: geometry).frame(maxWidth: .infinity, alignment: .leading)
-                    }.onDrop(of: [.text], delegate: WalletDropDelegate()) // TODO: pass necessary data to the drop delegate
+                        generateContent(in: geometry).frame(maxWidth: .infinity, alignment: .leading).padding([.horizontal], 4).padding([.top], 2)
+                    }.onDrop(of: [.text], delegate: WalletDropDelegate(wallets: $wallets))
                 }
                 .toolbar {
                     ToolbarItemGroup {
@@ -93,7 +93,7 @@ struct WalletsListView: View {
             Window.closeAll()
         }).frame(height: 36).offset(CGSize(width: 0, height: -6)).buttonStyle(LinkButtonStyle())
     }
-
+    
     private func openFolderForWallet(_ wallet: WatchOnlyWallet) {
         if let nftDirectory = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: true) {
             NSWorkspace.shared.open(nftDirectory)
@@ -117,13 +117,14 @@ struct WalletsListView: View {
     private func generateContent(in g: GeometryProxy) -> some View {
         var width = CGFloat.zero
         var height = CGFloat.zero
+        let totalHorizontalPadding: CGFloat = 8
         
         return ZStack(alignment: .topLeading) {
             ForEach(wallets, id: \.self) { wallet in
                 item(for: wallet)
                     .padding([.horizontal, .vertical], 2)
                     .alignmentGuide(.leading, computeValue: { d in
-                        if abs(width - d.width) > g.size.width {
+                        if abs(width - d.width) + totalHorizontalPadding > g.size.width {
                             width = 0
                             height -= d.height
                         }
@@ -252,32 +253,40 @@ struct WalletsListView: View {
     
 }
 
-// TODO: implement
-
-class WalletDropDelegate: DropDelegate {
+struct WalletDropDelegate: DropDelegate {
+    
+    private let itemType = "public.text"
+    
+    @Binding var wallets: [WatchOnlyWallet]
     
     func performDrop(info: DropInfo) -> Bool {
-        print("performDrop")
-        return false
-    }
-    
-    func dropExited(info: DropInfo) {
-        print("dropExited")
-    }
-    
-    func dropUpdated(info: DropInfo) -> DropProposal? {
-        print(info.location)
-        print("dropUpdated")
-        return DropProposal(operation: .move)
+        guard info.hasItemsConforming(to: [itemType]) else {
+            return false
+        }
+        
+        let providers = info.itemProviders(for: [itemType])
+        for provider in providers {
+            provider.loadItem(forTypeIdentifier: itemType, options: nil) { (item, error) in
+                guard let data = item as? Data, let address = String(data: data, encoding: .utf8) else {
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    print(address)
+                    // TODO: update model
+                }
+            }
+        }
+        
+        return true
     }
     
     func validateDrop(info: DropInfo) -> Bool {
-        print("validateDrop")
-        return false
+        return info.hasItemsConforming(to: [itemType])
     }
     
-    func dropEntered(info: DropInfo) {
-        print("dropEntered")
+    func dropUpdated(info: DropInfo) -> DropProposal? {
+        return DropProposal(operation: .move)
     }
     
 }
