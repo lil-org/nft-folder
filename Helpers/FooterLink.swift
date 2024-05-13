@@ -12,7 +12,6 @@ struct FooterLink: Hashable {
     }
     
     static let all = [
-        FooterLink(url: URL(string: "mailto:ivan@lil.org")!, imageName: "mail"),
         FooterLink(url: URL(string: "https://github.com/lil-org/nft-folder-macos")!, imageName: "github"),
         FooterLink(url: URL(string: "https://x.ivan.lol")!, imageName: "x"),
         FooterLink(url: URL(string: "https://f.ivan.lol")!, imageName: "fc")

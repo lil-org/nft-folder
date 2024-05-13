@@ -8,6 +8,8 @@ struct PreferencesView: View {
     @State private var glbPreference = Defaults.downloadGlb
     @State private var showInMenuBar = !Defaults.hideFromMenuBar
     
+    @State private var hoveringOverURL: URL? = nil
+    
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
             HStack {
@@ -58,7 +60,13 @@ struct PreferencesView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 20, height: 20)
-                            .foregroundColor(.secondary)
+                            .foregroundColor(hoveringOverURL == link.url ? .accentColor : .secondary).onHover { hovering in
+                                if hovering {
+                                    hoveringOverURL = link.url
+                                } else {
+                                    hoveringOverURL = nil
+                                }
+                            }
                     }
                 }
             }.padding(.top).padding(.bottom)
