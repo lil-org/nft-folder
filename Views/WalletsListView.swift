@@ -123,8 +123,7 @@ struct WalletsListView: View {
                 item(for: wallet)
                     .padding([.horizontal, .vertical], 2)
                     .alignmentGuide(.leading, computeValue: { d in
-                        if (abs(width - d.width) > g.size.width)
-                        {
+                        if abs(width - d.width) > g.size.width {
                             width = 0
                             height -= d.height
                         }
@@ -136,7 +135,7 @@ struct WalletsListView: View {
                         }
                         return result
                     })
-                    .alignmentGuide(.top, computeValue: {d in
+                    .alignmentGuide(.top, computeValue: { d in
                         let result = height
                         if wallet == wallets.last {
                             height = 0
