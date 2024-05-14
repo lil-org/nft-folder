@@ -159,13 +159,13 @@ struct WalletsListView: View {
     func item(for wallet: WatchOnlyWallet) -> some View {
         let status = downloadsStatuses[wallet] ?? .notDownloading
         return HStack {
-            Group {
+            HStack {
                 Spacer().frame(width: 7)
                 if wallet.collections == nil {
                     Circle().frame(width: 23, height: 23).foregroundStyle(wallet.placeholderColor).overlay(WalletImageView(wallet: wallet))
                 }
                 Text(wallet.listDisplayName).font(.system(size: 15, weight: .regular))
-            }.overlay(ClickHandler { openFolderForWallet(wallet) })
+            }.frame(height: 32).overlay(ClickHandler { openFolderForWallet(wallet) })
             switch status {
             case .downloading:
                 Button(action: {
