@@ -40,6 +40,7 @@
 		2C508C9D2B6830E6005F548A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
 		2C508C9E2B6830E6005F548A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
 		2C60AAD12B8A4DE200F2C143 /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60AAD02B8A4DE200F2C143 /* Window.swift */; };
+		2C622BB92BF3C1EA0003B932 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C622BB82BF3C1EA0003B932 /* main.swift */; };
 		2C8A42EA2B1A272600BE4166 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A42E92B1A272600BE4166 /* Network.swift */; };
 		2C91131A2B08F71200A8EE80 /* WalletDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9113192B08F71200A8EE80 /* WalletDownloader.swift */; };
 		2C9113282B09751D00A8EE80 /* WalletImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9113272B09751D00A8EE80 /* WalletImageView.swift */; };
@@ -95,6 +96,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		2C622BB42BF3C1EA0003B932 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		2CA34B4E2B082CFB00DAB623 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -132,6 +142,8 @@
 		2C424F452B9775E6007868F8 /* RightClickActivatingWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightClickActivatingWindow.swift; sourceTree = "<group>"; };
 		2C508C9C2B6830E6005F548A /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		2C60AAD02B8A4DE200F2C143 /* Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
+		2C622BB62BF3C1EA0003B932 /* translate */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = translate; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C622BB82BF3C1EA0003B932 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		2C8A42E92B1A272600BE4166 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		2C9113192B08F71200A8EE80 /* WalletDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDownloader.swift; sourceTree = "<group>"; };
 		2C9113272B09751D00A8EE80 /* WalletImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletImageView.swift; sourceTree = "<group>"; };
@@ -178,6 +190,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		2C622BB32BF3C1EA0003B932 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2CA34B5F2B08C01300DAB623 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -247,6 +266,14 @@
 				2C2B5AD02B84E2DA005C38B0 /* DownloadFileTask.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		2C622BB72BF3C1EA0003B932 /* translate */ = {
+			isa = PBXGroup;
+			children = (
+				2C622BB82BF3C1EA0003B932 /* main.swift */,
+			);
+			path = translate;
 			sourceTree = "<group>";
 		};
 		2C91131C2B08FCDF00A8EE80 /* Views */ = {
@@ -324,6 +351,7 @@
 				2CA34B4F2B08B32600DAB623 /* Shared */,
 				2CA34B632B08C01300DAB623 /* nft-finder-extension */,
 				2CD488FD2B10C6B000A53950 /* Supporting Files */,
+				2C622BB72BF3C1EA0003B932 /* translate */,
 				2CA4CF522B07F75F00CC75F4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -333,6 +361,7 @@
 			children = (
 				2CA4CF512B07F75F00CC75F4 /* nft folder.app */,
 				2CA34B622B08C01300DAB623 /* nft-finder-extension.appex */,
+				2C622BB62BF3C1EA0003B932 /* translate */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -375,6 +404,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2C622BB52BF3C1EA0003B932 /* translate */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C622BBC2BF3C1EA0003B932 /* Build configuration list for PBXNativeTarget "translate" */;
+			buildPhases = (
+				2C622BB22BF3C1EA0003B932 /* Sources */,
+				2C622BB32BF3C1EA0003B932 /* Frameworks */,
+				2C622BB42BF3C1EA0003B932 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = translate;
+			productName = translate;
+			productReference = 2C622BB62BF3C1EA0003B932 /* translate */;
+			productType = "com.apple.product-type.tool";
+		};
 		2CA34B612B08C01300DAB623 /* nft-finder-extension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2CA34B6B2B08C01300DAB623 /* Build configuration list for PBXNativeTarget "nft-finder-extension" */;
@@ -421,9 +467,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1510;
+				LastSwiftUpdateCheck = 1530;
 				LastUpgradeCheck = 1530;
 				TargetAttributes = {
+					2C622BB52BF3C1EA0003B932 = {
+						CreatedOnToolsVersion = 15.3;
+					};
 					2CA34B612B08C01300DAB623 = {
 						CreatedOnToolsVersion = 15.0.1;
 					};
@@ -482,6 +531,7 @@
 			targets = (
 				2CA4CF502B07F75E00CC75F4 /* nft folder */,
 				2CA34B612B08C01300DAB623 /* nft-finder-extension */,
+				2C622BB52BF3C1EA0003B932 /* translate */,
 			);
 		};
 /* End PBXProject section */
@@ -531,6 +581,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2C622BB22BF3C1EA0003B932 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C622BB92BF3C1EA0003B932 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2CA34B5E2B08C01300DAB623 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -636,6 +694,30 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		2C622BBA2BF3C1EA0003B932 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8DXC3N7E7P;
+				ENABLE_HARDENED_RUNTIME = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		2C622BBB2BF3C1EA0003B932 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8DXC3N7E7P;
+				ENABLE_HARDENED_RUNTIME = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		2CA34B6C2B08C01300DAB623 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -895,6 +977,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2C622BBC2BF3C1EA0003B932 /* Build configuration list for PBXNativeTarget "translate" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C622BBA2BF3C1EA0003B932 /* Debug */,
+				2C622BBB2BF3C1EA0003B932 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2CA34B6B2B08C01300DAB623 /* Build configuration list for PBXNativeTarget "nft-finder-extension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
