@@ -162,7 +162,7 @@ struct WalletsListView: View {
             Group {
                 Spacer().frame(width: 7)
                 if wallet.collections == nil {
-                    Circle().frame(width: 23, height: 23).foregroundStyle(.tertiary).overlay(WalletImageView(wallet: wallet))
+                    Circle().frame(width: 23, height: 23).foregroundStyle(wallet.placeholderColor).overlay(WalletImageView(wallet: wallet))
                 }
                 Text(wallet.listDisplayName).font(.system(size: 15, weight: .regular))
             }.overlay(ClickHandler { openFolderForWallet(wallet) })
@@ -283,7 +283,7 @@ struct WalletDropDelegate: DropDelegate {
             }
         }
         
-        return true
+        return false // TODO: enable when it's ready
     }
     
     func validateDrop(info: DropInfo) -> Bool {

@@ -23,7 +23,7 @@ struct WalletImageView: View {
                     .scaledToFill()
                     .clipShape(Circle())
             }
-        }
+        }.scaleEffect(1.023)
         .onAppear {
             avatarLoader.loadAvatar(wallet: wallet)
         }

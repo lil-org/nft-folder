@@ -1,6 +1,7 @@
 // ∅ nft-folder 2024
 
 import Foundation
+import SwiftUI
 
 struct WatchOnlyWallet: Codable, Hashable, Identifiable {
     
@@ -28,6 +29,30 @@ struct WatchOnlyWallet: Codable, Hashable, Identifiable {
         } else {
             return address
         }
+    }
+    
+    private static let colors: [Color] = [
+        Color(red: 0.75, green: 0.75, blue: 0.8),
+        Color(red: 0.8, green: 0.75, blue: 0.75),
+        Color(red: 0.8, green: 0.78, blue: 0.75),
+        Color(red: 0.78, green: 0.8, blue: 0.75),
+        Color(red: 0.75, green: 0.8, blue: 0.75),
+        Color(red: 0.75, green: 0.8, blue: 0.78),
+        Color(red: 0.75, green: 0.78, blue: 0.8),
+        Color(red: 0.75, green: 0.75, blue: 0.8),
+        Color(red: 0.77, green: 0.75, blue: 0.8),
+        Color(red: 0.78, green: 0.75, blue: 0.8)
+    ]
+
+    var placeholderColor: Color {
+        var digitsInAddress = 0
+        for addressScalar in address.unicodeScalars {
+            if CharacterSet.decimalDigits.contains(addressScalar) {
+                digitsInAddress += 1
+            }
+        }
+        
+        return WatchOnlyWallet.colors[digitsInAddress % WatchOnlyWallet.colors.count].opacity(0.81)
     }
     
 }
