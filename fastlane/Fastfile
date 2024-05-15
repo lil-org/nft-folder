@@ -2,18 +2,26 @@ default_platform(:mac)
 
 platform :mac do
 
-  desc "build for release"
+  lane :deliver_metadata do
+    update_fastlane
+    deliver(
+      metadata_path: "./fastlane/metadata",
+      screenshots_path: "./fastlane/screenshots",
+      overwrite_screenshots: true, 
+      platform: "osx",
+      run_precheck_before_submit: false,
+    )
+  end
+
   lane :build do
     gym(scheme: "nft-folder", output_directory: "fastlane/build", clean: true)
   end
 
-  desc "deploy to the app store"
   lane :release do
     build
     deliver # https://docs.fastlane.tools/actions/upload_to_app_store/
   end
 
-  desc "run the app"
   lane :dev do
     gym(
       scheme: "nft-folder",
