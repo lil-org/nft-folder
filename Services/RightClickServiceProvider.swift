@@ -5,8 +5,11 @@ import Cocoa
 class RightClickServiceProvider: NSObject {
     
     @objc func rightClickMint(_ pasteboard: NSPasteboard, userData: String?, error: AutoreleasingUnsafeMutablePointer<NSString>) {
-        if let urls = pasteboard.readObjects(forClasses: [NSURL.self], options: nil) as? [URL], let url = urls.first {
-            sendIt(fileURL: url)
+        if let urls = pasteboard.readObjects(forClasses: [NSURL.self], options: nil) as? [URL], !urls.isEmpty {
+            // TODO: check if it is an existing nft
+            if let url = urls.first {
+                sendIt(fileURL: url)
+            }
         }
     }
     
