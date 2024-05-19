@@ -42,6 +42,7 @@
 		2C60AAD12B8A4DE200F2C143 /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60AAD02B8A4DE200F2C143 /* Window.swift */; };
 		2C622BB92BF3C1EA0003B932 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C622BB82BF3C1EA0003B932 /* main.swift */; };
 		2C8A42EA2B1A272600BE4166 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A42E92B1A272600BE4166 /* Network.swift */; };
+		2C8A4CBF2BF9ECBD00F0E9D9 /* MagicEdenApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A4CBE2BF9ECBD00F0E9D9 /* MagicEdenApi.swift */; };
 		2C91131A2B08F71200A8EE80 /* WalletDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9113192B08F71200A8EE80 /* WalletDownloader.swift */; };
 		2C9113282B09751D00A8EE80 /* WalletImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9113272B09751D00A8EE80 /* WalletImageView.swift */; };
 		2C98C4AD2BEE9E390040383D /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98C4AC2BEE9E390040383D /* Consts.swift */; };
@@ -145,6 +146,7 @@
 		2C622BB62BF3C1EA0003B932 /* translate */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = translate; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C622BB82BF3C1EA0003B932 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		2C8A42E92B1A272600BE4166 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		2C8A4CBE2BF9ECBD00F0E9D9 /* MagicEdenApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicEdenApi.swift; sourceTree = "<group>"; };
 		2C8FD0322BF4B33C00B3D327 /* apple_tv_privacy_policy.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = apple_tv_privacy_policy.txt; sourceTree = "<group>"; };
 		2C8FD0332BF4B33C00B3D327 /* description.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = description.txt; sourceTree = "<group>"; };
 		2C8FD0342BF4B33C00B3D327 /* keywords.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = keywords.txt; sourceTree = "<group>"; };
@@ -1448,6 +1450,7 @@
 				2C1B60D52B7EBD18009949C2 /* AllDownloadsManager.swift */,
 				2C9113192B08F71200A8EE80 /* WalletDownloader.swift */,
 				2CF7339D2B0ED50000B1AC68 /* ZoraApi.swift */,
+				2C8A4CBE2BF9ECBD00F0E9D9 /* MagicEdenApi.swift */,
 				2CA3C2A02B18C91600AF33D6 /* FileDownloader.swift */,
 			);
 			path = Downloads;
@@ -1720,6 +1723,7 @@
 				2CE33D9A2B865CFB008473E1 /* AvatarService.swift in Sources */,
 				2CA34B5A2B08B7CF00DAB623 /* URL.swift in Sources */,
 				2CF7339E2B0ED50000B1AC68 /* ZoraApi.swift in Sources */,
+				2C8A4CBF2BF9ECBD00F0E9D9 /* MagicEdenApi.swift in Sources */,
 				2C60AAD12B8A4DE200F2C143 /* Window.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
