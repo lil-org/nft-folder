@@ -18,8 +18,15 @@ platform :mac do
   end
 
   lane :release do
+    update_fastlane
     build
-    deliver # https://docs.fastlane.tools/actions/upload_to_app_store/
+    deliver(
+      metadata_path: "./fastlane/metadata",
+      screenshots_path: "./fastlane/screenshots",
+      overwrite_screenshots: true, 
+      platform: "osx",
+      run_precheck_before_submit: false,
+    )
   end
 
   lane :dev do
