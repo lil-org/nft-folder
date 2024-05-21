@@ -33,6 +33,7 @@ struct Strings {
     static let quit = loc("Quit")
     static let hideFromHere = loc("Hide")
     static let showInMenuBar = loc("Show in menu bar")
+    static let pushCustomFolders = loc("Save Folders Onchain")
     
     static let zora = "Zora"
     static let opensea = "OpenSea"
