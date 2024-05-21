@@ -31,7 +31,7 @@ class RightClickServiceProvider: NSObject {
             guard let data = data,
                   error == nil,
                   let ipfsResponse = try? JSONDecoder().decode(IpfsResponse.self, from: data),
-                  let url = URL(string: "https://zora.co/create?image=ipfs://\(ipfsResponse.hash)") else {
+                  let url = URL(string: "https://zora.co/create?image=ipfs://\(ipfsResponse.cid)") else {
                 DispatchQueue.main.async { [weak self] in
                     self?.showErrorAlert(fileURL: fileURL)
                 }
