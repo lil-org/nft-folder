@@ -27,6 +27,7 @@ platform :mac do
       platform: "osx",
       run_precheck_before_submit: false,
     )
+    clean
   end
 
   lane :dev do
@@ -42,6 +43,10 @@ platform :mac do
       xcodebuild_formatter: '',
     )
     sh "open #{File.expand_path('build/nft\ folder.app')}"
+  end
+
+  lane :clean do
+    sh "rm -rf #{File.expand_path('build')}"
   end
 
 end
