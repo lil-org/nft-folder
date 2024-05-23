@@ -12,25 +12,7 @@ class FinderSync: FIFinderSync {
         self.monitor = DirectoryMonitor(directoryURL: home)
         super.init()
         FIFinderSyncController.default().directoryURLs = [home]
-        setupBadgeImages()
         monitor.startMonitoring()
-    }
-    
-    private func setupBadgeImages() {
-        for badge in Badge.allCases {
-            FIFinderSyncController.default().setBadgeImage(badge.image, label: badge.label, forBadgeIdentifier: badge.rawValue)
-        }
-    }
-    
-    private func setBadgeFor(url: URL) {
-        let pathComponents = url.pathComponents
-        if pathComponents.count == URL.nftDirectoryPathComponentsCount {
-            FIFinderSyncController.default().setBadgeIdentifier(Badge.nftFolder.rawValue, for: url)
-        } else if pathComponents.count - 1 == URL.nftDirectoryPathComponentsCount, let name = pathComponents.last {
-            if SharedDefaults.hasWallet(folderName: name) {
-                FIFinderSyncController.default().setBadgeIdentifier(Badge.nftFolder.rawValue, for: url)
-            }
-        }
     }
     
     // MARK: - directory observing
@@ -51,10 +33,6 @@ class FinderSync: FIFinderSync {
         } else if pathComponents.count - 1 == URL.nftDirectoryPathComponentsCount, let last = pathComponents.last {
             HostAppMessenger.send(.didEndObservingDirectory(mbAddressName: last))
         }
-    }
-    
-    override func requestBadgeIdentifier(for url: URL) {
-        setBadgeFor(url: url)
     }
     
     // MARK: - menu items

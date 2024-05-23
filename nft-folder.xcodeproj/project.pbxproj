@@ -10,7 +10,6 @@
 		2C0D86C42B08E67000106915 /* WalletsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C32B08E67000106915 /* WalletsService.swift */; };
 		2C0D86C72B08E7BF00106915 /* EnsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C62B08E7BF00106915 /* EnsResponse.swift */; };
 		2C1B60B92B7D3245009949C2 /* DirectoryMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60B82B7D3245009949C2 /* DirectoryMonitor.swift */; };
-		2C1B60BB2B7D3279009949C2 /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60BA2B7D3279009949C2 /* Badge.swift */; };
 		2C1B60BD2B7D3505009949C2 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60BC2B7D3505009949C2 /* Strings.swift */; };
 		2C1B60BE2B7D3505009949C2 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60BC2B7D3505009949C2 /* Strings.swift */; };
 		2C1B60C42B7D41D1009949C2 /* HostAppImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60C32B7D41D1009949C2 /* HostAppImages.swift */; };
@@ -124,7 +123,6 @@
 		2C0D86C32B08E67000106915 /* WalletsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsService.swift; sourceTree = "<group>"; };
 		2C0D86C62B08E7BF00106915 /* EnsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnsResponse.swift; sourceTree = "<group>"; };
 		2C1B60B82B7D3245009949C2 /* DirectoryMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryMonitor.swift; sourceTree = "<group>"; };
-		2C1B60BA2B7D3279009949C2 /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
 		2C1B60BC2B7D3505009949C2 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		2C1B60C32B7D41D1009949C2 /* HostAppImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostAppImages.swift; sourceTree = "<group>"; };
 		2C1B60C52B7E1145009949C2 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
@@ -1387,7 +1385,6 @@
 				2CA34B642B08C01300DAB623 /* FinderSync.swift */,
 				2C1B60CD2B7E2699009949C2 /* HostAppMessenger.swift */,
 				2C1B60B82B7D3245009949C2 /* DirectoryMonitor.swift */,
-				2C1B60BA2B7D3279009949C2 /* Badge.swift */,
 				2CA34B722B08C71800DAB623 /* ExtensionAssets.xcassets */,
 				2CA34B672B08C01300DAB623 /* nft_finder_extension.entitlements */,
 				2CA34B662B08C01300DAB623 /* Info.plist */,
@@ -1667,7 +1664,6 @@
 				2C1B60C92B7E1DD7009949C2 /* NftGallery.swift in Sources */,
 				2CA623E82BEE8A0200BD78FF /* UserDefaults.swift in Sources */,
 				2C1B60CE2B7E2699009949C2 /* HostAppMessenger.swift in Sources */,
-				2C1B60BB2B7D3279009949C2 /* Badge.swift in Sources */,
 				2C1B60D42B7EA27E009949C2 /* Bundle.swift in Sources */,
 				2C4039EE2B83A4F000DB94D7 /* SharedDefaults.swift in Sources */,
 				2C1FD2AE2B88D2EF004F42B3 /* Int.swift in Sources */,
