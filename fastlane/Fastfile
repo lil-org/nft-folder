@@ -10,39 +10,26 @@ platform :mac do
       overwrite_screenshots: true, 
       platform: "osx",
       run_precheck_before_submit: false,
+      force: true,
     )
   end
 
-  lane :build do
-    gym(scheme: "nft-folder", output_directory: "fastlane/build", clean: true)
-  end
-
   lane :release do
+    require 'spaceship'
+    Spaceship::Tunes.login('ivan@ivan.lol')
+
     update_fastlane
-    build
+    
+    gym(scheme: "nft-folder", output_directory: "fastlane/build", clean: true)
     deliver(
       metadata_path: "./fastlane/metadata",
       screenshots_path: "./fastlane/screenshots",
       overwrite_screenshots: true, 
       platform: "osx",
       run_precheck_before_submit: false,
+      force: true,
     )
     clean
-  end
-
-  lane :dev do
-    gym(
-      scheme: "nft-folder",
-      output_directory: "fastlane/build",
-      configuration: "Debug",
-      clean: false,
-      skip_archive: true,
-      silent: true,
-      skip_package_dependencies_resolution: true,
-      disable_package_automatic_updates: true,
-      xcodebuild_formatter: '',
-    )
-    sh "open #{File.expand_path('build/nft\ folder.app')}"
   end
 
   lane :clean do
