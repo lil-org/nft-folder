@@ -2,8 +2,19 @@ default_platform(:mac)
 
 platform :mac do
 
-  lane :deliver_metadata do
+  lane :update_and_login do
+    local_fastlane_password = ENV['FASTLANE_PASSWORD']
+    ENV['FASTLANE_PASSWORD'] = nil
+
+    require 'spaceship'
+    Spaceship::Tunes.login('ivan@ivan.lol')
+
     update_fastlane
+    ENV['FASTLANE_PASSWORD'] = local_fastlane_password
+  end
+
+  lane :deliver_metadata do
+    update_and_login
     deliver(
       metadata_path: "./fastlane/metadata",
       screenshots_path: "./fastlane/screenshots",
@@ -15,15 +26,7 @@ platform :mac do
   end
 
   lane :release do
-    # TODO: nullify FASTLANE_PASSWORD
-
-    require 'spaceship'
-    Spaceship::Tunes.login('ivan@ivan.lol')
-
-    # TODO: set FASTLANE_PASSWORD
-
-    update_fastlane
-    
+    update_and_login
     gym(scheme: "nft-folder", output_directory: "fastlane/build", clean: true)
     deliver(
       metadata_path: "./fastlane/metadata",
