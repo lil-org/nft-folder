@@ -15,8 +15,12 @@ platform :mac do
   end
 
   lane :release do
+    # TODO: nullify FASTLANE_PASSWORD
+
     require 'spaceship'
     Spaceship::Tunes.login('ivan@ivan.lol')
+
+    # TODO: set FASTLANE_PASSWORD
 
     update_fastlane
     
