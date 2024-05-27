@@ -160,30 +160,35 @@ struct WalletsListView: View {
     
     func item(for wallet: WatchOnlyWallet) -> some View {
         let status = downloadsStatuses[wallet] ?? .notDownloading
-        return HStack {
+        return HStack(spacing: 0) {
             HStack {
                 Spacer().frame(width: 7)
                 if wallet.collections == nil {
                     Circle().frame(width: 23, height: 23).foregroundStyle(wallet.placeholderColor).overlay(WalletImageView(wallet: wallet))
                 }
                 Text(wallet.listDisplayName).font(.system(size: 15, weight: .regular))
+                Spacer().frame(width: 3)
             }.frame(height: 32).overlay(ClickHandler { openFolderForWallet(wallet) })
-            switch status {
-            case .downloading:
-                Button(action: {
+            Button(action: {
+                switch status {
+                case .downloading:
                     AllDownloadsManager.shared.stopDownloads(wallet: wallet)
-                }) {
-                    Images.pause
-                }
-                .buttonStyle(BorderlessButtonStyle()).frame(width: 10)
-            case .notDownloading:
-                Button(action: {
+                case .notDownloading:
                     AllDownloadsManager.shared.startDownloads(wallet: wallet)
-                }) {
-                    Images.sync
-                }.buttonStyle(BorderlessButtonStyle()).frame(width: 10).foregroundStyle(.tertiary).opacity(0.8)
-            }
-            Spacer().frame(width: 7)
+                }
+            }) {
+                Spacer().frame(width: 4)
+                ZStack {
+                    Color.clear
+                    switch status {
+                    case .downloading:
+                        Images.pause
+                    case .notDownloading:
+                        Images.sync
+                    }
+                }.frame(width: 10)
+                Spacer().frame(width: 7)
+            }.buttonStyle(BorderlessButtonStyle()).foregroundStyle(.tertiary).opacity(0.8)
         }.frame(height: 32).background(hoveringOverAddress == wallet.address ? Color.gray.opacity(0.2) : Color.gray.opacity(0.1)).cornerRadius(5)
             .contextMenu {
                 Text(wallet.listDisplayName)
