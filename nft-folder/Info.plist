@@ -17,8 +17,6 @@
 	</array>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
-	<key>CFBundleDisplayName</key>
-	<string>nft folder</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -45,21 +43,7 @@
 			</dict>
 			<key>NSSendFileTypes</key>
 			<array>
-				<string>public.image</string>
-				<string>public.png</string>
-				<string>public.jpeg</string>
-				<string>com.compuserve.gif</string>
-				<string>public.tiff</string>
-				<string>com.microsoft.bmp</string>
-				<string>com.microsoft.ico</string>
-				<string>public.camera-raw-image</string>
-				<string>com.adobe.photoshop-image</string>
-				<string>public.svg-image</string>
-				<string>com.adobe.encapsulated-postscript</string>
-				<string>com.adobe.pdf</string>
-				<string>public.heic</string>
-				<string>public.heif</string>
-				<string>com.google.webp</string>
+				<string>public.item</string>
 			</array>
 		</dict>
 	</array>
