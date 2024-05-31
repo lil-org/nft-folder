@@ -6,12 +6,29 @@ class RightClickServiceProvider: NSObject {
     
     @objc func rightClickMint(_ pasteboard: NSPasteboard, userData: String?, error: AutoreleasingUnsafeMutablePointer<NSString>) {
         if let urls = pasteboard.readObjects(forClasses: [NSURL.self], options: nil) as? [URL], !urls.isEmpty {
-            // TODO: check if it is an existing nft to show it on zora instead
-            // TODO: can be a folder as well
-            // TODO: do not try to upload too big files
-            for url in urls {
-                sendIt(fileURL: url)
+            processUrls(urls)
+        }
+    }
+    
+    private func processUrls(_ urls: [URL]) {
+        let fileManager = FileManager.default
+        
+        for url in urls {
+            if let attributes = try? fileManager.attributesOfItem(atPath: url.path),
+               let fileSize = attributes[.size] as? NSNumber {
+                if fileSize.uintValue > 10485760 {
+                    print("file is bigger than 10 mb")
+                    showErrorAlert(fileURL: url)
+                    // TODO: ask confirmation if there are big files
+                    return
+                }
             }
+        }
+        
+        // TODO: check if it is an existing nft to show it on zora instead
+        // TODO: can be a folder as well
+        for url in urls {
+            sendIt(fileURL: url)
         }
     }
     
