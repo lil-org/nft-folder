@@ -9,8 +9,7 @@ class RightClickServiceProvider: NSObject {
             // TODO: check if it is an existing nft to show it on zora instead
             // TODO: can be a folder as well
             // TODO: do not try to upload too big files
-            // TODO: make it work with multiple nfts – both for create and view flows
-            if let url = urls.first {
+            for url in urls {
                 sendIt(fileURL: url)
             }
         }
