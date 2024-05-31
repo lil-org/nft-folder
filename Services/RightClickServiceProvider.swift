@@ -14,6 +14,12 @@ class RightClickServiceProvider: NSObject {
         let fileManager = FileManager.default
         
         for url in urls {
+            if url.hasDirectoryPath, let children = try? fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil), !children.isEmpty {
+                // TODO: handle folders corresponding to existing nfts
+                processUrls(children)
+                return // TODO: make sure it does not go deep recursively
+            }
+            
             if let attributes = try? fileManager.attributesOfItem(atPath: url.path),
                let fileSize = attributes[.size] as? NSNumber {
                 if fileSize.uintValue > 10485760 {
