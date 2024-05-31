@@ -36,7 +36,8 @@ platform :mac do
       run_precheck_before_submit: false,
       force: true,
       submit_for_review: true,
-      automatic_release: true
+      automatic_release: true,
+      add_id_info_uses_idfa: false
     )
     clean
   end
