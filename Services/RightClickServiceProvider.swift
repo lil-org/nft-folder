@@ -13,7 +13,17 @@ class RightClickServiceProvider: NSObject {
     private func processUrls(_ urls: [URL]) {
         let fileManager = FileManager.default
         
+        var urlsToUpload = [URL]()
+        
         for url in urls {
+            if url.isWithinNftDirectory {
+                Navigator.shared.show(filePath: url.path, on: .zora)
+                continue
+            } else {
+                // TODO: filter out stuff that can't be uploaded, like big folders, etc.
+                urlsToUpload.append(url)
+            }
+            
             if url.hasDirectoryPath, let children = try? fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil), !children.isEmpty {
                 // TODO: handle folders corresponding to existing nfts
                 processUrls(children)
@@ -31,9 +41,7 @@ class RightClickServiceProvider: NSObject {
             }
         }
         
-        // TODO: check if it is an existing nft to show it on zora instead
-        // TODO: can be a folder as well
-        for url in urls {
+        for url in urlsToUpload {
             sendIt(fileURL: url)
         }
     }
