@@ -35,6 +35,8 @@ platform :mac do
       platform: "osx",
       run_precheck_before_submit: false,
       force: true,
+      submit_for_review: true,
+      automatic_release: true
     )
     clean
   end
