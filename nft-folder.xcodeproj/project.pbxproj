@@ -44,6 +44,7 @@
 		2C8A42EA2B1A272600BE4166 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A42E92B1A272600BE4166 /* Network.swift */; };
 		2C8A4CBF2BF9ECBD00F0E9D9 /* MagicEdenApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A4CBE2BF9ECBD00F0E9D9 /* MagicEdenApi.swift */; };
 		2C8EDD032C0CFE3F003CB35D /* SyncedFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8EDD022C0CFE3F003CB35D /* SyncedFolder.swift */; };
+		2C8EDD052C0D00EA003CB35D /* FolderSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8EDD042C0D00EA003CB35D /* FolderSyncService.swift */; };
 		2C91131A2B08F71200A8EE80 /* WalletDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9113192B08F71200A8EE80 /* WalletDownloader.swift */; };
 		2C9113282B09751D00A8EE80 /* WalletImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9113272B09751D00A8EE80 /* WalletImageView.swift */; };
 		2C98C4AD2BEE9E390040383D /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98C4AC2BEE9E390040383D /* Consts.swift */; };
@@ -149,6 +150,7 @@
 		2C8A42E92B1A272600BE4166 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		2C8A4CBE2BF9ECBD00F0E9D9 /* MagicEdenApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicEdenApi.swift; sourceTree = "<group>"; };
 		2C8EDD022C0CFE3F003CB35D /* SyncedFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncedFolder.swift; sourceTree = "<group>"; };
+		2C8EDD042C0D00EA003CB35D /* FolderSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderSyncService.swift; sourceTree = "<group>"; };
 		2C8FD0322BF4B33C00B3D327 /* apple_tv_privacy_policy.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = apple_tv_privacy_policy.txt; sourceTree = "<group>"; };
 		2C8FD0332BF4B33C00B3D327 /* description.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = description.txt; sourceTree = "<group>"; };
 		2C8FD0342BF4B33C00B3D327 /* keywords.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = keywords.txt; sourceTree = "<group>"; };
@@ -610,6 +612,7 @@
 			isa = PBXGroup;
 			children = (
 				2C0D86C32B08E67000106915 /* WalletsService.swift */,
+				2C8EDD042C0D00EA003CB35D /* FolderSyncService.swift */,
 				2CE33D992B865CFB008473E1 /* AvatarService.swift */,
 				2C672CB02BFCEFB500E57B21 /* IpfsUploader.swift */,
 				2CAFA62A2B09C3610054160D /* MetadataStorage.swift */,
@@ -1726,6 +1729,7 @@
 				2CC943032B825907003219C7 /* ZoraRequest.swift in Sources */,
 				2CE33D9A2B865CFB008473E1 /* AvatarService.swift in Sources */,
 				2CA34B5A2B08B7CF00DAB623 /* URL.swift in Sources */,
+				2C8EDD052C0D00EA003CB35D /* FolderSyncService.swift in Sources */,
 				2CF7339E2B0ED50000B1AC68 /* ZoraApi.swift in Sources */,
 				2C8A4CBF2BF9ECBD00F0E9D9 /* MagicEdenApi.swift in Sources */,
 				2C60AAD12B8A4DE200F2C143 /* Window.swift in Sources */,
