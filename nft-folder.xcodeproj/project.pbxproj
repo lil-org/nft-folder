@@ -43,6 +43,7 @@
 		2C672CB12BFCEFB500E57B21 /* IpfsUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C672CB02BFCEFB500E57B21 /* IpfsUploader.swift */; };
 		2C8A42EA2B1A272600BE4166 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A42E92B1A272600BE4166 /* Network.swift */; };
 		2C8A4CBF2BF9ECBD00F0E9D9 /* MagicEdenApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A4CBE2BF9ECBD00F0E9D9 /* MagicEdenApi.swift */; };
+		2C8EDD032C0CFE3F003CB35D /* SyncedFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8EDD022C0CFE3F003CB35D /* SyncedFolder.swift */; };
 		2C91131A2B08F71200A8EE80 /* WalletDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9113192B08F71200A8EE80 /* WalletDownloader.swift */; };
 		2C9113282B09751D00A8EE80 /* WalletImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9113272B09751D00A8EE80 /* WalletImageView.swift */; };
 		2C98C4AD2BEE9E390040383D /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98C4AC2BEE9E390040383D /* Consts.swift */; };
@@ -147,6 +148,7 @@
 		2C672CB02BFCEFB500E57B21 /* IpfsUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IpfsUploader.swift; sourceTree = "<group>"; };
 		2C8A42E92B1A272600BE4166 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		2C8A4CBE2BF9ECBD00F0E9D9 /* MagicEdenApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicEdenApi.swift; sourceTree = "<group>"; };
+		2C8EDD022C0CFE3F003CB35D /* SyncedFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncedFolder.swift; sourceTree = "<group>"; };
 		2C8FD0322BF4B33C00B3D327 /* apple_tv_privacy_policy.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = apple_tv_privacy_policy.txt; sourceTree = "<group>"; };
 		2C8FD0332BF4B33C00B3D327 /* description.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = description.txt; sourceTree = "<group>"; };
 		2C8FD0342BF4B33C00B3D327 /* keywords.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = keywords.txt; sourceTree = "<group>"; };
@@ -633,6 +635,7 @@
 				2C1FD2AA2B88B53F004F42B3 /* ContentRepresentation.swift */,
 				2CF4C49D2B7FB26C000AB4A6 /* DetailedTokenMetadata.swift */,
 				2C2B5AD02B84E2DA005C38B0 /* DownloadFileTask.swift */,
+				2C8EDD022C0CFE3F003CB35D /* SyncedFolder.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1709,6 +1712,7 @@
 				2C9113282B09751D00A8EE80 /* WalletImageView.swift in Sources */,
 				2C9EF2E42B8A612F00297B32 /* StatusBarItem.swift in Sources */,
 				2CDE70202B9B5E9B0024DDA2 /* ClickHandler.swift in Sources */,
+				2C8EDD032C0CFE3F003CB35D /* SyncedFolder.swift in Sources */,
 				2CF4C49B2B7F567B000AB4A6 /* Navigator.swift in Sources */,
 				2C1B60D62B7EBD18009949C2 /* AllDownloadsManager.swift in Sources */,
 				2C0D86C42B08E67000106915 /* WalletsService.swift in Sources */,
