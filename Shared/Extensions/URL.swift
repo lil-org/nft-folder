@@ -21,6 +21,13 @@ extension URL {
         }
     }
     
+    static func attestFolder(address: String, cid: String) -> URL? {
+        let bytesString = "0x3bcfcc76d0d6774b8a683c69096b8a31b3ac6d2d4aca349c1561662832d9f81c" // TODO: create with cid
+        let schema = "0x980cd347baec3734e24c4ceb79e85ec67877e2298e0db7e62c5ed9d368af4dab"
+        let string = "https://base.easscan.org/attestation/attestWithSchema/\(schema)#template=\(address)::0:true:\(bytesString)"
+        return URL(string: string)
+    }
+    
     static func nftDirectory(wallet: WatchOnlyWallet, createIfDoesNotExist: Bool) -> URL? {
         let fileManager = FileManager.default
         guard let addressDirectoryURL = nftDirectory?.appendingPathComponent(wallet.folderDisplayName) else { return nil }

@@ -34,8 +34,7 @@ struct FolderSyncService {
         }
         
         IpfsUploader.upload(name: wallet.address, mimeType: "application/json", data: fileData) { cid in
-            if let cid = cid, let url = URL(string: "https://zora.co/create?image=ipfs://\(cid)") {
-                // TODO: open EAS url
+            if let cid = cid, let url = URL.attestFolder(address: wallet.address, cid: cid) {
                 NSWorkspace.shared.open(url)
             } else {
                 showErrorAlert()
