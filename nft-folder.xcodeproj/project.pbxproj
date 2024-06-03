@@ -37,6 +37,7 @@
 		2C424F462B9775E6007868F8 /* RightClickActivatingWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C424F452B9775E6007868F8 /* RightClickActivatingWindow.swift */; };
 		2C5065F72C0DFC8700D9D01A /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5065F62C0DFC8700D9D01A /* String.swift */; };
 		2C5065F82C0DFCF500D9D01A /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5065F62C0DFC8700D9D01A /* String.swift */; };
+		2C5065FA2C0E10D600D9D01A /* AttestationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5065F92C0E10D600D9D01A /* AttestationResponse.swift */; };
 		2C508C9D2B6830E6005F548A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
 		2C508C9E2B6830E6005F548A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
 		2C60AAD12B8A4DE200F2C143 /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60AAD02B8A4DE200F2C143 /* Window.swift */; };
@@ -143,6 +144,7 @@
 		2C4039F02B83B11100DB94D7 /* FileSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSaver.swift; sourceTree = "<group>"; };
 		2C424F452B9775E6007868F8 /* RightClickActivatingWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightClickActivatingWindow.swift; sourceTree = "<group>"; };
 		2C5065F62C0DFC8700D9D01A /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		2C5065F92C0E10D600D9D01A /* AttestationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationResponse.swift; sourceTree = "<group>"; };
 		2C508C9C2B6830E6005F548A /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		2C60AAD02B8A4DE200F2C143 /* Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
 		2C622BB62BF3C1EA0003B932 /* translate */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = translate; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -628,6 +630,7 @@
 		2C4D84102B1886D600952BF5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2C5065F92C0E10D600D9D01A /* AttestationResponse.swift */,
 				2CC943002B8248CE003219C7 /* ZoraResponse.swift */,
 				2CC943022B825907003219C7 /* ZoraRequest.swift */,
 				2CFA24702B19F956009B58FD /* DataOrUrl.swift */,
@@ -1717,6 +1720,7 @@
 				2C9113282B09751D00A8EE80 /* WalletImageView.swift in Sources */,
 				2C9EF2E42B8A612F00297B32 /* StatusBarItem.swift in Sources */,
 				2CDE70202B9B5E9B0024DDA2 /* ClickHandler.swift in Sources */,
+				2C5065FA2C0E10D600D9D01A /* AttestationResponse.swift in Sources */,
 				2C8EDD032C0CFE3F003CB35D /* SyncedFolder.swift in Sources */,
 				2CF4C49B2B7F567B000AB4A6 /* Navigator.swift in Sources */,
 				2C1B60D62B7EBD18009949C2 /* AllDownloadsManager.swift in Sources */,

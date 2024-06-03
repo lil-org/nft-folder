@@ -8,6 +8,8 @@ extension URL {
     static let ipfsScheme = "ipfs://"
     static let arScheme = "ar://"
     static let deeplinkScheme = "nft-folder://"
+    static let nftFolderAttestationSchema = "0x39693b21ffe38b11da9ae29437c981de90e56ddb8606ead0c5460ba4a9f93880"
+    static let easScanBase = "https://base.easscan.org"
     
     private enum MetadataKind: String {
         case address, minimal, detailed, hashed
@@ -23,8 +25,7 @@ extension URL {
     
     static func attestFolder(address: String, cid: String) -> URL? {
         let inputString = cid.toPaddedHexString()
-        let schema = "0x39693b21ffe38b11da9ae29437c981de90e56ddb8606ead0c5460ba4a9f93880"
-        let string = "https://base.easscan.org/attestation/attestWithSchema/\(schema)#template=\(address)::0:false:\(inputString)"
+        let string = "\(easScanBase)/attestation/attestWithSchema/\(nftFolderAttestationSchema)#template=\(address)::0:false:\(inputString)"
         return URL(string: string)
     }
     

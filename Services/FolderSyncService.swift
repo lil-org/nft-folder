@@ -8,7 +8,45 @@ struct FolderSyncService {
         showConfirmationAlert(wallet: wallet)
     }
     
+    static func getSyncedFolder(wallet: WatchOnlyWallet) {
+        let url = URL(string: "\(URL.easScanBase)/graphql")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        let query: [String: Any] = [
+            "query": """
+                query Attestation {
+                    attestations(
+                        take: 1,
+                        orderBy: { timeCreated: desc},
+                        where: { schemaId: { equals: "\(URL.nftFolderAttestationSchema)" }, recipient: { equals: "\(wallet.address)" }, attester: { equals: "\(wallet.address)" } }
+                    ) {
+                        attester
+                        recipient
+                        decodedDataJson
+                        timeCreated
+                    }
+                }
+            """,
+            "variables": [:]
+        ]
+        guard let data = try? JSONSerialization.data(withJSONObject: query) else { return }
+        request.httpBody = data
+        let task = URLSession.shared.dataTask(with: request) { data, _, _ in
+            if let data = data, let attestationResponse = try? JSONDecoder().decode(AttestationResponse.self, from: data) {
+                // TODO: get SyncedFolder from ipfs
+                print(attestationResponse)
+            } else {
+                print("hmm")
+            }
+        }
+        
+        task.resume()
+    }
+    
     private static func showConfirmationAlert(wallet: WatchOnlyWallet) {
+        getSyncedFolder(wallet: wallet) // TODO: dev tmp
+        
         let alert = NSAlert()
         alert.messageText = Strings.pushCustomFolders + "?"
         alert.informativeText = wallet.folderDisplayName
