@@ -35,6 +35,8 @@
 		2C4039EF2B83A59300DB94D7 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B552B08B6A200DAB623 /* Codable.swift */; };
 		2C4039F12B83B11100DB94D7 /* FileSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4039F02B83B11100DB94D7 /* FileSaver.swift */; };
 		2C424F462B9775E6007868F8 /* RightClickActivatingWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C424F452B9775E6007868F8 /* RightClickActivatingWindow.swift */; };
+		2C5065F72C0DFC8700D9D01A /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5065F62C0DFC8700D9D01A /* String.swift */; };
+		2C5065F82C0DFCF500D9D01A /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5065F62C0DFC8700D9D01A /* String.swift */; };
 		2C508C9D2B6830E6005F548A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
 		2C508C9E2B6830E6005F548A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
 		2C60AAD12B8A4DE200F2C143 /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60AAD02B8A4DE200F2C143 /* Window.swift */; };
@@ -140,6 +142,7 @@
 		2C4039EC2B83A4F000DB94D7 /* SharedDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDefaults.swift; sourceTree = "<group>"; };
 		2C4039F02B83B11100DB94D7 /* FileSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSaver.swift; sourceTree = "<group>"; };
 		2C424F452B9775E6007868F8 /* RightClickActivatingWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightClickActivatingWindow.swift; sourceTree = "<group>"; };
+		2C5065F62C0DFC8700D9D01A /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		2C508C9C2B6830E6005F548A /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		2C60AAD02B8A4DE200F2C143 /* Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
 		2C622BB62BF3C1EA0003B932 /* translate */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = translate; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1373,6 +1376,7 @@
 			children = (
 				2CA34B592B08B7CF00DAB623 /* URL.swift */,
 				2C1B60D22B7EA27E009949C2 /* Bundle.swift */,
+				2C5065F62C0DFC8700D9D01A /* String.swift */,
 				2CA623E62BEE8A0200BD78FF /* UserDefaults.swift */,
 				2C1FD2AC2B88D2EF004F42B3 /* Int.swift */,
 				2C1E2B8D2B877F290035E0CA /* Data.swift */,
@@ -1653,6 +1657,7 @@
 			files = (
 				2CA34B652B08C01300DAB623 /* FinderSync.swift in Sources */,
 				2C98C4AE2BEE9E390040383D /* Consts.swift in Sources */,
+				2C5065F82C0DFCF500D9D01A /* String.swift in Sources */,
 				2C1E2B8F2B877FF00035E0CA /* Data.swift in Sources */,
 				2C1B60BE2B7D3505009949C2 /* Strings.swift in Sources */,
 				2C1B60CC2B7E2481009949C2 /* Images.swift in Sources */,
@@ -1683,6 +1688,7 @@
 				2C2329DA2B68367F00001936 /* RightClickServiceProvider.swift in Sources */,
 				2CA979AA2B627B3900DB3AC8 /* MinimalTokenMetadata.swift in Sources */,
 				2C1B60C62B7E1145009949C2 /* PreferencesView.swift in Sources */,
+				2C5065F72C0DFC8700D9D01A /* String.swift in Sources */,
 				2CAFA62B2B09C3610054160D /* MetadataStorage.swift in Sources */,
 				2CA3C2A12B18C91600AF33D6 /* FileDownloader.swift in Sources */,
 				2C1FD2AB2B88B53F004F42B3 /* ContentRepresentation.swift in Sources */,
