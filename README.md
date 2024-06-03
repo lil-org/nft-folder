@@ -25,7 +25,7 @@ struct NftInSyncedFolder: Codable {
 }
 ```
 
-### 2️⃣ create attestation with `SyncedFolder` ipfs cid
+### 2️⃣ create an attestation with `SyncedFolder` ipfs cid
 ```swift
 static func attestFolder(address: String, cid: String) -> URL? {
     let inputString = cid.toPaddedHexString()
@@ -44,7 +44,7 @@ curl --request POST \
     --data '{"query":"query Attestation {\n  attestations(\n    take: 1,\n    orderBy: { timeCreated: desc},\n    where: { schemaId: { equals: \"0x39693b21ffe38b11da9ae29437c981de90e56ddb8606ead0c5460ba4a9f93880\" }, recipient: { equals: \"0xE26067c76fdbe877F48b0a8400cf5Db8B47aF0fE\" }, attester: { equals: \"0xE26067c76fdbe877F48b0a8400cf5Db8B47aF0fE\" } }\n  ) {\n    attester\n    recipient\n    decodedDataJson\n    timeCreated\n  }\n}","variables":{}}'
 ```
 
-### 4️⃣ get json corresponding to the latest attestation
+### 4️⃣ get `SyncedFolder` json corresponding to the latest attestation
 https://ipfs.decentralized-content.com/ipfs/bafkreids5ui7vb5uc5dkfu36uhtriy72nf4l7budx2ja3cewsul6wkpo7q
 
 ### 5️⃣ get nfts from an api of your choice
