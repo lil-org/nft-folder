@@ -65,8 +65,11 @@ class Navigator: NSObject {
                     }
                 }
             }
-            if !didOpenSome {
-                // TODO: open address root
+            if !didOpenSome && fileUrl.pathComponents.count > URL.nftDirectoryPathComponentsCount {
+                let rootFolderName = fileUrl.pathComponents[URL.nftDirectoryPathComponentsCount]
+                if let wallet = WalletsService.shared.wallet(folderName: rootFolderName), let galleryURL = gallery.url(wallet: wallet) {
+                    DispatchQueue.main.async { NSWorkspace.shared.open(galleryURL) }
+                }
             }
         }
     }
