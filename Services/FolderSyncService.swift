@@ -60,8 +60,8 @@ struct FolderSyncService {
                 if content.hasDirectoryPath {
                     let childFolder = folderToSync(url: content)
                     childrenFolders.append(childFolder)
-                } else {
-                    let nft = NftInSyncedFolder(chainId: "", tokenId: "", address: "") // TODO: read metadata
+                } else if let metadata = MetadataStorage.minimalMetadata(filePath: content.path) {
+                    let nft = NftInSyncedFolder(chainId: String(metadata.network.rawValue), tokenId: metadata.tokenId, address: metadata.collectionAddress)
                     nfts.append(nft)
                 }
             }
