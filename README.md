@@ -25,7 +25,7 @@ struct NftInSyncedFolder: Codable {
 }
 ```
 
-### 2️⃣ create attestation with `SyncedFolder` json ipfs cid
+### 2️⃣ create attestation with `SyncedFolder` ipfs cid
 ```swift
 static func attestFolder(address: String, cid: String) -> URL? {
     let inputString = cid.toPaddedHexString()
@@ -36,6 +36,7 @@ https://base.easscan.org/attestation/attestWithSchema/0x39693b21ffe38b11da9ae294
 
 
 ### 3️⃣ get the latest attestation
+using [easscan graphql api](https://docs.attest.org/docs/developer-tools/api)
 ```
 curl --request POST \
     --header 'content-type: application/json' \
