@@ -6,12 +6,10 @@ enum NftGallery: Int, CaseIterable, Codable {
     
     static let referrer = "0xE26067c76fdbe877F48b0a8400cf5Db8B47aF0fE"
     
-    case zora, mintfun, opensea, local
+    case zora, mintfun, opensea
     
     var image: NSImage {
         switch self {
-        case .local:
-            return Images.folder
         case .zora:
             return Images.zora
         case .mintfun:
@@ -23,8 +21,6 @@ enum NftGallery: Int, CaseIterable, Codable {
     
     var title: String {
         switch self {
-        case .local:
-            Strings.nftInfo
         case .zora:
             Strings.zora
         case .mintfun:
@@ -44,8 +40,6 @@ enum NftGallery: Int, CaseIterable, Codable {
     
     private func url(walletAddress: String) -> URL? {
         switch self {
-        case .local:
-            return nil
         case .zora:
             return URL(string: "https://zora.co/\(walletAddress)?referrer=\(NftGallery.referrer)")
         case .mintfun:
@@ -57,8 +51,6 @@ enum NftGallery: Int, CaseIterable, Codable {
     
     func url(network: Network, collectionAddress: String, tokenId: String?) -> URL? {
         switch self {
-        case .local:
-            return nil
         case .zora:
             let prefix: String
             switch network {

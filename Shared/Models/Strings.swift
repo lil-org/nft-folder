@@ -26,7 +26,6 @@ struct Strings {
     static let didNotUpload = loc("Did not upload")
     static let retry = loc("Retry")
     static let nftFolder = loc("nft folder")
-    static let nftInfo = loc("Metadata")
     static let somethingWentWrong = loc("Something went wrong")
     static let maxFileSize50mb = loc("Max file size 50 MB")
     static let downloadGlb = loc("Download .glb files")
