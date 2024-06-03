@@ -45,8 +45,29 @@ struct FolderSyncService {
     
     private static func folderToSync(wallet: WatchOnlyWallet) -> SyncedFolder? {
         guard let url = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return nil }
-        // TODO: read the contents to create SyncedFolder
-        return SyncedFolder(name: wallet.address, nfts: nil, childrenFolders: nil)
+        let folder = folderToSync(url: url)
+        return folder
+    }
+    
+    private static func folderToSync(url: URL) -> SyncedFolder {
+        let fileManager = FileManager.default
+        
+        var nfts = [NftInSyncedFolder]()
+        var childrenFolders = [SyncedFolder]()
+        
+        if let folderContents = try? fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil, options: .skipsHiddenFiles) {
+            for content in folderContents {
+                if content.hasDirectoryPath {
+                    let childFolder = folderToSync(url: content)
+                    childrenFolders.append(childFolder)
+                } else {
+                    let nft = NftInSyncedFolder(chainId: "", tokenId: "", address: "") // TODO: read metadata
+                    nfts.append(nft)
+                }
+            }
+        }
+        
+        return SyncedFolder(name: url.lastPathComponent, nfts: nfts, childrenFolders: childrenFolders)
     }
     
     private static func showErrorAlert() {
