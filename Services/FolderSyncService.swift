@@ -27,8 +27,12 @@ struct FolderSyncService {
     
     private static func uploadFoldersToIpfsAndSaveOnchain(wallet: WatchOnlyWallet) {
         // TODO: check if folders were changed
-        // TODO: create file properly
-        guard let fileData = wallet.address.data(using: .utf8) else { return }
+        
+        guard let folder = folderToSync(wallet: wallet), let fileData = try? JSONEncoder().encode(folder) else {
+            showErrorAlert()
+            return
+        }
+        
         IpfsUploader.upload(name: wallet.address, mimeType: "application/json", data: fileData) { cid in
             if let cid = cid, let url = URL(string: "https://zora.co/create?image=ipfs://\(cid)") {
                 // TODO: open EAS url
@@ -37,6 +41,12 @@ struct FolderSyncService {
                 showErrorAlert()
             }
         }
+    }
+    
+    private static func folderToSync(wallet: WatchOnlyWallet) -> SyncedFolder? {
+        guard let url = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return nil }
+        // TODO: read the contents to create SyncedFolder
+        return SyncedFolder(name: wallet.address, nfts: nil, childrenFolders: nil)
     }
     
     private static func showErrorAlert() {

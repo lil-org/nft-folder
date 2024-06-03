@@ -4,7 +4,7 @@ import Foundation
 
 struct SyncedFolder: Codable {
     
-    let name: String?
+    let name: String
     let nfts: [NftInSyncedFolder]?
     let childrenFolders: [SyncedFolder]?
     
