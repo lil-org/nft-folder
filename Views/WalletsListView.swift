@@ -215,10 +215,12 @@ struct WalletsListView: View {
                         DispatchQueue.main.async { NSWorkspace.shared.open(galleryURL) }
                     }
                 })
-                Divider()
-                Button(Strings.pushCustomFolders, action: {
-                    FolderSyncService.pushCustomFolders(wallet: wallet)
-                })
+                if wallet.collections == nil {
+                    Divider()
+                    Button(Strings.pushCustomFolders, action: {
+                        FolderSyncService.pushCustomFolders(wallet: wallet)
+                    })
+                }
                 Divider()
                 Button(Strings.hardReset, action: {
                     hardReset(wallet: wallet)
