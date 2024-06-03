@@ -22,9 +22,10 @@ extension URL {
     }
     
     static func attestFolder(address: String, cid: String) -> URL? {
-        let bytesString = "0x3bcfcc76d0d6774b8a683c69096b8a31b3ac6d2d4aca349c1561662832d9f81c" // TODO: create with cid
-        let schema = "0x980cd347baec3734e24c4ceb79e85ec67877e2298e0db7e62c5ed9d368af4dab"
-        let string = "https://base.easscan.org/attestation/attestWithSchema/\(schema)#template=\(address)::0:true:\(bytesString)"
+        // bafkreib3z7ghnugwo5fyu2b4neewxcrrwowg2lkkzi2jyflbmyudfwpydq
+        let bytesString = "0x0000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000003b6261666b72656962337a3767686e7567776f356679753262346e65657778637272776f7767326c6b6b7a69326a79666c626d7975646677707964710000000000" // TODO: create with cid
+        let schema = "0x39693b21ffe38b11da9ae29437c981de90e56ddb8606ead0c5460ba4a9f93880"
+        let string = "https://base.easscan.org/attestation/attestWithSchema/\(schema)#template=\(address)::0:false:\(bytesString)"
         return URL(string: string)
     }
     
