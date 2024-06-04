@@ -48,9 +48,9 @@ struct FolderSyncService {
         guard let url = URL(string: URL.ipfsGateway + cid) else { return }
         let task = URLSession.shared.dataTask(with: url) { data, _, _ in
             // TODO: retry when appropriate
-            if let data = data, let syncedFolder = try? JSONDecoder().decode(SyncedFolder.self, from: data) {
+            if let data = data, let snapshot = try? JSONDecoder().decode(SyncedFolderSnapshot.self, from: data) {
                 // TODO: use synced folder to organize nfts
-                print(syncedFolder)
+                print(snapshot)
             } else {
                 print("hmm")
             }
@@ -79,9 +79,7 @@ struct FolderSyncService {
     }
     
     private static func uploadFoldersToIpfsAndSaveOnchain(wallet: WatchOnlyWallet) {
-        // TODO: check if folders were changed
-        
-        guard let folder = folderToSync(wallet: wallet), let fileData = try? JSONEncoder().encode(folder) else {
+        guard let snapshot = folderSnapshotToSync(wallet: wallet), let fileData = try? JSONEncoder().encode(snapshot) else {
             showErrorAlert()
             return
         }
@@ -96,6 +94,7 @@ struct FolderSyncService {
     }
     
     private static func folderSnapshotToSync(wallet: WatchOnlyWallet) -> SyncedFolderSnapshot? {
+        // TODO: check if folders were changed
         guard let url = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return nil }
         let rootFolder = folderToSync(url: url)
         let nonce = 0 // TODO: bump previous when available
@@ -106,12 +105,6 @@ struct FolderSyncService {
                                             address: wallet.address,
                                             rootFolder: rootFolder)
         return snapshot
-    }
-    
-    private static func folderToSync(wallet: WatchOnlyWallet) -> SyncedFolder? {
-        guard let url = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return nil }
-        let folder = folderToSync(url: url)
-        return folder
     }
     
     private static func folderToSync(url: URL) -> SyncedFolder {
