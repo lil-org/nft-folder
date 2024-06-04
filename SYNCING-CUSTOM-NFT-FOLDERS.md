@@ -1,5 +1,11 @@
 # syncing custom nft folders
 
+organize nfts into folders and see the same custom folders in zora, opensea, rainbow, etc.
+
+what could be a good standard way to sync a custom folders structure?
+
+proposal:
+
 ## nft folders + ethereum attestation service
 
 ### 1️⃣ upload `SyncedFolderSnapshot` json to ipfs
