@@ -2,7 +2,7 @@
 
 import Foundation
 
-struct FolderSnapshot: Codable {
+struct SyncedFolderSnapshot: Codable {
     
     static let latestFormatVersion = 0
     

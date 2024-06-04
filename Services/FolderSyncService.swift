@@ -95,15 +95,15 @@ struct FolderSyncService {
         }
     }
     
-    private static func folderSnapshotToSync(wallet: WatchOnlyWallet) -> FolderSnapshot? {
+    private static func folderSnapshotToSync(wallet: WatchOnlyWallet) -> SyncedFolderSnapshot? {
         guard let url = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return nil }
         let rootFolder = folderToSync(url: url)
         let nonce = 0 // TODO: bump previous when available
-        let snapshot = FolderSnapshot(formatVersion: FolderSnapshot.latestFormatVersion,
-                                      uuid: UUID().uuidString,
-                                      nonce: nonce,
-                                      address: wallet.address,
-                                      rootFolder: rootFolder)
+        let snapshot = SyncedFolderSnapshot(formatVersion: SyncedFolderSnapshot.latestFormatVersion,
+                                            uuid: UUID().uuidString,
+                                            nonce: nonce,
+                                            address: wallet.address,
+                                            rootFolder: rootFolder)
         return snapshot
     }
     
