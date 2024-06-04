@@ -33,11 +33,21 @@ struct FolderSyncService {
         guard let data = try? JSONSerialization.data(withJSONObject: query) else { return }
         request.httpBody = data
         let task = URLSession.shared.dataTask(with: request) { data, _, _ in
-            if let data = data, let attestationResponse = try? JSONDecoder().decode(AttestationResponse.self, from: data) {
-                // TODO: get SyncedFolder from ipfs
-                print(attestationResponse)
-            } else {
-                print("hmm")
+            // TODO: retry when appropriate
+            if let data = data, let attestationResponse = try? JSONDecoder().decode(AttestationResponse.self, from: data), let cid = attestationResponse.cid {
+                getSyncedFolderFromIpfs(cid: cid)
+            }
+        }
+        
+        task.resume()
+    }
+    
+    private static func getSyncedFolderFromIpfs(cid: String) {
+        guard let url = URL(string: URL.ipfsGateway + cid) else { return }
+        let task = URLSession.shared.dataTask(with: url) { data, _, _ in
+            // TODO: retry when appropriate
+            if let data = data, let syncedFolder = try? JSONDecoder().decode(SyncedFolder.self, from: data) {
+                // TODO: use synced folder to organize nfts
             }
         }
         

@@ -82,7 +82,7 @@ struct Media: Codable {
     var customImageEncoding: String? {
         if let url = url,
            url.hasPrefix(URL.ipfsScheme),
-           let urlQueryEncoded = ("https://ipfs.decentralized-content.com/ipfs/" + url.dropFirst(URL.ipfsScheme.count)).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+           let urlQueryEncoded = (URL.ipfsGateway + url.dropFirst(URL.ipfsScheme.count)).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
             let custom = "https://remote-image.decentralized-content.com/image?url=\(urlQueryEncoded)&w=1920&q=75"
             return custom
         } else {

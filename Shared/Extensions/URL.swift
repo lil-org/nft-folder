@@ -10,6 +10,7 @@ extension URL {
     static let deeplinkScheme = "nft-folder://"
     static let nftFolderAttestationSchema = "0x39693b21ffe38b11da9ae29437c981de90e56ddb8606ead0c5460ba4a9f93880"
     static let easScanBase = "https://base.easscan.org"
+    static let ipfsGateway = "https://ipfs.decentralized-content.com/ipfs/"
     
     private enum MetadataKind: String {
         case address, minimal, detailed, hashed
