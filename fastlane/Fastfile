@@ -37,7 +37,7 @@ platform :mac do
       force: true,
       submit_for_review: true,
       automatic_release: true,
-      add_id_info_uses_idfa: false
+      submission_information: { add_id_info_uses_idfa: false },
     )
     clean
   end
