@@ -36,6 +36,8 @@ struct FolderSyncService {
             // TODO: retry when appropriate
             if let data = data, let attestationResponse = try? JSONDecoder().decode(AttestationResponse.self, from: data), let cid = attestationResponse.cid {
                 getSyncedFolderFromIpfs(cid: cid)
+            } else {
+                print("hmm")
             }
         }
         
@@ -48,6 +50,9 @@ struct FolderSyncService {
             // TODO: retry when appropriate
             if let data = data, let syncedFolder = try? JSONDecoder().decode(SyncedFolder.self, from: data) {
                 // TODO: use synced folder to organize nfts
+                print(syncedFolder)
+            } else {
+                print("hmm")
             }
         }
         
@@ -88,6 +93,18 @@ struct FolderSyncService {
                 showErrorAlert()
             }
         }
+    }
+    
+    private static func folderSnapshotToSync(wallet: WatchOnlyWallet) -> FolderSnapshot? {
+        guard let url = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return nil }
+        let rootFolder = folderToSync(url: url)
+        let nonce = 0 // TODO: bump previous when available
+        let snapshot = FolderSnapshot(formatVersion: FolderSnapshot.latestFormatVersion,
+                                      uuid: UUID().uuidString,
+                                      nonce: nonce,
+                                      address: wallet.address,
+                                      rootFolder: rootFolder)
+        return snapshot
     }
     
     private static func folderToSync(wallet: WatchOnlyWallet) -> SyncedFolder? {
