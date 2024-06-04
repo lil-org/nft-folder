@@ -102,6 +102,7 @@ struct FolderSyncService {
         let snapshot = SyncedFolderSnapshot(formatVersion: SyncedFolderSnapshot.latestFormatVersion,
                                             uuid: UUID().uuidString,
                                             nonce: nonce,
+                                            timestamp: Int(Date().timeIntervalSince1970),
                                             address: wallet.address,
                                             rootFolder: rootFolder)
         return snapshot

@@ -9,6 +9,7 @@ struct SyncedFolderSnapshot: Codable {
     let formatVersion: Int
     let uuid: String
     let nonce: Int
+    let timestamp: Int
     let address: String
     let rootFolder: SyncedFolder
     
