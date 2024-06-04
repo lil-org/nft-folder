@@ -517,7 +517,7 @@
 		2C8FD1BF2BF4B33C00B3D327 /* secondary_category.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = secondary_category.txt; sourceTree = "<group>"; };
 		2C8FD1C02BF4B33C00B3D327 /* secondary_first_sub_category.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = secondary_first_sub_category.txt; sourceTree = "<group>"; };
 		2C8FD1C12BF4B33C00B3D327 /* secondary_second_sub_category.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = secondary_second_sub_category.txt; sourceTree = "<group>"; };
-		2C8FD1C32BF4B33C00B3D327 /* 0_APP_DESKTOP_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0_APP_DESKTOP_0.png; sourceTree = "<group>"; };
+		2C8FD1C32BF4B33C00B3D327 /* 0_APP_DESKTOP_0.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 0_APP_DESKTOP_0.jpeg; sourceTree = "<group>"; };
 		2C8FD1C62BF4B33C00B3D327 /* Appfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
 		2C8FD1C72BF4B33C00B3D327 /* Fastfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; };
 		2C9113192B08F71200A8EE80 /* WalletDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDownloader.swift; sourceTree = "<group>"; };
@@ -1317,7 +1317,7 @@
 		2C8FD1C42BF4B33C00B3D327 /* en-GB */ = {
 			isa = PBXGroup;
 			children = (
-				2C8FD1C32BF4B33C00B3D327 /* 0_APP_DESKTOP_0.png */,
+				2C8FD1C32BF4B33C00B3D327 /* 0_APP_DESKTOP_0.jpeg */,
 			);
 			path = "en-GB";
 			sourceTree = "<group>";
