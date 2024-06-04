@@ -6,7 +6,7 @@
 
 ## syncing custom nft folders
 
-[wip doc](SYNCING-CUSTOM-NFT-FOLDERS.md)
+### [wip doc](SYNCING-CUSTOM-NFT-FOLDERS.md)
 
 ## development
 * run the xcode project
