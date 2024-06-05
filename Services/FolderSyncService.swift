@@ -5,7 +5,11 @@ import Cocoa
 struct FolderSyncService {
     
     static func pushCustomFolders(wallet: WatchOnlyWallet) {
-        showConfirmationAlert(wallet: wallet)
+        Alerts.showConfirmation(message: Strings.pushCustomFolders + "?", text: wallet.folderDisplayName) { confirmed in
+            if confirmed {
+                uploadFoldersToIpfsAndSaveOnchain(wallet: wallet)
+            }
+        }
     }
     
     static func getOnchainSyncedFolder(wallet: WatchOnlyWallet, completion: @escaping (SyncedFolderSnapshot?) -> Void) {
@@ -58,26 +62,9 @@ struct FolderSyncService {
         task.resume()
     }
     
-    private static func showConfirmationAlert(wallet: WatchOnlyWallet) {
-        let alert = NSAlert()
-        alert.messageText = Strings.pushCustomFolders + "?"
-        alert.informativeText = wallet.folderDisplayName
-        alert.alertStyle = .informational
-        alert.addButton(withTitle: Strings.ok)
-        alert.addButton(withTitle: Strings.cancel)
-        alert.buttons.last?.keyEquivalent = "\u{1b}"
-        let response = alert.runModal()
-        switch response {
-        case .alertFirstButtonReturn:
-            uploadFoldersToIpfsAndSaveOnchain(wallet: wallet)
-        default:
-            break
-        }
-    }
-    
     private static func uploadFoldersToIpfsAndSaveOnchain(wallet: WatchOnlyWallet) {
         guard let snapshot = folderSnapshotToSync(wallet: wallet), let fileData = try? JSONEncoder().encode(snapshot) else {
-            showErrorAlert()
+            Alerts.showSomethingWentWrong()
             return
         }
         
@@ -85,7 +72,7 @@ struct FolderSyncService {
             if let cid = cid, let url = URL.attestFolder(address: wallet.address, cid: cid) {
                 NSWorkspace.shared.open(url)
             } else {
-                showErrorAlert()
+                Alerts.showSomethingWentWrong()
             }
         }
     }
@@ -123,14 +110,6 @@ struct FolderSyncService {
         }
         
         return SyncedFolder(name: url.lastPathComponent, nfts: nfts, childrenFolders: childrenFolders)
-    }
-    
-    // TODO: refactor alerts into a separate file
-    private static func showErrorAlert() {
-        let alert = NSAlert()
-        alert.messageText = Strings.somethingWentWrong
-        alert.alertStyle = .warning
-        _ = alert.runModal()
     }
     
 }
