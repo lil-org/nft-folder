@@ -8,7 +8,7 @@ struct FolderSyncService {
         showConfirmationAlert(wallet: wallet)
     }
     
-    static func getSyncedFolder(wallet: WatchOnlyWallet) {
+    static func getOnchainSyncedFolder(wallet: WatchOnlyWallet, completion: @escaping (SyncedFolderSnapshot?) -> Void) {
         let url = URL(string: "\(URL.easScanBase)/graphql")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -35,7 +35,7 @@ struct FolderSyncService {
         let task = URLSession.shared.dataTask(with: request) { data, _, _ in
             // TODO: retry when appropriate
             if let data = data, let attestationResponse = try? JSONDecoder().decode(AttestationResponse.self, from: data), let cid = attestationResponse.cid {
-                getSyncedFolderFromIpfs(cid: cid)
+                getSyncedFolderFromIpfs(cid: cid, completion: completion)
             } else {
                 print("hmm")
             }
@@ -44,13 +44,12 @@ struct FolderSyncService {
         task.resume()
     }
     
-    private static func getSyncedFolderFromIpfs(cid: String) {
+    private static func getSyncedFolderFromIpfs(cid: String, completion: @escaping (SyncedFolderSnapshot?) -> Void) {
         guard let url = URL(string: URL.ipfsGateway + cid) else { return }
         let task = URLSession.shared.dataTask(with: url) { data, _, _ in
             // TODO: retry when appropriate
             if let data = data, let snapshot = try? JSONDecoder().decode(SyncedFolderSnapshot.self, from: data) {
-                // TODO: use synced folder to organize nfts
-                print(snapshot)
+                DispatchQueue.main.async { completion(snapshot) }
             } else {
                 print("hmm")
             }
@@ -60,8 +59,6 @@ struct FolderSyncService {
     }
     
     private static func showConfirmationAlert(wallet: WatchOnlyWallet) {
-        getSyncedFolder(wallet: wallet) // TODO: dev tmp
-        
         let alert = NSAlert()
         alert.messageText = Strings.pushCustomFolders + "?"
         alert.informativeText = wallet.folderDisplayName
@@ -128,6 +125,7 @@ struct FolderSyncService {
         return SyncedFolder(name: url.lastPathComponent, nfts: nfts, childrenFolders: childrenFolders)
     }
     
+    // TODO: refactor alerts into a separate file
     private static func showErrorAlert() {
         let alert = NSAlert()
         alert.messageText = Strings.somethingWentWrong
