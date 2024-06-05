@@ -49,7 +49,6 @@ struct Token: Codable {
     let content: Media?
     let tokenUrl: String?
     let tokenUrlMimeType: String?
-    let description: String?
     let tokenStandard: String?
 }
 
@@ -131,7 +130,6 @@ extension Token {
                                      collectionName: collectionName,
                                      collectionAddress: collectionAddress,
                                      tokenId: tokenId,
-                                     description: description,
                                      network: network,
                                      tokenStandard: tokenStandard,
                                      contentRepresentations: contentRepresentations)

@@ -8,7 +8,6 @@ struct DetailedTokenMetadata: Codable {
     let collectionName: String?
     let collectionAddress: String
     let tokenId: String
-    let description: String?
     let network: Network
     let tokenStandard: String?
     let contentRepresentations: [ContentRepresentation]

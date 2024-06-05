@@ -64,7 +64,6 @@ struct ZoraRequest {
                             tokenUrl
                             tokenUrlMimeType
                             tokenStandard
-                            description
                             image {
                                 url
                                 mimeType
