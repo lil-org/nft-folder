@@ -2,6 +2,8 @@
 
 import Foundation
 
+let isContentQueryEnabled = false
+
 struct ZoraRequest {
     
     enum Kind {
@@ -74,22 +76,7 @@ struct ZoraRequest {
                                         thumbnail
                                     }
                                 }
-                            }
-                            content {
-                                url
-                                mimeType
-                                size
-                                mediaEncoding {
-                                    ... on VideoEncodingTypes {
-                                        original
-                                        preview
-                                    }
-                                    ... on AudioEncodingTypes {
-                                        large
-                                        original
-                                    }
-                                }
-                            }
+                            }\(contentQuery)
                         }
                     }
                 }
@@ -115,6 +102,29 @@ struct ZoraRequest {
         }
         
         return ["query": queryString]
+    }
+    
+    private static var contentQuery: String {
+        guard isContentQueryEnabled else { return "" }
+        
+        return """
+        
+                        content {
+                            url
+                            mimeType
+                            size
+                            mediaEncoding {
+                                ... on VideoEncodingTypes {
+                                    original
+                                    preview
+                                }
+                                ... on AudioEncodingTypes {
+                                    large
+                                    original
+                                }
+                            }
+                        }
+        """
     }
     
 }
