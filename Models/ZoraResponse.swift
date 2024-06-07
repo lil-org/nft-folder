@@ -36,10 +36,10 @@ struct PageInfo: Codable {
 }
 
 struct Node: Codable {
-    let token: Token
+    let token: ZoraToken
 }
 
-struct Token: Codable {
+struct ZoraToken: Codable {
     let tokenId: String
     let name: String?
     let owner: String?
@@ -97,7 +97,7 @@ struct Media: Codable {
     }
 }
 
-extension Token {
+extension ZoraToken {
     
     func detailedMetadata(network: Network) -> DetailedTokenMetadata {
         let rawContentRepresentations = [

@@ -12,7 +12,7 @@ struct FolderSyncService {
         }
     }
     
-    static func getOnchainSyncedFolder(wallet: WatchOnlyWallet, completion: @escaping (SyncedFolderSnapshot?) -> Void) {
+    static func getOnchainSyncedFolder(wallet: WatchOnlyWallet, completion: @escaping (Snapshot?) -> Void) {
         let url = URL(string: "\(URL.easScanBase)/graphql")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -48,11 +48,11 @@ struct FolderSyncService {
         task.resume()
     }
     
-    private static func getSyncedFolderFromIpfs(cid: String, completion: @escaping (SyncedFolderSnapshot?) -> Void) {
+    private static func getSyncedFolderFromIpfs(cid: String, completion: @escaping (Snapshot?) -> Void) {
         guard let url = URL(string: URL.ipfsGateway + cid) else { return }
         let task = URLSession.shared.dataTask(with: url) { data, _, _ in
             // TODO: retry when appropriate
-            if let data = data, let snapshot = try? JSONDecoder().decode(SyncedFolderSnapshot.self, from: data) {
+            if let data = data, let snapshot = try? JSONDecoder().decode(Snapshot.self, from: data) {
                 DispatchQueue.main.async { completion(snapshot) }
             } else {
                 print("hmm")
@@ -63,7 +63,7 @@ struct FolderSyncService {
     }
     
     private static func uploadFoldersToIpfsAndSaveOnchain(wallet: WatchOnlyWallet) {
-        guard let snapshot = folderSnapshotToSync(wallet: wallet), let fileData = try? JSONEncoder().encode(snapshot) else {
+        guard let snapshot = makeFoldersSnapshot(wallet: wallet), let fileData = try? JSONEncoder().encode(snapshot) else {
             Alerts.showSomethingWentWrong()
             return
         }
@@ -77,39 +77,52 @@ struct FolderSyncService {
         }
     }
     
-    private static func folderSnapshotToSync(wallet: WatchOnlyWallet) -> SyncedFolderSnapshot? {
+    private static func makeFoldersSnapshot(wallet: WatchOnlyWallet) -> Snapshot? {
         // TODO: check if folders were changed
         guard let url = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return nil }
-        let rootFolder = folderToSync(url: url)
+        let folders = foldersToSync(url: url)
         let nonce = 0 // TODO: bump previous when available
-        let snapshot = SyncedFolderSnapshot(formatVersion: SyncedFolderSnapshot.latestFormatVersion,
-                                            uuid: UUID().uuidString,
-                                            nonce: nonce,
-                                            timestamp: Int(Date().timeIntervalSince1970),
-                                            address: wallet.address,
-                                            rootFolder: rootFolder)
+        let snapshot = Snapshot(folders: folders,
+                                folderType: 0,
+                                formatVersion: 0,
+                                address: wallet.address,
+                                uuid: UUID().uuidString,
+                                nonce: nonce,
+                                timestamp: Int(Date().timeIntervalSince1970),
+                                metadata: nil)
         return snapshot
     }
     
-    private static func folderToSync(url: URL) -> SyncedFolder {
+    private static func foldersToSync(url: URL) -> [Folder] {
         let fileManager = FileManager.default
-        
-        var nfts = [NftInSyncedFolder]()
-        var childrenFolders = [SyncedFolder]()
-        
-        if let folderContents = try? fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil, options: .skipsHiddenFiles) {
-            for content in folderContents {
-                if content.hasDirectoryPath {
-                    let childFolder = folderToSync(url: content)
-                    childrenFolders.append(childFolder)
-                } else if let metadata = MetadataStorage.minimalMetadata(filePath: content.path) {
-                    let nft = NftInSyncedFolder(chainId: String(metadata.network.rawValue), tokenId: metadata.tokenId, address: metadata.collectionAddress)
-                    nfts.append(nft)
+        var folders = [Folder]()
+        if let rootContents = try? fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil, options: .skipsHiddenFiles) {
+            for item in rootContents {
+                if item.hasDirectoryPath {
+                    let tokens = tokensInFolder(url: item)
+                    let folder = Folder(name: item.lastPathComponent, tokens: tokens, metadata: nil)
+                    folders.append(folder)
                 }
             }
         }
-        
-        return SyncedFolder(name: url.lastPathComponent, nfts: nfts, childrenFolders: childrenFolders)
+        return folders
+    }
+    
+    private static func tokensInFolder(url: URL) -> [Token] {
+        let fileManager = FileManager.default
+        var tokens = [Token]()
+        if let folderContents = try? fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil, options: .skipsHiddenFiles) {
+            for content in folderContents {
+                if content.hasDirectoryPath {
+                    let deepTokens = tokensInFolder(url: content)
+                    tokens.append(contentsOf: deepTokens)
+                } else if let metadata = MetadataStorage.minimalMetadata(filePath: content.path) {
+                    let token = Token(chainId: String(metadata.network.rawValue), tokenId: metadata.tokenId, address: metadata.collectionAddress)
+                    tokens.append(token)
+                }
+            }
+        }
+        return tokens
     }
     
 }
