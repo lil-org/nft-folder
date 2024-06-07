@@ -26,7 +26,7 @@ extension URL {
     }
     
     static func newAttestation(recipient: String, cid: String, folderType: UInt32, formatVersion: UInt32) -> URL? {
-        let arguments = cid.toPaddedHexString() // TODO: add type and version
+        let arguments = String.paddedHexString(cid: cid, folderType: folderType, formatVersion: formatVersion)
         return URL(string: "\(easScanBase)/attestation/attestWithSchema/\(attestationSchemaId)#template=\(recipient)::0:false:\(arguments)")
     }
     
