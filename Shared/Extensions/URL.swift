@@ -8,9 +8,10 @@ extension URL {
     static let ipfsScheme = "ipfs://"
     static let arScheme = "ar://"
     static let deeplinkScheme = "nft-folder://"
-    static let nftFolderAttestationSchema = "0x39693b21ffe38b11da9ae29437c981de90e56ddb8606ead0c5460ba4a9f93880"
-    static let easScanBase = "https://base.easscan.org"
     static let ipfsGateway = "https://ipfs.decentralized-content.com/ipfs/"
+    
+    static let easScanBase = "https://base.easscan.org"
+    static let attestationSchemaId = "0xb7cc934d4a5b37542520bfc80184538e568529d5fba5b13abe89109a23620cb6"
     
     private enum MetadataKind: String {
         case address, minimal, detailed, hashed
@@ -24,10 +25,9 @@ extension URL {
         }
     }
     
-    static func attestFolder(address: String, cid: String) -> URL? {
-        let inputString = cid.toPaddedHexString()
-        let string = "\(easScanBase)/attestation/attestWithSchema/\(nftFolderAttestationSchema)#template=\(address)::0:false:\(inputString)"
-        return URL(string: string)
+    static func newAttestation(recipient: String, cid: String, folderType: UInt32, formatVersion: UInt32) -> URL? {
+        let arguments = cid.toPaddedHexString() // TODO: add type and version
+        return URL(string: "\(easScanBase)/attestation/attestWithSchema/\(attestationSchemaId)#template=\(recipient)::0:false:\(arguments)")
     }
     
     static func nftDirectory(wallet: WatchOnlyWallet, createIfDoesNotExist: Bool) -> URL? {

@@ -23,7 +23,7 @@ struct FolderSyncService {
                     attestations(
                         take: 1,
                         orderBy: { timeCreated: desc},
-                        where: { schemaId: { equals: "\(URL.nftFolderAttestationSchema)" }, recipient: { equals: "\(wallet.address)" }, attester: { equals: "\(wallet.address)" } }
+                        where: { schemaId: { equals: "\(URL.attestationSchemaId)" }, recipient: { equals: "\(wallet.address)" }, attester: { equals: "\(wallet.address)" } }
                     ) {
                         attester
                         recipient
@@ -69,7 +69,7 @@ struct FolderSyncService {
         }
         
         IpfsUploader.upload(name: wallet.address, mimeType: "application/json", data: fileData) { cid in
-            if let cid = cid, let url = URL.attestFolder(address: wallet.address, cid: cid) {
+            if let cid = cid, let url = URL.newAttestation(recipient: wallet.address, cid: cid, folderType: 0, formatVersion: 0) {
                 NSWorkspace.shared.open(url)
             } else {
                 Alerts.showSomethingWentWrong()
