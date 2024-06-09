@@ -20,10 +20,9 @@ class WalletDownloader {
     
     func study(wallet: WatchOnlyWallet) {
         goThroughZora(wallet: wallet)
-        FolderSyncService.getOnchainSyncedFolder(wallet: wallet) { snapshot in
+        FolderSyncService.getOnchainSyncedFolder(wallet: wallet) { [weak self] snapshot in
             guard let snapshot = snapshot else { return }
-            // TODO: update local folders if snapshot is new
-            print(snapshot.folders)
+            self?.applyFolderSnapshotIfNeeded(snapshot, for: wallet)
         }
     }
     
@@ -76,6 +75,20 @@ class WalletDownloader {
         }
         
         fileDownloader.addTasks(tasks)
+    }
+    
+    private func applyFolderSnapshotIfNeeded(_ snapshot: Snapshot, for wallet: WatchOnlyWallet) {
+        // TODO: check if snapshot is new – i.e. if it was not applied previously
+        
+        FileDownloader.queue.async { [weak self] in
+            self?.organizeAlreadyDownloadedFilesBasedOnSnapshot(snapshot, for: wallet)
+        }
+        
+        // TODO: use snapshot for upcoming downloads if it is not fully applied yet
+    }
+    
+    private func organizeAlreadyDownloadedFilesBasedOnSnapshot(_ snapshot: Snapshot, for wallet: WatchOnlyWallet) {
+        // TODO: reorder existing files
     }
     
     deinit {

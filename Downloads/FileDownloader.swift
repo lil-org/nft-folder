@@ -6,7 +6,7 @@ class FileDownloader: NSObject {
     
     var hasPendingTasks: Bool { FileDownloader.queue.sync { [weak self] in self?.queuedURLsHashes.isEmpty != true } }
     
-    private static let queue = DispatchQueue(label: "\(Bundle.hostBundleId).FileDownloader", qos: .default)
+    static let queue = DispatchQueue(label: "\(Bundle.hostBundleId).FileDownloader", qos: .default)
     
     private enum DownloadFileResult {
         case success, cancel, failure
