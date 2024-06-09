@@ -78,18 +78,9 @@ struct FolderSyncService {
     }
     
     private static func makeFoldersSnapshot(wallet: WatchOnlyWallet) -> Snapshot? {
-        // TODO: check if folders were changed
         guard let url = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return nil }
         let folders = foldersToSync(url: url)
-        let nonce = 0 // TODO: bump previous when available
-        let snapshot = Snapshot(folders: folders,
-                                folderType: 0,
-                                formatVersion: 0,
-                                address: wallet.address,
-                                uuid: UUID().uuidString,
-                                nonce: nonce,
-                                timestamp: Int(Date().timeIntervalSince1970),
-                                metadata: nil)
+        let snapshot = Snapshot(folders: folders, uuid: UUID().uuidString)
         return snapshot
     }
     
@@ -100,7 +91,7 @@ struct FolderSyncService {
             for item in rootContents {
                 if item.hasDirectoryPath {
                     let tokens = tokensInFolder(url: item)
-                    let folder = Folder(name: item.lastPathComponent, tokens: tokens, metadata: nil)
+                    let folder = Folder(name: item.lastPathComponent, tokens: tokens)
                     folders.append(folder)
                 }
             }
@@ -117,7 +108,7 @@ struct FolderSyncService {
                     let deepTokens = tokensInFolder(url: content)
                     tokens.append(contentsOf: deepTokens)
                 } else if let metadata = MetadataStorage.minimalMetadata(filePath: content.path) {
-                    let token = Token(chainId: String(metadata.network.rawValue), tokenId: metadata.tokenId, address: metadata.collectionAddress)
+                    let token = Token(id: metadata.tokenId, address: metadata.collectionAddress, chainId: String(metadata.network.rawValue))
                     tokens.append(token)
                 }
             }
