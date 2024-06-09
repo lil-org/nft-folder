@@ -218,7 +218,7 @@ struct WalletsListView: View {
                 if wallet.collections == nil {
                     Divider()
                     Button(Strings.pushCustomFolders, action: {
-                        FolderSyncService.pushCustomFolders(wallet: wallet)
+                        confirmFoldersPush(wallet: wallet)
                     })
                 }
                 Divider()
@@ -240,6 +240,19 @@ struct WalletsListView: View {
                     hoveringOverAddress = nil
                 }
             }
+    }
+    
+    private func confirmFoldersPush(wallet: WatchOnlyWallet) {
+        Alerts.showConfirmation(message: Strings.pushCustomFolders + "?", text: wallet.folderDisplayName) { confirmed in
+            guard confirmed else { return }
+            FolderSyncService.pushCustomFolders(wallet: wallet) { url in
+                if let url = url {
+                    NSWorkspace.shared.open(url)
+                } else {
+                    Alerts.showSomethingWentWrong()
+                }
+            }
+        }
     }
     
     private func addWallet() {

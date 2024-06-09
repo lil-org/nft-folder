@@ -1,13 +1,21 @@
 // ∅ nft-folder 2024
 
-import Cocoa
+import Foundation
 
 struct FolderSyncService {
     
-    static func pushCustomFolders(wallet: WatchOnlyWallet) {
-        Alerts.showConfirmation(message: Strings.pushCustomFolders + "?", text: wallet.folderDisplayName) { confirmed in
-            if confirmed {
-                uploadFoldersToIpfsAndSaveOnchain(wallet: wallet)
+    static func pushCustomFolders(wallet: WatchOnlyWallet, completion: @escaping (URL?) -> Void) {
+        guard let snapshot = makeFoldersSnapshot(wallet: wallet), let fileData = try? JSONEncoder().encode(snapshot) else {
+            completion(nil)
+            return
+        }
+        
+        IpfsUploader.upload(name: wallet.address, mimeType: "application/json", data: fileData) { cid in
+            if let cid = cid, let url = URL.newAttestation(recipient: wallet.address, cid: cid, folderType: 0, formatVersion: 0) {
+                // TODO: save uploaded cid to skip updates when receiving it later
+                completion(url)
+            } else {
+                completion(nil)
             }
         }
     }
@@ -58,21 +66,6 @@ struct FolderSyncService {
         }
         
         task.resume()
-    }
-    
-    private static func uploadFoldersToIpfsAndSaveOnchain(wallet: WatchOnlyWallet) {
-        guard let snapshot = makeFoldersSnapshot(wallet: wallet), let fileData = try? JSONEncoder().encode(snapshot) else {
-            Alerts.showSomethingWentWrong()
-            return
-        }
-        
-        IpfsUploader.upload(name: wallet.address, mimeType: "application/json", data: fileData) { cid in
-            if let cid = cid, let url = URL.newAttestation(recipient: wallet.address, cid: cid, folderType: 0, formatVersion: 0) {
-                NSWorkspace.shared.open(url)
-            } else {
-                Alerts.showSomethingWentWrong()
-            }
-        }
     }
     
     private static func makeFoldersSnapshot(wallet: WatchOnlyWallet) -> Snapshot? {
