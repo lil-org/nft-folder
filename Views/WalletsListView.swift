@@ -219,9 +219,6 @@ struct WalletsListView: View {
                     Divider()
                     Button(Strings.pushCustomFolders, action: {
                         FolderSyncService.pushCustomFolders(wallet: wallet)
-                        FolderSyncService.getOnchainSyncedFolder(wallet: wallet) { snapshot in
-                            print(snapshot.debugDescription) // TODO: dev tmp
-                        }
                     })
                 }
                 Divider()
