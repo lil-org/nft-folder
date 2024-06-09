@@ -12,7 +12,7 @@ struct Folder: Codable {
     let tokens: [Token]
 }
 
-struct Token: Codable {
+struct Token: Codable, Hashable {
     let id: String
     let address: String
     let chainId: String

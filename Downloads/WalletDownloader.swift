@@ -80,15 +80,33 @@ class WalletDownloader {
     private func applyFolderSnapshotIfNeeded(_ snapshot: Snapshot, for wallet: WatchOnlyWallet) {
         // TODO: check if snapshot is new – i.e. if it was not applied previously
         
-        FileDownloader.queue.async { [weak self] in
-            self?.organizeAlreadyDownloadedFilesBasedOnSnapshot(snapshot, for: wallet)
+        var allTokensToOrganize = [Token: [String]]()
+        
+        for folder in snapshot.folders {
+            for token in folder.tokens {
+                if let otherFolders = allTokensToOrganize[token] {
+                    allTokensToOrganize[token] = otherFolders + [folder.name]
+                } else {
+                    allTokensToOrganize[token] = [folder.name]
+                }
+            }
         }
         
-        // TODO: use snapshot for upcoming downloads if it is not fully applied yet
+        FileDownloader.queue.async { [weak self] in
+            let remaining = self?.organizeAlreadyDownloadedFiles(tokens: allTokensToOrganize, wallet: wallet)
+            // TODO: use remaining for upcoming downloads if there is smth
+        }
     }
     
-    private func organizeAlreadyDownloadedFilesBasedOnSnapshot(_ snapshot: Snapshot, for wallet: WatchOnlyWallet) {
-        // TODO: reorder existing files
+    private func organizeAlreadyDownloadedFiles(tokens: [Token: [String]], wallet: WatchOnlyWallet) -> [Token: [String]] {
+        // TODO: go through each and every token file, even if deep in folders
+        // TODO: check minimal metadata to match nfts to organize
+        // TODO: create move or copy task if needed
+        // TODO: when copy is made — create new minimal metadata file to identify the copied file origin nft
+        // TODO: apply all move and copy tasks
+        // TODO: remove all folders that became empty after token moves
+        // TODO: return not-found tokens still waiting to be downloaded and organized
+        return [:]
     }
     
     deinit {
