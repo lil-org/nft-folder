@@ -20,6 +20,11 @@ class WalletDownloader {
     
     func study(wallet: WatchOnlyWallet) {
         goThroughZora(wallet: wallet)
+        FolderSyncService.getOnchainSyncedFolder(wallet: wallet) { snapshot in
+            guard let snapshot = snapshot else { return }
+            // TODO: update local folders if snapshot is new
+            print(snapshot.folders)
+        }
     }
     
     private func goThroughZora(wallet: WatchOnlyWallet) {
