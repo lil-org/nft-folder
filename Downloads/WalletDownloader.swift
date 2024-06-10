@@ -99,14 +99,30 @@ class WalletDownloader {
     }
     
     private func organizeAlreadyDownloadedFiles(tokens: [Token: [String]], wallet: WatchOnlyWallet) -> [Token: [String]] {
-        // TODO: go through each and every token file, even if deep in folders
-        // TODO: check minimal metadata to match nfts to organize
-        // TODO: create move or copy task if needed
-        // TODO: when copy is made — create new minimal metadata file to identify the copied file origin nft
-        // TODO: apply all move and copy tasks
-        // TODO: remove all folders that became empty after token moves
-        // TODO: return not-found tokens still waiting to be downloaded and organized
-        return [:]
+        var wipTokens = tokens
+        guard let url = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return [:] }
+        
+        let fileManager = FileManager.default
+        
+        func goThroughFolder(url: URL) {
+            guard let folderContents = try? fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil, options: .skipsHiddenFiles) else { return }
+            for content in folderContents {
+                if content.hasDirectoryPath {
+                    goThroughFolder(url: content)
+                } else if let metadata = MetadataStorage.minimalMetadata(filePath: content.path) {
+                    let token = Token(id: metadata.tokenId, address: metadata.collectionAddress, chainId: String(metadata.network.rawValue))
+                    if let folders = wipTokens[token] {
+                        // TODO: move or copy
+                        // TODO: when copy is made — create new minimal metadata file to identify the copied file origin nft
+                        wipTokens.removeValue(forKey: token)
+                        print("did find token for \(folders)")
+                    }
+                }
+            }
+        }
+        
+        goThroughFolder(url: url)
+        return wipTokens
     }
     
     deinit {
