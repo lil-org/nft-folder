@@ -100,7 +100,7 @@ class WalletDownloader {
     
     private func organizeAlreadyDownloadedFiles(tokens: [Token: [String]], wallet: WatchOnlyWallet) -> [Token: [String]] {
         var wipTokens = tokens
-        guard let url = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return [:] }
+        guard let baseURL = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return [:] }
         
         let fileManager = FileManager.default
         
@@ -111,17 +111,31 @@ class WalletDownloader {
                     goThroughFolder(url: content)
                 } else if let metadata = MetadataStorage.minimalMetadata(filePath: content.path) {
                     let token = Token(id: metadata.tokenId, address: metadata.collectionAddress, chainId: String(metadata.network.rawValue))
-                    if let folders = wipTokens[token] {
-                        // TODO: move or copy
+                    if let folders = wipTokens[token], !folders.isEmpty {
+                        let moveToFolderName = folders[0]
+                        // TODO: copy or create alias when there are several folders
                         // TODO: when copy is made — create new minimal metadata file to identify the copied file origin nft
+                        
+                        let destinationFolderURL = baseURL.appendingPathComponent(moveToFolderName)
+                        if !fileManager.fileExists(atPath: destinationFolderURL.path) {
+                            try? fileManager.createDirectory(at: destinationFolderURL, withIntermediateDirectories: false, attributes: nil)
+                        }
+                        
+                        let destinationTokenURL = destinationFolderURL.appending(component: content.lastPathComponent)
+                        if content != destinationTokenURL {
+                            try? fileManager.moveItem(at: content, to: destinationTokenURL)
+                        }
+                        
                         wipTokens.removeValue(forKey: token)
-                        print("did find token for \(folders)")
+                        if wipTokens.isEmpty {
+                            return
+                        }
                     }
                 }
             }
         }
         
-        goThroughFolder(url: url)
+        goThroughFolder(url: baseURL)
         return wipTokens
     }
     
