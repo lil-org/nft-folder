@@ -46,6 +46,7 @@ struct FolderSyncService {
         request.httpBody = data
         let task = URLSession.shared.dataTask(with: request) { data, _, _ in
             if let data = data, let attestationResponse = try? JSONDecoder().decode(AttestationResponse.self, from: data), let cid = attestationResponse.cid {
+                // TODO: do not make that request for known cid
                 getSyncedFolderFromIpfs(cid: cid, completion: completion)
             } else {
                 completion(nil)
