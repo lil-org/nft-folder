@@ -12,6 +12,30 @@ struct Defaults {
         }
     }
     
+    static func cleanupForWallet(_ wallet: WatchOnlyWallet) {
+        for isAttested in [true, false] {
+            userDefaults.removeObject(forKey: folderCidKey(wallet: wallet, isCidAttested: isAttested))
+        }
+    }
+    
+    static func setKnownFolderCid(_ cid: String, isCidAttested: Bool, for wallet: WatchOnlyWallet) {
+        userDefaults.setValue(cid, forKey: folderCidKey(wallet: wallet, isCidAttested: isCidAttested))
+    }
+    
+    static func isKnownCid(_ cid: String, wallet: WatchOnlyWallet) -> Bool {
+        if userDefaults.string(forKey: folderCidKey(wallet: wallet, isCidAttested: true)) == cid {
+            return true
+        } else if userDefaults.string(forKey: folderCidKey(wallet: wallet, isCidAttested: false)) == cid {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    private static func folderCidKey(wallet: WatchOnlyWallet, isCidAttested: Bool) -> String {
+        return "folder-cid-\(wallet.address)\(isCidAttested ? "" : "-pending")"
+    }
+    
     static var cleanupVersion: Int {
         get {
             userDefaults.integer(forKey: "cleanupVersion")

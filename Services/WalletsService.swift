@@ -43,6 +43,7 @@ struct WalletsService {
     
     func removeWallet(_ wallet: WatchOnlyWallet) {
         SharedDefaults.removeWallet(wallet)
+        Defaults.cleanupForWallet(wallet)
     }
     
     func removeWallet(address: String) {
