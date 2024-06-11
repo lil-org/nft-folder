@@ -8,6 +8,10 @@ struct DownloadFileTask {
     let fileName: String
     let detailedMetadata: DetailedTokenMetadata
     
+    var hasCustomFolderName: Bool {
+        return customFolderName != nil
+    }
+    
     var fileDestinationDirectory: URL {
         if let customFolderName = customFolderName {
             return walletRootDirectory.appending(path: customFolderName)

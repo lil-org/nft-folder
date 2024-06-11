@@ -86,6 +86,10 @@ struct FileSaver {
             }
         }
         
+        if task.hasCustomFolderName, !fileManager.fileExists(atPath: task.fileDestinationDirectory.path) {
+            try? fileManager.createDirectory(at: task.fileDestinationDirectory, withIntermediateDirectories: false, attributes: nil)
+        }
+        
         var finalDestinationURL = destinationFileURL
         do {
             if let tmpLocation = tmpLocation {
