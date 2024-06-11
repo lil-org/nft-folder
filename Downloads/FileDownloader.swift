@@ -29,19 +29,28 @@ class FileDownloader: NSObject {
     private var isCanceled = false
     
     private var foldersForTokens: [Token: [String]]?
+    private var wallet: WatchOnlyWallet?
     
     init(completion: @escaping () -> Void) {
         self.completion = completion
         super.init()
     }
     
-    func useFoldersForTokens(_ foldersForTokens: [Token: [String]]) {
+    func useFoldersForTokens(_ foldersForTokens: [Token: [String]], wallet: WatchOnlyWallet) {
         self.foldersForTokens = foldersForTokens
+        self.wallet = wallet
     }
     
     func invalidateAndCancel() {
         isCanceled = true
         urlSession?.invalidateAndCancel()
+        if let foldersForTokens = foldersForTokens, let wallet = wallet,
+           let fileURL = URL.foldersForUpcomingTokens(wallet: wallet),
+           FileManager.default.fileExists(atPath: fileURL.path) {
+            let model = RemainingFoldersForTokens(dict: foldersForTokens)
+            let data = try? JSONEncoder().encode(model)
+            try? data?.write(to: fileURL, options: .atomic)
+        }
     }
     
     func addTasks(_ tasks: [DownloadFileTask]) {
@@ -110,6 +119,8 @@ class FileDownloader: NSObject {
     
     private func save(_ task: DownloadFileTask, tmpLocation: URL?, data: Data?, fileExtension: String) {
         // TODO: use foldersForTokens to specify folder path when needed
+        // TODO: remove value from dict after saving a file for token
+        
         if let redirectURL = FileSaver.shared.saveForTask(task, tmpLocation: tmpLocation, data: data, fileExtension: fileExtension) {
             var updatedTask = task
             if updatedTask.setRedirectURL(redirectURL) {

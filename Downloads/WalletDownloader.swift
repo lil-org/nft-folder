@@ -97,7 +97,7 @@ class WalletDownloader {
                 }
                 
                 if !remaining.isEmpty {
-                    self?.fileDownloader.useFoldersForTokens(remaining)
+                    self?.fileDownloader.useFoldersForTokens(remaining, wallet: wallet)
                     if let fileURL = URL.foldersForUpcomingTokens(wallet: wallet) {
                         let model = RemainingFoldersForTokens(dict: remaining)
                         let data = try? JSONEncoder().encode(model)
