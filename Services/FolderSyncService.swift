@@ -56,13 +56,19 @@ struct FolderSyncService {
         task.resume()
     }
     
-    private static func getSyncedFolderFromIpfs(cid: String, completion: @escaping (Snapshot?) -> Void) {
+    private static func getSyncedFolderFromIpfs(cid: String, retryCount: Int = 0, completion: @escaping (Snapshot?) -> Void) {
         guard let url = URL(string: URL.ipfsGateway + cid) else { return }
         let task = URLSession.shared.dataTask(with: url) { data, _, _ in
             if let data = data, let snapshot = try? JSONDecoder().decode(Snapshot.self, from: data) {
                 completion(snapshot)
             } else {
-                completion(nil)
+                if retryCount < 3 {
+                    FileDownloader.queue.asyncAfter(deadline: .now() + .seconds(retryCount + 1)) {
+                        getSyncedFolderFromIpfs(cid: cid, retryCount: retryCount + 1, completion: completion)
+                    }
+                } else {
+                    completion(nil)
+                }
             }
         }
         
