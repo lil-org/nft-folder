@@ -43,6 +43,11 @@ extension URL {
         return addressDirectoryURL
     }
     
+    static func foldersForUpcomingTokens(wallet: WatchOnlyWallet) -> URL? {
+        guard let url = nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return nil }
+        return metadataDirectory(walletFolderURL: url, metadataKind: .address)?.appendingPathComponent("folders-for-tokens")
+    }
+    
     static func avatarOnDisk(wallet: WatchOnlyWallet) -> URL? {
         guard let url = nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return nil }
         return metadataDirectory(walletFolderURL: url, metadataKind: .address)?.appendingPathComponent("avatar")

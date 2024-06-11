@@ -18,3 +18,7 @@ struct Token: Codable, Hashable {
     let address: String
     let chainId: String
 }
+
+struct RemainingFoldersForTokens: Codable {
+    let dict: [Token: [String]]
+}

@@ -97,8 +97,12 @@ class WalletDownloader {
                 }
                 
                 if !remaining.isEmpty {
-                    // TODO: save these tokens on disk — they won't be requested and received again
                     self?.fileDownloader.useFoldersForTokens(remaining)
+                    if let fileURL = URL.foldersForUpcomingTokens(wallet: wallet) {
+                        let model = RemainingFoldersForTokens(dict: remaining)
+                        let data = try? JSONEncoder().encode(model)
+                        try? data?.write(to: fileURL, options: .atomic)
+                    }
                 }
             }
         }
