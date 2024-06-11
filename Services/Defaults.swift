@@ -18,7 +18,7 @@ struct Defaults {
         }
     }
     
-    static func setKnownFolderCid(_ cid: String, isCidAttested: Bool, for wallet: WatchOnlyWallet) {
+    static func addKnownFolderCid(_ cid: String, isCidAttested: Bool, for wallet: WatchOnlyWallet) {
         userDefaults.setValue(cid, forKey: folderCidKey(wallet: wallet, isCidAttested: isCidAttested))
     }
     

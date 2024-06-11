@@ -12,7 +12,7 @@ struct FolderSyncService {
         
         IpfsUploader.upload(name: wallet.address, mimeType: "application/json", data: fileData) { cid in
             if let cid = cid, let url = URL.newAttestation(recipient: wallet.address, cid: cid, folderType: 0, formatVersion: 0) {
-                // TODO: save uploaded cid to skip updates when receiving it later
+                Defaults.addKnownFolderCid(cid, isCidAttested: false, for: wallet)
                 completion(url)
             } else {
                 completion(nil)
@@ -46,8 +46,9 @@ struct FolderSyncService {
         request.httpBody = data
         let task = URLSession.shared.dataTask(with: request) { data, _, _ in
             if let data = data, let attestationResponse = try? JSONDecoder().decode(AttestationResponse.self, from: data), let cid = attestationResponse.cid {
-                // TODO: do not make that request for known cid
-                getSyncedFolderFromIpfs(cid: cid, completion: completion)
+                if !Defaults.isKnownCid(cid, wallet: wallet) {
+                    getSyncedFolderFromIpfs(cid: cid, completion: completion)
+                }
             } else {
                 completion(nil)
             }
@@ -59,7 +60,8 @@ struct FolderSyncService {
     private static func getSyncedFolderFromIpfs(cid: String, retryCount: Int = 0, completion: @escaping (Snapshot?) -> Void) {
         guard let url = URL(string: URL.ipfsGateway + cid) else { return }
         let task = URLSession.shared.dataTask(with: url) { data, _, _ in
-            if let data = data, let snapshot = try? JSONDecoder().decode(Snapshot.self, from: data) {
+            if let data = data, var snapshot = try? JSONDecoder().decode(Snapshot.self, from: data) {
+                snapshot.cid = cid
                 completion(snapshot)
             } else {
                 if retryCount < 3 {

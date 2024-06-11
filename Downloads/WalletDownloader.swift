@@ -78,8 +78,6 @@ class WalletDownloader {
     }
     
     private func applyFolderSnapshotIfNeeded(_ snapshot: Snapshot, for wallet: WatchOnlyWallet) {
-        // TODO: check if snapshot is new – i.e. if it was not applied previously
-        
         var allTokensToOrganize = [Token: [String]]()
         
         for folder in snapshot.folders {
@@ -93,9 +91,15 @@ class WalletDownloader {
         }
         
         FileDownloader.queue.async { [weak self] in
-            if let remaining = self?.organizeAlreadyDownloadedFiles(tokens: allTokensToOrganize, wallet: wallet), !remaining.isEmpty {
-                // TODO: save it to the disk here?
-                self?.fileDownloader.useFoldersForTokens(remaining)
+            if let remaining = self?.organizeAlreadyDownloadedFiles(tokens: allTokensToOrganize, wallet: wallet) {
+                if let cid = snapshot.cid {
+                    Defaults.addKnownFolderCid(cid, isCidAttested: true, for: wallet)
+                }
+                
+                if !remaining.isEmpty {
+                    // TODO: save these tokens on disk — they won't be requested and received again
+                    self?.fileDownloader.useFoldersForTokens(remaining)
+                }
             }
         }
     }

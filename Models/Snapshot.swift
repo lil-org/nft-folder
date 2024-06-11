@@ -5,6 +5,7 @@ import Foundation
 struct Snapshot: Codable {
     let folders: [Folder]
     let uuid: String
+    var cid: String?
 }
 
 struct Folder: Codable {
