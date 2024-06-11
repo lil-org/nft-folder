@@ -24,6 +24,13 @@ class WalletDownloader {
             guard let snapshot = snapshot else { return }
             self?.applyFolderSnapshotIfNeeded(snapshot, for: wallet)
         }
+        
+        if let foldersFileURL = URL.foldersForUpcomingTokens(wallet: wallet),
+           FileManager.default.fileExists(atPath: foldersFileURL.path),
+           let data = try? Data(contentsOf: foldersFileURL),
+           let model = try? JSONDecoder().decode(RemainingFoldersForTokens.self, from: data) {
+            fileDownloader.useFoldersForTokens(model.dict, wallet: wallet)
+        }
     }
     
     private func goThroughZora(wallet: WatchOnlyWallet) {
