@@ -87,7 +87,7 @@ class WalletDownloader {
     private func applyFolderSnapshotIfNeeded(_ snapshot: Snapshot, for wallet: WatchOnlyWallet) {
         var allTokensToOrganize = [Token: [String]]()
         
-        for folder in snapshot.folders {
+        for folder in snapshot.folders where !folder.name.isEmpty {
             for token in folder.tokens {
                 if let otherFolders = allTokensToOrganize[token] {
                     allTokensToOrganize[token] = otherFolders + [folder.name]
