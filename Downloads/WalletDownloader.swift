@@ -98,6 +98,9 @@ class WalletDownloader {
         }
         
         FileDownloader.queue.async { [weak self] in
+            guard let foldersForUpcomingTokensFileURL = URL.foldersForUpcomingTokens(wallet: wallet) else { return }
+            try? FileManager.default.removeItem(at: foldersForUpcomingTokensFileURL)
+            
             if let remaining = self?.organizeAlreadyDownloadedFiles(tokens: allTokensToOrganize, wallet: wallet) {
                 if let cid = snapshot.cid {
                     Defaults.addKnownFolderCid(cid, isCidAttested: true, for: wallet)
@@ -105,11 +108,9 @@ class WalletDownloader {
                 
                 if !remaining.isEmpty {
                     self?.fileDownloader.useFoldersForTokens(remaining, wallet: wallet)
-                    if let fileURL = URL.foldersForUpcomingTokens(wallet: wallet) {
-                        let model = RemainingFoldersForTokens(dict: remaining)
-                        let data = try? JSONEncoder().encode(model)
-                        try? data?.write(to: fileURL, options: .atomic)
-                    }
+                    let model = RemainingFoldersForTokens(dict: remaining)
+                    let data = try? JSONEncoder().encode(model)
+                    try? data?.write(to: foldersForUpcomingTokensFileURL, options: .atomic)
                 }
             }
         }
