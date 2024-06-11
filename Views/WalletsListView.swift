@@ -111,6 +111,7 @@ struct WalletsListView: View {
         if let nftDirectory = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) {
             let fileManager = FileManager.default
             try? fileManager.removeItem(at: nftDirectory)
+            Defaults.cleanupForWallet(wallet)
             if let _ = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: true) {
                 FolderIcon.set(for: wallet)
                 AllDownloadsManager.shared.startDownloads(wallet: wallet)

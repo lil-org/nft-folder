@@ -78,7 +78,7 @@ class WalletDownloader {
             let token = node.token
             let minimal = MinimalTokenMetadata(tokenId: token.tokenId, collectionAddress: token.collectionAddress, network: network)
             let detailed = token.detailedMetadata(network: network)
-            return DownloadFileTask(destinationDirectory: destination, minimalMetadata: minimal, detailedMetadata: detailed)
+            return DownloadFileTask(walletRootDirectory: destination, minimalMetadata: minimal, detailedMetadata: detailed)
         }
         
         fileDownloader.addTasks(tasks)

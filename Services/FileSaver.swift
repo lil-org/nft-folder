@@ -10,16 +10,10 @@ struct FileSaver {
     private let fileManager = FileManager.default
     
     func saveForTask(_ task: DownloadFileTask, tmpLocation: URL?, data: Data?, fileExtension: String) -> URL? {
-        return save(name: task.fileName,
-                    tmpLocation: tmpLocation,
-                    data: data,
-                    fileExtension: fileExtension,
-                    destinationURL: task.destinationDirectory,
-                    downloadedFromURL: task.currentURL,
-                    detailedMetadata: task.detailedMetadata)
+        return save(name: task.fileName, tmpLocation: tmpLocation, data: data, fileExtension: fileExtension, task: task)
     }
     
-    private func save(name: String, tmpLocation: URL?, data: Data?, fileExtension: String, destinationURL: URL, downloadedFromURL: URL?, detailedMetadata: DetailedTokenMetadata) -> URL? {
+    private func save(name: String, tmpLocation: URL?, data: Data?, fileExtension: String, task: DownloadFileTask) -> URL? {
         if fileExtension.lowercased() == "json" || fileExtension.lowercased() == "txt" {
             let mbJsonData: Data?
             if let tmpLocation = tmpLocation, let tmpData = try? Data(contentsOf: tmpLocation) {
@@ -36,7 +30,7 @@ struct FileSaver {
                 
                 switch dataOrURL {
                 case .data(let data, let fileExtension):
-                    return save(name: name, tmpLocation: nil, data: data, fileExtension: fileExtension, destinationURL: destinationURL, downloadedFromURL: downloadedFromURL, detailedMetadata: detailedMetadata)
+                    return save(name: name, tmpLocation: nil, data: data, fileExtension: fileExtension, task: task)
                 case .url(let url):
                     return url
                 }
@@ -45,19 +39,14 @@ struct FileSaver {
         let pathExtension = "." + fileExtension
         var finalName = name.hasSuffix(pathExtension) ? name : (name.trimmingCharacters(in: .whitespacesAndNewlines) + pathExtension)
         finalName = finalName.replacingOccurrences(of: "/", with: "-")
-        let destinationFileURL = destinationURL.appendingPathComponent(finalName)
-        saveAvoidingCollisions(tmpLocation: tmpLocation,
-                               data: data, destinationURL:
-                                destinationFileURL,
-                               addressDirectoryURL: destinationURL,
-                               metadata: detailedMetadata,
-                               downloadedFromURL: downloadedFromURL)
+        let destinationFileURL = task.fileDestinationDirectory.appendingPathComponent(finalName)
+        saveAvoidingCollisions(tmpLocation: tmpLocation, data: data, destinationFileURL: destinationFileURL, task: task)
         return nil
     }
     
-    private func saveAvoidingCollisions(tmpLocation: URL?, data: Data?, destinationURL: URL, addressDirectoryURL: URL, metadata: DetailedTokenMetadata, downloadedFromURL: URL?) {
-        guard let contentHash = downloadedFromURL?.fnv1aHash() ?? data?.fnv1aHash(),
-              !MetadataStorage.has(contentHash: contentHash, addressDirectoryURL: addressDirectoryURL) else {
+    private func saveAvoidingCollisions(tmpLocation: URL?, data: Data?, destinationFileURL: URL, task: DownloadFileTask) {
+        guard let contentHash = task.currentURL?.fnv1aHash() ?? data?.fnv1aHash(),
+              !MetadataStorage.has(contentHash: contentHash, addressDirectoryURL: task.walletRootDirectory) else {
             if let tmpLocation = tmpLocation {
                 try? FileManager.default.removeItem(at: tmpLocation)
             }
@@ -67,7 +56,7 @@ struct FileSaver {
         func uniqueURL(for url: URL, tmpLocation: URL?, data: Data?) -> URL {
             let fileName = url.deletingPathExtension().lastPathComponent
             let fileExtension = url.pathExtension
-            let newName = fileName.contains(metadata.tokenId) ? fileName : "\(fileName) #\(metadata.tokenId)"
+            let newName = fileName.contains(task.detailedMetadata.tokenId) ? fileName : "\(fileName) #\(task.detailedMetadata.tokenId)"
             var newURL = url.deletingLastPathComponent().appendingPathComponent(newName).appendingPathExtension(fileExtension)
             var count = 1
             while fileManager.fileExists(atPath: newURL.path) && areFilesDifferent(url1: newURL, url2: tmpLocation, data: data) {
@@ -97,16 +86,16 @@ struct FileSaver {
             }
         }
         
-        var finalDestinationURL = destinationURL
+        var finalDestinationURL = destinationFileURL
         do {
             if let tmpLocation = tmpLocation {
-                if fileManager.fileExists(atPath: destinationURL.path), areFilesDifferent(url1: destinationURL, url2: tmpLocation, data: nil) {
-                    finalDestinationURL = uniqueURL(for: destinationURL, tmpLocation: tmpLocation, data: nil)
+                if fileManager.fileExists(atPath: destinationFileURL.path), areFilesDifferent(url1: destinationFileURL, url2: tmpLocation, data: nil) {
+                    finalDestinationURL = uniqueURL(for: destinationFileURL, tmpLocation: tmpLocation, data: nil)
                 }
                 try fileManager.moveItem(at: tmpLocation, to: finalDestinationURL)
             } else if let data = data {
-                if fileManager.fileExists(atPath: destinationURL.path) && areFilesDifferent(url1: destinationURL, url2: nil, data: data) {
-                    finalDestinationURL = uniqueURL(for: destinationURL, tmpLocation: nil, data: data)
+                if fileManager.fileExists(atPath: destinationFileURL.path) && areFilesDifferent(url1: destinationFileURL, url2: nil, data: data) {
+                    finalDestinationURL = uniqueURL(for: destinationFileURL, tmpLocation: nil, data: data)
                 }
                 try data.write(to: finalDestinationURL)
             } else {
@@ -114,10 +103,10 @@ struct FileSaver {
             }
         } catch { }
         
-        let minimalMetadata = metadata.minimalMetadata(dowloadedFileSourceURL: downloadedFromURL)
+        let minimalMetadata = task.detailedMetadata.minimalMetadata(dowloadedFileSourceURL: task.currentURL)
         MetadataStorage.store(minimalMetadata: minimalMetadata, filePath: finalDestinationURL.path)
-        MetadataStorage.store(detailedMetadata: metadata, correspondingTo: minimalMetadata, addressDirectoryURL: addressDirectoryURL)
-        MetadataStorage.store(contentHash: contentHash, addressDirectoryURL: addressDirectoryURL)
+        MetadataStorage.store(detailedMetadata: task.detailedMetadata, correspondingTo: minimalMetadata, addressDirectoryURL: task.walletRootDirectory)
+        MetadataStorage.store(contentHash: contentHash, addressDirectoryURL: task.walletRootDirectory)
     }
     
     private func extractValueFromJson(jsonData: Data) -> DataOrUrl? {

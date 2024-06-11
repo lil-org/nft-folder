@@ -65,14 +65,14 @@ class FileDownloader: NSObject {
     private func preprocess(task: DownloadFileTask) {
         switch task.currentDataOrURL {
         case .data(let data, let fileExtension):
-            if !MetadataStorage.hasSomethingFor(detailedMetadata: task.detailedMetadata, addressDirectoryURL: task.destinationDirectory) {
+            if !MetadataStorage.hasSomethingFor(detailedMetadata: task.detailedMetadata, addressDirectoryURL: task.walletRootDirectory) {
                 save(task, tmpLocation: nil, data: data, fileExtension: fileExtension)
             }
         case .url(let url):
             if let contentHash = url.fnv1aHash(),
                !queuedURLsHashes.contains(contentHash),
-               !MetadataStorage.has(contentHash: contentHash, addressDirectoryURL: task.destinationDirectory),
-               !MetadataStorage.hasSomethingFor(detailedMetadata: task.detailedMetadata, addressDirectoryURL: task.destinationDirectory) {
+               !MetadataStorage.has(contentHash: contentHash, addressDirectoryURL: task.walletRootDirectory),
+               !MetadataStorage.hasSomethingFor(detailedMetadata: task.detailedMetadata, addressDirectoryURL: task.walletRootDirectory) {
                 queuedURLsHashes.insert(contentHash)
                 downloadTasks.append(task)
             }
@@ -118,14 +118,27 @@ class FileDownloader: NSObject {
     }
     
     private func save(_ task: DownloadFileTask, tmpLocation: URL?, data: Data?, fileExtension: String) {
-        // TODO: use foldersForTokens to specify folder path when needed
-        // TODO: remove value from dict after saving a file for token
+        var tokenToRemove: Token?
+        var task = task
+        
+        if foldersForTokens != nil {
+            let token = Token(id: task.detailedMetadata.tokenId,
+                              address: task.detailedMetadata.collectionAddress,
+                              chainId: String(task.detailedMetadata.network.rawValue))
+            // TODO: make it work when the same tokens goes to several folders
+            if let extraFolderName = foldersForTokens?[token]?.first {
+                tokenToRemove = token
+                task.setCustomFolder(name: extraFolderName)
+            }
+        }
         
         if let redirectURL = FileSaver.shared.saveForTask(task, tmpLocation: tmpLocation, data: data, fileExtension: fileExtension) {
             var updatedTask = task
             if updatedTask.setRedirectURL(redirectURL) {
                 addTasks([updatedTask])
             }
+        } else if let tokenToRemove = tokenToRemove {
+            foldersForTokens?.removeValue(forKey: tokenToRemove)
         }
     }
     
@@ -147,7 +160,7 @@ extension FileDownloader: URLSessionDownloadDelegate {
             return
         }
         
-        guard FileManager.default.fileExists(atPath: task.destinationDirectory.path) else {
+        guard FileManager.default.fileExists(atPath: task.walletRootDirectory.path) else {
             completion(.cancel)
             return
         }

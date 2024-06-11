@@ -4,13 +4,26 @@ import Foundation
 
 struct DownloadFileTask {
     
-    let destinationDirectory: URL
+    let walletRootDirectory: URL
     let fileName: String
     let detailedMetadata: DetailedTokenMetadata
+    
+    var fileDestinationDirectory: URL {
+        if let customFolderName = customFolderName {
+            return walletRootDirectory.appending(path: customFolderName)
+        } else {
+            return walletRootDirectory
+        }
+    }
     
     private let dataOrURLs: [DataOrUrl]
     private var sourceIndex = 0
     private var redirectURL: URL?
+    private var customFolderName: String?
+    
+    mutating func setCustomFolder(name: String) {
+        self.customFolderName = name
+    }
     
     mutating func setRedirectURL(_ url: URL) -> Bool {
         if redirectURL == nil {
@@ -47,8 +60,8 @@ struct DownloadFileTask {
         }
     }
     
-    init(destinationDirectory: URL, minimalMetadata: MinimalTokenMetadata, detailedMetadata: DetailedTokenMetadata) {
-        self.destinationDirectory = destinationDirectory
+    init(walletRootDirectory: URL, minimalMetadata: MinimalTokenMetadata, detailedMetadata: DetailedTokenMetadata) {
+        self.walletRootDirectory = walletRootDirectory
         self.detailedMetadata = detailedMetadata
         self.fileName = detailedMetadata.fileDisplayName
         self.dataOrURLs = detailedMetadata.contentRepresentations.compactMap { content -> (DataOrUrl?) in
