@@ -93,8 +93,10 @@ class WalletDownloader {
         }
         
         FileDownloader.queue.async { [weak self] in
-            let remaining = self?.organizeAlreadyDownloadedFiles(tokens: allTokensToOrganize, wallet: wallet)
-            // TODO: use remaining for upcoming downloads if there is smth
+            if let remaining = self?.organizeAlreadyDownloadedFiles(tokens: allTokensToOrganize, wallet: wallet), !remaining.isEmpty {
+                // TODO: save it to the disk here?
+                self?.fileDownloader.useFoldersForTokens(remaining)
+            }
         }
     }
     

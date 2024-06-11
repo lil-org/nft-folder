@@ -28,9 +28,15 @@ class FileDownloader: NSObject {
     private var completion: () -> Void
     private var isCanceled = false
     
+    private var foldersForTokens: [Token: [String]]?
+    
     init(completion: @escaping () -> Void) {
         self.completion = completion
         super.init()
+    }
+    
+    func useFoldersForTokens(_ foldersForTokens: [Token: [String]]) {
+        self.foldersForTokens = foldersForTokens
     }
     
     func invalidateAndCancel() {
@@ -103,6 +109,7 @@ class FileDownloader: NSObject {
     }
     
     private func save(_ task: DownloadFileTask, tmpLocation: URL?, data: Data?, fileExtension: String) {
+        // TODO: use foldersForTokens to specify folder path when needed
         if let redirectURL = FileSaver.shared.saveForTask(task, tmpLocation: tmpLocation, data: data, fileExtension: fileExtension) {
             var updatedTask = task
             if updatedTask.setRedirectURL(redirectURL) {
