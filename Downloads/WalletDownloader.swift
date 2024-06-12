@@ -20,6 +20,10 @@ class WalletDownloader {
     
     func study(wallet: WatchOnlyWallet) {
         goThroughZora(wallet: wallet)
+        getFolders(wallet: wallet)
+    }
+    
+    private func getFolders(wallet: WatchOnlyWallet) {
         FolderSyncService.getOnchainSyncedFolder(wallet: wallet) { [weak self] snapshot in
             guard let snapshot = snapshot else { return }
             self?.applyFolderSnapshotIfNeeded(snapshot, for: wallet)
@@ -130,20 +134,23 @@ class WalletDownloader {
                 } else if let metadata = MetadataStorage.minimalMetadata(filePath: content.path) {
                     let token = Token(id: metadata.tokenId, address: metadata.collectionAddress, chainId: String(metadata.network.rawValue))
                     if let folders = wipTokens[token], !folders.isEmpty {
-                        let moveToFolderName = folders[0]
-                        // TODO: copy or create alias when there are several folders
-                        // TODO: when copy is made — create new minimal metadata file to identify the copied file origin nft
-                        
-                        let destinationFolderURL = baseURL.appendingPathComponent(moveToFolderName)
-                        if !fileManager.fileExists(atPath: destinationFolderURL.path) {
-                            try? fileManager.createDirectory(at: destinationFolderURL, withIntermediateDirectories: false, attributes: nil)
+                        for (index, folder) in folders.enumerated() {
+                            let shouldCopyInsteadOfMoving = index < folders.count - 1
+                            let destinationFolderURL = baseURL.appendingPathComponent(folder)
+                            if !fileManager.fileExists(atPath: destinationFolderURL.path) {
+                                try? fileManager.createDirectory(at: destinationFolderURL, withIntermediateDirectories: false, attributes: nil)
+                            }
+                            
+                            let destinationTokenURL = destinationFolderURL.appending(component: content.lastPathComponent)
+                            if content != destinationTokenURL {
+                                if shouldCopyInsteadOfMoving {
+                                    try? fileManager.copyItem(at: content, to: destinationTokenURL)
+                                    MetadataStorage.store(minimalMetadata: metadata, filePath: destinationTokenURL.path)
+                                } else {
+                                    try? fileManager.moveItem(at: content, to: destinationTokenURL)
+                                }
+                            }
                         }
-                        
-                        let destinationTokenURL = destinationFolderURL.appending(component: content.lastPathComponent)
-                        if content != destinationTokenURL {
-                            try? fileManager.moveItem(at: content, to: destinationTokenURL)
-                        }
-                        
                         wipTokens.removeValue(forKey: token)
                         if wipTokens.isEmpty {
                             return
