@@ -12,6 +12,7 @@ enum MetadataKind: String {
 }
 
 enum Language: String, CaseIterable {
+    
     case english = "en"
     case arabic = "ar"
     case catalan = "ca"
@@ -46,6 +47,32 @@ enum Language: String, CaseIterable {
     case turkish = "tr"
     case ukrainian = "uk"
     case vietnamese = "vi"
+    
+    var appLocalizationKey: String {
+        return rawValue
+    }
+    
+    var metadataLocalizationKey: String {
+        switch self {
+        case .arabic:
+            return "ar-SA"
+        case .english:
+            return "en-US"
+        case .dutch:
+            return "nl-NL"
+        case .french:
+            return "fr-FR"
+        case .german:
+            return "de-DE"
+        case .spanish:
+            return "es-ES"
+        case .spanishLatinAmerica:
+            return "es-MX"
+        default:
+            return rawValue
+        }
+    }
+    
 }
 
 translateAppStoreMetadata()
