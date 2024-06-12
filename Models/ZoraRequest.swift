@@ -2,8 +2,6 @@
 
 import Foundation
 
-let isContentQueryEnabled = false
-
 struct ZoraRequest {
     
     enum Kind {
@@ -23,7 +21,9 @@ struct ZoraRequest {
         }
     }
     
-    static func query(kind: Kind, sort: Sort, networks: [Network], endCursor: String?) -> [String: String] {
+    static func query(kind: Kind, sort: Sort, networks: [Network], endCursor: String?, minimalVersion: Bool) -> [String: String] {
+        let contentQuery = minimalVersion ? "" : enabledContentQueryString
+        
         let whereString: String
         switch kind {
         case .owner(let address):
@@ -104,9 +104,7 @@ struct ZoraRequest {
         return ["query": queryString]
     }
     
-    private static var contentQuery: String {
-        guard isContentQueryEnabled else { return "" }
-        
+    private static let enabledContentQueryString = {
         return """
         
                         content {
@@ -125,6 +123,6 @@ struct ZoraRequest {
                             }
                         }
         """
-    }
+    }()
     
 }
