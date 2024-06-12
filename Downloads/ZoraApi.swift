@@ -7,11 +7,6 @@ struct ZoraApi {
     private static let urlSession = URLSession.shared
     private static let queue = DispatchQueue(label: "\(Bundle.hostBundleId).ZoraApi", qos: .default)
     
-    private static var shouldRequestMinimalVersion: Bool {
-        // TODO: request minimal version when regular one is consistently not working
-        return false
-    }
-    
     static func get(owner: String, networks: [Network], endCursor: String?, completion: @escaping (ZoraResponseData?) -> Void) {
         let kind = ZoraRequest.Kind.owner(address: owner)
         get(kind: kind, networks: networks, sort: .none, endCursor: endCursor, retryCount: 0, completion: completion)
@@ -28,6 +23,7 @@ struct ZoraApi {
     }
     
     static private func get(kind: ZoraRequest.Kind, networks: [Network], sort: ZoraRequest.Sort, endCursor: String?, retryCount: Int, completion: @escaping (ZoraResponseData?) -> Void) {
+        let shouldRequestMinimalVersion = retryCount > 1
         let query = ZoraRequest.query(kind: kind, sort: sort, networks: networks, endCursor: endCursor, minimalVersion: shouldRequestMinimalVersion)
         guard let jsonData = try? JSONSerialization.data(withJSONObject: query) else { return }
         let url = URL(string: "https://api.zora.co/graphql")!
