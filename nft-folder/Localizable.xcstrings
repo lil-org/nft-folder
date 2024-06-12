@@ -1,23 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "%@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@"
-          }
-        }
-      }
-    },
     "Address or ENS" : {
       "localizations" : {
         "ru" : {
@@ -104,17 +87,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Файлы не больше 50 МБ"
-          }
-        }
-      }
-    },
-    "Metadata" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Метаданные"
           }
         }
       }
