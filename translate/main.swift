@@ -13,6 +13,9 @@ enum MetadataKind: String {
 
 enum Language: String, CaseIterable {
     
+    static let sources: [Language] = [.english, .russian]
+    static let targets: [Language] = Language.allCases.filter { !sources.contains($0) }
+    
     case english = "en"
     case arabic = "ar"
     case catalan = "ca"
@@ -78,7 +81,9 @@ enum Language: String, CaseIterable {
 translateAppStoreMetadata()
 
 func translateAppStoreMetadata() {
-    print("yo")
+    for target in Language.targets {
+        print(target.metadataLocalizationKey)
+    }
     // TODO: go trough all locales
     // TODO: use en and ru versions as a reference
     // TODO: check if there were changes since the last translation run
