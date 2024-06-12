@@ -111,6 +111,19 @@ struct FileSaver {
         MetadataStorage.store(minimalMetadata: minimalMetadata, filePath: finalDestinationURL.path)
         MetadataStorage.store(detailedMetadata: task.detailedMetadata, correspondingTo: minimalMetadata, addressDirectoryURL: task.walletRootDirectory)
         MetadataStorage.store(contentHash: contentHash, addressDirectoryURL: task.walletRootDirectory)
+        
+        if let extraFolders = task.extraCustomFolders, !extraFolders.isEmpty {
+            for anotherFolder in extraFolders {
+                if let extraDestination = finalDestinationURL.replacingFolder(with: anotherFolder) {
+                    let extraDestinationDirectory = extraDestination.deletingLastPathComponent()
+                    if !fileManager.fileExists(atPath: extraDestinationDirectory.path) {
+                        try? fileManager.createDirectory(at: extraDestinationDirectory, withIntermediateDirectories: false, attributes: nil)
+                    }
+                    try? fileManager.copyItem(at: finalDestinationURL, to: extraDestination)
+                    MetadataStorage.store(minimalMetadata: minimalMetadata, filePath: extraDestination.path)
+                }
+            }
+        }
     }
     
     private func extractValueFromJson(jsonData: Data) -> DataOrUrl? {

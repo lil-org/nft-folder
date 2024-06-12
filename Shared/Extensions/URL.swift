@@ -128,4 +128,9 @@ extension URL {
         return absoluteString.data(using: .utf8)?.fnv1aHash()
     }
     
+    func replacingFolder(with newFolder: String) -> URL? {
+        let fileName = lastPathComponent
+        let parentURL = deletingLastPathComponent().deletingLastPathComponent()
+        return parentURL.appendingPathComponent(newFolder).appendingPathComponent(fileName)
+    }
 }
