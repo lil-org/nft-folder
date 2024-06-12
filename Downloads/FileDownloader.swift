@@ -125,10 +125,9 @@ class FileDownloader: NSObject {
             let token = Token(id: task.detailedMetadata.tokenId,
                               address: task.detailedMetadata.collectionAddress,
                               chainId: String(task.detailedMetadata.network.rawValue))
-            // TODO: make it work when the same tokens goes to several folders
-            if let extraFolderName = foldersForTokens?[token]?.first {
+            if let customFolders = foldersForTokens?[token] {
                 tokenToRemove = token
-                task.setCustomFolder(name: extraFolderName)
+                task.setCustomFolders(customFolders)
             }
         }
         

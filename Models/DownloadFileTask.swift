@@ -25,8 +25,13 @@ struct DownloadFileTask {
     private var redirectURL: URL?
     private var customFolderName: String?
     
-    mutating func setCustomFolder(name: String) {
-        self.customFolderName = name
+    var extraCustomFolders: [String]?
+    
+    mutating func setCustomFolders(_ folders: [String]) {
+        self.customFolderName = folders.first
+        if folders.count > 1 {
+            self.extraCustomFolders = Array(folders.dropFirst())
+        }
     }
     
     mutating func setRedirectURL(_ url: URL) -> Bool {
