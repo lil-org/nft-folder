@@ -547,7 +547,6 @@
 		2CA979A92B627B3900DB3AC8 /* MinimalTokenMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimalTokenMetadata.swift; sourceTree = "<group>"; };
 		2CA979AB2B62BA2400DB3AC8 /* NftGallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftGallery.swift; sourceTree = "<group>"; };
 		2CAFA62A2B09C3610054160D /* MetadataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataStorage.swift; sourceTree = "<group>"; };
-		2CB7A3EF2B29BD3F004BEE3A /* nouns-garden-round-4-proposal.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = "nouns-garden-round-4-proposal.md"; path = "Supporting Files/nouns-garden-round-4-proposal.md"; sourceTree = SOURCE_ROOT; };
 		2CC096F42B099F3400F24DD2 /* FolderIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderIcon.swift; sourceTree = "<group>"; };
 		2CC943002B8248CE003219C7 /* ZoraResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoraResponse.swift; sourceTree = "<group>"; };
 		2CC943022B825907003219C7 /* ZoraRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoraRequest.swift; sourceTree = "<group>"; };
@@ -1453,7 +1452,6 @@
 				2CE9A7702BAD8ECD00579BF7 /* Localizable.xcstrings */,
 				2CD488FE2B10C6FA00A53950 /* README.md */,
 				2C9C1B4C2C0F188D00A9DFFB /* SYNCING-CUSTOM-NFT-FOLDERS.md */,
-				2CB7A3EF2B29BD3F004BEE3A /* nouns-garden-round-4-proposal.md */,
 			);
 			name = "Supporting Files";
 			path = "nft-folder";
