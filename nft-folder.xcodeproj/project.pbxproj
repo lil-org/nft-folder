@@ -1293,18 +1293,18 @@
 			path = metadata;
 			sourceTree = "<group>";
 		};
-		2C8FD1C42BF4B33C00B3D327 /* en-US */ = {
+		2C8FD1C42BF4B33C00B3D327 /* en-GB */ = {
 			isa = PBXGroup;
 			children = (
 				2C8FD1C32BF4B33C00B3D327 /* 0_APP_DESKTOP_0.jpeg */,
 			);
-			path = "en-US";
+			path = "en-GB";
 			sourceTree = "<group>";
 		};
 		2C8FD1C52BF4B33C00B3D327 /* screenshots */ = {
 			isa = PBXGroup;
 			children = (
-				2C8FD1C42BF4B33C00B3D327 /* en-US */,
+				2C8FD1C42BF4B33C00B3D327 /* en-GB */,
 			);
 			path = screenshots;
 			sourceTree = "<group>";
