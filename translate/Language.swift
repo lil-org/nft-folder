@@ -4,9 +4,6 @@ import Foundation
 
 enum Language: String, CaseIterable {
     
-    static let sources: [Language] = [.english, .russian]
-    static let targets: [Language] = Language.allCases.filter { !sources.contains($0) }
-    
     case english = "en"
     case arabic = "ar"
     case catalan = "ca"
