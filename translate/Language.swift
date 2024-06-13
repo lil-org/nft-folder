@@ -66,4 +66,77 @@ enum Language: String, CaseIterable {
         }
     }
     
+    var name: String {
+        switch self {
+        case .english:
+            return "english"
+        case .arabic:
+            return "arabic"
+        case .catalan:
+            return "catalan"
+        case .chinese:
+            return "chinese (simplified)"
+        case .croatian:
+            return "croatian"
+        case .czech:
+            return "czech"
+        case .danish:
+            return "danish"
+        case .dutch:
+            return "dutch"
+        case .finnish:
+            return "finnish"
+        case .french:
+            return "french"
+        case .german:
+            return "german"
+        case .greek:
+            return "greek"
+        case .hebrew:
+            return "hebrew"
+        case .hindi:
+            return "hindi"
+        case .hungarian:
+            return "hungarian"
+        case .indonesian:
+            return "indonesian"
+        case .italian:
+            return "italian"
+        case .japanese:
+            return "japanese"
+        case .korean:
+            return "korean"
+        case .malay:
+            return "malay"
+        case .norwegian:
+            return "norwegian"
+        case .polish:
+            return "polish"
+        case .portugeseBrazil:
+            return "portugese (brazil)"
+        case .portugese:
+            return "portugese"
+        case .romanian:
+            return "romanian"
+        case .russian:
+            return "russian"
+        case .slovak:
+            return "slovak"
+        case .spanish:
+            return "spanish"
+        case .spanishLatinAmerica:
+            return "spanish (latin america)"
+        case .swedish:
+            return "swedish"
+        case .thai:
+            return "thai"
+        case .turkish:
+            return "turkish"
+        case .ukrainian:
+            return "ukrainian"
+        case .vietnamese:
+            return "vietnamese"
+        }
+    }
+    
 }
