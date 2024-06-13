@@ -9,6 +9,9 @@ enum MetadataKind: String {
     case subtitle
     case promotionalText = "promotional_text"
     case releaseNotes = "release_notes"
+    case marketingURL = "marketing_url"
+    case privacyURL = "privacy_url"
+    case supportURL = "support_url"
 }
 
 enum Language: String, CaseIterable {
@@ -87,4 +90,10 @@ func translateAppStoreMetadata() {
     // TODO: go trough all locales
     // TODO: use en and ru versions as a reference
     // TODO: check if there were changes since the last translation run
+    
+    // A description of your app, detailing features and functionality.
+    // Separate keywords with an English comma, Chinese comma, or a mix of both.
+    // max 100 chars for keywords
+    // Describe what's new in this version of your app, such as new features, improvements, and bug fixes.
+    
 }
