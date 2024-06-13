@@ -7,11 +7,22 @@ let queue = DispatchQueue(label: UUID().uuidString, qos: .default)
 let projectDir = FileManager.default.currentDirectoryPath
 let metadataDir = "\(projectDir)/fastlane/metadata/"
 
- translateAppStoreMetadata()
+  translateAppStoreMetadata()
 
-// TODO: do not save qith quotes in the first place
+// TODO: do not save with quotes in the first place
+// TODO: do not save too long keywords in the first place
 
-func cleanup() {
+func shortenKeywords() {
+    for language in Language.allCases where language != .english && language != .russian {
+        var text = read(metadataKind: .keywords, language: language)
+        
+        text = String(text.prefix(100))
+        
+        write(text, metadataKind: .keywords, language: language)
+    }
+}
+
+func cleanupQuotes() {
     for metadataKind in MetadataKind.allCases {
         for language in Language.allCases where language != .english && language != .russian {
             var text = read(metadataKind: metadataKind, language: language)
