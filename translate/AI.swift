@@ -27,6 +27,7 @@ struct AI {
     static func translate(task: Task, completion: @escaping (String) -> Void) {
         sendRequest(model: task.model, prompt: task.prompt) { response in
             completion(response!)
+            print("✅ \(task.metadataKind.fileName) \(task.language.name)")
         }
     }
     
@@ -52,7 +53,10 @@ struct AI {
                   let content = message["content"] as? String {
                 completion(content.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines.union(CharacterSet(charactersIn: "\""))))
             } else {
-                completion(nil)
+                print("🕰️ will retry in 30 seconds")
+                queue.asyncAfter(deadline: .now() + .seconds(30)) {
+                    sendRequest(model: model, prompt: prompt, completion: completion)
+                }
             }
         }
         task.resume()
