@@ -7,9 +7,8 @@ let queue = DispatchQueue(label: UUID().uuidString, qos: .default)
 let projectDir = FileManager.default.currentDirectoryPath
 let metadataDir = "\(projectDir)/fastlane/metadata/"
 
-translateAppStoreMetadata()
+translateAppStoreMetadata(.cheap)
 
-// TODO: do not save with quotes in the first place
 // TODO: do not save too long keywords in the first place
 
 func shortenKeywords() {
@@ -22,25 +21,7 @@ func shortenKeywords() {
     }
 }
 
-func cleanupQuotes() {
-    for metadataKind in MetadataKind.allCases {
-        for language in Language.allCases where language != .english && language != .russian {
-            var text = read(metadataKind: metadataKind, language: language)
-            
-            if text.hasSuffix("\"") {
-                text = String(text.dropLast())
-            }
-            
-            if text.hasPrefix("\"") {
-                text = String(text.dropFirst())
-            }
-            
-            write(text, metadataKind: metadataKind, language: language)
-        }
-    }
-}
-
-func translateAppStoreMetadata() {
+func translateAppStoreMetadata(_ model: AI.Model) {
     var translationTasksCount = MetadataKind.allCases.filter { $0.toTranslate }.count * (Language.allCases.count - 2)
     for metadataKind in MetadataKind.allCases {
         let englishText = read(metadataKind: metadataKind, language: .english)
@@ -49,7 +30,7 @@ func translateAppStoreMetadata() {
             let notEmpty = !englishText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
             if metadataKind.toTranslate && notEmpty {
                 guard language != .russian else { continue }
-                AI.translate(metadataKind: metadataKind, language: language, englishText: englishText, russianText: russianText) { translation in
+                AI.translate(model, metadataKind: metadataKind, language: language, englishText: englishText, russianText: russianText) { translation in
                     write(translation, metadataKind: metadataKind, language: language)
                     translationTasksCount -= 1
                     if translationTasksCount == 0 {

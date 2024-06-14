@@ -24,7 +24,7 @@ struct AI {
         return String(data: data, encoding: .utf8)!.trimmingCharacters(in: .whitespacesAndNewlines)
     }()
     
-    static func translate(metadataKind: MetadataKind, language: Language, englishText: String, russianText: String, completion: @escaping (String) -> Void) {
+    static func translate(_ model: Model, metadataKind: MetadataKind, language: Language, englishText: String, russianText: String, completion: @escaping (String) -> Void) {
         let metadataName = "text" // TODO: vary based on metadataKind
         let prompt = """
             translate the \(metadataName) to \(language.name).
@@ -45,7 +45,7 @@ struct AI {
         
             respond only with a \(language.name) version. do not add anything else to the response.
         """
-        sendRequest(prompt: prompt) { response in
+        sendRequest(model: model, prompt: prompt) { response in
             completion(response!)
         }
         
@@ -57,66 +57,30 @@ struct AI {
         // Describe what's new in this version of your app, such as new features, improvements, and bug fixes.
     }
     
-    private static func sendRequest(prompt: String, completion: @escaping (String?) -> Void) {
-        let model = Model.cheap // TODO: use highQuality for the final version
-        
+    private static func sendRequest(model: Model, prompt: String, completion: @escaping (String?) -> Void) {
         let url = URL(string: "https://api.openai.com/v1/chat/completions")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        print(apiKey)
         request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        
-        
-        
         let requestBody: [String: Any] = [
             "model": model.name,
-            "messages": [
-                ["role": "user", "content": prompt]
-            ]
+            "messages": [["role": "user", "content": prompt]]
         ]
         
-        do {
-            request.httpBody = try JSONSerialization.data(withJSONObject: requestBody, options: [])
-        } catch {
-            completion(nil)
-            return
-        }
+        request.httpBody = try! JSONSerialization.data(withJSONObject: requestBody, options: [])
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard error == nil else {
-                completion(nil)
-                return
-            }
-            
-            guard let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                completion(nil)
-                return
-            }
-            
-            print("yo")
-            
-            if let hmm = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                print(hmm)
-            }
-            
-            do {
-                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-                   let choices = json["choices"] as? [[String: Any]],
-                   let firstChoice = choices.first,
-                   let message = firstChoice["message"] as? [String: Any],
-                   let content = message["content"] as? String {
-                    
-                    print(json)
-                    completion(content.trimmingCharacters(in: .whitespacesAndNewlines))
-                } else {
-                    completion(nil)
-                }
-            } catch {
+            if let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200, error == nil,
+                  let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                  let choices = json["choices"] as? [[String: Any]],
+                  let firstChoice = choices.first,
+                  let message = firstChoice["message"] as? [String: Any],
+                  let content = message["content"] as? String {
+                completion(content.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines.union(CharacterSet(charactersIn: "\""))))
+            } else {
                 completion(nil)
             }
-            
         }
         task.resume()
     }
