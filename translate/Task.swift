@@ -38,7 +38,7 @@ struct Task {
             
             separate keywords with an english comma.
             
-            do not add whitespaces after comma to fit more keywords in.
+            do not add whitespaces after comma — in order to fit more keywords in.
             
             feel free to slightly change and reorder the words used.
             
@@ -52,7 +52,7 @@ struct Task {
             
             make sure the translated version communicates the same message.
             
-            keep formatting, capitalization, and punctuation style close to the original.
+            keep formatting, capitalization, and punctuation style as close to the original as possible.
             """
         }
         
