@@ -32,6 +32,14 @@ struct Task {
         }
         
         switch metadataKind {
+        case .name, .subtitle:
+            clarifications = """
+            feel free to tune it to make \(language.name) version sound natural.
+            
+            make sure the translated version communicates the same message.
+            
+            keep it lowercased if possible.
+            """
         case .keywords:
             clarifications = """
             make sure the output keywords are no longer than 100 chars.
