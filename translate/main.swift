@@ -58,8 +58,16 @@ func read(url: URL) -> String {
 }
 
 func write(_ newValue: String, metadataKind: MetadataKind, language: Language) {
+    let textToWrite: String = {
+        if metadataKind == .keywords && newValue.count > 100 {
+            print("🟡 trimming \(language.name) keywords")
+            return String(newValue.prefix(100))
+        } else {
+            return newValue
+        }
+    }()
     let url = url(metadataKind: metadataKind, language: language)
-    let data = newValue.data(using: .utf8)!
+    let data = textToWrite.data(using: .utf8)!
     try! data.write(to: url)
 }
 
