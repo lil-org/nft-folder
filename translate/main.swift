@@ -24,6 +24,8 @@ func shortenKeywords() {
 func translateAppStoreMetadata(_ model: AI.Model) {
     var translationTasksCount = MetadataKind.allCases.filter { $0.toTranslate }.count * (Language.allCases.count - 2)
     for metadataKind in MetadataKind.allCases {
+        // TODO: read source differently
+        // TODO: write both ru and en target folders using data from source
         let englishText = read(metadataKind: metadataKind, language: .english)
         let russianText = read(metadataKind: metadataKind, language: .russian)
         for language in Language.allCases where language != .english {
