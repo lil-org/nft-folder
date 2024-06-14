@@ -48,7 +48,7 @@ enum Language: String, CaseIterable {
         case .arabic:
             return "ar-SA"
         case .english:
-            return "en-US"
+            return "en-GB"
         case .dutch:
             return "nl-NL"
         case .french:

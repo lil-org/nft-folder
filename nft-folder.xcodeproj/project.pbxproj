@@ -755,7 +755,7 @@
 			path = el;
 			sourceTree = "<group>";
 		};
-		2C8FD0892BF4B33C00B3D327 /* en-US */ = {
+		2C8FD0892BF4B33C00B3D327 /* en-GB */ = {
 			isa = PBXGroup;
 			children = (
 				2C8FD07F2BF4B33C00B3D327 /* apple_tv_privacy_policy.txt */,
@@ -769,7 +769,7 @@
 				2C8FD0872BF4B33C00B3D327 /* subtitle.txt */,
 				2C8FD0882BF4B33C00B3D327 /* support_url.txt */,
 			);
-			path = "en-US";
+			path = "en-GB";
 			sourceTree = "<group>";
 		};
 		2C8FD0942BF4B33C00B3D327 /* es-ES */ = {
@@ -1253,7 +1253,7 @@
 				2C8FD05D2BF4B33C00B3D327 /* da */,
 				2C8FD0682BF4B33C00B3D327 /* de-DE */,
 				2C8FD0732BF4B33C00B3D327 /* el */,
-				2C8FD0892BF4B33C00B3D327 /* en-US */,
+				2C8FD0892BF4B33C00B3D327 /* en-GB */,
 				2C8FD0942BF4B33C00B3D327 /* es-ES */,
 				2C8FD09F2BF4B33C00B3D327 /* es-MX */,
 				2C8FD0AA2BF4B33C00B3D327 /* fi */,
