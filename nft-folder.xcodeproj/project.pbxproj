@@ -538,6 +538,21 @@
 		2CA4CF642B07FAC600CC75F4 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
 		2CA623E62BEE8A0200BD78FF /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		2CA7EE892C1C66D800C7AEB5 /* AI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AI.swift; sourceTree = "<group>"; };
+		2CA7EE8D2C1C752400C7AEB5 /* promotional_text.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = promotional_text.txt; sourceTree = "<group>"; };
+		2CA7EE8E2C1C752400C7AEB5 /* release_notes.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = release_notes.txt; sourceTree = "<group>"; };
+		2CA7EE8F2C1C752400C7AEB5 /* marketing_url.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = marketing_url.txt; sourceTree = "<group>"; };
+		2CA7EE902C1C752400C7AEB5 /* subtitle.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = subtitle.txt; sourceTree = "<group>"; };
+		2CA7EE912C1C752400C7AEB5 /* keywords.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = keywords.txt; sourceTree = "<group>"; };
+		2CA7EE922C1C752400C7AEB5 /* support_url.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = support_url.txt; sourceTree = "<group>"; };
+		2CA7EE932C1C752400C7AEB5 /* name.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = name.txt; sourceTree = "<group>"; };
+		2CA7EE942C1C752400C7AEB5 /* privacy_url.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = privacy_url.txt; sourceTree = "<group>"; };
+		2CA7EE952C1C752400C7AEB5 /* description.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = description.txt; sourceTree = "<group>"; };
+		2CA7EE9B2C1C782400C7AEB5 /* keywords_ru.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = keywords_ru.txt; sourceTree = "<group>"; };
+		2CA7EE9C2C1C782400C7AEB5 /* name_ru.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = name_ru.txt; sourceTree = "<group>"; };
+		2CA7EE9D2C1C782400C7AEB5 /* subtitle_ru.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = subtitle_ru.txt; sourceTree = "<group>"; };
+		2CA7EE9E2C1C782400C7AEB5 /* description_ru.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = description_ru.txt; sourceTree = "<group>"; };
+		2CA7EE9F2C1C784300C7AEB5 /* release_notes_ru.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = release_notes_ru.txt; sourceTree = "<group>"; };
+		2CA7EEA02C1C784300C7AEB5 /* promotional_text_ru.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = promotional_text_ru.txt; sourceTree = "<group>"; };
 		2CA979A92B627B3900DB3AC8 /* MinimalTokenMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimalTokenMetadata.swift; sourceTree = "<group>"; };
 		2CA979AB2B62BA2400DB3AC8 /* NftGallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftGallery.swift; sourceTree = "<group>"; };
 		2CAFA62A2B09C3610054160D /* MetadataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataStorage.swift; sourceTree = "<group>"; };
@@ -1397,8 +1412,9 @@
 				2C91131C2B08FCDF00A8EE80 /* Views */,
 				2CA34B4F2B08B32600DAB623 /* Shared */,
 				2CA34B632B08C01300DAB623 /* nft-finder-extension */,
-				2C8FD1CB2BF4B33C00B3D327 /* fastlane */,
+				2CA7EE8C2C1C746900C7AEB5 /* app-store */,
 				2C622BB72BF3C1EA0003B932 /* translate */,
+				2C8FD1CB2BF4B33C00B3D327 /* fastlane */,
 				2CD488FD2B10C6B000A53950 /* Supporting Files */,
 				2CA4CF522B07F75F00CC75F4 /* Products */,
 			);
@@ -1425,6 +1441,52 @@
 				2CA34B742B08CA8200DAB623 /* Info.plist */,
 			);
 			path = "nft-folder";
+			sourceTree = "<group>";
+		};
+		2CA7EE8C2C1C746900C7AEB5 /* app-store */ = {
+			isa = PBXGroup;
+			children = (
+				2CA7EE9A2C1C75F900C7AEB5 /* new */,
+				2CA7EE992C1C75ED00C7AEB5 /* texts */,
+				2CA7EE982C1C75CB00C7AEB5 /* links */,
+			);
+			path = "app-store";
+			sourceTree = "<group>";
+		};
+		2CA7EE982C1C75CB00C7AEB5 /* links */ = {
+			isa = PBXGroup;
+			children = (
+				2CA7EE8F2C1C752400C7AEB5 /* marketing_url.txt */,
+				2CA7EE942C1C752400C7AEB5 /* privacy_url.txt */,
+				2CA7EE922C1C752400C7AEB5 /* support_url.txt */,
+			);
+			name = links;
+			sourceTree = "<group>";
+		};
+		2CA7EE992C1C75ED00C7AEB5 /* texts */ = {
+			isa = PBXGroup;
+			children = (
+				2CA7EE952C1C752400C7AEB5 /* description.txt */,
+				2CA7EE9E2C1C782400C7AEB5 /* description_ru.txt */,
+				2CA7EE912C1C752400C7AEB5 /* keywords.txt */,
+				2CA7EE9B2C1C782400C7AEB5 /* keywords_ru.txt */,
+				2CA7EE902C1C752400C7AEB5 /* subtitle.txt */,
+				2CA7EE9D2C1C782400C7AEB5 /* subtitle_ru.txt */,
+				2CA7EE932C1C752400C7AEB5 /* name.txt */,
+				2CA7EE9C2C1C782400C7AEB5 /* name_ru.txt */,
+			);
+			name = texts;
+			sourceTree = "<group>";
+		};
+		2CA7EE9A2C1C75F900C7AEB5 /* new */ = {
+			isa = PBXGroup;
+			children = (
+				2CA7EE8E2C1C752400C7AEB5 /* release_notes.txt */,
+				2CA7EE9F2C1C784300C7AEB5 /* release_notes_ru.txt */,
+				2CA7EE8D2C1C752400C7AEB5 /* promotional_text.txt */,
+				2CA7EEA02C1C784300C7AEB5 /* promotional_text_ru.txt */,
+			);
+			name = new;
 			sourceTree = "<group>";
 		};
 		2CD488FD2B10C6B000A53950 /* Supporting Files */ = {
