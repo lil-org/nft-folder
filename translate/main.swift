@@ -9,7 +9,8 @@ let projectDir = FileManager.default.currentDirectoryPath
 translateAppStoreMetadata(.cheap) // TODO: use high quality
 
 func translateAppStoreMetadata(_ model: AI.Model) {
-    var translationTasksCount = MetadataKind.allCases.filter { $0.toTranslate }.count * (Language.allCases.count - 2)
+    var tasks = [Task]()
+    
     for metadataKind in MetadataKind.allCases {
         let englishText = originalMetadata(kind: metadataKind, language: .english)
         let russianText = originalMetadata(kind: metadataKind, language: .russian)
@@ -19,23 +20,31 @@ func translateAppStoreMetadata(_ model: AI.Model) {
         
         for language in Language.allCases where language != .english && language != .russian {
             if metadataKind.toTranslate && notEmpty {
-                // TODO: prepare tasks earlier to set translationTasksCount
-                // TODO: check if there were changes since the last translation run
-                
                 let task = Task(model: model, metadataKind: metadataKind, language: language, englishText: englishText, russianText: russianText)
-                AI.translate(task: task) { translation in
-                    write(translation, metadataKind: metadataKind, language: language)
-                    translationTasksCount -= 1
-                    if translationTasksCount == 0 {
-                        semaphore.signal()
-                    }
+                if !task.wasCompletedBefore {
+                    tasks.append(task)
                 }
             } else {
                 write(englishText, metadataKind: metadataKind, language: language)
             }
         }
     }
-    semaphore.wait()
+    
+    var finalTasksCount = tasks.count
+    for task in tasks {
+        AI.translate(task: task) { translation in
+            write(translation, metadataKind: task.metadataKind, language: task.language)
+            task.storeAsCompleted()
+            finalTasksCount -= 1
+            if finalTasksCount == 0 {
+                semaphore.signal()
+            }
+        }
+    }
+    
+    if !tasks.isEmpty {
+        semaphore.wait()
+    }
 }
 
 func read(metadataKind: MetadataKind, language: Language) -> String {

@@ -44,11 +44,15 @@ struct Task {
     }
     
     func storeAsCompleted() {
-        // TODO: implement
+        let url = URL(fileURLWithPath: projectDir + "/translate/latest/" + "\(language.metadataLocalizationKey)-\(metadataKind.fileName)")
+        let data = hash.data(using: .utf8)!
+        try! data.write(to: url)
     }
     
     private var hash: String {
-        return "" // TODO: implement
+        let description = prompt + model.name
+        let data = description.data(using: .utf8)
+        return String(data!.fnv1aHash())
     }
     
 }
