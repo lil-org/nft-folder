@@ -19,7 +19,11 @@ func translateAppStoreMetadata(_ model: AI.Model) {
         
         for language in Language.allCases where language != .english && language != .russian {
             if metadataKind.toTranslate && notEmpty {
-                AI.translate(model, metadataKind: metadataKind, language: language, englishText: englishText, russianText: russianText) { translation in
+                // TODO: prepare tasks earlier to set translationTasksCount
+                // TODO: check if there were changes since the last translation run
+                
+                let task = Task(model: model, metadataKind: metadataKind, language: language, englishText: englishText, russianText: russianText)
+                AI.translate(task: task) { translation in
                     write(translation, metadataKind: metadataKind, language: language)
                     translationTasksCount -= 1
                     if translationTasksCount == 0 {

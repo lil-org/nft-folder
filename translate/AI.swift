@@ -24,18 +24,10 @@ struct AI {
         return String(data: data, encoding: .utf8)!.trimmingCharacters(in: .whitespacesAndNewlines)
     }()
     
-    static func translate(_ model: Model, metadataKind: MetadataKind, language: Language, englishText: String, russianText: String, completion: @escaping (String) -> Void) {
-        let prompt = prompt(metadataKind: metadataKind, language: language, englishText: englishText, russianText: russianText)
-        sendRequest(model: model, prompt: prompt) { response in
+    static func translate(task: Task, completion: @escaping (String) -> Void) {
+        sendRequest(model: task.model, prompt: task.prompt) { response in
             completion(response!)
         }
-        
-        // TODO: check if there were changes since the last translation run
-        // TODO: call completion with a current version if there is no need to translate again
-        // A description of your app, detailing features and functionality.
-        // Separate keywords with an English comma, Chinese comma, or a mix of both.
-        // max 100 chars for keywords
-        // Describe what's new in this version of your app, such as new features, improvements, and bug fixes.
     }
     
     private static func sendRequest(model: Model, prompt: String, completion: @escaping (String?) -> Void) {
@@ -64,29 +56,6 @@ struct AI {
             }
         }
         task.resume()
-    }
-    
-    private static func prompt(metadataKind: MetadataKind, language: Language, englishText: String, russianText: String) -> String {
-        let metadataName = "text" // TODO: vary based on metadataKind
-        return """
-        translate the \(metadataName) to \(language.name).
-        
-        feel free to tune it to make \(language.name) version sound natural.
-        
-        make sure the translated version communicates the same message.
-        
-        keep it simple and straightforward.
-        
-        use english and russian texts below as a reference.
-        
-        english:
-        "\(englishText)"
-        
-        russian:
-        "\(russianText)"
-        
-        respond only with a \(language.name) version. do not add anything else to the response.
-        """
     }
     
 }
