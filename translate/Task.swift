@@ -11,19 +11,55 @@ struct Task {
     let russianText: String
     
     var prompt: String {
-        // TODO: tune prompt for different metadata
-        // A description of your app, detailing features and functionality.
-        // Separate keywords with an English comma, Chinese comma, or a mix of both.
-        // max 100 chars for keywords
-        // Describe what's new in this version of your app, such as new features, improvements, and bug fixes.
+        let metadataName: String
+        let clarifications: String
         
-        let metadataName = "text" // TODO: vary based on metadataKind
-        return """
+        switch metadataKind {
+        case .description:
+            metadataName = "app description"
+        case .keywords:
+            metadataName = "app store keywords"
+        case .name:
+            metadataName = "app name"
+        case .subtitle:
+            metadataName = "app store page subtitle"
+        case .promotionalText:
+            metadataName = "app store promotional text"
+        case .releaseNotes:
+            metadataName = "app release notes"
+        default:
+            metadataName = "text"
+        }
+        
+        switch metadataKind {
+        case .keywords:
+            clarifications = """
+            make sure the output keywords are no longer than 100 chars.
+            
+            separate keywords with an english comma.
+            
+            do not add whitespaces after comma to fit more keywords in.
+            
+            feel free to slightly change and reorder the words used.
+            
+            the output should be good to be used as app store keywords.
+            
+            make sure the output text is no longer than 100 chars.
+            """
+        default:
+            clarifications = """
+            feel free to tune it to make \(language.name) version sound natural.
+            
+            make sure the translated version communicates the same message.
+            
+            keep formatting, capitalization, and punctuation style close to the original.
+            """
+        }
+        
+        let output = """
         translate the \(metadataName) to \(language.name).
         
-        feel free to tune it to make \(language.name) version sound natural.
-        
-        make sure the translated version communicates the same message.
+        \(clarifications)
         
         keep it simple and straightforward.
         
@@ -37,6 +73,8 @@ struct Task {
         
         respond only with a \(language.name) version. do not add anything else to the response.
         """
+        
+        return output
     }
     
     var wasCompletedBefore: Bool {
