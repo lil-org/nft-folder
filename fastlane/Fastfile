@@ -3,7 +3,10 @@ default_platform(:mac)
 platform :mac do
 
   lane :bump do |options|
-    new_version = options[:version]
+    current_version = get_version_number(xcodeproj: "nft-folder.xcodeproj", target: "nft folder")
+    version_parts = current_version.split(".").map(&:to_i)
+    version_parts[-1] += 1
+    new_version = options[:version] || version_parts.join(".")
     sh("sed -i '' -e 's/MARKETING_VERSION \\= [^\\;]*\\;/MARKETING_VERSION = #{new_version};/' ../nft-folder.xcodeproj/project.pbxproj")
     increment_version_number(version_number: new_version)
     increment_build_number()
