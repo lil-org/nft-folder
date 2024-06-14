@@ -68,6 +68,7 @@
 		2CA4CF5C2B07F76000CC75F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CA4CF5A2B07F76000CC75F4 /* Main.storyboard */; };
 		2CA623E72BEE8A0200BD78FF /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA623E62BEE8A0200BD78FF /* UserDefaults.swift */; };
 		2CA623E82BEE8A0200BD78FF /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA623E62BEE8A0200BD78FF /* UserDefaults.swift */; };
+		2CA7EE8A2C1C66D800C7AEB5 /* AI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA7EE892C1C66D800C7AEB5 /* AI.swift */; };
 		2CA979AA2B627B3900DB3AC8 /* MinimalTokenMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA979A92B627B3900DB3AC8 /* MinimalTokenMetadata.swift */; };
 		2CA979AC2B62BA2400DB3AC8 /* NftGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA979AB2B62BA2400DB3AC8 /* NftGallery.swift */; };
 		2CAFA62B2B09C3610054160D /* MetadataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA62A2B09C3610054160D /* MetadataStorage.swift */; };
@@ -536,6 +537,7 @@
 		2CA4CF5D2B07F76000CC75F4 /* nft_folder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = nft_folder.entitlements; sourceTree = "<group>"; };
 		2CA4CF642B07FAC600CC75F4 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
 		2CA623E62BEE8A0200BD78FF /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		2CA7EE892C1C66D800C7AEB5 /* AI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AI.swift; sourceTree = "<group>"; };
 		2CA979A92B627B3900DB3AC8 /* MinimalTokenMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimalTokenMetadata.swift; sourceTree = "<group>"; };
 		2CA979AB2B62BA2400DB3AC8 /* NftGallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftGallery.swift; sourceTree = "<group>"; };
 		2CAFA62A2B09C3610054160D /* MetadataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataStorage.swift; sourceTree = "<group>"; };
@@ -648,6 +650,7 @@
 			children = (
 				2C622BB82BF3C1EA0003B932 /* main.swift */,
 				2CDDE0D42C1B1EC4002DB025 /* MetadataKind.swift */,
+				2CA7EE892C1C66D800C7AEB5 /* AI.swift */,
 				2CDDE0D22C1B1EAC002DB025 /* Language.swift */,
 			);
 			path = translate;
@@ -1631,6 +1634,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CA7EE8A2C1C66D800C7AEB5 /* AI.swift in Sources */,
 				2C622BB92BF3C1EA0003B932 /* main.swift in Sources */,
 				2CDDE0D52C1B1EC4002DB025 /* MetadataKind.swift in Sources */,
 				2CDDE0D32C1B1EAC002DB025 /* Language.swift in Sources */,
