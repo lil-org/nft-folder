@@ -40,13 +40,21 @@ struct Task {
     }
     
     var wasCompletedBefore: Bool {
-        return false // TODO: implement
+        if let data = try? Data(contentsOf: hashURL),
+           let text = String(data: data, encoding: .utf8) {
+            return hash == text
+        } else {
+            return false
+        }
     }
     
     func storeAsCompleted() {
-        let url = URL(fileURLWithPath: projectDir + "/translate/latest/" + "\(language.metadataLocalizationKey)-\(metadataKind.fileName)")
         let data = hash.data(using: .utf8)!
-        try! data.write(to: url)
+        try! data.write(to: hashURL)
+    }
+    
+    private var hashURL: URL {
+        return URL(fileURLWithPath: projectDir + "/translate/latest/" + "\(language.metadataLocalizationKey)-\(metadataKind.fileName)")
     }
     
     private var hash: String {
