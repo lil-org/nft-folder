@@ -5,7 +5,6 @@ import Foundation
 let semaphore = DispatchSemaphore(value: 0)
 let queue = DispatchQueue(label: UUID().uuidString, qos: .default)
 let projectDir = FileManager.default.currentDirectoryPath
-let metadataDir = "\(projectDir)/fastlane/metadata/"
 
 translateAppStoreMetadata(.cheap)
 
@@ -24,14 +23,14 @@ func shortenKeywords() {
 func translateAppStoreMetadata(_ model: AI.Model) {
     var translationTasksCount = MetadataKind.allCases.filter { $0.toTranslate }.count * (Language.allCases.count - 2)
     for metadataKind in MetadataKind.allCases {
-        // TODO: read source differently
-        // TODO: write both ru and en target folders using data from source
-        let englishText = read(metadataKind: metadataKind, language: .english)
-        let russianText = read(metadataKind: metadataKind, language: .russian)
-        for language in Language.allCases where language != .english {
-            let notEmpty = !englishText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        let englishText = originalMetadata(kind: metadataKind, language: .english)
+        let russianText = originalMetadata(kind: metadataKind, language: .russian)
+        write(englishText, metadataKind: metadataKind, language: .english)
+        write(russianText, metadataKind: metadataKind, language: .russian)
+        let notEmpty = !englishText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        
+        for language in Language.allCases where language != .english && language != .russian {
             if metadataKind.toTranslate && notEmpty {
-                guard language != .russian else { continue }
                 AI.translate(model, metadataKind: metadataKind, language: language, englishText: englishText, russianText: russianText) { translation in
                     write(translation, metadataKind: metadataKind, language: language)
                     translationTasksCount -= 1
@@ -49,9 +48,13 @@ func translateAppStoreMetadata(_ model: AI.Model) {
 
 func read(metadataKind: MetadataKind, language: Language) -> String {
     let url = url(metadataKind: metadataKind, language: language)
+    return read(url: url)
+}
+
+func read(url: URL) -> String {
     let data = try! Data(contentsOf: url)
     let text = String(data: data, encoding: .utf8)!
-    return text
+    return text.trimmingCharacters(in: .whitespacesAndNewlines)
 }
 
 func write(_ newValue: String, metadataKind: MetadataKind, language: Language) {
@@ -60,8 +63,14 @@ func write(_ newValue: String, metadataKind: MetadataKind, language: Language) {
     try! data.write(to: url)
 }
 
+func originalMetadata(kind: MetadataKind, language: Language) -> String {
+    let suffix = kind.toTranslate && language == .russian ? "_ru" : ""
+    let url = URL(fileURLWithPath: projectDir + "/app-store/" + "\(kind.fileName)\(suffix).txt")
+    return read(url: url)
+}
+
 func url(metadataKind: MetadataKind, language: Language) -> URL {
-    return URL(fileURLWithPath: metadataDir + "\(language.metadataLocalizationKey)/\(metadataKind.fileName).txt")
+    return URL(fileURLWithPath: projectDir + "/fastlane/metadata/" + "\(language.metadataLocalizationKey)/\(metadataKind.fileName).txt")
 }
 
 print("🟢 all done")

@@ -25,26 +25,7 @@ struct AI {
     }()
     
     static func translate(_ model: Model, metadataKind: MetadataKind, language: Language, englishText: String, russianText: String, completion: @escaping (String) -> Void) {
-        let metadataName = "text" // TODO: vary based on metadataKind
-        let prompt = """
-            translate the \(metadataName) to \(language.name).
-        
-            feel free to tune it to make \(language.name) version sound natural.
-        
-            make sure the translated version communicates the same message.
-        
-            keep it simple and straightforward.
-        
-            use english and russian texts below as a reference.
-        
-            english:
-            "\(englishText)"
-        
-            russian:
-            "\(russianText)"
-        
-            respond only with a \(language.name) version. do not add anything else to the response.
-        """
+        let prompt = prompt(metadataKind: metadataKind, language: language, englishText: englishText, russianText: russianText)
         sendRequest(model: model, prompt: prompt) { response in
             completion(response!)
         }
@@ -65,7 +46,7 @@ struct AI {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         let requestBody: [String: Any] = [
             "model": model.name,
-            "messages": [["role": "user", "content": prompt]]
+            "messages": [["role": "user", "content": prompt.trimmingCharacters(in: .whitespacesAndNewlines)]]
         ]
         
         request.httpBody = try! JSONSerialization.data(withJSONObject: requestBody, options: [])
@@ -83,6 +64,29 @@ struct AI {
             }
         }
         task.resume()
+    }
+    
+    private static func prompt(metadataKind: MetadataKind, language: Language, englishText: String, russianText: String) -> String {
+        let metadataName = "text" // TODO: vary based on metadataKind
+        return """
+        translate the \(metadataName) to \(language.name).
+        
+        feel free to tune it to make \(language.name) version sound natural.
+        
+        make sure the translated version communicates the same message.
+        
+        keep it simple and straightforward.
+        
+        use english and russian texts below as a reference.
+        
+        english:
+        "\(englishText)"
+        
+        russian:
+        "\(russianText)"
+        
+        respond only with a \(language.name) version. do not add anything else to the response.
+        """
     }
     
 }
