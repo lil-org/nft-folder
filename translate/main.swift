@@ -6,19 +6,7 @@ let semaphore = DispatchSemaphore(value: 0)
 let queue = DispatchQueue(label: UUID().uuidString, qos: .default)
 let projectDir = FileManager.default.currentDirectoryPath
 
-translateAppStoreMetadata(.cheap)
-
-// TODO: do not save too long keywords in the first place
-
-func shortenKeywords() {
-    for language in Language.allCases where language != .english && language != .russian {
-        var text = read(metadataKind: .keywords, language: language)
-        
-        text = String(text.prefix(100))
-        
-        write(text, metadataKind: .keywords, language: language)
-    }
-}
+translateAppStoreMetadata(.cheap) // TODO: use high quality
 
 func translateAppStoreMetadata(_ model: AI.Model) {
     var translationTasksCount = MetadataKind.allCases.filter { $0.toTranslate }.count * (Language.allCases.count - 2)
