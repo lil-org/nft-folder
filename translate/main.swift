@@ -7,6 +7,18 @@ let queue = DispatchQueue(label: UUID().uuidString, qos: .default)
 let projectDir = FileManager.default.currentDirectoryPath
 
 translateAppStoreMetadata(.highQuality)
+translateAllString()
+addNewString(key: "greeting", value: "yo")
+
+func addNewString(key: String, value: String) {
+    // TODO: do nothing if it already exists
+    // TODO: add everywhere and translate
+}
+
+func translateAllString() {
+    // TODO: do nothing if already translated
+    // TODO: implement
+}
 
 func translateAppStoreMetadata(_ model: AI.Model) {
     var tasks = [Task]()
