@@ -16,8 +16,11 @@ func addNewString(key: String, value: String) {
 }
 
 func translateAllString() {
-    // TODO: do nothing if already translated
-    // TODO: implement
+    let url = URL(fileURLWithPath: projectDir + "/nft-folder/Localizable.xcstrings")
+    let data = try! Data(contentsOf: url)
+    let json = try! JSONSerialization.jsonObject(with: data)
+    let reverseData = try! JSONSerialization.data(withJSONObject: json, options: [.prettyPrinted, .sortedKeys])
+    try! data.write(to: url)
 }
 
 func translateAppStoreMetadata(_ model: AI.Model) {
