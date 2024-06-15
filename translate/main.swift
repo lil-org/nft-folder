@@ -86,7 +86,7 @@ func write(_ newValue: String, metadataKind: MetadataKind, language: Language) {
 
 func originalMetadata(kind: MetadataKind, language: Language) -> String {
     let suffix = kind.toTranslate && language == .russian ? "_ru" : ""
-    let url = URL(fileURLWithPath: projectDir + "/app-store/" + "\(kind.fileName)\(suffix).txt")
+    let url = URL(fileURLWithPath: projectDir + "/app_store/" + "\(kind.fileName)\(suffix).txt")
     return read(url: url)
 }
 

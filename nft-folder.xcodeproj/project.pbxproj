@@ -1416,7 +1416,7 @@
 				2C91131C2B08FCDF00A8EE80 /* Views */,
 				2CA34B4F2B08B32600DAB623 /* Shared */,
 				2CA34B632B08C01300DAB623 /* nft-finder-extension */,
-				2CA7EE8C2C1C746900C7AEB5 /* app-store */,
+				2CA7EE8C2C1C746900C7AEB5 /* app_store */,
 				2C622BB72BF3C1EA0003B932 /* translate */,
 				2C8FD1CB2BF4B33C00B3D327 /* fastlane */,
 				2CD488FD2B10C6B000A53950 /* Supporting Files */,
@@ -1447,14 +1447,14 @@
 			path = "nft-folder";
 			sourceTree = "<group>";
 		};
-		2CA7EE8C2C1C746900C7AEB5 /* app-store */ = {
+		2CA7EE8C2C1C746900C7AEB5 /* app_store */ = {
 			isa = PBXGroup;
 			children = (
 				2CA7EE9A2C1C75F900C7AEB5 /* new */,
 				2CA7EE992C1C75ED00C7AEB5 /* texts */,
 				2CA7EE982C1C75CB00C7AEB5 /* links */,
 			);
-			path = "app-store";
+			path = app_store;
 			sourceTree = "<group>";
 		};
 		2CA7EE982C1C75CB00C7AEB5 /* links */ = {
