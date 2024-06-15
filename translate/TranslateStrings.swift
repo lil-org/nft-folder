@@ -4,32 +4,41 @@ import Foundation
 
 func translateAllString() {
     let strings = readStrings()
-    
     var newStrings = [String: Any]()
-    
     for key in strings.keys {
         let localizations = (strings[key] as! [String: Any])["localizations"] as! [String: Any]
         processSpecificString(key: key, localizations: localizations) { result in
             newStrings[key] = ["localizations": result]
+            if newStrings.count == strings.count {
+                writeStrings(newStrings)
+                print("✅ did write new strings")
+            }
         }
     }
-    
-    writeStrings(newStrings)
 }
 
 func processSpecificString(key: String, localizations: [String: Any], completion: @escaping ([String: Any]) -> Void) {
     let english = read(language: .english, from: localizations)
     let russian = read(language: .russian, from: localizations)
     
-    // TODO: add missing localizations
-    
-    let dict: [Language: String] = [
+    var dict: [Language: String] = [
         .english: english,
         .russian: russian
     ]
     
-    let formatted = formatLocalizationsDict(dict)
-    completion(formatted)
+    for language in Language.allCases where language != .english && language != .russian {
+        translate(to: language, english: english, russian: russian) { result in
+            dict[language] = result
+            if dict.count == Language.allCases.count {
+                let formatted = formatLocalizationsDict(dict)
+                completion(formatted)
+            }
+        }
+    }
+}
+
+func translate(to: Language, english: String, russian: String, completion: @escaping (String) -> Void) {
+    // TODO: implement translation
 }
 
 func formatLocalizationsDict(_ input: [Language: String]) -> [String: Any] {
