@@ -24,7 +24,7 @@ struct AI {
         return String(data: data, encoding: .utf8)!.trimmingCharacters(in: .whitespacesAndNewlines)
     }()
     
-    static func translate(task: Task, completion: @escaping (String) -> Void) {
+    static func translate(task: MetadataTask, completion: @escaping (String) -> Void) {
         sendRequest(model: task.model, prompt: task.prompt) { response in
             completion(response!)
             print("✅ \(task.metadataKind.fileName) \(task.language.name)")

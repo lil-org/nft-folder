@@ -2,7 +2,7 @@
 
 import Foundation
 
-struct Task {
+struct MetadataTask {
     
     let model: AI.Model
     let metadataKind: MetadataKind
