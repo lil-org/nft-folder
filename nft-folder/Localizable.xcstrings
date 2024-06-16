@@ -2,7 +2,7 @@
   "sourceLanguage" : "en",
   "strings" : {
     "Address or ENS" : {
-      "comment" : "5724883605635647934",
+      "comment" : "3771701299004970322",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -79,7 +79,7 @@
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पता या ईएनएस"
+            "value" : "पता या ENS"
           }
         },
         "hr" : {
@@ -109,7 +109,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "住所またはENS"
+            "value" : "アドレスまたはENS"
           }
         },
         "ko" : {
@@ -193,7 +193,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Адрес або ENS"
+            "value" : "Адреса або ENS"
           }
         },
         "vi" : {
@@ -211,7 +211,7 @@
       }
     },
     "Cancel" : {
-      "comment" : "18374170860300296762",
+      "comment" : "11509130949335088018",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -222,7 +222,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cancel·lar"
+            "value" : "Cancel·la"
           }
         },
         "cs" : {
@@ -234,7 +234,7 @@
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Annuller"
+            "value" : "Afbryd"
           }
         },
         "de" : {
@@ -288,13 +288,13 @@
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "रद्द"
+            "value" : "रद्द करें"
           }
         },
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Poništi"
+            "value" : "Otkaži"
           }
         },
         "hu" : {
@@ -366,7 +366,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Anulare"
+            "value" : "Anulează"
           }
         },
         "ru" : {
@@ -396,7 +396,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Iptal"
+            "value" : "İptal"
           }
         },
         "uk" : {
@@ -408,7 +408,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hủy bỏ"
+            "value" : "Hủy"
           }
         },
         "zh-Hans" : {
@@ -420,18 +420,18 @@
       }
     },
     "Click for NFT menu" : {
-      "comment" : "7956498603578847621",
+      "comment" : "1437650252256096425",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "انقر لفتح قائمة NFT"
+            "value" : "انقر لقائمة الـ NFT"
           }
         },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fes clic per al menú NFT"
+            "value" : "Clica per al menú NFT"
           }
         },
         "cs" : {
@@ -443,19 +443,19 @@
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Klik for NFT-menuet"
+            "value" : "Klik for NFT-menu"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Klicken Sie für das NFT-Menü"
+            "value" : "Klicken Sie auf das NFT-Menü"
           }
         },
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Κάντε κλικ για το μενού NFT."
+            "value" : "Κάντε κλικ για το μενού NFT"
           }
         },
         "en" : {
@@ -467,19 +467,19 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Haz clic para el menú de NFT"
+            "value" : "Haz clic para el menú NFT"
           }
         },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Haz clic para menú de NFT"
+            "value" : "Haz clic para el menú NFT"
           }
         },
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Klikkaa NFT-valikkoa"
+            "value" : "Napsauta NFT-valikkoa"
           }
         },
         "fr" : {
@@ -491,25 +491,25 @@
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "לחץ על תפריט NFT"
+            "value" : "לחץ לתפריט NFT"
           }
         },
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "NFT मेनू के लिए क्लिक करें"
+            "value" : "NFT मेन्यू के लिए क्लिक करें"
           }
         },
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Klikni za NFT izbornik"
+            "value" : "Kliknite za NFT izbornik"
           }
         },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kattintson az NFT menüre"
+            "value" : "Kattints az NFT menühöz"
           }
         },
         "id" : {
@@ -521,13 +521,13 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fare clic per il menu NFT."
+            "value" : "Clicca per il menu NFT"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "NFTメニューをクリック"
+            "value" : "NFTメニューをクリックしてください"
           }
         },
         "ko" : {
@@ -545,13 +545,13 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Klikk for NFT-menyen."
+            "value" : "Klikk for NFT-menyen"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Klik voor NFT-menu"
+            "value" : "Klik voor het NFT-menu"
           }
         },
         "pl" : {
@@ -575,7 +575,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Click pentru meniul NFT"
+            "value" : "Clic pentru meniul NFT"
           }
         },
         "ru" : {
@@ -587,7 +587,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kliknite pre NFT ponuku"
+            "value" : "Kliknite pre NFT menu"
           }
         },
         "sv" : {
@@ -599,7 +599,7 @@
         "th" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "คลิกเพื่อเปิดเมนู NFT"
+            "value" : "คลิกเพื่อเมนู NFT"
           }
         },
         "tr" : {
@@ -611,25 +611,25 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Клацніть, щоб відкрити меню NFT."
+            "value" : "Натисніть для відкриття НФТ меню"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nhấp để mở menu NFT"
+            "value" : "Nhấp vào menu NFT"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "点击以查看NFT菜单"
+            "value" : "点击开启NFT菜单"
           }
         }
       }
     },
     "Control Center" : {
-      "comment" : "3273564217033192367",
+      "comment" : "15559492991020407485",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -640,13 +640,13 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Centre de control"
+            "value" : "Centre de Control"
           }
         },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Řídící centrum"
+            "value" : "Centrum ovládání"
           }
         },
         "da" : {
@@ -658,7 +658,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Steuerzentrum"
+            "value" : "Kontrollzentrum"
           }
         },
         "el" : {
@@ -694,13 +694,13 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Centre de contrôle"
+            "value" : "Centre de Contrôle"
           }
         },
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "מרכז שליטה"
+            "value" : "מרכז בקרה"
           }
         },
         "hi" : {
@@ -712,13 +712,13 @@
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Centar kontrole"
+            "value" : "Kontrolni Centar"
           }
         },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vezérlőközpont"
+            "value" : "Irányítóközpont"
           }
         },
         "id" : {
@@ -742,7 +742,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "통제 센터"
+            "value" : "제어 센터"
           }
         },
         "ms" : {
@@ -784,7 +784,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Centrul de control"
+            "value" : "Centrul de Control"
           }
         },
         "ru" : {
@@ -796,7 +796,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ovládací stredisko"
+            "value" : "Kontrolné Centrum"
           }
         },
         "sv" : {
@@ -820,13 +820,13 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Центр управління"
+            "value" : "Центр Керування"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Trung tâm kiểm soát"
+            "value" : "Trung Tâm Điều Khiển"
           }
         },
         "zh-Hans" : {
@@ -838,12 +838,12 @@
       }
     },
     "Did not upload" : {
-      "comment" : "841090487885779858",
+      "comment" : "4548471871721333650",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "لم يتم التحميل"
+            "value" : "لم يتم الرفع"
           }
         },
         "ca" : {
@@ -861,13 +861,13 @@
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kunne ikke uploade"
+            "value" : "Upload ikke gennemført"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Konnte nicht hochladen"
+            "value" : "Hochladen fehlgeschlagen"
           }
         },
         "el" : {
@@ -885,43 +885,43 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No se pudo cargar"
+            "value" : "No se pudo subir"
           }
         },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No se pudo subir"
+            "value" : "No se cargó"
           }
         },
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ei ladannut"
+            "value" : "Ei latautunut"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "N'a pas téléchargé"
+            "value" : "N'a pas pu télécharger"
           }
         },
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "לא הצלחתי להעלות"
+            "value" : "לא הועלה"
           }
         },
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "अपलोड नहीं हुआ"
+            "value" : "अपलोड नहीं किया गया"
           }
         },
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nije se uspjelo učitati"
+            "value" : "Nije učitano"
           }
         },
         "hu" : {
@@ -933,7 +933,7 @@
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gagal mengunggah"
+            "value" : "Tidak dapat mengunggah"
           }
         },
         "it" : {
@@ -945,13 +945,13 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "アップロードできませんでした。"
+            "value" : "アップロードできませんでした"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "업로드하지 못했습니다."
+            "value" : "업로드하지 못했습니다"
           }
         },
         "ms" : {
@@ -963,7 +963,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Klarte ikke å laste opp"
+            "value" : "Ble ikke lastet opp"
           }
         },
         "nl" : {
@@ -981,13 +981,13 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Não foi possível fazer o upload"
+            "value" : "Não foi carregado"
           }
         },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Não foi carregado"
+            "value" : "Não conseguiu carregar"
           }
         },
         "ro" : {
@@ -1005,25 +1005,25 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nepodarilo sa nahrať"
+            "value" : "Neúspešné nahratie"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lyckades inte ladda upp"
+            "value" : "Laddades inte upp"
           }
         },
         "th" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ไม่สามารถอัปโหลด"
+            "value" : "ไม่สามารถอัปโหลดได้"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yüklenemedi"
+            "value" : "Yüklenmedi"
           }
         },
         "uk" : {
@@ -1035,19 +1035,19 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Không tải lên"
+            "value" : "Không tải lên được"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "没有上传"
+            "value" : "未上传"
           }
         }
       }
     },
     "Download .glb files" : {
-      "comment" : "7759933956565759212",
+      "comment" : "9412328357000957442",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -1058,13 +1058,13 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Baixa els fitxers .glb"
+            "value" : "Descarrega fitxers .glb"
           }
         },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Stáhnout soubory .glb"
+            "value" : "Stáhněte soubory .glb"
           }
         },
         "da" : {
@@ -1076,13 +1076,13 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Laden Sie .glb Dateien herunter"
+            "value" : ".glb Dateien herunterladen"
           }
         },
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Λήψη αρχείων .glb"
+            "value" : "Κατεβάστε αρχεία .glb"
           }
         },
         "en" : {
@@ -1106,7 +1106,7 @@
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lataa .glb-tiedostot"
+            "value" : "Lataa .glb-tiedostoja"
           }
         },
         "fr" : {
@@ -1118,7 +1118,7 @@
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "הורד קבצי glb."
+            "value" : "הורד קבצי .glb"
           }
         },
         "hi" : {
@@ -1136,7 +1136,7 @@
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Letöltés .glb fájlok"
+            "value" : ".glb fájlok letöltése"
           }
         },
         "id" : {
@@ -1154,13 +1154,13 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ".glbファイルをダウンロードします。"
+            "value" : ".glbファイルをダウンロードする"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ".glb 파일을 다운로드하세요"
+            "value" : ".glb 파일 다운로드"
           }
         },
         "ms" : {
@@ -1172,13 +1172,13 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Last ned .glb filer"
+            "value" : "Last ned .glb-filer"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Download .glb bestanden"
+            "value" : ".glb bestanden downloaden"
           }
         },
         "pl" : {
@@ -1214,13 +1214,13 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Stiahnuť súbory .glb"
+            "value" : "Sťahovanie .glb súborov"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ladda ner .glb filer"
+            "value" : "Ladda ner .glb-filer"
           }
         },
         "th" : {
@@ -1232,19 +1232,19 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ".glb dosyalarını indirin"
+            "value" : ".glb dosyaları indirin"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Завантажте файли .glb"
+            "value" : "Завантажувати .glb файли"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tải file .glb"
+            "value" : "Tải xuống tệp .glb"
           }
         },
         "zh-Hans" : {
@@ -1256,42 +1256,42 @@
       }
     },
     "Hard Reset" : {
-      "comment" : "11756915848358047928",
+      "comment" : "2109076344296678336",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "إعادة تعيين صعبة"
+            "value" : "إعادة تعيين فعالة"
           }
         },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Restabliment de fàbrica"
+            "value" : "Restablir"
           }
         },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Těžký restart"
+            "value" : "Tvrdý Reset"
           }
         },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hard nulstilling"
+            "value" : "Hård Nulstilling"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zurücksetzen"
+            "value" : "Harter Reset"
           }
         },
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Σκληρή επαναφορά"
+            "value" : "Σκληρό Επαναφορά"
           }
         },
         "en" : {
@@ -1303,31 +1303,31 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Restablecimiento de fábrica"
+            "value" : "Restablecer"
           }
         },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Restablecimiento completo"
+            "value" : "Reinicio Completo"
           }
         },
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Palauta tehdasasetukset"
+            "value" : "Kova Palautus"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Réinitialisation d'usine"
+            "value" : "Réinitialisation Complète"
           }
         },
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "איפוס קשה"
+            "value" : "איפוס חמור"
           }
         },
         "hi" : {
@@ -1339,25 +1339,25 @@
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tvrdi reset"
+            "value" : "Tvrdi Reset"
           }
         },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kemény visszaállítás"
+            "value" : "Kemény Újraindítás"
           }
         },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reset Keras"
+            "value" : "Setel Ulang Keras"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ripristino completo"
+            "value" : "Ripristino Completo"
           }
         },
         "ja" : {
@@ -1375,43 +1375,43 @@
         "ms" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Set Semula"
+            "value" : "Set Semula Keras"
           }
         },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tunge tilbakestillelse"
+            "value" : "Tilbakestill"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Harde reset"
+            "value" : "Harde Reset"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zresetuj"
+            "value" : "Twardy Reset"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Redefinição total"
+            "value" : "Redefinir"
           }
         },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reinicialização Dura"
+            "value" : "Redefinir Completamente"
           }
         },
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Resetare completă"
+            "value" : "Resetare Completă"
           }
         },
         "ru" : {
@@ -1423,37 +1423,37 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tvrdý reset"
+            "value" : "Tvrdý Reset"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fabriksåterställning"
+            "value" : "Hård Återställning"
           }
         },
         "th" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "รีเซ็ตให้สตรีม"
+            "value" : "ตั้งค่าใหม่"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sert Sıfırla"
+            "value" : "Sert Sıfırlama"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Складний скидання"
+            "value" : "Скидання"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Khởi động lại"
+            "value" : "Đặt Lại"
           }
         },
         "zh-Hans" : {
@@ -1465,7 +1465,7 @@
       }
     },
     "Hide" : {
-      "comment" : "3151137091432994465",
+      "comment" : "2053611664255826413",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -1494,13 +1494,13 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Verstecken"
+            "value" : "Verbergen"
           }
         },
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "κρύψτε"
+            "value" : "Απόκρυψη"
           }
         },
         "en" : {
@@ -1512,7 +1512,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Esconder"
+            "value" : "Ocultar"
           }
         },
         "es-419" : {
@@ -1536,13 +1536,13 @@
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "הסתיר"
+            "value" : "הסתר"
           }
         },
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "छुपाना"
+            "value" : "छुपाएं"
           }
         },
         "hr" : {
@@ -1560,13 +1560,13 @@
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sembunyi"
+            "value" : "Sembunyikan"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nascondere"
+            "value" : "Nascondi"
           }
         },
         "ja" : {
@@ -1578,7 +1578,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "숨다"
+            "value" : "숨기기"
           }
         },
         "ms" : {
@@ -1608,13 +1608,13 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Esconder"
+            "value" : "Ocultar"
           }
         },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ocultar"
+            "value" : "Esconder"
           }
         },
         "ro" : {
@@ -1638,7 +1638,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Göm"
+            "value" : "Dölj"
           }
         },
         "th" : {
@@ -1674,12 +1674,12 @@
       }
     },
     "Max file size 50 MB" : {
-      "comment" : "17400841936461635971",
+      "comment" : "7529852114847698353",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "حجم الملف الأقصى 50 ميغابايت"
+            "value" : "الحد الأقصى لحجم الملف 50 ميغابايت"
           }
         },
         "ca" : {
@@ -1697,7 +1697,7 @@
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Maksimal filstørrelse 50 MB"
+            "value" : "Maks filstørrelse 50 MB"
           }
         },
         "de" : {
@@ -1727,19 +1727,19 @@
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tamaño máximo del archivo 50 MB"
+            "value" : "Tamaño máximo de archivo 50 MB"
           }
         },
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tiedoston koko enintään 50 Mt"
+            "value" : "Tiedoston enimmäiskoko 50 MB"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Taille maximale du fichier 50 Mo"
+            "value" : "Taille de fichier max 50 MB"
           }
         },
         "he" : {
@@ -1763,13 +1763,13 @@
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fájlméret maximum 50 MB"
+            "value" : "Maximális fájlméret 50 MB"
           }
         },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ukuran file maksimum 50 MB"
+            "value" : "Ukuran file maksimal 50 MB"
           }
         },
         "it" : {
@@ -1781,13 +1781,13 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ファイルサイズは50MBまで"
+            "value" : "最大ファイルサイズ50 MB"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "파일 최대 크기 50MB"
+            "value" : "최대 파일 크기 50 MB"
           }
         },
         "ms" : {
@@ -1799,7 +1799,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Maksimal filstørrelse 50 MB"
+            "value" : "Maks filstørrelse 50 MB"
           }
         },
         "nl" : {
@@ -1847,7 +1847,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Maximal filstorlek 50 MB"
+            "value" : "Max filstorlek 50 MB"
           }
         },
         "th" : {
@@ -1859,31 +1859,31 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Max dosya boyutu 50 MB"
+            "value" : "Maksimum dosya boyutu 50 MB"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Максимальний розмір файлу 50 МБ."
+            "value" : "Максимальний розмір файлу 50 МБ"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dung lượng tệp tối đa 50 MB"
+            "value" : "Kích thước tệp tối đa 50 MB"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "文件大小不超过50MB"
+            "value" : "最大文件大小50 MB"
           }
         }
       }
     },
     "New Folder" : {
-      "comment" : "7694021784746180420",
+      "comment" : "3378124587162494502",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -1894,7 +1894,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nova carpeta"
+            "value" : "Carpeta Nova"
           }
         },
         "cs" : {
@@ -1906,7 +1906,7 @@
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ny mappe"
+            "value" : "Ny Mappe"
           }
         },
         "de" : {
@@ -1918,7 +1918,7 @@
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Νέος φάκελος"
+            "value" : "Νέος Φάκελος"
           }
         },
         "en" : {
@@ -1942,37 +1942,37 @@
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Uusi kansio"
+            "value" : "Uusi Kansio"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nouveau dossier"
+            "value" : "Nouveau Dossier"
           }
         },
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "תיק חדש"
+            "value" : "תיקייה חדשה"
           }
         },
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "नया फोल्डर"
+            "value" : "नया फ़ोल्डर"
           }
         },
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nova mapa"
+            "value" : "Nova Mapa"
           }
         },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Új mappa"
+            "value" : "Új Mappa"
           }
         },
         "id" : {
@@ -1984,7 +1984,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nuova cartella"
+            "value" : "Nuova Cartella"
           }
         },
         "ja" : {
@@ -2008,7 +2008,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ny mappe"
+            "value" : "Ny Mappe"
           }
         },
         "nl" : {
@@ -2020,25 +2020,25 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nowy folder"
+            "value" : "Nowy Folder"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nova pasta"
+            "value" : "Nova Pasta"
           }
         },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nova pasta"
+            "value" : "Nova Pasta"
           }
         },
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Folder nou"
+            "value" : "Dosar Nou"
           }
         },
         "ru" : {
@@ -2050,13 +2050,13 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nový priečinok"
+            "value" : "Nový Priečinok"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ny mapp"
+            "value" : "Ny Mapp"
           }
         },
         "th" : {
@@ -2092,12 +2092,12 @@
       }
     },
     "NFT" : {
-      "comment" : "6202098083085353318",
+      "comment" : "6030636340086453128",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ن.ف.ت."
+            "value" : "NFT"
           }
         },
         "ca" : {
@@ -2169,7 +2169,7 @@
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "एनएफटी"
+            "value" : "NFT"
           }
         },
         "hr" : {
@@ -2301,7 +2301,7 @@
       }
     },
     "nft folder" : {
-      "comment" : "859081194184053452",
+      "comment" : "15997285663182066218",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -2312,31 +2312,31 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "carpeta nft"
+            "value" : "carpeta NFT"
           }
         },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "nft složka"
+            "value" : "NFT složka"
           }
         },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "nft mappe"
+            "value" : "NFT mappe"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "NFT-Ordner"
+            "value" : "NFT Ordner"
           }
         },
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "φάκελος nft"
+            "value" : "φάκελος NFT"
           }
         },
         "en" : {
@@ -2348,19 +2348,19 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "carpeta nft"
+            "value" : "Carpeta NFT"
           }
         },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "carpeta nft"
+            "value" : "Carpeta NFT"
           }
         },
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "nft kansio"
+            "value" : "NFT-kansio"
           }
         },
         "fr" : {
@@ -2372,43 +2372,43 @@
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "תיקיית nft"
+            "value" : "תיקיית NFT"
           }
         },
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "एनएफटी फ़ोल्डर"
+            "value" : "NFT फ़ोल्डर"
           }
         },
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "nft mapa"
+            "value" : "NFT mapa"
           }
         },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "nft mappa"
+            "value" : "NFT mappa"
           }
         },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "folder nft"
+            "value" : "folder NFT"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "cartella nft"
+            "value" : "cartella NFT"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "NFT フォルダ"
+            "value" : "NFTフォルダ"
           }
         },
         "ko" : {
@@ -2420,43 +2420,43 @@
         "ms" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "folder nft"
+            "value" : "folder NFT"
           }
         },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "nft mappe"
+            "value" : "NFT-mappe"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "nft map"
+            "value" : "NFT map"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "folder nft"
+            "value" : "Folder NFT"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "pasta nft"
+            "value" : "Pasta NFT"
           }
         },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "pasta de NFT"
+            "value" : "pasta NFT"
           }
         },
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "dosar nft"
+            "value" : "Dosar NFT"
           }
         },
         "ru" : {
@@ -2468,60 +2468,60 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "nft priečinok"
+            "value" : "NFT priečinok"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "nft-mapp"
+            "value" : "NFT-mapp"
           }
         },
         "th" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "โฟลเดอร์ nft"
+            "value" : "โฟลเดอร์ NFT"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "nft klasörü"
+            "value" : "NFT dosyası"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "нфт папка"
+            "value" : "НФТ папка"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "thư mục nft"
+            "value" : "thư mục NFT"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "NFT 文件夹"
+            "value" : "NFT文件夹"
           }
         }
       }
     },
     "OK" : {
-      "comment" : "588546167393651953",
+      "comment" : "2822304492478367713",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "حسنا"
+            "value" : "حسناً"
           }
         },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "D'ACORD"
+            "value" : "OK"
           }
         },
         "cs" : {
@@ -2533,7 +2533,7 @@
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "I orden"
+            "value" : "OK"
           }
         },
         "de" : {
@@ -2545,7 +2545,7 @@
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Εντάξει"
+            "value" : "ΟΚ"
           }
         },
         "en" : {
@@ -2575,25 +2575,25 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "D'accord"
+            "value" : "OK"
           }
         },
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "אישור"
+            "value" : "אוקיי"
           }
         },
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ठीक है"
+            "value" : "ठिक है"
           }
         },
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "U redu"
+            "value" : "U REDU"
           }
         },
         "hu" : {
@@ -2605,7 +2605,7 @@
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "BAIK"
+            "value" : "OK"
           }
         },
         "it" : {
@@ -2623,7 +2623,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "오케이"
+            "value" : "확인"
           }
         },
         "ms" : {
@@ -2689,7 +2689,7 @@
         "th" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ดีครับ"
+            "value" : "ตกลง"
           }
         },
         "tr" : {
@@ -2701,30 +2701,30 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Добре"
+            "value" : "ОК"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Được"
+            "value" : "OK"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "好的"
+            "value" : "确定"
           }
         }
       }
     },
     "Pause" : {
-      "comment" : "6705572754559478867",
+      "comment" : "6169996161891452617",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "توقف"
+            "value" : "إيقاف مؤقت"
           }
         },
         "ca" : {
@@ -2748,7 +2748,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pausieren"
+            "value" : "Pause"
           }
         },
         "el" : {
@@ -2790,13 +2790,13 @@
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "השהייה"
+            "value" : "השהה"
           }
         },
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "रोकें।"
+            "value" : "विराम"
           }
         },
         "hr" : {
@@ -2886,7 +2886,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Prestávka"
+            "value" : "Pauza"
           }
         },
         "sv" : {
@@ -2898,13 +2898,13 @@
         "th" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "พักลง"
+            "value" : "หยุดชั่วคราว"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mola"
+            "value" : "Durdur"
           }
         },
         "uk" : {
@@ -2928,18 +2928,18 @@
       }
     },
     "Quit" : {
-      "comment" : "11815125865633460704",
+      "comment" : "8138168150957400580",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ترك"
+            "value" : "إنهاء"
           }
         },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Deixa"
+            "value" : "Surt"
           }
         },
         "cs" : {
@@ -2951,7 +2951,7 @@
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Afbryd"
+            "value" : "Afslut"
           }
         },
         "de" : {
@@ -2963,7 +2963,7 @@
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Διακοπή"
+            "value" : "Κλείστε"
           }
         },
         "en" : {
@@ -2993,25 +2993,25 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Arrêter"
+            "value" : "Quitter"
           }
         },
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "פסוק"
+            "value" : "צא"
           }
         },
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "छोड़ें्"
+            "value" : "बंद करें"
           }
         },
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Prestani"
+            "value" : "Izađi"
           }
         },
         "hu" : {
@@ -3023,7 +3023,7 @@
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Berhenti"
+            "value" : "Keluar"
           }
         },
         "it" : {
@@ -3035,13 +3035,13 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "やめる"
+            "value" : "終了"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "그만두세요"
+            "value" : "종료"
           }
         },
         "ms" : {
@@ -3059,13 +3059,13 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Stoppen"
+            "value" : "Afsluiten"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zrezygnuj"
+            "value" : "Zakończ"
           }
         },
         "pt-BR" : {
@@ -3083,7 +3083,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Renunța"
+            "value" : "Ieși"
           }
         },
         "ru" : {
@@ -3101,31 +3101,31 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sluta"
+            "value" : "Avsluta"
           }
         },
         "th" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "เลิกละ"
+            "value" : "ออก"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bırak"
+            "value" : "Çıkış"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Покинути"
+            "value" : "Вийти"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dừng"
+            "value" : "Thoát"
           }
         },
         "zh-Hans" : {
@@ -3137,7 +3137,7 @@
       }
     },
     "Remove Folder" : {
-      "comment" : "13064529161791837373",
+      "comment" : "4901239889991121121",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -3148,7 +3148,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Eliminar carpeta"
+            "value" : "Elimina la carpeta"
           }
         },
         "cs" : {
@@ -3160,7 +3160,7 @@
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fjern mappe"
+            "value" : "Fjern Mappe"
           }
         },
         "de" : {
@@ -3172,7 +3172,7 @@
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Αφαίρεση φακέλου"
+            "value" : "Αφαίρεση Φακέλου"
           }
         },
         "en" : {
@@ -3184,19 +3184,19 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Eliminar carpeta"
+            "value" : "Eliminar Carpeta"
           }
         },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Eliminar carpeta"
+            "value" : "Eliminar Carpeta"
           }
         },
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Poista kansio"
+            "value" : "Poista Kansio"
           }
         },
         "fr" : {
@@ -3214,19 +3214,19 @@
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "फोल्डर हटाएं"
+            "value" : "फ़ोल्डर हटाएं"
           }
         },
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Izbriši mapu"
+            "value" : "Ukloni Mapu"
           }
         },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mappa eltávolítása"
+            "value" : "Mappa Eltávolítása"
           }
         },
         "id" : {
@@ -3238,13 +3238,13 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Rimuovere cartella"
+            "value" : "Rimuovi Cartella"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "フォルダを削除"
+            "value" : "フォルダを削除する"
           }
         },
         "ko" : {
@@ -3262,19 +3262,19 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fjern mappe"
+            "value" : "Fjern Mappe"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Map verwijderen"
+            "value" : "Verwijder Map"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Usuń folder"
+            "value" : "Usuń Folder"
           }
         },
         "pt-BR" : {
@@ -3286,13 +3286,13 @@
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Remover pasta"
+            "value" : "Remover Pasta"
           }
         },
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Elimină folderul"
+            "value" : "Șterge Dosarul"
           }
         },
         "ru" : {
@@ -3322,19 +3322,19 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dosyayı sil"
+            "value" : "Klasörü Sil"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Видалити теку"
+            "value" : "Видалити папку"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Xóa thư mục"
+            "value" : "Xóa Thư mục"
           }
         },
         "zh-Hans" : {
@@ -3346,24 +3346,24 @@
       }
     },
     "Retry" : {
-      "comment" : "9079036437021987589",
+      "comment" : "14667223115331587627",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "إعادة المحاولة"
+            "value" : "أعد المحاولة"
           }
         },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tornar a intentar"
+            "value" : "Reintenta"
           }
         },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zkus to znovu"
+            "value" : "Zkusit znovu"
           }
         },
         "da" : {
@@ -3375,13 +3375,13 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erneut versuchen"
+            "value" : "Wiederholen"
           }
         },
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ξαναπροσπάθησε"
+            "value" : "Προσπαθήστε ξανά"
           }
         },
         "en" : {
@@ -3423,7 +3423,7 @@
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पुनः प्रयास करें।"
+            "value" : "पुनः प्रयास करें"
           }
         },
         "hr" : {
@@ -3435,13 +3435,13 @@
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Próbálkozás újra"
+            "value" : "Próbálkozz újra"
           }
         },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Coba lagi"
+            "value" : "Coba Lagi"
           }
         },
         "it" : {
@@ -3459,19 +3459,19 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "재시도"
+            "value" : "다시 시도"
           }
         },
         "ms" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cuba sekali lagi"
+            "value" : "Cuba Lagi"
           }
         },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Prøv på nytt."
+            "value" : "Prøv igjen"
           }
         },
         "nl" : {
@@ -3489,7 +3489,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tentar novamente"
+            "value" : "Tente novamente"
           }
         },
         "pt-PT" : {
@@ -3501,7 +3501,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Încercare"
+            "value" : "Reîncearcă"
           }
         },
         "ru" : {
@@ -3531,13 +3531,13 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yeniden dene"
+            "value" : "Tekrar Dene"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Спробувати знову"
+            "value" : "Спробувати ще раз"
           }
         },
         "vi" : {
@@ -3555,7 +3555,7 @@
       }
     },
     "Save Folders Onchain" : {
-      "comment" : "2903494228564986412",
+      "comment" : "5364738205306075718",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -3566,31 +3566,31 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Guardar carpetes en cadena"
+            "value" : "Desa Carpetes En Cadena"
           }
         },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Uložit složky Onchain"
+            "value" : "Uložit Složky na Blockchain"
           }
         },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gem mapper Onchain"
+            "value" : "Gem Mapper Påchain"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ordner auf der Blockchain speichern"
+            "value" : "Ordner Onchain Speichern"
           }
         },
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Αποθηκεύστε φακέλους στο Onchain"
+            "value" : "Αποθήκευση Φακέλων Onchain"
           }
         },
         "en" : {
@@ -3602,73 +3602,73 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Guardar carpetas en la cadena"
+            "value" : "Guardar Carpetas en Cadena"
           }
         },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Guardar carpetas en cadena"
+            "value" : "Guardar Carpetas en Cadena"
           }
         },
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tallenna kansionketjuun"
+            "value" : "Tallenna Kansiot Onchainiin"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enregistrer les dossiers sur la chaîne"
+            "value" : "Sauvegarder les Dossiers sur Onchain"
           }
         },
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "שמור תיקיות ברשת"
+            "value" : "שמור תיקיות בבלוקצ'יין"
           }
         },
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ऑनचैन पर फोल्डर सुरक्षित करें"
+            "value" : "ऑनचेन पर फ़ोल्डर्स सहेजें"
           }
         },
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Spremi mape na lanac"
+            "value" : "Spremi Mape Na Lanac"
           }
         },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mentse a mappákat a láncra"
+            "value" : "Mentse Mappákat a Blokkláncon"
           }
         },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Simpan Folder Onchain"
+            "value" : "Simpan Folder di Onchain"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Salva cartelle sulla blockchain"
+            "value" : "Salva Cartelle su Blockchain"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "オンチェーンにフォルダを保存する"
+            "value" : "オンチェーンでフォルダを保存"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "네트워크에 폴더 저장하기"
+            "value" : "온체인에 폴더 저장"
           }
         },
         "ms" : {
@@ -3680,25 +3680,25 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lagre mapper på kjeden"
+            "value" : "Lagre Mapper Påkjede"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sla mappen Onchain op"
+            "value" : "Bewaar Mappen Onchain"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zapisz foldery w łańcuchu"
+            "value" : "Zapisz Foldery w Łańcuchu"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Salvar pastas na cadeia"
+            "value" : "Salvar Pastas Onchain"
           }
         },
         "pt-PT" : {
@@ -3710,7 +3710,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Salvați folderele pe lanț."
+            "value" : "Salvați Folderele Onchain"
           }
         },
         "ru" : {
@@ -3722,66 +3722,66 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Uložiť priečinky na reťazi"
+            "value" : "Uložiť Priečinky Onchain"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Spara Mappar Onchain"
+            "value" : "Spara Mappar Påkedjan"
           }
         },
         "th" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "บันทึกโฟลเดอร์บนเชือง"
+            "value" : "บันทึกโฟลเดอร์บนออนเชน"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Akıllı kontrata düşürmek"
+            "value" : "Onchain'de Klasörleri Kaydet"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Зберегти теки на ланцюжку"
+            "value" : "Зберегти Папки В Ланцюгу"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lưu thư mục trên chuỗi"
+            "value" : "Lưu Thư mục Onchain"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "将文件夹保存在区块链上"
+            "value" : "保存链上文件夹"
           }
         }
       }
     },
     "Show in Finder" : {
-      "comment" : "6573811679857904611",
+      "comment" : "16812894649828053015",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "عرض في الباحث"
+            "value" : "إظهار في Finder"
           }
         },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mostra al Finder"
+            "value" : "Mostra a Finder"
           }
         },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zobrazit v Finderu"
+            "value" : "Zobrazit ve Finderu"
           }
         },
         "da" : {
@@ -3799,7 +3799,7 @@
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Εμφάνιση στο Finder"
+            "value" : "Εμφάνιση στον Finder"
           }
         },
         "en" : {
@@ -3829,19 +3829,19 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Montrer dans Finder"
+            "value" : "Afficher dans Finder"
           }
         },
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "הצג בחפשון"
+            "value" : "הצג ב-Finder"
           }
         },
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "फाइंडर में दिखाएं"
+            "value" : "Finder में दिखाएं"
           }
         },
         "hr" : {
@@ -3853,7 +3853,7 @@
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Megjelenítés a Finderben"
+            "value" : "Mutatás a Finderben"
           }
         },
         "id" : {
@@ -3871,19 +3871,19 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Finderで表示"
+            "value" : "Finderで表示する"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Finder에서 표시"
+            "value" : "Finder에서 보기"
           }
         },
         "ms" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Papar di Finder"
+            "value" : "Tunjukkan dalam Finder"
           }
         },
         "nb" : {
@@ -3919,7 +3919,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Arată în Finder"
+            "value" : "Afișează în Finder"
           }
         },
         "ru" : {
@@ -3931,7 +3931,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ukázať v Finder"
+            "value" : "Zobraziť vo Finderi"
           }
         },
         "sv" : {
@@ -3973,24 +3973,24 @@
       }
     },
     "Show in menu bar" : {
-      "comment" : "4870545579511995073",
+      "comment" : "4991368673344347589",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "إظهار في شريط القائمة"
+            "value" : "عرض في شريط القائمة"
           }
         },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mostra a la barra de menú"
+            "value" : "Mostra a la barra de menús"
           }
         },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zobrazit v nabídce"
+            "value" : "Zobrazit v menu lišty"
           }
         },
         "da" : {
@@ -4002,7 +4002,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "In der Menüleiste anzeigen"
+            "value" : "Im Menü anzeigen"
           }
         },
         "el" : {
@@ -4044,7 +4044,7 @@
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "הצג בתפריט השורה"
+            "value" : "הצג בשורת התפריט"
           }
         },
         "hi" : {
@@ -4056,19 +4056,19 @@
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Prikaži na izborniku."
+            "value" : "Prikaži u izborniku"
           }
         },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "A menüsávban mutatása"
+            "value" : "Jelenjen meg a menüsorban"
           }
         },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tampilkan di menu bar"
+            "value" : "Tampilkan di bar menu"
           }
         },
         "it" : {
@@ -4080,7 +4080,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "メニューバーに表示"
+            "value" : "メニューバーに表示する"
           }
         },
         "ko" : {
@@ -4092,7 +4092,7 @@
         "ms" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tunjukkan dalam bar menu"
+            "value" : "Paparkan dalam bar menu"
           }
         },
         "nb" : {
@@ -4110,7 +4110,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pokaż w pasku menu"
+            "value" : "Pokaż na pasku menu"
           }
         },
         "pt-BR" : {
@@ -4128,7 +4128,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Afișare în bara de meniu"
+            "value" : "Afișează în bara de meniu"
           }
         },
         "ru" : {
@@ -4140,13 +4140,13 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zobraziť v menu liste"
+            "value" : "Zobraziť v menu lište"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Visa i menyn"
+            "value" : "Visa i menyraden"
           }
         },
         "th" : {
@@ -4164,13 +4164,13 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Показати в панелі меню"
+            "value" : "Показувати в меню"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hiển thị trên thanh menu"
+            "value" : "Hiển thị trong thanh menu"
           }
         },
         "zh-Hans" : {
@@ -4182,18 +4182,18 @@
       }
     },
     "Something went wrong" : {
-      "comment" : "4778210150912711142",
+      "comment" : "1762767187344129722",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "شيء ما حدث خطأ"
+            "value" : "حدث خطأ ما"
           }
         },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Alguna cosa va malament"
+            "value" : "Alguna cosa ha anat malament"
           }
         },
         "cs" : {
@@ -4259,25 +4259,25 @@
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "कुछ गलत हो गया।"
+            "value" : "कुछ गलत हो गया"
           }
         },
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nešto nije u redu"
+            "value" : "Nešto je pošlo po zlu"
           }
         },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Valami nem stimmel"
+            "value" : "Valami hiba történt"
           }
         },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ada yang salah"
+            "value" : "Ada yang tidak beres"
           }
         },
         "it" : {
@@ -4289,7 +4289,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "何かがうまくいきませんでした。"
+            "value" : "何かが間違っていました"
           }
         },
         "ko" : {
@@ -4301,7 +4301,7 @@
         "ms" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ada sesuatu yang tidak kena"
+            "value" : "Sesuatu telah berlaku salah"
           }
         },
         "nb" : {
@@ -4337,7 +4337,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ceva a mers prost"
+            "value" : "Ceva nu a mers bine"
           }
         },
         "ru" : {
@@ -4361,7 +4361,7 @@
         "th" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "มีบางสิ่งผิดปกติ"
+            "value" : "เกิดข้อผิดพลาดบางอย่าง"
           }
         },
         "tr" : {
@@ -4379,7 +4379,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Đã xảy ra sự cố"
+            "value" : "Có gì đó đã không đúng"
           }
         },
         "zh-Hans" : {
@@ -4391,18 +4391,18 @@
       }
     },
     "Stop Downloads" : {
-      "comment" : "14219277649134296408",
+      "comment" : "5367267944073316458",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "توقف التحميلات"
+            "value" : "توقف التنزيلات"
           }
         },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aturar les descàrregues."
+            "value" : "Atura Descàrregues"
           }
         },
         "cs" : {
@@ -4420,13 +4420,13 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Stop Downloads"
+            "value" : "Downloads Stoppen"
           }
         },
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Διακοπή λήψεων"
+            "value" : "Διακοπή Λήψεων"
           }
         },
         "en" : {
@@ -4438,19 +4438,19 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Detener descargas"
+            "value" : "Detener Descargas"
           }
         },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Detener descargas"
+            "value" : "Detener Descargas"
           }
         },
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pysäytä lataukset"
+            "value" : "Lopeta Lataukset"
           }
         },
         "fr" : {
@@ -4462,7 +4462,7 @@
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "עצור הורדות"
+            "value" : "הפסק הורדות"
           }
         },
         "hi" : {
@@ -4474,13 +4474,13 @@
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zaustavi preuzimanja"
+            "value" : "Zaustavi Preuzimanja"
           }
         },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Letöltések leállítása"
+            "value" : "Leállítja a letöltéseket"
           }
         },
         "id" : {
@@ -4492,7 +4492,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Arresta i download"
+            "value" : "Ferma Download"
           }
         },
         "ja" : {
@@ -4504,7 +4504,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "다운로드를 중지하다."
+            "value" : "다운로드 중지"
           }
         },
         "ms" : {
@@ -4516,7 +4516,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Stopp nedlastinger"
+            "value" : "Stopp Nedlastinger"
           }
         },
         "nl" : {
@@ -4528,25 +4528,25 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zatrzymaj pobieranie"
+            "value" : "Zatrzymaj Pobieranie"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Parar downloads"
+            "value" : "Pare Downloads"
           }
         },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Parar Downloads"
+            "value" : "Pare Downloads"
           }
         },
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Oprește Descărcările"
+            "value" : "Opriți Descărcările"
           }
         },
         "ru" : {
@@ -4558,13 +4558,13 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zastaviť sťahovanie"
+            "value" : "Zastaviť Sťahovanie"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Stoppa nedladdningar"
+            "value" : "Stoppa Nedladdningar"
           }
         },
         "th" : {
@@ -4576,7 +4576,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "İndirmeyi durdur"
+            "value" : "İndirmeyi Durdur"
           }
         },
         "uk" : {
@@ -4588,7 +4588,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dừng tải về"
+            "value" : "Dừng Tải Xuống"
           }
         },
         "zh-Hans" : {
@@ -4600,7 +4600,7 @@
       }
     },
     "Sync" : {
-      "comment" : "2930875435882441752",
+      "comment" : "14980767563723848440",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -4611,7 +4611,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sincronitzar"
+            "value" : "Sincronitza"
           }
         },
         "cs" : {
@@ -4635,7 +4635,7 @@
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Συγχρονίζω"
+            "value" : "Συγχρονισμός"
           }
         },
         "en" : {
@@ -4671,19 +4671,19 @@
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "סנכרון"
+            "value" : "סנכרן"
           }
         },
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "सिंक्रनाइज़े करें।"
+            "value" : "सिंक"
           }
         },
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sinkronizirati"
+            "value" : "Sinkroniziraj"
           }
         },
         "hu" : {
@@ -4701,7 +4701,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sincronizzare"
+            "value" : "Sincronizza"
           }
         },
         "ja" : {
@@ -4719,13 +4719,13 @@
         "ms" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Selari"
+            "value" : "Sinkronkan"
           }
         },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Synkronisere"
+            "value" : "Synkroniser"
           }
         },
         "nl" : {
@@ -4755,7 +4755,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sincronizați"
+            "value" : "Sincronizează"
           }
         },
         "ru" : {
@@ -4773,7 +4773,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Synka"
+            "value" : "Synkronisera"
           }
         },
         "th" : {
@@ -4785,7 +4785,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Eşitlemek"
+            "value" : "Eşitle"
           }
         },
         "uk" : {
@@ -4797,7 +4797,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "đồng bộ"
+            "value" : "Đồng bộ"
           }
         },
         "zh-Hans" : {
@@ -4809,24 +4809,24 @@
       }
     },
     "Sync NFTs" : {
-      "comment" : "13745964716224992726",
+      "comment" : "14219052300701636402",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "تزامن الرموز غير القابلة للاستبدال"
+            "value" : "مزامنة الـNFTs"
           }
         },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sincronitzar NFTs"
+            "value" : "Sincronitza NFTs"
           }
         },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Synchronizace NFT"
+            "value" : "Synchronizovat NFT"
           }
         },
         "da" : {
@@ -4838,13 +4838,13 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Synchronisieren NFTs"
+            "value" : "NFTs synchronisieren"
           }
         },
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Συγχρονισμός NFTs"
+            "value" : "Συγχρονίστε NFTs"
           }
         },
         "en" : {
@@ -4880,13 +4880,13 @@
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "סנכרון NFTs"
+            "value" : "סנכרן NFTs"
           }
         },
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "सिंक एनएफटीएस"
+            "value" : "NFTs को सिंक करें"
           }
         },
         "hr" : {
@@ -4898,25 +4898,25 @@
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "NFT-k szinkronizálása"
+            "value" : "NFT-k Szinkronizálása"
           }
         },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sinkronisasi NFT"
+            "value" : "Sinkronkan NFT"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sincronizzare NFT"
+            "value" : "Sincronizza NFT"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "NFTを同期させる"
+            "value" : "NFTを同期する"
           }
         },
         "ko" : {
@@ -4928,13 +4928,13 @@
         "ms" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sinkronkan NFT"
+            "value" : "Sinkronkan NFTs"
           }
         },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Synkronisere NFT-er"
+            "value" : "Synkroniser NFTer"
           }
         },
         "nl" : {
@@ -4964,7 +4964,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sincronizare NFT-uri"
+            "value" : "Sincronizează NFT"
           }
         },
         "ru" : {
@@ -4982,7 +4982,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Synka NFT:er"
+            "value" : "Synkronisera NFTs"
           }
         },
         "th" : {
@@ -4994,31 +4994,31 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "NFT'leri senkronize et"
+            "value" : "NFT'leri Senkronize Et"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Синхронізуйте NFT'и"
+            "value" : "Синхронізувати НФТ"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Đồng bộ hóa NFT"
+            "value" : "Đồng bộ NFT"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "同步NFT"
+            "value" : "同步 NFTs"
           }
         }
       }
     },
     "View on OpenSea" : {
-      "comment" : "14466819310615019906",
+      "comment" : "5757485059474937690",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -5029,25 +5029,25 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Visualitzar a OpenSea"
+            "value" : "Veure a OpenSea"
           }
         },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pohled na OpenSea"
+            "value" : "Zobrazit na OpenSea"
           }
         },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Se på OpenSea"
+            "value" : "Vis på OpenSea"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Blick auf OpenSea"
+            "value" : "Auf OpenSea ansehen"
           }
         },
         "el" : {
@@ -5077,7 +5077,7 @@
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Näytä OpenSea:ssa"
+            "value" : "Näytä OpenSeassa"
           }
         },
         "fr" : {
@@ -5089,13 +5089,13 @@
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "צפה ב-OpenSea"
+            "value" : "הצג ב-OpenSea"
           }
         },
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ओपनसी पर देखें"
+            "value" : "OpenSea पर देखें"
           }
         },
         "hr" : {
@@ -5107,13 +5107,13 @@
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Megtekintés az OpenSea-n."
+            "value" : "Megtekintés az OpenSea-n"
           }
         },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tampilkan di OpenSea"
+            "value" : "Lihat di OpenSea"
           }
         },
         "it" : {
@@ -5137,13 +5137,13 @@
         "ms" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Paparan di OpenSea"
+            "value" : "Lihat di OpenSea"
           }
         },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vis på OpenSea"
+            "value" : "Se på OpenSea"
           }
         },
         "nl" : {
@@ -5155,7 +5155,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zobacz na OpenSea"
+            "value" : "Pokaż na OpenSea"
           }
         },
         "pt-BR" : {
@@ -5173,7 +5173,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vizualizare pe OpenSea"
+            "value" : "Vizualizați pe OpenSea"
           }
         },
         "ru" : {
@@ -5185,7 +5185,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pohľad na OpenSea"
+            "value" : "Zobraziť na OpenSea"
           }
         },
         "sv" : {
@@ -5227,18 +5227,18 @@
       }
     },
     "View on Zora" : {
-      "comment" : "4554650678790423142",
+      "comment" : "7871475072907662686",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "عرض على زورا"
+            "value" : "عرض على Zora"
           }
         },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Veure sobre la Zora"
+            "value" : "Veure a Zora"
           }
         },
         "cs" : {
@@ -5256,7 +5256,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Blick auf Zora"
+            "value" : "Auf Zora ansehen"
           }
         },
         "el" : {
@@ -5286,43 +5286,43 @@
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Näkymä Zoraan"
+            "value" : "Näytä Zorassa"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vue sur Zora"
+            "value" : "Voir sur Zora"
           }
         },
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "תצפה על Zora"
+            "value" : "צפה ב-Zora"
           }
         },
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "जोरा पर देखें"
+            "value" : "Zora पर देखें"
           }
         },
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pogled na Zoru"
+            "value" : "Pogledaj na Zora"
           }
         },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nézet Zora"
+            "value" : "Tekintse meg a Zora-n"
           }
         },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tampilan pada Zora"
+            "value" : "Lihat di Zora"
           }
         },
         "it" : {
@@ -5334,19 +5334,19 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ゾラの景色"
+            "value" : "Zoraで表示"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "조라에서 보기"
+            "value" : "Zora에서 보기"
           }
         },
         "ms" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pandangan ke Zora"
+            "value" : "Lihat di Zora"
           }
         },
         "nb" : {
@@ -5364,7 +5364,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Widok na Zora"
+            "value" : "Zobacz na Zora"
           }
         },
         "pt-BR" : {
@@ -5376,13 +5376,13 @@
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Visualizar no Zora"
+            "value" : "Ver no Zora"
           }
         },
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vizualizare la Zora"
+            "value" : "Vizualizează pe Zora"
           }
         },
         "ru" : {
@@ -5394,7 +5394,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pohľad na Zora"
+            "value" : "Zobraziť na Zora"
           }
         },
         "sv" : {
@@ -5406,19 +5406,19 @@
         "th" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "มองใน Zora"
+            "value" : "ดูบน Zora"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zora'da Görün"
+            "value" : "Zora'da Görüntüle"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Перегляд на Зорі"
+            "value" : "Переглянути на Zora"
           }
         },
         "vi" : {
@@ -5430,7 +5430,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在佐拉上看"
+            "value" : "在Zora上查看"
           }
         }
       }
