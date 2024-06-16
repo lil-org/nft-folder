@@ -14,12 +14,12 @@ struct StringTask: AI.Task {
     }
     
     var prompt: String {
-        // TODO: tune prompt
-        
         let output = """
+        help me localize macos app that downloads nfts.
+        
         translate the string to \(language.name).
         
-        keep it simple and straightforward.
+        feel free to tune it to make \(language.name) version sound natural.
         
         use both english and russian versions below as a reference.
         
@@ -28,8 +28,12 @@ struct StringTask: AI.Task {
         
         russian:
         "\(russianText)"
+                
+        keep it simple and straightforward.
+                    
+        keep formatting, capitalization, and punctuation style close to the original.
         
-        respond only with a \(language.name) version. do not add anything else to the response.
+        respond only with \(language.name) version. do not add anything else to the response.
         """
         
         return output
