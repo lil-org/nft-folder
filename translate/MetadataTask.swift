@@ -107,10 +107,4 @@ struct MetadataTask: AI.Task {
         return URL(fileURLWithPath: projectDir + "/translate/latest/" + "\(language.metadataLocalizationKey)-\(metadataKind.fileName)")
     }
     
-    private var hash: String {
-        let description = prompt + model.name
-        let data = description.data(using: .utf8)
-        return String(data!.fnv1aHash())
-    }
-    
 }

@@ -6,12 +6,11 @@ func translateAllString(_ model: AI.Model) {
     let strings = readStrings()
     var newStrings = [String: Any]()
     for key in strings.keys {
-        let localizations = (strings[key] as! [String: Any])["localizations"] as! [String: Any]
-        processSpecificString(model, key: key, localizations: localizations) { result in
-            newStrings[key] = ["localizations": result]
+        processSpecificString(model, key: key, dict: strings[key] as! [String: Any]) { result in
+            newStrings[key] = result
             if newStrings.count == strings.count {
                 writeStrings(newStrings)
-                print("✅ did write new strings")
+                print("✅ strings all done")
                 semaphore.signal()
             }
         }
@@ -19,14 +18,18 @@ func translateAllString(_ model: AI.Model) {
     semaphore.wait()
 }
 
-func processSpecificString(_ model: AI.Model, key: String, localizations: [String: Any], completion: @escaping ([String: Any]) -> Void) {
-    guard localizations.count < Language.allCases.count else {
-        completion(localizations)
-        return
-    }
-    
+func processSpecificString(_ model: AI.Model, key: String, dict: [String: Any], completion: @escaping ([String: Any]) -> Void) {
+    let hash = (dict["comment"] as? String) ?? ""
+    let localizations = dict["localizations"] as! [String: Any]
     let english = read(language: .english, from: localizations)!
     let russian = read(language: .russian, from: localizations)!
+    let newTargetHash = StringTask(model: model, language: .japanese, englishText: english, russianText: russian).hash
+    let forceTranslateAll = hash != newTargetHash
+    
+    guard localizations.count < Language.allCases.count || forceTranslateAll else {
+        completion(dict)
+        return
+    }
     
     var dict: [Language: String] = [
         .english: english,
@@ -37,12 +40,13 @@ func processSpecificString(_ model: AI.Model, key: String, localizations: [Strin
         dict[language] = value
         if dict.count == Language.allCases.count {
             let formatted = formatLocalizationsDict(dict)
-            completion(formatted)
+            let output: [String : Any] = ["comment": newTargetHash, "localizations": formatted]
+            completion(output)
         }
     }
     
     for language in Language.allCases where language != .english && language != .russian {
-        if let currentValue = read(language: language, from: localizations) {
+        if let currentValue = read(language: language, from: localizations), !forceTranslateAll {
             queue.async {
                 addTranslation(language: language, value: currentValue)
             }

@@ -69,3 +69,11 @@ struct AI {
     }
     
 }
+
+extension AI.Task {
+    var hash: String {
+        let description = prompt + model.name
+        let data = description.data(using: .utf8)
+        return String(data!.fnv1aHash())
+    }
+}
