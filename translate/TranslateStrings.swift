@@ -12,9 +12,11 @@ func translateAllString() {
             if newStrings.count == strings.count {
                 writeStrings(newStrings)
                 print("✅ did write new strings")
+                semaphore.signal()
             }
         }
     }
+    semaphore.wait()
 }
 
 func processSpecificString(key: String, localizations: [String: Any], completion: @escaping ([String: Any]) -> Void) {
@@ -38,7 +40,9 @@ func processSpecificString(key: String, localizations: [String: Any], completion
 }
 
 func translate(to: Language, english: String, russian: String, completion: @escaping (String) -> Void) {
-    // TODO: implement translation
+    queue.asyncAfter(deadline: .now() + .seconds(1)) {
+        // TODO: implement translation
+    }
 }
 
 func formatLocalizationsDict(_ input: [Language: String]) -> [String: Any] {
