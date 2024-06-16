@@ -673,15 +673,23 @@
 			isa = PBXGroup;
 			children = (
 				2C622BB82BF3C1EA0003B932 /* main.swift */,
+				2C3924C02C1F0F1200161154 /* StringTask.swift */,
+				2CA7EEA12C1C9E4000C7AEB5 /* MetadataTask.swift */,
+				2C7DD7F52C1F530D00AB5CEF /* helpers */,
+			);
+			path = translate;
+			sourceTree = "<group>";
+		};
+		2C7DD7F52C1F530D00AB5CEF /* helpers */ = {
+			isa = PBXGroup;
+			children = (
 				2CB392022C1E162C0011CC94 /* TranslateStrings.swift */,
 				2CB392002C1E15630011CC94 /* TranslateMetadata.swift */,
 				2CDDE0D42C1B1EC4002DB025 /* MetadataKind.swift */,
-				2CA7EEA12C1C9E4000C7AEB5 /* MetadataTask.swift */,
-				2C3924C02C1F0F1200161154 /* StringTask.swift */,
 				2CA7EE892C1C66D800C7AEB5 /* AI.swift */,
 				2CDDE0D22C1B1EAC002DB025 /* Language.swift */,
 			);
-			path = translate;
+			path = helpers;
 			sourceTree = "<group>";
 		};
 		2C8FD03C2BF4B33C00B3D327 /* ar-SA */ = {

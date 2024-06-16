@@ -94,9 +94,4 @@ func readStrings() -> [String: Any] {
     return strings
 }
 
-func addNewString(key: String, english: String, russian: String) {
-    // TODO: do nothing if it already exists
-    // TODO: add everywhere and translate
-}
-
 private let stringsURL = URL(fileURLWithPath: projectDir + "/nft-folder/Localizable.xcstrings")

@@ -8,6 +8,5 @@ let projectDir = FileManager.default.currentDirectoryPath
 
 translateAppStoreMetadata(.highQuality)
 translateAllString(.cheap)
-addNewString(key: "greeting", english: "yo", russian: "йо")
 
 print("🟢 all done")
