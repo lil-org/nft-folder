@@ -7,6 +7,6 @@ let queue = DispatchQueue(label: UUID().uuidString, qos: .default)
 let projectDir = FileManager.default.currentDirectoryPath
 
 translateAppStoreMetadata(.highQuality)
-translateAllString(.cheap)
+translateAllStrings(.cheap)
 
 print("🟢 all done")

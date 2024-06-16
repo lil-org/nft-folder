@@ -2,7 +2,7 @@
 
 import Foundation
 
-func translateAllString(_ model: AI.Model) {
+func translateAllStrings(_ model: AI.Model) {
     let strings = readStrings()
     var newStrings = [String: Any]()
     for key in strings.keys {
