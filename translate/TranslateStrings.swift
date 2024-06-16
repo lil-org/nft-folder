@@ -20,20 +20,35 @@ func translateAllString() {
 }
 
 func processSpecificString(key: String, localizations: [String: Any], completion: @escaping ([String: Any]) -> Void) {
-    let english = read(language: .english, from: localizations)
-    let russian = read(language: .russian, from: localizations)
+    guard localizations.count < Language.allCases.count else {
+        completion(localizations)
+        return
+    }
+    
+    let english = read(language: .english, from: localizations)!
+    let russian = read(language: .russian, from: localizations)!
     
     var dict: [Language: String] = [
         .english: english,
         .russian: russian
     ]
     
+    func addTranslation(language: Language, value: String) {
+        dict[language] = value
+        if dict.count == Language.allCases.count {
+            let formatted = formatLocalizationsDict(dict)
+            completion(formatted)
+        }
+    }
+    
     for language in Language.allCases where language != .english && language != .russian {
-        translate(to: language, english: english, russian: russian) { result in
-            dict[language] = result
-            if dict.count == Language.allCases.count {
-                let formatted = formatLocalizationsDict(dict)
-                completion(formatted)
+        if let currentValue = read(language: language, from: localizations) {
+            queue.async {
+                addTranslation(language: language, value: currentValue)
+            }
+        } else {
+            translate(to: language, english: english, russian: russian) { result in
+                addTranslation(language: language, value: result)
             }
         }
     }
@@ -41,6 +56,7 @@ func processSpecificString(key: String, localizations: [String: Any], completion
 
 func translate(to: Language, english: String, russian: String, completion: @escaping (String) -> Void) {
     queue.asyncAfter(deadline: .now() + .seconds(1)) {
+        completion("yo")
         // TODO: implement translation
     }
 }
@@ -55,9 +71,9 @@ func formatLocalizationsDict(_ input: [Language: String]) -> [String: Any] {
     return output
 }
 
-func read(language: Language, from localizations: [String: Any]) -> String {
-    let unit = (localizations[language.appLocalizationKey] as! [String: Any])["stringUnit"] as! [String: String]
-    let value = unit["value"]!
+func read(language: Language, from localizations: [String: Any]) -> String? {
+    let unit = (localizations[language.appLocalizationKey] as? [String: Any])?["stringUnit"] as? [String: String]
+    let value = unit?["value"]
     return value
 }
 
