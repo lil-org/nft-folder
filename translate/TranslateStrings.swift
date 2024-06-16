@@ -2,12 +2,12 @@
 
 import Foundation
 
-func translateAllString() {
+func translateAllString(_ model: AI.Model) {
     let strings = readStrings()
     var newStrings = [String: Any]()
     for key in strings.keys {
         let localizations = (strings[key] as! [String: Any])["localizations"] as! [String: Any]
-        processSpecificString(key: key, localizations: localizations) { result in
+        processSpecificString(model, key: key, localizations: localizations) { result in
             newStrings[key] = ["localizations": result]
             if newStrings.count == strings.count {
                 writeStrings(newStrings)
@@ -19,7 +19,7 @@ func translateAllString() {
     semaphore.wait()
 }
 
-func processSpecificString(key: String, localizations: [String: Any], completion: @escaping ([String: Any]) -> Void) {
+func processSpecificString(_ model: AI.Model, key: String, localizations: [String: Any], completion: @escaping ([String: Any]) -> Void) {
     guard localizations.count < Language.allCases.count else {
         completion(localizations)
         return
@@ -47,17 +47,17 @@ func processSpecificString(key: String, localizations: [String: Any], completion
                 addTranslation(language: language, value: currentValue)
             }
         } else {
-            translate(to: language, english: english, russian: russian) { result in
+            translate(model, to: language, english: english, russian: russian) { result in
                 addTranslation(language: language, value: result)
             }
         }
     }
 }
 
-func translate(to: Language, english: String, russian: String, completion: @escaping (String) -> Void) {
-    queue.asyncAfter(deadline: .now() + .seconds(1)) {
-        completion("yo")
-        // TODO: implement translation
+func translate(_ model: AI.Model, to: Language, english: String, russian: String, completion: @escaping (String) -> Void) {
+    let task = StringTask(model: model, language: to, englishText: english, russianText: russian)
+    AI.translate(task: task) { result in
+        completion(result)
     }
 }
 

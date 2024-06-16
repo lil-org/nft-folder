@@ -2,13 +2,17 @@
 
 import Foundation
 
-struct MetadataTask {
+struct MetadataTask: AI.Task {
     
     let model: AI.Model
     let metadataKind: MetadataKind
     let language: Language
     let englishText: String
     let russianText: String
+    
+    var description: String {
+        return "\(language.name) \(metadataKind.fileName)"
+    }
     
     var prompt: String {
         let metadataName: String
