@@ -2,17 +2,17 @@
 
 import Cocoa
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct WalletsListView: View {
-    
-    @State private var hoveringOverAddress: String? = nil
     
     @State private var isWaiting = false
     @State private var showAddWalletPopup: Bool
     @State private var showSettingsPopup = false
     @State private var newWalletAddress = ""
-    @State private var wallets = WalletsService.shared.wallets.first != nil ? [WalletsService.shared.wallets.first!] : [] // TODO: tmp, make a proper pagination
+    @State private var wallets = WalletsService.shared.wallets.first != nil ? [WalletsService.shared.wallets.first!] : []
     @State private var downloadsStatuses = AllDownloadsManager.shared.statuses
+    @State private var draggingIndex: Int? = nil
     
     init(showAddWalletPopup: Bool) {
         self.showAddWalletPopup = showAddWalletPopup
@@ -122,7 +122,11 @@ struct WalletsListView: View {
         let gridLayout = [GridItem(.adaptive(minimum: 100), spacing: 1)]
         let grid = LazyVGrid(columns: gridLayout, alignment: .leading, spacing: 1) {
             ForEach(wallets.indices, id: \.self) { index in
-                item(for: wallets[index])
+                item(for: wallets[index]).onDrag {
+                    self.draggingIndex = index
+                    return NSItemProvider(object: String(wallets[index].address) as NSString)
+                }
+                .onDrop(of: [UTType.text], delegate: WalletDropDelegate(wallets: $wallets, sourceIndex: $draggingIndex, destinationIndex: Binding.constant(IndexSet(integer: index))))
             }
         }
         return grid
@@ -130,10 +134,8 @@ struct WalletsListView: View {
     
     func item(for wallet: WatchOnlyWallet) -> some View {
         let status = downloadsStatuses[wallet] ?? .notDownloading
-        let color = hoveringOverAddress == wallet.address ? wallet.placeholderColor.opacity(0.69) : wallet.placeholderColor
-        
         let item = ZStack {
-            Rectangle().aspectRatio(1, contentMode: .fit)
+            Rectangle().aspectRatio(1, contentMode: .fit).foregroundStyle(wallet.placeholderColor)
             ClickHandler { openFolderForWallet(wallet) }
             VStack {
                 HStack {
@@ -161,17 +163,7 @@ struct WalletsListView: View {
                     Spacer()
                 }
             }
-        }
-            .foregroundStyle(color)
-            .contextMenu { walletContextMenu(wallet: wallet, status: status) }
-            .onHover { hovering in
-                if hovering {
-                    hoveringOverAddress = wallet.address
-                } else {
-                    hoveringOverAddress = nil
-                }
-            }
-        
+        }.contextMenu { walletContextMenu(wallet: wallet, status: status) }
         return item
     }
     
@@ -258,43 +250,28 @@ struct WalletsListView: View {
     }
     
     private func updateDisplayedWallets() {
-        wallets = WalletsService.shared.sortedWallets
+        wallets = WalletsService.shared.wallets
         downloadsStatuses = AllDownloadsManager.shared.statuses
     }
     
 }
 
-// TODO: use it or deprecate it
 struct WalletDropDelegate: DropDelegate {
     
-    private let itemType = "public.text"
-    
     @Binding var wallets: [WatchOnlyWallet]
+    @Binding var sourceIndex: Int?
+    @Binding var destinationIndex: IndexSet
     
     func performDrop(info: DropInfo) -> Bool {
-        guard info.hasItemsConforming(to: [itemType]) else {
-            return false
-        }
-        
-        let providers = info.itemProviders(for: [itemType])
-        for provider in providers {
-            provider.loadItem(forTypeIdentifier: itemType, options: nil) { (item, error) in
-                guard let data = item as? Data, let address = String(data: data, encoding: .utf8) else {
-                    return
-                }
-                
-                DispatchQueue.main.async {
-                    print(address)
-                    // TODO: update model
-                }
-            }
-        }
-        
-        return false // TODO: enable when it's ready
+        guard let source = sourceIndex, let destination = destinationIndex.first else { return false }
+        wallets.move(fromOffsets: IndexSet(integer: source), toOffset: destination)
+        WalletsService.shared.updateWithWallets(wallets)
+        sourceIndex = nil
+        return true
     }
     
     func validateDrop(info: DropInfo) -> Bool {
-        return info.hasItemsConforming(to: [itemType])
+        return info.hasItemsConforming(to: [UTType.text])
     }
     
     func dropUpdated(info: DropInfo) -> DropProposal? {

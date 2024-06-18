@@ -17,21 +17,6 @@ struct WalletsService {
         return SharedDefaults.watchWallets.reversed()
     }
     
-    var sortedWallets: [WatchOnlyWallet] {
-        var watchWallets = [WatchOnlyWallet]()
-        var collections = [WatchOnlyWallet]()
-        
-        for wallet in wallets {
-            if wallet.collections != nil {
-                collections.append(wallet)
-            } else {
-                watchWallets.append(wallet)
-            }
-        }
-        
-        return watchWallets + collections
-    }
-    
     func updateWithWallets(_ wallets: [WatchOnlyWallet]) {
         SharedDefaults.watchWallets = wallets.reversed()
     }
