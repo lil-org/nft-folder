@@ -28,24 +28,24 @@ struct WalletsListView: View {
                 ScrollView {
                     createGrid().frame(maxWidth: .infinity)
                 }.background(Color(nsColor: .controlBackgroundColor))
-                .toolbar {
-                    ToolbarItemGroup {
-                        Spacer()
-                        Text(Consts.noggles).fontWeight(.semibold).frame(maxWidth: .infinity, alignment: .center)
-                        Spacer()
-                        Button(action: {
-                            showSettingsPopup = true
-                        }) {
-                            Images.gearshape
-                        }
-                        
-                        Button(action: {
-                            showAddWalletPopup = true
-                        }) {
-                            Images.plus
+                    .toolbar {
+                        ToolbarItemGroup {
+                            Spacer()
+                            Text(Consts.noggles).fontWeight(.semibold).frame(maxWidth: .infinity, alignment: .center)
+                            Spacer()
+                            Button(action: {
+                                showSettingsPopup = true
+                            }) {
+                                Images.gearshape
+                            }
+                            
+                            Button(action: {
+                                showAddWalletPopup = true
+                            }) {
+                                Images.plus
+                            }
                         }
                     }
-                }
             }
         }
         .onReceive(NotificationCenter.default.publisher(for: .downloadsStatusUpdate), perform: { _ in
@@ -131,7 +131,24 @@ struct WalletsListView: View {
     func item(for wallet: WatchOnlyWallet) -> some View {
         let status = downloadsStatuses[wallet] ?? .notDownloading
         let color = hoveringOverAddress == wallet.address ? wallet.placeholderColor.opacity(0.69) : wallet.placeholderColor
-        return Rectangle().aspectRatio(1, contentMode: .fit).overlay(ClickHandler { openFolderForWallet(wallet) }).foregroundStyle(color).contextMenu {
+        
+        let item = Rectangle().aspectRatio(1, contentMode: .fit)
+            .overlay(ClickHandler { openFolderForWallet(wallet) })
+            .foregroundStyle(color)
+            .contextMenu { walletContextMenu(wallet: wallet, status: status) }
+            .onHover { hovering in
+                if hovering {
+                    hoveringOverAddress = wallet.address
+                } else {
+                    hoveringOverAddress = nil
+                }
+            }
+        
+        return item
+    }
+    
+    private func walletContextMenu(wallet: WatchOnlyWallet, status: AllDownloadsManager.Status) -> some View {
+        Group {
             Text(wallet.listDisplayName)
             Divider()
             switch status {
@@ -176,12 +193,6 @@ struct WalletsListView: View {
                 }
                 updateDisplayedWallets()
             })
-        }.onHover { hovering in
-            if hovering {
-                hoveringOverAddress = wallet.address
-            } else {
-                hoveringOverAddress = nil
-            }
         }
     }
     
