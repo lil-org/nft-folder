@@ -25,11 +25,9 @@ struct WalletsListView: View {
                     showAddWalletPopup = true
                 }).frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
-                GeometryReader { geometry in
-                    ScrollView {
-                        generateContent(in: geometry).frame(maxWidth: .infinity, alignment: .leading).padding([.horizontal], 4).padding([.top], 2)
-                    }.onDrop(of: [.text], delegate: WalletDropDelegate(wallets: $wallets)).background(Color(nsColor: .controlBackgroundColor))
-                }
+                ScrollView {
+                    createGrid().frame(maxWidth: .infinity)
+                }.background(Color(nsColor: .controlBackgroundColor))
                 .toolbar {
                     ToolbarItemGroup {
                         Spacer()
@@ -120,53 +118,83 @@ struct WalletsListView: View {
         }
     }
     
-    private func generateContent(in g: GeometryProxy) -> some View {
-        var width = CGFloat.zero
-        var height = CGFloat.zero
-        let totalHorizontalPadding: CGFloat = 8
-        
-        return ZStack(alignment: .topLeading) {
-            ForEach(wallets, id: \.self) { wallet in
-                item(for: wallet)
-                    .padding([.horizontal, .vertical], 2)
-                    .alignmentGuide(.leading, computeValue: { d in
-                        if abs(width - d.width) + totalHorizontalPadding > g.size.width {
-                            width = 0
-                            height -= d.height
-                        }
-                        let result = width
-                        if wallet == wallets.last {
-                            width = 0
-                        } else {
-                            width -= d.width
-                        }
-                        return result
-                    })
-                    .alignmentGuide(.top, computeValue: { d in
-                        let result = height
-                        if wallet == wallets.last {
-                            height = 0
-                        }
-                        return result
-                    })
-                    .onDrag {
-                        let itemProvider = NSItemProvider(object: wallet.address as NSString)
-                        return itemProvider
-                    }
+    private func createGrid() -> some View {
+        let gridLayout = [GridItem(.adaptive(minimum: 100), spacing: 1)]
+        let grid = LazyVGrid(columns: gridLayout, alignment: .leading, spacing: 1) {
+            ForEach(wallets.indices, id: \.self) { index in
+                item(for: wallets[index])
             }
         }
+        return grid
     }
     
     func item(for wallet: WatchOnlyWallet) -> some View {
         let status = downloadsStatuses[wallet] ?? .notDownloading
+        let color = hoveringOverAddress == wallet.address ? wallet.placeholderColor.opacity(0.69) : wallet.placeholderColor
+        return Rectangle().aspectRatio(1, contentMode: .fit).overlay(ClickHandler { openFolderForWallet(wallet) }).foregroundStyle(color).contextMenu {
+            Text(wallet.listDisplayName)
+            Divider()
+            switch status {
+            case .downloading:
+                Button(Strings.pause, action: {
+                    AllDownloadsManager.shared.stopDownloads(wallet: wallet)
+                })
+            case .notDownloading:
+                Button(Strings.sync, action: {
+                    AllDownloadsManager.shared.startDownloads(wallet: wallet)
+                })
+            }
+            Divider()
+            Button(Strings.viewinFinder, action: {
+                openFolderForWallet(wallet)
+            })
+            Button(Strings.viewOnZora, action: {
+                if let galleryURL = NftGallery.zora.url(wallet: wallet) {
+                    DispatchQueue.main.async { NSWorkspace.shared.open(galleryURL) }
+                }
+            })
+            Button(Strings.viewOnOpensea, action: {
+                if let galleryURL = NftGallery.opensea.url(wallet: wallet) {
+                    DispatchQueue.main.async { NSWorkspace.shared.open(galleryURL) }
+                }
+            })
+            if wallet.collections == nil {
+                Divider()
+                Button(Strings.pushCustomFolders, action: {
+                    confirmFoldersPush(wallet: wallet)
+                })
+            }
+            Divider()
+            Button(Strings.hardReset, action: {
+                hardReset(wallet: wallet)
+            })
+            Button(Strings.removeFolder, action: {
+                WalletsService.shared.removeWallet(wallet)
+                AllDownloadsManager.shared.stopDownloads(wallet: wallet)
+                if let path = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false)?.path {
+                    try? FileManager.default.removeItem(atPath: path)
+                }
+                updateDisplayedWallets()
+            })
+        }.onHover { hovering in
+            if hovering {
+                hoveringOverAddress = wallet.address
+            } else {
+                hoveringOverAddress = nil
+            }
+        }
+    }
+    
+    // TODO: reimplement within item and deprecate
+    func oldItem(wallet: WatchOnlyWallet) -> some View {
+        let status = downloadsStatuses[wallet] ?? .notDownloading
         return HStack(spacing: 0) {
             HStack {
-                Spacer().frame(width: 7)
                 if wallet.collections == nil {
                     Circle().frame(width: 23, height: 23).foregroundStyle(wallet.placeholderColor).overlay(WalletImageView(wallet: wallet))
                 }
                 Text(wallet.listDisplayName).font(.system(size: 15, weight: .regular))
-                Spacer().frame(width: 3)
+                Spacer()
             }.frame(height: 32).overlay(ClickHandler { openFolderForWallet(wallet) })
             Button(action: {
                 switch status {
@@ -186,61 +214,9 @@ struct WalletsListView: View {
                         Images.sync
                     }
                 }.frame(width: 10)
-                Spacer().frame(width: 7)
+                Spacer()
             }.buttonStyle(BorderlessButtonStyle()).foregroundStyle(.tertiary).opacity(0.8)
-        }.frame(height: 32).background(hoveringOverAddress == wallet.address ? Color.gray.opacity(0.2) : Color.gray.opacity(0.1)).cornerRadius(5)
-            .contextMenu {
-                Text(wallet.listDisplayName)
-                Divider()
-                switch status {
-                case .downloading:
-                    Button(Strings.pause, action: {
-                        AllDownloadsManager.shared.stopDownloads(wallet: wallet)
-                    })
-                case .notDownloading:
-                    Button(Strings.sync, action: {
-                        AllDownloadsManager.shared.startDownloads(wallet: wallet)
-                    })
-                }
-                Divider()
-                Button(Strings.viewinFinder, action: {
-                    openFolderForWallet(wallet)
-                })
-                Button(Strings.viewOnZora, action: {
-                    if let galleryURL = NftGallery.zora.url(wallet: wallet) {
-                        DispatchQueue.main.async { NSWorkspace.shared.open(galleryURL) }
-                    }
-                })
-                Button(Strings.viewOnOpensea, action: {
-                    if let galleryURL = NftGallery.opensea.url(wallet: wallet) {
-                        DispatchQueue.main.async { NSWorkspace.shared.open(galleryURL) }
-                    }
-                })
-                if wallet.collections == nil {
-                    Divider()
-                    Button(Strings.pushCustomFolders, action: {
-                        confirmFoldersPush(wallet: wallet)
-                    })
-                }
-                Divider()
-                Button(Strings.hardReset, action: {
-                    hardReset(wallet: wallet)
-                })
-                Button(Strings.removeFolder, action: {
-                    WalletsService.shared.removeWallet(wallet)
-                    AllDownloadsManager.shared.stopDownloads(wallet: wallet)
-                    if let path = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false)?.path {
-                        try? FileManager.default.removeItem(atPath: path)
-                    }
-                    updateDisplayedWallets()
-                })
-            }.onHover { hovering in
-                if hovering {
-                    hoveringOverAddress = wallet.address
-                } else {
-                    hoveringOverAddress = nil
-                }
-            }
+        }
     }
     
     private func confirmFoldersPush(wallet: WatchOnlyWallet) {
@@ -283,6 +259,7 @@ struct WalletsListView: View {
     
 }
 
+// TODO: use it or deprecate it
 struct WalletDropDelegate: DropDelegate {
     
     private let itemType = "public.text"
