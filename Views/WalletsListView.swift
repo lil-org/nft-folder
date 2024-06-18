@@ -132,8 +132,36 @@ struct WalletsListView: View {
         let status = downloadsStatuses[wallet] ?? .notDownloading
         let color = hoveringOverAddress == wallet.address ? wallet.placeholderColor.opacity(0.69) : wallet.placeholderColor
         
-        let item = Rectangle().aspectRatio(1, contentMode: .fit)
-            .overlay(ClickHandler { openFolderForWallet(wallet) })
+        let item = ZStack {
+            Rectangle().aspectRatio(1, contentMode: .fit)
+            ClickHandler { openFolderForWallet(wallet) }
+            VStack {
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        switch status {
+                        case .downloading:
+                            AllDownloadsManager.shared.stopDownloads(wallet: wallet)
+                        case .notDownloading:
+                            AllDownloadsManager.shared.startDownloads(wallet: wallet)
+                        }}) {
+                            ZStack {
+                                Rectangle().foregroundColor(.clear)
+                                status == .downloading ? Images.pause : Images.sync
+                            }
+                        }
+                        .frame(width: 34, height: 34)
+                        .buttonStyle(BorderlessButtonStyle())
+                }
+                Spacer()
+                HStack {
+                    Text(wallet.listDisplayName).font(.system(size: 10, weight: .regular))
+                        .foregroundColor(.white)
+                        .padding(.leading, 5).padding(.bottom, 3)
+                    Spacer()
+                }
+            }
+        }
             .foregroundStyle(color)
             .contextMenu { walletContextMenu(wallet: wallet, status: status) }
             .onHover { hovering in
@@ -193,40 +221,6 @@ struct WalletsListView: View {
                 }
                 updateDisplayedWallets()
             })
-        }
-    }
-    
-    // TODO: reimplement within item and deprecate
-    func oldItem(wallet: WatchOnlyWallet) -> some View {
-        let status = downloadsStatuses[wallet] ?? .notDownloading
-        return HStack(spacing: 0) {
-            HStack {
-                if wallet.collections == nil {
-                    Circle().frame(width: 23, height: 23).foregroundStyle(wallet.placeholderColor).overlay(WalletImageView(wallet: wallet))
-                }
-                Text(wallet.listDisplayName).font(.system(size: 15, weight: .regular))
-                Spacer()
-            }.frame(height: 32).overlay(ClickHandler { openFolderForWallet(wallet) })
-            Button(action: {
-                switch status {
-                case .downloading:
-                    AllDownloadsManager.shared.stopDownloads(wallet: wallet)
-                case .notDownloading:
-                    AllDownloadsManager.shared.startDownloads(wallet: wallet)
-                }
-            }) {
-                Spacer().frame(width: 4)
-                ZStack {
-                    Color.clear
-                    switch status {
-                    case .downloading:
-                        Images.pause
-                    case .notDownloading:
-                        Images.sync
-                    }
-                }.frame(width: 10)
-                Spacer()
-            }.buttonStyle(BorderlessButtonStyle()).foregroundStyle(.tertiary).opacity(0.8)
         }
     }
     
