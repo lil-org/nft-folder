@@ -5,12 +5,12 @@ import Combine
 
 struct WalletImageView: View {
     
-    @StateObject private var avatarLoader = AvatarLoader()
+    @StateObject private var avatarLoader: AvatarLoader
     let wallet: WatchOnlyWallet
     
     init(wallet: WatchOnlyWallet) {
         self.wallet = wallet
-        _avatarLoader = StateObject(wrappedValue: AvatarLoader())
+        _avatarLoader = StateObject(wrappedValue: AvatarLoader(wallet: wallet))
     }
     
     var body: some View {
@@ -28,8 +28,8 @@ struct WalletImageView: View {
                 Rectangle().foregroundColor(wallet.placeholderColor)
             }
         }
-        .onAppear {
-            avatarLoader.loadAvatar(wallet: wallet)
+        .onChange(of: wallet) { newWallet in
+            avatarLoader.loadAvatar(wallet: newWallet)
         }
     }
 }
@@ -37,7 +37,13 @@ struct WalletImageView: View {
 private class AvatarLoader: ObservableObject {
     @Published var avatar: NSImage?
     
+    init(wallet: WatchOnlyWallet) {
+        loadAvatar(wallet: wallet)
+    }
+    
     func loadAvatar(wallet: WatchOnlyWallet) {
+        avatar = nil
+        // TODO: access quicker, access directly
         AvatarService.getAvatar(wallet: wallet) { image in
             self.avatar = image
         }
