@@ -13,6 +13,7 @@ struct WalletsListView: View {
     @State private var wallets = WalletsService.shared.wallets.first != nil ? [WalletsService.shared.wallets.first!] : []
     @State private var downloadsStatuses = AllDownloadsManager.shared.statuses
     @State private var draggingIndex: Int? = nil
+    @State private var currentDropDestination: Int? = nil
     
     init(showAddWalletPopup: Bool) {
         self.showAddWalletPopup = showAddWalletPopup
@@ -122,20 +123,26 @@ struct WalletsListView: View {
         let gridLayout = [GridItem(.adaptive(minimum: 100), spacing: 1)]
         let grid = LazyVGrid(columns: gridLayout, alignment: .leading, spacing: 1) {
             ForEach(wallets.indices, id: \.self) { index in
-                item(for: wallets[index]).onDrag {
+                item(for: wallets[index], index: index).onDrag {
                     self.draggingIndex = index
                     return NSItemProvider(object: String(wallets[index].address) as NSString)
                 }
-                .onDrop(of: [UTType.text], delegate: WalletDropDelegate(wallets: $wallets, sourceIndex: $draggingIndex, destinationIndex: Binding.constant(IndexSet(integer: index))))
+                .onDrop(of: [UTType.text], delegate: WalletDropDelegate(wallets: $wallets,
+                                                                        sourceIndex: $draggingIndex,
+                                                                        destinationIndex: Binding.constant(IndexSet(integer: index)),
+                                                                        currentDropDestination: $currentDropDestination))
             }
         }
         return grid
     }
     
-    func item(for wallet: WatchOnlyWallet) -> some View {
+    func item(for wallet: WatchOnlyWallet, index: Int) -> some View {
         let status = downloadsStatuses[wallet] ?? .notDownloading
+        let isDestination = currentDropDestination == index
         let item = ZStack {
-            Rectangle().aspectRatio(1, contentMode: .fit).foregroundStyle(wallet.placeholderColor)
+            Rectangle().aspectRatio(1, contentMode: .fit)
+                .foregroundStyle(wallet.placeholderColor)
+                .border(isDestination ? Color.blue : Color.clear, width: 2)
             ClickHandler { openFolderForWallet(wallet) }
             VStack {
                 HStack {
@@ -261,13 +268,13 @@ struct WalletDropDelegate: DropDelegate {
     @Binding var wallets: [WatchOnlyWallet]
     @Binding var sourceIndex: Int?
     @Binding var destinationIndex: IndexSet
+    @Binding var currentDropDestination: Int?
     
     func performDrop(info: DropInfo) -> Bool {
         guard let source = sourceIndex, let destination = destinationIndex.first else { return false }
         let finalDestination = source <= destination ? destination + 1 : destination
         wallets.move(fromOffsets: IndexSet(integer: source), toOffset: finalDestination)
         WalletsService.shared.updateWithWallets(wallets)
-        sourceIndex = nil
         return true
     }
     
@@ -276,7 +283,16 @@ struct WalletDropDelegate: DropDelegate {
     }
     
     func dropUpdated(info: DropInfo) -> DropProposal? {
+        if sourceIndex != destinationIndex.first {
+            currentDropDestination = destinationIndex.first
+        }
         return DropProposal(operation: .move)
+    }
+    
+    func dropExited(info: DropInfo) {
+        if destinationIndex.first == currentDropDestination {
+            currentDropDestination = nil
+        }
     }
     
 }
