@@ -42,6 +42,7 @@ private class AvatarLoader: ObservableObject {
     }
     
     func loadAvatar(wallet: WatchOnlyWallet) {
+        // TODO: sometimes there is no need to change it at all
         avatar = nil
         // TODO: access quicker, access directly
         AvatarService.getAvatar(wallet: wallet) { image in
