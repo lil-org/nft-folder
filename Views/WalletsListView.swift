@@ -120,8 +120,8 @@ struct WalletsListView: View {
     }
     
     private func createGrid() -> some View {
-        let gridLayout = [GridItem(.adaptive(minimum: 100), spacing: 1)]
-        let grid = LazyVGrid(columns: gridLayout, alignment: .leading, spacing: 1) {
+        let gridLayout = [GridItem(.adaptive(minimum: 100), spacing: 0)]
+        let grid = LazyVGrid(columns: gridLayout, alignment: .leading, spacing: 0) {
             ForEach(wallets.indices, id: \.self) { index in
                 item(for: wallets[index], index: index).onDrag {
                     self.draggingIndex = index
