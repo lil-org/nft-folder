@@ -16,19 +16,22 @@ struct WalletImageView: View {
     var body: some View {
         Group {
             if let nsImage = avatarLoader.avatar {
-                Image(nsImage: nsImage)
-                    .resizable()
-                    .background(Color.white)
-                    .scaleEffect(1.042)
-                    .scaledToFill()
-                    .clipShape(Circle())
+                GeometryReader { geometry in
+                    Image(nsImage: nsImage)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: geometry.size.width, height: geometry.size.width)
+                        .clipped()
+                        .background(Color.white)
+                }
+            } else {
+                Rectangle().foregroundColor(wallet.placeholderColor)
             }
-        }.scaleEffect(1.023)
+        }
         .onAppear {
             avatarLoader.loadAvatar(wallet: wallet)
         }
     }
-    
 }
 
 private class AvatarLoader: ObservableObject {
@@ -41,5 +44,4 @@ private class AvatarLoader: ObservableObject {
             }
         }
     }
-    
 }

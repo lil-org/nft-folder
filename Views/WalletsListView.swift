@@ -140,11 +140,12 @@ struct WalletsListView: View {
         let status = downloadsStatuses[wallet] ?? .notDownloading
         let isDestination = currentDropDestination == index
         let item = ZStack {
-            Rectangle().aspectRatio(1, contentMode: .fit)
-                .foregroundStyle(wallet.placeholderColor)
-                .border(isDestination ? Color.blue : Color.clear, width: 2).onTapGesture {
-                    openFolderForWallet(wallet)
-                }
+            WalletImageView(wallet: wallet)
+                        .aspectRatio(1, contentMode: .fit)
+                        .border(isDestination ? Color.blue : Color.clear, width: 2)
+                        .onTapGesture {
+                            openFolderForWallet(wallet)
+                        }
             VStack {
                 HStack {
                     Spacer()
