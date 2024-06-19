@@ -31,6 +31,7 @@ struct WalletImageView: View {
         .onChange(of: wallet) { newWallet in
             avatarLoader.loadAvatar(wallet: newWallet)
         }
+        .animation(nil, value: avatarLoader.avatar)
     }
 }
 
