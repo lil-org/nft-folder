@@ -142,31 +142,33 @@ struct WalletsListView: View {
         let item = ZStack {
             Rectangle().aspectRatio(1, contentMode: .fit)
                 .foregroundStyle(wallet.placeholderColor)
-                .border(isDestination ? Color.blue : Color.clear, width: 2)
-            ClickHandler { openFolderForWallet(wallet) }
+                .border(isDestination ? Color.blue : Color.clear, width: 2).onTapGesture {
+                    openFolderForWallet(wallet)
+                }
             VStack {
                 HStack {
                     Spacer()
-                    Button(action: {
+                    ZStack {
+                        Rectangle().foregroundColor(.clear).contentShape(Rectangle())
+                        status == .downloading ? Images.pause : Images.sync
+                    }
+                    .frame(width: 34, height: 34)
+                    .onTapGesture {
                         switch status {
                         case .downloading:
                             AllDownloadsManager.shared.stopDownloads(wallet: wallet)
                         case .notDownloading:
                             AllDownloadsManager.shared.startDownloads(wallet: wallet)
-                        }}) {
-                            ZStack {
-                                Rectangle().foregroundColor(.clear)
-                                status == .downloading ? Images.pause : Images.sync
-                            }
                         }
-                        .frame(width: 34, height: 34)
-                        .buttonStyle(BorderlessButtonStyle())
+                    }
                 }
                 Spacer()
                 HStack {
                     Text(wallet.listDisplayName).font(.system(size: 10, weight: .regular))
                         .foregroundColor(.white)
-                        .padding(.leading, 5).padding(.bottom, 3)
+                        .padding(.leading, 5).padding(.bottom, 3).onTapGesture {
+                            openFolderForWallet(wallet)
+                        }
                     Spacer()
                 }
             }
