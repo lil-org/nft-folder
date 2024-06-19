@@ -167,6 +167,7 @@ struct WalletsListView: View {
                 HStack {
                     Text(wallet.listDisplayName).font(.system(size: 10, weight: .regular))
                         .foregroundColor(.white)
+                        .background(Color.black.opacity(0.7)).cornerRadius(3)
                         .padding(.leading, 5).padding(.bottom, 3).onTapGesture {
                             openFolderForWallet(wallet)
                         }
@@ -276,9 +277,7 @@ struct WalletDropDelegate: DropDelegate {
     func performDrop(info: DropInfo) -> Bool {
         guard let source = sourceIndex, let destination = destinationIndex.first else { return false }
         let finalDestination = source <= destination ? destination + 1 : destination
-        withAnimation {
-            wallets.move(fromOffsets: IndexSet(integer: source), toOffset: finalDestination)
-        }
+        wallets.move(fromOffsets: IndexSet(integer: source), toOffset: finalDestination)
         WalletsService.shared.updateWithWallets(wallets)
         return true
     }
