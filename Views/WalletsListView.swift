@@ -167,6 +167,7 @@ struct WalletsListView: View {
                 HStack {
                     Text(wallet.listDisplayName).font(.system(size: 10, weight: .regular))
                         .foregroundColor(.white)
+                        .padding(.horizontal, 1)
                         .background(Color.black.opacity(0.7)).cornerRadius(3)
                         .padding(.leading, 5).padding(.bottom, 3).onTapGesture {
                             openFolderForWallet(wallet)
