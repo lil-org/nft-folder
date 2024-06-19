@@ -10,7 +10,8 @@ struct WalletsListView: View {
     @State private var showAddWalletPopup: Bool
     @State private var showSettingsPopup = false
     @State private var newWalletAddress = ""
-    @State private var wallets = WalletsService.shared.wallets.first != nil ? [WalletsService.shared.wallets.first!] : []
+    @State private var wallets = [WatchOnlyWallet]()
+    @State private var didAppear = false
     @State private var downloadsStatuses = AllDownloadsManager.shared.statuses
     @State private var draggingIndex: Int? = nil
     @State private var currentDropDestination: Int? = nil
@@ -21,7 +22,7 @@ struct WalletsListView: View {
     
     var body: some View {
         Group {
-            if wallets.isEmpty {
+            if wallets.isEmpty && didAppear {
                 Button(Strings.newFolder, action: {
                     showAddWalletPopup = true
                 }).frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -92,9 +93,8 @@ struct WalletsListView: View {
             Window.closeAll()
         }).frame(height: 36).offset(CGSize(width: 0, height: -6)).buttonStyle(LinkButtonStyle())
             .onAppear() {
-                DispatchQueue.main.async {
-                    self.updateDisplayedWallets()
-                }
+                self.updateDisplayedWallets()
+                didAppear = true
             }
     }
     
