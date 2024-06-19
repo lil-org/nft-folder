@@ -264,7 +264,8 @@ struct WalletDropDelegate: DropDelegate {
     
     func performDrop(info: DropInfo) -> Bool {
         guard let source = sourceIndex, let destination = destinationIndex.first else { return false }
-        wallets.move(fromOffsets: IndexSet(integer: source), toOffset: destination)
+        let finalDestination = source <= destination ? destination + 1 : destination
+        wallets.move(fromOffsets: IndexSet(integer: source), toOffset: finalDestination)
         WalletsService.shared.updateWithWallets(wallets)
         sourceIndex = nil
         return true
