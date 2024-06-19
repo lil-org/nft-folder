@@ -39,9 +39,7 @@ private class AvatarLoader: ObservableObject {
     
     func loadAvatar(wallet: WatchOnlyWallet) {
         AvatarService.getAvatar(wallet: wallet) { image in
-            DispatchQueue.main.async {
-                self.avatar = image
-            }
+            self.avatar = image
         }
     }
 }
