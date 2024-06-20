@@ -42,10 +42,11 @@ private class AvatarLoader: ObservableObject {
     }
     
     func loadAvatar(wallet: WatchOnlyWallet) {
-        // TODO: access quicker, access directly
-        avatar = nil
-        AvatarService.getAvatar(wallet: wallet) { image in
-            self.avatar = image
+        avatar = AvatarService.getAvatarImmediatelly(wallet: wallet)
+        if avatar == nil {
+            AvatarService.getAvatar(wallet: wallet) { image in
+                self.avatar = image
+            }
         }
     }
 }

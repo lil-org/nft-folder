@@ -7,22 +7,26 @@ import Cocoa
 struct AvatarService {
     
     private static var attemptsCountDict = [String: Int]()
-    private static var dict = [URL: NSImage]()
+    private static var dict = [String: NSImage]()
+    
+    static func getAvatarImmediatelly(wallet: WatchOnlyWallet) -> NSImage? {
+        return dict[wallet.address]
+    }
     
     static func getAvatar(wallet: WatchOnlyWallet, completion: @escaping (NSImage) -> Void) {
+        if let image = getAvatarImmediatelly(wallet: wallet) {
+            completion(image)
+            return
+        }
+        
         guard let urlString = wallet.avatar,
               let url = URL(string: urlString),
               let fileURL = URL.avatarOnDisk(wallet: wallet),
               let folderURL = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return }
         
-        if let image = dict[fileURL] {
-            completion(image)
-            return
-        }
-        
         if let diskCachedData = try? Data(contentsOf: fileURL), let image = NSImage(data: diskCachedData) {
             completion(image)
-            dict[fileURL] = image
+            dict[wallet.address] = image
             return
         }
         
@@ -41,7 +45,7 @@ struct AvatarService {
             // TODO: make it smaller if needed, do not store an image too big
             DispatchQueue.main.async {
                 completion(image)
-                dict[fileURL] = image
+                dict[wallet.address] = image
                 NSWorkspace.shared.setIcon(image, forFile: folderURL.path, options: [])
             }
             try? data.write(to: fileURL, options: .atomic)
