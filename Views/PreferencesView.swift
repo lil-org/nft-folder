@@ -20,8 +20,7 @@ struct PreferencesView: View {
                 Text(Strings.nftFolder)
                     .font(.system(size: 20))
             }.padding(.top, 4)
-            
-            
+               
             VStack {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color(NSColor.windowBackgroundColor))
