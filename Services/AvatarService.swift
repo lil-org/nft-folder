@@ -42,13 +42,33 @@ struct AvatarService {
         
         URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data, error == nil, let image = NSImage(data: data) else { return }
-            // TODO: make it smaller if needed, do not store an image too big
-            DispatchQueue.main.async {
-                completion(image)
-                dict[wallet.address] = image
-                NSWorkspace.shared.setIcon(image, forFile: folderURL.path, options: [])
+            let maxDimension: CGFloat = 230
+            var newSize = image.size
+            
+            if image.size.width > maxDimension || image.size.height > maxDimension {
+                let aspectRatio = image.size.width / image.size.height
+                if aspectRatio > 1 {
+                    newSize = NSSize(width: maxDimension, height: maxDimension / aspectRatio)
+                } else {
+                    newSize = NSSize(width: maxDimension * aspectRatio, height: maxDimension)
+                }
             }
-            try? data.write(to: fileURL, options: .atomic)
+            
+            let resizedImage = NSImage(size: newSize)
+            resizedImage.lockFocus()
+            image.draw(in: NSRect(origin: .zero, size: newSize))
+            resizedImage.unlockFocus()
+            
+            guard let tiffData = resizedImage.tiffRepresentation,
+                  let bitmapImage = NSBitmapImageRep(data: tiffData),
+                  let jpegData = bitmapImage.representation(using: .jpeg, properties: [.compressionFactor: 0.9]) else { return }
+            
+            DispatchQueue.main.async {
+                completion(resizedImage)
+                dict[wallet.address] = resizedImage
+                NSWorkspace.shared.setIcon(resizedImage, forFile: folderURL.path, options: [])
+            }
+            try? jpegData.write(to: fileURL, options: .atomic)
         }.resume()
     }
     
