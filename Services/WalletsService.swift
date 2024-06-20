@@ -75,6 +75,7 @@ struct WalletsService {
         guard let path = URL.nftDirectory?.path, let files = try? fileManager.contentsOfDirectory(atPath: path) else { return [] }
         var knownWallets = Set(wallets)
         for name in files {
+            guard !name.hasPrefix(".") else { continue }
             if let known = knownWallets.first(where: { $0.folderDisplayName == name }) {
                 knownWallets.remove(known)
             } else if isEthAddress(name) {
@@ -90,8 +91,9 @@ struct WalletsService {
                         return
                     }
                 }
-            } else {
-                // TODO: if there is .nft folder in there, try to recover collection
+            } else if let collectionFolder = MetadataStorage.recoverCollectionIfPossible(folderPath: path + "/" + name) {
+                self.addWallet(collectionFolder)
+                onNewWallet(collectionFolder)
             }
         }
         

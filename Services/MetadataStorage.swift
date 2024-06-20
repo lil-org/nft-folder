@@ -21,6 +21,12 @@ struct MetadataStorage {
         return nil
     }
     
+    static func recoverCollectionIfPossible(folderPath: String) -> WatchOnlyWallet? {
+        print(folderPath)
+        // TODO: attempt recover using metadata
+        return nil
+    }
+    
     static func has(contentHash: UInt64, addressDirectoryURL: URL) -> Bool {
         if var url = URL.hashedMetadataDirectory(addressDirectoryURL: addressDirectoryURL) {
             url.append(path: String(contentHash))
