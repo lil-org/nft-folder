@@ -25,7 +25,7 @@ struct WalletImageView: View {
                         .background(Color.white)
                 }
             } else {
-                Rectangle().foregroundColor(wallet.placeholderColor)
+                RandomGradientShape(address: wallet.address)
             }
         }
         .onChange(of: wallet) { newWallet in
@@ -44,15 +44,37 @@ private class AvatarLoader: ObservableObject {
     
     func loadAvatar(wallet: WatchOnlyWallet) {
         // TODO: access quicker, access directly
-        
-        withAnimation {
-            avatar = nil
-        }
-        
+        avatar = nil
         AvatarService.getAvatar(wallet: wallet) { image in
-            withAnimation {
-                self.avatar = image
-            }
+            self.avatar = image
         }
+    }
+}
+
+struct RandomGradientShape: View {
+    let address: String
+    
+    var body: some View {
+        let colors = generateColors(from: address)
+        let gradient = LinearGradient(gradient: Gradient(colors: colors), startPoint: .topLeading, endPoint: .bottomTrailing)
+        
+        return Rectangle()
+            .fill(gradient)
+    }
+    
+    func generateColors(from address: String) -> [Color] {
+        let hash = simpleHash(address)
+        return [
+            Color(red: Double((hash >> 0) & 0xFF) / 255.0, green: Double((hash >> 8) & 0xFF) / 255.0, blue: Double((hash >> 16) & 0xFF) / 255.0),
+            Color(red: Double((hash >> 24) & 0xFF) / 255.0, green: Double((hash >> 32) & 0xFF) / 255.0, blue: Double((hash >> 40) & 0xFF) / 255.0)
+        ]
+    }
+    
+    func simpleHash(_ input: String) -> UInt64 {
+        var hash: UInt64 = 0
+        for char in input.utf8 {
+            hash = 31 &* hash &+ UInt64(char)
+        }
+        return hash
     }
 }
