@@ -21,9 +21,11 @@ struct WalletsService {
         SharedDefaults.watchWallets = wallets.reversed()
     }
     
-    func addWallet(_ wallet: WatchOnlyWallet) {
+    func addWallet(_ wallet: WatchOnlyWallet, skipCollectionCheck: Bool) {
         SharedDefaults.addWallet(wallet)
-        checkIfCollection(wallet: wallet)
+        if !skipCollectionCheck {
+            checkIfCollection(wallet: wallet)
+        }
     }
     
     func removeWallet(_ wallet: WatchOnlyWallet) {
@@ -83,7 +85,7 @@ struct WalletsService {
                     switch result {
                     case .success(let response):
                         let wallet = WatchOnlyWallet(address: response.address, name: response.name, avatar: response.avatar, collections: nil)
-                        self.addWallet(wallet)
+                        self.addWallet(wallet, skipCollectionCheck: false)
                         renameFolder(path: path, name: name, wallet: wallet)
                         FolderIcon.set(for: wallet)
                         onNewWallet(wallet)
@@ -92,8 +94,7 @@ struct WalletsService {
                     }
                 }
             } else if let collectionFolder = MetadataStorage.recoverCollectionIfPossible(folderPath: path + "/" + name) {
-                self.addWallet(collectionFolder)
-                onNewWallet(collectionFolder)
+                self.addWallet(collectionFolder, skipCollectionCheck: true)
             }
         }
         

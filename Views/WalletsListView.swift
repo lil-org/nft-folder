@@ -252,7 +252,7 @@ struct WalletsListView: View {
             if case .success(let response) = result {
                 if showAddWalletPopup {
                     let wallet = WatchOnlyWallet(address: response.address, name: response.name, avatar: response.avatar, collections: nil)
-                    WalletsService.shared.addWallet(wallet)
+                    WalletsService.shared.addWallet(wallet, skipCollectionCheck: false)
                     FolderIcon.set(for: wallet)
                     updateDisplayedWallets()
                     AllDownloadsManager.shared.startDownloads(wallet: wallet)

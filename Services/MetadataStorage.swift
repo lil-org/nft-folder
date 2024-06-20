@@ -22,8 +22,20 @@ struct MetadataStorage {
     }
     
     static func recoverCollectionIfPossible(folderPath: String) -> WatchOnlyWallet? {
-        print(folderPath)
-        // TODO: attempt recover using metadata
+        guard let files = try? fileManager.contentsOfDirectory(atPath: folderPath) else { return nil }
+        for name in files {
+            guard !name.hasPrefix(".") else { continue }
+            let filePath = folderPath + "/" + name
+            if let minimalMetadata = minimalMetadata(filePath: filePath),
+               let detailedMetadata = detailedMetadata(nftFilePath: filePath),
+               minimalMetadata.collectionAddress == detailedMetadata.collectionAddress,
+               let collectionName = detailedMetadata.collectionName, name.contains(collectionName) {
+                let collectionInfo = CollectionInfo(name: collectionName, network: detailedMetadata.network)
+                return WatchOnlyWallet(address: detailedMetadata.collectionAddress, name: collectionName, avatar: nil, collections: [collectionInfo])
+            } else {
+                return nil
+            }
+        }
         return nil
     }
     
