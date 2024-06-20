@@ -42,6 +42,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         allDownloadsManager.start()
         StatusBarItem.shared.showIfNeeded()
+        AvatarService.setup()
     }
     
     private func cleanupDefaultsIfNeeded() {

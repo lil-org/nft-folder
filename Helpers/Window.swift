@@ -12,4 +12,8 @@ struct Window {
         }
     }
     
+    static var thereAreSome: Bool {
+        return NSApplication.shared.windows.contains(where: { $0.className != "NSStatusBarWindow" })
+    }
+    
 }

@@ -2,14 +2,16 @@
 
 import Cocoa
 
-// TODO: clean in-memory cache if there was no opened window for a while
-
 struct AvatarService {
     
     private static var attemptsCountDict = [String: Int]()
     private static var dict = [String: NSImage]()
     
+    private static var lastAccessDate = Date()
+    private static var choresTimer: Timer?
+    
     static func getAvatarImmediatelly(wallet: WatchOnlyWallet) -> NSImage? {
+        lastAccessDate = Date()
         return dict[wallet.address]
     }
     
@@ -70,6 +72,30 @@ struct AvatarService {
             }
             try? jpegData.write(to: fileURL, options: .atomic)
         }.resume()
+    }
+    
+    static func setup() {
+        NotificationCenter.default.addObserver(forName: NSApplication.didResignActiveNotification, object: nil, queue: nil) { _ in
+            scheduleChoresTimer()
+        }
+        
+        NotificationCenter.default.addObserver(forName: NSApplication.didBecomeActiveNotification, object: nil, queue: nil) { _ in
+            choresTimer?.invalidate()
+        }
+    }
+    
+    private static func scheduleChoresTimer() {
+        let timeDelta = TimeInterval(300)
+        choresTimer?.invalidate()
+        choresTimer = Timer.scheduledTimer(withTimeInterval: timeDelta, repeats: false) { _ in
+            DispatchQueue.main.async {
+                if Date().timeIntervalSince(lastAccessDate) >= timeDelta && !Window.thereAreSome {
+                    dict.removeAll()
+                } else {
+                    scheduleChoresTimer()
+                }
+            }
+        }
     }
     
 }
