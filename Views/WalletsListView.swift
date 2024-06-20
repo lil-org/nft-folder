@@ -152,7 +152,7 @@ struct WalletsListView: View {
                     ZStack {
                         Rectangle().foregroundColor(.clear).contentShape(Rectangle())
                         status == .downloading ? Images.pause : Images.sync
-                    }
+                    }.foregroundStyle(.white.opacity(0.7))
                     .frame(width: 34, height: 34)
                     .onTapGesture {
                         switch status {
