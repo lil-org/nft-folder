@@ -5,6 +5,7 @@ import Combine
 
 struct WalletImageView: View {
     
+    @State private var windowIsFocused: Bool = true
     @StateObject private var avatarLoader: AvatarLoader
     let wallet: WatchOnlyWallet
     
@@ -27,9 +28,21 @@ struct WalletImageView: View {
             } else {
                 RandomGradientShape(address: wallet.address)
             }
-        }.overlay(FirstMouseView())
+        }
+        .overlay(
+            Group {
+                if !windowIsFocused {
+                    FirstMouseView()
+                }
+            }
+        )
         .onChange(of: wallet) { newWallet in
             avatarLoader.loadAvatar(wallet: newWallet)
+        }.onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
+            windowIsFocused = true
+        }
+        .onReceive(NotificationCenter.default.publisher(for: NSApplication.didResignActiveNotification)) { _ in
+            windowIsFocused = false
         }
     }
 }
