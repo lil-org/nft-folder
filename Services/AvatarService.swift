@@ -42,21 +42,21 @@ struct AvatarService {
         
         URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data, error == nil, let image = NSImage(data: data) else { return }
-            let maxDimension: CGFloat = 230
+            let maxDimension: CGFloat = 130
             var newSize = image.size
             
             if image.size.width > maxDimension || image.size.height > maxDimension {
                 let aspectRatio = image.size.width / image.size.height
                 if aspectRatio > 1 {
-                    newSize = NSSize(width: maxDimension, height: maxDimension / aspectRatio)
+                    newSize = NSSize(width: maxDimension, height: floor(maxDimension / aspectRatio))
                 } else {
-                    newSize = NSSize(width: maxDimension * aspectRatio, height: maxDimension)
+                    newSize = NSSize(width: floor(maxDimension * aspectRatio), height: maxDimension)
                 }
             }
             
             let resizedImage = NSImage(size: newSize)
             resizedImage.lockFocus()
-            image.draw(in: NSRect(origin: .zero, size: newSize))
+            image.draw(in: NSRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
             resizedImage.unlockFocus()
             
             guard let tiffData = resizedImage.tiffRepresentation,
