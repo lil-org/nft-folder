@@ -2,15 +2,7 @@
 
 import SwiftUI
 
-extension View {
-    
-    public func acceptFirstMouse() -> some View {
-        self.background(FirstMouseView())
-    }
-    
-}
-
-fileprivate struct FirstMouseView: NSViewRepresentable {
+struct FirstMouseView: NSViewRepresentable {
     
     func makeNSView(context: Context) -> NSView {
         return FirstMouseBackingView()

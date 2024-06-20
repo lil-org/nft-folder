@@ -153,7 +153,7 @@ struct WalletsListView: View {
                         Rectangle().foregroundColor(.clear).contentShape(Rectangle())
                         if status == .downloading {
                             Circle().frame(width: 27, height: 27).foregroundStyle(.regularMaterial)
-                            Images.pause.foregroundStyle(.white)
+                            Images.pause.foregroundStyle(.white).overlay(FirstMouseView())
                         } else {
                             Images.sync.shadow(color: .black, radius: 7).foregroundStyle(.white.opacity(0.77))
                         }
@@ -180,7 +180,7 @@ struct WalletsListView: View {
                     Spacer()
                 }
             }
-        }.contextMenu { walletContextMenu(wallet: wallet, status: status) }.acceptFirstMouse()
+        }.contextMenu { walletContextMenu(wallet: wallet, status: status) }
         return item
     }
     
