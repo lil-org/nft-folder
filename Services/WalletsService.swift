@@ -77,8 +77,7 @@ struct WalletsService {
         for name in files {
             if let known = knownWallets.first(where: { $0.folderDisplayName == name }) {
                 knownWallets.remove(known)
-            }
-            if isEthAddress(name) && !hasWallet(folderName: name) {
+            } else if isEthAddress(name) {
                 resolveENS(name) { result in
                     switch result {
                     case .success(let response):
@@ -91,6 +90,8 @@ struct WalletsService {
                         return
                     }
                 }
+            } else {
+                // TODO: if there is .nft folder in there, try to recover collection
             }
         }
         
