@@ -180,7 +180,7 @@ struct WalletsListView: View {
                     Spacer()
                 }
             }
-        }.contextMenu { walletContextMenu(wallet: wallet, status: status) }
+        }.contextMenu { walletContextMenu(wallet: wallet, status: status) }.acceptFirstMouse()
         return item
     }
     

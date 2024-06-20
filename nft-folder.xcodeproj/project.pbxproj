@@ -47,6 +47,7 @@
 		2C672CB12BFCEFB500E57B21 /* IpfsUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C672CB02BFCEFB500E57B21 /* IpfsUploader.swift */; };
 		2C8A42EA2B1A272600BE4166 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A42E92B1A272600BE4166 /* Network.swift */; };
 		2C8A4CBF2BF9ECBD00F0E9D9 /* MagicEdenApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A4CBE2BF9ECBD00F0E9D9 /* MagicEdenApi.swift */; };
+		2C8E246F2C24A6E200C13536 /* FirstMouseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8E246E2C24A6E200C13536 /* FirstMouseView.swift */; };
 		2C8EDD032C0CFE3F003CB35D /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8EDD022C0CFE3F003CB35D /* Snapshot.swift */; };
 		2C8EDD052C0D00EA003CB35D /* FolderSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8EDD042C0D00EA003CB35D /* FolderSyncService.swift */; };
 		2C91131A2B08F71200A8EE80 /* WalletDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9113192B08F71200A8EE80 /* WalletDownloader.swift */; };
@@ -162,6 +163,7 @@
 		2C672CB02BFCEFB500E57B21 /* IpfsUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IpfsUploader.swift; sourceTree = "<group>"; };
 		2C8A42E92B1A272600BE4166 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		2C8A4CBE2BF9ECBD00F0E9D9 /* MagicEdenApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicEdenApi.swift; sourceTree = "<group>"; };
+		2C8E246E2C24A6E200C13536 /* FirstMouseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstMouseView.swift; sourceTree = "<group>"; };
 		2C8EDD022C0CFE3F003CB35D /* Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
 		2C8EDD042C0D00EA003CB35D /* FolderSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderSyncService.swift; sourceTree = "<group>"; };
 		2C8FD0322BF4B33C00B3D327 /* apple_tv_privacy_policy.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = apple_tv_privacy_policy.txt; sourceTree = "<group>"; };
@@ -1376,6 +1378,7 @@
 				2C9EF2E32B8A612F00297B32 /* StatusBarItem.swift */,
 				2CE0B5E22B8686CE00B5BF4A /* FooterLink.swift */,
 				2CFA24722B19FB92009B58FD /* FileExtension.swift */,
+				2C8E246E2C24A6E200C13536 /* FirstMouseView.swift */,
 				2CC096F42B099F3400F24DD2 /* FolderIcon.swift */,
 			);
 			path = Helpers;
@@ -1803,6 +1806,7 @@
 				2CF524022BB2ECD200C18344 /* CollectionInfo.swift in Sources */,
 				2CA623E72BEE8A0200BD78FF /* UserDefaults.swift in Sources */,
 				2C508C9D2B6830E6005F548A /* Notification.swift in Sources */,
+				2C8E246F2C24A6E200C13536 /* FirstMouseView.swift in Sources */,
 				2C1B60C42B7D41D1009949C2 /* HostAppImages.swift in Sources */,
 				2CC943032B825907003219C7 /* ZoraRequest.swift in Sources */,
 				2CE33D9A2B865CFB008473E1 /* AvatarService.swift in Sources */,
