@@ -44,6 +44,11 @@ struct WalletImageView: View {
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.didResignActiveNotification)) { _ in
             windowIsFocused = false
         }
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.didUpdateWalletAvatar)) { notification in
+            if avatarLoader.avatar == nil && wallet.address == notification.object as? String {
+                avatarLoader.loadAvatar(wallet: wallet)
+            }
+        }
     }
 }
 

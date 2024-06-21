@@ -31,9 +31,9 @@ struct AvatarService {
               let folderURL = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return }
         
         DispatchQueue.main.async {
-            // TODO: deliver it to the visible window somehow
             dict[wallet.address] = resizedImage
             NSWorkspace.shared.setIcon(resizedImage, forFile: folderURL.path, options: [])
+            NotificationCenter.default.post(name: .didUpdateWalletAvatar, object: wallet.address)
         }
         
         try? jpegData.write(to: fileURL, options: .atomic)

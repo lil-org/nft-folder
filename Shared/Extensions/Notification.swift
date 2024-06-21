@@ -8,5 +8,6 @@ extension Notification.Name {
     static let fromFinder = Notification.Name("FromFinder")
     static let walletsUpdate = Notification.Name("WalletsUpdate")
     static let downloadsStatusUpdate = Notification.Name("DownloadsStatusUpdate")
+    static let didUpdateWalletAvatar = Notification.Name("didUpdateWalletAvatar")
     
 }
