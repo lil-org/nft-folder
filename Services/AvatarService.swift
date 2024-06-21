@@ -45,9 +45,7 @@ struct AvatarService {
             return
         }
         
-        guard let urlString = wallet.avatar,
-              let url = URL(string: urlString),
-              let fileURL = URL.avatarOnDisk(wallet: wallet),
+        guard let fileURL = URL.avatarOnDisk(wallet: wallet),
               let folderURL = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return }
         
         if let diskCachedData = try? Data(contentsOf: fileURL), let image = NSImage(data: diskCachedData) {
@@ -65,6 +63,8 @@ struct AvatarService {
         } else {
             attemptsCountDict[wallet.address] = 1
         }
+        
+        guard let urlString = wallet.avatar, let url = URL(string: urlString) else { return }
         
         URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data, error == nil,
