@@ -4,6 +4,9 @@ import Foundation
 
 struct FolderSyncService {
     
+    private static let ownerFoldersType: UInt32 = 4242424242
+    private static let ownerFoldersTypeHexString = "fcde41b2"
+    
     static func pushCustomFolders(wallet: WatchOnlyWallet, completion: @escaping (URL?) -> Void) {
         guard let snapshot = makeFoldersSnapshot(wallet: wallet), let fileData = try? JSONEncoder().encode(snapshot) else {
             completion(nil)
@@ -11,7 +14,7 @@ struct FolderSyncService {
         }
         
         IpfsUploader.upload(name: wallet.address, mimeType: "application/json", data: fileData) { cid in
-            if let cid = cid, let url = URL.newAttestation(recipient: wallet.address, cid: cid, folderType: 0, formatVersion: 0) {
+            if let cid = cid, let url = URL.newAttestation(recipient: wallet.address, cid: cid, folderType: ownerFoldersType) {
                 Defaults.addKnownFolderCid(cid, isCidAttested: false, for: wallet)
                 completion(url)
             } else {
@@ -31,7 +34,7 @@ struct FolderSyncService {
                     attestations(
                         take: 1,
                         orderBy: { timeCreated: desc},
-                        where: { schemaId: { equals: "\(URL.attestationSchemaId)" }, recipient: { equals: "\(wallet.address)" }, attester: { equals: "\(wallet.address)" } }
+                        where: { schemaId: { equals: "\(URL.attestationSchemaId)" }, recipient: { equals: "\(wallet.address)" }, attester: { equals: "\(wallet.address)" }, data: { contains: "\(ownerFoldersTypeHexString)"} }
                     ) {
                         attester
                         recipient
@@ -91,7 +94,7 @@ struct FolderSyncService {
             for item in rootContents {
                 if item.hasDirectoryPath {
                     let tokens = tokensInFolder(url: item)
-                    let folder = Folder(name: item.lastPathComponent, tokens: tokens)
+                    let folder = Folder(name: item.lastPathComponent, tokens: tokens, description: nil, cover: nil)
                     folders.append(folder)
                 }
             }
@@ -108,7 +111,7 @@ struct FolderSyncService {
                     let deepTokens = tokensInFolder(url: content)
                     tokens.append(contentsOf: deepTokens)
                 } else if let metadata = MetadataStorage.minimalMetadata(filePath: content.path) {
-                    let token = Token(id: metadata.tokenId, address: metadata.collectionAddress, chainId: String(metadata.network.rawValue))
+                    let token = Token(id: metadata.tokenId, address: metadata.collectionAddress, chainId: String(metadata.network.rawValue), comment: nil)
                     tokens.append(token)
                 }
             }

@@ -132,7 +132,7 @@ class WalletDownloader {
                 if content.hasDirectoryPath {
                     goThroughFolder(url: content)
                 } else if let metadata = MetadataStorage.minimalMetadata(filePath: content.path) {
-                    let token = Token(id: metadata.tokenId, address: metadata.collectionAddress, chainId: String(metadata.network.rawValue))
+                    let token = Token(id: metadata.tokenId, address: metadata.collectionAddress, chainId: String(metadata.network.rawValue), comment: nil)
                     if let folders = wipTokens[token], !folders.isEmpty {
                         for (index, folder) in folders.enumerated() {
                             let shouldCopyInsteadOfMoving = index < folders.count - 1

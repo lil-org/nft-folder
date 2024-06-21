@@ -124,7 +124,8 @@ class FileDownloader: NSObject {
         if foldersForTokens != nil {
             let token = Token(id: task.detailedMetadata.tokenId,
                               address: task.detailedMetadata.collectionAddress,
-                              chainId: String(task.detailedMetadata.network.rawValue))
+                              chainId: String(task.detailedMetadata.network.rawValue),
+                              comment: nil)
             if let customFolders = foldersForTokens?[token] {
                 tokenToRemove = token
                 task.setCustomFolders(customFolders)

@@ -11,7 +11,7 @@ extension URL {
     static let ipfsGateway = "https://ipfs.decentralized-content.com/ipfs/"
     
     static let easScanBase = "https://base.easscan.org"
-    static let attestationSchemaId = "0xb7cc934d4a5b37542520bfc80184538e568529d5fba5b13abe89109a23620cb6"
+    static let attestationSchemaId = "0x8c138d949f94e74f6503a8633bb25982946709fddc196764e26c9325b8c04f73"
     
     private enum MetadataKind: String {
         case address, minimal, detailed, hashed
@@ -25,8 +25,8 @@ extension URL {
         }
     }
     
-    static func newAttestation(recipient: String, cid: String, folderType: UInt32, formatVersion: UInt32) -> URL? {
-        let arguments = String.paddedHexString(cid: cid, folderType: folderType, formatVersion: formatVersion)
+    static func newAttestation(recipient: String, cid: String, folderType: UInt32) -> URL? {
+        let arguments = String.paddedHexString(cid: cid, folderType: folderType)
         return URL(string: "\(easScanBase)/attestation/attestWithSchema/\(attestationSchemaId)#template=\(recipient)::0:false:\(arguments)")
     }
     
