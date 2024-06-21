@@ -141,7 +141,7 @@ struct WalletsListView: View {
         let isDestination = currentDropDestination == index
         let item = ZStack {
             WalletImageView(wallet: wallet)
-                        .aspectRatio(1, contentMode: .fit)
+                        .aspectRatio(1, contentMode: .fit).contentShape(Rectangle())
                         .border(isDestination ? Color.blue : Color.clear, width: 2)
                         .onTapGesture {
                             openFolderForWallet(wallet)
