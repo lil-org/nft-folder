@@ -55,8 +55,11 @@ class FileDownloader: NSObject {
         }
     }
     
-    func addTasks(_ tasks: [DownloadFileTask]) {
+    func addTasks(_ tasks: [DownloadFileTask], wallet: WatchOnlyWallet?) {
         FileDownloader.queue.async { [weak self] in
+            if self?.wallet == nil, let wallet = wallet {
+                self?.wallet = wallet
+            }
             for task in tasks {
                 self?.preprocess(task: task)
             }
@@ -137,7 +140,7 @@ class FileDownloader: NSObject {
         if let redirectURL = FileSaver.shared.saveForTask(task, tmpLocation: tmpLocation, data: data, fileExtension: fileExtension) {
             var updatedTask = task
             if updatedTask.setRedirectURL(redirectURL) {
-                addTasks([updatedTask])
+                addTasks([updatedTask], wallet: wallet)
             }
         } else if let tokenToRemove = tokenToRemove {
             foldersForTokens?.removeValue(forKey: tokenToRemove)
@@ -182,15 +185,18 @@ extension FileDownloader: URLSessionDownloadDelegate {
         }
         
         let fileExtension: String
+        let mimeType = (downloadTask.response as? HTTPURLResponse)?.mimeType
+        
         if let requestExtension = downloadTask.originalRequest?.url?.pathExtension, !requestExtension.isEmpty {
             fileExtension = requestExtension
-        } else if let httpResponse = downloadTask.response as? HTTPURLResponse, let mimeType = httpResponse.mimeType {
+        } else if let mimeType = mimeType {
             fileExtension = FileExtension.forMimeType(mimeType)
-            if !definitelyShouldNotCreateCollectionThumbnail {
-                createCollectionThumbnailIfNeeded(tmpFileURL: location, mimeType: mimeType)
-            }
         } else {
             fileExtension = FileExtension.placeholder
+        }
+        
+        if !definitelyShouldNotCreateCollectionThumbnail, let mimeType = mimeType {
+            createCollectionThumbnailIfNeeded(tmpFileURL: location, mimeType: mimeType)
         }
         
         save(task, tmpLocation: location, data: nil, fileExtension: fileExtension)

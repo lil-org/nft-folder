@@ -85,7 +85,7 @@ class WalletDownloader {
             return DownloadFileTask(walletRootDirectory: destination, minimalMetadata: minimal, detailedMetadata: detailed)
         }
         
-        fileDownloader.addTasks(tasks)
+        fileDownloader.addTasks(tasks, wallet: wallet)
     }
     
     private func applyFolderSnapshotIfNeeded(_ snapshot: Snapshot, for wallet: WatchOnlyWallet) {

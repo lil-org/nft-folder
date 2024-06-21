@@ -26,7 +26,17 @@ struct AvatarService {
     }
     
     static func setAvatar(wallet: WatchOnlyWallet, image: NSImage) {
-        // TODO: implement
+        guard let (resizedImage, jpegData) = resizeImageIfNeeded(image),
+              let fileURL = URL.avatarOnDisk(wallet: wallet),
+              let folderURL = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return }
+        
+        DispatchQueue.main.async {
+            // TODO: deliver it to the visible window somehow
+            dict[wallet.address] = resizedImage
+            NSWorkspace.shared.setIcon(resizedImage, forFile: folderURL.path, options: [])
+        }
+        
+        try? jpegData.write(to: fileURL, options: .atomic)
     }
     
     static func getAvatar(wallet: WatchOnlyWallet, completion: @escaping (NSImage) -> Void) {
