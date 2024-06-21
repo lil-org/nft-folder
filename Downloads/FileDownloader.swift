@@ -142,6 +142,12 @@ class FileDownloader: NSObject {
         }
     }
     
+    private func createCollectionThumbnailIfNeeded(tmpFileURL: URL, mimeType: String) {
+        // TODO: check if collection
+        // TODO: check if does not have a thumbnail yet
+        // TODO: create a thumbnail if it's an image
+    }
+    
     deinit {
         invalidateAndCancel()
     }
@@ -170,6 +176,7 @@ extension FileDownloader: URLSessionDownloadDelegate {
             fileExtension = requestExtension
         } else if let httpResponse = downloadTask.response as? HTTPURLResponse, let mimeType = httpResponse.mimeType {
             fileExtension = FileExtension.forMimeType(mimeType)
+            createCollectionThumbnailIfNeeded(tmpFileURL: location, mimeType: mimeType)
         } else {
             fileExtension = FileExtension.placeholder
         }
