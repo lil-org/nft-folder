@@ -15,6 +15,20 @@ struct AvatarService {
         return dict[wallet.address]
     }
     
+    static func hasLocalAvatar(wallet: WatchOnlyWallet) -> Bool {
+        if dict[wallet.address] != nil {
+            return true
+        } else if let url = URL.avatarOnDisk(wallet: wallet) {
+            return FileManager.default.fileExists(atPath: url.path)
+        } else {
+            return false
+        }
+    }
+    
+    static func setAvatar(wallet: WatchOnlyWallet, image: NSImage) {
+        // TODO: implement
+    }
+    
     static func getAvatar(wallet: WatchOnlyWallet, completion: @escaping (NSImage) -> Void) {
         if let image = getAvatarImmediatelly(wallet: wallet) {
             completion(image)

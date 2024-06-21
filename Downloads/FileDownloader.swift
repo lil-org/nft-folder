@@ -1,6 +1,7 @@
 // ∅ nft-folder 2024
 
 import Cocoa
+import UniformTypeIdentifiers
 
 class FileDownloader: NSObject {
     
@@ -30,6 +31,7 @@ class FileDownloader: NSObject {
     
     private var foldersForTokens: [Token: [String]]?
     private var wallet: WatchOnlyWallet?
+    private var definitelyShouldNotCreateCollectionThumbnail = false
     
     init(completion: @escaping () -> Void) {
         self.completion = completion
@@ -143,9 +145,17 @@ class FileDownloader: NSObject {
     }
     
     private func createCollectionThumbnailIfNeeded(tmpFileURL: URL, mimeType: String) {
-        // TODO: check if collection
-        // TODO: check if does not have a thumbnail yet
-        // TODO: create a thumbnail if it's an image
+        guard let wallet = wallet,
+              wallet.collections?.isEmpty == false,
+              !AvatarService.hasLocalAvatar(wallet: wallet) else {
+            definitelyShouldNotCreateCollectionThumbnail = true
+            return
+        }
+        
+        if let utType = UTType(mimeType: mimeType), utType.conforms(to: .image), let image = NSImage(contentsOf: tmpFileURL) {
+            definitelyShouldNotCreateCollectionThumbnail = true
+            AvatarService.setAvatar(wallet: wallet, image: image)
+        }
     }
     
     deinit {
@@ -176,7 +186,9 @@ extension FileDownloader: URLSessionDownloadDelegate {
             fileExtension = requestExtension
         } else if let httpResponse = downloadTask.response as? HTTPURLResponse, let mimeType = httpResponse.mimeType {
             fileExtension = FileExtension.forMimeType(mimeType)
-            createCollectionThumbnailIfNeeded(tmpFileURL: location, mimeType: mimeType)
+            if !definitelyShouldNotCreateCollectionThumbnail {
+                createCollectionThumbnailIfNeeded(tmpFileURL: location, mimeType: mimeType)
+            }
         } else {
             fileExtension = FileExtension.placeholder
         }
