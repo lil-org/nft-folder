@@ -134,6 +134,7 @@ struct WalletsListView: View {
                                                                         destinationIndex: Binding.constant(IndexSet(integer: index)),
                                                                         currentDropDestination: $currentDropDestination))
             }
+            Rectangle().foregroundStyle(.regularMaterial).aspectRatio(1, contentMode: .fill) // TODO: use as + button
         }
         return grid
     }
