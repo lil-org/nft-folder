@@ -134,7 +134,11 @@ struct WalletsListView: View {
                                                                         destinationIndex: Binding.constant(IndexSet(integer: index)),
                                                                         currentDropDestination: $currentDropDestination))
             }
-            Rectangle().foregroundStyle(.regularMaterial).aspectRatio(1, contentMode: .fill) // TODO: use as + button
+            Rectangle().foregroundStyle(.regularMaterial).aspectRatio(1, contentMode: .fill).contentShape(Rectangle()).overlay(
+                Images.plus.resizable().scaledToFit().frame(width: 32, height: 32).foregroundStyle(.tertiary)
+            ).overlay(FirstMouseView()).onTapGesture {
+                showAddWalletPopup = true
+            }
         }
         return grid
     }
