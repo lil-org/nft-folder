@@ -98,6 +98,7 @@
 		2CFA24712B19F956009B58FD /* DataOrUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFA24702B19F956009B58FD /* DataOrUrl.swift */; };
 		2CFA24732B19FB92009B58FD /* FileExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFA24722B19FB92009B58FD /* FileExtension.swift */; };
 		2CFF88592C28896F0007045F /* Suggested.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CFF88582C28896F0007045F /* Suggested.xcassets */; };
+		2CFF885B2C288C9A0007045F /* SuggestedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFF885A2C288C9A0007045F /* SuggestedItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -586,6 +587,7 @@
 		2CFA24702B19F956009B58FD /* DataOrUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataOrUrl.swift; sourceTree = "<group>"; };
 		2CFA24722B19FB92009B58FD /* FileExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileExtension.swift; sourceTree = "<group>"; };
 		2CFF88582C28896F0007045F /* Suggested.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Suggested.xcassets; sourceTree = "<group>"; };
+		2CFF885A2C288C9A0007045F /* SuggestedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestedItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -655,6 +657,7 @@
 			isa = PBXGroup;
 			children = (
 				2C5065F92C0E10D600D9D01A /* AttestationResponse.swift */,
+				2CFF885A2C288C9A0007045F /* SuggestedItem.swift */,
 				2CC943002B8248CE003219C7 /* ZoraResponse.swift */,
 				2CC943022B825907003219C7 /* ZoraRequest.swift */,
 				2CFA24702B19F956009B58FD /* DataOrUrl.swift */,
@@ -1804,6 +1807,7 @@
 				2CF4C49B2B7F567B000AB4A6 /* Navigator.swift in Sources */,
 				2C1B60D62B7EBD18009949C2 /* AllDownloadsManager.swift in Sources */,
 				2C0D86C42B08E67000106915 /* WalletsService.swift in Sources */,
+				2CFF885B2C288C9A0007045F /* SuggestedItem.swift in Sources */,
 				2C1B60CB2B7E2481009949C2 /* Images.swift in Sources */,
 				2CA4CF552B07F75F00CC75F4 /* AppDelegate.swift in Sources */,
 				2CE0B5E32B8686CE00B5BF4A /* FooterLink.swift in Sources */,
