@@ -4,7 +4,10 @@ import Cocoa
 import SwiftUI
 import UniformTypeIdentifiers
 
-struct SuggestedItem {
+struct SuggestedItem: Identifiable, Hashable {
+    
+    var id: String { address }
+    
     let name: String
     let address: String
     
@@ -147,10 +150,17 @@ struct WalletsListView: View {
                                                                         destinationIndex: Binding.constant(IndexSet(integer: index)),
                                                                         currentDropDestination: $currentDropDestination))
             }
+            
             Rectangle().foregroundStyle(.regularMaterial).aspectRatio(1, contentMode: .fill).contentShape(Rectangle()).overlay(
                 Images.plus.resizable().scaledToFit().frame(width: 32, height: 32).foregroundStyle(.tertiary)
             ).overlay(FirstMouseView()).onTapGesture {
                 showAddWalletPopup = true
+            }
+            
+            ForEach(suggestedItems) { item in
+                Rectangle().foregroundStyle(.thickMaterial).aspectRatio(1, contentMode: .fill).contentShape(Rectangle()).overlay(
+                    Text(item.name)
+                )
             }
         }
         return grid
