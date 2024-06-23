@@ -4,6 +4,18 @@ import Cocoa
 import SwiftUI
 import UniformTypeIdentifiers
 
+struct SuggestedItem {
+    let name: String
+    let address: String
+    
+    static let all: [SuggestedItem] = [
+        SuggestedItem(name: "Allstarz Official", address: "0xec0a7a26456b8451aefc4b00393ce1beff5eb3e9"),
+        SuggestedItem(name: "Pudgy Penguins", address: "0xbd3531da5cf5857e7cfaa92426877b022e612cf8"),
+        SuggestedItem(name: "Creature World", address: "0xc92ceddfb8dd984a89fb494c376f9a48b999aafc")
+    ]
+    
+}
+
 struct WalletsListView: View {
     
     @State private var isWaiting = false
@@ -11,6 +23,7 @@ struct WalletsListView: View {
     @State private var showSettingsPopup = false
     @State private var newWalletAddress = ""
     @State private var wallets = [WatchOnlyWallet]()
+    @State private var suggestedItems = SuggestedItem.all
     @State private var didAppear = false
     @State private var downloadsStatuses = AllDownloadsManager.shared.statuses
     @State private var draggingIndex: Int? = nil
