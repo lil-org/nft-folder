@@ -159,7 +159,12 @@ struct WalletsListView: View {
             
             ForEach(suggestedItems) { item in
                 Rectangle().foregroundStyle(.thickMaterial).aspectRatio(1, contentMode: .fill).contentShape(Rectangle()).overlay(
-                    Text(item.name)
+                    VStack {
+                        Spacer()
+                        gridItemText(item.name) {
+                            // TODO: add suggested item
+                        }
+                    }
                 )
             }
         }
@@ -199,19 +204,25 @@ struct WalletsListView: View {
                     }
                 }
                 Spacer()
-                HStack {
-                    Text(wallet.listDisplayName).font(.system(size: 10, weight: .regular))
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 1)
-                        .background(Color.black.opacity(0.7)).cornerRadius(3)
-                        .padding(.leading, 5).padding(.bottom, 3).onTapGesture {
-                            openFolderForWallet(wallet)
-                        }
-                    Spacer()
+                gridItemText(wallet.listDisplayName) {
+                    openFolderForWallet(wallet)
                 }
             }
         }.contextMenu { walletContextMenu(wallet: wallet, status: status) }
         return item
+    }
+    
+    private func gridItemText(_ text: String, onTap: @escaping () -> Void) -> some View {
+        HStack {
+            Text(text).font(.system(size: 10, weight: .regular))
+                .foregroundColor(.white)
+                .padding(.horizontal, 1)
+                .background(Color.black.opacity(0.7)).cornerRadius(3)
+                .padding(.leading, 5).padding(.bottom, 3).onTapGesture {
+                    onTap()
+                }
+            Spacer()
+        }
     }
     
     private func walletContextMenu(wallet: WatchOnlyWallet, status: AllDownloadsManager.Status) -> some View {
