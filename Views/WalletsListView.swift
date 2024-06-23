@@ -158,14 +158,15 @@ struct WalletsListView: View {
             }
             
             ForEach(suggestedItems) { item in
-                Rectangle().foregroundStyle(.thickMaterial).aspectRatio(1, contentMode: .fill).contentShape(Rectangle()).overlay(
+                ZStack {
+                    Image(item.address).resizable().scaledToFill().clipped().aspectRatio(1, contentMode: .fit).contentShape(Rectangle())
                     VStack {
                         Spacer()
                         gridItemText(item.name) {
                             // TODO: add suggested item
                         }
                     }
-                )
+                }
             }
         }
         return grid

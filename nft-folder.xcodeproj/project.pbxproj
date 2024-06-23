@@ -97,6 +97,7 @@
 		2CF7339E2B0ED50000B1AC68 /* ZoraApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7339D2B0ED50000B1AC68 /* ZoraApi.swift */; };
 		2CFA24712B19F956009B58FD /* DataOrUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFA24702B19F956009B58FD /* DataOrUrl.swift */; };
 		2CFA24732B19FB92009B58FD /* FileExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFA24722B19FB92009B58FD /* FileExtension.swift */; };
+		2CFF88592C28896F0007045F /* Suggested.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CFF88582C28896F0007045F /* Suggested.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -584,6 +585,7 @@
 		2CF7339D2B0ED50000B1AC68 /* ZoraApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoraApi.swift; sourceTree = "<group>"; };
 		2CFA24702B19F956009B58FD /* DataOrUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataOrUrl.swift; sourceTree = "<group>"; };
 		2CFA24722B19FB92009B58FD /* FileExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileExtension.swift; sourceTree = "<group>"; };
+		2CFF88582C28896F0007045F /* Suggested.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Suggested.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1456,6 +1458,7 @@
 			children = (
 				2CA4CF542B07F75F00CC75F4 /* AppDelegate.swift */,
 				2CA4CF582B07F76000CC75F4 /* Assets.xcassets */,
+				2CFF88582C28896F0007045F /* Suggested.xcassets */,
 				2CA4CF5A2B07F76000CC75F4 /* Main.storyboard */,
 				2CA4CF5D2B07F76000CC75F4 /* nft_folder.entitlements */,
 				2CA4CF642B07FAC600CC75F4 /* .gitignore */,
@@ -1683,6 +1686,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CA4CF592B07F76000CC75F4 /* Assets.xcassets in Resources */,
+				2CFF88592C28896F0007045F /* Suggested.xcassets in Resources */,
 				2CA4CF5C2B07F76000CC75F4 /* Main.storyboard in Resources */,
 				2CE9A7712BAD8ECD00579BF7 /* Localizable.xcstrings in Resources */,
 			);
