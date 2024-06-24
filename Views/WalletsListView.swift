@@ -145,10 +145,13 @@ struct WalletsListView: View {
             ForEach(suggestedItems) { item in
                 ZStack {
                     Image(item.address).resizable().scaledToFill().clipped().aspectRatio(1, contentMode: .fit).contentShape(Rectangle())
+                        .onTapGesture {
+                            didSelectSuggestedItem(item)
+                        }
                     VStack {
                         Spacer()
                         gridItemText(item.name) {
-                            // TODO: add suggested item
+                            didSelectSuggestedItem(item)
                         }
                     }
                 }
@@ -271,6 +274,11 @@ struct WalletsListView: View {
                 }
             }
         }
+    }
+    
+    private func didSelectSuggestedItem(_ item: SuggestedItem) {
+        //TODO: implement
+        print("yo")
     }
     
     private func addWallet() {
