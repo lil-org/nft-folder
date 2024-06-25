@@ -69,7 +69,7 @@ struct WalletsListView: View {
                         ProgressView().progressViewStyle(.circular).scaleEffect(0.5)
                     } else {
                         Button(Strings.ok, action: {
-                            addWallet()
+                            resolveEnsAndAddWallet()
                         }).keyboardShortcut(.defaultAction)
                     }
                 }
@@ -277,20 +277,25 @@ struct WalletsListView: View {
     }
     
     private func didSelectSuggestedItem(_ item: SuggestedItem) {
-        //TODO: implement
-        print("yo")
+        let network = Network.ethereum // TODO: bundle collection network
+        let wallet = WatchOnlyWallet(address: item.address, name: item.name, avatar: nil, collections: [CollectionInfo(name: item.name, network: network)])
+        addWallet(wallet)
     }
     
-    private func addWallet() {
+    private func addWallet(_ wallet: WatchOnlyWallet) {
+        WalletsService.shared.addWallet(wallet, skipCollectionCheck: false)
+        FolderIcon.set(for: wallet)
+        updateDisplayedWallets()
+        AllDownloadsManager.shared.startDownloads(wallet: wallet)
+    }
+    
+    private func resolveEnsAndAddWallet() {
         isWaiting = true
         WalletsService.shared.resolveENS(newWalletAddress) { result in
             if case .success(let response) = result {
                 if showAddWalletPopup {
                     let wallet = WatchOnlyWallet(address: response.address, name: response.name, avatar: response.avatar, collections: nil)
-                    WalletsService.shared.addWallet(wallet, skipCollectionCheck: false)
-                    FolderIcon.set(for: wallet)
-                    updateDisplayedWallets()
-                    AllDownloadsManager.shared.startDownloads(wallet: wallet)
+                    addWallet(wallet)
                 }
                 showAddWalletPopup = false
                 newWalletAddress = ""
