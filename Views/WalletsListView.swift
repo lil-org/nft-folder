@@ -23,7 +23,7 @@ struct WalletsListView: View {
     
     var body: some View {
         Group {
-            if wallets.isEmpty && didAppear {
+            if wallets.isEmpty && didAppear && suggestedItems.isEmpty {
                 Button(Strings.newFolder, action: {
                     showAddWalletPopup = true
                 }).frame(maxWidth: .infinity, maxHeight: .infinity)
