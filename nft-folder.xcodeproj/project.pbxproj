@@ -657,7 +657,6 @@
 			isa = PBXGroup;
 			children = (
 				2C5065F92C0E10D600D9D01A /* AttestationResponse.swift */,
-				2CFF885A2C288C9A0007045F /* SuggestedItem.swift */,
 				2CC943002B8248CE003219C7 /* ZoraResponse.swift */,
 				2CC943022B825907003219C7 /* ZoraRequest.swift */,
 				2CFA24702B19F956009B58FD /* DataOrUrl.swift */,
@@ -1389,6 +1388,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		2C9C60332C2C34D4001D9B51 /* Suggested Items */ = {
+			isa = PBXGroup;
+			children = (
+				2CFF885A2C288C9A0007045F /* SuggestedItem.swift */,
+			);
+			path = "Suggested Items";
+			sourceTree = "<group>";
+		};
 		2CA34B4F2B08B32600DAB623 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
@@ -1438,6 +1445,7 @@
 				2C91131C2B08FCDF00A8EE80 /* Views */,
 				2CA34B4F2B08B32600DAB623 /* Shared */,
 				2CA34B632B08C01300DAB623 /* nft-finder-extension */,
+				2C9C60332C2C34D4001D9B51 /* Suggested Items */,
 				2CA7EE8C2C1C746900C7AEB5 /* app_store */,
 				2C622BB72BF3C1EA0003B932 /* translate */,
 				2C8FD1CB2BF4B33C00B3D327 /* fastlane */,
