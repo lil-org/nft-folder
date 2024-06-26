@@ -273,8 +273,8 @@ struct WalletsListView: View {
     private func didSelectSuggestedItem(_ item: SuggestedItem) {
         let wallet = WatchOnlyWallet(address: item.address, name: item.name, avatar: nil, collections: [CollectionInfo(name: item.name, network: item.network)])
         addWallet(wallet, skipCollectionCheck: true)
+        openFolderForWallet(wallet)
         // TODO: pass bundled avatar
-        // TODO: open folder
         // TODO: hide suggested item
     }
     
