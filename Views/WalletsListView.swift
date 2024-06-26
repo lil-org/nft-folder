@@ -272,11 +272,14 @@ struct WalletsListView: View {
     
     private func didSelectSuggestedItem(_ item: SuggestedItem) {
         let wallet = WatchOnlyWallet(address: item.address, name: item.name, avatar: nil, collections: [CollectionInfo(name: item.name, network: item.network)])
-        addWallet(wallet)
+        addWallet(wallet, skipCollectionCheck: true)
+        // TODO: pass bundled avatar
+        // TODO: open folder
+        // TODO: hide suggested item
     }
     
-    private func addWallet(_ wallet: WatchOnlyWallet) {
-        WalletsService.shared.addWallet(wallet, skipCollectionCheck: false)
+    private func addWallet(_ wallet: WatchOnlyWallet, skipCollectionCheck: Bool) {
+        WalletsService.shared.addWallet(wallet, skipCollectionCheck: skipCollectionCheck)
         FolderIcon.set(for: wallet)
         updateDisplayedWallets()
         AllDownloadsManager.shared.startDownloads(wallet: wallet)
@@ -288,7 +291,7 @@ struct WalletsListView: View {
             if case .success(let response) = result {
                 if showAddWalletPopup {
                     let wallet = WatchOnlyWallet(address: response.address, name: response.name, avatar: response.avatar, collections: nil)
-                    addWallet(wallet)
+                    addWallet(wallet, skipCollectionCheck: false)
                 }
                 showAddWalletPopup = false
                 newWalletAddress = ""
