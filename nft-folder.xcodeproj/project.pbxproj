@@ -45,6 +45,7 @@
 		2C60AAD12B8A4DE200F2C143 /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60AAD02B8A4DE200F2C143 /* Window.swift */; };
 		2C622BB92BF3C1EA0003B932 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C622BB82BF3C1EA0003B932 /* main.swift */; };
 		2C672CB12BFCEFB500E57B21 /* IpfsUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C672CB02BFCEFB500E57B21 /* IpfsUploader.swift */; };
+		2C8812422C2CBA7C005BFAA5 /* suggested-items.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C8812412C2CBA7C005BFAA5 /* suggested-items.json */; };
 		2C8A42EA2B1A272600BE4166 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A42E92B1A272600BE4166 /* Network.swift */; };
 		2C8A4CBF2BF9ECBD00F0E9D9 /* MagicEdenApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A4CBE2BF9ECBD00F0E9D9 /* MagicEdenApi.swift */; };
 		2C8E246F2C24A6E200C13536 /* FirstMouseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8E246E2C24A6E200C13536 /* FirstMouseView.swift */; };
@@ -164,6 +165,7 @@
 		2C622BB62BF3C1EA0003B932 /* translate */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = translate; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C622BB82BF3C1EA0003B932 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		2C672CB02BFCEFB500E57B21 /* IpfsUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IpfsUploader.swift; sourceTree = "<group>"; };
+		2C8812412C2CBA7C005BFAA5 /* suggested-items.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "suggested-items.json"; sourceTree = "<group>"; };
 		2C8A42E92B1A272600BE4166 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		2C8A4CBE2BF9ECBD00F0E9D9 /* MagicEdenApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicEdenApi.swift; sourceTree = "<group>"; };
 		2C8E246E2C24A6E200C13536 /* FirstMouseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstMouseView.swift; sourceTree = "<group>"; };
@@ -1394,6 +1396,7 @@
 			isa = PBXGroup;
 			children = (
 				2CFF885A2C288C9A0007045F /* SuggestedItem.swift */,
+				2C8812412C2CBA7C005BFAA5 /* suggested-items.json */,
 				2C9C60342C2C5FE8001D9B51 /* SuggestedItemsService.swift */,
 			);
 			path = "Suggested Items";
@@ -1701,6 +1704,7 @@
 			files = (
 				2CA4CF592B07F76000CC75F4 /* Assets.xcassets in Resources */,
 				2CFF88592C28896F0007045F /* Suggested.xcassets in Resources */,
+				2C8812422C2CBA7C005BFAA5 /* suggested-items.json in Resources */,
 				2CA4CF5C2B07F76000CC75F4 /* Main.storyboard in Resources */,
 				2CE9A7712BAD8ECD00579BF7 /* Localizable.xcstrings in Resources */,
 			);
