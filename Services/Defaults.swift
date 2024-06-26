@@ -12,6 +12,15 @@ struct Defaults {
         }
     }
     
+    static var suggestedItemsToHide: [String] {
+        get {
+            userDefaults.array(forKey: "suggestedItemsToHide") as? [String] ?? []
+        }
+        set {
+            userDefaults.set(newValue, forKey: "suggestedItemsToHide")
+        }
+    }
+    
     static func cleanupForWallet(_ wallet: WatchOnlyWallet) {
         for isAttested in [true, false] {
             userDefaults.removeObject(forKey: folderCidKey(wallet: wallet, isCidAttested: isAttested))

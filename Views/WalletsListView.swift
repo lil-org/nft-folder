@@ -11,7 +11,7 @@ struct WalletsListView: View {
     @State private var showSettingsPopup = false
     @State private var newWalletAddress = ""
     @State private var wallets = [WatchOnlyWallet]()
-    @State private var suggestedItems = SuggestedItem.all
+    @State private var suggestedItems = SuggestedItemsService.allItems
     @State private var didAppear = false
     @State private var downloadsStatuses = AllDownloadsManager.shared.statuses
     @State private var draggingIndex: Int? = nil
@@ -275,10 +275,10 @@ struct WalletsListView: View {
         addWallet(wallet, skipCollectionCheck: true)
         openFolderForWallet(wallet)
         suggestedItems.removeAll(where: { item.id == $0.id })
-        item.doNotSuggestAnymore()
         if let image = NSImage(named: item.address) {
             AvatarService.setAvatar(wallet: wallet, image: image)
         }
+        SuggestedItemsService.doNotSuggestAnymore(item: item)
     }
     
     private func addWallet(_ wallet: WatchOnlyWallet, skipCollectionCheck: Bool) {
