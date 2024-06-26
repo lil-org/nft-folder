@@ -81,6 +81,7 @@
 		2CB392012C1E15630011CC94 /* TranslateMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB392002C1E15630011CC94 /* TranslateMetadata.swift */; };
 		2CB392032C1E162C0011CC94 /* TranslateStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB392022C1E162C0011CC94 /* TranslateStrings.swift */; };
 		2CC096F52B099F3400F24DD2 /* FolderIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC096F42B099F3400F24DD2 /* FolderIcon.swift */; };
+		2CC4FF092C2CBC52007E90E8 /* Suggested.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CC4FF082C2CBC52007E90E8 /* Suggested.xcassets */; };
 		2CC943012B8248CE003219C7 /* ZoraResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC943002B8248CE003219C7 /* ZoraResponse.swift */; };
 		2CC943032B825907003219C7 /* ZoraRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC943022B825907003219C7 /* ZoraRequest.swift */; };
 		2CD4FC8A2B684A0900C965F6 /* IpfsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD4FC892B684A0900C965F6 /* IpfsResponse.swift */; };
@@ -99,7 +100,6 @@
 		2CF7339E2B0ED50000B1AC68 /* ZoraApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7339D2B0ED50000B1AC68 /* ZoraApi.swift */; };
 		2CFA24712B19F956009B58FD /* DataOrUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFA24702B19F956009B58FD /* DataOrUrl.swift */; };
 		2CFA24732B19FB92009B58FD /* FileExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFA24722B19FB92009B58FD /* FileExtension.swift */; };
-		2CFF88592C28896F0007045F /* Suggested.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CFF88582C28896F0007045F /* Suggested.xcassets */; };
 		2CFF885B2C288C9A0007045F /* SuggestedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFF885A2C288C9A0007045F /* SuggestedItem.swift */; };
 /* End PBXBuildFile section */
 
@@ -573,6 +573,7 @@
 		2CB392002C1E15630011CC94 /* TranslateMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateMetadata.swift; sourceTree = "<group>"; };
 		2CB392022C1E162C0011CC94 /* TranslateStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateStrings.swift; sourceTree = "<group>"; };
 		2CC096F42B099F3400F24DD2 /* FolderIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderIcon.swift; sourceTree = "<group>"; };
+		2CC4FF082C2CBC52007E90E8 /* Suggested.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Suggested.xcassets; sourceTree = "<group>"; };
 		2CC943002B8248CE003219C7 /* ZoraResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoraResponse.swift; sourceTree = "<group>"; };
 		2CC943022B825907003219C7 /* ZoraRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoraRequest.swift; sourceTree = "<group>"; };
 		2CCFED972B08246800D98A2E /* WalletsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsListView.swift; sourceTree = "<group>"; };
@@ -590,7 +591,6 @@
 		2CF7339D2B0ED50000B1AC68 /* ZoraApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoraApi.swift; sourceTree = "<group>"; };
 		2CFA24702B19F956009B58FD /* DataOrUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataOrUrl.swift; sourceTree = "<group>"; };
 		2CFA24722B19FB92009B58FD /* FileExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileExtension.swift; sourceTree = "<group>"; };
-		2CFF88582C28896F0007045F /* Suggested.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Suggested.xcassets; sourceTree = "<group>"; };
 		2CFF885A2C288C9A0007045F /* SuggestedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestedItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1398,6 +1398,7 @@
 				2CFF885A2C288C9A0007045F /* SuggestedItem.swift */,
 				2C8812412C2CBA7C005BFAA5 /* suggested-items.json */,
 				2C9C60342C2C5FE8001D9B51 /* SuggestedItemsService.swift */,
+				2CC4FF082C2CBC52007E90E8 /* Suggested.xcassets */,
 			);
 			path = "Suggested Items";
 			sourceTree = "<group>";
@@ -1475,7 +1476,6 @@
 			children = (
 				2CA4CF542B07F75F00CC75F4 /* AppDelegate.swift */,
 				2CA4CF582B07F76000CC75F4 /* Assets.xcassets */,
-				2CFF88582C28896F0007045F /* Suggested.xcassets */,
 				2CA4CF5A2B07F76000CC75F4 /* Main.storyboard */,
 				2CA4CF5D2B07F76000CC75F4 /* nft_folder.entitlements */,
 				2CA4CF642B07FAC600CC75F4 /* .gitignore */,
@@ -1703,8 +1703,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CA4CF592B07F76000CC75F4 /* Assets.xcassets in Resources */,
-				2CFF88592C28896F0007045F /* Suggested.xcassets in Resources */,
 				2C8812422C2CBA7C005BFAA5 /* suggested-items.json in Resources */,
+				2CC4FF092C2CBC52007E90E8 /* Suggested.xcassets in Resources */,
 				2CA4CF5C2B07F76000CC75F4 /* Main.storyboard in Resources */,
 				2CE9A7712BAD8ECD00579BF7 /* Localizable.xcstrings in Resources */,
 			);

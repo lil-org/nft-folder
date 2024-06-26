@@ -2,7 +2,7 @@
 
 import Foundation
 
-struct SuggestedItem: Identifiable, Hashable {
+struct SuggestedItem: Identifiable, Hashable, Codable {
     
     var id: String { address }
     
