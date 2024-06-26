@@ -141,7 +141,7 @@ struct WalletsListView: View {
                     Image(item.address).resizable().scaledToFill().clipped().aspectRatio(1, contentMode: .fit).contentShape(Rectangle())
                         .onTapGesture {
                             didSelectSuggestedItem(item)
-                        }
+                        }.overlay(FirstMouseView())
                     VStack {
                         Spacer()
                         gridItemText(item.name) {
