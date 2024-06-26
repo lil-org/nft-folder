@@ -148,7 +148,7 @@ struct WalletsListView: View {
                             didSelectSuggestedItem(item)
                         }
                     }
-                }
+                }.contextMenu { suggestedItemContextMenu(item: item) }
             }
         }
         return grid
@@ -205,6 +205,19 @@ struct WalletsListView: View {
                     onTap()
                 }
             Spacer()
+        }
+    }
+    
+    private func suggestedItemContextMenu(item: SuggestedItem) -> some View {
+        Group {
+            Text(item.name)
+            Divider()
+            Button(Strings.viewinFinder, action: {
+                didSelectSuggestedItem(item)
+            })
+            Button(Strings.hideFromHere, action: {
+                removeAndDoNotSuggestAnymore(item: item)
+            })
         }
     }
     
@@ -274,10 +287,14 @@ struct WalletsListView: View {
         let wallet = WatchOnlyWallet(address: item.address, name: item.name, avatar: nil, collections: [CollectionInfo(name: item.name, network: item.network)])
         addWallet(wallet, skipCollectionCheck: true)
         openFolderForWallet(wallet)
-        suggestedItems.removeAll(where: { item.id == $0.id })
         if let image = NSImage(named: item.address) {
             AvatarService.setAvatar(wallet: wallet, image: image)
         }
+        removeAndDoNotSuggestAnymore(item: item)
+    }
+    
+    private func removeAndDoNotSuggestAnymore(item: SuggestedItem) {
+        suggestedItems.removeAll(where: { item.id == $0.id })
         SuggestedItemsService.doNotSuggestAnymore(item: item)
     }
     
