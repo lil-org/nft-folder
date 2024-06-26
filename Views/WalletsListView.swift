@@ -136,12 +136,6 @@ struct WalletsListView: View {
                                                                         currentDropDestination: $currentDropDestination))
             }
             
-            Rectangle().foregroundStyle(.regularMaterial).aspectRatio(1, contentMode: .fill).contentShape(Rectangle()).overlay(
-                Images.plus.resizable().scaledToFit().frame(width: 32, height: 32).foregroundStyle(.tertiary)
-            ).overlay(FirstMouseView()).onTapGesture {
-                showAddWalletPopup = true
-            }
-            
             ForEach(suggestedItems) { item in
                 ZStack {
                     Image(item.address).resizable().scaledToFill().clipped().aspectRatio(1, contentMode: .fit).contentShape(Rectangle())
