@@ -271,8 +271,7 @@ struct WalletsListView: View {
     }
     
     private func didSelectSuggestedItem(_ item: SuggestedItem) {
-        let network = Network.ethereum // TODO: bundle collection network
-        let wallet = WatchOnlyWallet(address: item.address, name: item.name, avatar: nil, collections: [CollectionInfo(name: item.name, network: network)])
+        let wallet = WatchOnlyWallet(address: item.address, name: item.name, avatar: nil, collections: [CollectionInfo(name: item.name, network: item.network)])
         addWallet(wallet)
     }
     
