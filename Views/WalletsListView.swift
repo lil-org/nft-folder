@@ -274,8 +274,11 @@ struct WalletsListView: View {
         let wallet = WatchOnlyWallet(address: item.address, name: item.name, avatar: nil, collections: [CollectionInfo(name: item.name, network: item.network)])
         addWallet(wallet, skipCollectionCheck: true)
         openFolderForWallet(wallet)
-        // TODO: pass bundled avatar
-        // TODO: hide suggested item
+        suggestedItems.removeAll(where: { item.id == $0.id })
+        item.doNotSuggestAnymore()
+        if let image = NSImage(named: item.address) {
+            AvatarService.setAvatar(wallet: wallet, image: image)
+        }
     }
     
     private func addWallet(_ wallet: WatchOnlyWallet, skipCollectionCheck: Bool) {

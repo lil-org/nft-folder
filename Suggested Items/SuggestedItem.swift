@@ -24,4 +24,8 @@ struct SuggestedItem: Identifiable, Hashable {
         SuggestedItem(name: "Very Internet Person", address: "0xfed18c828277e3bd8610f9bae432e65a651706f7", chainId: 1)
     ]
     
+    func doNotSuggestAnymore() {
+        // TODO: store id to remove from suggestions
+    }
+    
 }
