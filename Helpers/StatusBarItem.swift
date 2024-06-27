@@ -1,12 +1,14 @@
 // ∅ nft-folder 2024
 
 import Cocoa
+import SwiftUI
 
-class StatusBarItem: NSObject {
+class StatusBarItem: NSObject, NSPopoverDelegate {
     
     static let shared = StatusBarItem()
     private override init() { super.init() }
     
+    private let popover = NSPopover()
     private var statusBarItem: NSStatusItem?
     
     func showIfNeeded() {
@@ -20,9 +22,38 @@ class StatusBarItem: NSObject {
         statusBarItem?.button?.action = #selector(statusBarButtonClicked(sender:))
     }
     
+    @objc private func statusBarButtonClicked(sender: NSStatusBarButton) {
+        if popover.isShown {
+            popover.performClose(sender)
+        } else {
+            showPopover()
+        }
+    }
+    
+    private func showPopover() {
+        if let button = statusBarItem?.button {
+            setupPopover()
+            popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
+        }
+    }
+    
+    private func setupPopover() {
+        let contentView = WalletsListView(showAddWalletPopup: false)
+        let viewController = NSHostingController(rootView: contentView)
+        popover.behavior = .transient
+        popover.contentSize = CGSize(width: 333, height: 444)
+        popover.contentViewController = viewController
+        popover.delegate = self
+    }
+    
+    func popoverDidClose(_ notification: Notification) {
+        popover.contentViewController = nil
+    }
+
+    // TODO: deprecate menu and menu actions
+    
     private func createMenu() -> NSMenu {
         let menu = NSMenu(title: Strings.nftFolder)
-        menu.delegate = self
         let openFolderItem = NSMenuItem(title: Strings.openFolderMenuItem, action: #selector(openNftFolder), keyEquivalent: "")
         let controlCenterItem = NSMenuItem(title: Strings.controlCenterMenuItem, action: #selector(showControlCenter), keyEquivalent: "")
         
@@ -67,12 +98,6 @@ class StatusBarItem: NSObject {
         AllDownloadsManager.shared.syncOnUserRequestIfNeeded(mbAddressFolderName: nil)
     }
     
-    @objc private func statusBarButtonClicked(sender: NSStatusBarButton) {
-        guard let event = NSApp.currentEvent, event.type == .rightMouseUp || event.type == .leftMouseUp else { return }
-        statusBarItem?.menu = createMenu()
-        statusBarItem?.button?.performClick(nil)
-    }
-    
     @objc private func openNftFolder() {
         if let url = URL.nftDirectory {
             NSWorkspace.shared.open(url)
@@ -108,14 +133,6 @@ class StatusBarItem: NSObject {
         default:
             break
         }
-    }
-    
-}
-
-extension StatusBarItem: NSMenuDelegate {
-    
-    func menuDidClose(_ menu: NSMenu) {
-        statusBarItem?.menu = nil
     }
     
 }
