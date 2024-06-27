@@ -30,6 +30,22 @@ struct WalletsListView: View {
                     showAddWalletPopup = true
                 }).frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
+                if inPopup {
+                    HStack {
+                            Spacer()
+                            Button(action: {
+                                showSettingsPopup = true
+                            }) {
+                                Images.gearshape
+                            }
+                            
+                            Button(action: {
+                                showAddWalletPopup = true
+                            }) {
+                                Images.plus
+                            }
+                    }.frame(height: 23).padding(.horizontal).padding(.top, 8)
+                }
                 ScrollView {
                     createGrid().frame(maxWidth: .infinity)
                 }.background(Color(nsColor: .controlBackgroundColor))
