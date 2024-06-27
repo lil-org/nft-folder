@@ -7,6 +7,7 @@ import UniformTypeIdentifiers
 struct WalletsListView: View {
     
     @State private var isWaiting = false
+    @State private var inPopup: Bool
     @State private var showAddWalletPopup: Bool
     @State private var showSettingsPopup = false
     @State private var newWalletAddress = ""
@@ -17,8 +18,9 @@ struct WalletsListView: View {
     @State private var draggingIndex: Int? = nil
     @State private var currentDropDestination: Int? = nil
     
-    init(showAddWalletPopup: Bool) {
+    init(showAddWalletPopup: Bool, inPopup: Bool) {
         self.showAddWalletPopup = showAddWalletPopup
+        self.inPopup = inPopup
     }
     
     var body: some View {

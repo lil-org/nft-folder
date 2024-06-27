@@ -33,12 +33,16 @@ class StatusBarItem: NSObject, NSPopoverDelegate {
     private func showPopover() {
         if let button = statusBarItem?.button {
             setupPopover()
+            Window.closeAll()
             popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
+            NSApp.activate(ignoringOtherApps: true)
+            let popoverWindow = NSApplication.shared.windows.first(where: { $0.className.hasSuffix("PopoverWindow") })
+            popoverWindow?.makeKeyAndOrderFront(nil)
         }
     }
     
     private func setupPopover() {
-        let contentView = WalletsListView(showAddWalletPopup: false)
+        let contentView = WalletsListView(showAddWalletPopup: false, inPopup: true)
         let viewController = NSHostingController(rootView: contentView)
         popover.behavior = .transient
         popover.contentSize = CGSize(width: 333, height: 444)
