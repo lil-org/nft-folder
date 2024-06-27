@@ -32,18 +32,24 @@ struct WalletsListView: View {
             } else {
                 if inPopup {
                     HStack {
-                            Spacer()
-                            Button(action: {
-                                showSettingsPopup = true
-                            }) {
-                                Images.gearshape
-                            }
-                            
-                            Button(action: {
-                                showAddWalletPopup = true
-                            }) {
-                                Images.plus
-                            }
+                        Button(action: {
+                            Navigator.shared.showControlCenter(addWallet: false)
+                        }) {
+                            Images.extend
+                        }.keyboardShortcut(.return, modifiers: []).buttonStyle(LinkButtonStyle())
+                        
+                        Spacer()
+                        Button(action: {
+                            showSettingsPopup = true
+                        }) {
+                            Images.gearshape
+                        }
+                        
+                        Button(action: {
+                            showAddWalletPopup = true
+                        }) {
+                            Images.plus
+                        }
                     }.frame(height: 23).padding(.horizontal).padding(.top, 8)
                 }
                 ScrollView {
@@ -177,11 +183,11 @@ struct WalletsListView: View {
         let isDestination = currentDropDestination == index
         let item = ZStack {
             WalletImageView(wallet: wallet)
-                        .aspectRatio(1, contentMode: .fit).contentShape(Rectangle())
-                        .border(isDestination ? Color.blue : Color.clear, width: 2)
-                        .onTapGesture {
-                            openFolderForWallet(wallet)
-                        }
+                .aspectRatio(1, contentMode: .fit).contentShape(Rectangle())
+                .border(isDestination ? Color.blue : Color.clear, width: 2)
+                .onTapGesture {
+                    openFolderForWallet(wallet)
+                }
             VStack {
                 HStack {
                     Spacer()
