@@ -37,7 +37,11 @@ struct WalletsListView: View {
                         }) {
                             Images.extend
                         }.keyboardShortcut(.return, modifiers: []).buttonStyle(LinkButtonStyle())
-                        
+                        Button(action: {
+                            warnBeforeQuitting()
+                        }) {
+                            Images.quit
+                        }.keyboardShortcut(.return, modifiers: []).buttonStyle(BorderlessButtonStyle())
                         Spacer()
                         Button(action: {
                             showSettingsPopup = true
@@ -229,6 +233,22 @@ struct WalletsListView: View {
                     onTap()
                 }
             Spacer()
+        }
+    }
+    
+    private func warnBeforeQuitting() {
+        let alert = NSAlert()
+        alert.messageText = Strings.quit + "?"
+        alert.alertStyle = .warning
+        alert.addButton(withTitle: Strings.ok)
+        alert.addButton(withTitle: Strings.cancel)
+        alert.buttons.last?.keyEquivalent = "\u{1b}"
+        let response = alert.runModal()
+        switch response {
+        case .alertFirstButtonReturn:
+            NSApp.terminate(nil)
+        default:
+            break
         }
     }
     
