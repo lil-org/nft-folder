@@ -41,7 +41,7 @@ struct WalletsListView: View {
                             warnBeforeQuitting()
                         }) {
                             Images.quit
-                        }.keyboardShortcut(.return, modifiers: []).buttonStyle(BorderlessButtonStyle())
+                        }.keyboardShortcut("q", modifiers: [.command]).buttonStyle(BorderlessButtonStyle())
                         Spacer()
                         Button(action: {
                             showSettingsPopup = true
