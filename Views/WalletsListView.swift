@@ -7,6 +7,7 @@ import UniformTypeIdentifiers
 struct WalletsListView: View {
     
     @State private var isWaiting = false
+    @State private var inPopup: Bool
     @State private var showAddWalletPopup: Bool
     @State private var showSettingsPopup = false
     @State private var newWalletAddress = ""
@@ -17,8 +18,9 @@ struct WalletsListView: View {
     @State private var draggingIndex: Int? = nil
     @State private var currentDropDestination: Int? = nil
     
-    init(showAddWalletPopup: Bool) {
+    init(showAddWalletPopup: Bool, inPopup: Bool) {
         self.showAddWalletPopup = showAddWalletPopup
+        self.inPopup = inPopup
     }
     
     var body: some View {
@@ -28,6 +30,32 @@ struct WalletsListView: View {
                     showAddWalletPopup = true
                 }).frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
+                if inPopup {
+                    HStack {
+                        Button(action: {
+                            Navigator.shared.showControlCenter(addWallet: false)
+                        }) {
+                            Images.extend
+                        }.keyboardShortcut(.return, modifiers: []).buttonStyle(LinkButtonStyle())
+                        Button(action: {
+                            warnBeforeQuitting()
+                        }) {
+                            Images.quit
+                        }.keyboardShortcut("q", modifiers: [.command]).buttonStyle(BorderlessButtonStyle())
+                        Spacer()
+                        Button(action: {
+                            showSettingsPopup = true
+                        }) {
+                            Images.gearshape
+                        }
+                        
+                        Button(action: {
+                            showAddWalletPopup = true
+                        }) {
+                            Images.plus
+                        }
+                    }.frame(height: 23).padding(.horizontal).padding(.top, 8)
+                }
                 ScrollView {
                     createGrid().frame(maxWidth: .infinity)
                 }.background(Color(nsColor: .controlBackgroundColor))
@@ -159,11 +187,11 @@ struct WalletsListView: View {
         let isDestination = currentDropDestination == index
         let item = ZStack {
             WalletImageView(wallet: wallet)
-                        .aspectRatio(1, contentMode: .fit).contentShape(Rectangle())
-                        .border(isDestination ? Color.blue : Color.clear, width: 2)
-                        .onTapGesture {
-                            openFolderForWallet(wallet)
-                        }
+                .aspectRatio(1, contentMode: .fit).contentShape(Rectangle())
+                .border(isDestination ? Color.blue : Color.clear, width: 2)
+                .onTapGesture {
+                    openFolderForWallet(wallet)
+                }
             VStack {
                 HStack {
                     Spacer()
@@ -205,6 +233,22 @@ struct WalletsListView: View {
                     onTap()
                 }
             Spacer()
+        }
+    }
+    
+    private func warnBeforeQuitting() {
+        let alert = NSAlert()
+        alert.messageText = Strings.quit + "?"
+        alert.alertStyle = .warning
+        alert.addButton(withTitle: Strings.ok)
+        alert.addButton(withTitle: Strings.cancel)
+        alert.buttons.last?.keyEquivalent = "\u{1b}"
+        let response = alert.runModal()
+        switch response {
+        case .alertFirstButtonReturn:
+            NSApp.terminate(nil)
+        default:
+            break
         }
     }
     
