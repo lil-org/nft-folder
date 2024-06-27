@@ -139,6 +139,7 @@
 /* Begin PBXFileReference section */
 		2C0D86C32B08E67000106915 /* WalletsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsService.swift; sourceTree = "<group>"; };
 		2C0D86C62B08E7BF00106915 /* EnsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnsResponse.swift; sourceTree = "<group>"; };
+		2C16579D2C2D8DED0050A896 /* 0_APP_DESKTOP_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0_APP_DESKTOP_0.png; sourceTree = "<group>"; };
 		2C1B60B82B7D3245009949C2 /* DirectoryMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryMonitor.swift; sourceTree = "<group>"; };
 		2C1B60BC2B7D3505009949C2 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		2C1B60C32B7D41D1009949C2 /* HostAppImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostAppImages.swift; sourceTree = "<group>"; };
@@ -524,7 +525,6 @@
 		2C8FD1BF2BF4B33C00B3D327 /* secondary_category.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = secondary_category.txt; sourceTree = "<group>"; };
 		2C8FD1C02BF4B33C00B3D327 /* secondary_first_sub_category.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = secondary_first_sub_category.txt; sourceTree = "<group>"; };
 		2C8FD1C12BF4B33C00B3D327 /* secondary_second_sub_category.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = secondary_second_sub_category.txt; sourceTree = "<group>"; };
-		2C8FD1C32BF4B33C00B3D327 /* 0_APP_DESKTOP_0.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 0_APP_DESKTOP_0.jpeg; sourceTree = "<group>"; };
 		2C8FD1C62BF4B33C00B3D327 /* Appfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
 		2C8FD1C72BF4B33C00B3D327 /* Fastfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; };
 		2C9113192B08F71200A8EE80 /* WalletDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDownloader.swift; sourceTree = "<group>"; };
@@ -1343,7 +1343,7 @@
 		2C8FD1C42BF4B33C00B3D327 /* en-GB */ = {
 			isa = PBXGroup;
 			children = (
-				2C8FD1C32BF4B33C00B3D327 /* 0_APP_DESKTOP_0.jpeg */,
+				2C16579D2C2D8DED0050A896 /* 0_APP_DESKTOP_0.png */,
 			);
 			path = "en-GB";
 			sourceTree = "<group>";
