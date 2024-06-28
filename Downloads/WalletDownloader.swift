@@ -36,15 +36,11 @@ class WalletDownloader {
            let walletRootDirectory = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) {
             
             var tasks = [DownloadFileTask]()
-            
             for item in bundledTokens.items {
                 guard let content = ContentRepresentation(url: item.url, size: nil, mimeType: nil, knownKind: nil) else { continue }
-                
-                let minimalMetadata = MinimalTokenMetadata(tokenId: item.id, collectionAddress: wallet.address, network: collection.network)
                 let detailedMetadata = DetailedTokenMetadata(name: item.name, collectionName: collection.name, collectionAddress: wallet.address, tokenId: item.id, network: collection.network, tokenStandard: nil, contentRepresentations: [content])
-                
-                // TODO: skip if already downloaded — check metadata on disk
-                
+                guard !MetadataStorage.hasSomethingFor(detailedMetadata: detailedMetadata, addressDirectoryURL: walletRootDirectory) else { continue }
+                let minimalMetadata = MinimalTokenMetadata(tokenId: item.id, collectionAddress: wallet.address, network: collection.network)
                 let downloadTask = DownloadFileTask(walletRootDirectory: walletRootDirectory, minimalMetadata: minimalMetadata, detailedMetadata: detailedMetadata)
                 tasks.append(downloadTask)
             }
