@@ -93,7 +93,6 @@ struct Media: Codable {
         let original: String?
         let thumbnail: String?
         let preview: String?
-        let large: String?
     }
 }
 
@@ -102,7 +101,7 @@ extension ZoraToken {
     func detailedMetadata(network: Network) -> DetailedTokenMetadata {
         let rawContentRepresentations = [
             ContentRepresentation(url: content?.url, size: content?.size, mimeType: content?.mimeType, knownKind: nil),
-            ContentRepresentation(url: content?.mediaEncoding?.preview ?? content?.mediaEncoding?.large, size: nil, mimeType: content?.mimeType, knownKind: nil),
+            ContentRepresentation(url: content?.mediaEncoding?.preview ?? content?.mediaEncoding?.original, size: nil, mimeType: content?.mimeType, knownKind: nil),
             ContentRepresentation(url: image?.url, size: image?.size, mimeType: image?.mimeType, knownKind: .image),
             ContentRepresentation(url: image?.customImageEncoding, size: nil, mimeType: image?.mimeType, knownKind: .image),
             ContentRepresentation(url: image?.mediaEncoding?.thumbnail, size: nil, mimeType: image?.mimeType, knownKind: .image),

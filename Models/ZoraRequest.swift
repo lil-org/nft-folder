@@ -117,7 +117,6 @@ struct ZoraRequest {
                                     preview
                                 }
                                 ... on AudioEncodingTypes {
-                                    large
                                     original
                                 }
                             }

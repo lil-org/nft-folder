@@ -204,7 +204,7 @@ extension FileDownloader: URLSessionDownloadDelegate {
     }
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
-        if totalBytesExpectedToWrite > Int.defaultFileSizeLimit {
+        if !Defaults.unlimitedFileSize && totalBytesExpectedToWrite > Int.defaultFileSizeLimit {
             downloadTask.cancel()
             if let (_, completion) = ongoingTasksAndCompletions[downloadTask.taskIdentifier] {
                 ongoingTasksAndCompletions.removeValue(forKey: downloadTask.taskIdentifier)
