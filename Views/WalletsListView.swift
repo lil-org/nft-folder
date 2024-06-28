@@ -143,7 +143,7 @@ struct WalletsListView: View {
             if let _ = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: true) {
                 FolderIcon.set(for: wallet)
                 AllDownloadsManager.shared.startDownloads(wallet: wallet)
-                if wallet.collections == nil {
+                if !wallet.isCollection {
                     WalletsService.shared.checkIfCollection(wallet: wallet)
                 }
             }
@@ -293,7 +293,7 @@ struct WalletsListView: View {
                     DispatchQueue.main.async { NSWorkspace.shared.open(galleryURL) }
                 }
             })
-            if wallet.collections == nil {
+            if !wallet.isCollection {
                 Divider()
                 Button(Strings.pushCustomFolders, action: {
                     confirmFoldersPush(wallet: wallet)

@@ -66,7 +66,7 @@ class AllDownloadsManager {
                 startDownloads(wallet: wallet)
             }
         } else {
-            for wallet in walletsService.wallets where statuses[wallet] != .downloading && wallet.collections == nil {
+            for wallet in walletsService.wallets where statuses[wallet] != .downloading && !wallet.isCollection {
                 startDownloads(wallet: wallet)
             }
         }

@@ -25,12 +25,14 @@ class WalletDownloader {
             goThroughZora(wallet: wallet)
         }
         
-        if wallet.collections?.isEmpty != false {
+        if !wallet.isCollection {
             getFolders(wallet: wallet)
         }
     }
     
     private func processBundledTokensAndSeeIfShouldGoThroughZora(wallet: WatchOnlyWallet) -> Bool {
+        guard let collection = wallet.collections?.first else { return true }
+        
         // TODO: check if there are bundled tokens for the collection
         // TODO: if there are bundled tokens, create and process [DownloadFileTask]
         // TODO: only create DownloadFileTask-s for tokens that are not downloaded yet — check existing metadata
@@ -58,7 +60,7 @@ class WalletDownloader {
     private func nextStepForZora(wallet: WatchOnlyWallet, networkIndex: Int, endCursor: String?, hasNextPage: Bool) {
         if hasNextPage {
             goThroughZora(wallet: wallet, networkIndex: networkIndex, endCursor: endCursor)
-        } else if networkIndex + 1 < networks.count && wallet.collections?.first == nil {
+        } else if networkIndex + 1 < networks.count && !wallet.isCollection {
             goThroughZora(wallet: wallet, networkIndex: networkIndex + 1, endCursor: nil)
         } else {
             didStudy = true
@@ -82,7 +84,7 @@ class WalletDownloader {
                 self?.nextStepForZora(wallet: wallet, networkIndex: networkIndex, endCursor: endCursor, hasNextPage: result.pageInfo.hasNextPage)
             }
         }
-        if let _ = wallet.collections?.first {
+        if wallet.isCollection {
             ZoraApi.get(collection: wallet.address, networks: [network], endCursor: endCursor, completion: completion)
         } else {
             ZoraApi.get(owner: wallet.address, networks: [network], endCursor: endCursor, completion: completion)

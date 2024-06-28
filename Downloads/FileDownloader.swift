@@ -148,9 +148,7 @@ class FileDownloader: NSObject {
     }
     
     private func createCollectionThumbnailIfNeeded(tmpFileURL: URL, mimeType: String) {
-        guard let wallet = wallet,
-              wallet.collections?.isEmpty == false,
-              !AvatarService.hasLocalAvatar(wallet: wallet) else {
+        guard let wallet = wallet, wallet.isCollection, !AvatarService.hasLocalAvatar(wallet: wallet) else {
             definitelyShouldNotCreateCollectionThumbnail = true
             return
         }

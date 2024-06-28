@@ -23,6 +23,10 @@ struct WatchOnlyWallet: Codable, Hashable, Identifiable {
         }
     }
     
+    var isCollection: Bool {
+        return collections?.first != nil
+    }
+    
     var folderDisplayName: String {
         if let name = name {
             return name
