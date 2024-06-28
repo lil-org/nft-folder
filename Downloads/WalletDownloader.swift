@@ -32,11 +32,13 @@ class WalletDownloader {
     
     private func processBundledTokensAndSeeIfShouldGoThroughZora(wallet: WatchOnlyWallet) -> Bool {
         guard let collection = wallet.collections?.first else { return true }
-        
-        // TODO: check if there are bundled tokens for the collection
-        // TODO: if there are bundled tokens, create and process [DownloadFileTask]
-        // TODO: only create DownloadFileTask-s for tokens that are not downloaded yet — check existing metadata
-        return true
+        if let bundledTokens = SuggestedItemsService.bundledTokens(collection: collection, address: wallet.address) {
+            // TODO: create and process [DownloadFileTask]
+            // TODO: only create DownloadFileTask-s for tokens that are not downloaded yet — check existing metadata
+            return !bundledTokens.isComplete
+        } else {
+            return true
+        }
     }
     
     private func getFolders(wallet: WatchOnlyWallet) {

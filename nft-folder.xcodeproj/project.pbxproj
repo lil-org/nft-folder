@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C086E872C2F3C3600D4268D /* BundledTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C086E862C2F3C3600D4268D /* BundledTokens.swift */; };
 		2C0D86C42B08E67000106915 /* WalletsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C32B08E67000106915 /* WalletsService.swift */; };
 		2C0D86C72B08E7BF00106915 /* EnsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C62B08E7BF00106915 /* EnsResponse.swift */; };
 		2C1B60B92B7D3245009949C2 /* DirectoryMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60B82B7D3245009949C2 /* DirectoryMonitor.swift */; };
@@ -137,6 +138,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2C086E862C2F3C3600D4268D /* BundledTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundledTokens.swift; sourceTree = "<group>"; };
 		2C0D86C32B08E67000106915 /* WalletsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsService.swift; sourceTree = "<group>"; };
 		2C0D86C62B08E7BF00106915 /* EnsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnsResponse.swift; sourceTree = "<group>"; };
 		2C16579D2C2D8DED0050A896 /* 0_APP_DESKTOP_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0_APP_DESKTOP_0.png; sourceTree = "<group>"; };
@@ -1396,6 +1398,7 @@
 			isa = PBXGroup;
 			children = (
 				2CFF885A2C288C9A0007045F /* SuggestedItem.swift */,
+				2C086E862C2F3C3600D4268D /* BundledTokens.swift */,
 				2C8812412C2CBA7C005BFAA5 /* suggested-items.json */,
 				2C9C60342C2C5FE8001D9B51 /* SuggestedItemsService.swift */,
 				2CC4FF082C2CBC52007E90E8 /* Suggested.xcassets */,
@@ -1830,6 +1833,7 @@
 				2CF524022BB2ECD200C18344 /* CollectionInfo.swift in Sources */,
 				2CA623E72BEE8A0200BD78FF /* UserDefaults.swift in Sources */,
 				2C508C9D2B6830E6005F548A /* Notification.swift in Sources */,
+				2C086E872C2F3C3600D4268D /* BundledTokens.swift in Sources */,
 				2C8E246F2C24A6E200C13536 /* FirstMouseView.swift in Sources */,
 				2C1B60C42B7D41D1009949C2 /* HostAppImages.swift in Sources */,
 				2CC943032B825907003219C7 /* ZoraRequest.swift in Sources */,

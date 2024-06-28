@@ -13,6 +13,11 @@ struct SuggestedItemsService {
         Defaults.suggestedItemsToHide = Array(toHide)
     }
     
+    static func bundledTokens(collection: CollectionInfo, address: String) -> BundledTokens? {
+        // TODO: implement quick reading
+        return nil
+    }
+    
     private static func readSuggestedItems() -> [SuggestedItem] {
         guard let url = Bundle.main.url(forResource: "suggested-items", withExtension: "json"),
               let data = try? Data(contentsOf: url),
