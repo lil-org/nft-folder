@@ -23,6 +23,8 @@ class WalletDownloader {
         
         if shouldGoThroughZora {
             goThroughZora(wallet: wallet)
+        } else {
+            didStudy = true
         }
         
         if !wallet.isCollection {

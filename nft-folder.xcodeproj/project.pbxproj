@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2C086E872C2F3C3600D4268D /* BundledTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C086E862C2F3C3600D4268D /* BundledTokens.swift */; };
+		2C086E892C2F50F000D4268D /* 0x9d09df7143ed764baa9427c05ca504d4241e2dba.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C086E882C2F50F000D4268D /* 0x9d09df7143ed764baa9427c05ca504d4241e2dba.json */; };
 		2C0D86C42B08E67000106915 /* WalletsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C32B08E67000106915 /* WalletsService.swift */; };
 		2C0D86C72B08E7BF00106915 /* EnsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C62B08E7BF00106915 /* EnsResponse.swift */; };
 		2C1B60B92B7D3245009949C2 /* DirectoryMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60B82B7D3245009949C2 /* DirectoryMonitor.swift */; };
@@ -139,6 +140,7 @@
 
 /* Begin PBXFileReference section */
 		2C086E862C2F3C3600D4268D /* BundledTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundledTokens.swift; sourceTree = "<group>"; };
+		2C086E882C2F50F000D4268D /* 0x9d09df7143ed764baa9427c05ca504d4241e2dba.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 0x9d09df7143ed764baa9427c05ca504d4241e2dba.json; sourceTree = "<group>"; };
 		2C0D86C32B08E67000106915 /* WalletsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsService.swift; sourceTree = "<group>"; };
 		2C0D86C62B08E7BF00106915 /* EnsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnsResponse.swift; sourceTree = "<group>"; };
 		2C16579D2C2D8DED0050A896 /* 0_APP_DESKTOP_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0_APP_DESKTOP_0.png; sourceTree = "<group>"; };
@@ -621,6 +623,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C086E8A2C2F510C00D4268D /* Bundled Tokens */ = {
+			isa = PBXGroup;
+			children = (
+				2C086E882C2F50F000D4268D /* 0x9d09df7143ed764baa9427c05ca504d4241e2dba.json */,
+			);
+			path = "Bundled Tokens";
+			sourceTree = "<group>";
+		};
 		2C0D86C92B08E7C600106915 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -1397,11 +1407,12 @@
 		2C9C60332C2C34D4001D9B51 /* Suggested Items */ = {
 			isa = PBXGroup;
 			children = (
+				2C9C60342C2C5FE8001D9B51 /* SuggestedItemsService.swift */,
 				2CFF885A2C288C9A0007045F /* SuggestedItem.swift */,
 				2C086E862C2F3C3600D4268D /* BundledTokens.swift */,
-				2C8812412C2CBA7C005BFAA5 /* suggested-items.json */,
-				2C9C60342C2C5FE8001D9B51 /* SuggestedItemsService.swift */,
 				2CC4FF082C2CBC52007E90E8 /* Suggested.xcassets */,
+				2C8812412C2CBA7C005BFAA5 /* suggested-items.json */,
+				2C086E8A2C2F510C00D4268D /* Bundled Tokens */,
 			);
 			path = "Suggested Items";
 			sourceTree = "<group>";
@@ -1707,6 +1718,7 @@
 			files = (
 				2CA4CF592B07F76000CC75F4 /* Assets.xcassets in Resources */,
 				2C8812422C2CBA7C005BFAA5 /* suggested-items.json in Resources */,
+				2C086E892C2F50F000D4268D /* 0x9d09df7143ed764baa9427c05ca504d4241e2dba.json in Resources */,
 				2CC4FF092C2CBC52007E90E8 /* Suggested.xcassets in Resources */,
 				2CA4CF5C2B07F76000CC75F4 /* Main.storyboard in Resources */,
 				2CE9A7712BAD8ECD00579BF7 /* Localizable.xcstrings in Resources */,

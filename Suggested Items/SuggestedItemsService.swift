@@ -14,8 +14,13 @@ struct SuggestedItemsService {
     }
     
     static func bundledTokens(collection: CollectionInfo, address: String) -> BundledTokens? {
-        // TODO: implement quick reading
-        return nil
+        if let url = Bundle.main.url(forResource: address, withExtension: "json"),
+           let data = try? Data(contentsOf: url),
+           let bundledTokens = try? JSONDecoder().decode(BundledTokens.self, from: data) {
+            return bundledTokens
+        } else {
+            return nil
+        }
     }
     
     private static func readSuggestedItems() -> [SuggestedItem] {
