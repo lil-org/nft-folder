@@ -5,6 +5,7 @@ import SwiftUI
 extension Images {
     
     static let plus = Image(systemName: "plus")
+    static let mint = Image(systemName: "plus.circle")
     static let gearshape = Image(systemName: "gearshape")
     static let quit = Image(systemName: "xmark.circle")
     static let extend = Image(systemName: "arrow.down.backward.and.arrow.up.forward.circle")
