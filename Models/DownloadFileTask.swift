@@ -76,10 +76,19 @@ struct DownloadFileTask {
         self.dataOrURLs = detailedMetadata.contentRepresentations.compactMap { content -> (DataOrUrl?) in
             if let size = content.size, !Defaults.unlimitedFileSize, size > Int.defaultFileSizeLimit {
                 return nil
-            } else if content.kind == .html || (!Defaults.downloadGlb && content.kind == .glb) {
-                return nil
             } else {
-                return content.dataOrUrl
+                switch content.kind {
+                case .image, .other, .none:
+                    return content.dataOrUrl
+                case .audio:
+                    return Defaults.downloadAudio ? content.dataOrUrl : nil
+                case .video:
+                    return Defaults.downloadVideo ? content.dataOrUrl : nil
+                case .html:
+                    return nil
+                case .glb:
+                    return Defaults.downloadGlb ? content.dataOrUrl : nil
+                }
             }
         }
     }

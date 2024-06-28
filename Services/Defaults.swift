@@ -72,6 +72,24 @@ struct Defaults {
         }
     }
     
+    static var downloadAudio: Bool {
+        get {
+            userDefaults.bool(forKey: "downloadAudio")
+        }
+        set {
+            userDefaults.set(newValue, forKey: "downloadAudio")
+        }
+    }
+    
+    static var downloadVideo: Bool {
+        get {
+            userDefaults.bool(forKey: "downloadVideo")
+        }
+        set {
+            userDefaults.set(newValue, forKey: "downloadVideo")
+        }
+    }
+    
     static var hideFromMenuBar: Bool {
         get {
             userDefaults.bool(forKey: "hideFromMenuBar")

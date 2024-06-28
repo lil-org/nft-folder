@@ -6,6 +6,8 @@ struct PreferencesView: View {
     
     @State private var maxFileSizeLimitPreference = !Defaults.unlimitedFileSize
     @State private var glbPreference = Defaults.downloadGlb
+    @State private var videoPreference = Defaults.downloadVideo
+    @State private var audioPreference = Defaults.downloadAudio
     @State private var showInMenuBar = !Defaults.hideFromMenuBar
     
     @State private var hoveringOverURL: URL? = nil
@@ -24,7 +26,7 @@ struct PreferencesView: View {
             VStack {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color(NSColor.windowBackgroundColor))
-                    .frame(height: 110)
+                    .frame(height: 150)
                     .overlay(
                         VStack(alignment: .leading) {
                             Toggle(isOn: $maxFileSizeLimitPreference) {
@@ -32,11 +34,25 @@ struct PreferencesView: View {
                             }.onChange(of: maxFileSizeLimitPreference) { newValue in
                                 Defaults.unlimitedFileSize = !newValue
                             }
+                            
                             Toggle(isOn: $glbPreference) {
                                 Text(Strings.downloadGlb)
                             }.onChange(of: glbPreference) { newValue in
                                 Defaults.downloadGlb = newValue
                             }
+                            
+                            Toggle(isOn: $videoPreference) {
+                                Text(Strings.downloadVideo)
+                            }.onChange(of: videoPreference) { newValue in
+                                Defaults.downloadVideo = newValue
+                            }
+                            
+                            Toggle(isOn: $audioPreference) {
+                                Text(Strings.downloadAudio)
+                            }.onChange(of: audioPreference) { newValue in
+                                Defaults.downloadAudio = newValue
+                            }
+                            
                             Toggle(isOn: $showInMenuBar) {
                                 Text(Strings.showInMenuBar)
                             }.onChange(of: showInMenuBar) { newValue in
