@@ -23,7 +23,7 @@ struct SuggestedItemsService {
     }
     
     static func bundledTokens(collection: CollectionInfo, address: String) -> BundledTokens? {
-        if let url = bundle.url(forResource: address, withExtension: "json"),
+        if let url = bundle.url(forResource: "Tokens/" + address, withExtension: "json"),
            let data = try? Data(contentsOf: url),
            let bundledTokens = try? JSONDecoder().decode(BundledTokens.self, from: data) {
             return bundledTokens
@@ -33,7 +33,7 @@ struct SuggestedItemsService {
     }
     
     private static func readSuggestedItems() -> [SuggestedItem] {
-        guard let url = bundle.url(forResource: "suggested-items", withExtension: "json"),
+        guard let url = bundle.url(forResource: "items", withExtension: "json"),
               let data = try? Data(contentsOf: url),
               let items = try? JSONDecoder().decode([SuggestedItem].self, from: data) else {
             return []
