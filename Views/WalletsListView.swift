@@ -225,7 +225,7 @@ struct WalletsListView: View {
     
     private func gridItemText(_ text: String, onTap: @escaping () -> Void) -> some View {
         HStack {
-            Text(text).font(.system(size: 10, weight: .regular))
+            Text(text).font(.system(size: 10, weight: .regular)).lineLimit(2)
                 .foregroundColor(.white)
                 .padding(.horizontal, 1)
                 .background(Color.black.opacity(0.7)).cornerRadius(3)
