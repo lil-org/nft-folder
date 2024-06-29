@@ -5,8 +5,9 @@ import Cocoa
 struct FolderIcon {
     
     static func set(for wallet: WatchOnlyWallet) {
-        // TODO: make sure it writes on disk, not just returns cached value
-        AvatarService.getAvatar(wallet: wallet) { _ in }
+        AvatarService.getAvatar(wallet: wallet) { image in
+            AvatarService.makeSureAvatarIsOnDisk(wallet: wallet, image: image)
+        }
     }
     
 }
