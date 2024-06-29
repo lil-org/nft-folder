@@ -39,6 +39,7 @@ class WalletDownloader {
             
             var tasks = [DownloadFileTask]()
             for item in bundledTokens.items {
+                // TODO: more content for artblocks with video
                 guard let content = ContentRepresentation(url: item.url, size: nil, mimeType: nil, knownKind: nil) else { continue }
                 let detailedMetadata = DetailedTokenMetadata(name: item.name, collectionName: collection.name, collectionAddress: wallet.address, tokenId: item.id, network: collection.network, tokenStandard: nil, contentRepresentations: [content])
                 guard !MetadataStorage.hasSomethingFor(detailedMetadata: detailedMetadata, addressDirectoryURL: walletRootDirectory) else { continue }

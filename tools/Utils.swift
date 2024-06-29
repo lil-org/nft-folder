@@ -15,12 +15,21 @@ struct ArtblocksData: Codable {
 }
 
 struct Project: Codable {
+    
+    enum CurationStatus: String, Codable {
+        case factory, curated
+    }
+    
     let projectId: String
     let contractAddress: String
-    let curationStatus: String
+    let curationStatus: CurationStatus
     let name: String
     let tokens: [Token]
 
+    var allTokensHaveVideo: Bool {
+        return !tokens.contains(where: { $0.videoId == nil })
+    }
+    
     enum CodingKeys: String, CodingKey {
         case projectId = "project_id"
         case contractAddress = "contract_address"
@@ -38,4 +47,13 @@ struct Token: Codable {
         case tokenId = "token_id"
         case videoId = "video_id"
     }
+}
+
+struct ArtblocksProjectToBundle {
+    
+    let hasVideo: Bool
+    let tokens: [String]
+    let contractAddress: String
+    let projectId: String
+    
 }
