@@ -62,3 +62,22 @@ struct ArtblocksProjectToBundle {
     }
     
 }
+
+func imagesetContentsFileData(id: String) -> Data {
+    let jsonString =
+    """
+    {
+      "images" : [
+        {
+          "filename" : "\(id).jpeg",
+          "idiom" : "universal"
+        }
+      ],
+      "info" : {
+        "author" : "xcode",
+        "version" : 1
+      }
+    }
+    """
+    return jsonString.data(using: .utf8)!
+}

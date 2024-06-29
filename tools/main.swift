@@ -38,12 +38,21 @@ for project in projects where !bundledIds.contains(project.id) {
     let rawImageData = try! Data(contentsOf: coverImageUrl)
     let (_, imageData) = NSImage(data: rawImageData)!.resizeToUseAsCoverIfNeeded()!
     
-    let fileImageUrl = URL(fileURLWithPath: dir + "/tools/\(coverTokenId).jpeg") // TODO: fix path
+    let imagesetPath = dir + "/Suggested Items/Covers.xcassets/\(project.id).imageset"
+    try! FileManager.default.createDirectory(atPath: imagesetPath, withIntermediateDirectories: false)
+    let imagesetData = imagesetContentsFileData(id: project.id)
+    try! imagesetData.write(to: URL(fileURLWithPath: imagesetPath + "/Contents.json"))
+    let fileImageUrl = URL(fileURLWithPath: imagesetPath + "/\(project.id).jpeg")
     try! imageData.write(to: fileImageUrl)
     
-    // TODO: write to Tokens/(id).json
-    // TODO: write avatar to Covers.xcassets
+    let bundledTokensData = try! JSONEncoder().encode(bundledTokens)
+    try! bundledTokensData.write(to: URL(fileURLWithPath: dir + "/Suggested Items/Suggested.bundle/Tokens/\(project.id).json"))
+    print("✅ did add \(project.name)")
 }
 
-// TODO: write bundledSuggestedItems to items.json
+let encoder = JSONEncoder()
+encoder.outputFormatting = .prettyPrinted
+let updatedSuggestedItemsData = try! encoder.encode(bundledSuggestedItems)
+try! updatedSuggestedItemsData.write(to: bundledSuggestedItemsUrl)
+
 print("🟢 all done")
