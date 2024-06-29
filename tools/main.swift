@@ -16,4 +16,10 @@ let projects = artblocks.data.projects.compactMap {
     : nil
 }
 
-print(projects.count)
+for project in projects {
+    // TODO: if items.json does not have the same id
+    
+    // TODO: add to items.json
+    // TODO: add to Tokens/(id).json
+    // TODO: add avatar to Covers.xcassets
+}
