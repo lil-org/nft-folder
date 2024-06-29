@@ -7,14 +7,14 @@ struct Artblocks: Codable {
 }
 
 struct ArtblocksData: Codable {
-    let projectsMetadata: [ProjectMetadata]
+    let projects: [Project]
 
     enum CodingKeys: String, CodingKey {
-        case projectsMetadata = "projects_metadata"
+        case projects = "projects_metadata"
     }
 }
 
-struct ProjectMetadata: Codable {
+struct Project: Codable {
     let projectId: String
     let contractAddress: String
     let curationStatus: String

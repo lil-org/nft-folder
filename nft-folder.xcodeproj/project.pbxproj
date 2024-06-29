@@ -175,7 +175,6 @@
 		2C4659932C308B44008CF97F /* Covers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Covers.xcassets; sourceTree = "<group>"; };
 		2C4659992C308F86008CF97F /* tools */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = tools; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C46599B2C308F86008CF97F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		2C4659A02C309055008CF97F /* artblocks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = artblocks.json; sourceTree = "<group>"; };
 		2C4659A12C30911C008CF97F /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		2C5065F62C0DFC8700D9D01A /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		2C5065F92C0E10D600D9D01A /* AttestationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationResponse.swift; sourceTree = "<group>"; };
@@ -670,7 +669,6 @@
 			children = (
 				2C46599B2C308F86008CF97F /* main.swift */,
 				2C4659A12C30911C008CF97F /* Utils.swift */,
-				2C4659A02C309055008CF97F /* artblocks.json */,
 			);
 			path = tools;
 			sourceTree = "<group>";

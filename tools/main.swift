@@ -7,4 +7,5 @@ let url = URL(fileURLWithPath: dir + "/tools/artblocks.json")
 let data = try! Data(contentsOf: url)
 let artblocks = try! JSONDecoder().decode(Artblocks.self, from: data)
 
-print(artblocks.data.projectsMetadata.count)
+let projects = artblocks.data.projects
+print(projects.count)
