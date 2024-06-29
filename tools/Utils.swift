@@ -51,6 +51,7 @@ struct Token: Codable {
 
 struct ArtblocksProjectToBundle {
     
+    let name: String
     let hasVideo: Bool
     let tokens: [String]
     let contractAddress: String

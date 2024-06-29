@@ -8,7 +8,8 @@ let data = try! Data(contentsOf: url)
 let artblocks = try! JSONDecoder().decode(Artblocks.self, from: data)
 let projects = artblocks.data.projects.compactMap {
     $0.curationStatus == .curated ?
-    ArtblocksProjectToBundle(hasVideo: $0.allTokensHaveVideo,
+    ArtblocksProjectToBundle(name: $0.name,
+                             hasVideo: $0.allTokensHaveVideo,
                              tokens: $0.tokens.map { $0.tokenId },
                              contractAddress: $0.contractAddress,
                              projectId: $0.projectId)

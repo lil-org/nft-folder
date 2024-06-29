@@ -7,7 +7,7 @@ struct BundledTokens: Codable {
     struct Item: Codable {
         let id: String
         let name: String?
-        let url: String
+        let url: String?
     }
     
     let isComplete: Bool
