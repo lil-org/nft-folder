@@ -8,20 +8,23 @@ extension NSImage {
     
     func resizeToUseAsCoverIfNeeded() -> (NSImage, Data)? {
         let maxDimension: CGFloat = 130
-        var newSize = size
+        let newSize = CGSize(width: maxDimension, height: maxDimension)
+        var targetRect = NSRect(x: 0, y: 0, width: maxDimension, height: maxDimension)
         
         if size.width > maxDimension || size.height > maxDimension {
             let aspectRatio = size.width / size.height
             if aspectRatio > 1 {
-                newSize = NSSize(width: maxDimension, height: floor(maxDimension / aspectRatio))
+                let widthToCrop = maxDimension * (aspectRatio - 1)
+                targetRect = targetRect.insetBy(dx: -widthToCrop, dy: 0)
             } else {
-                newSize = NSSize(width: floor(maxDimension * aspectRatio), height: maxDimension)
+                let heightToCrop = maxDimension * (1 / aspectRatio - 1)
+                targetRect = targetRect.insetBy(dx: 0, dy: -heightToCrop)
             }
         }
         
         let resizedImage = NSImage(size: newSize)
         resizedImage.lockFocus()
-        draw(in: NSRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        draw(in: targetRect)
         resizedImage.unlockFocus()
         
         guard let tiffData = resizedImage.tiffRepresentation,
