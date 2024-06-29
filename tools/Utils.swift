@@ -57,4 +57,8 @@ struct ArtblocksProjectToBundle {
     let contractAddress: String
     let projectId: String
     
+    var id: String {
+        return contractAddress + projectId
+    }
+    
 }

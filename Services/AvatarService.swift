@@ -39,7 +39,7 @@ struct AvatarService {
     }
     
     static func setAvatar(wallet: WatchOnlyWallet, image: NSImage) {
-        guard let (resizedImage, jpegData) = resizeImageIfNeeded(image),
+        guard let (resizedImage, jpegData) = image.resizeToUseAsCoverIfNeeded(),
               let fileURL = URL.avatarOnDisk(wallet: wallet),
               let folderURL = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return }
         
@@ -82,7 +82,7 @@ struct AvatarService {
         URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data, error == nil,
                   let image = NSImage(data: data),
-                  let (resizedImage, jpegData) = resizeImageIfNeeded(image) else { return }
+                  let (resizedImage, jpegData) = image.resizeToUseAsCoverIfNeeded() else { return }
             DispatchQueue.main.async {
                 completion(resizedImage)
                 dict[wallet.address] = resizedImage
@@ -90,31 +90,6 @@ struct AvatarService {
             }
             try? jpegData.write(to: fileURL, options: .atomic)
         }.resume()
-    }
-    
-    private static func resizeImageIfNeeded(_ image: NSImage) -> (NSImage, Data)? {
-        let maxDimension: CGFloat = 130
-        var newSize = image.size
-        
-        if image.size.width > maxDimension || image.size.height > maxDimension {
-            let aspectRatio = image.size.width / image.size.height
-            if aspectRatio > 1 {
-                newSize = NSSize(width: maxDimension, height: floor(maxDimension / aspectRatio))
-            } else {
-                newSize = NSSize(width: floor(maxDimension * aspectRatio), height: maxDimension)
-            }
-        }
-        
-        let resizedImage = NSImage(size: newSize)
-        resizedImage.lockFocus()
-        image.draw(in: NSRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
-        resizedImage.unlockFocus()
-        
-        guard let tiffData = resizedImage.tiffRepresentation,
-              let bitmapImage = NSBitmapImageRep(data: tiffData),
-              let jpegData = bitmapImage.representation(using: .jpeg, properties: [.compressionFactor: 0.9]) else { return nil }
-        
-        return (resizedImage, jpegData)
     }
     
     static func setup() {

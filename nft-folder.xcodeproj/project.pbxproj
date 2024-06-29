@@ -85,6 +85,8 @@
 		2CB308E32C30A2E800D914A5 /* BundledTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C086E862C2F3C3600D4268D /* BundledTokens.swift */; };
 		2CB308E42C30A2E800D914A5 /* SuggestedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFF885A2C288C9A0007045F /* SuggestedItem.swift */; };
 		2CB308E52C30A3C100D914A5 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A42E92B1A272600BE4166 /* Network.swift */; };
+		2CB308E72C30AD0000D914A5 /* NSImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB308E62C30AD0000D914A5 /* NSImage.swift */; };
+		2CB308E82C30AD0000D914A5 /* NSImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB308E62C30AD0000D914A5 /* NSImage.swift */; };
 		2CB392012C1E15630011CC94 /* TranslateMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB392002C1E15630011CC94 /* TranslateMetadata.swift */; };
 		2CB392032C1E162C0011CC94 /* TranslateStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB392022C1E162C0011CC94 /* TranslateStrings.swift */; };
 		2CC096F52B099F3400F24DD2 /* FolderIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC096F42B099F3400F24DD2 /* FolderIcon.swift */; };
@@ -590,6 +592,7 @@
 		2CA979A92B627B3900DB3AC8 /* MinimalTokenMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimalTokenMetadata.swift; sourceTree = "<group>"; };
 		2CA979AB2B62BA2400DB3AC8 /* NftGallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftGallery.swift; sourceTree = "<group>"; };
 		2CAFA62A2B09C3610054160D /* MetadataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataStorage.swift; sourceTree = "<group>"; };
+		2CB308E62C30AD0000D914A5 /* NSImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSImage.swift; sourceTree = "<group>"; };
 		2CB392002C1E15630011CC94 /* TranslateMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateMetadata.swift; sourceTree = "<group>"; };
 		2CB392022C1E162C0011CC94 /* TranslateStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateStrings.swift; sourceTree = "<group>"; };
 		2CC096F42B099F3400F24DD2 /* FolderIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderIcon.swift; sourceTree = "<group>"; };
@@ -1422,6 +1425,7 @@
 				2CE0B5E22B8686CE00B5BF4A /* FooterLink.swift */,
 				2CFA24722B19FB92009B58FD /* FileExtension.swift */,
 				2C8E246E2C24A6E200C13536 /* FirstMouseView.swift */,
+				2CB308E62C30AD0000D914A5 /* NSImage.swift */,
 				2CC096F42B099F3400F24DD2 /* FolderIcon.swift */,
 			);
 			path = Helpers;
@@ -1802,6 +1806,7 @@
 				2C46599C2C308F86008CF97F /* main.swift in Sources */,
 				2C4659A22C30911C008CF97F /* Utils.swift in Sources */,
 				2CB308E32C30A2E800D914A5 /* BundledTokens.swift in Sources */,
+				2CB308E82C30AD0000D914A5 /* NSImage.swift in Sources */,
 				2CB308E42C30A2E800D914A5 /* SuggestedItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1904,6 +1909,7 @@
 				2C086E872C2F3C3600D4268D /* BundledTokens.swift in Sources */,
 				2C8E246F2C24A6E200C13536 /* FirstMouseView.swift in Sources */,
 				2C1B60C42B7D41D1009949C2 /* HostAppImages.swift in Sources */,
+				2CB308E72C30AD0000D914A5 /* NSImage.swift in Sources */,
 				2CC943032B825907003219C7 /* ZoraRequest.swift in Sources */,
 				2CE33D9A2B865CFB008473E1 /* AvatarService.swift in Sources */,
 				2CA34B5A2B08B7CF00DAB623 /* URL.swift in Sources */,
