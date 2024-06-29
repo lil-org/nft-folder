@@ -4,6 +4,15 @@ import Foundation
 
 struct SuggestedItemsService {
     
+    private static let bundle: Bundle = {
+        if let bundleURL = Bundle.main.url(forResource: "Suggested", withExtension: "bundle"),
+           let suggestedBundle = Bundle(url: bundleURL) {
+            return suggestedBundle
+        } else {
+            return Bundle.main
+        }
+    }()
+    
     static var allItems = readSuggestedItems()
     static var toHide = Set(Defaults.suggestedItemsToHide)
     
@@ -14,7 +23,7 @@ struct SuggestedItemsService {
     }
     
     static func bundledTokens(collection: CollectionInfo, address: String) -> BundledTokens? {
-        if let url = Bundle.main.url(forResource: address, withExtension: "json"),
+        if let url = bundle.url(forResource: address, withExtension: "json"),
            let data = try? Data(contentsOf: url),
            let bundledTokens = try? JSONDecoder().decode(BundledTokens.self, from: data) {
             return bundledTokens
@@ -24,11 +33,11 @@ struct SuggestedItemsService {
     }
     
     private static func readSuggestedItems() -> [SuggestedItem] {
-        guard let url = Bundle.main.url(forResource: "suggested-items", withExtension: "json"),
+        guard let url = bundle.url(forResource: "suggested-items", withExtension: "json"),
               let data = try? Data(contentsOf: url),
               let items = try? JSONDecoder().decode([SuggestedItem].self, from: data) else {
-                return []
-            }
+            return []
+        }
         let filtered = items.filter { !toHide.contains($0.id) }
         return filtered
     }

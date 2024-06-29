@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2C086E872C2F3C3600D4268D /* BundledTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C086E862C2F3C3600D4268D /* BundledTokens.swift */; };
-		2C086E892C2F50F000D4268D /* 0x17abd4cc1382397ec2b675f98621c3ba809897de.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C086E882C2F50F000D4268D /* 0x17abd4cc1382397ec2b675f98621c3ba809897de.json */; };
+		2C09BAE42C308145009BA300 /* Suggested.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2C09BAE32C308145009BA300 /* Suggested.bundle */; };
 		2C0D86C42B08E67000106915 /* WalletsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C32B08E67000106915 /* WalletsService.swift */; };
 		2C0D86C72B08E7BF00106915 /* EnsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C62B08E7BF00106915 /* EnsResponse.swift */; };
 		2C1B60B92B7D3245009949C2 /* DirectoryMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60B82B7D3245009949C2 /* DirectoryMonitor.swift */; };
@@ -47,7 +47,6 @@
 		2C60AAD12B8A4DE200F2C143 /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60AAD02B8A4DE200F2C143 /* Window.swift */; };
 		2C622BB92BF3C1EA0003B932 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C622BB82BF3C1EA0003B932 /* main.swift */; };
 		2C672CB12BFCEFB500E57B21 /* IpfsUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C672CB02BFCEFB500E57B21 /* IpfsUploader.swift */; };
-		2C8812422C2CBA7C005BFAA5 /* suggested-items.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C8812412C2CBA7C005BFAA5 /* suggested-items.json */; };
 		2C8A42EA2B1A272600BE4166 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A42E92B1A272600BE4166 /* Network.swift */; };
 		2C8A4CBF2BF9ECBD00F0E9D9 /* MagicEdenApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A4CBE2BF9ECBD00F0E9D9 /* MagicEdenApi.swift */; };
 		2C8E246F2C24A6E200C13536 /* FirstMouseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8E246E2C24A6E200C13536 /* FirstMouseView.swift */; };
@@ -140,7 +139,7 @@
 
 /* Begin PBXFileReference section */
 		2C086E862C2F3C3600D4268D /* BundledTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundledTokens.swift; sourceTree = "<group>"; };
-		2C086E882C2F50F000D4268D /* 0x17abd4cc1382397ec2b675f98621c3ba809897de.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 0x17abd4cc1382397ec2b675f98621c3ba809897de.json; sourceTree = "<group>"; };
+		2C09BAE32C308145009BA300 /* Suggested.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Suggested.bundle; sourceTree = "<group>"; };
 		2C0D86C32B08E67000106915 /* WalletsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsService.swift; sourceTree = "<group>"; };
 		2C0D86C62B08E7BF00106915 /* EnsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnsResponse.swift; sourceTree = "<group>"; };
 		2C16579D2C2D8DED0050A896 /* 0_APP_DESKTOP_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0_APP_DESKTOP_0.png; sourceTree = "<group>"; };
@@ -170,7 +169,6 @@
 		2C622BB62BF3C1EA0003B932 /* translate */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = translate; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C622BB82BF3C1EA0003B932 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		2C672CB02BFCEFB500E57B21 /* IpfsUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IpfsUploader.swift; sourceTree = "<group>"; };
-		2C8812412C2CBA7C005BFAA5 /* suggested-items.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "suggested-items.json"; sourceTree = "<group>"; };
 		2C8A42E92B1A272600BE4166 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		2C8A4CBE2BF9ECBD00F0E9D9 /* MagicEdenApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicEdenApi.swift; sourceTree = "<group>"; };
 		2C8E246E2C24A6E200C13536 /* FirstMouseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstMouseView.swift; sourceTree = "<group>"; };
@@ -623,14 +621,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2C086E8A2C2F510C00D4268D /* Bundled Tokens */ = {
-			isa = PBXGroup;
-			children = (
-				2C086E882C2F50F000D4268D /* 0x17abd4cc1382397ec2b675f98621c3ba809897de.json */,
-			);
-			path = "Bundled Tokens";
-			sourceTree = "<group>";
-		};
 		2C0D86C92B08E7C600106915 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -1410,9 +1400,8 @@
 				2C9C60342C2C5FE8001D9B51 /* SuggestedItemsService.swift */,
 				2CFF885A2C288C9A0007045F /* SuggestedItem.swift */,
 				2C086E862C2F3C3600D4268D /* BundledTokens.swift */,
+				2C09BAE32C308145009BA300 /* Suggested.bundle */,
 				2CC4FF082C2CBC52007E90E8 /* Suggested.xcassets */,
-				2C8812412C2CBA7C005BFAA5 /* suggested-items.json */,
-				2C086E8A2C2F510C00D4268D /* Bundled Tokens */,
 			);
 			path = "Suggested Items";
 			sourceTree = "<group>";
@@ -1717,10 +1706,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CA4CF592B07F76000CC75F4 /* Assets.xcassets in Resources */,
-				2C8812422C2CBA7C005BFAA5 /* suggested-items.json in Resources */,
-				2C086E892C2F50F000D4268D /* 0x17abd4cc1382397ec2b675f98621c3ba809897de.json in Resources */,
 				2CC4FF092C2CBC52007E90E8 /* Suggested.xcassets in Resources */,
 				2CA4CF5C2B07F76000CC75F4 /* Main.storyboard in Resources */,
+				2C09BAE42C308145009BA300 /* Suggested.bundle in Resources */,
 				2CE9A7712BAD8ECD00579BF7 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
