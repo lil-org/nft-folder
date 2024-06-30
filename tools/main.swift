@@ -16,7 +16,7 @@ var bundledSuggestedItems = try! JSONDecoder().decode([SuggestedItem].self, from
 let bundledIds = Set(bundledSuggestedItems.map { $0.id })
 
 let projects = artblocks.data.projects.compactMap {
-    $0.curationStatus == .curated ?
+    $0.curationStatus != .curated ?
     ArtblocksProjectToBundle(name: $0.name,
                              hasVideo: $0.allTokensHaveVideo,
                              tokens: $0.tokens.map { $0.tokenId },
@@ -77,6 +77,6 @@ func prepareForSelection() {
     }
 }
 
-bundleSelected()
+prepareForSelection()
 
 print("🟢 all done")
