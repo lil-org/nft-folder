@@ -34,7 +34,7 @@ func bundleSelected() {
         let bundledTokensItems = project.tokens.map { BundledTokens.Item(id: $0, name: nil, url: nil) }
         let bundledTokens = BundledTokens(isComplete: true, items: bundledTokensItems)
         
-        let coverTokenId = project.tokens.first!
+        let coverTokenId = project.tokens.randomElement()!
         let coverImageUrl = URL(string: "https://media-proxy.artblocks.io/\(project.contractAddress)/\(coverTokenId).png")!
         let rawImageData = try! Data(contentsOf: coverImageUrl)
         let (_, imageData) = NSImage(data: rawImageData)!.resizeToUseAsCoverIfNeeded()!
