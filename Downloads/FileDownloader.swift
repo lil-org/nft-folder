@@ -32,6 +32,9 @@ class FileDownloader: NSObject {
     private var foldersForTokens: [Token: [String]]?
     private var wallet: WatchOnlyWallet?
     private var definitelyShouldNotCreateCollectionThumbnail = false
+    private var maxSimultaneousDownloads: Int {
+        return wallet?.projectId != nil ? 3 : 13
+    }
     
     init(completion: @escaping () -> Void) {
         self.completion = completion
@@ -88,7 +91,7 @@ class FileDownloader: NSObject {
     
     private func downloadNextIfNeeded() {
         guard !queuedURLsHashes.isEmpty else { completion(); return }
-        guard downloadsInProgress < 10 && !downloadTasks.isEmpty else { return }
+        guard downloadsInProgress < maxSimultaneousDownloads && !downloadTasks.isEmpty else { return }
         var task = downloadTasks.removeFirst()
         downloadsInProgress += 1
         downloadFile(task: task) { [weak self] result in
