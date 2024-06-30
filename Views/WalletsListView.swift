@@ -14,6 +14,7 @@ struct WalletsListView: View {
     @State private var wallets = [WatchOnlyWallet]()
     @State private var suggestedItems = SuggestedItemsService.allItems
     @State private var didAppear = false
+    @State private var isDownloading = false
     @State private var downloadsStatuses = AllDownloadsManager.shared.statuses
     @State private var draggingIndex: Int? = nil
     @State private var currentDropDestination: Int? = nil
@@ -43,6 +44,15 @@ struct WalletsListView: View {
                             Images.quit
                         }.keyboardShortcut("q", modifiers: [.command]).buttonStyle(BorderlessButtonStyle())
                         Spacer()
+                        
+                        if isDownloading {
+                            Button(action: {
+                                AllDownloadsManager.shared.stopAllDownloads()
+                            }) {
+                                Images.pause
+                            }
+                        }
+                        
                         Button(action: {
                             showSettingsPopup = true
                         }) {
@@ -369,6 +379,7 @@ struct WalletsListView: View {
     private func updateDisplayedWallets() {
         wallets = WalletsService.shared.wallets
         downloadsStatuses = AllDownloadsManager.shared.statuses
+        isDownloading = downloadsStatuses.contains(where: { $0.value == .downloading })
     }
     
 }
