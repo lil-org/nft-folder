@@ -15,7 +15,7 @@ class FileDownloader: NSObject {
     
     private lazy var urlSession: URLSession? = {
         var configuration = URLSessionConfiguration.default
-        configuration.timeoutIntervalForRequest = 15
+        configuration.timeoutIntervalForRequest = 30
         let delegateQueue = OperationQueue()
         delegateQueue.underlyingQueue = FileDownloader.queue
         let session = URLSession(configuration: configuration, delegate: self, delegateQueue: delegateQueue)
@@ -88,7 +88,7 @@ class FileDownloader: NSObject {
     
     private func downloadNextIfNeeded() {
         guard !queuedURLsHashes.isEmpty else { completion(); return }
-        guard downloadsInProgress < 23 && !downloadTasks.isEmpty else { return }
+        guard downloadsInProgress < 10 && !downloadTasks.isEmpty else { return }
         var task = downloadTasks.removeFirst()
         downloadsInProgress += 1
         downloadFile(task: task) { [weak self] result in
