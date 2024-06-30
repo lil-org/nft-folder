@@ -77,6 +77,55 @@ func prepareForSelection() {
     }
 }
 
-bundleSelected()
+func removeBundledItems(_ idsString: String) {
+    let ids = idsString.split(separator: "\n\n")
+    for id in ids {
+        bundledSuggestedItems.removeAll(where: { $0.id == id })
+        let tokensURL = URL(fileURLWithPath: dir + "/Suggested Items/Suggested.bundle/Tokens/\(id).json")
+        try! FileManager.default.removeItem(at: tokensURL)
+        let imagesetPath = dir + "/Suggested Items/Covers.xcassets/\(id).imageset"
+        try! FileManager.default.removeItem(atPath: imagesetPath)
+        print("did remove \(id)")
+    }
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = .prettyPrinted
+    let updatedSuggestedItemsData = try! encoder.encode(bundledSuggestedItems)
+    try! updatedSuggestedItemsData.write(to: bundledSuggestedItemsUrl)
+}
+
+let allToRemoveString =
+"""
+0xbdde08bd57e5c9fd563ee7ac61618cb2ecdc0ce09
+
+0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd27095
+
+0xbdde08bd57e5c9fd563ee7ac61618cb2ecdc0ce08
+
+0xbdde08bd57e5c9fd563ee7ac61618cb2ecdc0ce00
+
+0xbdde08bd57e5c9fd563ee7ac61618cb2ecdc0ce03
+
+0xbdde08bd57e5c9fd563ee7ac61618cb2ecdc0ce05
+
+0xbdde08bd57e5c9fd563ee7ac61618cb2ecdc0ce06
+
+0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270189
+
+0xbdde08bd57e5c9fd563ee7ac61618cb2ecdc0ce04
+
+0xbdde08bd57e5c9fd563ee7ac61618cb2ecdc0ce07
+
+0x9f79e46a309f804aa4b7b53a1f72c6913742779411
+
+0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270337
+
+0x0a1bbd57033f57e7b6743621b79fcb9eb2ce367655
+
+0x7c3ea2b7b3befa1115ab51c09f0c9f245c500b188
+
+0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270178
+"""
+
+removeBundledItems(allToRemoveString)
 
 print("🟢 all done")
