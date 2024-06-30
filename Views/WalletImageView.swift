@@ -26,7 +26,7 @@ struct WalletImageView: View {
                         .background(Color.white)
                 }
             } else {
-                RandomGradientShape(address: wallet.address)
+                RandomGradientShape(address: wallet.id)
             }
         }
         .overlay(
@@ -45,7 +45,7 @@ struct WalletImageView: View {
             windowIsFocused = false
         }
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name.didUpdateWalletAvatar)) { notification in
-            if avatarLoader.avatar == nil && wallet.address == notification.object as? String {
+            if avatarLoader.avatar == nil && wallet.id == notification.object as? String {
                 avatarLoader.loadAvatar(wallet: wallet)
             }
         }

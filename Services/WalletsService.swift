@@ -33,8 +33,8 @@ struct WalletsService {
         Defaults.cleanupForWallet(wallet)
     }
     
-    func removeWallet(address: String) {
-        if let toRemove = wallets.first(where: { $0.address == address }) {
+    func removeWallet(id: String) {
+        if let toRemove = wallets.first(where: { $0.id == id }) {
             removeWallet(toRemove)
         }
     }
@@ -99,7 +99,7 @@ struct WalletsService {
         }
         
         for remaining in knownWallets {
-            removeWallet(address: remaining.address)
+            removeWallet(id: remaining.id)
         }
         return Array(knownWallets)
     }
@@ -121,10 +121,10 @@ struct WalletsService {
                     collectionName += " " + wallet.address.suffix(4)
                 }
                 
-                let updatedWallet = WatchOnlyWallet(address: wallet.address, name: collectionName, avatar: wallet.avatar, projectId: nil, collections: collections)
+                let updatedWallet = WatchOnlyWallet(address: wallet.address, name: collectionName, avatar: wallet.avatar, projectId: wallet.projectId, collections: collections)
                 DispatchQueue.main.async {
                     var walletsUpdate = wallets
-                    if let index = walletsUpdate.firstIndex(where: { $0.address == updatedWallet.address }) {
+                    if let index = walletsUpdate.firstIndex(where: { $0.id == updatedWallet.id }) {
                         renameFolder(path: path, name: wallet.folderDisplayName, wallet: updatedWallet)
                         walletsUpdate[index] = updatedWallet
                         updateWithWallets(walletsUpdate)

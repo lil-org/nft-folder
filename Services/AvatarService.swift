@@ -12,11 +12,11 @@ struct AvatarService {
     
     static func getAvatarImmediatelly(wallet: WatchOnlyWallet) -> NSImage? {
         lastAccessDate = Date()
-        return dict[wallet.address]
+        return dict[wallet.id]
     }
     
     static func hasLocalAvatar(wallet: WatchOnlyWallet) -> Bool {
-        if dict[wallet.address] != nil {
+        if dict[wallet.id] != nil {
             return true
         } else if let url = URL.avatarOnDisk(wallet: wallet) {
             return FileManager.default.fileExists(atPath: url.path)
@@ -44,9 +44,9 @@ struct AvatarService {
               let folderURL = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return }
         
         DispatchQueue.main.async {
-            dict[wallet.address] = resizedImage
+            dict[wallet.id] = resizedImage
             NSWorkspace.shared.setIcon(resizedImage, forFile: folderURL.path, options: [])
-            NotificationCenter.default.post(name: .didUpdateWalletAvatar, object: wallet.address)
+            NotificationCenter.default.post(name: .didUpdateWalletAvatar, object: wallet.id)
         }
         
         try? jpegData.write(to: fileURL, options: .atomic)
@@ -63,18 +63,18 @@ struct AvatarService {
         
         if let diskCachedData = try? Data(contentsOf: fileURL), let image = NSImage(data: diskCachedData) {
             completion(image)
-            dict[wallet.address] = image
+            dict[wallet.id] = image
             return
         }
         
-        if let attemptsCount = attemptsCountDict[wallet.address] {
+        if let attemptsCount = attemptsCountDict[wallet.id] {
             if attemptsCount > 3 {
                 return
             } else {
-                attemptsCountDict[wallet.address] = attemptsCount + 1
+                attemptsCountDict[wallet.id] = attemptsCount + 1
             }
         } else {
-            attemptsCountDict[wallet.address] = 1
+            attemptsCountDict[wallet.id] = 1
         }
         
         guard let urlString = wallet.avatar, let url = URL(string: urlString) else { return }
@@ -85,7 +85,7 @@ struct AvatarService {
                   let (resizedImage, jpegData) = image.resizeToUseAsCoverIfNeeded() else { return }
             DispatchQueue.main.async {
                 completion(resizedImage)
-                dict[wallet.address] = resizedImage
+                dict[wallet.id] = resizedImage
                 NSWorkspace.shared.setIcon(resizedImage, forFile: folderURL.path, options: [])
             }
             try? jpegData.write(to: fileURL, options: .atomic)

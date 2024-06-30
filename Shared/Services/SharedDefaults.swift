@@ -17,11 +17,11 @@ struct SharedDefaults {
     }
     
     static func removeWallet(_ wallet: WatchOnlyWallet) {
-        watchWallets.removeAll(where: { $0.address == wallet.address })
+        watchWallets.removeAll(where: { $0.id == wallet.id })
     }
     
     static func addWallet(_ wallet: WatchOnlyWallet) {
-        guard !watchWallets.contains(where: { $0.address == wallet.address }) else { return }
+        guard !watchWallets.contains(where: { $0.id == wallet.id }) else { return }
         watchWallets += [wallet]
         NotificationCenter.default.post(name: .walletsUpdate, object: nil)
         _ = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: true)

@@ -166,7 +166,7 @@ struct WalletsListView: View {
             ForEach(wallets.indices, id: \.self) { index in
                 item(for: wallets[index], index: index).onDrag {
                     self.draggingIndex = index
-                    return NSItemProvider(object: String(wallets[index].address) as NSString)
+                    return NSItemProvider(object: String(wallets[index].id) as NSString)
                 }
                 .onDrop(of: [UTType.text], delegate: WalletDropDelegate(wallets: $wallets,
                                                                         sourceIndex: $draggingIndex,
@@ -342,7 +342,7 @@ struct WalletsListView: View {
         let wallet = WatchOnlyWallet(address: item.address, name: item.name, avatar: nil, projectId: item.projectId, collections: collections)
         addWallet(wallet, skipCollectionCheck: true)
         openFolderForWallet(wallet)
-        if let image = NSImage(named: item.address) {
+        if let image = NSImage(named: item.id) {
             AvatarService.setAvatar(wallet: wallet, image: image)
         }
         removeAndDoNotSuggestAnymore(item: item)
