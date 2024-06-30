@@ -4,8 +4,6 @@ import Cocoa
 
 extension NSImage {
     
-    // TODO: crop to square
-    
     func resizeToUseAsCoverIfNeeded() -> (NSImage, Data)? {
         let maxDimension: CGFloat = 130
         let newSize = CGSize(width: maxDimension, height: maxDimension)

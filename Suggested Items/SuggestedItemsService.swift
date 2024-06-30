@@ -22,8 +22,8 @@ struct SuggestedItemsService {
         Defaults.suggestedItemsToHide = Array(toHide)
     }
     
-    static func bundledTokens(collection: CollectionInfo, address: String) -> BundledTokens? {
-        if let url = bundle.url(forResource: "Tokens/" + address, withExtension: "json"),
+    static func bundledTokens(collectionId: String) -> BundledTokens? {
+        if let url = bundle.url(forResource: "Tokens/" + collectionId, withExtension: "json"),
            let data = try? Data(contentsOf: url),
            let bundledTokens = try? JSONDecoder().decode(BundledTokens.self, from: data) {
             return bundledTokens

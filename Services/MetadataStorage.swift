@@ -30,8 +30,9 @@ struct MetadataStorage {
                let detailedMetadata = detailedMetadata(nftFilePath: filePath),
                minimalMetadata.collectionAddress == detailedMetadata.collectionAddress,
                let collectionName = detailedMetadata.collectionName, name.contains(collectionName) {
-                let collectionInfo = CollectionInfo(name: collectionName, network: detailedMetadata.network)
-                return WatchOnlyWallet(address: detailedMetadata.collectionAddress, name: collectionName, avatar: nil, collections: [collectionInfo])
+                let collectionInfo = CollectionInfo(name: collectionName, network: detailedMetadata.network, hasVideo: nil)
+                // TODO: fix recovering artblocks project id
+                return WatchOnlyWallet(address: detailedMetadata.collectionAddress, name: collectionName, avatar: nil, projectId: nil, collections: [collectionInfo])
             } else {
                 return nil
             }

@@ -34,15 +34,32 @@ class WalletDownloader {
     
     private func processBundledTokensAndSeeIfShouldGoThroughZora(wallet: WatchOnlyWallet) -> Bool {
         guard let collection = wallet.collections?.first else { return true }
-        if let bundledTokens = SuggestedItemsService.bundledTokens(collection: collection, address: wallet.address),
+        if let bundledTokens = SuggestedItemsService.bundledTokens(collectionId: wallet.id),
            let walletRootDirectory = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) {
-            
             var tasks = [DownloadFileTask]()
             for item in bundledTokens.items {
-                // TODO: more content for artblocks with video
-                // TODO: url is nil for artblocks tokens, build url using token id
-                guard let content = ContentRepresentation(url: item.url, size: nil, mimeType: nil, knownKind: nil) else { continue }
-                let detailedMetadata = DetailedTokenMetadata(name: item.name, collectionName: collection.name, collectionAddress: wallet.address, tokenId: item.id, network: collection.network, tokenStandard: nil, contentRepresentations: [content])
+                let contentRepresentations: [ContentRepresentation]
+                if let url = item.url {
+                    guard let content = ContentRepresentation(url: item.url, size: nil, mimeType: nil, knownKind: nil) else { continue }
+                    contentRepresentations = [content]
+                } else {
+                    if let imageContent = ContentRepresentation(url: "https://media-proxy.artblocks.io/\(wallet.address)/\(item.id).png",
+                                                                size: nil, mimeType: nil, knownKind: .image) {
+                        if collection.hasVideo == true,
+                           let videoContent = ContentRepresentation(url: "https://media-proxy.artblocks.io/\(wallet.address)/\(item.id).mp4",
+                                                                    size: nil,
+                                                                    mimeType: nil,
+                                                                    knownKind: .video) {
+                            contentRepresentations = [videoContent, imageContent]
+                        } else {
+                            contentRepresentations = [imageContent]
+                        }
+                    } else {
+                        continue
+                    }
+                }
+
+                let detailedMetadata = DetailedTokenMetadata(name: item.name, collectionName: collection.name, collectionAddress: wallet.address, tokenId: item.id, network: collection.network, tokenStandard: nil, contentRepresentations: contentRepresentations)
                 guard !MetadataStorage.hasSomethingFor(detailedMetadata: detailedMetadata, addressDirectoryURL: walletRootDirectory) else { continue }
                 let minimalMetadata = MinimalTokenMetadata(tokenId: item.id, collectionAddress: wallet.address, network: collection.network)
                 let downloadTask = DownloadFileTask(walletRootDirectory: walletRootDirectory, minimalMetadata: minimalMetadata, detailedMetadata: detailedMetadata)

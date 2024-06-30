@@ -5,11 +5,12 @@ import SwiftUI
 
 struct WatchOnlyWallet: Codable, Hashable, Identifiable {
     
-    var id: String { address }
+    var id: String { address + (projectId ?? "") }
     
     let address: String
     let name: String?
     let avatar: String?
+    let projectId: String?
     
     let collections: [CollectionInfo]?
     

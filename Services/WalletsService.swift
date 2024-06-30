@@ -84,7 +84,7 @@ struct WalletsService {
                 resolveENS(name) { result in
                     switch result {
                     case .success(let response):
-                        let wallet = WatchOnlyWallet(address: response.address, name: response.name, avatar: response.avatar, collections: nil)
+                        let wallet = WatchOnlyWallet(address: response.address, name: response.name, avatar: response.avatar, projectId: nil, collections: nil)
                         self.addWallet(wallet, skipCollectionCheck: false)
                         renameFolder(path: path, name: name, wallet: wallet)
                         FolderIcon.set(for: wallet)
@@ -110,7 +110,7 @@ struct WalletsService {
             if let responseCollections = response?.collections?.nodes {
                 let collections = responseCollections.compactMap { collectionNode in
                     if let network = Network.withName(collectionNode.networkInfo.network) {
-                        return CollectionInfo(name: collectionNode.name, network: network)
+                        return CollectionInfo(name: collectionNode.name, network: network, hasVideo: nil)
                     } else {
                         return nil
                     }
@@ -121,7 +121,7 @@ struct WalletsService {
                     collectionName += " " + wallet.address.suffix(4)
                 }
                 
-                let updatedWallet = WatchOnlyWallet(address: wallet.address, name: collectionName, avatar: wallet.avatar, collections: collections)
+                let updatedWallet = WatchOnlyWallet(address: wallet.address, name: collectionName, avatar: wallet.avatar, projectId: nil, collections: collections)
                 DispatchQueue.main.async {
                     var walletsUpdate = wallets
                     if let index = walletsUpdate.firstIndex(where: { $0.address == updatedWallet.address }) {
