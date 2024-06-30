@@ -3,6 +3,8 @@
 import Cocoa
 
 let dir = FileManager.default.currentDirectoryPath
+let selectedPath = dir + "/tools/select/"
+let selectedSet = Set(try! FileManager.default.contentsOfDirectory(atPath: selectedPath))
 
 let artblocksUrl = URL(fileURLWithPath: dir + "/tools/artblocks.json")
 let artblocksData = try! Data(contentsOf: artblocksUrl)
@@ -24,7 +26,7 @@ let projects = artblocks.data.projects.compactMap {
 }
 
 func bundleSelected() {
-    for project in projects where !bundledIds.contains(project.id) {
+    for project in projects where !bundledIds.contains(project.id) && selectedSet.contains(project.id) {
         let suggestedItem = SuggestedItem(name: project.name,
                                           address: project.contractAddress,
                                           chainId: 1,
@@ -58,12 +60,10 @@ func bundleSelected() {
 }
 
 func prepareForSelection() {
-    let selectPath = dir + "/tools/select/"
-
     print("will download previews for \(projects.count) projects")
 
     for project in projects {
-        let projectPath = selectPath + project.id
+        let projectPath = selectedPath + project.id
         try! FileManager.default.createDirectory(atPath: projectPath, withIntermediateDirectories: false)
         for token in project.tokens.prefix(5) {
             let imageURL = URL(string: "https://media-proxy.artblocks.io/\(project.contractAddress)/\(token).png")!
@@ -76,5 +76,7 @@ func prepareForSelection() {
         print("✅ did add \(project.name)")
     }
 }
+
+bundleSelected()
 
 print("🟢 all done")
