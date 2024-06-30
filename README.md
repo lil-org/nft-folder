@@ -2,7 +2,7 @@
 
 ### [folder.lil.org](https://folder.lil.org)
 
-![1](https://github.com/lil-org/nft-folder-macos/assets/7680193/7ea5a8cf-f2d6-4631-aba4-0bbab41a4467)
+![0](https://github.com/lil-org/nft-folder/assets/7680193/791644ec-f7e8-449a-817e-17219c9927ff)
 
 ## syncing custom nft folders
 
