@@ -93,6 +93,4 @@ func removeBundledItems(_ idsString: String) {
     try! updatedSuggestedItemsData.write(to: bundledSuggestedItemsUrl)
 }
 
-prepareForSelection()
-
 print("🟢 all done")
