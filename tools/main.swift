@@ -16,7 +16,7 @@ var bundledSuggestedItems = try! JSONDecoder().decode([SuggestedItem].self, from
 let bundledIds = Set(bundledSuggestedItems.map { $0.id })
 
 let projects = artblocks.data.projects.compactMap {
-    $0.curationStatus != .curated ?
+    $0.curationStatus == .playground ?
     ArtblocksProjectToBundle(name: $0.name,
                              hasVideo: $0.allTokensHaveVideo,
                              tokens: $0.tokens.map { $0.tokenId },
@@ -92,5 +92,7 @@ func removeBundledItems(_ idsString: String) {
     let updatedSuggestedItemsData = try! encoder.encode(bundledSuggestedItems)
     try! updatedSuggestedItemsData.write(to: bundledSuggestedItemsUrl)
 }
+
+prepareForSelection()
 
 print("🟢 all done")

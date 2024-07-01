@@ -17,7 +17,7 @@ struct ArtblocksData: Codable {
 struct Project: Codable {
     
     enum CurationStatus: String, Codable {
-        case factory, curated
+        case factory, curated, plyground
     }
     
     let projectId: String
