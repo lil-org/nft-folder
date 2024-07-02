@@ -207,8 +207,14 @@ private func rebundleImages(items: [SuggestedItem], useCollectionImage: Bool) {
                     rebundleImages(items: Array(items.dropFirst()), useCollectionImage: useCollectionImage)
                 }
             } else {
-                // TODO: implement for artblocks
-                print("⚠️ will not get an image for artblocks \(item.name)")
+                let data = try! Data(contentsOf: URL(fileURLWithPath: dir + "/Suggested Items/Suggested.bundle/Tokens/\(item.id).json"))
+                let tokens = try! JSONDecoder().decode(BundledTokens.self, from: data)
+                let tokenId = tokens.items.randomElement()!.id
+                let url = URL(string: "https://media-proxy.artblocks.io/\(item.address)/\(tokenId).png")
+                let imageData = try! Data(contentsOf: url!)
+                let coverImage = NSImage(data: imageData)!
+                writeImage(coverImage, id: item.id)
+                print("did update image for \(item.name)")
                 rebundleImages(items: Array(items.dropFirst()), useCollectionImage: useCollectionImage)
             }
         } else {

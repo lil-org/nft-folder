@@ -7,7 +7,6 @@ extension NSImage {
     func resizeToUseAsCoverIfNeeded() -> (NSImage, Data)? {
         let targetDimension: CGFloat = 230
         let newSize = CGSize(width: targetDimension, height: targetDimension)
-        let targetRect = NSRect(x: 0, y: 0, width: targetDimension, height: targetDimension)
         
         let aspectRatio = size.width / size.height
         var scaledSize: CGSize
