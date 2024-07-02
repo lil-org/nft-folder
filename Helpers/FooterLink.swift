@@ -16,10 +16,10 @@ struct FooterLink: Hashable {
     }
     
     static let all = [
-        FooterLink(url: URL(string: "https://github.com/lil-org/nft-folder")!, imageName: "github"),
-        FooterLink(url: URL(string: "https://x.ivan.lol")!, imageName: "x"),
-        FooterLink(url: NftGallery.zora.url(network: .zora, collectionAddress: "0x01c077fd6b4df827490cd4f95650d55d6b35c35d", tokenId: nil)!, imageName: nil),
-        FooterLink(url: URL(string: "https://f.ivan.lol")!, imageName: "fc"),
+        FooterLink(url: URL(string: "https://g.lil.org")!, imageName: "github"),
+        FooterLink(url: URL(string: "https://x.lil.org")!, imageName: "x"),
+        FooterLink(url: URL(string: "https://mint.lil.org")!, imageName: nil),
+        FooterLink(url: URL(string: "https://f.lil.org")!, imageName: "fc"),
     ]
     
 }
