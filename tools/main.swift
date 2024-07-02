@@ -61,7 +61,8 @@ func bundleSelected() {
     try! updatedSuggestedItemsData.write(to: bundledSuggestedItemsUrl)
 }
 
-func prepareForSelection() {
+func prepareForSelection(input: String) {
+    SimpleHash.previewCollections(input: input)
     print("will download previews for \(projects.count) projects")
     processProjects(projects: projects)
     semaphore.wait()
@@ -107,11 +108,5 @@ func removeBundledItems(_ idsString: String) {
     let updatedSuggestedItemsData = try! encoder.encode(bundledSuggestedItems)
     try! updatedSuggestedItemsData.write(to: bundledSuggestedItemsUrl)
 }
-
-
-let bundleThese = ""
-SimpleHash.previewCollections(input: bundleThese)
-
-prepareForSelection()
 
 print("🟢 all done")
