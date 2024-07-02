@@ -77,11 +77,13 @@ func processProjects(projects: [ProjectToBundle]) {
         
         SimpleHash.previewNfts(collectionId: project.projectId) { nfts in
             for token in nfts.prefix(5) {
-                let imageURL = URL(string: token.imageUrl)!
+                guard let imageUrlString = token.imageUrl else { continue }
+                let imageURL = URL(string: imageUrlString)!
                 if let rawImageData = try? Data(contentsOf: imageURL) {
-                    let fileImageUrl = URL(fileURLWithPath: projectPath + "/\(token.name).\(imageURL.pathExtension)")
+                    let fileName = "\(token.name)-\(token.tokenId).\(imageURL.pathExtension)".replacingOccurrences(of: "/", with: "")
+                    let fileImageUrl = URL(fileURLWithPath: projectPath + "/" + fileName)
                     try! rawImageData.write(to: fileImageUrl)
-                    print("did add \(token) to \(project.name)")
+                    print("did add \(fileName) to \(project.name)")
                 }
             }
             print("✅ did add \(project.name)")

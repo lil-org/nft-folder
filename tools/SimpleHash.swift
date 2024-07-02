@@ -26,7 +26,7 @@ struct SimpleHash {
     struct NFT: Codable {
         let tokenId: String
         let name: String
-        let imageUrl: String
+        let imageUrl: String?
         
         enum CodingKeys: String, CodingKey {
             case tokenId = "token_id"
