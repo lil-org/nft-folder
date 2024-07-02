@@ -82,6 +82,17 @@ func removeBundledItems(_ idsString: String) {
     try! updatedSuggestedItemsData.write(to: bundledSuggestedItemsUrl)
 }
 
+
+let bundleThese =
+"""
+0x46ac8540d698167fcbb9e846511beb8cf8af9bd8
+0x72f28b86749cba12bbac8783a67bbc48d80c92e9
+0x5a0121a0a21232ec0d024dab9017314509026480
+0x80f1ed6a1ac694317dc5719db099a440627d1ea7
+0x0427743df720801825a5c82e0582b1e915e0f750
+0x20c70bdfcc398c1f06ba81730c8b52ace3af7cc3
+"""
+
 // TODO: go through all these collections
 SimpleHash.getAllCollections(contractAddress: "0x46ac8540d698167fcbb9e846511beb8cf8af9bd8")
 
