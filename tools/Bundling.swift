@@ -77,13 +77,7 @@ fileprivate func bundleProjects(projects: [ProjectToBundle]) {
                 coverImage = NSImage(data: anotherData)!
             }
             
-            let (_, imageData) = coverImage.resizeToUseAsCoverIfNeeded()!
-            let imagesetPath = dir + "/Suggested Items/Covers.xcassets/\(project.id).imageset"
-            try! FileManager.default.createDirectory(atPath: imagesetPath, withIntermediateDirectories: false)
-            let imagesetData = imagesetContentsFileData(id: project.id)
-            try! imagesetData.write(to: URL(fileURLWithPath: imagesetPath + "/Contents.json"))
-            let fileImageUrl = URL(fileURLWithPath: imagesetPath + "/\(project.id).jpeg")
-            try! imageData.write(to: fileImageUrl)
+            writeImage(coverImage, id: project.id)
             
             let bundledTokensData = try! JSONEncoder().encode(bundledTokens)
             let jsonString = String(data: bundledTokensData, encoding: .utf8)!
@@ -96,6 +90,28 @@ fileprivate func bundleProjects(projects: [ProjectToBundle]) {
     } else {
         semaphore.signal()
     }
+}
+
+func writeImage(_ image: NSImage, id: String) {
+    let (_, imageData) = image.resizeToUseAsCoverIfNeeded()!
+    let imagesetPath = dir + "/Suggested Items/Covers.xcassets/\(id).imageset"
+    
+    if FileManager.default.fileExists(atPath: imagesetPath) {
+        try! FileManager.default.removeItem(atPath: imagesetPath)
+    }
+    
+    try! FileManager.default.createDirectory(atPath: imagesetPath, withIntermediateDirectories: false)
+    let imagesetData = imagesetContentsFileData(id: id)
+    try! imagesetData.write(to: URL(fileURLWithPath: imagesetPath + "/Contents.json"))
+    let fileImageUrl = URL(fileURLWithPath: imagesetPath + "/\(id).jpeg")
+    try! imageData.write(to: fileImageUrl)
+}
+
+func hasImage(id: String) -> Bool {
+    let imagesetPath = dir + "/Suggested Items/Covers.xcassets/\(id).imageset"
+    let hasDir = FileManager.default.fileExists(atPath: imagesetPath)
+    let hasImage = FileManager.default.fileExists(atPath: imagesetPath + "/\(id).jpeg")
+    return hasDir && hasImage
 }
 
 func prepareForSelection(input: String) {
@@ -166,5 +182,39 @@ fileprivate func imagesetContentsFileData(id: String) -> Data {
 }
 
 func rebundleMissingImages() {
-    // TODO: implement
+    var missing = [SuggestedItem]()
+    for item in bundledSuggestedItems {
+        if !hasImage(id: item.id) {
+            missing.append(item)
+            print("no image for \(item.name)")
+        }
+    }
+    rebundleImages(items: missing)
+    semaphore.wait()
+}
+
+private func rebundleImages(items: [SuggestedItem]) {
+    if let item = items.first {
+        if let projectId = item.projectId {
+            if projectId.contains(where: { $0.isLetter }) {
+                SimpleHash.getNfts(collectionId: projectId, next: nil, count: 23) { result in
+                    let nft = result.nfts.randomElement()!
+                    let data = try! Data(contentsOf: URL(string: nft.previews!.imageMediumUrl!)!)
+                    let coverImage = NSImage(data: data)!
+                    writeImage(coverImage, id: item.id)
+                    print("did update image for \(item.name)")
+                    rebundleImages(items: Array(items.dropFirst()))
+                }
+            } else {
+                // TODO: implement for artblocks
+                print("⚠️ will not get an image for artblocks \(item.name)")
+                rebundleImages(items: Array(items.dropFirst()))
+            }
+        } else {
+            print("⚠️ will not get an image for \(item.name)")
+            rebundleImages(items: Array(items.dropFirst()))
+        }
+    } else {
+        semaphore.signal()
+    }
 }

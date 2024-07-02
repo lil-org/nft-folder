@@ -125,7 +125,7 @@ struct SimpleHash {
         }
     }
     
-    private static func getNfts(collectionId: String, next: String?, count: Int, completion: @escaping (NftsResponse) -> Void) {
+    static func getNfts(collectionId: String, next: String?, count: Int, completion: @escaping (NftsResponse) -> Void) {
         let url = URL(string: next ?? "https://api.simplehash.com/api/v0/nfts/collection/\(collectionId)?limit=\(count)&include_attribute_percentages=0&include_unit_price_eth_wei=0")!
         var request = URLRequest(url: url)
         request.allHTTPHeaderFields = [
