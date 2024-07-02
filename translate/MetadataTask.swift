@@ -42,7 +42,7 @@ struct MetadataTask: AI.Task {
             
             make sure the translated version communicates the same message.
             
-            keep it lowercased if possible.
+            keep it lowercased if possible.\(metadataKind == .subtitle ? " the output string MUST fit in 30 chars." : "")
             """
         case .keywords:
             clarifications = """
