@@ -52,17 +52,21 @@ func bundleProjects(projects: [ProjectToBundle]) {
             let localImageName = try! FileManager.default.contentsOfDirectory(atPath: selectedPath + project.id).first(where: { !$0.hasPrefix(".") })!
             let coverImageUrl = URL(fileURLWithPath: selectedPath + project.id + "/" + localImageName)
             let rawImageData = try! Data(contentsOf: coverImageUrl)
-            let (_, imageData) = NSImage(data: rawImageData)!.resizeToUseAsCoverIfNeeded()!
             
-            let imagesetPath = dir + "/Suggested Items/Covers.xcassets/\(project.id).imageset"
-            try! FileManager.default.createDirectory(atPath: imagesetPath, withIntermediateDirectories: false)
-            let imagesetData = imagesetContentsFileData(id: project.id)
-            try! imagesetData.write(to: URL(fileURLWithPath: imagesetPath + "/Contents.json"))
-            let fileImageUrl = URL(fileURLWithPath: imagesetPath + "/\(project.id).jpeg")
-            try! imageData.write(to: fileImageUrl)
+            if let image = NSImage(data: rawImageData), let (_, imageData) = image.resizeToUseAsCoverIfNeeded() {
+                let imagesetPath = dir + "/Suggested Items/Covers.xcassets/\(project.id).imageset"
+                try! FileManager.default.createDirectory(atPath: imagesetPath, withIntermediateDirectories: false)
+                let imagesetData = imagesetContentsFileData(id: project.id)
+                try! imagesetData.write(to: URL(fileURLWithPath: imagesetPath + "/Contents.json"))
+                let fileImageUrl = URL(fileURLWithPath: imagesetPath + "/\(project.id).jpeg")
+                try! imageData.write(to: fileImageUrl)
+            } else {
+                print("⚠️ did not set an image for \(project.name) \(project.id)")
+            }
             
             let bundledTokensData = try! JSONEncoder().encode(bundledTokens)
-            try! bundledTokensData.write(to: URL(fileURLWithPath: dir + "/Suggested Items/Suggested.bundle/Tokens/\(project.id).json"))
+            let jsonString = String(data: bundledTokensData, encoding: .utf8)!
+            try! jsonString.write(to: URL(fileURLWithPath: dir + "/Suggested Items/Suggested.bundle/Tokens/\(project.id).json"), atomically: true, encoding: .utf8)
             print("✅ did add \(project.name)")
             
             bundleProjects(projects: Array(projects.dropFirst()))
