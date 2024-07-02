@@ -33,6 +33,10 @@ struct SimpleHash {
             case name
             case imageUrl = "image_url"
         }
+        
+        var toBundle: BundledTokens.Item {
+            return BundledTokens.Item(id: tokenId, name: name, url: imageUrl)
+        }
     }
     
     struct Collection: Codable {
@@ -90,7 +94,7 @@ struct SimpleHash {
         dataTask.resume()
     }
     
-    private static func getAllNfts(collectionId: String, next: String?, addTo: [NFT], completion: @escaping ([NFT]) -> Void) {
+    static func getAllNfts(collectionId: String, next: String?, addTo: [NFT], completion: @escaping ([NFT]) -> Void) {
         getNfts(collectionId: collectionId, next: next, count: 50) { response in
             if let next = response.next {
                 getAllNfts(collectionId: collectionId, next: next, addTo: addTo + response.nfts, completion: completion)

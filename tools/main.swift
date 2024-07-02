@@ -29,36 +29,48 @@ let projects: [ProjectToBundle] = {
 }()
 
 func bundleSelected() {
-    for project in projects where !bundledIds.contains(project.id) && selectedSet.contains(project.id) {
+    let projectsToBundle = projects.filter { !bundledIds.contains($0.id) && selectedSet.contains($0.id) }
+    bundleProjects(projects: projectsToBundle)
+    semaphore.wait()
+    let updatedSuggestedItemsData = try! encoder.encode(bundledSuggestedItems)
+    try! updatedSuggestedItemsData.write(to: bundledSuggestedItemsUrl)
+}
+
+func bundleProjects(projects: [ProjectToBundle]) {
+    if let project = projects.first {
         let suggestedItem = SuggestedItem(name: project.name,
                                           address: project.contractAddress,
                                           chainId: 1,
                                           projectId: project.projectId,
                                           hasVideo: false)
         bundledSuggestedItems.append(suggestedItem)
-        let bundledTokens = BundledTokens(isComplete: true, items: project.tokens)
         
-        let localImageName = try! FileManager.default.contentsOfDirectory(atPath: selectedPath + project.id).first(where: { !$0.hasPrefix(".") })!
-        let coverImageUrl = URL(fileURLWithPath: selectedPath + project.id + "/" + localImageName)
-        let rawImageData = try! Data(contentsOf: coverImageUrl)
-        let (_, imageData) = NSImage(data: rawImageData)!.resizeToUseAsCoverIfNeeded()!
+        SimpleHash.getAllNfts(collectionId: project.projectId, next: nil, addTo: []) { nfts in
+            let tokens = nfts.map { $0.toBundle }
+            let bundledTokens = BundledTokens(isComplete: true, items: tokens)
+            
+            let localImageName = try! FileManager.default.contentsOfDirectory(atPath: selectedPath + project.id).first(where: { !$0.hasPrefix(".") })!
+            let coverImageUrl = URL(fileURLWithPath: selectedPath + project.id + "/" + localImageName)
+            let rawImageData = try! Data(contentsOf: coverImageUrl)
+            let (_, imageData) = NSImage(data: rawImageData)!.resizeToUseAsCoverIfNeeded()!
+            
+            let imagesetPath = dir + "/Suggested Items/Covers.xcassets/\(project.id).imageset"
+            try! FileManager.default.createDirectory(atPath: imagesetPath, withIntermediateDirectories: false)
+            let imagesetData = imagesetContentsFileData(id: project.id)
+            try! imagesetData.write(to: URL(fileURLWithPath: imagesetPath + "/Contents.json"))
+            let fileImageUrl = URL(fileURLWithPath: imagesetPath + "/\(project.id).jpeg")
+            try! imageData.write(to: fileImageUrl)
+            
+            let bundledTokensData = try! JSONEncoder().encode(bundledTokens)
+            try! bundledTokensData.write(to: URL(fileURLWithPath: dir + "/Suggested Items/Suggested.bundle/Tokens/\(project.id).json"))
+            print("✅ did add \(project.name)")
+            
+            bundleProjects(projects: Array(projects.dropFirst()))
+        }
         
-        let imagesetPath = dir + "/Suggested Items/Covers.xcassets/\(project.id).imageset"
-        try! FileManager.default.createDirectory(atPath: imagesetPath, withIntermediateDirectories: false)
-        let imagesetData = imagesetContentsFileData(id: project.id)
-        try! imagesetData.write(to: URL(fileURLWithPath: imagesetPath + "/Contents.json"))
-        let fileImageUrl = URL(fileURLWithPath: imagesetPath + "/\(project.id).jpeg")
-        try! imageData.write(to: fileImageUrl)
-        
-        let bundledTokensData = try! JSONEncoder().encode(bundledTokens)
-        try! bundledTokensData.write(to: URL(fileURLWithPath: dir + "/Suggested Items/Suggested.bundle/Tokens/\(project.id).json"))
-        print("✅ did add \(project.name)")
+    } else {
+        semaphore.signal()
     }
-    
-    let encoder = JSONEncoder()
-    encoder.outputFormatting = .prettyPrinted
-    let updatedSuggestedItemsData = try! encoder.encode(bundledSuggestedItems)
-    try! updatedSuggestedItemsData.write(to: bundledSuggestedItemsUrl)
 }
 
 func prepareForSelection(input: String) {
@@ -108,5 +120,7 @@ func removeBundledItems(_ idsString: String) {
     let updatedSuggestedItemsData = try! encoder.encode(bundledSuggestedItems)
     try! updatedSuggestedItemsData.write(to: bundledSuggestedItemsUrl)
 }
+
+bundleSelected()
 
 print("🟢 all done")
