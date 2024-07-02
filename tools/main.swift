@@ -10,6 +10,7 @@ let fresh =
 """
 
 // prepareForSelection(input: fresh)
-bundleSelected()
+// bundleSelected()
+rebundleMissingImages()
 
 print("🟢 all done")

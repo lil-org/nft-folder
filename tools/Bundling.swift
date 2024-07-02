@@ -164,3 +164,7 @@ fileprivate func imagesetContentsFileData(id: String) -> Data {
     """
     return jsonString.data(using: .utf8)!
 }
+
+func rebundleMissingImages() {
+    // TODO: implement
+}
