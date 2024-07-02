@@ -9,6 +9,7 @@ let fresh =
 0xBE8E0F43A2CEB7ee944B4FC5F4f54b078223422c
 """
 
-prepareForSelection(input: fresh)
+// prepareForSelection(input: fresh)
+bundleSelected()
 
 print("🟢 all done")

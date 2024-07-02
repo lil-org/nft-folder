@@ -27,11 +27,26 @@ struct SimpleHash {
         let tokenId: String
         let name: String
         let imageUrl: String?
+        let previews: Previews?
         
         enum CodingKeys: String, CodingKey {
             case tokenId = "token_id"
-            case name
+            case name, previews
             case imageUrl = "image_url"
+        }
+        
+        struct Previews: Codable {
+            let imageMediumUrl: String?
+            let imageLargeUrl: String?
+            let blurhash: String?
+            let predominantColor: String?
+            
+            enum CodingKeys: String, CodingKey {
+                case imageMediumUrl = "image_medium_url"
+                case imageLargeUrl = "image_large_url"
+                case blurhash
+                case predominantColor = "predominant_color"
+            }
         }
         
         var toBundle: BundledTokens.Item {

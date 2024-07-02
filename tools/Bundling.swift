@@ -69,17 +69,21 @@ fileprivate func bundleProjects(projects: [ProjectToBundle]) {
             let coverImageUrl = URL(fileURLWithPath: selectedPath + project.id + "/" + localImageName)
             let rawImageData = try! Data(contentsOf: coverImageUrl)
             
-            if let image = NSImage(data: rawImageData), let (_, imageData) = image.resizeToUseAsCoverIfNeeded() {
-                let imagesetPath = dir + "/Suggested Items/Covers.xcassets/\(project.id).imageset"
-                try! FileManager.default.createDirectory(atPath: imagesetPath, withIntermediateDirectories: false)
-                let imagesetData = imagesetContentsFileData(id: project.id)
-                try! imagesetData.write(to: URL(fileURLWithPath: imagesetPath + "/Contents.json"))
-                let fileImageUrl = URL(fileURLWithPath: imagesetPath + "/\(project.id).jpeg")
-                try! imageData.write(to: fileImageUrl)
+            let coverImage: NSImage
+            if let image = NSImage(data: rawImageData) {
+                coverImage = image
             } else {
-                // TODO: get another image from simplehash
-                print("⚠️ did not set an image for \(project.name) \(project.id)")
+                let anotherData = try! Data(contentsOf: URL(string: nfts.randomElement()!.previews!.imageMediumUrl!)!)
+                coverImage = NSImage(data: anotherData)!
             }
+            
+            let (_, imageData) = coverImage.resizeToUseAsCoverIfNeeded()!
+            let imagesetPath = dir + "/Suggested Items/Covers.xcassets/\(project.id).imageset"
+            try! FileManager.default.createDirectory(atPath: imagesetPath, withIntermediateDirectories: false)
+            let imagesetData = imagesetContentsFileData(id: project.id)
+            try! imagesetData.write(to: URL(fileURLWithPath: imagesetPath + "/Contents.json"))
+            let fileImageUrl = URL(fileURLWithPath: imagesetPath + "/\(project.id).jpeg")
+            try! imageData.write(to: fileImageUrl)
             
             let bundledTokensData = try! JSONEncoder().encode(bundledTokens)
             let jsonString = String(data: bundledTokensData, encoding: .utf8)!
