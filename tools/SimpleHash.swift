@@ -46,8 +46,30 @@ struct SimpleHash {
     }
     
     static func previewCollections(input: String) {
-        // TODO: implpement
+        let contractAddresses = input.split(separator: "\n").map { String($0) }
+        process(contractAddresses: contractAddresses)
         semaphore.wait()
+    }
+    
+    private static func process(contractAddresses: [String]) {
+        if let address = contractAddresses.first {
+            getAllCollections(contractAddress: String(address), next: nil, addTo: []) { collections in
+                save(contract: address, collections: collections)
+                process(contractAddresses: Array(contractAddresses.dropFirst()))
+            }
+        } else {
+            semaphore.signal()
+        }
+    }
+    
+    private static func save(contract: String, collections: [Collection]) {
+        for collection in collections {
+            let dirPath = selectedPath + contract + collection.collectionId
+            try! FileManager.default.createDirectory(atPath: dirPath, withIntermediateDirectories: true)
+            let project = ProjectToBundle(name: collection.name, tokens: [], contractAddress: contract, projectId: collection.collectionId)
+            let data = try! encoder.encode(project)
+            try! data.write(to: URL(filePath: dirPath + "/" + "project.json"))
+        }
     }
     
     private static func getAllCollections(contractAddress: String, next: String?, addTo: [Collection], completion: @escaping ([Collection]) -> Void) {

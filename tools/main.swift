@@ -8,6 +8,9 @@ let dir = FileManager.default.currentDirectoryPath
 let selectedPath = dir + "/tools/wip/select/"
 let selectedSet = Set(try! FileManager.default.contentsOfDirectory(atPath: selectedPath))
 
+let encoder = JSONEncoder()
+encoder.outputFormatting = .prettyPrinted
+
 let bundledSuggestedItemsUrl = URL(fileURLWithPath: dir + "/Suggested Items/Suggested.bundle/items.json")
 let currentBundledData = try! Data(contentsOf: bundledSuggestedItemsUrl)
 var bundledSuggestedItems = try! JSONDecoder().decode([SuggestedItem].self, from: currentBundledData)
@@ -76,8 +79,6 @@ func removeBundledItems(_ idsString: String) {
         try! FileManager.default.removeItem(atPath: imagesetPath)
         print("did remove \(id)")
     }
-    let encoder = JSONEncoder()
-    encoder.outputFormatting = .prettyPrinted
     let updatedSuggestedItemsData = try! encoder.encode(bundledSuggestedItems)
     try! updatedSuggestedItemsData.write(to: bundledSuggestedItemsUrl)
 }

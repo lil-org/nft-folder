@@ -2,7 +2,7 @@
 
 import Foundation
 
-struct ProjectToBundle {
+struct ProjectToBundle: Codable {
     
     let name: String
     let tokens: [BundledTokens.Item]
