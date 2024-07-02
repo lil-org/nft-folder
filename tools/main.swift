@@ -61,6 +61,7 @@ func bundleProjects(projects: [ProjectToBundle]) {
                 let fileImageUrl = URL(fileURLWithPath: imagesetPath + "/\(project.id).jpeg")
                 try! imageData.write(to: fileImageUrl)
             } else {
+                // TODO: get another image from simplehash
                 print("⚠️ did not set an image for \(project.name) \(project.id)")
             }
             
