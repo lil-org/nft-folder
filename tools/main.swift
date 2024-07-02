@@ -57,10 +57,9 @@ func prepareForSelection() {
         for token in project.tokens.prefix(5) {
             let imageURL = URL(string: token.url!)!
             if let rawImageData = try? Data(contentsOf: imageURL) {
-                // TODO: use correct file extension based on response
-                let fileImageUrl = URL(fileURLWithPath: projectPath + "/\(token).png")
+                let fileImageUrl = URL(fileURLWithPath: projectPath + "/\(token).\(imageURL.pathExtension)")
                 try! rawImageData.write(to: fileImageUrl)
-                print("did add \(token) to \(project.id)")
+                print("did add \(token) to \(project.name)")
             }
         }
         print("✅ did add \(project.name)")

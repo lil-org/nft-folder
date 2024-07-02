@@ -27,13 +27,11 @@ struct SimpleHash {
         let tokenId: String
         let name: String
         let imageUrl: String
-        let contractAddress: String
         
         enum CodingKeys: String, CodingKey {
             case tokenId = "token_id"
             case name
             case imageUrl = "image_url"
-            case contractAddress = "contract_address"
         }
     }
     
