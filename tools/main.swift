@@ -11,6 +11,6 @@ let fresh =
 
 // prepareForSelection(input: fresh)
 // bundleSelected()
-rebundleMissingImages()
+rebundleMissingImages(useCollectionImage: true)
 
 print("🟢 all done")

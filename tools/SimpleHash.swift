@@ -28,10 +28,11 @@ struct SimpleHash {
         let name: String
         let imageUrl: String?
         let previews: Previews?
+        let collection: Collection?
         
         enum CodingKeys: String, CodingKey {
             case tokenId = "token_id"
-            case name, previews
+            case name, previews, collection
             case imageUrl = "image_url"
         }
         
@@ -57,9 +58,11 @@ struct SimpleHash {
     struct Collection: Codable {
         let name: String
         let collectionId: String
+        let imageUrl: String?
         
         enum CodingKeys: String, CodingKey {
             case collectionId = "collection_id"
+            case imageUrl = "image_url"
             case name
         }
     }

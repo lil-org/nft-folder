@@ -181,7 +181,7 @@ fileprivate func imagesetContentsFileData(id: String) -> Data {
     return jsonString.data(using: .utf8)!
 }
 
-func rebundleMissingImages() {
+func rebundleMissingImages(useCollectionImage: Bool) {
     var missing = [SuggestedItem]()
     for item in bundledSuggestedItems {
         if !hasImage(id: item.id) {
@@ -189,30 +189,31 @@ func rebundleMissingImages() {
             print("no image for \(item.name)")
         }
     }
-    rebundleImages(items: missing)
+    rebundleImages(items: missing, useCollectionImage: useCollectionImage)
     semaphore.wait()
 }
 
-private func rebundleImages(items: [SuggestedItem]) {
+private func rebundleImages(items: [SuggestedItem], useCollectionImage: Bool) {
     if let item = items.first {
         if let projectId = item.projectId {
             if projectId.contains(where: { $0.isLetter }) {
                 SimpleHash.getNfts(collectionId: projectId, next: nil, count: 23) { result in
                     let nft = result.nfts.randomElement()!
-                    let data = try! Data(contentsOf: URL(string: nft.previews!.imageMediumUrl!)!)
+                    let url = useCollectionImage ? URL(string: nft.collection!.imageUrl!)! : URL(string: nft.previews!.imageMediumUrl!)!
+                    let data = try! Data(contentsOf: url)
                     let coverImage = NSImage(data: data)!
                     writeImage(coverImage, id: item.id)
                     print("did update image for \(item.name)")
-                    rebundleImages(items: Array(items.dropFirst()))
+                    rebundleImages(items: Array(items.dropFirst()), useCollectionImage: useCollectionImage)
                 }
             } else {
                 // TODO: implement for artblocks
                 print("⚠️ will not get an image for artblocks \(item.name)")
-                rebundleImages(items: Array(items.dropFirst()))
+                rebundleImages(items: Array(items.dropFirst()), useCollectionImage: useCollectionImage)
             }
         } else {
             print("⚠️ will not get an image for \(item.name)")
-            rebundleImages(items: Array(items.dropFirst()))
+            rebundleImages(items: Array(items.dropFirst()), useCollectionImage: useCollectionImage)
         }
     } else {
         semaphore.signal()
