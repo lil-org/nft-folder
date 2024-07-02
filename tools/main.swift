@@ -16,7 +16,17 @@ let currentBundledData = try! Data(contentsOf: bundledSuggestedItemsUrl)
 var bundledSuggestedItems = try! JSONDecoder().decode([SuggestedItem].self, from: currentBundledData)
 let bundledIds = Set(bundledSuggestedItems.map { $0.id })
 
-let projects = [ProjectToBundle]()
+let projects: [ProjectToBundle] = {
+    var result = [ProjectToBundle]()
+    
+    for path in selectedSet where !path.hasPrefix(".") {
+        let data = try! Data(contentsOf: URL(filePath: selectedPath + path + "/" + "project.json"))
+        let project = try! JSONDecoder().decode(ProjectToBundle.self, from: data)
+        result.append(project)
+    }
+    
+    return result
+}()
 
 func bundleSelected() {
     for project in projects where !bundledIds.contains(project.id) && selectedSet.contains(project.id) {
@@ -53,19 +63,32 @@ func bundleSelected() {
 
 func prepareForSelection() {
     print("will download previews for \(projects.count) projects")
-    
-    for project in projects {
+    processProjects(projects: projects)
+    semaphore.wait()
+}
+
+func processProjects(projects: [ProjectToBundle]) {
+    if let project = projects.first {
         let projectPath = selectedPath + project.id
-        try! FileManager.default.createDirectory(atPath: projectPath, withIntermediateDirectories: false)
-        for token in project.tokens.prefix(5) {
-            let imageURL = URL(string: token.url!)!
-            if let rawImageData = try? Data(contentsOf: imageURL) {
-                let fileImageUrl = URL(fileURLWithPath: projectPath + "/\(token).\(imageURL.pathExtension)")
-                try! rawImageData.write(to: fileImageUrl)
-                print("did add \(token) to \(project.name)")
-            }
+        guard try! FileManager.default.contentsOfDirectory(atPath: projectPath).count < 5 else {
+            processProjects(projects: Array(projects.dropFirst()))
+            return
         }
-        print("✅ did add \(project.name)")
+        
+        SimpleHash.previewNfts(collectionId: project.projectId) { nfts in
+            for token in nfts.prefix(5) {
+                let imageURL = URL(string: token.imageUrl)!
+                if let rawImageData = try? Data(contentsOf: imageURL) {
+                    let fileImageUrl = URL(fileURLWithPath: projectPath + "/\(token.name).\(imageURL.pathExtension)")
+                    try! rawImageData.write(to: fileImageUrl)
+                    print("did add \(token) to \(project.name)")
+                }
+            }
+            print("✅ did add \(project.name)")
+            processProjects(projects: Array(projects.dropFirst()))
+        }
+    } else {
+        semaphore.signal()
     }
 }
 
@@ -84,16 +107,9 @@ func removeBundledItems(_ idsString: String) {
 }
 
 
-let bundleThese =
-"""
-0x46ac8540d698167fcbb9e846511beb8cf8af9bd8
-0x72f28b86749cba12bbac8783a67bbc48d80c92e9
-0x5a0121a0a21232ec0d024dab9017314509026480
-0x80f1ed6a1ac694317dc5719db099a440627d1ea7
-0x0427743df720801825a5c82e0582b1e915e0f750
-0x20c70bdfcc398c1f06ba81730c8b52ace3af7cc3
-"""
-
+let bundleThese = ""
 SimpleHash.previewCollections(input: bundleThese)
+
+prepareForSelection()
 
 print("🟢 all done")

@@ -100,7 +100,7 @@ struct SimpleHash {
         }
     }
     
-    private static func previewNfts(collectionId: String, completion: @escaping ([NFT]) -> Void) {
+    static func previewNfts(collectionId: String, completion: @escaping ([NFT]) -> Void) {
         getNfts(collectionId: collectionId, next: nil, count: 7) { response in
             completion(response.nfts)
         }
