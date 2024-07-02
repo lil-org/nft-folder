@@ -45,9 +45,13 @@ struct SimpleHash {
         }
     }
     
-    static func getAllCollections(contractAddress: String) {
-        // TODO: go through all
-        let url = URL(string: "https://api.simplehash.com/api/v0/nfts/collections/ethereum/\(contractAddress)?limit=50")!
+    static func previewCollections(input: String) {
+        // TODO: implpement
+        semaphore.wait()
+    }
+    
+    private static func getAllCollections(contractAddress: String, next: String?, addTo: [Collection], completion: @escaping ([Collection]) -> Void) {
+        let url = URL(string: next ?? "https://api.simplehash.com/api/v0/nfts/collections/ethereum/\(contractAddress)?limit=50")!
         var request = URLRequest(url: url)
         request.allHTTPHeaderFields = [
           "accept": "application/json",
@@ -55,16 +59,33 @@ struct SimpleHash {
         ]
         let dataTask = URLSession.shared.dataTask(with: request) { data, _, _ in
             let collectionsResponse = try! JSONDecoder().decode(CollectionsResponse.self, from: data!)
-            print(collectionsResponse)
-            
-            previewNfts(collectionId: collectionsResponse.collections.first!.collectionId, count: 5) // TODO: remove dev tmp
+            if let next = collectionsResponse.next {
+                getAllCollections(contractAddress: contractAddress, next: next, addTo: addTo + collectionsResponse.collections, completion: completion)
+            } else {
+                completion(addTo + collectionsResponse.collections)
+            }
         }
         dataTask.resume()
-        semaphore.wait()
     }
     
-    static func previewNfts(collectionId: String, count: Int) {
-        let url = URL(string: "https://api.simplehash.com/api/v0/nfts/collection/\(collectionId)?limit=\(count)&include_attribute_percentages=0&include_unit_price_eth_wei=0")!
+    private static func getAllNfts(collectionId: String, next: String?, addTo: [NFT], completion: @escaping ([NFT]) -> Void) {
+        getNfts(collectionId: collectionId, next: next, count: 50) { response in
+            if let next = response.next {
+                getAllNfts(collectionId: collectionId, next: next, addTo: addTo + response.nfts, completion: completion)
+            } else {
+                completion(addTo + response.nfts)
+            }
+        }
+    }
+    
+    private static func previewNfts(collectionId: String, completion: @escaping ([NFT]) -> Void) {
+        getNfts(collectionId: collectionId, next: nil, count: 7) { response in
+            completion(response.nfts)
+        }
+    }
+    
+    private static func getNfts(collectionId: String, next: String?, count: Int, completion: @escaping (NftsResponse) -> Void) {
+        let url = URL(string: next ?? "https://api.simplehash.com/api/v0/nfts/collection/\(collectionId)?limit=\(count)&include_attribute_percentages=0&include_unit_price_eth_wei=0")!
         var request = URLRequest(url: url)
         request.allHTTPHeaderFields = [
           "accept": "application/json",
@@ -72,14 +93,9 @@ struct SimpleHash {
         ]
         let dataTask = URLSession.shared.dataTask(with: request) { data, _, _ in
             let nftsResponse = try! JSONDecoder().decode(NftsResponse.self, from: data!)
-            print(nftsResponse)
+            completion(nftsResponse)
         }
         dataTask.resume()
-    }
-    
-    static func getAllNfts(collectionId: String) {
-        // TODO: go through all
-        previewNfts(collectionId: collectionId, count: 50)
     }
     
 }

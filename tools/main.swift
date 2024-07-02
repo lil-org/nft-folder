@@ -5,7 +5,7 @@ import Cocoa
 let semaphore = DispatchSemaphore(value: 0)
 
 let dir = FileManager.default.currentDirectoryPath
-let selectedPath = dir + "/tools/select/"
+let selectedPath = dir + "/tools/wip/select/"
 let selectedSet = Set(try! FileManager.default.contentsOfDirectory(atPath: selectedPath))
 
 let bundledSuggestedItemsUrl = URL(fileURLWithPath: dir + "/Suggested Items/Suggested.bundle/items.json")
@@ -93,7 +93,6 @@ let bundleThese =
 0x20c70bdfcc398c1f06ba81730c8b52ace3af7cc3
 """
 
-// TODO: go through all these collections
-SimpleHash.getAllCollections(contractAddress: "0x46ac8540d698167fcbb9e846511beb8cf8af9bd8")
+SimpleHash.previewCollections(input: bundleThese)
 
 print("🟢 all done")
