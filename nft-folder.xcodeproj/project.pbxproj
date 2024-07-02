@@ -32,6 +32,7 @@
 		2C1FD2AE2B88D2EF004F42B3 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1FD2AC2B88D2EF004F42B3 /* Int.swift */; };
 		2C2329DA2B68367F00001936 /* RightClickServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2329D92B68367F00001936 /* RightClickServiceProvider.swift */; };
 		2C2B5AD12B84E2DA005C38B0 /* DownloadFileTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2B5AD02B84E2DA005C38B0 /* DownloadFileTask.swift */; };
+		2C3214332C33DF7C0050BBC1 /* SimpleHash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3214322C33DF7C0050BBC1 /* SimpleHash.swift */; };
 		2C3924C12C1F0F1200161154 /* StringTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3924C02C1F0F1200161154 /* StringTask.swift */; };
 		2C4039ED2B83A4F000DB94D7 /* SharedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4039EC2B83A4F000DB94D7 /* SharedDefaults.swift */; };
 		2C4039EE2B83A4F000DB94D7 /* SharedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4039EC2B83A4F000DB94D7 /* SharedDefaults.swift */; };
@@ -40,7 +41,7 @@
 		2C424F462B9775E6007868F8 /* RightClickActivatingWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C424F452B9775E6007868F8 /* RightClickActivatingWindow.swift */; };
 		2C4659942C308B47008CF97F /* Covers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C4659932C308B44008CF97F /* Covers.xcassets */; };
 		2C46599C2C308F86008CF97F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C46599B2C308F86008CF97F /* main.swift */; };
-		2C4659A22C30911C008CF97F /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4659A12C30911C008CF97F /* utils.swift */; };
+		2C4659A22C30911C008CF97F /* Bundling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4659A12C30911C008CF97F /* Bundling.swift */; };
 		2C5065F72C0DFC8700D9D01A /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5065F62C0DFC8700D9D01A /* String.swift */; };
 		2C5065F82C0DFCF500D9D01A /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5065F62C0DFC8700D9D01A /* String.swift */; };
 		2C5065FA2C0E10D600D9D01A /* AttestationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5065F92C0E10D600D9D01A /* AttestationResponse.swift */; };
@@ -173,6 +174,7 @@
 		2C1FD2AC2B88D2EF004F42B3 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		2C2329D92B68367F00001936 /* RightClickServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightClickServiceProvider.swift; sourceTree = "<group>"; };
 		2C2B5AD02B84E2DA005C38B0 /* DownloadFileTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadFileTask.swift; sourceTree = "<group>"; };
+		2C3214322C33DF7C0050BBC1 /* SimpleHash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleHash.swift; sourceTree = "<group>"; };
 		2C3924C02C1F0F1200161154 /* StringTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTask.swift; sourceTree = "<group>"; };
 		2C4039EC2B83A4F000DB94D7 /* SharedDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDefaults.swift; sourceTree = "<group>"; };
 		2C4039F02B83B11100DB94D7 /* FileSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSaver.swift; sourceTree = "<group>"; };
@@ -180,7 +182,7 @@
 		2C4659932C308B44008CF97F /* Covers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Covers.xcassets; sourceTree = "<group>"; };
 		2C4659992C308F86008CF97F /* tools */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = tools; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C46599B2C308F86008CF97F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		2C4659A12C30911C008CF97F /* utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
+		2C4659A12C30911C008CF97F /* Bundling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundling.swift; sourceTree = "<group>"; };
 		2C5065F62C0DFC8700D9D01A /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		2C5065F92C0E10D600D9D01A /* AttestationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationResponse.swift; sourceTree = "<group>"; };
 		2C508C9C2B6830E6005F548A /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
@@ -674,7 +676,8 @@
 			isa = PBXGroup;
 			children = (
 				2C46599B2C308F86008CF97F /* main.swift */,
-				2C4659A12C30911C008CF97F /* utils.swift */,
+				2C4659A12C30911C008CF97F /* Bundling.swift */,
+				2C3214322C33DF7C0050BBC1 /* SimpleHash.swift */,
 			);
 			path = tools;
 			sourceTree = "<group>";
@@ -1804,7 +1807,8 @@
 			files = (
 				2CB308E52C30A3C100D914A5 /* Network.swift in Sources */,
 				2C46599C2C308F86008CF97F /* main.swift in Sources */,
-				2C4659A22C30911C008CF97F /* utils.swift in Sources */,
+				2C4659A22C30911C008CF97F /* Bundling.swift in Sources */,
+				2C3214332C33DF7C0050BBC1 /* SimpleHash.swift in Sources */,
 				2CB308E32C30A2E800D914A5 /* BundledTokens.swift in Sources */,
 				2CB308E82C30AD0000D914A5 /* NSImage.swift in Sources */,
 				2CB308E42C30A2E800D914A5 /* SuggestedItem.swift in Sources */,

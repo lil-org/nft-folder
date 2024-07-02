@@ -2,6 +2,8 @@
 
 import Cocoa
 
+let semaphore = DispatchSemaphore(value: 0)
+
 let dir = FileManager.default.currentDirectoryPath
 let selectedPath = dir + "/tools/select/"
 let selectedSet = Set(try! FileManager.default.contentsOfDirectory(atPath: selectedPath))
@@ -81,31 +83,7 @@ func removeBundledItems(_ idsString: String) {
     try! updatedSuggestedItemsData.write(to: bundledSuggestedItemsUrl)
 }
 
-let apiKey: String = {
-    let home = FileManager.default.homeDirectoryForCurrentUser
-    let url = home.appending(path: "Developer/secrets/tools/SIMPLEHASH_API_KEY")
-    let data = try! Data(contentsOf: url)
-    return String(data: data, encoding: .utf8)!.trimmingCharacters(in: .whitespacesAndNewlines)
-}()
-
-let url = URL(string: "https://api.simplehash.com/api/v0/nfts/ethereum/0x5a0121a0a21232ec0d024dab9017314509026480")!
-var components = URLComponents(url: url, resolvingAgainstBaseURL: true)!
-let queryItems: [URLQueryItem] = [
-  URLQueryItem(name: "limit", value: "50"),
-]
-components.queryItems = components.queryItems.map { $0 + queryItems } ?? queryItems
-
-var request = URLRequest(url: components.url!)
-request.httpMethod = "GET"
-request.timeoutInterval = 10
-request.allHTTPHeaderFields = [
-  "accept": "application/json",
-  "X-API-KEY": apiKey
-]
-
-let (data, _) = try await URLSession.shared.data(for: request)
-let response = try JSONDecoder().decode(SimpleHashResponse.self, from: data)
-
-print(response)
+// TODO: go through all these collections
+SimpleHash.getAllCollections(contractAddress: "0x46ac8540d698167fcbb9e846511beb8cf8af9bd8")
 
 print("🟢 all done")

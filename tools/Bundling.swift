@@ -2,25 +2,6 @@
 
 import Foundation
 
-struct SimpleHashResponse: Codable {
-    
-    let next: String
-    let nfts: [NFT]
-    
-    struct NFT: Codable {
-        let tokenId: String
-        let name: String
-        let imageUrl: String
-        
-        enum CodingKeys: String, CodingKey {
-            case tokenId = "token_id"
-            case name = "name"
-            case imageUrl = "image_url"
-        }
-    }
-    
-}
-
 struct ProjectToBundle {
     
     let name: String
