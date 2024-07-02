@@ -5,24 +5,23 @@ import Cocoa
 extension NSImage {
     
     func resizeToUseAsCoverIfNeeded() -> (NSImage, Data)? {
-        let maxDimension: CGFloat = 130
-        let newSize = CGSize(width: maxDimension, height: maxDimension)
-        var targetRect = NSRect(x: 0, y: 0, width: maxDimension, height: maxDimension)
+        let targetDimension: CGFloat = 230
+        let newSize = CGSize(width: targetDimension, height: targetDimension)
+        let targetRect = NSRect(x: 0, y: 0, width: targetDimension, height: targetDimension)
         
-        if size.width > maxDimension || size.height > maxDimension {
-            let aspectRatio = size.width / size.height
-            if aspectRatio > 1 {
-                let widthToCrop = maxDimension * (aspectRatio - 1)
-                targetRect = targetRect.insetBy(dx: -widthToCrop, dy: 0)
-            } else {
-                let heightToCrop = maxDimension * (1 / aspectRatio - 1)
-                targetRect = targetRect.insetBy(dx: 0, dy: -heightToCrop)
-            }
+        let aspectRatio = size.width / size.height
+        var scaledSize: CGSize
+        
+        if aspectRatio > 1 {
+            scaledSize = CGSize(width: targetDimension * aspectRatio, height: targetDimension)
+        } else {
+            scaledSize = CGSize(width: targetDimension, height: targetDimension / aspectRatio)
         }
         
         let resizedImage = NSImage(size: newSize)
         resizedImage.lockFocus()
-        draw(in: targetRect)
+        let drawRect = NSRect(origin: CGPoint(x: -(scaledSize.width - newSize.width) / 2, y: -(scaledSize.height - newSize.height) / 2), size: scaledSize)
+        draw(in: drawRect)
         resizedImage.unlockFocus()
         
         guard let tiffData = resizedImage.tiffRepresentation,
