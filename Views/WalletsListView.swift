@@ -92,14 +92,14 @@ struct WalletsListView: View {
                                     AllDownloadsManager.shared.stopAllDownloads()
                                 }) {
                                     Images.pause
-                                }
+                                }.frame(width: 23)
                             }
                             
                             Button(action: {
                                 showSettingsPopup = true
                             }) {
                                 Images.gearshape
-                            }
+                            }.frame(width: 23)
                             
                             Button(action: {
                                 if let nftDirectory = URL.nftDirectory {
@@ -107,13 +107,13 @@ struct WalletsListView: View {
                                 }
                             }) {
                                 Images.openFinder
-                            }
+                            }.frame(width: 23)
                             
                             Button(action: {
                                 showAddWalletPopup = true
                             }) {
                                 Images.plus
-                            }
+                            }.frame(width: 23)
                         }
                     }
             }
