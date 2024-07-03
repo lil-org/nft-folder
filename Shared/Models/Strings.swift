@@ -6,7 +6,6 @@ struct Strings {
     
     static let toolbarItemToolTip = loc("Click for NFT menu")
     static let toolbarItemName = loc("NFT")
-    static let openFolderMenuItem = openNftFolder
     static let syncMenuItem = loc("Sync NFTs")
     static let controlCenterMenuItem = loc("Control Center") + "..."
     static let newFolder = loc("New Folder")
@@ -17,7 +16,6 @@ struct Strings {
     static let viewOnZora = loc("View on Zora")
     static let addressOrEns = loc("Address or ENS")
     static let cancel = loc("Cancel")
-    static let openNftFolder = loc("Show in Finder")
     static let ok = loc("OK")
     static let sync = loc("Sync")
     static let pause = loc("Pause")

@@ -63,7 +63,6 @@ class FinderSync: FIFinderSync {
         case .toolbarItemMenu:
             menu.addItem(withTitle: Strings.newFolderMenuItem, action: #selector(didSelectNewFolderMenuItem(_:)), keyEquivalent: "")
             menu.addItem(withTitle: Strings.controlCenterMenuItem, action: #selector(didSelectControlCenterMenuItem(_:)), keyEquivalent: "")
-            menu.addItem(withTitle: Strings.openFolderMenuItem, action: #selector(openNFTDirectory(_:)), keyEquivalent: "")
             menu.addItem(withTitle: Strings.sync, action: #selector(didSelectSyncMenuItem(_:)), keyEquivalent: "")
             if SharedDefaults.downloadsInProgress {
                 menu.addItem(withTitle: Strings.stopAllDownloads, action: #selector(stopAllDownloads(_:)), keyEquivalent: "")
@@ -98,12 +97,6 @@ class FinderSync: FIFinderSync {
     
     @IBAction private func didSelectControlCenterMenuItem(_ sender: AnyObject?) {
         HostAppMessenger.send(.didSelectControlCenterMenuItem)
-    }
-    
-    @IBAction private func openNFTDirectory(_ sender: AnyObject?) {
-        if let url = URL.nftDirectory {
-            DispatchQueue.main.async { NSWorkspace.shared.open(url) }
-        }
     }
     
     @objc private func viewOn(_ sender: NSMenuItem) {

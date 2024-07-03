@@ -13,5 +13,6 @@ extension Images {
     static let pause = Image(systemName: "pause.fill")
     static let sync = Image(systemName: "arrow.clockwise")
     static let ellipsis = Image(systemName: "ellipsis")
+    static let openFinder = Image(systemName: "folder")
     
 }

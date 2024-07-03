@@ -61,6 +61,14 @@ struct WalletsListView: View {
                         }
                         
                         Button(action: {
+                            if let nftDirectory = URL.nftDirectory {
+                                NSWorkspace.shared.open(nftDirectory)
+                            }
+                        }) {
+                            Images.openFinder
+                        }
+                        
+                        Button(action: {
                             showAddWalletPopup = true
                         }) {
                             Images.plus
@@ -79,6 +87,14 @@ struct WalletsListView: View {
                                 showSettingsPopup = true
                             }) {
                                 Images.gearshape
+                            }
+                            
+                            Button(action: {
+                                if let nftDirectory = URL.nftDirectory {
+                                    NSWorkspace.shared.open(nftDirectory)
+                                }
+                            }) {
+                                Images.openFinder
                             }
                             
                             Button(action: {
@@ -138,17 +154,10 @@ struct WalletsListView: View {
             }.frame(width: 230).padding()
         }.onReceive(NotificationCenter.default.publisher(for: .walletsUpdate), perform: { _ in
             self.updateDisplayedWallets()
-        })
-        Button(Strings.openNftFolder, action: {
-            if let nftDirectory = URL.nftDirectory {
-                NSWorkspace.shared.open(nftDirectory)
-            }
-            Window.closeAll()
-        }).frame(height: 36).offset(CGSize(width: 0, height: -6)).buttonStyle(LinkButtonStyle())
-            .onAppear() {
-                self.updateDisplayedWallets()
-                didAppear = true
-            }
+        }).onAppear() {
+            self.updateDisplayedWallets()
+            didAppear = true
+        }
     }
     
     private func openFolderForWallet(_ wallet: WatchOnlyWallet) {
