@@ -2,7 +2,7 @@
 
 download on the [app store](https://folder.lil.org)
 
-![0](https://github.com/lil-org/nft-folder/assets/7680193/791644ec-f7e8-449a-817e-17219c9927ff)
+![0](https://github.com/lil-org/nft-folder/assets/7680193/15041d4c-45b6-43b0-b417-de2a05890123)
 
 ## syncing custom nft folders
 
