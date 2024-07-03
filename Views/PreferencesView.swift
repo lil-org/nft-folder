@@ -86,14 +86,7 @@ struct PreferencesView: View {
                     }
                 }
             }.padding(.top).padding(.bottom)
-            if hasHiddenSuggestedItems {
-                // TODO: show put back button
-            }
         }
-    }
-    
-    func putBackHiddenItems() {
-        // TODO: implement
     }
     
 }

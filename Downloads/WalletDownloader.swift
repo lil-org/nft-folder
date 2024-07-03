@@ -40,7 +40,7 @@ class WalletDownloader {
             for item in bundledTokens.items {
                 let contentRepresentations: [ContentRepresentation]
                 if let url = item.url {
-                    guard let content = ContentRepresentation(url: item.url, size: nil, mimeType: nil, knownKind: nil) else { continue }
+                    guard let content = ContentRepresentation(url: url, size: nil, mimeType: nil, knownKind: nil) else { continue }
                     contentRepresentations = [content]
                 } else {
                     if let imageContent = ContentRepresentation(url: "https://media-proxy.artblocks.io/\(wallet.address)/\(item.id).png",

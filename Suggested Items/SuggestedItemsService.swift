@@ -32,6 +32,15 @@ struct SuggestedItemsService {
         }
     }
     
+    static func restoredSuggestedItems(usersWallets: [WatchOnlyWallet]) -> [SuggestedItem] {
+        let walletsIds = Set(usersWallets.map { $0.id })
+        let hiddenAndAddedByUser = Defaults.suggestedItemsToHide.filter { walletsIds.contains($0) }
+        Defaults.suggestedItemsToHide = hiddenAndAddedByUser
+        toHide = Set(hiddenAndAddedByUser)
+        allItems = readSuggestedItems()
+        return allItems
+    }
+    
     private static func readSuggestedItems() -> [SuggestedItem] {
         guard let url = bundle.url(forResource: "items", withExtension: "json"),
               let data = try? Data(contentsOf: url),

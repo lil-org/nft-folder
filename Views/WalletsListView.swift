@@ -18,6 +18,7 @@ struct WalletsListView: View {
     @State private var downloadsStatuses = AllDownloadsManager.shared.statuses
     @State private var draggingIndex: Int? = nil
     @State private var currentDropDestination: Int? = nil
+    @State private var showMorePreferences = false
     
     init(showAddWalletPopup: Bool, inPopup: Bool) {
         self.showAddWalletPopup = showAddWalletPopup
@@ -116,6 +117,19 @@ struct WalletsListView: View {
             VStack {
                 PreferencesView()
                 HStack {
+                    Button(action: {
+                        showMorePreferences.toggle()
+                    }) {
+                        Images.ellipsis
+                    }.popover(isPresented: $showMorePreferences) {
+                        VStack {
+                            Button("Restore hidden items") { // TODO: loc
+                                restoreHiddenItems()
+                                showSettingsPopup = false
+                                showMorePreferences = false
+                            }
+                        }.frame(height: 32).padding()
+                    }
                     Spacer()
                     Button(Strings.ok, action: {
                         showSettingsPopup = false
@@ -244,6 +258,10 @@ struct WalletsListView: View {
                 }
             Spacer()
         }
+    }
+    
+    private func restoreHiddenItems() {
+        suggestedItems = SuggestedItemsService.restoredSuggestedItems(usersWallets: wallets)
     }
     
     private func warnBeforeQuitting() {
