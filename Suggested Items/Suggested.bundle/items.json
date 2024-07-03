@@ -150,13 +150,6 @@
         "chainId" : 1
     },
     {
-        "chainId" : 1,
-        "address" : "0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270",
-        "name" : "27-Bit Digital",
-        "hasVideo" : false,
-        "projectId" : "21"
-    },
-    {
         "address" : "0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270",
         "hasVideo" : true,
         "projectId" : "225",
@@ -563,13 +556,6 @@
         "projectId" : "406"
     },
     {
-        "chainId" : 1,
-        "hasVideo" : true,
-        "projectId" : "85",
-        "address" : "0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270",
-        "name" : "70s Pop Series Two"
-    },
-    {
         "projectId" : "96",
         "name" : "Gravity 12",
         "chainId" : 1,
@@ -626,13 +612,6 @@
         "address" : "0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270"
     },
     {
-        "hasVideo" : false,
-        "chainId" : 1,
-        "projectId" : "73",
-        "name" : "CatBlocks",
-        "address" : "0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270"
-    },
-    {
         "hasVideo" : true,
         "address" : "0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270",
         "projectId" : "268",
@@ -645,13 +624,6 @@
         "name" : "Concrete Letters",
         "hasVideo" : false,
         "address" : "0x32d4be5ee74376e08038d652d4dc26e62c67f436"
-    },
-    {
-        "name" : "70s Pop Ghost Bonus Pack 👻",
-        "chainId" : 1,
-        "hasVideo" : false,
-        "address" : "0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270",
-        "projectId" : "111"
     },
     {
         "name" : "QWERTY",
@@ -2731,6 +2703,34 @@
         "hasVideo" : false,
         "address" : "0x0a1bbd57033f57e7b6743621b79fcb9eb2ce3676",
         "name" : "lūmen"
+    },
+    {
+        "chainId" : 1,
+        "address" : "0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270",
+        "name" : "27-Bit Digital",
+        "hasVideo" : false,
+        "projectId" : "21"
+    },
+    {
+        "chainId" : 1,
+        "hasVideo" : true,
+        "projectId" : "85",
+        "address" : "0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270",
+        "name" : "70s Pop Series Two"
+    },
+    {
+        "name" : "70s Pop Ghost Bonus Pack 👻",
+        "chainId" : 1,
+        "hasVideo" : false,
+        "address" : "0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270",
+        "projectId" : "111"
+    },
+    {
+        "hasVideo" : false,
+        "chainId" : 1,
+        "projectId" : "73",
+        "name" : "CatBlocks",
+        "address" : "0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270"
     },
     {
         "hasVideo" : true,
