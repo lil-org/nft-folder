@@ -123,7 +123,7 @@ struct WalletsListView: View {
                         Images.ellipsis
                     }.popover(isPresented: $showMorePreferences) {
                         VStack {
-                            Button("Restore hidden items") { // TODO: loc
+                            Button(Strings.restoreHiddenItems) {
                                 restoreHiddenItems()
                                 showSettingsPopup = false
                                 showMorePreferences = false
