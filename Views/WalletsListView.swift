@@ -79,11 +79,14 @@ struct WalletsListView: View {
                     createGrid().frame(maxWidth: .infinity)
                 }.background(Color(nsColor: .controlBackgroundColor))
                     .toolbar {
-                        ToolbarItemGroup {
+                        ToolbarItemGroup(placement: .principal) {
+                            Text(Consts.noggles)
+                                .fontWeight(.semibold)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                        }
+                        
+                        ToolbarItemGroup() {
                             Spacer()
-                            Text(Consts.noggles).fontWeight(.semibold).frame(maxWidth: .infinity, alignment: .center)
-                            Spacer()
-                            
                             if isDownloading {
                                 Button(action: {
                                     AllDownloadsManager.shared.stopAllDownloads()
