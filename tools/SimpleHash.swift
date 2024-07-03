@@ -128,6 +128,20 @@ struct SimpleHash {
         }
     }
     
+    static func getNft(tokenId: String, contractAddress: String, completion: @escaping (NFT) -> Void) {
+        let url = URL(string: "https://api.simplehash.com/api/v0/nfts/ethereum/\(contractAddress)/\(tokenId)")!
+        var request = URLRequest(url: url)
+        request.allHTTPHeaderFields = [
+          "accept": "application/json",
+          "X-API-KEY": apiKey
+        ]
+        let dataTask = URLSession.shared.dataTask(with: request) { data, _, _ in
+            let nft = try! JSONDecoder().decode(NFT.self, from: data!)
+            completion(nft)
+        }
+        dataTask.resume()
+    }
+    
     static func getNfts(collectionId: String, next: String?, count: Int, completion: @escaping (NftsResponse) -> Void) {
         let url = URL(string: next ?? "https://api.simplehash.com/api/v0/nfts/collection/\(collectionId)?limit=\(count)&include_attribute_percentages=0&include_unit_price_eth_wei=0")!
         var request = URLRequest(url: url)
