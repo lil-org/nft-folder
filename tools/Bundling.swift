@@ -216,14 +216,7 @@ private func rebundleImages(items: [SuggestedItem], useCollectionImage: Bool) {
                 let tokens = try! JSONDecoder().decode(BundledTokens.self, from: data)
                 let tokenId = tokens.items.randomElement()!.id
                 if useCollectionImage {
-                    SimpleHash.getNft(tokenId: tokenId, contractAddress: item.address) { nft in
-                        let url = URL(string: nft.collection!.imageUrl!)!
-                        let data = try! Data(contentsOf: url)
-                        let coverImage = NSImage(data: data)!
-                        writeImage(coverImage, id: item.id)
-                        print("did update image for \(item.name)")
-                        rebundleImages(items: Array(items.dropFirst()), useCollectionImage: useCollectionImage)
-                    }
+                    print("⚠️ will not get an image for artblocks \(item.name)")
                 } else {
                     let url = URL(string: "https://media-proxy.artblocks.io/\(item.address)/\(tokenId).png")
                     let imageData = try! Data(contentsOf: url!)
