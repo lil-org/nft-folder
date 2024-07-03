@@ -45,7 +45,7 @@ class StatusBarItem: NSObject, NSPopoverDelegate {
         let contentView = WalletsListView(showAddWalletPopup: false, inPopup: true)
         let viewController = NSHostingController(rootView: contentView)
         popover.behavior = .transient
-        popover.contentSize = CGSize(width: 300, height: 482)
+        popover.contentSize = CGSize(width: 300, height: 439)
         popover.contentViewController = viewController
         popover.delegate = self
     }
