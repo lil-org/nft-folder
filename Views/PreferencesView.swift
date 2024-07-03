@@ -9,6 +9,7 @@ struct PreferencesView: View {
     @State private var videoPreference = Defaults.downloadVideo
     @State private var audioPreference = Defaults.downloadAudio
     @State private var showInMenuBar = !Defaults.hideFromMenuBar
+    @State private var hasHiddenSuggestedItems = !Defaults.suggestedItemsToHide.isEmpty
     
     @State private var hoveringOverURL: URL? = nil
     
@@ -85,7 +86,14 @@ struct PreferencesView: View {
                     }
                 }
             }.padding(.top).padding(.bottom)
+            if hasHiddenSuggestedItems {
+                // TODO: show put back button
+            }
         }
+    }
+    
+    func putBackHiddenItems() {
+        // TODO: implement
     }
     
 }
