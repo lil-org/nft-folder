@@ -181,15 +181,20 @@ fileprivate func imagesetContentsFileData(id: String) -> Data {
     return jsonString.data(using: .utf8)!
 }
 
-func rebundleMissingImages(useCollectionImage: Bool) {
-    var missing = [SuggestedItem]()
-    for item in bundledSuggestedItems {
-        if !hasImage(id: item.id) {
-            missing.append(item)
-            print("no image for \(item.name)")
+func rebundleImages(onlyMissing: Bool, useCollectionImage: Bool) {
+    if onlyMissing {
+        var missing = [SuggestedItem]()
+        for item in bundledSuggestedItems {
+            if !hasImage(id: item.id) {
+                missing.append(item)
+                print("no image for \(item.name)")
+            }
         }
+        rebundleImages(items: missing, useCollectionImage: useCollectionImage)
+    } else {
+        print("will rebundle all images")
+        rebundleImages(items: bundledSuggestedItems, useCollectionImage: useCollectionImage)
     }
-    rebundleImages(items: missing, useCollectionImage: useCollectionImage)
     semaphore.wait()
 }
 
@@ -210,12 +215,16 @@ private func rebundleImages(items: [SuggestedItem], useCollectionImage: Bool) {
                 let data = try! Data(contentsOf: URL(fileURLWithPath: dir + "/Suggested Items/Suggested.bundle/Tokens/\(item.id).json"))
                 let tokens = try! JSONDecoder().decode(BundledTokens.self, from: data)
                 let tokenId = tokens.items.randomElement()!.id
-                let url = URL(string: "https://media-proxy.artblocks.io/\(item.address)/\(tokenId).png")
-                let imageData = try! Data(contentsOf: url!)
-                let coverImage = NSImage(data: imageData)!
-                writeImage(coverImage, id: item.id)
-                print("did update image for \(item.name)")
-                rebundleImages(items: Array(items.dropFirst()), useCollectionImage: useCollectionImage)
+                if useCollectionImage {
+                    // TODO: get that specific token from simplehash
+                } else {
+                    let url = URL(string: "https://media-proxy.artblocks.io/\(item.address)/\(tokenId).png")
+                    let imageData = try! Data(contentsOf: url!)
+                    let coverImage = NSImage(data: imageData)!
+                    writeImage(coverImage, id: item.id)
+                    print("did update image for \(item.name)")
+                    rebundleImages(items: Array(items.dropFirst()), useCollectionImage: useCollectionImage)
+                }
             }
         } else {
             print("⚠️ will not get an image for \(item.name)")
