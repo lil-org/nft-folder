@@ -4,13 +4,11 @@ import Cocoa
 
 let fresh =
 """
-0xabfae8a54e6817f57f9de7796044e9a60e61ad67
-0x4e1f41613c9084fdb9e34e11fae9412427480e56
-0xBE8E0F43A2CEB7ee944B4FC5F4f54b078223422c
+0xaa39b261b8d4fdaa8a1ed436cc14a723c0480ee9
 """
 
 // prepareForSelection(input: fresh)
 // bundleSelected()
-rebundleMissingImages(useCollectionImage: false)
+rebundleMissingImages(useCollectionImage: true)
 
 print("🟢 all done")
