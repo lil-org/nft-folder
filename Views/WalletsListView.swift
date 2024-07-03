@@ -83,6 +83,15 @@ struct WalletsListView: View {
                             Spacer()
                             Text(Consts.noggles).fontWeight(.semibold).frame(maxWidth: .infinity, alignment: .center)
                             Spacer()
+                            
+                            if isDownloading {
+                                Button(action: {
+                                    AllDownloadsManager.shared.stopAllDownloads()
+                                }) {
+                                    Images.pause
+                                }
+                            }
+                            
                             Button(action: {
                                 showSettingsPopup = true
                             }) {
