@@ -3,7 +3,7 @@
 import Cocoa
 
 let fresh: [(String, Chain)] = [
-    ("0xe7ed54673455193f1d4448c88c6544fd93a237c0", .ethereum)
+    ("", .ethereum)
 ]
 
 //prepareForSelection(input: fresh)
@@ -11,5 +11,7 @@ let fresh: [(String, Chain)] = [
 //bundleSelected()
 
 //rebundleImages(onlyMissing: true, useCollectionImage: true)
+
+// removeBundledItems("")
 
 print("🟢 all done")
