@@ -3,20 +3,11 @@
 import Cocoa
 
 let fresh: [(String, Chain)] = [
+    ("0x5a0121a0a21232ec0d024dab9017314509026480", .ethereum)
 ]
 
-//prepareForSelection(input: fresh)
-
-// TODO: make sure all bundled items have simplehash project id
-// bundleSelected()
-
+prepareForSelection(input: fresh)
+//bundleSelected()
 //rebundleImages(onlyMissing: true, useCollectionImage: true)
-
-for index in 0..<bundledSuggestedItems.count {
-    
-}
-
-//let updatedSuggestedItemsData = try! encoder.encode(bundledSuggestedItems)
-//try! updatedSuggestedItemsData.write(to: bundledSuggestedItemsUrl)
 
 print("🟢 all done")

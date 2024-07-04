@@ -11,7 +11,7 @@ struct ProjectToBundle: Codable {
     let chain: Chain
     
     var id: String {
-        return collectionId
+        return contractAddress + collectionId
     }
     
 }

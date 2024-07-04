@@ -88,6 +88,11 @@ struct SimpleHash {
     
     private static func save(contract: String, collections: [Collection], chain: Chain) {
         for collection in collections {
+            guard !bundledSuggestedItems.contains(where: { $0.collectionId == collection.collectionId } ) else {
+                print("already has \(collection.name) bundled, skipping")
+                continue
+            }
+            
             let dirPath = selectedPath + contract + collection.collectionId
             try! FileManager.default.createDirectory(atPath: dirPath, withIntermediateDirectories: true)
             let project = ProjectToBundle(name: collection.name, tokens: [], contractAddress: contract, collectionId: collection.collectionId, chain: chain)
