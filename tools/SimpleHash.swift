@@ -74,9 +74,18 @@ struct SimpleHash {
     
     private static func process(contracts: [(String, Chain)]) {
         if let (address, chain) = contracts.first {
-            getAllCollections(chain: chain, contractAddress: String(address), next: nil, addTo: []) { collections in
-                save(contract: address, collections: collections, chain: chain)
-                process(contracts: Array(contracts.dropFirst()))
+            switch chain {
+            case .ethereum, .base:
+                getAllCollections(chain: chain, contractAddress: String(address), next: nil, addTo: []) { collections in
+                    save(contract: address, collections: collections, chain: chain)
+                    process(contracts: Array(contracts.dropFirst()))
+                }
+            case .solana, .bitcoin, .tezos:
+                getNft(contract: address, chain: chain) { nft in
+                    let collection = nft.collection
+                    save(contract: address, collections: [collection!], chain: chain)
+                    process(contracts: Array(contracts.dropFirst()))
+                }
             }
         } else {
             semaphore.signal()
@@ -151,6 +160,20 @@ struct SimpleHash {
         let dataTask = URLSession.shared.dataTask(with: request) { data, _, _ in
             let nftsResponse = try! JSONDecoder().decode(NftsResponse.self, from: data!)
             completion(nftsResponse)
+        }
+        dataTask.resume()
+    }
+    
+    static func getNft(contract: String, chain: Chain, completion: @escaping (NFT) -> Void) {
+        let url = URL(string: "https://api.simplehash.com/api/v0/nfts/\(chain.rawValue)/\(contract)")!
+        var request = URLRequest(url: url)
+        request.allHTTPHeaderFields = [
+          "accept": "application/json",
+          "X-API-KEY": apiKey
+        ]
+        let dataTask = URLSession.shared.dataTask(with: request) { data, _, _ in
+            let nftsResponse = try! JSONDecoder().decode(NftsResponse.self, from: data!)
+            completion(nftsResponse.nfts.first!)
         }
         dataTask.resume()
     }
