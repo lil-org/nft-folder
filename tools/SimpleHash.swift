@@ -25,7 +25,7 @@ struct SimpleHash {
     
     struct NFT: Codable {
         let tokenId: String
-        let name: String
+        let name: String?
         let imageUrl: String?
         let previews: Previews?
         let collection: Collection?

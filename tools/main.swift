@@ -2,13 +2,15 @@
 
 import Cocoa
 
-let fresh: [(String, Chain)] = [
-    ("0xa8a425864db32fcbb459bf527bdbb8128e6abf21", .ethereum)
-]
+let ethCollections =
+"""
+"""
+
+let fresh: [(String, Chain)] = ethCollections.split(separator: "\n").map { (String($0), .ethereum) }
 
 //prepareForSelection(input: fresh)
 
-bundleSelected()
+//bundleSelected()
 
 //rebundleImages(onlyMissing: true, useCollectionImage: true)
 
