@@ -42,6 +42,8 @@
 		2C4659942C308B47008CF97F /* Covers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C4659932C308B44008CF97F /* Covers.xcassets */; };
 		2C46599C2C308F86008CF97F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C46599B2C308F86008CF97F /* main.swift */; };
 		2C4659A22C30911C008CF97F /* Bundling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4659A12C30911C008CF97F /* Bundling.swift */; };
+		2C4DBFC12C3698D10097AD35 /* Chain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4DBFC02C3698D10097AD35 /* Chain.swift */; };
+		2C4DBFC22C3698D10097AD35 /* Chain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4DBFC02C3698D10097AD35 /* Chain.swift */; };
 		2C5065F72C0DFC8700D9D01A /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5065F62C0DFC8700D9D01A /* String.swift */; };
 		2C5065F82C0DFCF500D9D01A /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5065F62C0DFC8700D9D01A /* String.swift */; };
 		2C5065FA2C0E10D600D9D01A /* AttestationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5065F92C0E10D600D9D01A /* AttestationResponse.swift */; };
@@ -183,6 +185,7 @@
 		2C4659992C308F86008CF97F /* tools */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = tools; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C46599B2C308F86008CF97F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		2C4659A12C30911C008CF97F /* Bundling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundling.swift; sourceTree = "<group>"; };
+		2C4DBFC02C3698D10097AD35 /* Chain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chain.swift; sourceTree = "<group>"; };
 		2C5065F62C0DFC8700D9D01A /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		2C5065F92C0E10D600D9D01A /* AttestationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationResponse.swift; sourceTree = "<group>"; };
 		2C508C9C2B6830E6005F548A /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
@@ -654,6 +657,7 @@
 			isa = PBXGroup;
 			children = (
 				2CA979AB2B62BA2400DB3AC8 /* NftGallery.swift */,
+				2C4DBFC02C3698D10097AD35 /* Chain.swift */,
 				2CA34B502B08B33C00DAB623 /* WatchOnlyWallet.swift */,
 				2C98C4AC2BEE9E390040383D /* Consts.swift */,
 				2CF524012BB2ECD200C18344 /* CollectionInfo.swift */,
@@ -1844,6 +1848,7 @@
 				2C1B60D02B7E26CB009949C2 /* ExtensionMessage.swift in Sources */,
 				2C4039EF2B83A59300DB94D7 /* Codable.swift in Sources */,
 				2C508C9E2B6830E6005F548A /* Notification.swift in Sources */,
+				2C4DBFC22C3698D10097AD35 /* Chain.swift in Sources */,
 				2CA34B6E2B08C02500DAB623 /* URL.swift in Sources */,
 				2CA34B702B08C02B00DAB623 /* WatchOnlyWallet.swift in Sources */,
 				2CF524032BB2ECD200C18344 /* CollectionInfo.swift in Sources */,
@@ -1907,6 +1912,7 @@
 				2CA4CF552B07F75F00CC75F4 /* AppDelegate.swift in Sources */,
 				2C9C60352C2C5FE8001D9B51 /* SuggestedItemsService.swift in Sources */,
 				2CE0B5E32B8686CE00B5BF4A /* FooterLink.swift in Sources */,
+				2C4DBFC12C3698D10097AD35 /* Chain.swift in Sources */,
 				2CF524022BB2ECD200C18344 /* CollectionInfo.swift in Sources */,
 				2CA623E72BEE8A0200BD78FF /* UserDefaults.swift in Sources */,
 				2C508C9D2B6830E6005F548A /* Notification.swift in Sources */,
