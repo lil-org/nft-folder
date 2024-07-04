@@ -80,12 +80,6 @@ struct SimpleHash {
                     save(contract: address, collections: collections, chain: chain)
                     process(contracts: Array(contracts.dropFirst()))
                 }
-            case .solana, .bitcoin, .tezos:
-                getNft(contract: address, chain: chain) { nft in
-                    let collection = nft.collection
-                    save(contract: address, collections: [collection!], chain: chain)
-                    process(contracts: Array(contracts.dropFirst()))
-                }
             }
         } else {
             semaphore.signal()
