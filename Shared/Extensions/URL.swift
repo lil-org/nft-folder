@@ -53,6 +53,16 @@ extension URL {
         return metadataDirectory(walletFolderURL: url, metadataKind: .address)?.appendingPathComponent("avatar")
     }
     
+    static func suggestedItemOnDisk(wallet: WatchOnlyWallet) -> URL? {
+        guard let url = nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return nil }
+        return metadataDirectory(walletFolderURL: url, metadataKind: .address)?.appendingPathComponent("suggested-item")
+    }
+    
+    static func suggestedItemOnDisk(folderPath: String) -> URL? {
+        let url = URL(filePath: folderPath)
+        return metadataDirectory(walletFolderURL: url, metadataKind: .address)?.appendingPathComponent("suggested-item")
+    }
+    
     static func detailedMetadataDirectory(wallet: WatchOnlyWallet) -> URL? {
         guard let url = nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return nil }
         return metadataDirectory(walletFolderURL: url, metadataKind: .detailed)

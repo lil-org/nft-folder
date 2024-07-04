@@ -21,8 +21,22 @@ struct MetadataStorage {
         return nil
     }
     
+    static func storeOriginalSuggestedItem(_ item: SuggestedItem, wallet: WatchOnlyWallet) {
+        guard let data = try? JSONEncoder().encode(item),
+              let url = URL.suggestedItemOnDisk(wallet: wallet) else { return }
+        try? data.write(to: url, options: .atomic)
+    }
+    
     static func recoverCollectionIfPossible(folderPath: String) -> WatchOnlyWallet? {
         guard let files = try? fileManager.contentsOfDirectory(atPath: folderPath) else { return nil }
+        
+        if let url = URL.suggestedItemOnDisk(folderPath: folderPath),
+           let data = try? Data(contentsOf: url),
+           let suggestedItem = try? JSONDecoder().decode(SuggestedItem.self, from: data) {
+            let wallet = WatchOnlyWallet(address: suggestedItem.address, name: suggestedItem.name, avatar: nil, projectId: suggestedItem.abId ?? suggestedItem.collectionId, chain: suggestedItem.chain, collections: [CollectionInfo(name: suggestedItem.name, network: suggestedItem.network, chain: suggestedItem.chain, hasVideo: suggestedItem.hasVideo)])
+            return wallet
+        }
+        
         for name in files {
             guard !name.hasPrefix(".") else { continue }
             let filePath = folderPath + "/" + name
@@ -30,7 +44,6 @@ struct MetadataStorage {
                let detailedMetadata = detailedMetadata(nftFilePath: filePath),
                minimalMetadata.collectionAddress == detailedMetadata.collectionAddress,
                let collectionName = detailedMetadata.collectionName, name.contains(collectionName) {
-                // TODO: fix recovering artblocks id / project id
                 let collectionInfo = CollectionInfo(name: collectionName, network: detailedMetadata.network, chain: detailedMetadata.chain, hasVideo: nil)
                 return WatchOnlyWallet(address: detailedMetadata.collectionAddress, name: collectionName, avatar: nil, projectId: nil, chain: detailedMetadata.chain, collections: [collectionInfo])
             } else {

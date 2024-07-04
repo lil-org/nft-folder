@@ -397,6 +397,7 @@ struct WalletsListView: View {
             openFolderForWallet(wallet)
         }
         removeAndDoNotSuggestAnymore(item: item)
+        MetadataStorage.storeOriginalSuggestedItem(item, wallet: wallet)
     }
     
     private func removeAndDoNotSuggestAnymore(item: SuggestedItem) {
