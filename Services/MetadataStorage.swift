@@ -33,7 +33,11 @@ struct MetadataStorage {
         if let url = URL.suggestedItemOnDisk(folderPath: folderPath),
            let data = try? Data(contentsOf: url),
            let suggestedItem = try? JSONDecoder().decode(SuggestedItem.self, from: data) {
-            let wallet = WatchOnlyWallet(address: suggestedItem.address, name: suggestedItem.name, avatar: nil, projectId: suggestedItem.abId ?? suggestedItem.collectionId, chain: suggestedItem.chain, collections: [CollectionInfo(name: suggestedItem.name, network: suggestedItem.network, chain: suggestedItem.chain, hasVideo: suggestedItem.hasVideo)])
+            var walletName = suggestedItem.name
+            if WalletsService.shared.hasWallet(folderName: suggestedItem.name) {
+                walletName += " " + suggestedItem.address.suffix(4)
+            }
+            let wallet = WatchOnlyWallet(address: suggestedItem.address, name: walletName, avatar: nil, projectId: suggestedItem.abId ?? suggestedItem.collectionId, chain: suggestedItem.chain, collections: [CollectionInfo(name: suggestedItem.name, network: suggestedItem.network, chain: suggestedItem.chain, hasVideo: suggestedItem.hasVideo)])
             return wallet
         }
         
