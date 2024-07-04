@@ -13,7 +13,7 @@ struct SuggestedItem: Identifiable, Hashable, Codable {
     let name: String
     let address: String
     let chainId: Int
-    let chain: Chain?
+    let chain: Chain
     
     let projectId: String?
     let hasVideo: Bool?

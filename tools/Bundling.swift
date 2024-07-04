@@ -8,6 +8,7 @@ struct ProjectToBundle: Codable {
     let tokens: [BundledTokens.Item]
     let contractAddress: String
     let projectId: String
+    let chain: Chain
     
     var id: String {
         return contractAddress + projectId
@@ -56,7 +57,8 @@ fileprivate func bundleProjects(projects: [ProjectToBundle]) {
     if let project = projects.first {
         let suggestedItem = SuggestedItem(name: project.name,
                                           address: project.contractAddress,
-                                          chainId: 1,
+                                          chainId: project.chain.network.rawValue,
+                                          chain: project.chain,
                                           projectId: project.projectId,
                                           hasVideo: false)
         bundledSuggestedItems.append(suggestedItem)
@@ -114,8 +116,8 @@ func hasImage(id: String) -> Bool {
     return hasDir && hasImage
 }
 
-func prepareForSelection(input: String) {
-    SimpleHash.previewCollections(input: input)
+func prepareForSelection(input: [(String, Chain)]) {
+    SimpleHash.previewCollections(input)
     print("will download previews for \(projects.count) projects")
     processProjects(projects: projects)
     semaphore.wait()

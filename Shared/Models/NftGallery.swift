@@ -32,13 +32,13 @@ enum NftGallery: Int, CaseIterable, Codable {
     
     func url(wallet: WatchOnlyWallet) -> URL? {
         if let collectionNetwork = wallet.collections?.first?.network {
-            return url(network: collectionNetwork, chain: wallet.chain ?? .ethereum, collectionAddress: wallet.address, tokenId: nil)
+            return url(network: collectionNetwork, chain: wallet.chain, collectionAddress: wallet.address, tokenId: nil)
         } else {
-            return url(walletAddress: wallet.address, chain: wallet.chain ?? .ethereum)
+            return url(walletAddress: wallet.address, chain: wallet.chain)
         }
     }
     
-    private func url(walletAddress: String, chain: Chain) -> URL? {
+    private func url(walletAddress: String, chain: Chain?) -> URL? {
         // TODO: use chain for non eth explorers
         switch self {
         case .zora:
@@ -50,7 +50,7 @@ enum NftGallery: Int, CaseIterable, Codable {
         }
     }
     
-    func url(network: Network, chain: Chain, collectionAddress: String, tokenId: String?) -> URL? {
+    func url(network: Network, chain: Chain?, collectionAddress: String, tokenId: String?) -> URL? {
         // TODO: use chain for non eth explorers
         switch self {
         case .zora:

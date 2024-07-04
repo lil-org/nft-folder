@@ -67,28 +67,27 @@ struct SimpleHash {
         }
     }
     
-    static func previewCollections(input: String) {
-        let contractAddresses = input.split(separator: "\n").map { String($0) }
-        process(contractAddresses: contractAddresses)
+    static func previewCollections(_ input: [(String, Chain)]) {
+        process(contracts: input)
         semaphore.wait()
     }
     
-    private static func process(contractAddresses: [String]) {
-        if let address = contractAddresses.first {
+    private static func process(contracts: [(String, Chain)]) {
+        if let (address, chain) = contracts.first {
             getAllCollections(contractAddress: String(address), next: nil, addTo: []) { collections in
-                save(contract: address, collections: collections)
-                process(contractAddresses: Array(contractAddresses.dropFirst()))
+                save(contract: address, collections: collections, chain: chain)
+                process(contracts: Array(contracts.dropFirst()))
             }
         } else {
             semaphore.signal()
         }
     }
     
-    private static func save(contract: String, collections: [Collection]) {
+    private static func save(contract: String, collections: [Collection], chain: Chain) {
         for collection in collections {
             let dirPath = selectedPath + contract + collection.collectionId
             try! FileManager.default.createDirectory(atPath: dirPath, withIntermediateDirectories: true)
-            let project = ProjectToBundle(name: collection.name, tokens: [], contractAddress: contract, projectId: collection.collectionId)
+            let project = ProjectToBundle(name: collection.name, tokens: [], contractAddress: contract, projectId: collection.collectionId, chain: chain)
             let data = try! encoder.encode(project)
             try! data.write(to: URL(filePath: dirPath + "/" + "project.json"))
         }

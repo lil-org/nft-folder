@@ -101,7 +101,7 @@ struct MetadataStorage {
     }
     
     private static func nftURL(metadata: MinimalTokenMetadata, gallery: NftGallery) -> URL? {
-        let url = gallery.url(network: metadata.network, chain: metadata.chain ?? .ethereum, collectionAddress: metadata.collectionAddress, tokenId: metadata.tokenId)
+        let url = gallery.url(network: metadata.network, chain: metadata.chain, collectionAddress: metadata.collectionAddress, tokenId: metadata.tokenId)
         return url
     }
     
