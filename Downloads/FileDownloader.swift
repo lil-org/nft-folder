@@ -33,7 +33,7 @@ class FileDownloader: NSObject {
     private var wallet: WatchOnlyWallet?
     private var definitelyShouldNotCreateCollectionThumbnail = false
     private var maxSimultaneousDownloads: Int {
-        return wallet?.projectId != nil ? 3 : 13
+        return wallet?.projectId != nil ? 1 : 13
     }
     
     init(completion: @escaping () -> Void) {
