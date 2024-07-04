@@ -32,13 +32,14 @@ enum NftGallery: Int, CaseIterable, Codable {
     
     func url(wallet: WatchOnlyWallet) -> URL? {
         if let collectionNetwork = wallet.collections?.first?.network {
-            return url(network: collectionNetwork, collectionAddress: wallet.address, tokenId: nil)
+            return url(network: collectionNetwork, chain: wallet.chain ?? .ethereum, collectionAddress: wallet.address, tokenId: nil)
         } else {
-            return url(walletAddress: wallet.address)
+            return url(walletAddress: wallet.address, chain: wallet.chain ?? .ethereum)
         }
     }
     
-    private func url(walletAddress: String) -> URL? {
+    private func url(walletAddress: String, chain: Chain) -> URL? {
+        // TODO: use chain for non eth explorers
         switch self {
         case .zora:
             return URL(string: "https://zora.co/\(walletAddress)?referrer=\(NftGallery.referrer)")
@@ -49,12 +50,13 @@ enum NftGallery: Int, CaseIterable, Codable {
         }
     }
     
-    func url(network: Network, collectionAddress: String, tokenId: String?) -> URL? {
+    func url(network: Network, chain: Chain, collectionAddress: String, tokenId: String?) -> URL? {
+        // TODO: use chain for non eth explorers
         switch self {
         case .zora:
             let prefix: String
             switch network {
-            case .ethereum:
+            case .mainnet:
                 prefix = "eth"
             case .optimism:
                 prefix = "optimism"
@@ -71,7 +73,7 @@ enum NftGallery: Int, CaseIterable, Codable {
         case .mintfun:
             let prefix: String
             switch network {
-            case .ethereum:
+            case .mainnet:
                 prefix = "ethereum"
             case .optimism:
                 prefix = "op"
@@ -88,7 +90,7 @@ enum NftGallery: Int, CaseIterable, Codable {
         case .opensea:
             let prefix: String
             switch network {
-            case .ethereum:
+            case .mainnet:
                 prefix = "ethereum"
             case .optimism:
                 prefix = "optimism"

@@ -377,8 +377,8 @@ struct WalletsListView: View {
     }
     
     private func didSelectSuggestedItem(_ item: SuggestedItem) {
-        let collections = [CollectionInfo(name: item.name, network: item.network, hasVideo: item.hasVideo)]
-        let wallet = WatchOnlyWallet(address: item.address, name: item.name, avatar: nil, projectId: item.projectId, collections: collections)
+        let collections = [CollectionInfo(name: item.name, network: item.network, chain: item.chain, hasVideo: item.hasVideo)]
+        let wallet = WatchOnlyWallet(address: item.address, name: item.name, avatar: nil, projectId: item.projectId, chain: item.chain, collections: collections)
         addWallet(wallet, skipCollectionCheck: true)
         openFolderForWallet(wallet)
         if let image = NSImage(named: item.id) {
@@ -404,7 +404,7 @@ struct WalletsListView: View {
         WalletsService.shared.resolveENS(newWalletAddress) { result in
             if case .success(let response) = result {
                 if showAddWalletPopup {
-                    let wallet = WatchOnlyWallet(address: response.address, name: response.name, avatar: response.avatar, projectId: nil, collections: nil)
+                    let wallet = WatchOnlyWallet(address: response.address, name: response.name, avatar: response.avatar, projectId: nil, chain: nil, collections: nil)
                     addWallet(wallet, skipCollectionCheck: false)
                 }
                 showAddWalletPopup = false

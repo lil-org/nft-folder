@@ -129,6 +129,7 @@ extension ZoraToken {
                                      collectionName: collectionName,
                                      collectionAddress: collectionAddress,
                                      tokenId: tokenId,
+                                     chain: nil,
                                      network: network,
                                      tokenStandard: tokenStandard,
                                      contentRepresentations: contentRepresentations)

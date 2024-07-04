@@ -4,11 +4,11 @@ import Foundation
 
 enum Network: Int, CaseIterable, Codable {
     
-    case zora = 7777777, base = 8453, ethereum = 1, optimism = 10, arbitrum = 42161, blast = 238
+    case zora = 7777777, base = 8453, mainnet = 1, optimism = 10, arbitrum = 42161, blast = 238
     
     var name: String {
         switch self {
-        case .ethereum:
+        case .mainnet:
             return "ETHEREUM"
         case .optimism:
             return "OPTIMISM"
@@ -26,7 +26,7 @@ enum Network: Int, CaseIterable, Codable {
     private var chainStringValue: String {
         let mainnet = "MAINNET"
         switch self {
-        case .ethereum:
+        case .mainnet:
             return mainnet
         default:
             return name + "_" + mainnet
@@ -40,7 +40,7 @@ enum Network: Int, CaseIterable, Codable {
     static func withName(_ name: String) -> Network? {
         switch name {
         case "ETHEREUM":
-            return .ethereum
+            return .mainnet
         case "OPTIMISM":
             return .optimism
         case "ZORA":

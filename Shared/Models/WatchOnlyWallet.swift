@@ -11,6 +11,7 @@ struct WatchOnlyWallet: Codable, Hashable, Identifiable {
     let name: String?
     let avatar: String?
     let projectId: String?
+    let chain: Chain?
     
     let collections: [CollectionInfo]?
     

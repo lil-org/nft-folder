@@ -7,7 +7,7 @@ struct SuggestedItem: Identifiable, Hashable, Codable {
     var id: String { address + (projectId ?? "") }
     
     var network: Network {
-        return Network(rawValue: chainId) ?? .ethereum
+        return Network(rawValue: chainId) ?? .mainnet
     }
     
     let name: String

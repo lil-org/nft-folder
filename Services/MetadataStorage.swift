@@ -30,9 +30,9 @@ struct MetadataStorage {
                let detailedMetadata = detailedMetadata(nftFilePath: filePath),
                minimalMetadata.collectionAddress == detailedMetadata.collectionAddress,
                let collectionName = detailedMetadata.collectionName, name.contains(collectionName) {
-                let collectionInfo = CollectionInfo(name: collectionName, network: detailedMetadata.network, hasVideo: nil)
-                // TODO: fix recovering artblocks project id
-                return WatchOnlyWallet(address: detailedMetadata.collectionAddress, name: collectionName, avatar: nil, projectId: nil, collections: [collectionInfo])
+                // TODO: fix recovering artblocks id / project id
+                let collectionInfo = CollectionInfo(name: collectionName, network: detailedMetadata.network, chain: detailedMetadata.chain, hasVideo: nil)
+                return WatchOnlyWallet(address: detailedMetadata.collectionAddress, name: collectionName, avatar: nil, projectId: nil, chain: detailedMetadata.chain, collections: [collectionInfo])
             } else {
                 return nil
             }
@@ -101,7 +101,7 @@ struct MetadataStorage {
     }
     
     private static func nftURL(metadata: MinimalTokenMetadata, gallery: NftGallery) -> URL? {
-        let url = gallery.url(network: metadata.network, collectionAddress: metadata.collectionAddress, tokenId: metadata.tokenId)
+        let url = gallery.url(network: metadata.network, chain: metadata.chain ?? .ethereum, collectionAddress: metadata.collectionAddress, tokenId: metadata.tokenId)
         return url
     }
     

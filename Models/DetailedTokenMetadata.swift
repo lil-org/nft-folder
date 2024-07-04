@@ -8,6 +8,7 @@ struct DetailedTokenMetadata: Codable {
     let collectionName: String?
     let collectionAddress: String
     let tokenId: String
+    let chain: Chain?
     let network: Network
     let tokenStandard: String?
     let contentRepresentations: [ContentRepresentation]
@@ -33,7 +34,7 @@ extension DetailedTokenMetadata {
     }
     
     func minimalMetadata(dowloadedFileSourceURL: URL? = nil) -> MinimalTokenMetadata {
-        return MinimalTokenMetadata(tokenId: tokenId, collectionAddress: collectionAddress, network: network, dowloadedFileSourceURL: dowloadedFileSourceURL)
+        return MinimalTokenMetadata(tokenId: tokenId, collectionAddress: collectionAddress, chain: chain, network: network, dowloadedFileSourceURL: dowloadedFileSourceURL)
     }
     
 }

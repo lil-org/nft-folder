@@ -59,9 +59,9 @@ class WalletDownloader {
                     }
                 }
 
-                let detailedMetadata = DetailedTokenMetadata(name: item.name, collectionName: collection.name, collectionAddress: wallet.address, tokenId: item.id, network: collection.network, tokenStandard: nil, contentRepresentations: contentRepresentations)
+                let detailedMetadata = DetailedTokenMetadata(name: item.name, collectionName: collection.name, collectionAddress: wallet.address, tokenId: item.id, chain: wallet.chain, network: collection.network, tokenStandard: nil, contentRepresentations: contentRepresentations)
                 guard !MetadataStorage.hasSomethingFor(detailedMetadata: detailedMetadata, addressDirectoryURL: walletRootDirectory) else { continue }
-                let minimalMetadata = MinimalTokenMetadata(tokenId: item.id, collectionAddress: wallet.address, network: collection.network)
+                let minimalMetadata = MinimalTokenMetadata(tokenId: item.id, collectionAddress: wallet.address, chain: wallet.chain, network: collection.network)
                 let downloadTask = DownloadFileTask(walletRootDirectory: walletRootDirectory, minimalMetadata: minimalMetadata, detailedMetadata: detailedMetadata)
                 tasks.append(downloadTask)
             }
@@ -130,7 +130,7 @@ class WalletDownloader {
         
         let tasks = nodes.map { node -> DownloadFileTask in
             let token = node.token
-            let minimal = MinimalTokenMetadata(tokenId: token.tokenId, collectionAddress: token.collectionAddress, network: network)
+            let minimal = MinimalTokenMetadata(tokenId: token.tokenId, collectionAddress: token.collectionAddress, chain: wallet.chain, network: network)
             let detailed = token.detailedMetadata(network: network)
             return DownloadFileTask(walletRootDirectory: destination, minimalMetadata: minimal, detailedMetadata: detailed)
         }
