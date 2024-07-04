@@ -40,6 +40,8 @@ enum NftGallery: Int, CaseIterable, Codable {
     
     private func url(walletAddress: String, chain: Chain?) -> URL? {
         // TODO: use chain for non eth explorers
+        // https://magiceden.io/marketplace/CjL5WpAmf4cMEEGwZGTfTDKWok9a92ykq9aLZrEK2D5H
+        
         switch self {
         case .zora:
             return URL(string: "https://zora.co/\(walletAddress)?referrer=\(NftGallery.referrer)")

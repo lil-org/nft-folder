@@ -74,7 +74,7 @@ struct SimpleHash {
     
     private static func process(contracts: [(String, Chain)]) {
         if let (address, chain) = contracts.first {
-            getAllCollections(contractAddress: String(address), next: nil, addTo: []) { collections in
+            getAllCollections(chain: chain, contractAddress: String(address), next: nil, addTo: []) { collections in
                 save(contract: address, collections: collections, chain: chain)
                 process(contracts: Array(contracts.dropFirst()))
             }
@@ -93,8 +93,8 @@ struct SimpleHash {
         }
     }
     
-    private static func getAllCollections(contractAddress: String, next: String?, addTo: [Collection], completion: @escaping ([Collection]) -> Void) {
-        let url = URL(string: next ?? "https://api.simplehash.com/api/v0/nfts/collections/ethereum/\(contractAddress)?limit=50")!
+    private static func getAllCollections(chain: Chain, contractAddress: String, next: String?, addTo: [Collection], completion: @escaping ([Collection]) -> Void) {
+        let url = URL(string: next ?? "https://api.simplehash.com/api/v0/nfts/collections/\(chain.rawValue)/\(contractAddress)?limit=50")!
         var request = URLRequest(url: url)
         request.allHTTPHeaderFields = [
           "accept": "application/json",
@@ -103,7 +103,7 @@ struct SimpleHash {
         let dataTask = URLSession.shared.dataTask(with: request) { data, _, _ in
             let collectionsResponse = try! JSONDecoder().decode(CollectionsResponse.self, from: data!)
             if let next = collectionsResponse.next {
-                getAllCollections(contractAddress: contractAddress, next: next, addTo: addTo + collectionsResponse.collections, completion: completion)
+                getAllCollections(chain: chain, contractAddress: contractAddress, next: next, addTo: addTo + collectionsResponse.collections, completion: completion)
             } else {
                 completion(addTo + collectionsResponse.collections)
             }
@@ -127,8 +127,8 @@ struct SimpleHash {
         }
     }
     
-    static func getNft(tokenId: String, contractAddress: String, completion: @escaping (NFT) -> Void) {
-        let url = URL(string: "https://api.simplehash.com/api/v0/nfts/ethereum/\(contractAddress)/\(tokenId)")!
+    static func getNft(chain: Chain, tokenId: String, contractAddress: String, completion: @escaping (NFT) -> Void) {
+        let url = URL(string: "https://api.simplehash.com/api/v0/nfts/\(chain.rawValue)/\(contractAddress)/\(tokenId)")!
         var request = URLRequest(url: url)
         request.allHTTPHeaderFields = [
           "accept": "application/json",
