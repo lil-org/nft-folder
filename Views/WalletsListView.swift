@@ -390,9 +390,11 @@ struct WalletsListView: View {
         let projectId = item.abId ?? item.collectionId
         let wallet = WatchOnlyWallet(address: item.address, name: item.name, avatar: nil, projectId: projectId, chain: item.chain, collections: collections)
         addWallet(wallet, skipCollectionCheck: true)
-        openFolderForWallet(wallet)
         if let image = NSImage(named: item.id) {
             AvatarService.setAvatar(wallet: wallet, image: image)
+        }
+        DispatchQueue.main.async {
+            openFolderForWallet(wallet)
         }
         removeAndDoNotSuggestAnymore(item: item)
     }
