@@ -7,11 +7,11 @@ struct ProjectToBundle: Codable {
     let name: String
     let tokens: [BundledTokens.Item]
     let contractAddress: String
-    let projectId: String
+    let collectionId: String
     let chain: Chain
     
     var id: String {
-        return contractAddress + projectId
+        return collectionId
     }
     
 }
@@ -24,7 +24,7 @@ let selectedSet = Set(try! FileManager.default.contentsOfDirectory(atPath: selec
 
 let encoder: JSONEncoder = {
     let new = JSONEncoder()
-    new.outputFormatting = .prettyPrinted
+    new.outputFormatting = [.prettyPrinted, .sortedKeys]
     return new
 }()
 
@@ -59,11 +59,12 @@ fileprivate func bundleProjects(projects: [ProjectToBundle]) {
                                           address: project.contractAddress,
                                           chainId: project.chain.network.rawValue,
                                           chain: project.chain,
-                                          projectId: project.projectId,
+                                          collectionId: project.collectionId,
+                                          projectId: nil,
                                           hasVideo: false)
         bundledSuggestedItems.append(suggestedItem)
         
-        SimpleHash.getAllNfts(collectionId: project.projectId, next: nil, addTo: []) { nfts in
+        SimpleHash.getAllNfts(collectionId: project.collectionId, next: nil, addTo: []) { nfts in
             let tokens = nfts.map { $0.toBundle }
             let bundledTokens = BundledTokens(isComplete: true, items: tokens)
             
@@ -131,7 +132,7 @@ fileprivate func processProjects(projects: [ProjectToBundle]) {
             return
         }
         
-        SimpleHash.previewNfts(collectionId: project.projectId) { nfts in
+        SimpleHash.previewNfts(collectionId: project.collectionId) { nfts in
             for token in nfts.prefix(5) {
                 guard let imageUrlString = token.imageUrl else { continue }
                 let imageURL = URL(string: imageUrlString)!

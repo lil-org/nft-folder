@@ -90,7 +90,7 @@ struct SimpleHash {
         for collection in collections {
             let dirPath = selectedPath + contract + collection.collectionId
             try! FileManager.default.createDirectory(atPath: dirPath, withIntermediateDirectories: true)
-            let project = ProjectToBundle(name: collection.name, tokens: [], contractAddress: contract, projectId: collection.collectionId, chain: chain)
+            let project = ProjectToBundle(name: collection.name, tokens: [], contractAddress: contract, collectionId: collection.collectionId, chain: chain)
             let data = try! encoder.encode(project)
             try! data.write(to: URL(filePath: dirPath + "/" + "project.json"))
         }
