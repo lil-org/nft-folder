@@ -3,12 +3,12 @@
 import Cocoa
 
 let fresh: [(String, Chain)] = [
-    ("", .ethereum)
+    ("0xa8a425864db32fcbb459bf527bdbb8128e6abf21", .ethereum)
 ]
 
 //prepareForSelection(input: fresh)
 
-//bundleSelected()
+bundleSelected()
 
 //rebundleImages(onlyMissing: true, useCollectionImage: true)
 
