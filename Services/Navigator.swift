@@ -17,7 +17,7 @@ class Navigator: NSObject {
         Window.closeAll()
         let contentView = WalletsListView(showAddWalletPopup: addWallet, inPopup: false)
         let window = RightClickActivatingWindow(
-            contentRect: CGRect(origin: .zero, size: CGSize(width: 300, height: 420)),
+            contentRect: CGRect(origin: .zero, size: CGSize(width: 777, height: 593)),
             styleMask: [.closable, .fullSizeContentView, .titled, .resizable],
             backing: .buffered, defer: false)
         window.titleVisibility = .hidden
