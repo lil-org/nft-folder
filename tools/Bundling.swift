@@ -137,7 +137,7 @@ fileprivate func processProjects(projects: [ProjectToBundle]) {
                 guard let imageUrlString = token.imageUrl else { continue }
                 let imageURL = URL(string: imageUrlString)!
                 if let rawImageData = try? Data(contentsOf: imageURL) {
-                    let fileName = "\(token.name)-\(token.tokenId).\(imageURL.pathExtension)".replacingOccurrences(of: "/", with: "")
+                    let fileName = "\(token.name ?? "untitled")-\(token.tokenId).\(imageURL.pathExtension)".replacingOccurrences(of: "/", with: "")
                     let fileImageUrl = URL(fileURLWithPath: projectPath + "/" + fileName)
                     try! rawImageData.write(to: fileImageUrl)
                     print("did add \(fileName) to \(project.name)")
