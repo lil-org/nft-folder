@@ -378,7 +378,8 @@ struct WalletsListView: View {
     
     private func didSelectSuggestedItem(_ item: SuggestedItem) {
         let collections = [CollectionInfo(name: item.name, network: item.network, chain: item.chain, hasVideo: item.hasVideo)]
-        let wallet = WatchOnlyWallet(address: item.address, name: item.name, avatar: nil, projectId: item.projectId, chain: item.chain, collections: collections)
+        let projectId = item.abId ?? item.collectionId
+        let wallet = WatchOnlyWallet(address: item.address, name: item.name, avatar: nil, projectId: projectId, chain: item.chain, collections: collections)
         addWallet(wallet, skipCollectionCheck: true)
         openFolderForWallet(wallet)
         if let image = NSImage(named: item.id) {

@@ -60,8 +60,8 @@ fileprivate func bundleProjects(projects: [ProjectToBundle]) {
                                           chainId: project.chain.network.rawValue,
                                           chain: project.chain,
                                           collectionId: project.collectionId,
-                                          projectId: nil,
-                                          hasVideo: false)
+                                          abId: nil,
+                                          hasVideo: nil)
         bundledSuggestedItems.append(suggestedItem)
         
         SimpleHash.getAllNfts(collectionId: project.collectionId, next: nil, addTo: []) { nfts in
@@ -203,31 +203,29 @@ func rebundleImages(onlyMissing: Bool, useCollectionImage: Bool) {
 
 private func rebundleImages(items: [SuggestedItem], useCollectionImage: Bool) {
     if let item = items.first {
-        if let projectId = item.projectId {
-            if projectId.contains(where: { $0.isLetter }) {
-                SimpleHash.getNfts(collectionId: projectId, next: nil, count: 23) { result in
-                    let nft = result.nfts.randomElement()!
-                    let url = useCollectionImage ? URL(string: nft.collection!.imageUrl!)! : URL(string: nft.previews!.imageMediumUrl!)!
-                    let data = try! Data(contentsOf: url)
-                    let coverImage = NSImage(data: data)!
-                    writeImage(coverImage, id: item.id)
-                    print("did update image for \(item.name)")
-                    rebundleImages(items: Array(items.dropFirst()), useCollectionImage: useCollectionImage)
-                }
+        if item.abId != nil {
+            let data = try! Data(contentsOf: URL(fileURLWithPath: dir + "/Suggested Items/Suggested.bundle/Tokens/\(item.id).json"))
+            let tokens = try! JSONDecoder().decode(BundledTokens.self, from: data)
+            let tokenId = tokens.items.randomElement()!.id
+            if useCollectionImage {
+                print("⚠️ will not get an image for artblocks \(item.name)")
             } else {
-                let data = try! Data(contentsOf: URL(fileURLWithPath: dir + "/Suggested Items/Suggested.bundle/Tokens/\(item.id).json"))
-                let tokens = try! JSONDecoder().decode(BundledTokens.self, from: data)
-                let tokenId = tokens.items.randomElement()!.id
-                if useCollectionImage {
-                    print("⚠️ will not get an image for artblocks \(item.name)")
-                } else {
-                    let url = URL(string: "https://media-proxy.artblocks.io/\(item.address)/\(tokenId).png")
-                    let imageData = try! Data(contentsOf: url!)
-                    let coverImage = NSImage(data: imageData)!
-                    writeImage(coverImage, id: item.id)
-                    print("did update image for \(item.name)")
-                    rebundleImages(items: Array(items.dropFirst()), useCollectionImage: useCollectionImage)
-                }
+                let url = URL(string: "https://media-proxy.artblocks.io/\(item.address)/\(tokenId).png")
+                let imageData = try! Data(contentsOf: url!)
+                let coverImage = NSImage(data: imageData)!
+                writeImage(coverImage, id: item.id)
+                print("did update image for \(item.name)")
+                rebundleImages(items: Array(items.dropFirst()), useCollectionImage: useCollectionImage)
+            }
+        } else if let collectionId = item.collectionId {
+            SimpleHash.getNfts(collectionId: collectionId, next: nil, count: 23) { result in
+                let nft = result.nfts.randomElement()!
+                let url = useCollectionImage ? URL(string: nft.collection!.imageUrl!)! : URL(string: nft.previews!.imageMediumUrl!)!
+                let data = try! Data(contentsOf: url)
+                let coverImage = NSImage(data: data)!
+                writeImage(coverImage, id: item.id)
+                print("did update image for \(item.name)")
+                rebundleImages(items: Array(items.dropFirst()), useCollectionImage: useCollectionImage)
             }
         } else {
             print("⚠️ will not get an image for \(item.name)")

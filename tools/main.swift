@@ -12,10 +12,11 @@ let fresh: [(String, Chain)] = [
 
 //rebundleImages(onlyMissing: true, useCollectionImage: true)
 
-for item in bundledSuggestedItems {
-    if item.collectionId == nil {
-        print(item.name)
-    }
+for index in 0..<bundledSuggestedItems.count {
+    
 }
+
+//let updatedSuggestedItemsData = try! encoder.encode(bundledSuggestedItems)
+//try! updatedSuggestedItemsData.write(to: bundledSuggestedItemsUrl)
 
 print("🟢 all done")

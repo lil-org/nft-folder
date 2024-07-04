@@ -4,7 +4,7 @@ import Foundation
 
 struct SuggestedItem: Identifiable, Hashable, Codable {
     
-    var id: String { address + (projectId ?? "") }
+    var id: String { address + (abId ?? collectionId ?? "") }
     
     var network: Network {
         return Network(rawValue: chainId) ?? .mainnet
@@ -14,10 +14,8 @@ struct SuggestedItem: Identifiable, Hashable, Codable {
     let address: String
     let chainId: Int
     let chain: Chain
-    
     let collectionId: String?
-    
-    let projectId: String?
+    let abId: String?
     let hasVideo: Bool?
     
 }
