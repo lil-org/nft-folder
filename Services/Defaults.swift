@@ -6,6 +6,13 @@ struct Defaults {
     
     private static let userDefaults = UserDefaults.standard
     
+    static func eraseAllContent() {
+        let dictionary = userDefaults.dictionaryRepresentation()
+        for key in dictionary.keys where key != "cleanupVersion" {
+            userDefaults.removeObject(forKey: key)
+        }
+    }
+    
     static func performCleanup(version: Int) {
         if version < 1 {
             userDefaults.keepOnly(keys: ["cleanupVersion", "unlimitedFileSize", "downloadGlb", "hideFromMenuBar"])

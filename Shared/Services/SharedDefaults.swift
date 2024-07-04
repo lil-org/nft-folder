@@ -6,6 +6,13 @@ struct SharedDefaults {
     
     private static let userDefaults = UserDefaults(suiteName: "group.org.lil.nft-folder")!
 
+    static func eraseAllContent() {
+        let dictionary = userDefaults.dictionaryRepresentation()
+        for key in dictionary.keys {
+            userDefaults.removeObject(forKey: key)
+        }
+    }
+    
     static func performCleanup(version: Int) {
         if version < 1 {
             userDefaults.keepOnly(keys: ["watch-wallets"])

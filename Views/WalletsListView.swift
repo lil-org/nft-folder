@@ -149,14 +149,19 @@ struct WalletsListView: View {
                         showMorePreferences.toggle()
                     }) {
                         Images.ellipsis
-                    }.popover(isPresented: $showMorePreferences) {
-                        VStack {
+                    }.popover(isPresented: $showMorePreferences, arrowEdge: .bottom) {
+                        VStack(spacing: 13) {
                             Button(Strings.restoreHiddenItems) {
                                 restoreHiddenItems()
                                 showSettingsPopup = false
                                 showMorePreferences = false
                             }
-                        }.frame(height: 32).padding()
+                            Button(Strings.eraseAllContent) {
+                                eraseAllContent()
+                                showSettingsPopup = false
+                                showMorePreferences = false
+                            }.buttonStyle(BorderlessButtonStyle()).foregroundColor(.red)
+                        }.frame(height: 69).padding()
                     }
                     Spacer()
                     Button(Strings.ok, action: {
@@ -279,6 +284,17 @@ struct WalletsListView: View {
                 }
             Spacer()
         }
+    }
+    
+    private func eraseAllContent() {
+        guard let url = URL.nftDirectory else { return }
+        AllDownloadsManager.shared.stopAllDownloads()
+        try? FileManager.default.removeItem(at: url)
+        Defaults.eraseAllContent()
+        SharedDefaults.eraseAllContent()
+        _ = URL.nftDirectory
+        updateDisplayedWallets()
+        restoreHiddenItems()
     }
     
     private func restoreHiddenItems() {

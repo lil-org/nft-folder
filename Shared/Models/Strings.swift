@@ -34,7 +34,8 @@ struct Strings {
     static let pushCustomFolders = loc("Save Folders Onchain")
     static let downloadVideo = loc("Download video")
     static let downloadAudio = loc("Download audio")
-    static let restoreHiddenItems = loc("Restore hidden items")
+    static let restoreHiddenItems = loc("Restore Hidden Items")
+    static let eraseAllContent = loc("Erase All Content")
     
     static let zora = "Zora"
     static let opensea = "OpenSea"
