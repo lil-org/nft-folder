@@ -3,10 +3,9 @@
 import Cocoa
 
 let fresh: [(String, Chain)] = [
-    ("CjL5WpAmf4cMEEGwZGTfTDKWok9a92ykq9aLZrEK2D5H", .solana)
 ]
 
-prepareForSelection(input: fresh)
+//prepareForSelection(input: fresh)
 
 // TODO: make sure all bundled items have simplehash project id
 // bundleSelected()
