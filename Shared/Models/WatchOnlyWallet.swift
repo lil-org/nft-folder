@@ -29,6 +29,14 @@ struct WatchOnlyWallet: Codable, Hashable, Identifiable {
         return collections?.first != nil
     }
     
+    var isArtBlocks: Bool {
+        if let projectId = projectId, !projectId.isEmpty {
+            return !projectId.contains(where: { $0.isLetter })
+        } else {
+            return false
+        }
+    }
+    
     var folderDisplayName: String {
         if let name = name {
             return name

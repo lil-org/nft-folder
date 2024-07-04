@@ -11,6 +11,7 @@ struct Strings {
     static let newFolder = loc("New Folder")
     static let removeFolder = loc("Remove Folder")
     static let hardReset = loc("Hard Reset")
+    static let viewOnArtBlocks = loc("View on Art Blocks")
     static let viewOnOpensea = loc("View on OpenSea")
     static let viewinFinder = loc("Show in Finder")
     static let viewOnZora = loc("View on Zora")

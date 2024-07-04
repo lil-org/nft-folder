@@ -342,6 +342,15 @@ struct WalletsListView: View {
                     DispatchQueue.main.async { NSWorkspace.shared.open(galleryURL) }
                 }
             })
+            
+            if let projectId = wallet.projectId, wallet.isArtBlocks {
+                Button(Strings.viewOnArtBlocks, action: {
+                    if let url = URL(string: "https://live.artblocks.io/\(wallet.address)/\(projectId)") {
+                        DispatchQueue.main.async { NSWorkspace.shared.open(url) }
+                    }
+                })
+            }
+            
             if !wallet.isCollection {
                 Divider()
                 Button(Strings.pushCustomFolders, action: {
