@@ -4564,6 +4564,13 @@
     "name" : "Terraforms"
   },
   {
+    "address" : "0xd4e4078ca3495de5b1d4db434bebc5a986197782",
+    "chain" : "ethereum",
+    "chainId" : 1,
+    "collectionId" : "764ef793a247544db529c3122a757e8c",
+    "name" : "Autoglyphs"
+  }
+  {
     "address" : "0xe6b8631dcd1d9f9f26bb8aec2df74a971383b94a",
     "chain" : "ethereum",
     "chainId" : 7777777,
@@ -4786,12 +4793,5 @@
     "chainId" : 1,
     "collectionId" : "8e531868de7a9723dbf18c3cefca96a8",
     "name" : "Autoscope"
-  },
-  {
-    "address" : "0xd4e4078ca3495de5b1d4db434bebc5a986197782",
-    "chain" : "ethereum",
-    "chainId" : 1,
-    "collectionId" : "764ef793a247544db529c3122a757e8c",
-    "name" : "Autoglyphs"
   }
 ]
