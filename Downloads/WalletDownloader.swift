@@ -7,6 +7,7 @@ class WalletDownloader {
     private var networks = Network.allCases
     private var didStudy = false
     private var completion: () -> Void
+    private var bundledTokensIdsWithAddresses = Set<String>()
     
     private lazy var fileDownloader = FileDownloader { [weak self] in
         if self?.didStudy == true {
@@ -36,6 +37,7 @@ class WalletDownloader {
         guard let collection = wallet.collections?.first else { return true }
         if let bundledTokens = SuggestedItemsService.bundledTokens(collectionId: wallet.id),
            let walletRootDirectory = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) {
+            let isComplete = bundledTokens.isComplete
             var tasks = [DownloadFileTask]()
             for item in bundledTokens.items {
                 let contentRepresentations: [ContentRepresentation]
@@ -58,16 +60,19 @@ class WalletDownloader {
                         continue
                     }
                 }
-
+                
+                if !isComplete {
+                    bundledTokensIdsWithAddresses.insert(item.id + wallet.address)
+                }
+                
                 let detailedMetadata = DetailedTokenMetadata(name: item.name, collectionName: collection.name, collectionAddress: wallet.address, tokenId: item.id, chain: wallet.chain, network: collection.network, tokenStandard: nil, contentRepresentations: contentRepresentations)
                 guard !MetadataStorage.hasSomethingFor(detailedMetadata: detailedMetadata, addressDirectoryURL: walletRootDirectory) else { continue }
                 let minimalMetadata = MinimalTokenMetadata(tokenId: item.id, collectionAddress: wallet.address, chain: wallet.chain, network: collection.network)
                 let downloadTask = DownloadFileTask(walletRootDirectory: walletRootDirectory, minimalMetadata: minimalMetadata, detailedMetadata: detailedMetadata)
                 tasks.append(downloadTask)
             }
-            
             fileDownloader.addTasks(tasks, wallet: wallet)
-            return !bundledTokens.isComplete
+            return !isComplete
         } else {
             return true
         }
@@ -127,14 +132,13 @@ class WalletDownloader {
     
     private func processResultTokensNodes(_ nodes: [Node], wallet: WatchOnlyWallet, network: Network) {
         guard let destination = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return }
-        
-        let tasks = nodes.map { node -> DownloadFileTask in
+        let newNodes = bundledTokensIdsWithAddresses.isEmpty ? nodes : nodes.filter { !bundledTokensIdsWithAddresses.contains($0.token.tokenId + $0.token.collectionAddress) }
+        let tasks = newNodes.map { node -> DownloadFileTask in
             let token = node.token
             let minimal = MinimalTokenMetadata(tokenId: token.tokenId, collectionAddress: token.collectionAddress, chain: wallet.chain, network: network)
             let detailed = token.detailedMetadata(network: network)
             return DownloadFileTask(walletRootDirectory: destination, minimalMetadata: minimal, detailedMetadata: detailed)
         }
-        
         fileDownloader.addTasks(tasks, wallet: wallet)
     }
     
