@@ -6,7 +6,7 @@ let ethCollections =
 """
 """
 
-let fresh: [(String, Chain)] = ethCollections.split(separator: "\n").map { (String($0), .ethereum) }
+let fresh: [(String, Chain)] = ethCollections.split(separator: "\n\n").map { (String($0), .ethereum) }
 
 //prepareForSelection(input: fresh)
 

@@ -69,7 +69,7 @@ fileprivate func bundleProjects(projects: [ProjectToBundle], useCollectionImages
             let bundledTokens = BundledTokens(isComplete: true, items: tokens)
             
             if useCollectionImages {
-                rebundleImages(items: [suggestedItem], useCollectionImage: true)
+                rebundleImages(items: [suggestedItem], useCollectionImage: true, doNotSignal: true)
             } else {
                 let localImageName = try! FileManager.default.contentsOfDirectory(atPath: selectedPath + project.id).first(where: { !$0.hasPrefix(".") })!
                 let coverImageUrl = URL(fileURLWithPath: selectedPath + project.id + "/" + localImageName)
@@ -197,15 +197,15 @@ func rebundleImages(onlyMissing: Bool, useCollectionImage: Bool) {
                 print("no image for \(item.name)")
             }
         }
-        rebundleImages(items: missing, useCollectionImage: useCollectionImage)
+        rebundleImages(items: missing, useCollectionImage: useCollectionImage, doNotSignal: false)
     } else {
         print("will rebundle all images")
-        rebundleImages(items: bundledSuggestedItems, useCollectionImage: useCollectionImage)
+        rebundleImages(items: bundledSuggestedItems, useCollectionImage: useCollectionImage, doNotSignal: false)
     }
     semaphore.wait()
 }
 
-private func rebundleImages(items: [SuggestedItem], useCollectionImage: Bool) {
+private func rebundleImages(items: [SuggestedItem], useCollectionImage: Bool, doNotSignal: Bool) {
     if let item = items.first {
         if item.abId != nil {
             let data = try! Data(contentsOf: URL(fileURLWithPath: dir + "/Suggested Items/Suggested.bundle/Tokens/\(item.id).json"))
@@ -219,23 +219,28 @@ private func rebundleImages(items: [SuggestedItem], useCollectionImage: Bool) {
                 let coverImage = NSImage(data: imageData)!
                 writeImage(coverImage, id: item.id)
                 print("did update image for \(item.name)")
-                rebundleImages(items: Array(items.dropFirst()), useCollectionImage: useCollectionImage)
+                rebundleImages(items: Array(items.dropFirst()), useCollectionImage: useCollectionImage, doNotSignal: doNotSignal)
             }
         } else if let collectionId = item.collectionId {
             SimpleHash.getNfts(collectionId: collectionId, next: nil, count: 23) { result in
                 let nft = result.nfts.randomElement()!
-                let url = useCollectionImage ? URL(string: nft.collection!.imageUrl!)! : URL(string: nft.previews!.imageMediumUrl!)!
+                let url: URL
+                if useCollectionImage, let collectionImageUrlString = nft.collection?.imageUrl {
+                    url = URL(string: collectionImageUrlString)!
+                } else {
+                    url = URL(string: nft.previews!.imageMediumUrl!)!
+                }
                 let data = try! Data(contentsOf: url)
                 let coverImage = NSImage(data: data)!
                 writeImage(coverImage, id: item.id)
                 print("did update image for \(item.name)")
-                rebundleImages(items: Array(items.dropFirst()), useCollectionImage: useCollectionImage)
+                rebundleImages(items: Array(items.dropFirst()), useCollectionImage: useCollectionImage, doNotSignal: doNotSignal)
             }
         } else {
             print("⚠️ will not get an image for \(item.name)")
-            rebundleImages(items: Array(items.dropFirst()), useCollectionImage: useCollectionImage)
+            rebundleImages(items: Array(items.dropFirst()), useCollectionImage: useCollectionImage, doNotSignal: doNotSignal)
         }
-    } else {
+    } else if !doNotSignal {
         semaphore.signal()
     }
 }
