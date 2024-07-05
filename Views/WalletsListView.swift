@@ -435,19 +435,26 @@ struct WalletsListView: View {
     }
     
     private func resolveEnsAndAddWallet() {
-        isWaiting = true
-        WalletsService.shared.resolveENS(newWalletAddress) { result in
-            if case .success(let response) = result {
-                if showAddWalletPopup {
-                    let wallet = WatchOnlyWallet(address: response.address, name: response.name, avatar: response.avatar, projectId: nil, chain: nil, collections: nil)
-                    addWallet(wallet, skipCollectionCheck: false)
+        guard WalletsService.shared.isEthAddress(newWalletAddress) else { return }
+        let knownSuggestedItems = SuggestedItemsService.suggestedItems(address: newWalletAddress)
+        if knownSuggestedItems.isEmpty {
+            isWaiting = true
+            WalletsService.shared.resolveENS(newWalletAddress) { result in
+                if case .success(let response) = result {
+                    if showAddWalletPopup {
+                        let wallet = WatchOnlyWallet(address: response.address, name: response.name, avatar: response.avatar, projectId: nil, chain: nil, collections: nil)
+                        addWallet(wallet, skipCollectionCheck: false)
+                    }
+                    showAddWalletPopup = false
+                    newWalletAddress = ""
+                    isWaiting = false
+                } else {
+                    isWaiting = false
                 }
-                showAddWalletPopup = false
-                newWalletAddress = ""
-                isWaiting = false
-            } else {
-                isWaiting = false
             }
+        } else {
+            // TODO: handle adding known suggested item
+            print(knownSuggestedItems.count)
         }
     }
     

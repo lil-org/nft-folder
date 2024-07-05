@@ -22,6 +22,12 @@ struct SuggestedItemsService {
         Defaults.suggestedItemsToHide = Array(toHide)
     }
     
+    static func suggestedItems(address: String) -> [SuggestedItem] {
+        let lowercased = address.lowercased()
+        guard !address.hasSuffix(".eth") else { return [] }
+        return allItems.filter { $0.address.lowercased() == lowercased }
+    }
+    
     static func bundledTokens(collectionId: String) -> BundledTokens? {
         if let url = bundle.url(forResource: "Tokens/" + collectionId, withExtension: "json"),
            let data = try? Data(contentsOf: url),
