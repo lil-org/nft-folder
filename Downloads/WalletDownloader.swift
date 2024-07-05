@@ -40,10 +40,12 @@ class WalletDownloader {
             let isComplete = bundledTokens.isComplete
             var tasks = [DownloadFileTask]()
             for item in bundledTokens.items.shuffled() {
+                let name: String?
                 let contentRepresentations: [ContentRepresentation]
                 if let url = item.url {
                     guard let content = ContentRepresentation(url: url, size: nil, mimeType: nil, knownKind: nil) else { continue }
                     contentRepresentations = [content]
+                    name = item.name
                 } else {
                     if let imageContent = ContentRepresentation(url: "https://media-proxy.artblocks.io/\(wallet.address)/\(item.id).png",
                                                                 size: nil, mimeType: nil, knownKind: .image) {
@@ -56,6 +58,14 @@ class WalletDownloader {
                         } else {
                             contentRepresentations = [imageContent]
                         }
+                        
+                        if let knownName = item.name {
+                            name = knownName
+                        } else if let projectId = wallet.projectId, item.id.hasPrefix(projectId) {
+                            name = collection.name + " #" + item.id.dropFirst(projectId.count).drop(while: { $0 == "0" })
+                        } else {
+                            name = nil
+                        }
                     } else {
                         continue
                     }
@@ -65,7 +75,7 @@ class WalletDownloader {
                     bundledTokensIdsWithAddresses.insert(item.id + wallet.address)
                 }
                 
-                let detailedMetadata = DetailedTokenMetadata(name: item.name, collectionName: collection.name, collectionAddress: wallet.address, tokenId: item.id, chain: wallet.chain, network: collection.network, tokenStandard: nil, contentRepresentations: contentRepresentations)
+                let detailedMetadata = DetailedTokenMetadata(name: name, collectionName: collection.name, collectionAddress: wallet.address, tokenId: item.id, chain: wallet.chain, network: collection.network, tokenStandard: nil, contentRepresentations: contentRepresentations)
                 guard !MetadataStorage.hasSomethingFor(detailedMetadata: detailedMetadata, addressDirectoryURL: walletRootDirectory) else { continue }
                 let minimalMetadata = MinimalTokenMetadata(tokenId: item.id, collectionAddress: wallet.address, chain: wallet.chain, network: collection.network)
                 let downloadTask = DownloadFileTask(walletRootDirectory: walletRootDirectory, minimalMetadata: minimalMetadata, detailedMetadata: detailedMetadata)
