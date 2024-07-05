@@ -45,15 +45,15 @@ let projects: [ProjectToBundle] = {
     return result
 }()
 
-func bundleSelected() {
+func bundleSelected(useCollectionImages: Bool) {
     let projectsToBundle = projects.filter { !bundledIds.contains($0.id) && selectedSet.contains($0.id) }
-    bundleProjects(projects: projectsToBundle)
+    bundleProjects(projects: projectsToBundle, useCollectionImages: useCollectionImages)
     semaphore.wait()
     let updatedSuggestedItemsData = try! encoder.encode(bundledSuggestedItems)
     try! updatedSuggestedItemsData.write(to: bundledSuggestedItemsUrl)
 }
 
-fileprivate func bundleProjects(projects: [ProjectToBundle]) {
+fileprivate func bundleProjects(projects: [ProjectToBundle], useCollectionImages: Bool) {
     if let project = projects.first {
         let suggestedItem = SuggestedItem(name: project.name,
                                           address: project.contractAddress,
@@ -68,26 +68,30 @@ fileprivate func bundleProjects(projects: [ProjectToBundle]) {
             let tokens = nfts.map { $0.toBundle }
             let bundledTokens = BundledTokens(isComplete: true, items: tokens)
             
-            let localImageName = try! FileManager.default.contentsOfDirectory(atPath: selectedPath + project.id).first(where: { !$0.hasPrefix(".") })!
-            let coverImageUrl = URL(fileURLWithPath: selectedPath + project.id + "/" + localImageName)
-            let rawImageData = try! Data(contentsOf: coverImageUrl)
-            
-            let coverImage: NSImage
-            if let image = NSImage(data: rawImageData) {
-                coverImage = image
+            if useCollectionImages {
+                rebundleImages(items: [suggestedItem], useCollectionImage: true)
             } else {
-                let anotherData = try! Data(contentsOf: URL(string: nfts.randomElement()!.previews!.imageMediumUrl!)!)
-                coverImage = NSImage(data: anotherData)!
+                let localImageName = try! FileManager.default.contentsOfDirectory(atPath: selectedPath + project.id).first(where: { !$0.hasPrefix(".") })!
+                let coverImageUrl = URL(fileURLWithPath: selectedPath + project.id + "/" + localImageName)
+                let rawImageData = try! Data(contentsOf: coverImageUrl)
+                
+                let coverImage: NSImage
+                if let image = NSImage(data: rawImageData) {
+                    coverImage = image
+                } else {
+                    let anotherData = try! Data(contentsOf: URL(string: nfts.randomElement()!.previews!.imageMediumUrl!)!)
+                    coverImage = NSImage(data: anotherData)!
+                }
+                
+                writeImage(coverImage, id: project.id)
             }
-            
-            writeImage(coverImage, id: project.id)
             
             let bundledTokensData = try! JSONEncoder().encode(bundledTokens)
             let jsonString = String(data: bundledTokensData, encoding: .utf8)!
             try! jsonString.write(to: URL(fileURLWithPath: dir + "/Suggested Items/Suggested.bundle/Tokens/\(project.id).json"), atomically: true, encoding: .utf8)
             print("✅ did add \(project.name)")
             
-            bundleProjects(projects: Array(projects.dropFirst()))
+            bundleProjects(projects: Array(projects.dropFirst()), useCollectionImages: useCollectionImages)
         }
         
     } else {

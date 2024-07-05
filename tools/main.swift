@@ -10,7 +10,7 @@ let fresh: [(String, Chain)] = ethCollections.split(separator: "\n").map { (Stri
 
 //prepareForSelection(input: fresh)
 
-//bundleSelected()
+//bundleSelected(useCollectionImages: true)
 
 //rebundleImages(onlyMissing: true, useCollectionImage: true)
 
