@@ -75,10 +75,14 @@ struct SimpleHash {
     private static func process(contracts: [(String, Chain)]) {
         if let (address, chain) = contracts.first {
             switch chain {
-            case .ethereum, .base, .optimism, .zora, .blast:
+            case .ethereum, .base, .optimism, .zora:
                 getAllCollections(chain: chain, contractAddress: String(address), next: nil, addTo: []) { collections in
-                    save(contract: address, collections: collections, chain: chain)
-                    process(contracts: Array(contracts.dropFirst()))
+                    if collections.isEmpty, let nextToTry = chain.nextToTry {
+                        process(contracts: [(address, nextToTry)] + Array(contracts.dropFirst()))
+                    } else {
+                        save(contract: address, collections: collections, chain: chain)
+                        process(contracts: Array(contracts.dropFirst()))
+                    }
                 }
             }
         } else {
