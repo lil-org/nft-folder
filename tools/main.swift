@@ -14,6 +14,6 @@ let fresh: [(String, Chain)] = ethCollections.split(separator: "\n").map { (Stri
 
 //rebundleImages(onlyMissing: true, useCollectionImage: true)
 
-// removeBundledItems("")
+//removeBundledItems("")
 
 print("🟢 all done")
