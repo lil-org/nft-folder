@@ -10,7 +10,7 @@ let fresh =
 
 //bundleSelected(useCollectionImages: true)
 
-//rebundleImages(onlyMissing: true, useCollectionImage: false)
+rebundleImages(onlyMissing: true, useCollectionImage: false)
 
 //removeBundledItems("")
 
