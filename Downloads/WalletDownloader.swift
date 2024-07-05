@@ -39,7 +39,7 @@ class WalletDownloader {
            let walletRootDirectory = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) {
             let isComplete = bundledTokens.isComplete
             var tasks = [DownloadFileTask]()
-            for item in bundledTokens.items {
+            for item in bundledTokens.items.shuffled() {
                 let contentRepresentations: [ContentRepresentation]
                 if let url = item.url {
                     guard let content = ContentRepresentation(url: url, size: nil, mimeType: nil, knownKind: nil) else { continue }
