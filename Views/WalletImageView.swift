@@ -6,13 +6,9 @@ import Combine
 struct WalletImageView: View {
     
     @State private var windowIsFocused: Bool = true
-    @StateObject private var avatarLoader: AvatarLoader
+    @StateObject private var avatarLoader = AvatarLoader()
+
     let wallet: WatchOnlyWallet
-    
-    init(wallet: WatchOnlyWallet) {
-        self.wallet = wallet
-        _avatarLoader = StateObject(wrappedValue: AvatarLoader(wallet: wallet))
-    }
     
     var body: some View {
         Group {
@@ -36,9 +32,13 @@ struct WalletImageView: View {
                 }
             }
         )
+        .onAppear {
+            avatarLoader.loadAvatar(wallet: wallet)
+        }
         .onChange(of: wallet) { newWallet in
             avatarLoader.loadAvatar(wallet: newWallet)
-        }.onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
+        }
+        .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
             windowIsFocused = true
         }
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.didResignActiveNotification)) { _ in
@@ -53,17 +53,20 @@ struct WalletImageView: View {
 }
 
 private class AvatarLoader: ObservableObject {
+    
     @Published var avatar: NSImage?
     
-    init(wallet: WatchOnlyWallet) {
-        loadAvatar(wallet: wallet)
-    }
-    
+    private var currentWalletId: String?
+
     func loadAvatar(wallet: WatchOnlyWallet) {
+        guard currentWalletId != wallet.id || avatar == nil else { return }
+        currentWalletId = wallet.id
         avatar = AvatarService.getAvatarImmediatelly(wallet: wallet)
         if avatar == nil {
-            AvatarService.getAvatar(wallet: wallet) { image in
-                self.avatar = image
+            AvatarService.getAvatar(wallet: wallet) { [weak self] image in
+                if self?.currentWalletId == wallet.id {
+                    self?.avatar = image
+                }
             }
         }
     }
