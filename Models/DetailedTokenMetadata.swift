@@ -19,7 +19,7 @@ extension DetailedTokenMetadata {
     
     var fileDisplayName: String {
         if let name = name, let collectionName = collectionName, name.localizedCaseInsensitiveContains(collectionName) {
-            return name
+            return name.replacingOccurrences(of: "/", with: "")
         } else {
             let collectionDisplayName: String
             if let collectionName = collectionName, !collectionName.isEmpty {
@@ -29,7 +29,7 @@ extension DetailedTokenMetadata {
             } else {
                 collectionDisplayName = String(collectionAddress.prefix(7))
             }
-            return "\(collectionDisplayName) - \(name ?? tokenId)".trimmingCharacters(in: ["."])
+            return "\(collectionDisplayName) - \(name ?? tokenId)".trimmingCharacters(in: ["."]).replacingOccurrences(of: "/", with: "")
         }
     }
     
