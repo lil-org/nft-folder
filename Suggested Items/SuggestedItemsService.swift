@@ -48,6 +48,7 @@ struct SuggestedItemsService {
             return []
         }
         let filtered = items.filter { !toHide.contains($0.id) }
+        print(filtered.count)
         return filtered
     }
     
