@@ -13,11 +13,12 @@ struct SuggestedItemsService {
         }
     }()
     
-    static var allItems = readSuggestedItems()
+    private static var allItems = [SuggestedItem]()
+    static var visibleItems = readSuggestedItems()
     static var toHide = Set(Defaults.suggestedItemsToHide)
     
     static func doNotSuggestAnymore(item: SuggestedItem) {
-        allItems.removeAll(where: { item.id == $0.id })
+        visibleItems.removeAll(where: { item.id == $0.id })
         toHide.insert(item.id)
         Defaults.suggestedItemsToHide = Array(toHide)
     }
@@ -43,17 +44,21 @@ struct SuggestedItemsService {
         let hiddenAndAddedByUser = Defaults.suggestedItemsToHide.filter { walletsIds.contains($0) }
         Defaults.suggestedItemsToHide = hiddenAndAddedByUser
         toHide = Set(hiddenAndAddedByUser)
-        allItems = readSuggestedItems()
-        return allItems
+        visibleItems = readSuggestedItems()
+        return visibleItems
     }
     
     private static func readSuggestedItems() -> [SuggestedItem] {
-        guard let url = bundle.url(forResource: "items", withExtension: "json"),
-              let data = try? Data(contentsOf: url),
-              let items = try? JSONDecoder().decode([SuggestedItem].self, from: data) else {
-            return []
+        if allItems.isEmpty {
+            guard let url = bundle.url(forResource: "items", withExtension: "json"),
+                  let data = try? Data(contentsOf: url),
+                  let items = try? JSONDecoder().decode([SuggestedItem].self, from: data) else {
+                return []
+            }
+            allItems = items
         }
-        let filtered = items.filter { !toHide.contains($0.id) }
+        
+        let filtered = allItems.filter { !toHide.contains($0.id) }
         return filtered
     }
     
