@@ -121,8 +121,9 @@ func hasImage(id: String) -> Bool {
     return hasDir && hasImage
 }
 
-func prepareForSelection(input: [(String, Chain)]) {
-    SimpleHash.previewCollections(input)
+func prepareForSelection(_ input: String) {
+    let fresh: [(String, Chain)] = input.split(separator: "\n\n").map { (String($0), .ethereum) }
+    SimpleHash.previewCollections(fresh)
     print("will download previews for \(projects.count) projects")
     processProjects(projects: projects)
     semaphore.wait()

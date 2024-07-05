@@ -75,7 +75,7 @@ struct SimpleHash {
     private static func process(contracts: [(String, Chain)]) {
         if let (address, chain) = contracts.first {
             switch chain {
-            case .ethereum, .base:
+            case .ethereum, .base, .optimism, .zora, .blast:
                 getAllCollections(chain: chain, contractAddress: String(address), next: nil, addTo: []) { collections in
                     save(contract: address, collections: collections, chain: chain)
                     process(contracts: Array(contracts.dropFirst()))
