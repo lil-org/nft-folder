@@ -17,9 +17,9 @@ struct FooterLink: Hashable {
     
     static let all = [
         FooterLink(url: URL(string: "https://g.lil.org")!, imageName: "github"),
-        FooterLink(url: URL(string: "https://x.ivan.org")!, imageName: "x"),
+        FooterLink(url: URL(string: "https://x.ivan.lol")!, imageName: "x"),
         FooterLink(url: URL(string: "https://mint.lil.org")!, imageName: nil),
-        FooterLink(url: URL(string: "https://f.ivan.org")!, imageName: "fc"),
+        FooterLink(url: URL(string: "https://f.ivan.lol")!, imageName: "fc"),
     ]
     
 }
