@@ -1,10 +1,13 @@
 // ∅ nft-folder 2024
 
 import Cocoa
+import Combine
 import SwiftUI
 import UniformTypeIdentifiers
 
 struct WalletsListView: View {
+    
+    private let uuid = UUID().uuidString
     
     @State private var isWaiting = false
     @State private var inPopup: Bool
@@ -19,6 +22,7 @@ struct WalletsListView: View {
     @State private var draggingIndex: Int? = nil
     @State private var currentDropDestination: Int? = nil
     @State private var showMorePreferences = false
+    @State private var cancellables = Set<AnyCancellable>()
     
     init(showAddWalletPopup: Bool, inPopup: Bool) {
         self.showAddWalletPopup = showAddWalletPopup
@@ -117,10 +121,7 @@ struct WalletsListView: View {
                         }
                     }
             }
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .downloadsStatusUpdate), perform: { _ in
-            self.updateDisplayedWallets()
-        }).sheet(isPresented: $showAddWalletPopup) {
+        }.sheet(isPresented: $showAddWalletPopup) {
             VStack {
                 Text(Strings.newFolder).fontWeight(.medium)
                 TextField(Strings.addressOrEns, text: $newWalletAddress)
@@ -169,11 +170,25 @@ struct WalletsListView: View {
                     }).keyboardShortcut(.defaultAction)
                 }
             }.frame(width: 230).padding()
-        }.onReceive(NotificationCenter.default.publisher(for: .walletsUpdate), perform: { _ in
-            self.updateDisplayedWallets()
-        }).onAppear() {
-            self.updateDisplayedWallets()
+        }.onAppear() {
+            NotificationCenter.default.publisher(for: .walletsUpdate)
+                .sink { _ in
+                    updateDisplayedWallets()
+                }
+                .store(in: &cancellables)
+            
+            NotificationCenter.default.publisher(for: .downloadsStatusUpdate)
+                .sink { _ in
+                    updateDisplayedWallets()
+                }
+                .store(in: &cancellables)
+            
+            updateDisplayedWallets()
             didAppear = true
+        }.onDisappear() {
+            cancellables.forEach { $0.cancel() }
+            cancellables.removeAll()
+            NotificationCenter.default.removeObserver(self)
         }
     }
     
