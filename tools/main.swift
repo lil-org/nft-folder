@@ -12,6 +12,6 @@ let fresh =
 
 rebundleImages(onlyMissing: true, useCollectionImage: false)
 
-//removeBundledItems("")
+removeBundledItem(name: "")
 
 print("🟢 all done")

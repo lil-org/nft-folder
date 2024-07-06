@@ -156,16 +156,37 @@ fileprivate func processProjects(projects: [ProjectToBundle]) {
     }
 }
 
-func removeBundledItems(_ idsString: String) {
-    let ids = idsString.split(separator: "\n\n")
+func removeBundledItems(batchIds: String) {
+    let ids = batchIds.split(separator: "\n\n")
     for id in ids {
-        bundledSuggestedItems.removeAll(where: { $0.id == id })
-        let tokensURL = URL(fileURLWithPath: dir + "/Suggested Items/Suggested.bundle/Tokens/\(id).json")
-        try! FileManager.default.removeItem(at: tokensURL)
-        let imagesetPath = dir + "/Suggested Items/Covers.xcassets/\(id).imageset"
-        try! FileManager.default.removeItem(atPath: imagesetPath)
-        print("did remove \(id)")
+        removeBundledItem(id: String(id))
     }
+    saveSuggestedItemsJson()
+}
+
+func removeBundledItem(name: String) {
+    guard !name.isEmpty else { return }
+    let idsToRemove = bundledSuggestedItems.filter { $0.name.localizedCaseInsensitiveContains(name) }.map { $0.id }
+    guard idsToRemove.count < 4 else {
+        print("hmm won't remove \(idsToRemove.count) items automatically")
+        return
+    }
+    for id in idsToRemove {
+        removeBundledItem(id: id)
+    }
+    saveSuggestedItemsJson()
+}
+
+fileprivate func removeBundledItem(id: String) {
+    bundledSuggestedItems.removeAll(where: { $0.id == id })
+    let tokensURL = URL(fileURLWithPath: dir + "/Suggested Items/Suggested.bundle/Tokens/\(id).json")
+    try! FileManager.default.removeItem(at: tokensURL)
+    let imagesetPath = dir + "/Suggested Items/Covers.xcassets/\(id).imageset"
+    try! FileManager.default.removeItem(atPath: imagesetPath)
+    print("did remove \(id)")
+}
+
+fileprivate func saveSuggestedItemsJson() {
     let updatedSuggestedItemsData = try! encoder.encode(bundledSuggestedItems)
     try! updatedSuggestedItemsData.write(to: bundledSuggestedItemsUrl)
 }
