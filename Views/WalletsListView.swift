@@ -183,6 +183,22 @@ struct WalletsListView: View {
                 }
                 .store(in: &cancellables)
             
+            NotificationCenter.default.publisher(for: .updateAnotherVisibleWalletsList)
+                .sink { notification in
+                    if let anotherId = notification.object as? String, anotherId != uuid {
+                        updateDisplayedWallets()
+                    }
+                }
+                .store(in: &cancellables)
+            
+            NotificationCenter.default.publisher(for: .updateAnotherVisibleSuggestions)
+                .sink { notification in
+                    if let anotherId = notification.object as? String, anotherId != uuid {
+                        suggestedItems = SuggestedItemsService.visibleItems
+                    }
+                }
+                .store(in: &cancellables)
+            
             updateDisplayedWallets()
             didAppear = true
         }.onDisappear() {
@@ -223,7 +239,8 @@ struct WalletsListView: View {
                     self.draggingIndex = index
                     return NSItemProvider(object: String(wallets[index].id) as NSString)
                 }
-                .onDrop(of: [UTType.text], delegate: WalletDropDelegate(wallets: $wallets,
+                .onDrop(of: [UTType.text], delegate: WalletDropDelegate(uuid: uuid,
+                                                                        wallets: $wallets,
                                                                         sourceIndex: $draggingIndex,
                                                                         destinationIndex: Binding.constant(IndexSet(integer: index)),
                                                                         currentDropDestination: $currentDropDestination))
@@ -314,6 +331,7 @@ struct WalletsListView: View {
     
     private func restoreHiddenItems() {
         suggestedItems = SuggestedItemsService.restoredSuggestedItems(usersWallets: wallets)
+        NotificationCenter.default.post(name: .updateAnotherVisibleSuggestions, object: uuid)
     }
     
     private func warnBeforeQuitting() {
@@ -440,6 +458,7 @@ struct WalletsListView: View {
     private func removeAndDoNotSuggestAnymore(item: SuggestedItem) {
         suggestedItems.removeAll(where: { item.id == $0.id })
         SuggestedItemsService.doNotSuggestAnymore(item: item)
+        NotificationCenter.default.post(name: .updateAnotherVisibleSuggestions, object: uuid)
     }
     
     private func addWallet(_ wallet: WatchOnlyWallet, skipCollectionCheck: Bool) {
@@ -488,6 +507,8 @@ struct WalletsListView: View {
 
 struct WalletDropDelegate: DropDelegate {
     
+    let uuid: String
+    
     @Binding var wallets: [WatchOnlyWallet]
     @Binding var sourceIndex: Int?
     @Binding var destinationIndex: IndexSet
@@ -498,6 +519,7 @@ struct WalletDropDelegate: DropDelegate {
         let finalDestination = source <= destination ? destination + 1 : destination
         wallets.move(fromOffsets: IndexSet(integer: source), toOffset: finalDestination)
         WalletsService.shared.updateWithWallets(wallets)
+        NotificationCenter.default.post(name: .updateAnotherVisibleWalletsList, object: uuid)
         return true
     }
     
