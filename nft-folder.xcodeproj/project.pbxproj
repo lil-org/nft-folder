@@ -195,6 +195,8 @@
 		2C60AAD02B8A4DE200F2C143 /* Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
 		2C622BB62BF3C1EA0003B932 /* translate */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = translate; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C622BB82BF3C1EA0003B932 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		2C657CD32C3A9EA600F64E9D /* untitled.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = untitled.html; sourceTree = "<group>"; };
+		2C657CD42C3A9F0800F64E9D /* p5.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = p5.min.js; sourceTree = "<group>"; };
 		2C672CB02BFCEFB500E57B21 /* IpfsUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IpfsUploader.swift; sourceTree = "<group>"; };
 		2C88D95C2C3872DD00009C25 /* RandomGradientShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomGradientShape.swift; sourceTree = "<group>"; };
 		2C8A42E92B1A272600BE4166 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
@@ -686,6 +688,8 @@
 				2C46599B2C308F86008CF97F /* main.swift */,
 				2C4659A12C30911C008CF97F /* Bundling.swift */,
 				2C3214322C33DF7C0050BBC1 /* SimpleHash.swift */,
+				2C657CD32C3A9EA600F64E9D /* untitled.html */,
+				2C657CD42C3A9F0800F64E9D /* p5.min.js */,
 				2CF15C972C3A9DD800E08495 /* ab.json */,
 			);
 			path = tools;
