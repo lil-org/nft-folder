@@ -614,6 +614,7 @@
 		2CE0B5E22B8686CE00B5BF4A /* FooterLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterLink.swift; sourceTree = "<group>"; };
 		2CE33D992B865CFB008473E1 /* AvatarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarService.swift; sourceTree = "<group>"; };
 		2CE9A7702BAD8ECD00579BF7 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		2CF15C972C3A9DD800E08495 /* ab.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ab.json; sourceTree = "<group>"; };
 		2CF4C49A2B7F567B000AB4A6 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		2CF4C49D2B7FB26C000AB4A6 /* DetailedTokenMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedTokenMetadata.swift; sourceTree = "<group>"; };
 		2CF4C49F2B7FCDDC000AB4A6 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
@@ -685,6 +686,7 @@
 				2C46599B2C308F86008CF97F /* main.swift */,
 				2C4659A12C30911C008CF97F /* Bundling.swift */,
 				2C3214322C33DF7C0050BBC1 /* SimpleHash.swift */,
+				2CF15C972C3A9DD800E08495 /* ab.json */,
 			);
 			path = tools;
 			sourceTree = "<group>";
