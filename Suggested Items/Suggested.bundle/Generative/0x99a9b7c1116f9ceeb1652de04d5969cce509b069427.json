@@ -1,0 +1,124 @@
+{
+  "contractAddress" : "0x99a9b7c1116f9ceeb1652de04d5969cce509b069",
+  "kind" : "p5js",
+  "projectId" : "427",
+  "script" : "let hash = tokenData.hash\r\n\r\nclass Random {\r\n\tconstructor() {\r\n\t\tthis.useA = false;\r\n\t\tlet sfc32 = function (uint128Hex) {\r\n\t\t\tlet a = parseInt(uint128Hex.substr(0, 8), 16);\r\n\t\t\tlet b = parseInt(uint128Hex.substr(8, 8), 16);\r\n\t\t\tlet c = parseInt(uint128Hex.substr(16, 8), 16);\r\n\t\t\tlet d = parseInt(uint128Hex.substr(24, 8), 16);\r\n\t\t\treturn function () {\r\n\t\t\t\ta |= 0;\r\n\t\t\t\tb |= 0;\r\n\t\t\t\tc |= 0;\r\n\t\t\t\td |= 0;\r\n\t\t\t\tlet t = (((a + b) | 0) + d) | 0;\r\n\t\t\t\td = (d + 1) | 0;\r\n\t\t\t\ta = b ^ (b >>> 9);\r\n\t\t\t\tb = (c + (c << 3)) | 0;\r\n\t\t\t\tc = (c << 21) | (c >>> 11);\r\n\t\t\t\tc = (c + t) | 0;\r\n\t\t\t\treturn (t >>> 0) \/ 4294967296;\r\n\t\t\t};\r\n\t\t};\r\n\t\t\/\/ seed prngA with first half of tokenData.hash\r\n\t\tthis.prngA = new sfc32(tokenData.hash.substr(2, 32));\r\n\t\t\/\/ seed prngB with second half of tokenData.hash\r\n\t\tthis.prngB = new sfc32(tokenData.hash.substr(34, 32));\r\n\t\tfor (let i = 0; i < 1e6; i += 2) {\r\n\t\t\tthis.prngA();\r\n\t\t\tthis.prngB();\r\n\t\t}\r\n\t}\r\n\r\n\t\/\/ random number between 0 (inclusive) and 1 (exclusive)\r\n\trandom_dec() {\r\n\t\tthis.useA = !this.useA;\r\n\t\treturn this.useA ? this.prngA() : this.prngB();\r\n\t}\r\n\r\n\t\/\/ random number between a (inclusive) and b (exclusive)\r\n\trandom_num(a, b) {\r\n\t\treturn a + (b - a) * this.random_dec();\r\n\t}\r\n\r\n\t\/\/ random integer between a (inclusive) and b (inclusive)\r\n\t\/\/ requires a < b for proper probability distribution\r\n\trandom_int(a, b) {\r\n\t\treturn Math.floor(this.random_num(a, b + 1));\r\n\t}\r\n\r\n\t\/\/ random value in an array of items\r\n\trandom_choice(list) {\r\n\t\treturn list[this.random_int(0, list.length - 1)];\r\n\t}\r\n}\r\n\r\nlet R = new Random();\r\n\r\nlet multi, indexArray, multiX, cP, r, g, b, colorPicker, toggle4, toggle5, noiseVal, density;\r\nlet rectangles = [];\r\nlet multiArray = [9, 12, 15, 18, 21];\r\nlet startingValue = 0;\r\nlet noiseScale = 0.02;\r\n\r\nlet cnv, paperGraph, drawingGraph, ctx;\r\n\r\nlet s, palettePicker, palettes, rBack, gBack, bBack, com;\r\n\r\nfunction setup() {\r\n\r\n\tnoiseSeed(R.random_int(0, 10000));\r\n\tlet canvasSize = min(round(windowWidth * 9 \/ 7), windowHeight);\r\n\tcnv = createCanvas(round(canvasSize * 7 \/ 9), canvasSize);\r\n\tpaperGraph = createGraphics(width, height);\r\n\tdrawingGraph = createGraphics(width, height);\r\n\ts = canvasSize \/ 900;\r\n\tpixelDensity(2);\r\n\tctx = cnv.drawingContext;\r\n\r\n\tlet palette1 = ['#ff7200', '#ff5e5e', '#140040', '#081F15', '#4D0269', '#DB7C00',\r\n\t\t\t\t\t\t '#4B94D8', '#155B9D', '#C268B6', '#1990FF'];\r\n\tlet palette2 = ['#dc0000'];\r\n\tlet palette3 = ['#000000'];\r\n\tlet palette4 = ['#FF0000', '#DB0000', '#A50000', '#B60000', '#920000', '#6D0000',\r\n\t\t\t\t\t\t '#490000', '#240000', '#000000', '#2B2B2B', '#575757'];\r\n\tlet palette5 = ['#005A00', '#016B59', '#005D0F', '#00601E', '#01632D', '#01653B',\r\n\t\t\t\t\t\t '#01684A'];\r\n\tlet palette6 = ['#642000', '#7E3310', '#90492D', '#A65D44', '#BC715A', '#CF7B54',\r\n\t\t\t\t\t\t '#481700'];\r\n\tlet palette7 = ['#006CAF', '#1760A6', '#2F549D', '#464893', '#5E3C8A', '#753181',\r\n\t\t\t\t\t\t '#8D2578', '#A4196E', '#BC0D65', '#D3015C'];\r\n\tlet palette8 = ['#5B00B0', '#6A0A9C', '#791389', '#881D75', '#972762', '#A6304E',\r\n\t\t\t\t\t\t '#B53A3B', '#C44427', '#D34D14', '#E25700', '#B00000', '#C62700'];\r\n\tlet palette9 = ['#DC0000', '#931E00', '#493C00', '#005A00', '#496500', '#927100',\r\n\t\t\t\t\t\t '#DB7C00', '#006249', '#006992', '#0071DB', '#B00000'];\r\n\tlet palette10 = ['#1800B5'];\r\n\tlet palette11 = ['#ff7200'];\r\n\tpalettes = [palette1, palette2, palette3, palette4, palette5, palette6, palette7,\r\n\t\t\t\t\tpalette8, palette9, palette10, palette11];\r\n\tpalettePicker = R.random_int(0, palettes.length - 1);\r\n\tcom = [\r\n\t\t[50, 25, 10, 10, 5, 5, 5, 5, 0, 250],\r\n\t\t[5, 5, 4, 5, 5, 3, 5, 5, 0, 250],\r\n\t\t[1, 1, 2, 5, 5, 3, 50, 5, 2, 250],\r\n\t\t[1, 1, 3, 8, 5, 3, 8, 5, 2, 400],\r\n\t\t[5, 5, 3, 50, 5, 3, 50, 5, 5, 250],\r\n\t\t[25, 25, 1, 2, 25, 1, 2, 25, 0, 250],\r\n\t\t[25, 25, 2, 10, 25, 4, 6, 25, 0, 250],\r\n\t\t[25, 25, 4, 6, 25, 2, 10, 25, 0, 250],\r\n\t\t[25, 25, 1, 2, 25, 2, 10, 25, 0, 250],\r\n\t\t[25, 25, 2, 10, 25, 1, 2, 25, 0, 250],\r\n\t\t[25, 25, 2, 10, 25, 2, 10, 25, 0, 250],\r\n\t\t[50, 50, 1, 5, 50, 1, 5, 50, 0, 150],\r\n\t\t[5, 5, 15, 20, 5, 15, 20, 5, 0, 200],\r\n\t\t[5, 5, 10, 15, 5, 20, 25, 5, 10, 250],\r\n\t\t[5, 5, 3, 8, 25, 3, 8, 25, 0, 250],\r\n\t\t[50, 50, 1, 3, 50, 1, 3, 50, 0, 250],\r\n\t\t[25, 5, 2, 4, 25, 4, 12, 25, 0, 150],\r\n\t\t[25, 25, 1, 1, 25, 3, 12, 25, 0, 200],\r\n\t\t[25, 25, 3, 10, 25, 1, 1, 25, 0, 200],\r\n\t\t[50, 50, 2, 6, 50, 1, 3, 50, 0, 150]\r\n\t];\r\n\tcP = R.random_int(0, com.length - 1);\r\n\tmulti = R.random_choice(multiArray);\r\n\tindexArray = multiArray.indexOf(multi);\r\n\tmultiX = (width - 100 * s) \/ multi;\r\n    density = R.random_num(7,10);\r\n\tfor (let i = 0; i < com[cP][9]; i++) {\r\n\t\trectangles[i] = new Rectangle();\r\n\t}\r\n\tbackground(255);\r\n\tlet backColor = ['#BDA491', '#D19D9D', '#AEAEE2', '#A5A5A5', '#CE9D8C', '#B395B0'];\r\n\tlet backPicker = R.random_int(0, backColor.length - 1);\r\n\trBack = red(backColor[backPicker]);\r\n\tgBack = green(backColor[backPicker]);\r\n\tbBack = blue(backColor[backPicker]);\r\n}\r\n\r\nfunction draw() {\r\n\tnoiseDetail(10, 0.85);\r\n\tnoiseScale *= s;\r\n\tfor (let y = 0; y < height; y += 1) {\r\n\t\tfor (let x = 0; x < width; x += 1) {\r\n\t\t\tnoiseVal = noise((x * noiseScale) \/ 3, y * noiseScale);\r\n\t\t\tpaperGraph.stroke(rBack, gBack, bBack, noiseVal * 100);\r\n            paperGraph.strokeWeight(1);\r\n\t\t\tpaperGraph.point(x, y);\r\n\t\t}\r\n\t}\r\n\r\n\tfor (let y = 0; y < height + 2; y += 1) {\r\n\t\tfor (let x = 0; x < width + 1; x += 1) {\r\n\t\t\tnoiseVal = constrain(noise((x * noiseScale) \/ 3, y * noiseScale), 0, 1.6);\r\n\t\t\tpaperGraph.stroke(255, noiseVal * 100);\r\n            paperGraph.strokeWeight(1);\r\n\t\t\tpaperGraph.point(x - 1, y - 2);\r\n\t\t}\r\n\t}\r\n\timage(paperGraph, 0, 0);\r\n\tnoiseDetail(4, 0.5);\r\n\tframe();\r\n\tpush();\r\n\ttranslate(width \/ 2, height \/ 2)\r\n\trectMode(CENTER);\r\n\tfor (let jj = 0; jj < 8; jj++) {\r\n\t\tstroke(180, 1 + jj * 10);\r\n\t\tnoFill()\r\n\t\tstrokeWeight(1 * s);\r\n\t\trect(0, 0, width - 5 + jj, height - 5 + jj, 4);\r\n\t}\r\n\tpop();\r\n\tnoLoop();\r\n\tnoStroke();\r\n\ttoggle5 = R.random_num(0, 15);\r\n\r\n\tlet composition = R.random_num(0, 23);\r\n  \r\n\tif (composition < 13) {\r\n\t\ttoggle4 = R.random_num(0, 4);\r\n\t\tif (toggle4 < 2) {\r\n\t\t\tgrid();\r\n\t\t}\r\n\t\tlet rectSize = R.random_int(3, 4);\r\n\t\tlet optionX = multi - rectSize;\r\n\t\tlet optionY = (indexArray + 2) * 4 + (4 - rectSize);\r\n\t\tfor (let h = 0; h < multi * multi \/ density; h++) {\r\n\t\t\tnoStroke();\r\n\t\t\ttransparentRect(\r\n\t\t\t\t50 * s + R.random_int(0, optionX) * multiX,\r\n\t\t\t\t50 * s + R.random_int(0, optionY) * multiX,\r\n\t\t\t\tR.random_int(1, rectSize) * multiX,\r\n\t\t\t\tR.random_int(1, rectSize) * multiX);\r\n\t\t}\r\n\t}\r\n\r\n\tif (composition < 14 && composition >= 13) {\r\n\t\tgrid();\r\n\t\tlet toggle1 = R.random_int(0, 2);\r\n\t\tlet randInFor = R.random_num(3, 12);\r\n\t\tfor (let sn = 0; sn < multi * multi \/ randInFor; sn++) {\r\n\t\t\tpickColor();\r\n\t\t\tstroke(r, g, b, 150);\r\n\t\t\tlet numX1 = int(R.random_num(0, multi));\r\n\t\t\tlet numY1 = int(R.random_num(0, (multi * 4 \/ 3)));\r\n\t\t\tlet numX2 = int(R.random_num(0, multi));\r\n\t\t\tlet numY2 = int(R.random_num(0, (multi * 4 \/ 3)));\r\n\t\t\tif (toggle1 === 0) {\r\n\t\t\t\tbLine(\r\n\t\t\t\t\t50 * s + numX1 * multiX,\r\n\t\t\t\t\t50 * s + numY1 * multiX,\r\n\t\t\t\t\tmultiX * 2,\r\n\t\t\t\t\tmultiX \/ 5,\r\n\t\t\t\t\t0)\r\n\t\t\t}\r\n\t\t\tif (toggle1 === 1) {\r\n\t\t\t\tbLine(\r\n\t\t\t\t\t50 * s + numX1 * multiX,\r\n\t\t\t\t\t50 * s + numY1 * multiX,\r\n\t\t\t\t\tmultiX * 2,\r\n\t\t\t\t\tmultiX \/ 5,\r\n\t\t\t\t\t1)\r\n\t\t\t}\r\n\t\t\tif (toggle1 === 2) {\r\n\t\t\t\tbLine(\r\n\t\t\t\t\t50 * s + numX1 * multiX,\r\n\t\t\t\t\t50 * s + numY1 * multiX,\r\n\t\t\t\t\tmultiX * 2,\r\n\t\t\t\t\tmultiX \/ 5,\r\n\t\t\t\t\t0)\r\n\t\t\t\tbLine(\r\n\t\t\t\t\t50 * s + numX2 * multiX,\r\n\t\t\t\t\t50 * s + numY2 * multiX,\r\n\t\t\t\t\tmultiX * 2,\r\n\t\t\t\t\tmultiX \/ 5,\r\n\t\t\t\t\t1)\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n\r\n\tif (composition >= 14 && composition < 22.5) {\r\n\t\tfor (let i = 0; i < rectangles.length; i++) {\r\n\t\t\trectangles[i].size();\r\n\t\t\trectangles[i].display();\r\n\t\t\tfor (let j = 0; j < rectangles.length; j++) {\r\n\t\t\t\tif (i !== j && rectangles[i].intersects(rectangles[j])) {\r\n\t\t\t\t\trectangles[j].delete();\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t\tfor (let i = 0; i < rectangles.length; i++) {\r\n\t\t\tif (rectangles[i].x === -1000) {\r\n\t\t\t\trectangles.splice(i, 1);\r\n\t\t\t\ti++;\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n\r\n\tif (composition >= 22.5) {\r\n\t\tmultiX = (width - 100 * s) \/ 9;\r\n\r\n\t\tfor (let rt = 0; rt < 8; rt++) {\r\n\t\t\tlet toggle1 = R.random_int(0, 1);\r\n\t\t\tif (toggle1 === 0) {\r\n\t\t\t\ttransparentRect(\r\n\t\t\t\t\t50 * s + rt * (multiX + 9.5 * s),\r\n\t\t\t\t\t50 * s,\r\n\t\t\t\t\tmultiX,\r\n\t\t\t\t\theight - 100 * s);\r\n\t\t\t}\r\n\t\t}\r\n\t\tfor (let rt = 0; rt < 10; rt++) {\r\n\t\t\tlet toggle2 = R.random_int(0, 1);\r\n\t\t\tif (toggle2 === 0) {\r\n\t\t\t\ttransparentRect(\r\n\t\t\t\t\t50 * s,\r\n\t\t\t\t\t50 * s + rt * (multiX + 14 * s),\r\n\t\t\t\t\twidth - 100 * s,\r\n\t\t\t\t\tmultiX + 6 * s);\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}\r\n\r\nfunction xLine(x1, y1, x2, y2, z, changingValue, additional) {\r\n\tlet length = dist(x1, y1, x2, y2);\r\n\tfor (let i = 0; i < length; i += additional * s) {\r\n\t\tlet x = lerp(x1, x2, i \/ length);\r\n\t\tlet y = lerp(y1, y2, i \/ length);\r\n\t\txPoint(x, y, z, changingValue);\r\n\t}\r\n}\r\n\r\nfunction xPoint(x, y, z, changingValue) {\r\n\tstartingValue += changingValue;\r\n\tlet weightValue = noise(startingValue);\r\n    noStroke();\r\n    ellipse(x, y, weightValue * z * s)\r\n}\r\n\r\nfunction grid() {\r\n\tfor (let gridY = 50 * s; gridY < height - 25 * s; gridY += multiX) {\r\n\t\tfill(150, 150, 150, R.random_num(0, 130));\r\n\t\txLine((50 - R.random_num(-5, 10)) * s, gridY,\r\n\t\t\t(width - 50 * s) + R.random_num(-5, 10) * s, gridY, 0.7, 0.1, 0.5);\r\n\t}\r\n\tfor (let gridX = 50 * s; gridX < width - 25 * s; gridX += multiX) {\r\n\t\tfill(150, 150, 150, R.random_num(0, 130));\r\n\t\txLine(gridX, (50 - R.random_num(-5, 10)) * s, gridX,\r\n\t\t\t(height - 50 * s) + R.random_num(-5, 10) * s, 0.7, 0.1, 0.5);\r\n\t}\r\n}\r\n\r\nfunction frame() {\r\n\tlet toggle3 = R.random_num(0, 3);\r\n\tif (toggle3 < 2) {\r\n      fill(150, 150, 150, 130);\r\n\t\txLine(50 * s, (50 - R.random_num(5, 15)) * s, 50 * s,\r\n\t\t\t(height - 50 * s) + R.random_num(5, 15) * s, 0.7, 0.1, 0.5);\r\n\t\txLine(width - 50 * s, (50 - R.random_num(5, 15)) * s, width - 50 * s,\r\n\t\t\t(height - 50 * s) + R.random_num(5, 15) * s, 0.7, 0.1, 0.5);\r\n\t\txLine((50 - R.random_num(5, 15)) * s, 50 * s,\r\n\t\t\t(width - 50 * s) + R.random_num(5, 15) * s, 50 * s, 0.7, 0.1, 0.5);\r\n\t\txLine((50 - R.random_num(5, 15)) * s, (height - 50 * s),\r\n\t\t\t(width - 50 * s) + R.random_num(5, 15) * s, (height - 50 * s), 0.7, 0.1, 0.5);\r\n\t}\r\n}\r\n\r\nfunction transparentRect(startX, startY, sizeX, sizeY) {\r\n\tpickColor();\r\n\tfill(r, g, b, 30);\r\n\trect(startX, startY, sizeX, sizeY);\r\n\tfill(r, g, b, 5);\r\n\txLine(startX, startY, startX, startY + sizeY, 4, 0.03, 0.5);\r\n\txLine(startX, startY, startX + sizeX, startY, 4, 0.03, 0.5);\r\n\txLine(startX + sizeX, startY, startX + sizeX, startY + sizeY, 4, 0.03, 0.5);\r\n\txLine(startX, startY + sizeY, startX + sizeX, startY + sizeY, 4, 0.03, 0.5);\r\n\tnoStroke();\r\n\tfor (let de = 0; de < 150; de++) {\r\n\t\tfill(r, g, b, R.random_num(1, 1.5));\r\n\t\tlet sMin = min(sizeX \/ 6, sizeY \/ 6);\r\n        noStroke();\r\n\t\trect(\r\n\t\t\tR.random_num(startX, startX + sizeX - sMin),\r\n\t\t\tR.random_num(startY, startY + sizeY - sMin),\r\n\t\t\tsMin,\r\n\t\t\tsMin,\r\n\t\t\tsMin * 0.3);\r\n      fill(r, g, b, 5);\r\n      ellipse(R.random_num(startX, startX + sizeX),\r\n\t\t\tR.random_num(startY, startY + sizeY),R.random_num(0.1,0.2) * s)\r\n\t}\r\n\r\n    startX = round(startX);\r\n    startY = round(startY);\r\n\tlet yOff = startX \/ width * s;\r\n\tfor (let y = startY; y < startY + sizeY; y += 1) {\r\n\t\tlet xOff = startY \/ height * s;\r\n\t\tfor (let x = startX; x < startX + sizeX; x += 1) {\r\n\t\t\tlet noiseOpacity = noise(xOff, yOff) * 105;\r\n\t\t\tstrokeWeight(1);\r\n\t\t\tstroke(r, g, b, noiseOpacity - 50);\r\n\t\t\tpoint(x, y);\r\n\t\t\txOff += 0.01 \/ s;\r\n\t\t}\r\n\t\tyOff += 0.0035 \/ s;\r\n\t}\r\n}\r\n\r\nclass Rectangle {\r\n\tconstructor() {\r\n\t\tthis.x = 50 * s + R.random_int(0, 700 \/ com[cP][0]) * com[cP][0] * s;\r\n\t\tthis.y = 50 * s + R.random_int(0, 900 \/ com[cP][1]) * com[cP][1] * s;\r\n\t\tthis.w = R.random_int(com[cP][2], com[cP][3]) * com[cP][4] * s;\r\n\t\tthis.h = R.random_int(com[cP][5], com[cP][6]) * com[cP][7] * s;\r\n\t}\r\n\r\n\tsize() {\r\n\t\tif (this.x + this.w - 0.5 > width - 49 * s ||\r\n\t\t\t this.y + this.h - 0.5 > height - 49 * s) {\r\n\t\t\tthis.x = -1000;\r\n\t\t\tthis.y = -1000;\r\n\t\t\tthis.h = 0;\r\n\t\t\tthis.w = 0;\r\n\t\t}\r\n\t}\r\n\r\n\tdisplay() {\r\n\t\ttransparentRect(this.x, this.y, this.w, this.h);\r\n\t}\r\n\r\n\tdelete() {\r\n\t\tthis.x = -1000;\r\n\t\tthis.y = -1000;\r\n\t\tthis.w = 0;\r\n\t\tthis.h = 0;\r\n\t}\r\n\r\n\tintersects(other) {\r\n\t\treturn this.x < other.x + other.w + com[cP][8] - 0.5 &&\r\n\t\t\t\t this.x + this.w + com[cP][8] - 0.5 > other.x &&\r\n\t\t\t\t this.y < other.y + other.h + com[cP][8] - 0.5 &&\r\n\t\t\t\t this.y + this.h + com[cP][8] - 0.5 > other.y;\r\n\r\n\t}\r\n}\r\n\r\nfunction brush(xPos, yPos) {\r\n\tlet maxR = 0.5 * s;\r\n\tfor (let ji = 0; ji < 8; ji++) {\r\n\t\tlet a = R.random_num(0, 2 * PI);\r\n\t\tlet rad = (sqrt(R.random_num(0, 1))) * maxR;\r\n\t\tlet x = rad * cos(a) + xPos;\r\n\t\tlet y = rad * sin(a) + yPos;\r\n        noStroke();\r\n        fill(r,g,b);\r\n        ellipse(x,y,R.random_num(0, 0.5) * s);\r\n\t}\r\n}\r\n\r\nfunction bLine(x, y, n, m, t) {\r\n\tlet xb, yb;\r\n\tlet toggle2 = t;\r\n\tlet amt = round(n \/ s);\r\n\tfor (let th = 0; th < (m + 0.1) \/ s; th++) {\r\n\t\tif (toggle2 === 0) {\r\n\t\t\txb = x + R.random_num(-0.5, 0.5) * s;\r\n\t\t\tyb = y + R.random_num(-1.5, 1.5) * s;\r\n\t\t\tfor (let h = 0; h < amt; h++) {\r\n\t\t\t\tbrush(xb + 5 * th * s, yb);\r\n\t\t\t\txb = xb + R.random_num(-0.08, 0.08) * s;\r\n\t\t\t\tyb = yb + s \/ 2;\r\n\t\t\t}\r\n\t\t}\r\n\t\tif (toggle2 === 1) {\r\n\t\t\txb = x + R.random_num(-1.5, 1.5) * s;\r\n\t\t\tyb = y + R.random_num(-0.5, 0.5) * s;\r\n\t\t\tfor (let h = 0; h < amt; h++) {\r\n\t\t\t\tbrush(xb, yb + 5 * th * s);\r\n\t\t\t\txb = xb + s \/ 2;\r\n\t\t\t\tyb = yb + R.random_num(-0.08, 0.08) * s;\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}\r\n\r\nfunction pickColor() {\r\n\tif (toggle5 < 5) {\r\n\t\tr = R.random_num(0, 200);\r\n\t\tg = R.random_num(0, 120);\r\n\t\tb = R.random_num(0, 120);\r\n\t}\r\n\r\n\tif (toggle5 < 7 && toggle5 >= 5) {\r\n\t\tr = R.random_num(0, 255);\r\n\t\tg = R.random_num(0, 100);\r\n\t\tb = 0;\r\n\t}\r\n\r\n\tif (toggle5 < 8 && toggle5 >= 7) {\r\n\t\tr = R.random_num(0, 100);\r\n\t\tg = R.random_num(0, 120);\r\n\t\tb = R.random_num(0, 200);\r\n\t}\r\n\r\n\tif (toggle5 < 9 && toggle5 >= 8) {\r\n\t\tr = R.random_num(0, 200);\r\n\t\tg = R.random_num(0, 120);\r\n\t\tb = R.random_num(0, 200);\r\n\t}\r\n\r\n\tif (toggle5 >= 9) {\r\n\t\tcolorPicker = R.random_int(0, palettes[palettePicker].length - 1);\r\n\t\tr = red(palettes[palettePicker][colorPicker]);\r\n\t\tg = green(palettes[palettePicker][colorPicker]);\r\n\t\tb = blue(palettes[palettePicker][colorPicker]);\r\n\t}\r\n\r\n\r\n}\r\n\r\nfunction keyTyped() {\r\n\tif (key === 's') {\r\n\t\tsaveCanvas('transparency', 'png');\r\n\t}\r\n}",
+  "tokens" : [
+    {
+      "hash" : "0xcf1c329b5ef049d81e0947c459f83872013c269c70580c3e5d59e85acb10ab32",
+      "id" : "427000021"
+    },
+    {
+      "hash" : "0xa398d0b49b55e3efff332c7d623fe0ad6ac76fe753bca13f03d562a17d03ca29",
+      "id" : "427000025"
+    },
+    {
+      "hash" : "0x248ab1fd8845f996c7174239124c1d6cf5393f8f7c6f705eb8a8f33834c6cef9",
+      "id" : "427000023"
+    },
+    {
+      "hash" : "0x0e6700d359a7a1455b126992e8f954d033f8f100a69675a342bbe8e36a9e499e",
+      "id" : "427000022"
+    },
+    {
+      "hash" : "0x073cd4f68a685e11d8b76175829d12b1e779dadcbc4013d4e01e237da002dc01",
+      "id" : "427000017"
+    },
+    {
+      "hash" : "0x37785cc71442e8c64d16c0ffa4a6562ddf208b181d5113f47846fc730cbcbf10",
+      "id" : "427000006"
+    },
+    {
+      "hash" : "0x690aa41dcfbb4812b09a35e55f5d0150ad45ce8d51dd27d94100b408959ada41",
+      "id" : "427000011"
+    },
+    {
+      "hash" : "0x932465745b949e7778f39318199292d2490392791097c76afea9621875b08e19",
+      "id" : "427000026"
+    },
+    {
+      "hash" : "0xa428c1908ef90dbd0bef791b05165f45deb2de0f493265498a93c25ba315067e",
+      "id" : "427000013"
+    },
+    {
+      "hash" : "0xac108bb8089531e3b27f9537c3d0380dafc712efb014838c3dca38cb8944c356",
+      "id" : "427000028"
+    },
+    {
+      "hash" : "0x5e57854ffff9cacba93760fd7501b85cd66da56b90eec791ad80cc50a838d03a",
+      "id" : "427000012"
+    },
+    {
+      "hash" : "0x8eda1b7810c040f86c5a38d5f3f918f0a78ad89dac8ae6402efc7490e6bc171a",
+      "id" : "427000027"
+    },
+    {
+      "hash" : "0xe18e9ef59449f87914cd512d15436091382257dc9941397269f55b98ec9c0f87",
+      "id" : "427000009"
+    },
+    {
+      "hash" : "0xe7f58ffc8cec2a225aa1579217253dc11d6f693693cfbb1101dcdebb5df147fa",
+      "id" : "427000007"
+    },
+    {
+      "hash" : "0xb13e2ff9d0799ff83094399151e4ef2587827bcf5014ed2a21563f51b235c8f7",
+      "id" : "427000004"
+    },
+    {
+      "hash" : "0x88285f3edbb25ab227a0508a9e92783272a512c73304cf3f24d60cb52c3a387f",
+      "id" : "427000005"
+    },
+    {
+      "hash" : "0x40ec43c455c89bf49be9e3103b7c8477b08191091888b5a75c45dfa636b7d072",
+      "id" : "427000014"
+    },
+    {
+      "hash" : "0xf6160cf4bdc895a509aec18c8b7a808d0c5f8b47b153d1990bc51ca1763b73ff",
+      "id" : "427000015"
+    },
+    {
+      "hash" : "0x13bc6cbc4d168731f1402b5095c3441b69c0c8b613c95efffd0837ae82f4fdd3",
+      "id" : "427000020"
+    },
+    {
+      "hash" : "0x0576c3bcb8f87622308a284c0b49966b70a921a96dd52bcceb939919b36e84a4",
+      "id" : "427000024"
+    },
+    {
+      "hash" : "0xff0d7bbe8e5f32470195222212c446bd6d24ad4eb03be22379862898412481b6",
+      "id" : "427000002"
+    },
+    {
+      "hash" : "0xef3312a8d1b6afea9b4e73715ac0b99fea45f98dafa86f665748c02cc2104240",
+      "id" : "427000001"
+    },
+    {
+      "hash" : "0x0e110cebd50901bd2dd90395624e883cec119dfe0b9ee012fd9f5ea2c23c9dd4",
+      "id" : "427000000"
+    },
+    {
+      "hash" : "0x406499dd318e81c8a4bc37f0bfbe07a4efd5713ce1e4560ec6461183af0d083a",
+      "id" : "427000003"
+    },
+    {
+      "hash" : "0x5094d8995ac1dbcd3fef2ec23afed93b4eb39a41b70ff6b7b4343f8d34182c5f",
+      "id" : "427000008"
+    },
+    {
+      "hash" : "0x2be99b6c9a72659bb6593e6ced0a1f264fcaf8a12ee3b2e42117c120f036fff9",
+      "id" : "427000016"
+    },
+    {
+      "hash" : "0xe681423e83342b869cb8d9cda6cbe622d4ed3b6d5e022eaf45bfb5149dd15dc9",
+      "id" : "427000018"
+    },
+    {
+      "hash" : "0x3a15431aa4397f748eeb43d60dab0b4523f4c7c058b3f4e2774b10d0ec9591d4",
+      "id" : "427000019"
+    },
+    {
+      "hash" : "0x50b4f5ec03b536ccc5821440bba8a9bc8b5fc58327c0b735f0b99a466ae4e88f",
+      "id" : "427000010"
+    }
+  ]
+}

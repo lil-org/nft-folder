@@ -1,0 +1,152 @@
+{
+  "contractAddress" : "0x9209070e1447018638e15b73dbee46bf085fcf5f",
+  "kind" : "js",
+  "projectId" : "35",
+  "script" : "!function(){\"use strict\";function e(e,t){let n=t.x-e.x,r=t.y-e.y,o=y(n**2+r**2);return[n\/o,r\/o]}function t(e){return e*e}function n(e,t,n,r){let o,l,a=0,i=Y\/t;O(e,Y\/2*3),D(e),F(e,n,0);for(let f=0;f<t;f++){let t=a,f=n;o=h(t)*f,l=m(t)*f,S(e,o,l),a+=i;let c=a,d=r;o=h(c)*d,l=m(c)*d,S(e,o,l),a+=i}}function r(e,t,n,r){let o=.5<r[2]?.02*n:n*r[3]*.3;D(e),F(e,0,-t),R(e,...b(o,.25*-Y),n,0),R(e,...b(o,.25*Y),0,t),R(e,...b(o,.75*Y),-n,0),R(e,...b(o,1.25*Y),0,-t)}function o(e,t){D(e),B(e,0,0,t)}function l(e,t,n,r,o,l){var a=Math.abs;const i=t.length,f=k([0,100],[2,1],.5),c=.06*r*g(f(i),1,2);let u,m=[],h=[],y=[];t.forEach((e=>y=y.concat(e.stars)));let x=s(l.random_skew_normal(11,2,-1));l.random_bool(.1)&&(x=s(l.random_skew_normal(15,3,-1)));let b=e.filter((e=>e.r>1.4*o&&(n?T(e,n):_(e,{x:r\/2,y:r\/2})<.425*r)&&!y.some((t=>_(e,t)<.01*r))));if(0===b.length)return[];u=b[l.random_weighted(b.map((e=>e.r**10)))],m.push(u),u.const=i;let w=0,E=0;for(;E<x&&300>w;){.2>l.random_dec()&&2<E&&(u=m[l.random_int(0,m.length-1)]),w++;const v=.03;let M=e.filter((e=>e!==u&&_(e,u)<c&&!y.some((t=>_(e,t)<.01*r))&&e.x>r*v&&e.x<r*(1-v)&&e.y>r*v&&e.y<r*(1-v)));for(;0<M.length;){function D(){M=M.filter((e=>e!==F))}let F=M.reduce(((e,t)=>1*e.r\/_(e,u)>1*t.r\/_(t,u)?e:t));if(h.some((e=>e.x1===u.x&&e.y1===u.y&&e.x2===F.x&&e.y2===F.y||e.x1===F.x&&e.y1===F.y&&e.x2===u.x&&e.y2===u.y))){D();continue}let[S,B]=I(u.x,u.y,F.x,F.y),[R,$]=[F.x,F.y];if(l.random_bool(.5)&&([R,$]=I(F.x,F.y,u.x,u.y)),!1!==h.some((e=>!1!==A(S,B,R,$,e.x1,e.y1,e.x2,e.y2)))){D();continue}if(t.some((e=>e.lines.some((e=>A(S,B,R,$,e.x1,e.y1,e.x2,e.y2)))))){D();continue}if(0<E){let L=h[h.length-1],O=d(L.y1-L.y2,L.x1-L.x2),G=p(u,F);if(a(O-G)<re*l.random_num(.1,.2)){D();continue}}if(h.some((e=>{let t,n,r;return u.x===e.x1&&u.y===e.y1?(t=u,n=F,r={x:e.x2,y:e.y2}):u.x===e.x2&&u.y===e.y2?(t=u,n=F,r={x:e.x1,y:e.y1}):F.x===e.x1&&F.y===e.y1?(t=F,n=u,r={x:e.x2,y:e.y2}):F.x===e.x2&&F.y===e.y2&&(t=F,n=u,r={x:e.x1,y:e.y1}),!!t&&a(P(n,t,r))<.06*re}))){D();continue}let q=t.some((e=>e.lines.some((e=>C(F.x,F.y,e.x1,e.y1,e.x2,e.y2)<.02*r)))),J=y.some((e=>C(e.x,e.y,S,B,R,$)<.02*r));if(!q&&!J){F.const=i,m.push(F),h.push({x1:u.x,y1:u.y,x2:F.x,y2:F.y,sign:l.random_bool()}),u=F,E++;break}D()}if(0===M.length)break}return{stars:m,lines:h}}function a(e,t,n,r,o){e.moveTo(t,n),e.lineTo(t,o),e.lineTo(r,o),e.lineTo(r,n),e.lineTo(t,n)}var i=Math.max,f=Math.min,c=Math.PI,d=Math.atan2,s=Math.round,u=Math.floor,m=Math.sin,h=Math.cos,y=Math.sqrt;class x{constructor(e){this.useA=!1;let t=e=>{let t=parseInt(e.substring(0,8),16),n=parseInt(e.substring(8,16),16),r=parseInt(e.substring(16,24),16),o=parseInt(e.substring(24,32),16);return()=>{t|=0,n|=0,r|=0,o|=0;let e=0|(0|t+n)+o;return o=0|o+1,t=n^n>>>9,n=0|r+(r<<3),r=r<<21|r>>>11,r=0|r+e,(e>>>0)\/4294967296}};this.prngA=t(e.hash.substring(2,34)),this.prngB=t(e.hash.substring(34,66));for(let e=0;1e6>e;e+=2)this.prngA(),this.prngB()}random_dec(){return this.useA=!this.useA,this.useA?this.prngA():this.prngB()}random_num(e,t){return e+(t-e)*this.random_dec()}random_int(e,t){return u(this.random_num(e,t+1))}random_bool(e=.5){return this.random_dec()<e}random_choice(e){return e[this.random_int(0,e.length-1)]}random_sign(e=.5){return this.random_dec()<e?-1:1}random_weighted(e){let t,n=e.reduce(((e,t)=>e+t)),r=this.random_dec()*n;for(t=0;t<e.length;t++){if(r<e[t])return t;r-=e[t]}return 0}random_skew_normal(e,t,n=0){const[r,o]=this.random_normals();if(0===n)return e+t*r;const l=n\/y(1+n*n),a=l*r+y(1-l*l)*o;return e+t*(0<=r?a:-a)}random_normals(){let e=0,t=0;for(;0===e;)e=this.random_dec();for(;0===t;)t=this.random_dec();const n=y(-2*Math.log(e)),r=2*c*t;return[n*h(r),n*m(r)]}}const _=(e,t)=>y((e.x-t.x)**2+(e.y-t.y)**2),g=(e,t,n)=>i(f(e,n),t),p=(e,t)=>d(t.y-e.y,t.x-e.x),b=(e,t,n=0,r=0)=>[n+e*h(t),r+e*m(t)],w=(e,t,n=0,r=0)=>[y((e-n)**2+(t-r)**2),d(t-r,e-n)],E=e=>e.length,v=(ie=0,e=>ie+=e),P=(e,t,n)=>{let r=(e.x-t.x)*(n.x-t.x)+(e.y-t.y)*(n.y-t.y),o=(e.x-t.x)*(n.y-t.y)-(n.x-t.x)*(e.y-t.y);return d(o,r)},k=(e,t,n)=>{function r(e,t){return n=>(n-e)\/(t-e)}function o(e,t){return n=>(1-n)*e+n*t}var l=Math.pow;let a=(e=e.map((e=>0>e?-l(-e,n):l(e,n))))[0],i=e[1],f=t[0],c=t[1];return i<a?(a=r(i,a),f=o(c,f)):(a=r(a,i),f=o(f,c)),e=>{let t=0>e?-l(-e,n):l(e,n);return f(a(t))}},M=(e,n=2,r)=>{e.forEach((e=>{e.r=y(t(e.x2-e.x1)+t(e.y2-e.y1))*n;let o=((e,n,r)=>{let o=.5*(n.x+r.x),l=.5*(n.y+r.y),a=-(r.y-n.y),i=r.x-n.x,f=y(t(a)+t(i));a\/=f,i\/=f;let c=y(t(o-n.x)+t(l-n.y))\/e;if(-1>c||1<c)return null;let d=e*y(1-t(c));return{c1:{x:o+a*d,y:l+i*d},c2:{x:o-a*d,y:l-i*d}}})(e.r,{x:e.x1,y:e.y1},{x:e.x2,y:e.y2});e.sign=void 0===r?e.sign:r,e.center=e.sign?o.c2:o.c1}))},A=(e,t,n,r,o,l,a,i)=>{if(e===n&&t===r||o===a&&l===i)return!1;let f=(i-l)*(n-e)-(a-o)*(r-t);if(0==f)return!1;let c=((a-o)*(t-l)-(i-l)*(e-o))\/f,d=((n-e)*(t-l)-(r-t)*(e-o))\/f;return!(0>c||1<c||0>d||1<d)&&[e+c*(n-e),t+c*(r-t)]},I=(e,t,n,r)=>{let o=d(r-t,n-e);return[e+.001*h(o),t+.001*m(o)]},T=(e,t)=>{let n=e.x,r=e.y,o=!1;for(let e=0,l=t.length-1;e<t.length;l=e++){let a=t[e][0],i=t[e][1],f=t[l][0],c=t[l][1];i>r!=c>r&&n<(f-a)*(r-i)\/(c-i)+a&&(o=!o)}return o},C=(e,t,n,r,o,l)=>{let a,i,f=o-n,c=l-r,d=f*f+c*c,s=-1;return 0!=d&&(s=((e-n)*f+(t-r)*c)\/d),0>s||1<s?1e6:(a=n+s*f,i=r+s*c,y((e-a)**2+(t-i)**2))},D=e=>e.beginPath(),F=(e,t,n)=>e.moveTo(t,n),S=(e,t,n)=>e.lineTo(t,n),B=(e,t,n,r,o=0,l=2*c,a=!1)=>e.arc(t,n,r,o,l,a),R=(e,t,n,r,o)=>e.quadraticCurveTo(t,n,r,o),$=e=>e.closePath(),q=e=>e.save(),J=e=>e.restore(),L=(e,t,n)=>e.translate(t,n),O=(e,t)=>e.rotate(t),G=(e,t)=>e.scale(t,t),W=e=>e.fill(),j=e=>e.stroke(),z=(e,t)=>e.fillStyle=t,H=(e,t)=>e.strokeStyle=t,N=(e,t=1)=>e.globalAlpha=t,K=(e,t,n)=>e.lineWidth=n*t,Q=(e,t=[])=>e.setLineDash(t),U=(e,t=0)=>{e.globalCompositeOperation=[\"source-over\",\"destination-out\"][t]},V=(e,t)=>e.createLinearGradient(t[0],t[1],t[2],t[3]),X=(e,t,n,r)=>e.addColorStop(t,`rgba(${(e=>{let t=parseInt(e.replace(\"#\",\"\"),16);return[t>>16,255&t>>8,255&t]})(n)},${r})`),Y=c,Z=2*Y,ee=(e,t,l,a,i)=>{let f=t.r*l,c=f\/l;f*=t.incr;let d=t.x*l,s=t.y*l,m=t.rot,h=t.probs;q(e),L(e,d,s),0===a?o(e,f):1===a?7<c?n(e,4,2.5*f,.8*f):3<c?(O(e,m),n(e,5,1.75*f,.9*f)):1.75>c?o(e,f):.2>h[0]?(O(e,m),n(e,5,1.75*f,.9*f)):.4>h[0]?n(e,4,1.75*f,.8*f):o(e,f):2===a?.8<h[0]||4<c?7<c||.5<h[1]&&2<c?r(e,3*f,2*f,h):r(e,2*f,2*f,h):o(e,f):3==a&&(O(e,m),((e,t,n,r)=>{let o=0<r?r:u(4*n)+3;t*=((e,t)=>{let n=e[0],r=e[1],o=t[0],l=t[1];return e=>(e-n)\/(r-n)*(l-o)+o})([3,6],[1.8,1.2])(o),D(e),F(e,...b(t,0));for(let n=1;n<o;n++)S(e,...b(t,n*Z\/o))})(e,f,h[0],i)),$(e),J(e)},te=c,ne=(e,t,n,r=1)=>{let o=t.type,l=t.x*n,a=t.y*n,i=t.r*n*r;q(e),L(e,l,a),D(e),0===o?e.rect(-i,-i,2*i,2*i):1===o||2===o?B(e,0,0,1.2*i):3===o&&e.ellipse(0,0,1.5*i,.7*i,.2*te,0,2*te),$(e),J(e)},re=c,{sqrt:oe}=Math,le=(e,t,n)=>e[0]*t+e[1]*n,ae=[[1,1,0],[-1,1,0],[1,-1,0],[-1,-1,0],[1,0,1],[-1,0,1],[1,0,-1],[-1,0,-1],[0,1,1],[0,-1,1],[0,1,-1],[0,-1,-1]];var ie;class fe{constructor(e){this.p=[...Array(256)].map((()=>~~(256*e.random_dec()))),this.pm=[...this.p,...this.p]}noise(e,t){const n=this.pm;var r,o,l=(e+t)*(.5*(oe(3)-1)),a=~~(e+l),i=~~(t+l),f=(3-oe(3))\/6,c=(a+i)*f,d=e-(a-c),s=t-(i-c);d>s?(r=1,o=0):(r=0,o=1);var u=d-r+f,m=s-o+f,h=d-1+2*f,y=s-1+2*f,x=255&a,_=255&i,g=n[x+n[_]]%12,p=n[x+r+n[_+o]]%12,b=n[x+1+n[_+1]]%12,w=.5-d*d-s*s,E=.5-u*u-m*m,v=.5-h*h-y*y;return 70*((0>w?0:(w*=w)*w*le(ae[g],d,s))+(0>E?0:(E*=E)*E*le(ae[p],u,m))+(0>v?0:(v*=v)*v*le(ae[b],h,y)))}}const ce=2*c,de=(e,t,n,r,o,l=1)=>{let a=0,i=r,f=1;for(let r=0;r<l;r++)a+=e.noise(t*i+o[0],n*i+o[1])*f,i*=2,f*=.5;return a},se=2*c,ue=e=>{let t=.00175*e,n=1.5*t,r=[];for(let e=0;10>e;e++){let o=(e-1)%3,l=u((e-1)\/3),i=new Path2D;i.rect(-n,-n,2*n,2*n),0<e&&a(i,o*t-n,l*t-n,(o+1)*t-n,(l+1)*t-n),r.push(i)}return[r,.0025*se]},me=e=>{let t=.0019*e,n=1.5*t,r=[],o=[[0,0],[1,0],[2,1],[1,2],[0,1],[1,1],[1,0],[2,1],[1,2],[0,1]];for(let e,l=0;10>l;l++)e=new Path2D,0<l&&e.arc(-n+(o[l][0]+.5)*t,-n+(o[l][1]+.5)*t,t\/2,0,se,!0),5<l&&(e.moveTo(0,0),e.arc(0,0,t\/2,0,se,!0)),e.arc(0,0,n,0,se),r.push(e);return[r,.0025*se]},he=e=>{let t=.0011*e,n=2.5*t,r=[];return[[[0,0,5,1],[4,0,1,5],[0,4,5,1],[0,0,1,5]],[[0,0,3,1],[2,0,1,3],[0,4,5,1]],[[0,0,5,1],[4,0,1,3],[0,2,5,1],[0,4,5,1]],[[0,0,5,1],[4,0,1,5],[0,2,3,1],[0,4,5,1]],[[0,0,1,3],[0,2,3,1],[4,0,1,5]],[[0,0,5,1],[0,0,1,3],[0,2,5,1],[0,4,5,1]],[[0,0,5,1],[4,3,1,2],[0,4,5,1],[0,3,1,2],[0,2,5,1]],[[0,0,5,1],[4,2,1,3]],[[0,0,5,1],[0,4,5,1],[0,2,5,1]],[[0,0,5,1],[0,0,1,3],[4,0,1,3],[0,2,5,1],[0,4,5,1]]].forEach((e=>{let o=new Path2D;e.forEach((e=>{o.rect(-n+e[0]*t,-n+e[1]*t,e[2]*t,e[3]*t)})),r.push(o)})),[r,.0027*se]},ye=(e,t,n,r,o)=>{let l=t;3===t&&(l=r.random_int(0,2));let a=[];const c=r.random_int(4,6);for(let e=0;e<c;e++){let t;t=0===l?n-e\/(c-1)*n+n*r.random_num(-.3,.3):1===l?e\/(c-1)*n+n*r.random_num(-.3,.3):r.random_num(.3,.7)*n,a.push({x:t,y:e\/(c-1)*n})}let d,s;for(D(e),F(e,a[0].x,a[0].y),d=0;d<a.length-2;d++){let t=a[d],n=a[d+1],r=(t.x+n.x)\/2,o=(t.y+n.y)\/2;R(e,a[d].x,a[d].y,r,o)}R(e,a[d].x,a[d].y,a[d+1].x,a[d+1].y),r.random_bool()?(S(e,0,n),S(e,0,0),s=0,a.forEach((e=>{e.x>s&&(s=e.x)})),s=[0,f(n,s)]):(S(e,n,n),S(e,n,0),s=n,a.forEach((e=>{e.x<s&&(s=e.x)})),s=[i(0,s),n]),$(e);let u=r.random_bool()?[0,n]:[n,0],m=[r.random_num(s[0],s[1]),u[0],r.random_num(s[0],s[1]),u[1]],h=V(e,m);X(h,0,r.random_choice(o),0),X(h,1,r.random_choice(o),.8),z(e,h),N(e,.4),W(e),N(e)};var xe=t=>{function n(e,t,n,r,l){let a=Pe||ke;z(e,ke),H(e,ke),U(e,1),n.forEach((n=>{let o=f(6,i(1*n.r,4));K(e,t,n.fill?o:o+1),ee(e,n,t,r,l),W(e),j(e)})),U(e),K(e,t,2),n.forEach((n=>{let i=ke;le.random_bool(.1)&&(i=le.random_choice(a)),z(e,i),H(e,i),ee(e,n,t,r,l),n.fill?(W(e),7<n.r&&(H(e,ke),o(e,n.x,n.y,n.r*n.incr*1.7,t,!1))):j(e)}))}function r(){let e=document.createElement(\"canvas\"),t=e.getContext(\"2d\");return[e,t]}function o(e,t,n,r,o,l=!0){D(e),B(e,t*o,n*o,r*o),l?W(e):j(e)}function a(e,t,n){D(e),F(e,t.x1*n,t.y1*n),t.center?((e,t,n)=>{let r=t.center,o=d(t.y1-r.y,t.x1-r.x),l=d(t.y2-r.y,t.x2-r.x);B(e,r.x*n,r.y*n,t.r*n,o,l,t.sign)})(e,t,n):S(e,t.x2*n,t.y2*n),j(e)}function u(e,t,n,r,o=!1,l=0){let a=[];for(let i,f=0;f<t+1;f++){i=(o?I-I\/t*f:I\/t*f)-P\/2,i-=l;let c=b(r*n*1.025,i,n\/2,n\/2);0==f?F(e,...c):S(e,...c),a.push(c)}return a}function g(e,t,n,r=!1){let o;return 1===t?o=u(e,4,n,C,r):2===t?o=u(e,6,n,C,r):3===t?o=u(e,4,n,1.3*C,r,Oe):B(e,n\/2,n\/2,C*n,0,I,r),o}function p(e){return e.toString().split(\"\").map(Number)}const P=c,I=2*P,T=2e3,C=.425;let Y,te,re,oe,le=new x(t),[ae,ie,se,xe,_e,ge,pe,be,we,Ee,ve]=(()=>{let e,t=le.random_weighted([2,2,2,2]);e=0===t?[0,1]:1===t?[2,6]:2===t?[7,14]:[15,17];let n=le.random_int(...e),r=le.random_weighted([2,1,1.5,.5]),o=le.random_bool(3===t?.03:.015),l=[0,1,2][le.random_weighted([2===t?0:1,10,8])],a=le.random_int(0,1);0===l&&(a=2);let i=le.random_weighted([4,.5,1,2]),f=le.random_weighted([4,1]);(0===l||1===i||2===t)&&(f=0);let c=le.random_weighted([.3,.6,.1]),d=le.random_weighted([.3,.2,.1]);return 0===i&&.3>le.random_dec()&&(d=3),[t,n,r,o,l,a,i,f,c,d,le.random_bool(.2)]})(),[Pe,ke,Me,Ae,Ie,Te,Ce,De,Fe,Se,Be,Re]=((e,t)=>{const n=\"#131313\",r=\"#F6416C\";let o,l,a,i,f,c,d,s,u,m,h,y,x;return a=\"#fdfbf9\",m=i=f=c=s=d=u=a,0===e?(h=[n,n],y=[\"#565656\",\"#000000\"],f=i=\"#dedede\",m=r,t.random_bool(.3)&&(d=u=r)):1===e?(a=n,h=[\"#fdfbf9\",\"#fdfbf9\"],y=[\"#ffffff\",\"#d4dbde\"],u=s=i=n,f=i=\"#677074\",c=a,d=f,m=r,t.random_bool(.3)&&(l=[r],d=i=\"#04aeab\")):2===e?(l=[\"#efbb0d\"],h=[\"#3782fb\",\"#1f137c\"],y=[\"#2c9ff2\",\"#010052\"],f=\"#c6e8f6\",d=i=m=l[0]):3===e?(h=[\"#49d09e\",\"#01a5a7\"],y=[\"#8dddc0\",\"#07b3b6\"],x=[\"#49d0c7\",h[1]],f=i=\"#d2efe0\",d=\"#9edcdc\",m=\"#f9d14e\"):4===e?(h=[\"#FFF886\",\"#F072B6\"],y=[\"#fcf8ac\",\"#ed4aa1\"],f=\"#f5dbe9\",x=[f,y[1]],d=i=m=\"#fad0b2\"):5===e?(h=[\"#FFF6B7\",r],y=h,f=\"#fbdfda\",x=[f,y[1]],d=i=m=\"#faddb2\"):6===e?(h=[\"#5ff1fc\",\"#736EFE\"],y=[\"#8981f8\",\"#3029ff\"],d=c=i=m=h[0],f=\"#a6e9f2\",x=[f,y[1]]):7<=e&&11>=e?(t.random_bool(.3)&&(l=[\"#fdfbf9\"]),o=[\"#90dae1\",\"#f28e76\",\"#f6d36a\",\"#f5a8e2\",\"#50f1ae\"][e-7],h=[o,o],y=h,a=f=s=n):12<=e&&14>=e?(o=[\"#28b2ca\",\"#ff5937\",\"#9d7ad2\"][e-12],h=[o,o],y=h):15===e?(l=[\"#18acab\",\"#f0ac3f\",\"#e31f4f\",\"#ebe8e1\",\"#ea7d81\"],h=[n,n],y=[\"#26265a\",n],c=f=l[0],d=l[4],a=s=l[3],u=m=l[1],i=l[2]):16===e?(l=[\"#09217f\",\"#17c3b2\",\"#ffcb77\",\"#fe6d73\"],h=[\"#fdfbf9\",\"#fef9ef\"],y=[\"#ffffff\",\"#fee6be\"],c=l[1],d=u=l[2],s=f=l[3],a=l[0],i=m=l[3]):17===e&&(l=[\"#ef476f\",\"#ffd166\",\"#06d6a0\",\"#118ab2\",\"#073b4c\",\"#fbfbfb\"],h=[n,n],y=[\"#073b4c\",n],c=l[0],d=u=m=l[1],f=l[2],i=l[3]),x=y,[l,a,i,f,c,d,s,u,h,y,m,x]})(ie,le),$e=3===se?[0,3,6][le.random_weighted([10,1,1])]:0,qe=le.random_bool();const Je=0;let Le=new Path2D;const Oe=3===pe?P\/4:0;let Ge=g(Le,pe,T);const We=Ge?E(Ge)-1:0,je=0,ze=0,He=1,Ne=2,Ke=3;let Qe=((e,t,n,r)=>{let o=10*s(t.random_int(3e3,3500)\/10);const l=k([-2,6],[26,1],.7);let a=[];do{let e=t.random_skew_normal(8.5,1.5,0);if(6<e)continue;let o=l(e);a.push({id:a.length,x:t.random_num(0,2e3),y:t.random_num(0,2e3),r:o,a:t.random_num(.5,1),rot:t.random_dec()*Z,probs:[0,0,0,0,0,0].map((()=>t.random_dec())),incr:n?t.random_num(1,4):1,fill:r||2>o||t.random_bool()})}while(a.length<o);return a.sort(((e,t)=>e.r-t.r)),a})(0,le,xe,qe),Ue=((e,t,n,r)=>{let o,a=[],i=e.filter((e=>e.r>2.2)),f=0;do{let e=l(i,a,t,2e3,2.2,r);if(0===e.length)break;e.id=a.length,a.push(e),o=e.stars,i=i.filter((e=>!o.includes(e))),f++}while(0<i.length&&0<o.length&&400>f);a=a.filter((e=>1<e.stars.length));let c=[];return a.forEach((e=>{1===e.lines.length&&c.push(e.id)})),4<c.length&&(c=c.slice(4,c.length),a=a.filter((e=>!c.includes(e.id)))),a})(Qe,Ge,0,le),Ve=((e,t)=>{let n=t.random_int(15,25),r=[];for(let o=0;o<n;o++){let n=t.random_weighted([1,.75,.75,1.5]),o=t.random_int(0,3);3===n&&(o=t.random_choice([1,3]));let l,a,i,f=0;do{l=t.random_num(0,e),a=t.random_num(0,e),i=!1,r.forEach((e=>{y((l-e.x)**2+(a-e.y)**2)<40&&(i=!0)})),f++}while(i&&100>f);r.push({id:r.length,num:t.random_int(10,100),type:n,x:l,y:a,r:9.5,corner:o})}return r})(T,le),Xe=((t,n,r)=>{function o(t){let n=(t=>{const n=t.length;let r=[];for(let o=0;o<n-1;o++)r.push(e(t[o],t[o+1]));return r})(t);const o=Array.from([0,0,0],(()=>r.random_int(0,1e3)));for(let e=0;e<t.length-1;e++){let r=t[e],l=de(a,r.x,r.y,.001,o,3);l*=100;let i=n[e][1]*l,f=n[e][0]*l;r.x-=i,r.y+=f}t.pop()}function l(e,t,r){let l=[];for(let o=0;o<i;o++){let a=e.center.x+t[0],i=e.center.y+t[1],f=e.r*r,c=a+f*h(o\/1079*ce),d=i+f*m(o\/1079*ce);c<-.1*n||c>1.1*n||d<-.1*n||d>1.1*n||l.push({x:c,y:d})}return o(l),l}if(0===t)return[];let a=new fe(r);const i=1080;let f,c,d;do{f=[];let e=[r.random_num(-1.5,1.5),r.random_num(.2,.8)*n];d={x1:-.1*n,y1:-.1*e[0]*n+e[1],x2:1.1*n,y2:1.1*e[0]*n+e[1]},M([d],.9);for(let e=0;e<i;e++){let t=d.center,r=d.r,o=t.x+r*h(e\/1079*ce),l=t.y+r*m(e\/1079*ce);o<-.1*n||o>1.1*n||l<-.1*n||l>1.1*n||f.push({x:o,y:l})}let t=0;f.forEach((e=>{y((e.x-n\/2)**2+(e.y-n\/2)**2)<.7*n\/2&&t++})),c=t\/f.length,t++}while(.25>c);o(f);let s=Array.from([0,0],(()=>r.random_num(-.1,.1)*d.r)),u=l(d,s,.98),x=[f.concat(u.reverse())];for(let e=1;e<t;e++){let e=l(d,[0,0],1.02),t=Array.from([0,0],(()=>r.random_num(-.1,.1)*d.r)),n=l(d,t,1.03);x.push(e.concat(n.reverse()))}return x})(_e,T,le),Ye={};Ye.Stars=Qe.length,Ye.Constellations=Ue.length,Ye[\"Deep Sky Objects\"]=Ve.length,console.table(Ye);let[Ze,et]=r(),[tt,nt]=r();return(e,r,l)=>{Ze.width=Ze.height=tt.width=tt.height=r,e.lineJoin=et.lineJoin=\"bevel\",te=r\/2,Y=r*C,le=new x(t),Le=new Path2D,Ge=g(Le,pe,r),Ge&&Ge.forEach((e=>{e[0]-=te,e[1]-=te})),we===je?[re,oe]=he(r):1===we?[re,oe]=ue(r):2===we&&([re,oe]=me(r));let f=((e,t,n)=>{let r=V(e,t);return n.forEach(((e,t)=>{r.addColorStop(t\/n.length,e)})),r})(e,[0,0,r,r],Fe);if(z(e,f),e.fillRect(0,0,r,r),2!==ae){let t=le.random_int(2,8);const n=le.random_int(0,3);for(let o=0;o<t;o++)ye(e,n,r,le,Se);le.random_bool(.5)&&((e,t,n,r,o)=>{let l=n.random_int(100,150);N(e,.3);for(let a=0;a<l;a++){let l=n.random_int(0,t),a=n.random_int(0,t),i=n.random_int(300,700)*o,f=e.createRadialGradient(l,a,0,l,a,i);X(f,0,n.random_choice(r),n.random_num(.1,.6)),X(f,1,n.random_choice(r),0),z(e,f),D(e),B(e,l,a,i),W(e)}N(e)})(e,r,le,Re,l)}q(et),et.clip(Le),((e,t,n)=>{function r(e){let t=(180-(90-e))*P\/180;return m(t)\/(1-h(t))*Y}H(e,Ce),N(e,.2),K(e,t,2),D(e);let o=[75,60,45,30,15,0,-15,-30];const l=E(o);for(let t,n=0;n<l;n++)t=r(o[n]),F(e,te+(a=t),te),B(e,te,te,a);var a;for(let t=0;t<12;t++)q(e),L(e,te,te),O(e,t\/12*I),F(e,0<=[0,3,6,9].indexOf(t)?0:r(o[0]),0),S(e,n,0),J(e);j(e),N(e)})(et,l,r),((e,t)=>{let n={x1:1e3,y1:1e3*(1-2*C),x2:1e3,y2:1850};M([n],le.random_num(.505,.6),!1),N(e,Te===ke?.6:1),K(e,t,7),H(e,Te),Q(e,[2*t,4*t]),D(e),B(e,n.center.x*t,n.center.y*t,n.r*t),j(e),Q(e),N(e)})(et,l),J(et),0<_e&&((e,t,n)=>{let r=Ie===ke?[.1,.6,.7]:[.3,1,.9];H(et,Ie),z(et,Ie),z(nt,Ie);let l=[];t.forEach((e=>{let t=new Path2D;t.moveTo(e[0].x*n,e[0].y*n),e.forEach((e=>{t.lineTo(e.x*n,e.y*n)})),l.push(t)})),l.forEach((e=>nt.fill(e))),N(e,r[0]),e.drawImage(tt,0,0),N(e),N(et),U(et,1),l.forEach((e=>et.fill(e))),U(et);let a=Ie===ke?5:8;K(et,n,1<_e?a:a\/2),N(et,r[1]),l.forEach((e=>et.stroke(e))),1<_e&&(N(et),U(et,1),l.forEach((e=>et.fill(e))),U(et)),N(et,r[2]);let f=T\/(0===ge?250:325);for(let e=0;e<T;e+=f)for(let t=0;t<T;t+=f){let r=e,a=t,f=1.75;if(1===ge){let e=b(le.random_num(0,5),le.random_num(0,I));r+=e[0],a+=e[1],f=i(.8,le.random_skew_normal(1.5,.4,-2))}l.some((e=>et.isPointInPath(e,r*n,a*n)))&&o(et,r,a,f,n)}N(et)})(e,Xe,l),n(et,l,Qe.filter((e=>!e.const)),se,$e),function(e,t,n,r){function o(e){let t,n=e.corner,o=.009*r;return e.type===l&&(o=.007*r),t=0===n?[-o,-o]:1===n?[o,-o]:2===n?[o,o]:[-o,o],t}const l=3;q(e),e.lineJoin=\"miter\";let a=we===je?.8:.7;z(e,Me),H(e,Me),U(e,1),K(e,n,10),t.forEach((t=>{ne(e,t,n),W(e),j(e),((t,l=1)=>{let a=o(t),i=oe*l*Y,f=p(t.num),c=E(f)*i*1.75,d=-c\/2,s=.01*r,u=-s\/2;q(e),L(e,t.x*n,t.y*n),L(e,...a),G(e,l),D(e),e.rect(d,u,c,s),J(e)})(t,a),W(e)})),U(e),t.forEach((t=>{let r=3;2===t.type&&(Q(e,[3.5*n,3*n]),r=3.5),K(e,n,r),ne(e,t,n),j(e),Q(e),t.type!==l&&(K(e,n,2.5),ne(e,t,n,.45),j(e)),((t,r=1)=>{let l=oe*r*Y,a=p(t.num),i=o(t);a.forEach(((o,f)=>{q(e),L(e,t.x*n,t.y*n),L(e,...i),L(e,-(E(a)-1)*l\/2+f*l,0),G(e,r),z(e,De),e.fill(re[o]),J(e)}))})(t,a)})),J(e)}(et,Ve,l,r),q(et),et.clip(Le),((e,t,n)=>{H(e,Ae),K(e,n,9),N(e),U(e,1),t.forEach((t=>{M(t.lines),t.lines.forEach((t=>a(e,t,n)))})),U(e),K(e,n,3),N(e,.6),t.forEach((t=>{t.lines.forEach((t=>a(e,t,n)))})),N(e)})(et,Ue,l),J(et);let c=Qe.filter((e=>0<=e.const));n(et,l,c,se,$e),ve&&((e,t,n,r)=>{let o,l,a,i=.015*t,f=0;do{o=b(le.random_num(0,.9*Y),le.random_num(0,I)),l=r.some((e=>!!(_({x:o[0]+te,y:o[1]+te},{x:e.x*n,y:e.y*n})<i))),a=e.isPointInPath(Le,o[0]+te,o[1]+te),f++}while((l||!a)&&100>f);q(e),L(e,te+o[0],te+o[1]),O(e,le.random_num(0,I));let c=.002*t,d=13*c\/16,s=1.6*-c,u=[[c,0],[c,.8*-c],[d,s]];D(e),F(e,...u[0]);for(let t=1;t<E(u);t++)S(e,...u[t]);R(e,0,3.75*-c,-d,s);for(let t=E(u)-2;0<=t;t--)S(e,-u[t][0],u[t][1]);$(e),K(e,n,7),U(e,1),j(e),U(e),z(e,Be),W(e),J(e)})(et,r,l,Qe),1===be&&(q(e),e.clip(Le)),e.drawImage(Ze,0,0),1===be&&J(e),0===be&&(D(e),e.rect(0,0,r,r),g(e,pe,r,!0),z(e,f),N(e,.5),W(e),N(e)),et.clearRect(0,0,r,r),function(e,t,n){function r(t,r){r&&K(e,n,r),D(e),B(e,0,0,t),j(e)}function o(t,r){r&&K(e,n,r),D(e),t=x(t),Ge.forEach(((n,r)=>{let[o,l]=w(...n),a=b(o+t,l);0===r&&F(e,...a),S(e,...a)})),$(e),j(e)}function l(e,t,n=1,r=1){for(let o,l=0;l<e;l++)o=l\/e*I-P\/2,a(l*n,t,o,r)}function a(t,n,r,o=1){let l=oe*o,a=p(t);0<r&&r<P&&a.reverse(),a.forEach(((t,i)=>{q(e),O(e,r-(E(a)-1)*l\/2+i*l+P\/2),L(e,0,-n),G(e,o),0<r&&r<P&&O(e,P),z(e,De),e.fill(re[t]),J(e)}))}function i(e,t,n,r,o=1,l=1,a=0){for(let c=0;c<e;c++){let d=c+a\/o,[u,m,h]=y(d,e,t),_=c;Oe&&(_=((_-e\/(I\/Oe))%(i=e)+i)%i,_+=a\/o);let g=n+r;0==d%(e\/We)&&(g=x(n)+r),f(s(_*o),m,u,g,h,l)}var i}function f(t,n,r,o,l,a=1){let i=oe*a*Y,f=p(t);0<l&&l<P&&f.reverse(),f.forEach(((t,c)=>{q(e),L(e,...b(n,r)),O(e,l+P\/2),L(e,-(E(f)-1)*i\/2+c*i,-o),G(e,a),0<l&&l<P&&O(e,P),z(e,De),e.fill(re[t]),J(e)}))}function c(t,r,o,l,a){l&&K(e,n,l);for(let e,n=0;n<t;n++)e=a?a[n]:n\/t*I-P\/2,d(e,r,o)}function d(t,n,r){D(e),F(e,...b(n,t)),S(e,...b(r,t)),j(e)}function u(t,r,o,l,a=0){l&&K(e,n,l);for(let e=0;e<t;e++){let n=e+a,[l,i,f]=y(n,t,r),c=o-r;0==n%(t\/We)&&(c=x(c)),m(l,i,c,f)}}function m(t,n,r,o){q(e),L(e,...b(n,t)),D(e),F(e,0,0),S(e,...b(r,o)),j(e),J(e)}function y(e,n,r=0){let o=e\/n*I-P\/2-Oe,[l,a]=((e,n,r)=>{let o,l,a=n.slice();for(a=a.map((e=>{let[t,n]=w(...e);return b(t+x(r),n)})),l=0;l<a.length-1&&(o=A(0,0,...b(t,e),...a[l],...a[l+1]),!o);l++);return[o,l]})(o,Ge,r);if(0==e%(n\/We)){a=e\/(n\/We),l=Ge[a];let[t,o]=w(...l);l=b(t+x(r),o)}let[i,f]=w(...l),c=(2*a+1)\/(2*We)*I-P\/2-Oe;return 0==e%(n\/We)&&(c=e\/(n\/We)\/We*I-P\/2-Oe),[o,i,c]}function x(e){return e\/h(I\/We\/2)}function _(t,n,r){D(e),B(e,...b(n,t),r),W(e)}function g(t,n,r,o){D(e),F(e,...b(t,r)),B(e,0,0,t,r,o),S(e,...b(n,o)),B(e,0,0,n,o,r,!0),$(e),W(e)}function k(t,n,r,o,l,a){D(e),F(e,...b(t,l)),S(e,...b(n,l)),S(e,...b(o,a)),S(e,...b(r,a)),$(e),W(e)}const M=[5,10,15,20,25,30],T=[31,28,31,30,31,30,31,31,30,31,30,31];let C=[];T.forEach((e=>{function t(e){C=C.concat(n.concat(e))}let n=[5,5,5,5,5];28===e?t(3):30===e?t(5):31==e&&t(6)}));const R=P\/2-80\/365*I,N=T.map((e=>1\/365*e*I)).map(v).map((e=>e+R));q(e),L(e,te,te),H(e,Ce),z(e,Ce),pe===Je?Ee===ze?(()=>{let e=Y+10*n;r(Y,5),r(e,3),c(360,e,e+6*n,2),c(72,e,e+9*n,2),c(24,Y,e+11*n,4),l(24,e+21*n)})():Ee===He?(()=>{let e=Y+17*n,t=Y+7*n;r(e,3),c(360,e,e+6*n,2),c(72,e,e+9*n,2),c(24,Y,e+11*n,4),l(24,e+21*n),r(Y,2.5),r(t,2.5),((e,t,n)=>{for(let e,r=0;r<72;r+=2)e=r*I\/72-P\/2,g(t,n,e,e+I\/72)})(0,Y,t)})():Ee===Ne?(()=>{let e=Y+12*n,t=Y+38*n;r(Y,3),c(360,Y,Y-6*n,2),c(72,Y,Y-9*n,2),c(24,Y,Y-11*n,4),l(24,Y-21*n),r(e,5),r(t,3),c(360,e,t,2),c(36,e,t,5),l(36,t+18*n,10,1.2)})():Ee===Ke&&(()=>{let t=Y-9*n,o=Y-16*n,i=Y+12*n,f=Y+22*n,s=Y+44*n;r(Y,5),r(t,3),c(360,t,o,2),c(72,t,o-3*n,2),c(24,Y,o-4*n,4),l(24,o-16*n),r(i,2.5),r(f,2.5),r(s,2.5),c(E(N),i,s,3,N);let u=R;C.forEach(((t,r)=>{let o=u+1\/365*t*I;1==r%2&&g(i,f,u,o),K(e,n,2);for(let o=0;o<t;o++){if(0==o||o===t)continue;let l=u+o\/365*I,a=i+3*n,c=f-3*n;1==r%2&&U(e,1),d(l,a,c),U(e)}let l=(f+s)\/2;if(4<t){let e=(o-u)\/3,t=2*n;_(u+e,l,t),_(u+2*e,l,t)}26>M[r%6]&&a(M[r%6],l,o,.8),u=o}))})():Ee===ze?(()=>{let e=10*n;o(0,5),o(e,3),u(360,e,e+6*n,2),u(72,e,e+9*n,2),u(24,e,e+11*n,4),i(24,e,11*n,13*n)})():Ee===He?(()=>{let e=17*n,t=7*n;o(e,3),u(360,e,e+6*n,2),u(72,e,e+9*n,2),u(24,e,e+11*n,4),u(We,0,e+11*n,4),i(24,e,11*n,13*n),o(0,2.5),o(t,2.5),((e,t,n,r=0)=>{const o=360;for(let l=0;l<o;l+=2*e){let a=l+r,[i,f,c]=y(a,o,t),[d,s,u]=y(a,o,n),[m,h,x]=y(a+e,o,t),[_,g,p]=y(a+e,o,n);k(f,s,h,g,i,m)}})(5,0,t)})():Ee===Ne&&(()=>{let e=12*n,t=38*n;o(0,3),u(360,0,0-6*n,2),u(72,0,0-9*n,2),u(24,0,0-11*n,4),i(24,0,-11*n,-10*n),o(e,5),o(t,3),u(360,e,t,2),u(36,e,t,5,Oe?.5:0),i(36,e,t,6*n,10,1.2,Oe?-5:0)})(),J(e)}(et,r,l),N(e,.9),e.drawImage(Ze,0,0),N(e)}};(async()=>{let e=window,t=document;const n=t.body.appendChild(t.createElement(\"canvas\")),r=n.getContext(\"2d\",{colorSpace:\"display-p3\"});let o,l,a,i,c,d;const s=async()=>{o(r,l,d)},u=()=>{c=e.devicePixelRatio,a=e.innerWidth,i=e.innerHeight,l=f(a,i),n.width=~~(l*c),n.height=~~(l*c),n.style.width=`${l}px`,n.style.height=`${l}px`,l*=c,d=l\/2e3,o&&s()};e.addEventListener(\"resize\",u),u(),o=xe(tokenData),await s()})()}();",
+  "tokens" : [
+    {
+      "hash" : "0x5c29b78254f626e7576ac993c68bdee6707f5204a4dfa5e1b4b123806b03288d",
+      "id" : "35000006"
+    },
+    {
+      "hash" : "0x0aa958f56dc2ceb869ca038f3dc0e7c8b272a86c3f774438a866ba4191e56fba",
+      "id" : "35000013"
+    },
+    {
+      "hash" : "0xc7c26b44cf81b4b014d13f0c57856d0f621f88652f231980d9b12531bdaab503",
+      "id" : "35000035"
+    },
+    {
+      "hash" : "0x94d172eabaf8f4e2d0edb9370de11825607ad2c910ec788e230e1485481eaeb5",
+      "id" : "35000000"
+    },
+    {
+      "hash" : "0xbf38eaea47a3e2181e92e09df29cfb5919c3796512a033a853e40b9a02020659",
+      "id" : "35000016"
+    },
+    {
+      "hash" : "0xaf2d430ca33f3bb853a5a30e067b628d87248992d56cb33176dc19f000c857c1",
+      "id" : "35000028"
+    },
+    {
+      "hash" : "0xe86d3f90f5d95b83e3b336536d6227efba1c8bbe99e85404adbc95dafb442355",
+      "id" : "35000024"
+    },
+    {
+      "hash" : "0x7064edf9dbdd683a6a77ffc926efa82910f2c918f0972d93f9e896c6d6b8de87",
+      "id" : "35000018"
+    },
+    {
+      "hash" : "0xbb7d25caa593d97de196f8e075894e34d44113ceaa22936fc5e2ebd6d7fc407b",
+      "id" : "35000033"
+    },
+    {
+      "hash" : "0xa9c75ca9c3e6e1aef7db259f12093e85c223d39ccf087217fbf01fd85b1137e1",
+      "id" : "35000001"
+    },
+    {
+      "hash" : "0x861b7aaf956aa88f22df8f4a740bf0b4f3e660e34f1caa60a7ea662e7b674102",
+      "id" : "35000021"
+    },
+    {
+      "hash" : "0xc7aa68688e226f27e16b20ed5a120d959f7abce4dc9d470329c15ce36f10c536",
+      "id" : "35000019"
+    },
+    {
+      "hash" : "0x0734e575b0afdcb0e6dd29970a323ed36852c3eaad77cc1575633ebca4d6c739",
+      "id" : "35000025"
+    },
+    {
+      "hash" : "0x6b37d5d6fb3b90ad212f4debdf4e8f7d60dea4ee21d61486c43e3513bd1634c1",
+      "id" : "35000017"
+    },
+    {
+      "hash" : "0x10d311e9f7b0197867a81d4616fec6310dad87f393b2fbfd2d89837c3639bc17",
+      "id" : "35000005"
+    },
+    {
+      "hash" : "0xa1f14155cb2c18d37ea35dd0f58a1602ce8f47e35c0e82b5a1c657b2efe93661",
+      "id" : "35000020"
+    },
+    {
+      "hash" : "0xeaa6067beaab90a0d851140e8d57848759b39c9eb73579b773396f232ab2607c",
+      "id" : "35000003"
+    },
+    {
+      "hash" : "0x09ba1657daf7f472113acb8af6464abbf3114e13a2c8b2328e5e7487d615e21c",
+      "id" : "35000034"
+    },
+    {
+      "hash" : "0xc6cb7f56837f18996b8a70d0f6484d6a1d143d33db0f5a986e2729d0e01669c7",
+      "id" : "35000007"
+    },
+    {
+      "hash" : "0x03ca4f9dd8d6a185f6f9e5ad54ac47807b57bb3739f65ca51dada615f1b3f4e5",
+      "id" : "35000029"
+    },
+    {
+      "hash" : "0x10ac62f0f1d0a810df193aab9aea72327f824d334669a54b9d769028b23dc929",
+      "id" : "35000008"
+    },
+    {
+      "hash" : "0xefe1015148e2169cf2eb5986789b3256dafe629ca6269cf67fa55b302f3978a6",
+      "id" : "35000026"
+    },
+    {
+      "hash" : "0x2701c6084cb9a397dbc25d2705dc2d18a9622cb2527fa0c6a010fb9f0b9b569d",
+      "id" : "35000009"
+    },
+    {
+      "hash" : "0x8406503545dcdb8a7bdaafab9f6d2adfc76c763f3049b60ff168fc2cc89c2da5",
+      "id" : "35000015"
+    },
+    {
+      "hash" : "0x45fff8189e613774710b8dc9b278987d5962a98c2e4f3f1c0c6c8f0d8bf870d5",
+      "id" : "35000027"
+    },
+    {
+      "hash" : "0x345a6d0da38999501449c0bfb25c75bc2925a171753d9a8b964476ebe020f91f",
+      "id" : "35000002"
+    },
+    {
+      "hash" : "0xcef58db8524e746ee455b5b198c41c155e5f4debcc0880b96c8cfeb708e60ed1",
+      "id" : "35000012"
+    },
+    {
+      "hash" : "0x11ba95fb2c818810a92bd89e9031d3618272fef8f58efb0b2e089f8a767c626f",
+      "id" : "35000004"
+    },
+    {
+      "hash" : "0x170f7a2cb815425d5d4bcdc62be132c6ead40325b2548d1a1f52e2121ba4d5af",
+      "id" : "35000030"
+    },
+    {
+      "hash" : "0x81169b75fb5b92a881aedc48f2df464dc954e0e25b2a6680679992dd6db8250d",
+      "id" : "35000031"
+    },
+    {
+      "hash" : "0xc7df4f451f0ffc855fe9a3cd961c6f50f0e4a9bc32a69c16a0932cce81e38c75",
+      "id" : "35000010"
+    },
+    {
+      "hash" : "0x9712ef8222eae7ffcb80122fc6aa41c715badef05c04503afea3c98686a51c09",
+      "id" : "35000032"
+    },
+    {
+      "hash" : "0x53a592b83708f3161ecc7a2e1854b1bfdef85f4c0f8d6598403097cd1ea21dd4",
+      "id" : "35000014"
+    },
+    {
+      "hash" : "0xfe3a6bb8d53f7a2979cd94249568e4af7a2cbdb7db55bd335e24db2285eeb086",
+      "id" : "35000011"
+    },
+    {
+      "hash" : "0xa84e6cfbd775afbecb4afed58a7a0b3e2d9ff9463235a86e2ea4d910395b8b5c",
+      "id" : "35000022"
+    },
+    {
+      "hash" : "0xe75246bad26420df9540ae693c8090c8aa6941821b526c0bd572ae49c24feb51",
+      "id" : "35000023"
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "contractAddress" : "0x294fed5f1d3d30cfa6fe86a937dc3141eec8bc6d",
+  "kind" : "p5js",
+  "projectId" : "2",
+  "script" : "\nlet REF_CANVAS_SIZE = 1024;\nlet REF_BUFFER_SIZE = 512;\nlet REF_STROKE_HALF = 0.5;\nlet REF_STROKE_FULL = 1.0;\nlet STROKE_QUART = 0.0;\nlet STROKE_HALF = 0.0;\nlet STROKE_FULL = 0.0;\nlet CANVAS_SIZE = 0;\nlet BUFFER_SIZE = 0;\nlet BG = \"#090809\";\nlet BLACK = \"#000000\";\nlet LIME = \"#cccc66\";\nlet TURQ = \"#04edcd\";\nlet WHITE = \"#FFFFFF\";\nlet ORANGE = \"#FF9900\";\nlet ORANGE_RED = \"#cc6600\";\nlet RED_ORANGE = \"#ff4800\"\nlet MID_GREY = \"#CCCCCC\";\nlet DRK_GREY = \"#333333\";\nlet RED_PINK = \"#ff003c\";\nlet GREEN = \"#c5cd7a\";\nlet PINK = \"#c90a48\";\nlet FRAME_COL = MID_GREY;\nlet SYSTEM_COL = WHITE;\nlet SEED;\nlet RES_MULTI;\nlet RES_REDUC;\nlet ROOT_DATA = [];\nlet HASH_DATA = [];\nlet BLUR;\n\nlet palettes_start =\n    [\n        [\"#cccc66\", \"#999933\", \"#999966\", \"#04edcd\"],\n        [\"#3d2ba5\", \"#2b53a5\", \"#2b4ba5\", \"#04edcd\"],\n        [\"#cc3300\", \"#cc6600\", \"#cc9933\", \"#04edcd\"],\n        [\"#ff003c\", \"#89223b\", \"#93237d\", \"#04edcd\"]\n    ];\n\nlet palettes_stop =\n    [\n        [\"#cdb966\", \"#9a8637\", \"#8d8371\", \"#88b4a1\"],\n        [\"#773f61\", \"#5c5286\", \"#8d4b4d\", \"#88b4a1\"],\n        [\"#cd4a28\", \"#b36347\", \"#cd6a31\", \"#88b4a1\"],\n        [\"#ed3c34\", \"#7e264a\", \"#5c358a\", \"#88b4a1\"]\n    ];\n\nfunction setup()\n{\n    SEED = parseInt(tokenData.hash.slice(0, 16), 16);\n    randomSeed(SEED);\n    noiseSeed(SEED);\n    noiseDetail(8);\n\n    let ss = min(windowWidth, windowHeight);\n    RES_MULTI = ss \/ REF_CANVAS_SIZE;\n    RES_REDUC = REF_CANVAS_SIZE \/ ss;\n\n    CANVAS_SIZE = rm(REF_CANVAS_SIZE);\n    BUFFER_SIZE = rm(REF_BUFFER_SIZE);\n    STROKE_HALF = rm(REF_STROKE_HALF);\n    STROKE_FULL = rm(REF_STROKE_FULL);\n    STROKE_QUART = STROKE_HALF \/ 2.0;\n    createCanvas(CANVAS_SIZE, CANVAS_SIZE, WEBGL);\n\n    BLUR = new p5.Shader(this._renderer, blur_vertex, blur_fragment);\n    shader(BLUR);\n\n    set_relicdata();\n\n    let MAIN_BUFFER = comp();\n    fill(\"#FF9900\");\n\n    BLUR.setUniform('tex0', MAIN_BUFFER);\n    BLUR.setUniform('blur_amount', rm(8));\n    BLUR.setUniform('blur_curve', 1);\n    BLUR.setUniform('texelSize', [1 \/ width, 1 \/ height]);\n\n    rect(0, 0, CANVAS_SIZE, CANVAS_SIZE);\n}\n\nfunction set_relicdata()\n{\n    function lerp(start, end, amt)\n    {\n        return (1 - amt) * start + amt * end\n    }\n\n    let hashdata = [];\n    for (let j = 0; j < 32; j++)\n    {\n        let pair = tokenData.hash.slice(2 + (j * 2), 4 + (j * 2));\n        let npair = parseInt(pair, 16) \/ 255.0;\n\n        hashdata.push(npair);\n    }\n\n    let val_count = hashdata[0];\n    let val_age = hashdata[1];\n    let val_pallete = hashdata[2];\n    let val_creep = hashdata[3];\n    let val_chaos = hashdata[4];\n    let val_size = hashdata[5];\n\n    let min_core_radius = 30;\n    let max_core_radius = 60;\n    let min_root_radius = 30;\n    let max_root_radius = 30;\n    let min_root_count = 3;\n    let max_root_count = 8;\n    let min_age = 10.0;\n    let max_age = 30.0;\n    let min_taper = 0.0;\n    let min_chaos = 1.0;\n    let max_chaos = 1.5;\n    let min_creep = 0.0;\n    let max_creep = max_core_radius;\n\n    let min_offset = min_core_radius;\n    let max_offset = max_core_radius;\n    let environment_buffer = 10;\n\n    let relic_origin = createVector(REF_BUFFER_SIZE \/ 2, REF_BUFFER_SIZE \/ 2);\n    let core_radius = round(lerp(min_core_radius, max_core_radius, val_size));\n    let root_count = Math.round(lerp(min_root_count, max_root_count, val_count));\n    let root_nodes = root_count - 2;\n\n    let chaos = round(lerp(min_chaos, max_chaos, val_chaos));\n    let creep = round(lerp(min_creep, max_creep, val_creep));\n\n    let greatest_root_radius = 0;\n    let greatest_offset = 0;\n    let pallete = Math.round(lerp(0, 3, val_pallete));\n\n    for (let i = root_count - 1; i >= 0; i--)\n    {\n        let col = rint(2);\n        let angle = TWO_PI \/ root_nodes;\n        let offset = round(lerp(min_offset, max_offset, random(1.0)));\n        let overlaps = BLACK;\n\n\n        let root_radius = round(lerp(min_root_radius, max_root_radius, random(1.0)));\n        greatest_root_radius = (root_radius > greatest_root_radius) ? root_radius : greatest_root_radius;\n        greatest_offset = (offset > greatest_offset) ? offset : greatest_offset;\n\n        let max_taper = (root_radius \/ 2);\n        let taper = round(lerp(min_taper, max_taper, random(1.0)));\n\n        let env_radius = (greatest_root_radius + core_radius + greatest_offset + environment_buffer);\n        let colour_index = col;\n        let strength = 120;\n        let age = round(lerp(min_age, max_age, val_age));\n\n        let env_root = (i == 0);\n        let core_root = (i == 1);\n\n        if (env_root)\n        {\n            offset = 0.0;\n            overlaps = -1;\n            colour_index = 3;\n            strength = 20;\n            age = 50;\n            root_radius = env_radius;\n            creep = 0;\n        }\n\n        if (core_root)\n        {\n            offset = 0.0;\n            root_radius = core_radius;\n            strength = 120;\n        }\n\n        ROOT_DATA[i] = get_rootdata(relic_origin, root_radius, angle * (i - 2), age, taper, chaos, creep, offset, overlaps, strength, pallete, colour_index, i);\n    }\n}\n\nfunction get_rootdata(relic_origin, root_radius, angle, age, taper, chaos, creep, offset, overlaps, strength, pallete, colour_index, no)\n{\n    let root_data =\n    {\n        relic_origin: relic_origin,\n        root_radius: root_radius,\n        angle: angle,\n        age: age,\n        taper: taper,\n        chaos: chaos,\n        creep: creep,\n        offset: offset,\n        overlaps: overlaps,\n        pallete: pallete,\n        colour_index: colour_index,\n        strength: strength,\n        no: no\n    };\n\n    return root_data;\n}\n\nfunction comp()\n{\n    let layer_composite = create_layer(CANVAS_SIZE);\n    layer_composite.background(BG);\n\n    let layer_gradient = create_layer(CANVAS_SIZE);\n    gradient(layer_gradient, 0, 0, CANVAS_SIZE, CANVAS_SIZE, color(BLACK), color(PINK), Axis.y);\n    render_layer(layer_gradient, layer_composite, ADD, 10, Axis.none);\n\n    let layer_holo = create_layer(CANVAS_SIZE);\n\n    let layer_basesystem = generate(systems_arrays, Axis.y, BUFFER_SIZE);\n    render_layer(layer_basesystem, layer_holo, ADD, 40, Axis.y);\n    render_layer(layer_basesystem, layer_holo, ADD, 10, Axis.x);\n    render_layer(layer_basesystem, layer_holo, ADD, 10, Axis.z);\n\n    let layer_relics = generate(draw_relics, Axis.y, rm(1));\n    render_layer(layer_relics, layer_holo, ADD, 100, Axis.y, false);\n    render_layer(layer_relics, layer_holo, ADD, 100, Axis.y, false);\n\n    let layer_frame = generate(frame, Axis.x, BUFFER_SIZE \/ 8);\n    render_layer(layer_frame, layer_holo, ADD, 80, Axis.x);\n    render_layer(layer_frame, layer_holo, ADD, 40, Axis.y);\n\n    let layer_gradients = generate(grads, Axis.x, BUFFER_SIZE);\n    render_layer(layer_gradients, layer_holo, ADD, 60, Axis.x);\n    render_layer(layer_gradients, layer_holo, ADD, 60, Axis.y);\n    render_layer(layer_gradients, layer_holo, ADD, 60, Axis.z);\n\n    render_layer(layer_holo, layer_composite, ADD, 100, Axis.none, CANVAS_SIZE \/ 2, CANVAS_SIZE \/ 2, CANVAS_SIZE * 0.9, CANVAS_SIZE * 0.9, CENTER);\n    render_layer(layer_holo, layer_composite, ADD, 20, Axis.none, CANVAS_SIZE \/ 2, CANVAS_SIZE \/ 2, CANVAS_SIZE * 0.9, CANVAS_SIZE * 0.9, CENTER, true, BUFFER_SIZE * 0.9);\n\n    return layer_composite;\n}\n\nfunction draw_indicator(surface, x, y, rad, strk)\n{\n    surface.strokeWeight(STROKE_QUART);\n    surface.stroke(strk);\n    surface.noFill();\n    surface.circle(x, y, rad);\n    let s = rad \/ 4;\n    surface.line(x - (s), y, x + s, y);\n    surface.line(x, y - (s), x, y + (s));\n}\n\nfunction draw_relics(graphics, surface, i, axis)\n{\n    surface.push();\n    let norm_inc = i \/ BUFFER_SIZE;\n    let inc = (axis == Axis.none) ? 0 : i;\n    surface.translate(inc, inc);\n    graphics.background(\"#000000\");\n    graphics.fill(0);\n\n    let overall_rotational_increment = PI \/ BUFFER_SIZE;\n    let vertex_arrays = [];\n    let drawn = 0;\n\n    for (let j = 0; j < ROOT_DATA.length; j++)\n    {\n        let root = ROOT_DATA[j];\n        let overall_rotation = overall_rotational_increment * i;\n        let radial_offset = (root.offset + (-1.0 * root.creep * norm_inc) * root.chaos);\n        let root_angle = root.angle * root.chaos;\n        let root_origin_x = root.relic_origin.x + (sin(root_angle + overall_rotation) * radial_offset);\n        let root_origin_y = root.relic_origin.y + (cos(root_angle + overall_rotation) * radial_offset);\n        let root_origin = createVector(root_origin_x, root_origin_y);\n        let root_age = root.age;\n        let root_radius = (root.root_radius - (norm_inc * root.taper) * root.chaos);\n        let color_start = color(palettes_start[root.pallete][root.colour_index]);\n        let color_stop = color(palettes_stop[root.pallete][root.colour_index]);\n        let root_colour = lerpColor(color_start, color_stop, norm_inc);\n        root_colour.setAlpha(root.strength);\n\n        if (noise(rr(i)) > 0.875 && (j % 3 == 0) && (j > 1))\n        {\n            draw_indicator(surface, rm(root_origin_x), rm(root_origin_y), rm(root_radius + root_age), 150);\n        }\n\n        vertex_arrays[j] = contour_plot(i, root_origin, root_age, root_radius, root.no);\n        contour_draw(graphics, vertex_arrays[j], STROKE_HALF, root_colour);\n\n        if (i == BUFFER_SIZE)\n        {\n            surface.noFill();\n            surface.strokeWeight(rm(0.05));\n            surface.stroke(DRK_GREY);\n            surface.circle(BUFFER_SIZE \/ 2, BUFFER_SIZE \/ 2, (ROOT_DATA[0].root_radius * 2 + 20));\n        }\n    }\n\n    for (let j = 0; j < ROOT_DATA.length; j++)\n    {\n        let root = ROOT_DATA[j];\n        contour_draw(graphics, vertex_arrays[j], STROKE_HALF, -1, root.overlaps);\n    }\n\n    commit(surface, ADD, graphics, axis, 100);\n    surface.pop();\n\n    return surface;\n}\n\nfunction contour_plot(i, origin, age, radius, root_no)\n{\n    let reduced_i = rr(i);\n    let radial_steps = 50;\n    let points = [];\n    let ang = TWO_PI \/ radial_steps;\n    let frequency = 0.015;\n    let affected_radius = radius - abs(sin(reduced_i * 0.01) * radius \/ 8);\n\n    for (let j = 0; j <= radial_steps; j++) \n    {\n        let theta = ang * j;\n        let ct = cos(theta);\n        let st = sin(theta);\n\n        let sample_x = (ct);\n        let sample_y = (st);\n        let sample_z = reduced_i * frequency;\n\n        let ken = noise(sample_x, sample_y, sample_z);\n        let noise_offset = ken * age;\n        let final_radius = ((affected_radius - noise_offset) + noise(reduced_i * 0.1) * 3.0);\n\n        let x = rm(origin.x + (final_radius * ct));\n        let y = rm(origin.y + (final_radius * st));\n\n        points.push(createVector(x, y));\n    }\n\n    return points;\n}\n\nfunction contour_draw(surface, vert_array, stroke_weight, stroke_colour = -1, fill_color = -1)\n{\n    if (fill_color == -1) surface.noFill();\n    else\n    {\n        surface.fill(fill_color);\n    }\n\n    if (stroke_colour == -1) surface.noStroke();\n    else\n    {\n        surface.stroke(stroke_colour);\n        surface.strokeWeight(stroke_weight);\n    }\n\n    surface.beginShape();\n\n    for (let k = 1; k < vert_array.length; k++) \n    {\n        let x = (vert_array[k].x);\n        let y = (vert_array[k].y);\n\n        surface.vertex(x, y);\n    }\n\n    surface.endShape(CLOSE);\n}\n\nfunction grads(graphics, surface, i, axis)\n{\n    surface.push();\n\n    let offset = get_offset_for_axis(axis);\n\n    surface.translate(offset.x * i, offset.y * i);\n    graphics.background(\"#000000\");\n    graphics.noFill();\n\n    gradient(graphics, 0, graphics.height \/ 2, graphics.width, graphics.height \/ 2, color(BLACK), color(GREEN), Axis.y);\n    commit(surface, ADD, graphics, axis, 7);\n\n    surface.pop();\n\n    return surface;\n}\n\nfunction gradient(surface, x, y, w, h, col_start, col_finish, axis)\n{\n    let col = 0;\n    surface.strokeWeight(STROKE_FULL);\n    surface.noFill();\n\n    if (axis == Axis.x)\n    {\n        for (let i = 0; i < w; i++)\n        {\n            col = lerpColor(col_start, col_finish, i \/ w);\n            surface.stroke(col);\n            surface.line(x + i, y, x + i, y + h);\n        }\n    } else\n    {\n        for (let i = 0; i < h; i++)\n        {\n            col = lerpColor(col_start, col_finish, i \/ h);\n            surface.stroke(col);\n            surface.line(x, y + i, x + w, y + i);\n        }\n    }\n}\n\nfunction systems_arrays(graphics, surface, i, axis)\n{\n    surface.push();\n\n    let offset = get_offset_for_axis(axis);\n\n    surface.translate(offset.x * i, offset.y * i);\n    graphics.background(\"#000000\");\n    graphics.noFill();\n\n    system(graphics)\n    commit(surface, ADD, graphics, axis, 100);\n\n    surface.pop();\n\n    return surface;\n}\n\nfunction system(srf)\n{\n    let w = srf.width \/ 2;\n    let h = ((srf.width - w) \/ 2);\n\n    srf.background(BLACK);\n\n    let cell_size = rm(16);\n\n    for (let y = h; y < (BUFFER_SIZE - h); y += cell_size)\n    {\n        srf.stroke(64);\n        srf.strokeWeight(STROKE_FULL);\n\n        for (let x = h; x < (BUFFER_SIZE - h); x += cell_size)\n        {\n            srf.noStroke();\n            srf.fill(MID_GREY);\n            srf.circle(x, y, rm(2));\n        }\n    }\n\n    let s = subsystem(w, h);\n\n    srf.push();\n    srf.translate(srf.width \/ 2, srf.height \/ 2);\n\n    for (let i = 0; i < 4; i++)\n    {\n        srf.rotate(i * HALF_PI);\n        srf.imageMode(CORNER);\n        srf.image(s, -(s.width \/ 2), -(srf.height \/ 2));\n    }\n\n    srf.pop();\n}\n\nfunction subsystem(w, h)\n{\n    let surf = createGraphics(w, h);\n    let remains = surf.height;\n\n    function draw_row(row_width, cell_y, cell_h)\n    {\n        let divisions = rint(5) + 1;\n        let row = row_width;\n        for (let i = 0; i < divisions; i++) row \/= 2;\n        let cell_width = row;\n\n        let count = row_width \/ cell_width;\n        let stroke_color = color(SYSTEM_COL);\n        stroke_color.setAlpha(rint(255));\n\n        for (let i = 0; i < count; i++)\n        {\n            draw_cell(i * cell_width, cell_y, cell_width, cell_h, stroke_color)\n        }\n    }\n\n    function draw_cell(cx, cy, cw, ch, strk)\n    {\n        surf.stroke(strk);\n        surf.strokeWeight(STROKE_HALF);\n        surf.fill(BLACK);\n        surf.rect(cx, cy, cw, ch);\n    }\n\n    while (true)\n    {\n        let remove = (128 >> rint(5));\n\n        if ((remains - remove) < 0)\n        {\n            let r = remains;\n            remove = r;\n            remains = 0;\n\n            draw_row(surf.width, remains, remove);\n\n            break;\n        }\n        else\n        {\n            remains -= remove;\n\n            draw_row(surf.width, remains, remove);\n\n            if (remains == 0) break;\n        }\n    }\n\n    return surf;\n}\n\nfunction generate(draw_function, axis, step_size, iterations = BUFFER_SIZE, surface_size = CANVAS_SIZE, buffer_size = BUFFER_SIZE)\n{\n    let surface = create_layer(surface_size);\n    let graphics = create_layer(buffer_size);\n\n    for (let i = 0; i <= iterations; i += step_size)\n    {\n        draw_function(graphics, surface, i, axis);\n    }\n\n    return surface;\n}\n\nfunction get_offset_for_axis(axis)\n{\n    return (axis == Axis.none) ? createVector(0, 0) : createVector(1, 1);\n}\n\nfunction create_layer(dim)\n{\n    let layer = createGraphics(dim, dim);\n    layer.imageMode(CORNERS);\n\n    return layer;\n}\n\nfunction commit(surface, blend_mode, image, axis, opacity_percentage)\n{\n    surface.blendMode(blend_mode);\n\n    let opacity = map(opacity_percentage, 0, 100, 0, 255);\n\n    if (axis == Axis.x)\n    {\n        surface.push();\n        surface.scale(-0.5, 1);\n        surface.translate(-image.width, 0);\n        surface.tint(255, opacity);\n        surface.image(image, -image.width, 0);\n        surface.pop();\n    }\n    else\n    {\n        surface.tint(255, opacity);\n        surface.image(image, 0, 0);\n    }\n}\n\nfunction frame(graphics, surface, i, axis)\n{\n    surface.push();\n\n    let offset = get_offset_for_axis(axis);\n\n    surface.translate(offset.x * i, offset.y * i);\n    graphics.background(\"#000000\");\n    graphics.noFill();\n    graphics.strokeWeight(STROKE_HALF);\n    graphics.stroke(FRAME_COL);\n\n    let b = rm(6);\n    let s = BUFFER_SIZE;\n\n    graphics.line(0, 0, b, 0);\n    graphics.line(0, 0, 0, b);\n\n    graphics.line(s, 0, s, b);\n    graphics.line(s, 0, s - b, 0);\n\n    graphics.line(s, s, s, s - b);\n    graphics.line(s, s, s - b, s);\n\n    graphics.line(0, s, b, s);\n    graphics.line(0, s, 0, s - b);\n\n    graphics.stroke(FRAME_COL);\n    graphics.strokeWeight(STROKE_HALF);\n    graphics.rect(0, 0, s, s);\n\n    commit(surface, ADD, graphics, axis, rint(75) + 25);\n    surface.pop();\n\n    return surface;\n}\n\nfunction orth(index, layer)\n{\n    let base_x = createVector(rm(1024 - 68), rm(259));\n    let base_y = createVector(rm(509), rm(1));\n    let base_z = createVector(rm(68), rm(259));\n\n    switch (index)\n    {\n        case 0:\n            layer.translate(base_x.x, base_x.y);\n            layer.rotate(radians(30.0));\n            layer.shearX(radians(30.0));\n            layer.scale(-1.0, 0.86062);\n            break;\n        case 1:\n            layer.translate(base_y.x, base_y.y);\n            layer.rotate(radians(30.0));\n            layer.shearX(radians(-30.0));\n            layer.scale(1.0, 0.86062);\n            break;\n        case 2:\n            layer.translate(base_z.x, base_z.y);\n            layer.rotate(radians(-30.0));\n            layer.shearX(radians(-30.0));\n            layer.scale(1.0, 0.86062);\n            break;\n    }\n}\n\nfunction rint(x)\n{\n    return round(random(x));\n}\n\nfunction render_layer(layer, target, blend_mode, opacity_percentage, axis, x = 0, y = 0, w = CANVAS_SIZE, h = CANVAS_SIZE, mode = CORNER, reflect = false, offset_y = 0)\n{\n    target.push();\n    if (axis != Axis.none) orth(axis, target);\n    if (reflect) \n    {\n        target.scale(1, -1);\n        target.translate(0, -(CANVAS_SIZE + offset_y));\n    }\n    target.imageMode(mode);\n    target.blendMode(blend_mode);\n    target.tint(255, map(opacity_percentage, 0, 100, 0, 255));\n    target.image(layer, x, y, w, h);\n    target.pop();\n}\n\nconst Axis =\n{\n    x: 0,\n    y: 1,\n    z: 2,\n    none: 3\n};\n\nlet blur_vertex =\n    `\n\tattribute vec3 aPosition;\n\tattribute vec2 aTexCoord;\n\tvarying vec2 vTexCoord;\n\n\tvoid main() {\n\t\tvTexCoord = aTexCoord;\n\t\tvec4 positionVec4 = vec4(aPosition, 1.0);\n\t\tpositionVec4.xy = positionVec4.xy * 2.0 - 1.0;\n\t\tgl_Position = positionVec4;\n\t}\n`;\nlet blur_fragment =\n    `\n\tprecision mediump float;\n\tvarying vec2 vTexCoord;\n\tuniform sampler2D tex0;\n\tuniform float blur_amount;\n\tuniform float blur_curve;\n\tuniform vec2 texelSize;\n\tfloat gamma = 2.2;\n\t\n\tvec3 tone_mapping(vec3 color)\n\t{\n\t\tcolor = max(vec3(0.), color - vec3(0.004));\n\t\tcolor = (color * (6.2 * color + .5)) \/ (color * (6.2 * color + 1.7) + 0.06);\n\t\treturn color;\n\t}\n\t\n\tvoid main() \n\t{\n\t\tvec2 uv = vTexCoord;\n\t\tuv.y = 1.0 - uv.y;\n\t\tfloat x = uv.y;\n\t\tfloat curve = (blur_curve==1.0) ? (max(abs( ((x - 0.289) \/ 0.428 - 0.504) \/ 0.5 ), (x - 0.289) \/ 0.428 \/ 1.085 * -0.056 + 0.5) * 0.533 + -0.247) : 1.0;\n\t\tfloat spread = curve * blur_amount;\n\t\tvec2 offset = texelSize * spread;\n\t\t\n\t\tvec4 tex = texture2D(tex0, uv); \n\t\ttex += texture2D(tex0, uv + vec2(-offset.x, -offset.y)); \n\t\ttex += texture2D(tex0, uv + vec2(0.0, -offset.y)); \n\t\ttex += texture2D(tex0, uv + vec2(offset.x, -offset.y)); \n\t\ttex += texture2D(tex0, uv + vec2(-offset.x, 0.0)); \n\t\ttex += texture2D(tex0, uv + vec2(offset.x, 0.0)); \n\t\ttex += texture2D(tex0, uv + vec2(-offset.x, offset.y)); \n\t\ttex += texture2D(tex0, uv + vec2(0.0, offset.y)); \n\t\ttex += texture2D(tex0, uv + vec2(offset.x, offset.y)); \n\t\ttex \/= 9.0;\n\n\t\tvec3 mapped = tone_mapping(tex.xyz);\n\n\t\tfloat grain = 0.05; \n\t\tfloat noise = (fract(sin(dot(uv, vec2(12.9898,78.233)*2.0)) * 43758.5453));\n\t\tvec3  final = mix(mapped, tex.xyz, 0.71);\n\t\tvec2  st = vec2(uv.x-0.5, uv.t-0.5) * 2.0;\n\t\tfloat vignette = 1.0 - (0.35*length(st));\n\t\tvec3 col = final - noise * grain;\n\n\t\tvec2 bl = step(vec2(0.016),uv);       \n\t\tvec2 tr = step(vec2(0.016),1.0-uv);   \n\t\tvec3 border = vec3(bl.x * bl.y * tr.x * tr.y);\n\n\t\tgl_FragColor = vec4(col * vignette * border, 1.0);\n\t}\n`;\n\nfunction rm(value)\n{\n    return RES_MULTI * value;\n}\n\nfunction rr(value)\n{\n    return RES_REDUC * value;\n}",
+  "tokens" : [
+    {
+      "hash" : "0xb9f0e3cdf8083f1a3f8d40afe888f360773c5898d041419c8637dcc9d99e1490",
+      "id" : "2000002"
+    },
+    {
+      "hash" : "0x6ada0c60813e89c407c9a368ca55bf027f0dfb723374524442c8d47369ac4b4f",
+      "id" : "2000000"
+    },
+    {
+      "hash" : "0xa263d35b92ffe6ba928acc7a3e567aa84c0b056ee8cc9222292fe39442106631",
+      "id" : "2000025"
+    },
+    {
+      "hash" : "0xb8c5004ae67802ef6db805b67cc58bb4b244c186bc43f23a19088bb55cc4ceaa",
+      "id" : "2000018"
+    },
+    {
+      "hash" : "0xe0edc4c911ffd605481f03f3d44305ad8c2fcbf876d87f15d722a5959a685b49",
+      "id" : "2000010"
+    },
+    {
+      "hash" : "0xc14f30516e7c6ce203210bbb36c0fa271ce43818ccca9eeefcbfad18519dacd8",
+      "id" : "2000001"
+    },
+    {
+      "hash" : "0x9495c77ee77ade9ff8a3e5faec5f53cd6ac697c7e5624b057e75ecd8389b3711",
+      "id" : "2000013"
+    },
+    {
+      "hash" : "0x231a78f1ca4856b4f0b04438ced96b8eb4c4f5b5bfa58215de639e36a9e0257a",
+      "id" : "2000005"
+    },
+    {
+      "hash" : "0x256328a29b7999b78babcf1a6f9a72d10c819996ed136cd1cf317914d37916db",
+      "id" : "2000031"
+    },
+    {
+      "hash" : "0xd5abef18b010584a8ee20d70c193823adb7029e4b6838d422313491addcb8513",
+      "id" : "2000024"
+    },
+    {
+      "hash" : "0x6e28ce00426849e7ed4df6f707921025d485aa538e8086d78901f49729a1ea59",
+      "id" : "2000014"
+    },
+    {
+      "hash" : "0xaf1138e96851a31142c30bdb4d48a5d19ca49a119cdc665a5d23cb536a212166",
+      "id" : "2000028"
+    },
+    {
+      "hash" : "0x395918a6c34a654b2d265684b05cecd590f440579683ea838ee0c3e9b9668b05",
+      "id" : "2000022"
+    },
+    {
+      "hash" : "0xa2f8ddeb0dfa0cd5163b468c3822ce0ab69b2014023987ca1b9614c73a391de7",
+      "id" : "2000007"
+    },
+    {
+      "hash" : "0x5beb8cc32b93238da14c04ad1d77faa38619731130e3dbcf1c87e0482731febf",
+      "id" : "2000027"
+    },
+    {
+      "hash" : "0xfc81f2da2b2e5369bd5a9997b0edddc80a5f1397c645d7f03ce53169586515c1",
+      "id" : "2000015"
+    },
+    {
+      "hash" : "0x2570084071d5e8f22659480c58892258b06ab28d0c6373e81e3ddfe3e2073e69",
+      "id" : "2000003"
+    },
+    {
+      "hash" : "0x8724d0094e73400f07189f04adc41f992bf66bc93cc676ccfce8d85912212890",
+      "id" : "2000017"
+    },
+    {
+      "hash" : "0xd12f6e027b477b85de6b4138fa563407f2794839ed1ae63c3875696dd55e86b9",
+      "id" : "2000019"
+    },
+    {
+      "hash" : "0xf09f46edf4d9b9d868cfe39df33e3b5334b218df339e3d21ae6b481ac51607e7",
+      "id" : "2000021"
+    },
+    {
+      "hash" : "0x66caa21a1ee2f0fab8c3f99eba2917682b034e30c2f457b4133c9e73dec85ba6",
+      "id" : "2000030"
+    },
+    {
+      "hash" : "0xcf61ed8e660aa6e170bf13311acdfba6feaecb24164323221ea9c9f09dbd5aa9",
+      "id" : "2000020"
+    },
+    {
+      "hash" : "0x4877f309a318c326dc8c231bc1c73b078bd80507318fd1506e66626404ef9e81",
+      "id" : "2000011"
+    },
+    {
+      "hash" : "0xb42fc89beb71b4f8157134c20fdb5b94fd1af0cc675e660e8fb5d0f57647996c",
+      "id" : "2000016"
+    },
+    {
+      "hash" : "0xc3abbf8c7cc7f378160d30d75e1ccfdcf7574101e4bd97766089325b123e0570",
+      "id" : "2000012"
+    },
+    {
+      "hash" : "0x45b6d027263173a8de493c690bd6cd40526514c7d6d02aad33e6347c77b785d4",
+      "id" : "2000029"
+    },
+    {
+      "hash" : "0x0ef6bbaec8945f73784f023feb1b80c26f16e89319713b9d05d17a5573b71c18",
+      "id" : "2000023"
+    },
+    {
+      "hash" : "0xcc61296b6b2feaac8d0c6c54fd41c0dae948d804077a8e74a5bbd63fe608a135",
+      "id" : "2000009"
+    },
+    {
+      "hash" : "0x34bc833389c78c360dd45e8210323addfe5b8d0d07cb14f47a71107d27a0a07c",
+      "id" : "2000026"
+    },
+    {
+      "hash" : "0x58059366ccb214d564651d0ab2b59b6ea55223850f0087c59face2984a5e7dca",
+      "id" : "2000006"
+    },
+    {
+      "hash" : "0xcff9fc8ea0a2cc3745a6cb33008d4ccbf4a2085680f13908ad6e25368eed3964",
+      "id" : "2000008"
+    },
+    {
+      "hash" : "0xff07259b0eaed56aead2db1a8ebdc1e76e8988580b05f5f81947953634a0e0db",
+      "id" : "2000004"
+    }
+  ]
+}

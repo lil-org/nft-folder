@@ -1,0 +1,152 @@
+{
+  "contractAddress" : "0x68c01cb4733a82a58d5e7bb31bddbff26a3a35d5",
+  "kind" : "js",
+  "projectId" : "3",
+  "script" : "let t=Math,s=window,e=t.min,i=document,h=Math.ceil,F=t.random;const V=\"20230330.165846\",n={};n.t=\"FFFF0000A99DFF0000FF620000A5456F00A4ED1E79FF00FF7A00DB29ABE26600FFFCCDFFFFFF9B00FFFFB8FFDEC4E9FB006400E6E6E6000000595959D8D2FF00A65100AEEFED1C24EE2A7B78FF7200A7910068374040407373738C8C8C\".match(\/(.{6})\/g).map((t=>\"#\"+t)),n.i=[[22,22,12750,17250,2,10,4],[1,3,7500,22500,17,20,5,11,6,2],[7,15,17e3,23e3,1,0,13,7,3,8,16,12,2,14,10,4,15,5,6,11,9],[4,19,17e3,23e3,6,9,7],[1,3,17e3,23e3,5,8,11,3,12,1,16,0,4],[11,11,8500,11500,8,3,10,14,1,13],[1,3,12750,17250,14,11,13,2,10,6],[1,3,17e3,23e3,10,7,1,2,4,11,8,3,6],[1,3,1e4,3e4,9,6,8,1,5,12],[15,30,14e3,26e3,12,1,15],[15,30,12750,17250,7,4,5],[15,30,7500,22500,7,3,9],[1,4,8500,11500,8,5,7,4,0,9],[11,11,8500,11500,21,22,23,24,18,19],[56,56,10500,19500,1,8,0],[11,56,17e3,23e3,9,13,14,6,4,1,15,8,7,2,0,10,5,3,11,16,12],[15,30,17e3,23e3,3,10,15,9,4,11,0,13,12,2,14,6,7,16,1],[45,89,17e3,23e3,4,6,0],[22,22,15e3,15e3,0,10,8,9,6,12],[1,3,1e4,1e4,1,0,3],[4,19,14e3,26e3,0,15,6,9,12,3],[15,30,17e3,23e3,17,25,14,26,4,27],[67,133,1e4,3e4,11,5,1],[15,30,8500,11500,5,7,2],[67,133,14e3,26e3,10,11,4,13,1,5],[7,15,12750,17250,6,8,4,5,13,9],[11,11,8500,11500,18,28,19,29,30],[7,37,12750,17250,12,7,8],[67,133,8500,11500,11,14,15,9,0,13,7,2,12,5,16,10,6,3,8,1,4],[2,2,17e3,23e3,9,6,5,0,7,2],[45,89,12750,17250,3,12,0],[33,33,17e3,23e3,10,8,3,15,0,2],[2,2,1e4,1e4,14,0,2,1,7,13],[22,22,1e4,1e4,3,2,1],[11,11,15e3,15e3,5,0,4,14,2,3],[1,3,10500,19500,1,2,3,0,13,8,7,11,14]];class l{constructor(t,s){this.h=t,this.t=s,this.rect=new p}F(t,s,e){if(this.rect.contains(t,s)){let i=this.h,h=f.l(i.o,F()<.5?2:3);return this.u?this.u.F(t,s,this)||this.A.F(t,s,this):(this.D=0,this.p=F()>=.5,this.C=e?!e.C:F(),this.B=f.range(i.duration),this.u=new l(i,this.t),this.A=new l(i,h),this.u.m=this.m,!0)}return!1}g(s,i,h,F,n){if(this.u){const l=s\/this.B;let r,o;this.D=e(1,t.max(0,this.D+l));let c=1-t.pow(1-this.D,2);this.p?(r=this.u,o=this.A,c=1-c):(r=this.A,o=this.u),this.C?(r.g(s,i,h,F,n*c),o.g(s,i,h+n*c,F,n*(1-c))):(r.g(s,i,h,F*c,n),o.g(s,i+F*c,h,F*(1-c),n));{const{w:t,M:s}=this.u.rect;(t*s<36||t<1||s<1||this.D>=1)&&this.k(this.A)}}this.rect.v(i,h,F,n)}I(t){if(this.u)this.u.I(t),this.A.I(t);else{const{t:s,rect:{x:e,y:i,w:h,M:F}}=this;let n=this.m;null==n&&(n=this.m=h<F?1:0);let l=t.createLinearGradient(e,i,e+n*h,i+(1-n)*F);s.forEach(((t,e)=>{l.addColorStop(e\/(s.length-1),t)})),t.strokeStyle=l,t.strokeRect(e,i,h,F),t.fillStyle=l,t.fillRect(e,i,h,F)}}k(t){this.C=t.C,this.p=t.p,this.B=t.B,this.D=t.D,this.rect=t.rect,this.u=t.u,this.A=t.A,this.t=t.t,this.m=t.m}}s.Node=l;let r,o,c,a,u,E,d,A,w,D,f={range:([t,s])=>t+F()*(s-t),l:(t,s)=>f.S(t.slice(0)).slice(0,s),S:s=>{let e,i,h;for(h=s.length;h;h--)e=t.floor(F()*h),i=s[h-1],s[h-1]=s[e],s[e]=i;return s},q:t=>(t%=2147483647,()=>((t=16807*t%2147483647)-1)\/2147483646)},p=function(t,s,e,i){this.contains=(t,s)=>t>=this.x&&t<=this.x+this.w&&s>=this.y&&s<=this.y+this.M,this.v=(t,s,e,i)=>{this.x=t,this.y=s,this.w=e,this.M=i},this.v(t,s,e,i)},C=500\/60,B=t=>{D=parseInt(tokenData.tokenId.slice(-6));let s=n.i[D%n.i.length];for(F=f.q(D+1),u=s.slice(0,2),r={duration:s.slice(2,4),o:s.slice(4).map((t=>n.t[t]))},c=new l(r),o=0,m();o<r.duration[1];)x()},m=(t=0)=>{a=o+f.range(u)-e(C,t)},g=()=>{c.F(F()*A,F()*w,null)},x=t=>{o+=C,o>a&&(g(),m(e(o-a,C))),c.g(C,0,0,A,w)},M=t=>{E.fillStyle=\"#888\",E.fillRect(0,0,A+1,w+1),c.I(E)},k=t=>{M(),requestAnimationFrame(k)},v=s.onresize=t=>{let e=s.innerWidth,i=s.innerHeight,F=s.devicePixelRatio;e&&(A=h(e*F),w=h(i*F),E.scale(F,F),d.width=A,d.height=w,d.style.width=e+\"px\",d.style.height=i+\"px\")};s.onload=()=>{d=i.querySelector(\"canvas\"),d.style.margin=\"0\",E=d.getContext(\"2d\"),v(),B(),x(),setInterval(x,100\/6),k()},i.body.style.overflow=\"hidden\";",
+  "tokens" : [
+    {
+      "hash" : "0x20bfbe936829743b396e0de9f5fdfe032c627ae66dd175c8b739d6fd5defa6e8",
+      "id" : "3000012"
+    },
+    {
+      "hash" : "0x36206c73c707672bd0323e7f2c778ce6ce5d3102eafc09047313664651207a4f",
+      "id" : "3000029"
+    },
+    {
+      "hash" : "0x9ff3e96eb9fa6ff766d134a249ba5a2b20d6c72de082856b4409f2b2b35c1d36",
+      "id" : "3000019"
+    },
+    {
+      "hash" : "0x18d1fe5fa450de742b2790833437e37fdaf917c193ab33c96f6021ed45edf162",
+      "id" : "3000001"
+    },
+    {
+      "hash" : "0xa653d2618910e70285b3ba8380598e42e528638def1c64290747ed52f6ee4355",
+      "id" : "3000000"
+    },
+    {
+      "hash" : "0xc899a0559d9b34c656fe757bd903df70b1f27881452ba7413e84cbfbb183efe2",
+      "id" : "3000010"
+    },
+    {
+      "hash" : "0xde39a4332e8eb4908af3f9bbb21bb7f1439ab796cce560f2409a67e5cb105400",
+      "id" : "3000008"
+    },
+    {
+      "hash" : "0x760e6cb52d7061ff21b00b7bb52d6013d82e95ecaf0317dc9945c59135059570",
+      "id" : "3000017"
+    },
+    {
+      "hash" : "0x4296c704145ce155cdfe4a04d9c494cb587edc3cc26737cbef690083cbb90693",
+      "id" : "3000028"
+    },
+    {
+      "hash" : "0x036a90a984d812ed26d84587accd81da4d96c75f89854b1c7464696919a000e7",
+      "id" : "3000009"
+    },
+    {
+      "hash" : "0xae52670cdf05478c7f2a51ebde06ca5f8da240698c8d2d29ab974d7e143c258d",
+      "id" : "3000011"
+    },
+    {
+      "hash" : "0x0079c1e4d7cb86440548cc7247f2958f4905d215120f2d4f68f3447952a66ec3",
+      "id" : "3000007"
+    },
+    {
+      "hash" : "0xaf1ece60d3dd6774c47650cc881c9269173707bccfff8582743a58d6bb283a45",
+      "id" : "3000018"
+    },
+    {
+      "hash" : "0x68598b80c69c7110ad1e0cca3eb26c0cf7fb9f6596c6f9e878215b858e626830",
+      "id" : "3000013"
+    },
+    {
+      "hash" : "0xc47ef269c2b88e32d51daa83c154ab82be11f94897e49bf30f952e810bfc5c9c",
+      "id" : "3000035"
+    },
+    {
+      "hash" : "0x456b727cced49ae702b1b539ec3a35ab20e286a9ff47dcb26beab7e885973861",
+      "id" : "3000025"
+    },
+    {
+      "hash" : "0xc3da8e3d52cc3115507accee72e14e7db0e210bd149ea3658af133170552b8eb",
+      "id" : "3000004"
+    },
+    {
+      "hash" : "0x7297b540e11fde1bb60c24948d3b0c62301704e88cc1294f8721cf8f72bd2f8a",
+      "id" : "3000005"
+    },
+    {
+      "hash" : "0x903f61dee96519b2dbcff76603e67c2531c2d3acbf07191fec2afd095a5b1486",
+      "id" : "3000031"
+    },
+    {
+      "hash" : "0xe57b04dc9be7a39fe1d9c27164c4a80650adaab2aeca0d9ab8c8fabaa18778c5",
+      "id" : "3000002"
+    },
+    {
+      "hash" : "0xd503e0566dc0758ae658d9c78d4338bb8d7130ad333472efa32b6c10efc50cfd",
+      "id" : "3000030"
+    },
+    {
+      "hash" : "0x5f9fa62d2c27921412f88434c4cbb2ab073b6528cabd6f25c9d8101a507d5a3b",
+      "id" : "3000016"
+    },
+    {
+      "hash" : "0xc3e5154a7c023bbe157d022c70c1ab55c35e6ce357d551c87cbd811c05fa16be",
+      "id" : "3000033"
+    },
+    {
+      "hash" : "0x67a24117abdd911726d7b7ee3ff2655e8e720f3f3a3fd6d7e0264878ce9b8c9b",
+      "id" : "3000020"
+    },
+    {
+      "hash" : "0xc535b43901bf68ac27c055366493eef45e706ceb4b27d240bb734dcd8b03a15f",
+      "id" : "3000026"
+    },
+    {
+      "hash" : "0x4ee7dfae17dfd2cb7be31aad5439e37d02a417d59e92cdf3826d963b78a5bede",
+      "id" : "3000021"
+    },
+    {
+      "hash" : "0x291eb1533ad8926220509bfd0c9b6209e567f17bc10a6d555db73d78a8e4d4d9",
+      "id" : "3000027"
+    },
+    {
+      "hash" : "0x8df579616e633ae2755159f42a75a0c1fe8ab069047c1e67a590cc4271246451",
+      "id" : "3000006"
+    },
+    {
+      "hash" : "0xc76b917416c74681f517a60cf806d746fbd673849aaf7be68878436065a0c7fc",
+      "id" : "3000024"
+    },
+    {
+      "hash" : "0x23ea007f16531198cb440117965b2d98c5e2609c91c5a98dff194a81ef1ff4e1",
+      "id" : "3000022"
+    },
+    {
+      "hash" : "0x89a6ff910b8e43d3c60c736c8b4a8bbf0a32520f7f8f6fdc3f3901b82b7c16dc",
+      "id" : "3000032"
+    },
+    {
+      "hash" : "0xfc3cc07a2cf6391e98ffdd8c41deec3ae57d287f01a7190aaa85e197e338fb48",
+      "id" : "3000034"
+    },
+    {
+      "hash" : "0x09fbeb49d02532281b063075e98524e087ac90604ad8a463004c4556b73ec626",
+      "id" : "3000015"
+    },
+    {
+      "hash" : "0x74a3d3b79ecda37adf0926e3c62f168e3fc3c614d7cec10ad0390547ae73c52c",
+      "id" : "3000023"
+    },
+    {
+      "hash" : "0x3a337fff513dbd48a2dd1c3796c715bcd4b538d799f36071200df327cf507a77",
+      "id" : "3000003"
+    },
+    {
+      "hash" : "0x2257efb68b623f5c691bb6dea5413b789e245e7296991cac5e7a5453bc77021d",
+      "id" : "3000014"
+    }
+  ]
+}

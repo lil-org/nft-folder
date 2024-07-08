@@ -1,0 +1,96 @@
+{
+  "contractAddress" : "0x68c01cb4733a82a58d5e7bb31bddbff26a3a35d5",
+  "kind" : "js",
+  "projectId" : "6",
+  "script" : "let e=Math,f=Object,t=Number,r=window,o=document,l=e.ceil,n=Object.keys,i=e.random,s=Object.values;const V=\"20230531.152535\",c={t:.7,speed:[7e-4,7e-4],o:.5,l:[1,2,3,5,7,9,11,15,20,25],i:{\"#00ff00\":.1,\"#ffff00\":1,\"#00ffff\":1,\"#7100bf\":1,\"#ff00ff\":1,\"#ff0000\":1,\"#ed1e79\":1,\"#000000\":1,\"#ffffff\":2,\"#00a545\":.5,\"#0000a9\":.5,\"#29abe2\":.5},u:[[\"#ffffff\",\"#ff0000\"],[\"#ffffff\",\"#0000a9\"],[\"#ffffff\",\"#7100bf\"],[\"#ffffff\",\"#ffff00\"],[\"#ffffff\",\"#00ff00\"]],p:{2:1,3:3,4:2},m:[.2,.5],g:.9,h:[5354038,1383523,1906325,2895934,3196395,3344673,3535226,3896507,4975443,5324319,1126717,5661527,6384179,9474408,7580312,7846211,7864618,8337936,8444814,8933182,9012587,6276595]},a={C:(e,f)=>e+i()*(f-e),k:e=>{const f=e.reduce(((e,f)=>e+f),0);let t=i()*f;return e.findIndex((e=>(t-=e,t<0)))},j:(e,f,r)=>{const o=s(e),l=n(e),i=[];for(let e=0;e<f;e++){const e=a.k(o),f=l[e];i.push(r?t(f):f),o.splice(e,1),l.splice(e,1)}return i},I:(e,f)=>{const r=s(e),o=n(e)[a.k(r)];return f?t(o):o},O:e=>{let f=4022871197,t=2.3283064365386963e-10,r=e=>{e=String(e);for(let t=0;t<e.length;t++){f+=e.charCodeAt(t);let r=.02519603282416938*f;f=r>>>0,r-=f,r*=f,f=r>>>0,r-=f,f+=4294967296*r}return(f>>>0)*t},o=1,l=r(\" \"),n=r(\" \"),i=r(\" \");return l-=r(e),l<0&&(l+=1),n-=r(e),n<0&&(n+=1),i-=r(e),i<0&&(i+=1),e=>{const f=2091639*l+o*t;return l=n,n=i,i=f-(o=0|f)}}};o.body.style.overflow=\"hidden\";let d,u,b,p,m,g,h,x,C=c.u.concat(c.u.map((e=>e.slice().reverse()))).map((e=>e.join(\"\"))),k=f=>{let t;x=parseInt(tokenData.tokenId.slice(-6)),i=a.O(c.h[x%c.h.length]),d=c.l[e.floor(i()*c.l.length)],u=[],i()<c.g&&(t=w());for(let e=0;e<d;e++)u.push(t||w());let r=e.pow(d,c.o),o=i()<.5?-1:1,l=i()<c.t?1:-1;b=[];let n=a.C(...c.speed)*r;for(let e=0;e<d;e++){o*=l;let f=u[e],t=j(f,n*o);b.push(t)}},w=e=>{let f,t;do{let e=a.I(c.p,!0);f=a.j(c.i,e),t=f.join(\"\")+f[0]}while(C.some((e=>t.indexOf(e)>-1)));return f},j=(f,t)=>{let r={i:[]},o=0,n=f.map((e=>{let f=a.C(...c.m);return o+=f,f})),i=[],s=2*l(1\/o);for(let e=0;e<s;e++)r.i.push(...f),i.push(...n);r.i.push(r.i[0]),r.size=o*s,r.speed=t\/(.5*r.size);let d=0;return r.W=i.map((f=>(d+=f\/r.size,e.max(0,e.min(1,d))))),r.W.unshift(0),r.v=a.C(0,1),r},I=e=>{b.forEach((e=>{e.v=(e.v+e.speed+1)%1}))},O=e=>{let f=h\/2\/d;p.fillStyle=\"#fff\",p.fillRect(0,0,g+1,h+1),b.forEach((({i:e,W:t,v:r,size:o},l)=>{let n=d-l-1,i=h\/2-n*f,s=i-f,c=g\/2-n*f,a=c-f,u=.5*r*o*f,b=u-o*f;W(e,t,0,-i-b,0,-i-u,-c,-i,c,-i,a,-s,-a,-s),W(e,t,0,i+b,0,i+u,-c,i,c,i,a,s,-a,s),W(e,t,-c-b,0,-c-u,0,-c,-i,-a,-s,-a,s,-c,i),W(e,t,c+b,0,c+u,0,c,-i,a,-s,a,s,c,i)}))},W=function(e,f,t,r,o,l,...n){let i=p.createLinearGradient(t,r,o,l);e.forEach(((e,t)=>{i.addColorStop(f[t],e)})),p.fillStyle=p.strokeStyle=i,p.beginPath();let s=n.length;p.moveTo(n[s-2],n[s-1]);for(let e=0;e<s;e+=2)p.lineTo(n[e],n[e+1]);return p.stroke(),p.fill(),p},v=e=>{O(),requestAnimationFrame(v)},y=r.onresize=f=>{let t=r.innerWidth,o=r.innerHeight,n=r.devicePixelRatio;if(t&&(g=l(t*n),h=l(o*n),p.scale(n,n),m.width=g,m.height=h,m.style.width=t+\"px\",m.style.height=o+\"px\",p.translate(g\/2,h\/2),t<o)){p.rotate(e.PI\/2);let f=g;g=h,h=f}};r.onload=()=>{m=o.querySelector(\"canvas\"),m.style.margin=\"0\",p=m.getContext(\"2d\"),k(),y(),setInterval(I,100\/6),v()};",
+  "tokens" : [
+    {
+      "hash" : "0xdb61f370e17eb60c65e79f9a5f14c24b2cb22cb9cdb2ee7c1584cb53ab3a2d7f",
+      "id" : "6000007"
+    },
+    {
+      "hash" : "0x166dcda3291616d08fbcd8af6db25bfdc9f4405e024825d95c1026402c055a0a",
+      "id" : "6000015"
+    },
+    {
+      "hash" : "0x108255f37a714053862bd86d0ecb85a5bbcf05b4157ce578dbc9841a3da10fd1",
+      "id" : "6000009"
+    },
+    {
+      "hash" : "0x82fb38ccf6a75c9496f4e25dc76fa0aba23e86756d433b3dc446b3ad3f0de5ae",
+      "id" : "6000011"
+    },
+    {
+      "hash" : "0x7504ab837bfd7e3596bb2325e95dc52accf687dd2a3204cae2cd6860b89c7915",
+      "id" : "6000012"
+    },
+    {
+      "hash" : "0x19b5b8f451e2f23aef62126413fa4648887b9151bf4b6f30351fa65b24c0dd76",
+      "id" : "6000020"
+    },
+    {
+      "hash" : "0x8915f474f7a297e5e831dfb853f2d7baeb17b14982049f5ea5c63e2cc45dda76",
+      "id" : "6000002"
+    },
+    {
+      "hash" : "0xa88ffe1a0fe24317fa17fb6a44adb54a270aa388bb456e03a93921b7a8fb45b6",
+      "id" : "6000013"
+    },
+    {
+      "hash" : "0xa52635e3ffe361ff89a816375791aeae454e295f54a7571d46e77baaa651788f",
+      "id" : "6000004"
+    },
+    {
+      "hash" : "0xb2640b33a9e924a4ff40435089e1368020bf63e04230bf363182fce06b4401b4",
+      "id" : "6000005"
+    },
+    {
+      "hash" : "0x26550212d1e28d47758da996f33214b16140b49d2a38bc580bdb4e85960c3e32",
+      "id" : "6000010"
+    },
+    {
+      "hash" : "0xacebb21dae23f143c132451780a93f9fa92cb27f734de00dd63525a94d771121",
+      "id" : "6000000"
+    },
+    {
+      "hash" : "0x74420b554b7d826c72640b271fad74f141bf9d40f0104880d26d6587d8f0b97c",
+      "id" : "6000003"
+    },
+    {
+      "hash" : "0x6823866b6ecf71634d9850662050bb53a3893a464a2217ee9bff316bc1348231",
+      "id" : "6000019"
+    },
+    {
+      "hash" : "0x9369a018dfcb5cf112aeb645261b4d02769caff89d2c214333c86c38fbfa22f6",
+      "id" : "6000006"
+    },
+    {
+      "hash" : "0x788a4db72c74099cd0da09e6beff4a7429c34ba98c9d96aa808c8668ca3446b3",
+      "id" : "6000016"
+    },
+    {
+      "hash" : "0x59338d0184a3b2db4db6230e87f0871f464ba5544a385f2ab664f087d268ed10",
+      "id" : "6000008"
+    },
+    {
+      "hash" : "0x781cab8a751bcadd221acbe0979ef7f4ca0e138107c43da05b8b5710bd389c05",
+      "id" : "6000014"
+    },
+    {
+      "hash" : "0x02c75af2ae153dbc71307635d57cdcefcdc82704e54c52688a621afea6f434f8",
+      "id" : "6000017"
+    },
+    {
+      "hash" : "0xd3791383f7106da0929c5ddd3ec665b80e897c5b8d7b279bdc3ea9182c08c8e9",
+      "id" : "6000018"
+    },
+    {
+      "hash" : "0x6083939e922c0a540df561778bef6ddeeee212f6f808268b13acf1de8feda5c1",
+      "id" : "6000001"
+    },
+    {
+      "hash" : "0x4aa81057562c388c2ae379b8c8c1864a5660a6994967d37dc200c0b83c65c36d",
+      "id" : "6000021"
+    }
+  ]
+}

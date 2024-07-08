@@ -1,0 +1,128 @@
+{
+  "contractAddress" : "0xa319c382a702682129fcbf55d514e61a16f97f9c",
+  "kind" : "p5js",
+  "projectId" : "17",
+  "script" : "function setup(){const a=createVector;noiseSeed(s),noCanvas();var o=900,l=1200;const t=new CC;var i=rnd()<.45,e=60*floor(i?rnd(20,26):rnd(15,20)),n=floor(rnd(2,6)),c=e\/n;const p=[],r=[];for(let e=0;e<n;e++){const{v:a,n:$}=t.N(r);r.push(a),p[e]={v:a,n:$,shapes:[]}}const h=gnf();var v=18e4\/1080,f=floor(rnd(3,9)),u=o\/(i?rnd(48,128):rnd(24,40));for(let r=0;r<n;r++){const A=[];for(let e=0;e<f-1;e++)A[e]=[rnd(2e3),rnd(2e3)];for(let e=0;e<c;e++){var g,w=e<c\/2?map(e,0,c\/2,0,u):map(e,c\/2,c,u,0);let t,n;const N=[];n=i?(g=map(e,0,c-1,0,l),t=a(0,g),a(o,g)):(x=map(e,0,c-1,0,o),t=a(x,0),a(x,l));for(let e=0;e<A.length;e++){const a=p5.Vector.lerp(t,n,(e+1)\/f);var[m,y]=A[e];a.x+=map(h(m,a.x\/v,a.y\/v),0,1,-w,w),a.y+=map(h(y,a.y\/v,a.x\/v),0,1,-w,w),a.x<0&&(a.x=0),a.y<0&&(a.y=0),a.x>o&&(a.x=o),a.y>l&&(a.y=l),N.push(a)}var x=e%2==0?[t,...N,n]:[n,...N.reverse(),t];p[r].shapes.push(x)}}var S=\"http:\/\/www.w3.org\/2000\/svg\";let C=document.createElementNS(S,\"svg\");C.sa=C.setAttribute,C.sa(\"class\",\"plot\"),C.sa(\"width\",\"9in\"),C.sa(\"height\",\"12in\"),C.sa(\"viewBox\",\"0 0 900 \"+l),C.sa(\"style\",\"background-color:white;\"),C.sa(\"xmlns\",\"http:\/\/www.w3.org\/2000\/svg\"),C.sa(\"xmlns:inkscape\",\"http:\/\/www.inkscape.org\/namespaces\/inkscape\");for(let e=0;e<p.length;e++){var k=p[e];const E=d.createElementNS(S,\"g\");var M=`${e+1} - ${k.n}`;E.sa=E.setAttribute,E.sa(\"id\",M),E.sa(\"inkscape:groupmode\",\"layer\"),E.sa(\"inkscape:label\",M);for(let e=0;e<k.shapes.length;e++){var b=k.shapes[e];let t=`M ${b[0].x} ${b[0].y}`;for(let e=1;e<b.length;e++)t+=` L ${b[e].x} ${b[e].y}`;const B=d.createElementNS(S,\"path\");B.setAttribute(\"style\",`fill:none;stroke-width:1;stroke:${k.v};`),B.setAttribute(\"d\",t),E.appendChild(B)}C.appendChild(E)}d.body.appendChild(C);let R=d.createElement(\"style\");R.appendChild(d.createTextNode(\".plot{width:100vw;height:100vh;}\")),d.head.appendChild(R)}h=tokenData.hash,S=Uint32Array.from([0,1,s=t=2,3].map(e=>parseInt(h.substr(8*e+2,8),16))),R=e=>(t=S[3],S[3]=S[2],S[2]=S[1],S[1]=s=S[0],t^=t<<11,S[0]^=t^t>>>8^s>>>19,S[0]\/2**32),s=parseInt(h.slice(0,16),16),d=document,rnd=(e,t)=>{var n,r=R();return void 0===e?r:void 0===t?e instanceof Array?e[Math.floor(r*e.length)]:r*e:(t<e&&(n=e,e=t,t=n),r*(t-e)+e)};class CC{n=[\"Micron Rose\",\"Micron Red\",\"Micron Orange\",\"Micron Green\",\"Micron Blue\",\"Micron Purple\",\"Micron Brown\"];v=[\"#df4a82\",\"#f1230a\",\"#f47d3d\",\"#47a858\",\"#0972c4\",\"#842eae\",\"#a14725\"];R(){return rnd(this.v)}N(e){let t=this.R();for(;e.includes(t);)t=this.R();var n=this.n[this.v.indexOf(t)];return{v:t,n:n}}}function gnf(){const r=floor(rnd(5,10));return rnd([(e,t,n)=>noise(e,t,n),(e,t,n)=>ceil(noise(e,t,n)*r)\/r])}",
+  "tokens" : [
+    {
+      "hash" : "0xb0d731b621a4d374f1f3ec485cba9de40d9b90f63d00937637fdf03aca7e49a3",
+      "id" : "17000004"
+    },
+    {
+      "hash" : "0x13ba80ea87b34c72ef31be0b715849b4da1ef5b2a1c8834bbe15db983a486e68",
+      "id" : "17000028"
+    },
+    {
+      "hash" : "0x7e6a87da26981b276ac04257b76c06cd1e64c0d596717b31789cbc5cc3fed143",
+      "id" : "17000029"
+    },
+    {
+      "hash" : "0x82d7ceb5f12637c27d869de37f676a8372963f47592f54bc3fe2341a4b9dcf8f",
+      "id" : "17000013"
+    },
+    {
+      "hash" : "0x00f2e825524dae79c1727acfb250d6899c871db0487c62adcb8955d39ac64572",
+      "id" : "17000018"
+    },
+    {
+      "hash" : "0xb85d0ff276d0b258d63eb72986be6ec224875f4bab4f0619f13cf329cde32aa7",
+      "id" : "17000000"
+    },
+    {
+      "hash" : "0x21b9be5db10107ba22d5e57b6864987ac3d2f621057587c80b8145d8a7563893",
+      "id" : "17000016"
+    },
+    {
+      "hash" : "0x7b67832eef5e45fd95c8ecd7729c9b64c8a9e37fb7c6df45183b1f809dd94577",
+      "id" : "17000023"
+    },
+    {
+      "hash" : "0x675f66d1b4c5e814a435ba398ef0dc0f6ba04f9951cc905e4aa55528d4b38c00",
+      "id" : "17000011"
+    },
+    {
+      "hash" : "0xefbd4d352a2a3f0cd66de4834aeb7f8d9574f5274f8f465202d7b8ed3ee71389",
+      "id" : "17000010"
+    },
+    {
+      "hash" : "0xa2229350eb6c8211aabf724b235465deeb304555f4df6f4d1b555c1e2d195b5a",
+      "id" : "17000025"
+    },
+    {
+      "hash" : "0x59d9760bf48462f4dd18f8be73c4c48a5a485036f7e1d7a0e98b2ac2efe2687b",
+      "id" : "17000002"
+    },
+    {
+      "hash" : "0xf06d65193138a52e25c9132e0f174c5edc9040dded973c6f6ecde76a68340ca4",
+      "id" : "17000003"
+    },
+    {
+      "hash" : "0x9458f3b877cc70286abc862b3a616fef910dd4fc8058f7d10f0dd7fe42752358",
+      "id" : "17000020"
+    },
+    {
+      "hash" : "0xd9f55f7dcee4f11ba8d80827788d9b87ccbc3864a9c38b9269a7bfeb4a88f3ec",
+      "id" : "17000007"
+    },
+    {
+      "hash" : "0x845c5faceab084c11b9e2b3cedb1d41b0916ebc239768f06576fec62f00ab073",
+      "id" : "17000012"
+    },
+    {
+      "hash" : "0x3254dde8dae58c2b2d3645c85ffc7197c726bf7a72fbee851c19325d60fe5dfc",
+      "id" : "17000009"
+    },
+    {
+      "hash" : "0x860d1838b43ce901e3e3c958cf0020a59f5a8432544e26c2d93312a2c4b8e6b2",
+      "id" : "17000021"
+    },
+    {
+      "hash" : "0x887e3cbd270e4256e3cd5f29002954a7b0d08cd7611787f2aa53a8bdb500672e",
+      "id" : "17000026"
+    },
+    {
+      "hash" : "0x6b220277e5608069db1e3c1438a80f58c56309f899b9b08fd4db2822eb8eaa8f",
+      "id" : "17000027"
+    },
+    {
+      "hash" : "0x511c5954a8f6619a9d484c77119048ed2cadc9fd41bc2253a4611715c3d8139f",
+      "id" : "17000001"
+    },
+    {
+      "hash" : "0xd36c0358e64daf92725169eae8cff991fb433d4d3f446a75b3b96163b7c516f4",
+      "id" : "17000005"
+    },
+    {
+      "hash" : "0xc44d6cc9c8d04a77da179025f7f798028ec738391ac8de3b64d0c40a500f27cd",
+      "id" : "17000006"
+    },
+    {
+      "hash" : "0xd8147678818b5e6acdc6a5c1f8a5ba04fb2136aec8b3fb6b57d7df8266fbfed3",
+      "id" : "17000014"
+    },
+    {
+      "hash" : "0x2635beb1be634405fde3f5ca6ada9df4f5888bbc9691f5944d5d7ed419d90319",
+      "id" : "17000015"
+    },
+    {
+      "hash" : "0xc9d869d1393e2d6c440b09aff33c72e588d641ba8468d515b29a772776535cbd",
+      "id" : "17000017"
+    },
+    {
+      "hash" : "0xf5b595456b7aec667f4e6055025cd467d3faa91cefd447fe8fe48b50fda26166",
+      "id" : "17000019"
+    },
+    {
+      "hash" : "0xd8666a9211265517ca9814d681cb3dd24b06b6cb39e29457551bf4ad6b15bb38",
+      "id" : "17000022"
+    },
+    {
+      "hash" : "0x3b7640d8eef26b25b70bb5c76a0b3dc1ba9afc5bd05678793dcc5f17781639b2",
+      "id" : "17000024"
+    },
+    {
+      "hash" : "0xabf6aaa58f85e8af5d9bd67f0b4c803ca2651f4aea7beae0bef8fb820a4d39fb",
+      "id" : "17000008"
+    }
+  ]
+}

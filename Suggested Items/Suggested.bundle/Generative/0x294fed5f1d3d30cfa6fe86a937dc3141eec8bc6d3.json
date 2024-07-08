@@ -1,0 +1,416 @@
+{
+  "contractAddress" : "0x294fed5f1d3d30cfa6fe86a937dc3141eec8bc6d",
+  "kind" : "p5js",
+  "projectId" : "3",
+  "script" : "let canvas,seed,R,S,featuresInt,featuresReadable;const ratio=.76,colVarParams={hMin:-2.5,hMax:2.5,sMin:-2.5,sMax:15,bMin:-10,bMax:5},bgVarParams={hMin:-5,hMax:5,sMin:-10,sMax:2.5,bMin:-2.5,bMax:5},thicknessDivFactorLowRangeMin=1.75,thicknessDivFactorLowRangeMax=2,thicknessDivFactorHiRangeMin=.5,thicknessDivFactorHiRangeMax=.75,textureSoftLightAlpha=8,textureOverlayAlpha=10,paths=[[{x:.7,y:.07},{x:.59,y:.04},{x:.22,y:.09},{x:.14,y:.16},{x:.23,y:.21},{x:.57,y:.18},{x:.51,y:.12},{x:.54,y:.05},{x:.64,y:.08},{x:.59,y:.18},{x:.7,y:.2},{x:.87,y:.3},{x:.9,y:.59},{x:.81,y:.7},{x:.89,y:.85},{x:.74,y:.66},{x:.8,y:.4},{x:.72,y:.24},{x:.58,y:.19},{x:.5,y:.27},{x:.6,y:.3},{x:.63,y:.24},{x:.61,y:.31},{x:.74,y:.33},{x:.61,y:.54},{x:.07,y:.61},{x:.16,y:.78},{x:.6,y:.81},{x:.92,y:.91},{x:.55,y:.65},{x:.38,y:.34},{x:.22,y:.29},{x:.16,y:.38},{x:.21,y:.66},{x:.27,y:.77},{x:.19,y:.86},],[{x:.71,y:.1},{x:.54,y:.03},{x:.27,y:.06},{x:.08,y:.09},{x:.07,y:.16},{x:.23,y:.23},{x:.64,y:.21},{x:.68,y:.14},{x:.55,y:.06},{x:.43,y:.09},{x:.47,y:.16},{x:.64,y:.2},{x:.8,y:.2},{x:.87,y:.34},{x:.89,y:.57},{x:.81,y:.83},{x:.9,y:.95},{x:.67,y:.78},{x:.79,y:.5},{x:.63,y:.22},{x:.48,y:.3},{x:.53,y:.38},{x:.6,y:.37},{x:.65,y:.3},{x:.6,y:.37},{x:.72,y:.41},{x:.65,y:.51},{x:.1,y:.65},{x:.07,y:.79},{x:.14,y:.88},{x:.5,y:.91},{x:.84,y:.94},{x:.59,y:.83},{x:.45,y:.6},{x:.32,y:.39},{x:.13,y:.29},{x:.1,y:.34},{x:.11,y:.43},{x:.16,y:.73},{x:.2,y:.9},{x:.12,y:.94},],[{x:.69,y:.09},{x:.56,y:.03},{x:.26,y:.07},{x:.16,y:.09},{x:.14,y:.16},{x:.26,y:.21},{x:.56,y:.21},{x:.67,y:.13},{x:.54,y:.06},{x:.43,y:.1},{x:.56,y:.21},{x:.76,y:.19},{x:.89,y:.29},{x:.91,y:.55},{x:.75,y:.82},{x:.89,y:.91},{x:.7,y:.82},{x:.77,y:.64},{x:.71,y:.55},{x:.76,y:.23},{x:.67,y:.21},{x:.64,y:.27},{x:.6,y:.22},{x:.51,y:.31},{x:.62,y:.34},{x:.67,y:.34},{x:.68,y:.44},{x:.64,y:.62},{x:.14,y:.63},{x:.07,y:.72},{x:.31,y:.78},{x:.67,y:.85},{x:.69,y:.73},{x:.69,y:.61},{x:.6,y:.56},{x:.39,y:.42},{x:.26,y:.29},{x:.16,y:.29},{x:.17,y:.43},{x:.25,y:.69},{x:.23,y:.82},{x:.12,y:.91},],[{x:.75,y:.04},{x:.63,y:.03},{x:.31,y:.07},{x:.32,y:.12},{x:.55,y:.14},{x:.77,y:.17},{x:.75,y:.12},{x:.78,y:.06},{x:.89,y:.04},{x:.95,y:.1},{x:.91,y:.17},{x:.79,y:.2},{x:.88,y:.27},{x:.85,y:.53},{x:.87,y:.71},{x:.83,y:.79},{x:.71,y:.78},{x:.65,y:.62},{x:.69,y:.43},{x:.79,y:.23},{x:.61,y:.21},{x:.56,y:.26},{x:.62,y:.31},{x:.69,y:.28},{x:.62,y:.34},{x:.62,y:.59},{x:.23,y:.64},{x:.12,y:.71},{x:.14,y:.79},{x:.51,y:.79},{x:.71,y:.71},{x:.6,y:.62},{x:.49,y:.45},{x:.32,y:.25},{x:.19,y:.23},{x:.16,y:.35},{x:.25,y:.76},{x:.21,y:.86},{x:.16,y:.88},],[{x:.61,y:.06},{x:.27,y:.07},{x:.11,y:.12},{x:.11,y:.17},{x:.24,y:.17},{x:.55,y:.19},{x:.67,y:.21},{x:.73,y:.16},{x:.59,y:.08},{x:.55,y:.19},{x:.67,y:.21},{x:.87,y:.27},{x:.88,y:.43},{x:.87,y:.71},{x:.7,y:.93},{x:.68,y:.64},{x:.79,y:.35},{x:.66,y:.26},{x:.51,y:.32},{x:.57,y:.37},{x:.64,y:.3},{x:.6,y:.37},{x:.72,y:.39},{x:.64,y:.49},{x:.33,y:.54},{x:.1,y:.63},{x:.1,y:.74},{x:.23,y:.86},{x:.8,y:.93},{x:.59,y:.82},{x:.48,y:.6},{x:.36,y:.38},{x:.19,y:.3},{x:.15,y:.38},{x:.1,y:.45},{x:.18,y:.73},{x:.2,y:.89},{x:.12,y:.93},],[{x:.76,y:.07},{x:.16,y:.07},{x:.16,y:.17},{x:.76,y:.17},{x:.76,y:.11},{x:.67,y:.11},{x:.67,y:.17},{x:.91,y:.17},{x:.91,y:.81},{x:.8,y:.81},{x:.8,y:.22},{x:.55,y:.22},{x:.56,y:.32},{x:.64,y:.32},{x:.64,y:.26},{x:.67,y:.26},{x:.67,y:.32},{x:.74,y:.32},{x:.74,y:.48},{x:.12,y:.48},{x:.12,y:.81},{x:.71,y:.81},{x:.71,y:.61},{x:.37,y:.61},{x:.37,y:.24},{x:.23,y:.24},{x:.23,y:.87},{x:.11,y:.87},],[{x:.42,y:.2},{x:.29,y:.15},{x:.16,y:.17},{x:.09,y:.23},{x:.15,y:.29},{x:.33,y:.31},{x:.43,y:.27},{x:.39,y:.22},{x:.33,y:.26},{x:.39,y:.31},{x:.42,y:.41},{x:.5,y:.58},{x:.52,y:.73},{x:.46,y:.84},{x:.15,y:.74},{x:.16,y:.61},{x:.28,y:.51},{x:.43,y:.38},{x:.5,y:.3},{x:.46,y:.29},{x:.55,y:.46},{x:.51,y:.42},{x:.54,y:.29},{x:.61,y:.26},{x:.66,y:.28},{x:.68,y:.33},{x:.66,y:.4},{x:.67,y:.35},{x:.76,y:.31},{x:.84,y:.35},{x:.84,y:.43},{x:.76,y:.62},{x:.81,y:.69},{x:.93,y:.71},],],blue=\"#0a4f9c\",red=\"#de1215\",green=\"#1aa588\",black=\"#181617\",paper=\"#FBF9EA\",classicPalettes=[[green,red,blue],[red],[blue],],colorPalette=[blue,red,green,black,\"#ede5d8\",\"#ac1972\",\"#ebca49\",\"#e98110\"];let points=[],colors=[];function calculateFeatures($){switch((featuresInt={}).style=[0,1,2][R.weighted_index([.5,.2,.3])],featuresInt.style){case 0:colors=classicPalettes[R.weighted_index([.1,.2,.7])],featuresInt.bg=getColorVariation(paper,bgVarParams);break;case 1:colors=[...colorPalette],featuresInt.bg=colors.splice(colors.indexOf(black),1),colors=R.random_bool(.8)?[paper]:colors.splice(R.random_int(0,colors.length-1),1);break;case 2:colors=[...colorPalette],featuresInt.bg=colors.splice(R.random_int(0,colors.length-1),1)}featuresInt.pathIndex=R.weighted_index([.1,.1,.1,.1,.1,.1,.02]),featuresInt.minSegmentSize=R.random_int(3,7),featuresInt.probSegment=R.random_num(0,.25),featuresInt.probSmooth=R.random_num(.5,1),featuresInt.erraticness=R.random_num(.1,.5),points=paths[featuresInt.pathIndex],featuresReadable={};let e;switch(featuresInt.style){case 0:e=\"Classic\";break;case 1:e=\"Lino\";break;case 2:e=\"Cut Color\"}return featuresReadable.Style=e,featuresReadable.Line=featuresInt.pathIndex<6?numberToRoman(featuresInt.pathIndex+1):\"GM\",console.log(\"featuresReadable:\",featuresReadable),featuresReadable}function setup(){init(),noLoop()}function draw(){render()}function init(){console.log(`tokenData.hash: ${tokenData.hash}`);let $,e;window.innerHeight<=window.innerWidth\/.76?($=.76*Math.max(window.innerHeight,1),e=Math.max(window.innerHeight,1)):($=Math.max(window.innerWidth),e=Math.max(window.innerWidth,1)\/.76),console.log(`Canvas w:${$} h:${e}`),createCanvas($,e),pixelDensity(2*displayDensity()),seed=parseInt(tokenData.hash.slice(0,16),16),R=new Random,S=new SimplexNoise(seed),calculateFeatures(tokenData)}function render(){background(featuresInt.bg);let $=segmentPath(points,featuresInt.probSegment,featuresInt.minSegmentSize),e=[];for(let n=0;n<$.length;n++){let r={points:$[n],thickness:R.random_num(.04,.06),erraticness:R.random_dec(),col:0==featuresInt.style?getColorVariation(R.random_choice(colors),colVarParams):R.random_choice(colors)};r.poly=getPolyFromStroke(r.points,r.thickness,r.erraticness),r.poly=smoothPoly(r.poly,3,!0,featuresInt.probSmooth),e.push(r),r.strokePoly=getPolyFromStroke(r.poly,.004,.1);let _=[];for(let t=0;t<R.random_int(5,15);t++){let o={};o.col=getColorVariation(R.random_choice(colors),colVarParams),o.highlightCol=getColorVariation(R.random_choice([\"#ffffff\",\"#000000\"]),bgVarParams);let a=R.random_num(.1,.25),y=R.random_num(0,TAU),x=R.random_dec(),l=R.random_dec(),s=[];for(let i=y;i<TAU+y;i+=TAU\/R.random_int(3,10)){let u=a*R.random_num(.5,1),m=x+u*Math.cos(i),d=l+u*Math.sin(i);s.push({x:m,y:d})}s=smoothPoly(s,3,!0,.75),o.poly=s,o.expandedPoly=scalePoly(s,R.random_num(.002,.004)),o.expandedPolyAlpha=R.random_num(90,120),_.push(o)}r.patches=_}featuresInt.segments=e,console.log(\"featuresInt:\",featuresInt);for(let h=0;h<featuresInt.segments.length;h++){let c=featuresInt.segments[h],f=createGraphics(width,height),g=f.canvas.getContext(\"2d\");for(let p of(g.clearRect(0,0,width,height),g.globalCompositeOperation=\"destination-over\",f.beginShape(),f.fill(1!=featuresInt.style?featuresInt.bg:R.random_choice(colors)),f.noStroke(),c.strokePoly))f.vertex(p.x*width,p.y*height);if(f.endShape(CLOSE),1!=featuresInt.style){for(let b of(f.beginShape(),f.fill(c.col),f.noStroke(),c.poly))f.vertex(b.x*width,b.y*height);f.endShape(CLOSE),g.globalCompositeOperation=\"source-over\",g.clip(),2!=featuresInt.style&&(drawPatches(f,c.patches),drawTexture(f))}image(f,0,0)}0==featuresInt.style&&drawGlobalDiscoloration(),drawGlobalNoiseGrain()}function segmentPath($,e,n){let r=[],_=[];for(let t=0;t<$.length;t++)_.push($[t]),_.length>=n&&t<$.length-n&&R.random_bool(e)&&(_.push($[t+1]),r.push([..._]),_.length=0);return r.push([..._]),r}function getPolyFromStroke($,e,n){let r=[];if($.length>1){for(let _=0;_<$.length-1;_++){let t={x:$[_].x+R.random_num(-.02,.02)*n,y:$[_].y+R.random_num(-.02,.02)*n},o={x:$[_+1].x+R.random_num(-.02,.02)*n,y:$[_+1].y+R.random_num(-.02,.02)*n};0==_&&r.push(getPerpendicularPoint(t,o,0,e\/map(t.y,0,1,R.random_num(1.75,2),R.random_num(.5,.75)))),r.push(getPerpendicularPoint(t,o,R.random_num(.4,.6),e\/map(t.y,0,1,R.random_num(1.75,2),R.random_num(.5,.75)))),r.push(getPerpendicularPoint(t,o,1,e\/map(t.y,0,1,R.random_num(1.75,2),R.random_num(.5,.75))))}for(let a=$.length-1;a>0;a--){let y={x:$[a].x+R.random_num(-.02,.02)*n,y:$[a].y+R.random_num(-.02,.02)*n},x={x:$[a-1].x+R.random_num(-.02,.02)*n,y:$[a-1].y+R.random_num(-.02,.02)*n};r.push(getPerpendicularPoint(y,x,0,e\/map(y.y,0,1,R.random_num(1.75,2),R.random_num(.5,.75)))),r.push(getPerpendicularPoint(y,x,R.random_num(.4,.6),e\/map(y.y,0,1,R.random_num(1.75,2),R.random_num(.5,.75)))),a==$.length-2&&r.push(getPerpendicularPoint(y,x,1,e\/map(y.y,0,1,R.random_num(1.75,2),R.random_num(.5,.75))))}}return r.push(r[0]),r}function getPerpendicularPoint($,e,n,r){let _=atan2(e.y-$.y,e.x-$.x),t=getMidPoint($,e,n);return{x:t.x+r*Math.cos(_-HALF_PI),y:t.y+r*Math.sin(_-HALF_PI)}}function getMidPoint($,e,n){return{x:$.x*(1-n)+e.x*n,y:$.y*(1-n)+e.y*n}}function smoothPoly($,e,n,r){let _=[],t=$.length-1;n&&(t+=2);for(let o=0;o<t;o++){let a=$[o%$.length],y=$[(o+1)%$.length];o!=$.length-1&&(R.random_bool(r)?(_.push({x:.75*a.x+.25*y.x,y:.75*a.y+.25*y.y}),_.push({x:.25*a.x+.75*y.x,y:.25*a.y+.75*y.y})):_.push(a)),o==t-1&&_.push(y)}for(let x=1;x<e;x++)_=smoothPoly([..._],1);return _}function scalePoly($,e){let n=getPolyCentroid($),r=[];for(let _ of $){let t=_,o={x:n.x,y:n.y};r.push({x:t.x*(1+e)+-(o.x*e),y:t.y*(1+e)+-(o.y*e)})}return r}function getPolyCentroid($){let e=0,n=0;for(let r=0;r<$.length;r++){let _=$[r],t=$[(r+1)%$.length],o=_.x*t.y-t.x*_.y;e+=(_.x+t.x)*o,n+=(_.y+t.y)*o}let a=calculatePolygonArea($),y=1\/(6*a),x=y*e,l=y*n;return{x:x,y:l}}function calculatePolygonArea($){let e=0;for(let n=0;n<$.length;n++){let r=$[n],_=$[(n+1)%$.length];e+=r.x*_.y-_.x*r.y}return Math.abs(e\/=2)}function drawTexture($){let e=R.random_int(0,99999),n=width\/10,r=height\/100;$.rectMode(CENTER);for(let _=0;_<2;_++)for(let t=-50;t<150;t++)for(let o=-5;o<15;o++){$.push(),$.translate(n*(o+.5),r*(t+.5));let a,y;0==_?(a=.4,y=.01):1==_&&(a=.005,y=.2);let x=map(S.noise3D(e,t*a,o*y),0,1,150,190),l;x>160?($.blendMode(SOFT_LIGHT),l=8):($.blendMode(OVERLAY),l=10),$.fill(x,l),$.noStroke();let s=map(S.noise3D(e,.001*t,.005*o),0,1,-5*r,5*r),i=map(S.noise3D(e,.005*t,.001*o),0,1,-2*n,2*n),u=R.random_num(0,TAU);$.beginShape();for(let m=u;m<TAU+u;m+=TAU\/R.random_int(3,10)){let d=i+n*R.random_num(2,4)*Math.cos(m),h=s+r*R.random_num(2,4)*Math.sin(m);$.vertex(d,h)}$.endShape(CLOSE),$.pop()}}function drawPatches($,e){for(let n=0;n<e.length;n++){let r=e[n],_=color(r.highlightCol);for(let t of(_.setAlpha(r.expandedPolyAlpha),$.fill(_),$.beginShape(),r.expandedPoly))$.vertex(t.x*width,t.y*height);for(let o of($.endShape(CLOSE),(_=color(r.col)).setAlpha(255),$.beginShape(),$.fill(_),$.noStroke(),r.poly))$.vertex(o.x*width,o.y*height);$.endShape(CLOSE)}}function drawGlobalDiscoloration(){drawingContext.save();let $=drawingContext.createLinearGradient(width\/2,height*R.random_num(-.1,-.2),width\/2,1*height),e=drawingContext.createLinearGradient(width\/2,height*R.random_num(1.1,1.2),width\/2,0*height),n=drawingContext.createLinearGradient(width*R.random_num(-.1,-.2),height\/2,1*width,height\/2),r=drawingContext.createLinearGradient(width*R.random_num(1.1,1.2),height\/2,0*width,height\/2);for(let _ of(drawingContext.globalCompositeOperation=\"color-burn\",[$,e,n,r]))_.addColorStop(0,\"rgba(0,0,0,0.25)\"),_.addColorStop(.5,\"rgba(255,255,255,0.05)\"),drawingContext.fillStyle=_,drawingContext.fillRect(0,0,width,height);drawingContext.restore()}function drawGlobalNoiseGrain(){drawingContext.save(),drawingContext.globalCompositeOperation=\"multiply\";for(let $=0;$<5e4;$++){push();let e=R.random_dec()*width,n=R.random_dec()*height,r=1==featuresInt.style?color(255):color(R.random_bool(.9)?R.random_num(50,80):featuresInt.bg);r.setAlpha(R.random_bool(.999)?map(S.noise2D(.0025*e,.0025*n),0,1,20,40):R.random_num(80,120)),fill(r),noStroke();let _=width*(R.random_bool(.999)?R.random_num(.001,.003):R.random_num(.004,.006)),t=R.random_num(0,TAU);beginShape();for(let o=t;o<TAU+t;o+=TAU\/R.random_int(3,10)){let a=e+(_\/2+width*R.random_num(-.001,.001))*Math.cos(o),y=n+(_\/2+width*R.random_num(-.001,.001))*.6*Math.sin(o);curveVertex(a,y)}endShape(CLOSE),pop()}drawingContext.restore()}function getColorVariation($,e){let n=color($);if(!R.random_bool(.8))return n.toString(\"#rrggbb\");{let r=R.random_num(e.hMin,e.hMax),_=R.random_num(e.sMin,e.sMax),t=R.random_num(e.bMin,e.bMax),o=hexToHSB($);return o[0]=Math.round((o[0]+r)%360),o[1]=Math.max(Math.min(o[1]+_,100),0),o[2]=Math.max(Math.min(o[2]+t,100),0),color(`hsb(${o[0]}, ${o[1]}%, ${o[2]}%)`).toString(\"#rrggbb\")}}function hexToHSB($){$=$.replace(\"#\",\"\");let e=parseInt($.substring(0,2),16)\/255,n=parseInt($.substring(2,4),16)\/255,r=parseInt($.substring(4,6),16)\/255,_=Math.max(e,n,r),t=Math.min(e,n,r),o;return(o=Math.round(60*(o=_===t?0:_===e?(n-r)\/(_-t)%6:_===n?(r-e)\/(_-t)+2:(e-n)\/(_-t)+4)))<0&&(o+=360),[o,0===_?0:Math.round((_-t)\/_*100),Math.round(100*_)]}function numberToRoman($){let e=\"\";for(let n of[{value:1e3,numeral:\"M\"},{value:900,numeral:\"CM\"},{value:500,numeral:\"D\"},{value:400,numeral:\"CD\"},{value:100,numeral:\"C\"},{value:90,numeral:\"XC\"},{value:50,numeral:\"L\"},{value:40,numeral:\"XL\"},{value:10,numeral:\"X\"},{value:9,numeral:\"IX\"},{value:5,numeral:\"V\"},{value:4,numeral:\"IV\"},{value:1,numeral:\"I\"}])for(;$>=n.value;)e+=n.numeral,$-=n.value;return e}class Random{constructor(){this.useA=!1;let $=function($){let e=parseInt($.substring(0,8),16),n=parseInt($.substring(8,16),16),r=parseInt($.substring(16,24),16),_=parseInt($.substring(24,32),16);return function(){r|=0;let $=((e|=0)+(n|=0)|0)+(_|=0)|0;return _=_+1|0,e=n^n>>>9,n=r+(r<<3)|0,r=(r=r<<21|r>>>11)+$|0,($>>>0)\/4294967296}};this.prngA=new $(tokenData.hash.substring(2,34)),this.prngB=new $(tokenData.hash.substring(34,66));for(let e=0;e<1e6;e+=2)this.prngA(),this.prngB()}random_dec(){return this.useA=!this.useA,this.useA?this.prngA():this.prngB()}random_num($,e){return $+(e-$)*this.random_dec()}random_int($,e){return Math.floor(this.random_num($,e+1))}random_bool($){return this.random_dec()<$}random_choice($){return $[this.random_int(0,$.length-1)]}weighted_index($){let e=0;for(let n=0;n<$.length;n++)e+=$[n];let r=e*this.random_dec();for(let _=0;_<$.length;_++){if(r<$[_])return _;r-=$[_]}return $.length-1}}!function(){\"use strict\";var $=.5*(Math.sqrt(3)-1),e=(3-Math.sqrt(3))\/6,n=1\/3,r=1\/6,_=(Math.sqrt(5)-1)\/4,t=(5-Math.sqrt(5))\/20;function o($){var e;e=\"function\"==typeof $?$:$?function $(){var e,n=0,r=0,_=0,t=1,o=(e=4022871197,function($){$=$.toString();for(var n=0;n<$.length;n++){var r=.02519603282416938*(e+=$.charCodeAt(n));e=r>>>0,r-=e,r*=e,e=r>>>0,r-=e,e+=4294967296*r}return(e>>>0)*23283064365386963e-26});n=o(\" \"),r=o(\" \"),_=o(\" \");for(var a=0;a<arguments.length;a++)n-=o(arguments[a]),n<0&&(n+=1),r-=o(arguments[a]),r<0&&(r+=1),_-=o(arguments[a]),_<0&&(_+=1);return o=null,function(){var $=2091639*n+23283064365386963e-26*t;return n=r,r=_,_=$-(t=0|$)}}($):Math.random,this.p=a(e),this.perm=new Uint8Array(512),this.permMod12=new Uint8Array(512);for(var n=0;n<512;n++)this.perm[n]=this.p[255&n],this.permMod12[n]=this.perm[n]%12}function a($){var e,n=new Uint8Array(256);for(e=0;e<256;e++)n[e]=e;for(e=0;e<255;e++){var r=e+~~($()*(256-e)),_=n[e];n[e]=n[r],n[r]=_}return n}o.prototype={grad3:new Float32Array([1,1,0,-1,1,0,1,-1,0,-1,-1,0,1,0,1,-1,0,1,1,0,-1,-1,0,-1,0,1,1,0,-1,1,0,1,-1,0,-1,-1]),grad4:new Float32Array([0,1,1,1,0,1,1,-1,0,1,-1,1,0,1,-1,-1,0,-1,1,1,0,-1,1,-1,0,-1,-1,1,0,-1,-1,-1,1,0,1,1,1,0,1,-1,1,0,-1,1,1,0,-1,-1,-1,0,1,1,-1,0,1,-1,-1,0,-1,1,-1,0,-1,-1,1,1,0,1,1,1,0,-1,1,-1,0,1,1,-1,0,-1,-1,1,0,1,-1,1,0,-1,-1,-1,0,1,-1,-1,0,-1,1,1,1,0,1,1,-1,0,1,-1,1,0,1,-1,-1,0,-1,1,1,0,-1,1,-1,0,-1,-1,1,0,-1,-1,-1,0]),noise2D:function(n,r){var _,t,o=this.permMod12,a=this.perm,y=this.grad3,x=0,l=0,s=0,i=(n+r)*$,u=Math.floor(n+i),m=Math.floor(r+i),d=(u+m)*e,h=n-(u-d),c=r-(m-d);h>c?(_=1,t=0):(_=0,t=1);var f=h-_+e,g=c-t+e,p=h-1+2*e,b=c-1+2*e,v=255&u,P=255&m,I=.5-h*h-c*c;if(I>=0){var M=3*o[v+a[P]];I*=I,x=I*I*(y[M]*h+y[M+1]*c)}var w=.5-f*f-g*g;if(w>=0){var C=3*o[v+_+a[P+t]];w*=w,l=w*w*(y[C]*f+y[C+1]*g)}var k=.5-p*p-b*b;if(k>=0){var A=3*o[v+1+a[P+1]];k*=k,s=k*k*(y[A]*p+y[A+1]*b)}return 70*(x+l+s)},noise3D:function($,e,_){var t,o,a,y,x,l,s,i,u,m,d=this.permMod12,h=this.perm,c=this.grad3,f=($+e+_)*n,g=Math.floor($+f),p=Math.floor(e+f),b=Math.floor(_+f),v=(g+p+b)*r,P=$-(g-v),I=e-(p-v),M=_-(b-v);P>=I?I>=M?(x=1,l=0,s=0,i=1,u=1,m=0):P>=M?(x=1,l=0,s=0,i=1,u=0,m=1):(x=0,l=0,s=1,i=1,u=0,m=1):I<M?(x=0,l=0,s=1,i=0,u=1,m=1):P<M?(x=0,l=1,s=0,i=0,u=1,m=1):(x=0,l=1,s=0,i=1,u=1,m=0);var w=P-x+r,C=I-l+r,k=M-s+r,A=P-i+2*r,D=I-u+2*r,V=M-m+2*r,F=P-1+3*r,G=I-1+3*r,L=M-1+3*r,H=255&g,T=255&p,B=255&b,O=.6-P*P-I*I-M*M;if(O<0)t=0;else{var q=3*d[H+h[T+h[B]]];O*=O,t=O*O*(c[q]*P+c[q+1]*I+c[q+2]*M)}var X=.6-w*w-C*C-k*k;if(X<0)o=0;else{var N=3*d[H+x+h[T+l+h[B+s]]];X*=X,o=X*X*(c[N]*w+c[N+1]*C+c[N+2]*k)}var W=.6-A*A-D*D-V*V;if(W<0)a=0;else{var z=3*d[H+i+h[T+u+h[B+m]]];W*=W,a=W*W*(c[z]*A+c[z+1]*D+c[z+2]*V)}var E=.6-F*F-G*G-L*L;if(E<0)y=0;else{var j=3*d[H+1+h[T+1+h[B+1]]];E*=E,y=E*E*(c[j]*F+c[j+1]*G+c[j+2]*L)}return 32*(t+o+a+y)},noise4D:function($,e,n,r){var o,a,y,x,l,s,i,u,m,d,h,c,f,g,p,b,v,P=this.perm,I=this.grad4,M=($+e+n+r)*_,w=Math.floor($+M),C=Math.floor(e+M),k=Math.floor(n+M),A=Math.floor(r+M),D=(w+C+k+A)*t,V=$-(w-D),F=e-(C-D),G=n-(k-D),L=r-(A-D),H=0,T=0,B=0,O=0;V>F?H++:T++,V>G?H++:B++,V>L?H++:O++,F>G?T++:B++,F>L?T++:O++,G>L?B++:O++,s=H>=3?1:0,i=T>=3?1:0,u=B>=3?1:0,m=O>=3?1:0,d=H>=2?1:0,h=T>=2?1:0,c=B>=2?1:0,f=O>=2?1:0,g=H>=1?1:0,p=T>=1?1:0,b=B>=1?1:0;var q=V-s+t,X=F-i+t,N=G-u+t,W=L-m+t,z=V-d+2*t,E=F-h+2*t,j=G-c+2*t,J=L-f+2*t,K=V-g+3*t,Q=F-p+3*t,U=G-b+3*t,Y=L-(v=O>=1?1:0)+3*t,Z=V-1+4*t,$$=F-1+4*t,$e=G-1+4*t,$n=L-1+4*t,$r=255&w,$_=255&C,$t=255&k,$o=255&A,$a=.6-V*V-F*F-G*G-L*L;if($a<0)o=0;else{var $y=P[$r+P[$_+P[$t+P[$o]]]]%32*4;$a*=$a,o=$a*$a*(I[$y]*V+I[$y+1]*F+I[$y+2]*G+I[$y+3]*L)}var $x=.6-q*q-X*X-N*N-W*W;if($x<0)a=0;else{var $l=P[$r+s+P[$_+i+P[$t+u+P[$o+m]]]]%32*4;$x*=$x,a=$x*$x*(I[$l]*q+I[$l+1]*X+I[$l+2]*N+I[$l+3]*W)}var $s=.6-z*z-E*E-j*j-J*J;if($s<0)y=0;else{var $0=P[$r+d+P[$_+h+P[$t+c+P[$o+f]]]]%32*4;$s*=$s,y=$s*$s*(I[$0]*z+I[$0+1]*E+I[$0+2]*j+I[$0+3]*J)}var $i=.6-K*K-Q*Q-U*U-Y*Y;if($i<0)x=0;else{var $u=P[$r+g+P[$_+p+P[$t+b+P[$o+v]]]]%32*4;$i*=$i,x=$i*$i*(I[$u]*K+I[$u+1]*Q+I[$u+2]*U+I[$u+3]*Y)}var $3=.6-Z*Z-$$*$$-$e*$e-$n*$n;if($3<0)l=0;else{var $m=P[$r+1+P[$_+1+P[$t+1+P[$o+1]]]]%32*4;$3*=$3,l=$3*$3*(I[$m]*Z+I[$m+1]*$$+I[$m+2]*$e+I[$m+3]*$n)}return 27*(o+a+y+x+l)}},o._buildPermutationTable=a,window.SimplexNoise=o}();",
+  "tokens" : [
+    {
+      "hash" : "0xfb7b65fc48216b8ef99d8cdeac15e9da997b9a240878f6686a887d931cd58331",
+      "id" : "3000088"
+    },
+    {
+      "hash" : "0x5b4a03e6d28bdf4f9a49f4197c3b0b02ea197b90fa7e45d11f322503724270c9",
+      "id" : "3000048"
+    },
+    {
+      "hash" : "0x525a3f175274db26a5d51d8d0157368ffb2940194fb0ab664f0eff1f2c17b18d",
+      "id" : "3000096"
+    },
+    {
+      "hash" : "0xb1df6f9d63d59f2f0e38cb5b26bbc1d4b54c5c1d3ebbd1dd47f74a0152acb94d",
+      "id" : "3000013"
+    },
+    {
+      "hash" : "0xf77c4634eafb38441ab6b450d8b48e1ffe24bb5430ce56a31c5b7ee4ac388b7a",
+      "id" : "3000041"
+    },
+    {
+      "hash" : "0xa8caefcbca0a1ef07e37a06f42a2c9a2393388859718dd5bb48da46a2d44512a",
+      "id" : "3000101"
+    },
+    {
+      "hash" : "0x36a7c1b5c61352eb1f4bb9aa67adc3a5d61c7675442c50d86c06d4dd7a1e587b",
+      "id" : "3000060"
+    },
+    {
+      "hash" : "0x6ed6d0237a92d3536d3a99f091feba221625b53efed2abace5ccfac6483c8636",
+      "id" : "3000099"
+    },
+    {
+      "hash" : "0xd33d66052ce42c4913d899a2e81e8f827b70c39ba4f0235f7beab9335aecd48f",
+      "id" : "3000035"
+    },
+    {
+      "hash" : "0xecd01146f9d1237b91180672139e7f7ef3ed3c71b80ee078a345516f0bf8ea44",
+      "id" : "3000057"
+    },
+    {
+      "hash" : "0x0be606d603ed7b6484e580de71d99bff2868a6de9065662b679c6a4693d5b9c6",
+      "id" : "3000022"
+    },
+    {
+      "hash" : "0x5cb601d966f086adc14ea9fd8721da0768144c455c5bb89ff7b553ec0e75f53d",
+      "id" : "3000026"
+    },
+    {
+      "hash" : "0x63df951028de45d8038bf2514119579a5ba73c621c6b67c4be56a538eb642e3f",
+      "id" : "3000078"
+    },
+    {
+      "hash" : "0xce13d5f77da64b56dc7137e147242abec697f995267d6d779b5574054eee87cb",
+      "id" : "3000012"
+    },
+    {
+      "hash" : "0x48587b48c8ab1a381625cd52afa952813669b4bc432d1978330e098feffe743e",
+      "id" : "3000075"
+    },
+    {
+      "hash" : "0xa8baca7b0d98003a545893fc23784c6e3bf052486c5453f1d9bd80ff3b899371",
+      "id" : "3000058"
+    },
+    {
+      "hash" : "0x181f533dc99e71eda888cfaf41e93ec8c26ad067df1687ceb95e994bb2a3b143",
+      "id" : "3000054"
+    },
+    {
+      "hash" : "0x31ed17f68031e128340d2fb24b18110e2a6b55811ab03ea00c785adf8c419b19",
+      "id" : "3000025"
+    },
+    {
+      "hash" : "0x93821ef0bd9794b7ef69b8724d9f773ccd6944206d948065c6aa078e9a999bfc",
+      "id" : "3000006"
+    },
+    {
+      "hash" : "0x5250ecb7c93180e41940ba6dc67a8a1a30a9eec7c2aa6c750de27945542ce043",
+      "id" : "3000091"
+    },
+    {
+      "hash" : "0xe850d644aec5d8651bd4d96f3215026895ff56b1cb249e265af1effbeb8ca8cc",
+      "id" : "3000100"
+    },
+    {
+      "hash" : "0xd51e1987b6dbeceefeef96e7e34e76488b3f91d4ccdb16b6eb590164ca00ee89",
+      "id" : "3000087"
+    },
+    {
+      "hash" : "0xf664cd9b37bc019abb2ea659f45f00587539eaf3ce76b3d7726fe4de9bd78341",
+      "id" : "3000079"
+    },
+    {
+      "hash" : "0xdf0e65afdd1a103a9eac2b583f32642e7e64c56eede5d0221a2494f70b039a67",
+      "id" : "3000044"
+    },
+    {
+      "hash" : "0x2e0df16c3fb6fa6925847edc29a30837b24b6c15f4662173911c1d93f55e81a1",
+      "id" : "3000070"
+    },
+    {
+      "hash" : "0xdeb20ad91a88450824eb481ab1c922ff5a9a372e6f2dfb887801b9cc56c8a9be",
+      "id" : "3000097"
+    },
+    {
+      "hash" : "0xcefc440d355cb8d481dd6f186dbd9ec65e970759cc2cc85b63c9b87b39faf6fb",
+      "id" : "3000064"
+    },
+    {
+      "hash" : "0x908b0c2d9c71e0068704b5cea3686cd54fbda035ddc56b8614f39436d3488400",
+      "id" : "3000068"
+    },
+    {
+      "hash" : "0x9687a271b275175c246d1689563c97e5e4520ed49eb22f63e7cc1a5485f2f33b",
+      "id" : "3000053"
+    },
+    {
+      "hash" : "0x6b0921e0262a36c2978898aa50c3f0cdddeba3f07849e9b1977ab887e68dd755",
+      "id" : "3000065"
+    },
+    {
+      "hash" : "0x846146661df6887e18ea7d766b823cc1378673cc28cb31372540ed24ffa38b3d",
+      "id" : "3000045"
+    },
+    {
+      "hash" : "0x1d484273fc5ec136d37d110f975267430ae6c092b941ef269f65957452492279",
+      "id" : "3000004"
+    },
+    {
+      "hash" : "0xa93e2113a3f926f4be3ea91722cffd7423548ce2670d5632b439513c461ea3bc",
+      "id" : "3000051"
+    },
+    {
+      "hash" : "0x3ad08dc051fe2199f588a9b8f811d32d96450bf9b156b3d7c548778ac6e32898",
+      "id" : "3000055"
+    },
+    {
+      "hash" : "0x4a6fd73ffd0058f6a6331c1aceed014a74544b1a07ea4dba5d6e61402586bdee",
+      "id" : "3000003"
+    },
+    {
+      "hash" : "0xbfbecf09b9524eaa5d82575eeaae559446367d67f43f8620d8c38b394de678f4",
+      "id" : "3000008"
+    },
+    {
+      "hash" : "0xe3c636ea49df0b471c47ff437e78d8b36fdf4f79c99d62fabf63c4ae2797cd76",
+      "id" : "3000009"
+    },
+    {
+      "hash" : "0x52d59b79ee0cf20f8ab741f79d8cc69d4a3823ca7e8276bbb8e283e64ace1d6b",
+      "id" : "3000049"
+    },
+    {
+      "hash" : "0x5e3f51cef6df991b66e58ca47df341cb7ccd757a0a1ae59c8a56aa52c71bfa29",
+      "id" : "3000027"
+    },
+    {
+      "hash" : "0x0504c08963fb477ec8299e146e1dd3b90a28dede96be5e8899f19b436a2450f1",
+      "id" : "3000033"
+    },
+    {
+      "hash" : "0x6281e05733883cfcba31d742251058b9a4b78aa35a1517943aef362178783a8d",
+      "id" : "3000042"
+    },
+    {
+      "hash" : "0x73006e02f30572db7eafc0ff07108732bd1a1f9f1e2d36244800b1424c4eb4c0",
+      "id" : "3000062"
+    },
+    {
+      "hash" : "0x7934119a4aa61420ab7627106c8baf6a4f5dd465e0a681c06f77c177e9a3f1a5",
+      "id" : "3000005"
+    },
+    {
+      "hash" : "0x74ed4931fcd40d8f1c5d57d2cfa83c5981b6c6696c455973e9805a65f2635886",
+      "id" : "3000001"
+    },
+    {
+      "hash" : "0xad49032c451b1570d93143743cfce72ea6b2bb5c3fa9762e30d076ec53312b45",
+      "id" : "3000019"
+    },
+    {
+      "hash" : "0x3adcb6c021778cbe83d19d11dc4553f5fa307b67f9dfc07c808677c0768c036d",
+      "id" : "3000007"
+    },
+    {
+      "hash" : "0xc1d305f38be0b72aa82da215b7906e16772a4702c5e80f9774463d0144218538",
+      "id" : "3000080"
+    },
+    {
+      "hash" : "0xf56e0cca73928495373d9a5295c4d8649cad71b7fd5858afbbdf634b3547b0a0",
+      "id" : "3000029"
+    },
+    {
+      "hash" : "0x6e034cf9c6d29a86875cb2c888f83c3bf6b1fe327d8e19019dd2a86423bd32af",
+      "id" : "3000046"
+    },
+    {
+      "hash" : "0xc9225bd55ab51f0de0b38c4658a4eba4afbf33717eb267f804d23884dfa807a4",
+      "id" : "3000071"
+    },
+    {
+      "hash" : "0xb472f999a0d8eafac6e832a4c5c21d2abb4f8ef9cd3de923712fd61e4f1d7f31",
+      "id" : "3000098"
+    },
+    {
+      "hash" : "0xa49acb15e3065b6260923b1391f17c39b69791576dc3dbcc56b7f73c1d05b77a",
+      "id" : "3000032"
+    },
+    {
+      "hash" : "0x82b0afb61df5c1833b64bc14c424db5253f45b17b0d5052a1b46707592477770",
+      "id" : "3000082"
+    },
+    {
+      "hash" : "0xbd8734424304488d4f0e1bfbf215dfde11b086ab2c69c4f9ebf6bf6c6d437b71",
+      "id" : "3000083"
+    },
+    {
+      "hash" : "0xf2da1a41a8e899de23d51847f29ca663de18edd3226ddae473b5d1fda23550d0",
+      "id" : "3000010"
+    },
+    {
+      "hash" : "0xcf64a05a5ac8e9a5c15ed7e478e30cce4319f7cdd0df27f64be04f2a3ea70141",
+      "id" : "3000018"
+    },
+    {
+      "hash" : "0xacb82319ec9cde44bb4a56032ee5cbd31f693c6dd61cb7ca52b80593517f0f76",
+      "id" : "3000059"
+    },
+    {
+      "hash" : "0x30fc9d290ea9dcfb83f2486321b75149cd61261e6cbed6fc8c7b4d4ea7932802",
+      "id" : "3000072"
+    },
+    {
+      "hash" : "0x418b0e55526f81a22e98baca4d0960ec69d4c14cc0ea486798dede4bed15d600",
+      "id" : "3000073"
+    },
+    {
+      "hash" : "0xd93830d4c76f1a88aae98b6037c08735b9090e5724c1c9b8c4d7af4ba469f0b8",
+      "id" : "3000081"
+    },
+    {
+      "hash" : "0x85fdf2dfa855938f4d433d2af482374a7298d3c5981875605e9072aad513384a",
+      "id" : "3000028"
+    },
+    {
+      "hash" : "0x251684595e3dc2534fc5daeecfb4c0f74d979b2e0af6dc72081a27a0a15b8b28",
+      "id" : "3000011"
+    },
+    {
+      "hash" : "0x0abc92f6c5914acef6f33b938b199a9bf26a81c0425b25fd020c1bf85c179b40",
+      "id" : "3000050"
+    },
+    {
+      "hash" : "0xcb545da61d3e0381ea920ffd994ada8be9ac7d9d7c79971716fc2176ad507e42",
+      "id" : "3000089"
+    },
+    {
+      "hash" : "0xbf899a504fe44783a53540922f912dade093d47b9593cfe69efb7d0811b83a9a",
+      "id" : "3000074"
+    },
+    {
+      "hash" : "0x8e7a86800ed4380ccb16702e97f958052b51f964f946316941b8b791373010e4",
+      "id" : "3000063"
+    },
+    {
+      "hash" : "0x0ab17a4400b7988bff4e70c6570b1ebcfd7a8142e22be2bf7409c1b41119759a",
+      "id" : "3000034"
+    },
+    {
+      "hash" : "0x3e67da300d26840d7ab3690da56b09d18318096d2e2d5c29a15bdf74d29b13d3",
+      "id" : "3000037"
+    },
+    {
+      "hash" : "0xcdcf1d931871a2500600aa0747b3ca5adc0d82739252df3f6918939b7877b4e9",
+      "id" : "3000036"
+    },
+    {
+      "hash" : "0xadb9264dfbec46c105b0d5e396c4f2656729150bd66b41640e354321ae16c582",
+      "id" : "3000002"
+    },
+    {
+      "hash" : "0x737794dcb906abac6a013ad8d1be7561624682a19532adc0f6ec3301ca73da13",
+      "id" : "3000094"
+    },
+    {
+      "hash" : "0x5870da14c2782bb38f3eb5d16bd454c5ef4b0cef9335511c17257762e44481bc",
+      "id" : "3000095"
+    },
+    {
+      "hash" : "0x655104dbcd6559717ea28b7a2473218f3e1e40a13cc3df7f3e3fe76c415ab691",
+      "id" : "3000052"
+    },
+    {
+      "hash" : "0xe2a8540b9d5ef64717003eed498045c11c23279dc6cdbcb22784b35c0c7d587d",
+      "id" : "3000020"
+    },
+    {
+      "hash" : "0x161cda2e2a0762e55aba47bad113c14106c586bcf00df4da99db010c2b84a034",
+      "id" : "3000021"
+    },
+    {
+      "hash" : "0xef8ea3d456c76d46f88e8e6ee44f6c4b6651d5030687f409dd9b910edb220c25",
+      "id" : "3000092"
+    },
+    {
+      "hash" : "0xebcbcfbf8a11d0170451a7b5074b7ad415a2a98f2f738bb0295606c50a66689e",
+      "id" : "3000090"
+    },
+    {
+      "hash" : "0xb0e304e912e6ef24a7b5645fcd48a32b1b104e8540b66ef8d3a538f333f8d5b1",
+      "id" : "3000056"
+    },
+    {
+      "hash" : "0xc17099514aff4769779fece219d54904e9f1f27bb7cdee5cd2ab9276fbf4288b",
+      "id" : "3000030"
+    },
+    {
+      "hash" : "0x209ed58aeff7d02a1d4141fce587c6b7e7c20a7f36f3a51a4360446fa443f1a9",
+      "id" : "3000086"
+    },
+    {
+      "hash" : "0xeca48579741f4a657680b156b7220420bfe628666d4366a260de237a246a7339",
+      "id" : "3000084"
+    },
+    {
+      "hash" : "0x91c84f3f67688944c133c07f931d786c5a03ebd3cb1cd01223d1a9b826d0c60d",
+      "id" : "3000085"
+    },
+    {
+      "hash" : "0x97b2f4f2c5e4ece0e1c269a379ceee39c58d64248bd9e73578dedf56ebf5f1ee",
+      "id" : "3000047"
+    },
+    {
+      "hash" : "0x1b050e2e707100ab43fd61d371c8b300a985d3aa1557d119511c1fdff1017ad3",
+      "id" : "3000061"
+    },
+    {
+      "hash" : "0x3aaa43e145212863cfff5ce6651cbe201cc9a90f44960a225c39c7f7adc2ff17",
+      "id" : "3000031"
+    },
+    {
+      "hash" : "0xe0917addbe251bfb473fe5d30e6fa4907e8e82cbde8f12a6c7f848ef71382fe1",
+      "id" : "3000069"
+    },
+    {
+      "hash" : "0x555cee65772b135aef5701532d9683678b6ba2ad10e3a5cc9dfebc801852b330",
+      "id" : "3000000"
+    },
+    {
+      "hash" : "0x1201ecec1fdb49e5409bd1c231af0c01a3930ba5f3f6432740c1ce6ac04ca8e8",
+      "id" : "3000023"
+    },
+    {
+      "hash" : "0x81592362889fb64351ab9bc8e5282f4e71d3b9b76191ddfdc094d18b04f5c799",
+      "id" : "3000066"
+    },
+    {
+      "hash" : "0x01022f0a68922e83033ff4a421107545c06951c4840df1e331a8125720ad2daf",
+      "id" : "3000043"
+    },
+    {
+      "hash" : "0xd3af267cec1596099bf286a87b0917486b062b63f8c161bec839b85062399052",
+      "id" : "3000067"
+    },
+    {
+      "hash" : "0x9210a28a0b0c04ae77e9aa75a38fec9652343dbe66c3aeffbadbbdd84c9dbc65",
+      "id" : "3000024"
+    },
+    {
+      "hash" : "0x29573028685e647afc6414873992570f3db84e2d24f1639d0738e0428549d1d0",
+      "id" : "3000077"
+    },
+    {
+      "hash" : "0xdc8c0532ba90372b84150e5eed72624e468eaf6edea9b857a60cff99e3264c09",
+      "id" : "3000017"
+    },
+    {
+      "hash" : "0x75a4550128f5e02a44e2a2b11e3c12a1eeff936153a2914d5cfed6575e4861e0",
+      "id" : "3000014"
+    },
+    {
+      "hash" : "0x265934dd5e90176cfb3de88f9a22a1e8e15c62f758df98af7d292be1c8df3cc7",
+      "id" : "3000038"
+    },
+    {
+      "hash" : "0xfac42e0895984a300504dcb115f043e4b2156ad75dfaf294f1fa4ad5e6fc46b6",
+      "id" : "3000039"
+    },
+    {
+      "hash" : "0xcece43bfb0a148b2e72dc354868301da316f6bb31dd92e0411e6abe39b20e9e1",
+      "id" : "3000040"
+    },
+    {
+      "hash" : "0x1d0f89a08ca7f7107d3880a9a98262d1a404cebe95dd03f2185b253c50285ccc",
+      "id" : "3000015"
+    },
+    {
+      "hash" : "0x2541fc38541b88a289d38cb1c665a3df84c473f3d4cee1cf4f52356d330a805e",
+      "id" : "3000076"
+    },
+    {
+      "hash" : "0x065198000e86042b820aeec49718464471676b909f7be5d477d306548c537199",
+      "id" : "3000093"
+    },
+    {
+      "hash" : "0xa55188a5655bab626fa14965791b861dc5d2f1ef5eee037086f5e0a988a7af58",
+      "id" : "3000016"
+    }
+  ]
+}

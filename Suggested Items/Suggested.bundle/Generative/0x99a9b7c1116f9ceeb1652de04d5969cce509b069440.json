@@ -1,0 +1,512 @@
+{
+  "contractAddress" : "0x99a9b7c1116f9ceeb1652de04d5969cce509b069",
+  "kind" : "p5js",
+  "projectId" : "440",
+  "script" : "var num_backgrounds\nvar num_horiz_stripes\nvar num_vert_stripes\nvar center_horiz_stripe = false\nvar center_vert_stripe = false\nvar woven = false\nvar num_backgrounds_probs = [0.24,0.29,0.18,.29]\nvar density_probs = [0.05,0.15,0.3,0.3,0.15,0.05]\nvar center_horiz_stripe_prob = 0.1\nvar center_vert_stripe_prob = 0.1\nvar weave_prob = 0.72\nvar synth_size = 2000\nvar r_period_reset\nvar g_period_reset\nvar b_period_reset\nvar r_period\nvar g_period\nvar b_period\nconst sync_probs = [0.01, 0.05, 0.1, 0.5]\nvar all_period_sync_prob\nvar WIDTH = window.innerWidth\nvar HEIGHT = window.innerHeight\nvar output_img\nvar x_offset = 0\nvar y_offset = 0\nvar r_incr = 0.0\nvar r_value = 0\nvar r_shifter = 1.0\nvar r_bot = 0\nvar r_range = 255\nvar g_incr = 0.0\nvar g_value = 0\nvar g_shifter = 1.0\nvar g_bot = 0\nvar g_range = 255\nvar b_incr = 0.0\nvar b_value = 0\nvar b_shifter = 1.0\nvar b_bot = 0\nvar b_range = 255\nvar R\nvar drawn = false\nvar loaded = false\n\nfunction setup() {\n createCanvas(WIDTH, HEIGHT)\n noStroke()\n \/\/tokenData = genTokenData(123) \/\/ remove\n R = new Random() \n make_parameters()\n update_incrs()\n output_img = createImage(WIDTH,HEIGHT)\n}\nfunction make_parameters() {\n let nbp = []\n for (let i = 0; i < 4; i++){\n   for (let j = 0; j < num_backgrounds_probs[i] * 100; j++){\n     nbp[nbp.length] = i + 1}}\n num_backgrounds = nbp[Math.floor(R.random_num(0,nbp.length))]\n let dp = []\n for (let i = 0; i < 6; i++){\n   for (let j = 0; j < density_probs[i] * 100; j++){\n     dp[dp.length] = i + 1}}\n num_horiz_stripes = dp[Math.floor(R.random_num(0,dp.length))]\n num_vert_stripes = dp[Math.floor(R.random_num(0,dp.length))]\n woven = R.random_bool(weave_prob)\n if (woven && num_vert_stripes == 1) num_vert_stripes = 2\n center_horiz_stripe = R.random_bool(center_horiz_stripe_prob)\n center_vert_stripe = R.random_bool(center_vert_stripe_prob)\n r_period_reset = Math.floor(synth_size \/ Math.floor(R.random_num(1, 6)))\n g_period_reset = Math.floor(synth_size \/ Math.floor(R.random_num(1, 6)))\n b_period_reset = Math.floor(synth_size \/ Math.floor(R.random_num(1, 6)))\n r_period = r_period_reset\n g_period = g_period_reset\n b_period = b_period_reset\n all_period_sync_prob = sync_probs[Math.floor(R.random_num(0, 4))]\n}\n\nfunction make_augury_image(){\n switch (num_backgrounds) {\n   case 1:\n     output_img.copy(make_image(), 0, 0, Math.floor(R.random_num(250,synth_size)),Math.floor(R.random_num(250,synth_size)),0, 0, WIDTH, HEIGHT)\n     break;\n   case 2:\n     output_img.copy(make_image(), 0, 0,Math.floor(R.random_num(250,synth_size)),Math.floor(R.random_num(250,synth_size)),0, 0, Math.floor(WIDTH\/2), HEIGHT)\n     output_img.copy(make_image(), 0, 0,Math.floor(R.random_num(250,synth_size)),Math.floor(R.random_num(250,synth_size)),Math.floor(WIDTH\/2), 0, Math.floor(WIDTH\/2), HEIGHT)\n     break\n   case 3:\n     output_img.copy(make_image(), 0, 0,Math.floor(R.random_num(250,synth_size)),Math.floor(R.random_num(250,synth_size)),0, 0, WIDTH, Math.floor(HEIGHT\/3))\n     output_img.copy(make_image(), 0, 0,Math.floor(R.random_num(250,synth_size)),Math.floor(R.random_num(250,synth_size)),0, Math.floor(HEIGHT\/3), WIDTH, Math.floor(HEIGHT\/3 * 2))\n     output_img.copy(make_image(), 0, 0,Math.floor(R.random_num(250,synth_size)),Math.floor(R.random_num(250,synth_size)),0, Math.floor(HEIGHT\/3 * 2), WIDTH, HEIGHT)\n     break\n\n   case 4:\n     output_img.copy(make_image(), 0, 0,Math.floor(R.random_num(250,synth_size)),Math.floor(R.random_num(250,synth_size)),0, 0, Math.floor(WIDTH\/2), Math.floor(HEIGHT\/2))\n     output_img.copy(make_image(), 0, 0,Math.floor(R.random_num(250,synth_size)),Math.floor(R.random_num(250,synth_size)),Math.floor(WIDTH\/2), 0, WIDTH, Math.floor(HEIGHT\/2))\n     output_img.copy(make_image(), 0, 0,Math.floor(R.random_num(250,synth_size)),Math.floor(R.random_num(250,synth_size)),0, Math.floor(HEIGHT\/2), Math.floor(WIDTH\/2), HEIGHT)\n     output_img.copy(make_image(), 0, 0,Math.floor(R.random_num(250,synth_size)),Math.floor(R.random_num(250,synth_size)),Math.floor(WIDTH\/2), Math.floor(HEIGHT\/2), WIDTH, HEIGHT)\n     break\n   default:\n     output_img.copy(make_image(), 0, 0, Math.floor(R.random_num(250,synth_size)),Math.floor(R.random_num(250,synth_size)),0, 0, WIDTH, HEIGHT)\n     break;\n }\n var v_stripes = []\n var v_stripes_C = 0.0\n var h_stripes = []\n var h_stripes_C = 0.0\n var got_all = false\n if (center_horiz_stripe){\n   var h = Math.floor(R.random_num(HEIGHT\/50,HEIGHT\/7))\n   h_stripes_C = h\n   num_horiz_stripes -= 1}\n var num_h_T = Math.floor(R.random_num(0,num_horiz_stripes+1))\n var num_h_B = num_horiz_stripes - num_h_T\n var y = 0\n var i = 0\n while (!got_all){\n   got_all = true\n   y = 0\n   for (i = 0; i < num_h_T; i++){\n     if (y > HEIGHT\/4) got_all = false\n     y = Math.floor(R.random_num(y, HEIGHT \/ 4))\n     h_stripes[i] = y\n     y += HEIGHT\/50}}\n got_all = false\n while (!got_all){\n   got_all = true\n   y = HEIGHT - HEIGHT \/ 4\n   for (i = num_h_T; i < num_horiz_stripes; i++){\n     if (y > HEIGHT) got_all = false\n     y = Math.floor(R.random_num(y, HEIGHT))\n     h_stripes[i] = y\n     y += HEIGHT\/50}}\n if (center_vert_stripe){\n   var w = Math.floor(R.random_num(WIDTH\/50,WIDTH\/7))\n   v_stripes_C = w\n   num_vert_stripes -= 1}\n var num_v_L = Math.floor(R.random_num(0,num_vert_stripes+1))\n var num_v_R = num_vert_stripes - num_v_L\n got_all = false\n while (!got_all){\n   got_all = true\n   var x = 0\n   for (i = 0; i < num_v_L; i++){\n     if (x > WIDTH\/4) got_all = false\n     x = Math.floor(R.random_num(x, WIDTH \/ 4))\n     v_stripes[i] = x\n     x += WIDTH\/50}}\n got_all = false\n while (!got_all){\n   got_all = true\n   let x = WIDTH - WIDTH \/ 4\n   for (i = num_v_L; i < num_vert_stripes; i++){\n     if (x > WIDTH) got_all = false\n     x = Math.floor(R.random_num(x, WIDTH))\n     v_stripes[i] = x\n     x += WIDTH\/50}}\n if (woven){\n   if (center_vert_stripe) vert_stripe(Math.floor(WIDTH\/2 - v_stripes_C \/ 2), v_stripes_C)\n  \n   if (center_horiz_stripe) horiz_stripe(Math.floor(HEIGHT\/2 - h_stripes_C \/ 2), h_stripes_C)\n   let v_done = 0\n   let h_done = 0\n   while (v_done < v_stripes.length || h_done < h_stripes.length){\n     if (v_done < v_stripes.length){\n       vert_stripe(v_stripes[v_done], Math.floor(R.random_num(25,WIDTH\/7)))\n       v_done += 1}\n     if (h_done < h_stripes.length){\n       horiz_stripe(h_stripes[h_done], Math.floor(R.random_num(25,HEIGHT\/7)))\n       h_done += 1}}}\n else {\n   if (center_horiz_stripe) horiz_stripe(Math.floor(HEIGHT\/2 - h_stripes_C \/ 2), h_stripes_C)\n   for (var i = 0; i < h_stripes.length; i++){horiz_stripe(h_stripes[i], Math.floor(R.random_num(25,HEIGHT\/7)))}\n   if (center_vert_stripe) vert_stripe(Math.floor(WIDTH\/2 - v_stripes_C \/ 2), v_stripes_C)\n   for (var i = 0; i < v_stripes.length; i++){vert_stripe(v_stripes[i], Math.floor(R.random_num(25,WIDTH\/7)))}}\n}\nfunction horiz_stripe(y_start, h){\n img_seg = get_image_segment()\n num_segs = Math.floor(R.random_num(2,10))\n dest_w = WIDTH \/ num_segs\n dest_h = h\n dest_x = 0\n dest_y = y_start\n for (n = 0; n < num_segs; n++){\n   output_img.copy(img_seg, 0, 0, img_seg.width, img_seg.height,\n   Math.floor(dest_x), dest_y, Math.ceil(dest_w), dest_h)\n   img_seg = mirror_h_image(img_seg)\n   dest_x += dest_w}\n}\nfunction vert_stripe(x_start, w){\n img_seg = get_image_segment()\n num_segs = Math.floor(R.random_num(2,10))\n dest_w = w\n dest_h = HEIGHT \/ num_segs\n dest_x = x_start\n dest_y = 0\n for (n = 0; n < num_segs; n++){\n   output_img.copy(img_seg, 0, 0, img_seg.width, img_seg.height,\n   dest_x, Math.floor(dest_y), dest_w, Math.ceil(dest_h))\n   img_seg = mirror_v_image(img_seg)\n   dest_y += dest_h}\n}\n\nfunction draw() {\n if (frameCount == 1){\n   background(0)\n   return}\n  if (!drawn) {\n   make_augury_image()\n   image(output_img, 0, 0, WIDTH, HEIGHT)\n   drawn = true}\n}\nfunction mirror_h_image(orig_img)\n{\n var mirror_img = createImage(orig_img.width,orig_img.height)\n mirror_img.loadPixels()\n orig_img.loadPixels()\n orig_img_numcols = orig_img.width\n orig_img_numrows = orig_img.height\n orig_img_valsperrow = orig_img_numcols * 4\n for (var pr = 0; pr < orig_img_numrows; pr++) {\n   for (var pc = 0; pc < orig_img_numcols; pc++) {\n     po = (pr * orig_img_valsperrow) + orig_img_valsperrow\n     pm = (pr * orig_img_valsperrow) + (pc * 4);\n     mirror_img.pixels[pm] = orig_img.pixels[po - ((pc*4) + 4)]\n     mirror_img.pixels[pm+1] = orig_img.pixels[po - ((pc*4) + 3)]\n     mirror_img.pixels[pm+2] = orig_img.pixels[po - ((pr*4) + 2)]\n     mirror_img.pixels[pm+3] = orig_img.pixels[po - ((pc*4) + 1)]}}\n mirror_img.updatePixels()\n return mirror_img\n}\nfunction mirror_v_image(orig_img)\n{\n var mirror_img = createImage(orig_img.width,orig_img.height)\n mirror_img.loadPixels()\n orig_img.loadPixels()\n orig_img_numcols = orig_img.width\n orig_img_numrows = orig_img.height\n orig_img_valsperrow = orig_img_numcols * 4\n for (var pr = 0; pr < orig_img_numrows; pr++) {\n   for (var pc = 0; pc < orig_img_numcols; pc++) {\n     po = ((orig_img_numrows - (pr +1) ) * orig_img_valsperrow) + (pc * 4)\n     pm = (pr * orig_img_valsperrow) + (pc * 4)\n     mirror_img.pixels[pm] = orig_img.pixels[po]\n     mirror_img.pixels[pm+1] = orig_img.pixels[po+ 1]\n     mirror_img.pixels[pm+2] = orig_img.pixels[po+ 2]\n     mirror_img.pixels[pm+3] = orig_img.pixels[po + 3]}}\n mirror_img.updatePixels()\n return mirror_img\n}\nfunction make_image()\n{\n   tmp_img = createImage(synth_size,synth_size)\n   tmp_img.loadPixels()\n   var y = 0\n   for (var j = 0; j < synth_size * synth_size; j++) {\n     if (j % synth_size == 0) y = Math.floor(j \/ synth_size)\n     var x = int(j % synth_size)\n     pixel_i = int((y * synth_size + x) * 4)\n     tmp_img.pixels[pixel_i] = Math.round(r_value)\n     tmp_img.pixels[pixel_i + 1] = Math.round(g_value)\n     tmp_img.pixels[pixel_i + 2] = Math.round(b_value)\n     tmp_img.pixels[pixel_i + 3] = 255\n     increment_rbg(j)}\n   tmp_img.updatePixels()\n   if (R.random_bool(all_period_sync_prob)) sync_periods()\n   return tmp_img\n}\nfunction get_image_segment()\n{\n var out_w = Math.floor(R.random_num(10,synth_size))\n var out_h = Math.floor(R.random_num(10,synth_size))\n var src_img = make_image()\n var tmp_img = createImage(out_w, out_h)\n var src_w = Math.floor(R.random_num(10,synth_size))\n var src_h = Math.floor(R.random_num(10,synth_size))\n var src_x = Math.floor(R.random_num(0,synth_size-src_w))\n var src_y = Math.floor(R.random_num(0,synth_size-src_h))\n tmp_img.copy(src_img, src_x, src_y, src_w, src_h,0,0,out_w,out_h)\n return tmp_img\n}\n\nfunction increment_rbg(mega_i) {\n r_value = ((r_range - abs(r_range - (mega_i % r_period) * r_incr)) + r_bot) * r_shifter\n if (r_value > 255) r_value = 255\n if (Math.floor(r_value) <= r_bot) {\n   if (R.random_bool(0.0001)) {\n     r_period = random_period(r_period)\n     update_incrs()\n   } else if (R.random_bool(0.01)) {\n     if (R.random_bool) {\n       r_incr *= 1.0 + 0.001\n     } else {\n       r_incr *= 1.0 - 0.001\n     }\n   }\n }\n g_value = ((g_range - abs(g_range - (mega_i % g_period) * g_incr)) + g_bot) * g_shifter\n if (g_value > 255) g_value = 255\n if (Math.floor(g_value) <= g_bot) {\n   if (R.random_bool(0.0001)) {\n     g_period = random_period(g_period)\n     update_incrs()\n   } else if (R.random_bool(0.01)) {\n     if (R.random_bool) {\n       g_incr *= 1.0001\n     } else {\n       g_incr *= 0.9999\n     }\n   }\n }\n b_value = ((b_range - abs(b_range - (mega_i % b_period) * b_incr)) + b_bot) * b_shifter\n if (b_value > 255) b_value = 255\n if (Math.floor(b_value) <= b_bot) {\n   b_value = 0\n   b_incr *= -1\n   if (R.random_bool(0.0001)) {\n     b_period = random_period(b_period)\n     update_incrs()\n   } else if (R.random_bool(0.01)) {\n     if (R.random_bool) {\n       b_incr *= 1.0001\n     } else {\n       b_incr *= 0.9999\n     }\n   }\n }\n}\nfunction random_period(curr_period) {\n var p = curr_period\n p += R.random_num(-2, 2)\n if (p < 10) p = 10\n return p\n}\nfunction sync_period(which) {\n if (which == \"r\") r_period = r_period_reset\n else if (which == \"g\") g_period = g_period_reset\n if (which == \"b\") b_period = b_period_reset\n update_incrs()\n}\nfunction sync_periods() {\n r_period = r_period_reset\n g_period = g_period_reset\n b_period = b_period_reset\n update_incrs()\n}\nfunction update_incrs() {\n if (r_period < 10) r_period = 10\n if (g_period < 10) g_period = 10\n if (b_period < 10) b_period = 10\n r_incr = r_range \/ (r_period * 0.5)\n g_incr = g_range \/ (g_period * 0.5)\n b_incr = b_range \/ (b_period * 0.5)\n}\n\nclass Random {\n constructor() {\n   this.useA = false\n   var sfc32 = function (uint128Hex) {\n     var a = parseInt(uint128Hex.substr(0, 8), 16)\n     var b = parseInt(uint128Hex.substr(8, 8), 16)\n     var c = parseInt(uint128Hex.substr(16, 8), 16)\n     var d = parseInt(uint128Hex.substr(24, 8), 16)\n     return function () {\n       a |= 0\n       b |= 0\n       c |= 0\n       d |= 0\n       var t = (((a + b) | 0) + d) | 0\n       d = (d + 1) | 0\n       a = b ^ (b >>> 9)\n       b = (c + (c << 3)) | 0\n       c = (c << 21) | (c >>> 11)\n       c = (c + t) | 0\n       return (t >>> 0) \/ 4294967296\n     }\n   }\n   this.prngA = new sfc32(tokenData.hash.substr(2, 32))\n   this.prngB = new sfc32(tokenData.hash.substr(34, 32))\n   for (var i = 0; i < 1e6; i += 2) {\n     this.prngA()\n     this.prngB()\n   }\n }\n random_dec() {\n   this.useA = !this.useA\n   return this.useA ? this.prngA() : this.prngB()\n }\n random_num(a, b) {\n   return a + (b - a) * this.random_dec()\n }\n random_bool(p) {\n   return this.random_dec() < p\n }\n}",
+  "tokens" : [
+    {
+      "hash" : "0x21e790b28c5d5a71663abc1dba896fb574ea872776332c9fa9ac12e22de985d8",
+      "id" : "440000055"
+    },
+    {
+      "hash" : "0x713a8914182958a29dd32e7b17068548882900c5879f7a8aa3cad341311f0739",
+      "id" : "440000039"
+    },
+    {
+      "hash" : "0xde24d477db2e5c3338009487ea49203b5d4073b7603be8a14492b18d3dff454d",
+      "id" : "440000086"
+    },
+    {
+      "hash" : "0x734309dfac9783e01f4a5bba9ffcc7a42c1b47686af0e0bb560428d4dfb8c2ff",
+      "id" : "440000043"
+    },
+    {
+      "hash" : "0xb6ed0a9e5cf26f24e972172abcaa797fae368d064024badf33ba8065d060b92c",
+      "id" : "440000051"
+    },
+    {
+      "hash" : "0xd7884416f57b7fbc5d6a96dfe99a12d630d070e06ab4f596e078aec0f2c4aa9c",
+      "id" : "440000105"
+    },
+    {
+      "hash" : "0x55569ff85859ae9b2ea05e12d5791f884550f97cea8a776fbc6918db215346e3",
+      "id" : "440000004"
+    },
+    {
+      "hash" : "0x7c780c016ca7b41e3c4ac7d6ed895aab8f2427e292edcde4d46290529645a691",
+      "id" : "440000107"
+    },
+    {
+      "hash" : "0x7497a809f3840657cb807ab0b616bff81d84c18aac969f18b5c10ffbb84607de",
+      "id" : "440000121"
+    },
+    {
+      "hash" : "0x3e01a04dc2a323dfd32ddced37547f75c8ab425c34bf74abc3f20d70ce1d534b",
+      "id" : "440000095"
+    },
+    {
+      "hash" : "0x284ac611344c2da10984f91ecef0f9b1f65b1d384a7362bf007d430f350dfdd5",
+      "id" : "440000023"
+    },
+    {
+      "hash" : "0x10f260b60a72fa0285c8548b1ec56c44d5be7d4099ddbb8cf28936fe38973489",
+      "id" : "440000117"
+    },
+    {
+      "hash" : "0x6eaf7ebca3868e534c14038614f435324de72e240cc62b3453c6414d05e373f3",
+      "id" : "440000122"
+    },
+    {
+      "hash" : "0x18827fa3f813bfabaf73c3c87e13ccc72c1b099aa63e062bf7158f3240ec3d04",
+      "id" : "440000106"
+    },
+    {
+      "hash" : "0x400f8a59f53e7c5c4fc18a4bcf241d640d98141ed6fff57e0bb97811918ac18a",
+      "id" : "440000077"
+    },
+    {
+      "hash" : "0xa4360f55b920db57f8e2f19085f0b3a2c5914b03718cdb81e494a62d5a23e38b",
+      "id" : "440000097"
+    },
+    {
+      "hash" : "0xa5c260873c35b8eb2aa8177d5f7bd3b063fd37a8751ebf68213ce7410bd99300",
+      "id" : "440000094"
+    },
+    {
+      "hash" : "0x3027136cdb38ac440f1e4fd386619c88a450cf3a65bc0dc37ca09aa6b4f65c62",
+      "id" : "440000067"
+    },
+    {
+      "hash" : "0x9eccebc38ca218b3403b059eebc1e7f83c92cda782ee91d6ad441c5a312f4b24",
+      "id" : "440000044"
+    },
+    {
+      "hash" : "0xfdfffd7ba0165c8abdbcef375137b9adff3170b329eecc2eb715a07f49dc11ce",
+      "id" : "440000076"
+    },
+    {
+      "hash" : "0x62005e8e9bc7c9be1a34ff1ca12cdc255ea843442bf6b69ecebd6e852d133703",
+      "id" : "440000041"
+    },
+    {
+      "hash" : "0xc62e15d42a1328b0f9f757f44fb19c8450de740f23d626d8f153a95b61e1a148",
+      "id" : "440000114"
+    },
+    {
+      "hash" : "0x0fdfb1f6dcb4e3dfe2c2370b8f6a4548674872d298b97154dc54f73a9efaf2a4",
+      "id" : "440000013"
+    },
+    {
+      "hash" : "0xf07159bf56ef17afa9d7023ad1f868260901d1b9eec242d1b60867b632caa790",
+      "id" : "440000015"
+    },
+    {
+      "hash" : "0x4694f326918568cdb0a967e5e5ef145ada307858d4dc22328f48183ab79cc2ee",
+      "id" : "440000092"
+    },
+    {
+      "hash" : "0x82dd1aaf014a358d54418291af710da983389318c52ff8bc62d883f157fbed6e",
+      "id" : "440000093"
+    },
+    {
+      "hash" : "0x6bc8d6fa56b815b25c30dc569051215aeb6feb599f482f8091700e08ddbc2e0b",
+      "id" : "440000109"
+    },
+    {
+      "hash" : "0x1b33813d5b38c61e2487139db19db412e7816568fd5e05fbb269ea7ec7c94116",
+      "id" : "440000028"
+    },
+    {
+      "hash" : "0x2e470b7e1a634e6d50eea157b024f8276c7fb046e28497e49500ee41a99de8af",
+      "id" : "440000011"
+    },
+    {
+      "hash" : "0x20fa8b4d6f2dc22104391c3f10cc53fa7e078f946945b6766f9a36bfe1a7204e",
+      "id" : "440000016"
+    },
+    {
+      "hash" : "0xfd1b3418e098fb22fe08f493b3487469b9ed9a6b2f11735f6216c36dbcdce25b",
+      "id" : "440000020"
+    },
+    {
+      "hash" : "0x771f5e512b6696a3a2cba3332428f968bf6812ed09cea4a22bf85768a772812b",
+      "id" : "440000022"
+    },
+    {
+      "hash" : "0xa785f3392d987d2ba7dd3a6b2b2981c8f04c7d7dcf86c7e608fe1ac9ebfb1958",
+      "id" : "440000030"
+    },
+    {
+      "hash" : "0x4db36a66366f2f2068502e586905ce60efc9e62029f35263498e4b2a523d23f8",
+      "id" : "440000048"
+    },
+    {
+      "hash" : "0xb4495e1c8d7997b0d9ecb9f3967bb6a17ef608b847c55da032cf8faba4b399a2",
+      "id" : "440000058"
+    },
+    {
+      "hash" : "0xd94ba1e793fec07814a8c431ad2e8a7822a8a5ef84a4a8aa4a2d5243c9936469",
+      "id" : "440000062"
+    },
+    {
+      "hash" : "0xbfcaaa3f01be9bbf91d42e093b92edf869af4d3fcdb7a159654474c7aa195a59",
+      "id" : "440000065"
+    },
+    {
+      "hash" : "0x40c41757418bfcc2bdc443d1cf9f56be85398f08ca77da27f1953486ae03d14b",
+      "id" : "440000066"
+    },
+    {
+      "hash" : "0x1f3f79e3f6a26479a3a66970457d265e77fdc5c17160ad8b0aa67deb2c4ded6f",
+      "id" : "440000078"
+    },
+    {
+      "hash" : "0x988a02db5787104dde071a19b7178d01c7e341628e781b7f16da55a313559e36",
+      "id" : "440000079"
+    },
+    {
+      "hash" : "0xc41bb7fcd4b9d0129f6e4d9acc6d6172b9879325c438f1abe84a739a860905aa",
+      "id" : "440000080"
+    },
+    {
+      "hash" : "0x842881fd816705d38f1925aff082fcd77312246c14f3284fea91639f9a42db1c",
+      "id" : "440000081"
+    },
+    {
+      "hash" : "0xe58e8ad6a445b324bfe5d8b75bddecb359fd272d6badb01dc0f0d3086e2c54ae",
+      "id" : "440000082"
+    },
+    {
+      "hash" : "0xfccb1cb73e7a2d427883a9894c1ebe65fdb736aba25e3f28e1fd70808031aa15",
+      "id" : "440000084"
+    },
+    {
+      "hash" : "0x196ca0da642a997d43cfa76b1bb2a23857cdf5333f26478a3bff255d93049db9",
+      "id" : "440000088"
+    },
+    {
+      "hash" : "0xcf783ae6cbeb9d14b60d029efe429ad043a82f94f46068a57984cc1f1f97c893",
+      "id" : "440000032"
+    },
+    {
+      "hash" : "0xaaa5821dfd47f0df0d93f5139e6e394dfe51577d1e5defa2e90ac56dd6f39b4f",
+      "id" : "440000060"
+    },
+    {
+      "hash" : "0x95e5c01e1a309b019ff3160edea04844be0e6eff23df1c2d671ae71ede11d78f",
+      "id" : "440000068"
+    },
+    {
+      "hash" : "0x6327a3938312606006171d2d93968c03ba827d3647f2577fcef8c3a8069b03a0",
+      "id" : "440000056"
+    },
+    {
+      "hash" : "0xe35e0416eebc9b6b21f1d7df7b340851fc7de63b74628252fdf038a634b01171",
+      "id" : "440000074"
+    },
+    {
+      "hash" : "0x4501c3c8bbd77f6b8d9045a6ab1a94d286f087614f405232f19f5861be89738e",
+      "id" : "440000120"
+    },
+    {
+      "hash" : "0xb6085cff74204079b77702bbc24052b9d99e7e0b27a61f3d45221fd4eb7c0e0e",
+      "id" : "440000113"
+    },
+    {
+      "hash" : "0x2aa70e97a5e02a8325cb8adc071ca47b617109459675a5f188bda51b0b9a4794",
+      "id" : "440000014"
+    },
+    {
+      "hash" : "0x90b311109456f3a0c58f53a5fdb11054b9f92e59663c9872091320d64027ba0f",
+      "id" : "440000073"
+    },
+    {
+      "hash" : "0xbf82175c744fdcaad74ad7fb463a82b8898658e9a86c5d23725feaa1ee014918",
+      "id" : "440000018"
+    },
+    {
+      "hash" : "0x2bf5b57a0bbef5697efb1545309c27d13cea49de0bfff00e0d99db62382cff87",
+      "id" : "440000019"
+    },
+    {
+      "hash" : "0x76c9f6ccace64fa3aa50488fcbe0c53c26809ffd31fbd7ac96fed95dc870aacd",
+      "id" : "440000021"
+    },
+    {
+      "hash" : "0xc90e971aeffbfa2a37c69f92287d817ede978533a42c46811533f3e83a61ffa4",
+      "id" : "440000069"
+    },
+    {
+      "hash" : "0x8234a3bb789c77c56ec7e1964b6fdafb323979efbd70c713bb518935667b8f1e",
+      "id" : "440000108"
+    },
+    {
+      "hash" : "0xaa4ea40e563c191fc02884a5cd3284ebc4f1eddef07c35610cdf02830a545979",
+      "id" : "440000006"
+    },
+    {
+      "hash" : "0x7d0a5fc649027974529dce3ed0ff82b18e6cca16784422ab60b90370cf89f2c2",
+      "id" : "440000000"
+    },
+    {
+      "hash" : "0x8a21653d046e6a458b785739d2528a266f9e9c1d4e5428a56ce7283e6ef682a0",
+      "id" : "440000035"
+    },
+    {
+      "hash" : "0x9400c1935c97d6ba40de96727c76f4ae5051cf55b2a167ab34648231b346625b",
+      "id" : "440000115"
+    },
+    {
+      "hash" : "0xb1488d3edf46ccaba2cc2bce365d1df25a5a249ce3d01e39aa8a7b34c63d71fa",
+      "id" : "440000038"
+    },
+    {
+      "hash" : "0xf2250b8b89c760440ef37efdb55c94f8de633c0b06be70622164f46777970345",
+      "id" : "440000001"
+    },
+    {
+      "hash" : "0xeb911008dc64d1a7b85942fdfe482f2414f2852b62c931537c8d735259090b90",
+      "id" : "440000102"
+    },
+    {
+      "hash" : "0xa0a65ba89b7d833f6ebc48b5eb59bc86f7f9a0c649dbf23084eb83ce07da8abf",
+      "id" : "440000003"
+    },
+    {
+      "hash" : "0x9c560676c2e8e8224085c78081d27631bbf01f0d147edb76a7290b2b49a0646a",
+      "id" : "440000053"
+    },
+    {
+      "hash" : "0x23ec47af1c8c41acb52ff9a208db82431464c520aee2b0262ddf8b685c76930b",
+      "id" : "440000089"
+    },
+    {
+      "hash" : "0x4ed40f1bc1e4c49ec5bec93d5f1fb0e8d47274263c13b5cdc6474c0ec5bd1be2",
+      "id" : "440000017"
+    },
+    {
+      "hash" : "0x4a28403ad4a3a8529f454590e2ea7e4068d79f497a3e694055f4b802e8817d65",
+      "id" : "440000002"
+    },
+    {
+      "hash" : "0x7d9de99be29cdacf9e7c774f59173527a1029783a97de46302610c32b666d2f0",
+      "id" : "440000101"
+    },
+    {
+      "hash" : "0x33b84906f39e597e6e04c986fb853a87cc6670e46f8ae0c87d98c46450d50dc8",
+      "id" : "440000029"
+    },
+    {
+      "hash" : "0xab0f45cd9e86b15581f62d7fd02dc4d60835e5d270ea138c8a0a7b26562a4d7c",
+      "id" : "440000050"
+    },
+    {
+      "hash" : "0x1748b934d788f76989ebaca7f155a2675d9c9814cb162a42eefe2af095ecc91f",
+      "id" : "440000052"
+    },
+    {
+      "hash" : "0x3f6a91946429ae7ce6251539a7d9756fd095be0d48e59dcf8c457a81e4659b4a",
+      "id" : "440000042"
+    },
+    {
+      "hash" : "0xa713666c05804b7b74e408245df5cb4d195c03cc8722348a83acc32e48efefb1",
+      "id" : "440000125"
+    },
+    {
+      "hash" : "0xb462c5a4e5d3b1f100d8b511d7f5cbafd627d61c9e700ad11065306f9db60e3c",
+      "id" : "440000025"
+    },
+    {
+      "hash" : "0x869178581d5be7d39b668b32b1d6da4a1b1eeff6ddac53c79723111843311967",
+      "id" : "440000046"
+    },
+    {
+      "hash" : "0xb71a9d7ad80ed18c7cc2cdd3f86d7b958ee94f893690998cad3b3eb73b5173a8",
+      "id" : "440000071"
+    },
+    {
+      "hash" : "0xf98ed22063f16fac949f059b6aa1689dc1e72473ddc241b836c15b739b47182c",
+      "id" : "440000045"
+    },
+    {
+      "hash" : "0xaecc93cc233d425dc848b3c38c49995246cdf9609fd02171998fff7689cbe99b",
+      "id" : "440000110"
+    },
+    {
+      "hash" : "0x8d4afb9210b849558d48b9261a8a5a064d2a7b8d8e3eccfc2bef7c2a2b2671f8",
+      "id" : "440000111"
+    },
+    {
+      "hash" : "0xed40c85db1572a3674d388cf62fd5421595dba7d44a29ef730b5432cce61b6fe",
+      "id" : "440000012"
+    },
+    {
+      "hash" : "0x5e924bd35f44792e49ddeaa3a2ffc0242db94e8a61d4e9b918e92ea187108e9d",
+      "id" : "440000037"
+    },
+    {
+      "hash" : "0xef0a03d69e3d02ed5643476f101402d5cd38184665cf45142ee4015974e49f8f",
+      "id" : "440000091"
+    },
+    {
+      "hash" : "0x9c558e10394b936d6071a996cee8ee28f4046cbac5944a0c741e09ddcefc4ecf",
+      "id" : "440000033"
+    },
+    {
+      "hash" : "0x0a9a3ffadfabac78d5f734bec812f829dfffda1961f6767e8f149da55402ae42",
+      "id" : "440000049"
+    },
+    {
+      "hash" : "0x82312fbe19b5e5d5948a84d4c19a82cfb1a427545ccd168c6507516143f23641",
+      "id" : "440000118"
+    },
+    {
+      "hash" : "0x44b3f2d8e75699403c00701fa2f3a813f961c0dc9b7d225d8b557177e92b31c6",
+      "id" : "440000119"
+    },
+    {
+      "hash" : "0x91909e58b8fdcb9eb0f1d73e57ff425dbbdfc7cd83d3b3f5b1d6041f29fd24d4",
+      "id" : "440000026"
+    },
+    {
+      "hash" : "0x1f5a1a70915ecb53249b939f32c9fa412bdca3058cbadcb0d64503fb22dd0142",
+      "id" : "440000027"
+    },
+    {
+      "hash" : "0x73ce197f0dbbc6690e414a7b46d762a6c7e5248c1cdf2a97a8583fe2ac038d20",
+      "id" : "440000008"
+    },
+    {
+      "hash" : "0x098029ef09777e3ec0c0969463ecb8c4fb8d0aadfcc03a6347d8019d6dde75da",
+      "id" : "440000034"
+    },
+    {
+      "hash" : "0xc56b7f8f1a3ee654c8d9edea2ad967d2a8ecfe5c3c643f3fe2e9ccedb863bab9",
+      "id" : "440000061"
+    },
+    {
+      "hash" : "0x07510f0b60c2b4f6a5283fe9f781fab4350f576c60ea00abf61426d98e6fb65c",
+      "id" : "440000096"
+    },
+    {
+      "hash" : "0xf5e8ec6e15c8d4183fb829ae9e9f22c80906ef35f2cac5a5edb71a5bd1409047",
+      "id" : "440000070"
+    },
+    {
+      "hash" : "0xc2c028a9d3b796ac1fd8d5d26e16db2823e3484ea94284b9043803a3a3f93985",
+      "id" : "440000112"
+    },
+    {
+      "hash" : "0x57281c30c79138e0211375f765790b1498bc7b93415eff8d57362f8b853047f9",
+      "id" : "440000116"
+    },
+    {
+      "hash" : "0xd9c5c9cd72f14fa7268be6d1b48491531d7ce5ceb14fd0bdca83d767c532b558",
+      "id" : "440000123"
+    },
+    {
+      "hash" : "0xf0c9645a0a858a61d26d3e48b2bb158851c9ebdb32546ecf7b6f8ccde74b9337",
+      "id" : "440000057"
+    },
+    {
+      "hash" : "0x2bc9bbc0977f3ad7f9d8e5d4f9ab4ab85400d566dab4ffa05a668b367eef3574",
+      "id" : "440000075"
+    },
+    {
+      "hash" : "0x020846912fc2cad3910a573b72a2c2e28397a63051946c658314b62fa3d2d612",
+      "id" : "440000083"
+    },
+    {
+      "hash" : "0x762cba07a95cfa7a75334117a8d3c9acf58f06face7e2c4c8c35a8e44d05b4f0",
+      "id" : "440000036"
+    },
+    {
+      "hash" : "0xe24ccc992cefb02013bd2076ef565b06258d33724bed1ddbdd2a60159bc88abc",
+      "id" : "440000040"
+    },
+    {
+      "hash" : "0x29afd72253f9f52d3b5a338cd2d7d88c284e5203c4ffd1717daeff2dd098aae0",
+      "id" : "440000085"
+    },
+    {
+      "hash" : "0xe1609dcd43e1f819c41f7516757e1ce3320ca2f550b9b5c8ac882dfad608f361",
+      "id" : "440000054"
+    },
+    {
+      "hash" : "0xb5fce34ed8b0dd221b5457a16339f212b071057f2d7115c73c23023497e9f18d",
+      "id" : "440000090"
+    },
+    {
+      "hash" : "0x64194d13a9d3624e5ca1e03c1ca1c62b3db98e18452f8fd1add2b44fd2b4eec4",
+      "id" : "440000024"
+    },
+    {
+      "hash" : "0x97dcd26be89eab866e2ca8260a44921a67777cfb4b02932a34e3ddbcbc9f69b2",
+      "id" : "440000103"
+    },
+    {
+      "hash" : "0xa97e72252e898c0b7b8a33fcca36398eacdbc00acd642f9eff1b5b50db35b48a",
+      "id" : "440000063"
+    },
+    {
+      "hash" : "0x9b2b53e99234240edc0e268c0d2ad0186dc95e2069ddd0565d6c9aee67fe33bf",
+      "id" : "440000007"
+    },
+    {
+      "hash" : "0x07b2fd3bcd64c3fef91836decd69e1baf1567bf423bfa522aad1744fa2a2327d",
+      "id" : "440000064"
+    },
+    {
+      "hash" : "0x804bd828e7798b2174dfc5d055787621ba4fc78b60f1499a7f08f7f3cbcdb447",
+      "id" : "440000087"
+    },
+    {
+      "hash" : "0x8b5d362ee1e0665aa953f687894739dcd3ddff9b0cd373dbdf14958ebaafefa5",
+      "id" : "440000059"
+    },
+    {
+      "hash" : "0xc15159795e9e122a78be222a193c43d440c65f6a5072aad98b04a8dd62817885",
+      "id" : "440000072"
+    },
+    {
+      "hash" : "0x3ab96615149419fb899f53d9016df0252a9da362981e18e1ea1c3ce47957394f",
+      "id" : "440000104"
+    },
+    {
+      "hash" : "0x555a6289adb04c8281839edab49629fe30c681f841e6796771579031584ead22",
+      "id" : "440000010"
+    },
+    {
+      "hash" : "0xd4e5e8f8d81caf5378b7cf3798645caac68f11658a2a9cb87bd9c1463e2eade0",
+      "id" : "440000099"
+    },
+    {
+      "hash" : "0x64bdeeb3c72445f9becb7b6af175c751f00095bb67f4d2d2d15de739c39a2c8d",
+      "id" : "440000005"
+    },
+    {
+      "hash" : "0xa1e04ecd4f60e5705529669063cc65cc7f3be139217772e57d5a1c5c5898de44",
+      "id" : "440000100"
+    },
+    {
+      "hash" : "0xb5d7e0313a574c907db7e64d3f2e144351c9b628e520586b4523c46a429b03f9",
+      "id" : "440000098"
+    },
+    {
+      "hash" : "0x6ee1de55cbe2ed403316c487d83cec3fb213551b8c70d7f03e34d7f3553e0158",
+      "id" : "440000009"
+    },
+    {
+      "hash" : "0x3c67c9795f4f31986de7120f5fbe561aa261b70a3199be16c7510a5812c03504",
+      "id" : "440000047"
+    },
+    {
+      "hash" : "0x913481548b199e4d42c8be4bff64d8a1003ba576731fca00893132cca03636e7",
+      "id" : "440000124"
+    },
+    {
+      "hash" : "0x240760bc8147a4eac98213302f13657c744de9d330eee6a668c0c871094ac2f7",
+      "id" : "440000031"
+    }
+  ]
+}

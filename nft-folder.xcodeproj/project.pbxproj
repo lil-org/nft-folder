@@ -57,6 +57,7 @@
 		2C88D95D2C3872DD00009C25 /* RandomGradientShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88D95C2C3872DD00009C25 /* RandomGradientShape.swift */; };
 		2C8A42EA2B1A272600BE4166 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A42E92B1A272600BE4166 /* Network.swift */; };
 		2C8A4CBF2BF9ECBD00F0E9D9 /* MagicEdenApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A4CBE2BF9ECBD00F0E9D9 /* MagicEdenApi.swift */; };
+		2C8C8DE92C3C890B00BC83E9 /* GenerativeProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C8DE82C3C890B00BC83E9 /* GenerativeProject.swift */; };
 		2C8E246F2C24A6E200C13536 /* FirstMouseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8E246E2C24A6E200C13536 /* FirstMouseView.swift */; };
 		2C8EDD032C0CFE3F003CB35D /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8EDD022C0CFE3F003CB35D /* Snapshot.swift */; };
 		2C8EDD052C0D00EA003CB35D /* FolderSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8EDD042C0D00EA003CB35D /* FolderSyncService.swift */; };
@@ -201,6 +202,7 @@
 		2C88D95C2C3872DD00009C25 /* RandomGradientShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomGradientShape.swift; sourceTree = "<group>"; };
 		2C8A42E92B1A272600BE4166 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		2C8A4CBE2BF9ECBD00F0E9D9 /* MagicEdenApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicEdenApi.swift; sourceTree = "<group>"; };
+		2C8C8DE82C3C890B00BC83E9 /* GenerativeProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerativeProject.swift; sourceTree = "<group>"; };
 		2C8E246E2C24A6E200C13536 /* FirstMouseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstMouseView.swift; sourceTree = "<group>"; };
 		2C8EDD022C0CFE3F003CB35D /* Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
 		2C8EDD042C0D00EA003CB35D /* FolderSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderSyncService.swift; sourceTree = "<group>"; };
@@ -616,7 +618,6 @@
 		2CE0B5E22B8686CE00B5BF4A /* FooterLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterLink.swift; sourceTree = "<group>"; };
 		2CE33D992B865CFB008473E1 /* AvatarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarService.swift; sourceTree = "<group>"; };
 		2CE9A7702BAD8ECD00579BF7 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
-		2CF15C972C3A9DD800E08495 /* ab.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ab.json; sourceTree = "<group>"; };
 		2CF4C49A2B7F567B000AB4A6 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		2CF4C49D2B7FB26C000AB4A6 /* DetailedTokenMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedTokenMetadata.swift; sourceTree = "<group>"; };
 		2CF4C49F2B7FCDDC000AB4A6 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
@@ -690,7 +691,6 @@
 				2C3214322C33DF7C0050BBC1 /* SimpleHash.swift */,
 				2C657CD32C3A9EA600F64E9D /* untitled.html */,
 				2C657CD42C3A9F0800F64E9D /* p5.min.js */,
-				2CF15C972C3A9DD800E08495 /* ab.json */,
 			);
 			path = tools;
 			sourceTree = "<group>";
@@ -1454,6 +1454,7 @@
 				2C9C60342C2C5FE8001D9B51 /* SuggestedItemsService.swift */,
 				2CFF885A2C288C9A0007045F /* SuggestedItem.swift */,
 				2C086E862C2F3C3600D4268D /* BundledTokens.swift */,
+				2C8C8DE82C3C890B00BC83E9 /* GenerativeProject.swift */,
 				2C4659932C308B44008CF97F /* Covers.xcassets */,
 				2C09BAE32C308145009BA300 /* Suggested.bundle */,
 			);
@@ -1933,6 +1934,7 @@
 				2C1B60C42B7D41D1009949C2 /* HostAppImages.swift in Sources */,
 				2CB308E72C30AD0000D914A5 /* NSImage.swift in Sources */,
 				2CC943032B825907003219C7 /* ZoraRequest.swift in Sources */,
+				2C8C8DE92C3C890B00BC83E9 /* GenerativeProject.swift in Sources */,
 				2CE33D9A2B865CFB008473E1 /* AvatarService.swift in Sources */,
 				2CA34B5A2B08B7CF00DAB623 /* URL.swift in Sources */,
 				2C8EDD052C0D00EA003CB35D /* FolderSyncService.swift in Sources */,
