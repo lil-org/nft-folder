@@ -34,6 +34,8 @@
 		2C2B5AD12B84E2DA005C38B0 /* DownloadFileTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2B5AD02B84E2DA005C38B0 /* DownloadFileTask.swift */; };
 		2C3214332C33DF7C0050BBC1 /* SimpleHash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3214322C33DF7C0050BBC1 /* SimpleHash.swift */; };
 		2C3924C12C1F0F1200161154 /* StringTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3924C02C1F0F1200161154 /* StringTask.swift */; };
+		2C3B775F2C3D6DEC000A9B52 /* LocalHtmlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3B775E2C3D6DEC000A9B52 /* LocalHtmlView.swift */; };
+		2C3B77612C3D6F82000A9B52 /* LocalHtmlWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3B77602C3D6F82000A9B52 /* LocalHtmlWindow.swift */; };
 		2C4039ED2B83A4F000DB94D7 /* SharedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4039EC2B83A4F000DB94D7 /* SharedDefaults.swift */; };
 		2C4039EE2B83A4F000DB94D7 /* SharedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4039EC2B83A4F000DB94D7 /* SharedDefaults.swift */; };
 		2C4039EF2B83A59300DB94D7 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B552B08B6A200DAB623 /* Codable.swift */; };
@@ -182,6 +184,8 @@
 		2C2B5AD02B84E2DA005C38B0 /* DownloadFileTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadFileTask.swift; sourceTree = "<group>"; };
 		2C3214322C33DF7C0050BBC1 /* SimpleHash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleHash.swift; sourceTree = "<group>"; };
 		2C3924C02C1F0F1200161154 /* StringTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTask.swift; sourceTree = "<group>"; };
+		2C3B775E2C3D6DEC000A9B52 /* LocalHtmlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalHtmlView.swift; sourceTree = "<group>"; };
+		2C3B77602C3D6F82000A9B52 /* LocalHtmlWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalHtmlWindow.swift; sourceTree = "<group>"; };
 		2C4039EC2B83A4F000DB94D7 /* SharedDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDefaults.swift; sourceTree = "<group>"; };
 		2C4039F02B83B11100DB94D7 /* FileSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSaver.swift; sourceTree = "<group>"; };
 		2C424F452B9775E6007868F8 /* RightClickActivatingWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightClickActivatingWindow.swift; sourceTree = "<group>"; };
@@ -1423,6 +1427,7 @@
 		2C91131C2B08FCDF00A8EE80 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2C3B775E2C3D6DEC000A9B52 /* LocalHtmlView.swift */,
 				2CCFED972B08246800D98A2E /* WalletsListView.swift */,
 				2C1B60C52B7E1145009949C2 /* PreferencesView.swift */,
 				2C9113272B09751D00A8EE80 /* WalletImageView.swift */,
@@ -1436,6 +1441,7 @@
 			children = (
 				2C5504DD2C106C4400DE145A /* Alerts.swift */,
 				2C424F452B9775E6007868F8 /* RightClickActivatingWindow.swift */,
+				2C3B77602C3D6F82000A9B52 /* LocalHtmlWindow.swift */,
 				2C60AAD02B8A4DE200F2C143 /* Window.swift */,
 				2C9EF2E32B8A612F00297B32 /* StatusBarItem.swift */,
 				2CE0B5E22B8686CE00B5BF4A /* FooterLink.swift */,
@@ -1915,9 +1921,11 @@
 				2CA34B562B08B6A200DAB623 /* Codable.swift in Sources */,
 				2C9113282B09751D00A8EE80 /* WalletImageView.swift in Sources */,
 				2C9EF2E42B8A612F00297B32 /* StatusBarItem.swift in Sources */,
+				2C3B775F2C3D6DEC000A9B52 /* LocalHtmlView.swift in Sources */,
 				2C5065FA2C0E10D600D9D01A /* AttestationResponse.swift in Sources */,
 				2C8EDD032C0CFE3F003CB35D /* Snapshot.swift in Sources */,
 				2CF4C49B2B7F567B000AB4A6 /* Navigator.swift in Sources */,
+				2C3B77612C3D6F82000A9B52 /* LocalHtmlWindow.swift in Sources */,
 				2C1B60D62B7EBD18009949C2 /* AllDownloadsManager.swift in Sources */,
 				2C0D86C42B08E67000106915 /* WalletsService.swift in Sources */,
 				2CFF885B2C288C9A0007045F /* SuggestedItem.swift in Sources */,

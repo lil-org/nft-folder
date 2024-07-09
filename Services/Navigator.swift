@@ -3,14 +3,6 @@
 import Cocoa
 import SwiftUI
 
-struct PlaceholderView: View {
-    
-    var body: some View {
-        Rectangle().background(.red)
-    }
-    
-}
-
 class Navigator: NSObject {
     
     private override init() { super.init() }
@@ -21,11 +13,10 @@ class Navigator: NSObject {
     }
     
     func showRandomPlayer() {
-        // TODO: tune window
-        // TODO: generate artblocks
-        
-        let window = NSWindow(
-            contentRect: CGRect(origin: .zero, size: CGSize(width: 777, height: 777)),
+        Window.closeOtherPlayers()
+        let contentView = LocalHtmlView()
+        let window = LocalHtmlWindow(
+            contentRect: CGRect(origin: .zero, size: CGSize(width: 300, height: 320)),
             styleMask: [.closable, .fullSizeContentView, .titled, .resizable],
             backing: .buffered, defer: false)
         
@@ -41,8 +32,6 @@ class Navigator: NSObject {
         window.contentView?.wantsLayer = true
         window.contentView?.layer?.cornerRadius = 10
         window.contentView?.layer?.masksToBounds = true
-        
-        let contentView = PlaceholderView()
         
         window.isReleasedWhenClosed = false
         window.contentView = NSHostingView(rootView: contentView.frame(minWidth: 251, minHeight: 130))
