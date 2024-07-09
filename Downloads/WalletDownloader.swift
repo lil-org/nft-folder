@@ -62,7 +62,8 @@ class WalletDownloader {
                         if let knownName = item.name {
                             name = knownName
                         } else if let projectId = wallet.projectId, item.id.hasPrefix(projectId), item.id != projectId {
-                            name = collection.name + " #" + item.id.dropFirst(projectId.count).drop(while: { $0 == "0" })
+                            let cleanId = item.id.dropFirst(projectId.count).drop(while: { $0 == "0" })
+                            name = collection.name + " #" + (cleanId.isEmpty ? "0" : cleanId)
                         } else {
                             name = nil
                         }
