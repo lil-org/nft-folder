@@ -19,14 +19,26 @@ struct TokenGenerator {
     }()
     
     static func generateRandomToken(specificCollectionId: String?, notCollectionId: String?, notTokenId: String?) -> GeneratedToken? {
-        // TODO: use id preferences
+        var jsonName: String
+        if let specificCollectionId = specificCollectionId {
+            jsonName = specificCollectionId + ".json"
+        } else {
+            jsonName = jsonsNames.randomElement() ?? ""
+            if jsonName == notCollectionId {
+                jsonName = jsonsNames.randomElement() ?? ""
+            }
+        }
         
-        guard let jsonName = jsonsNames.randomElement() else { return nil }
         let url = dirURL.appendingPathComponent(jsonName)
         guard let data = try? Data(contentsOf: url),
               let project = try? JSONDecoder().decode(GenerativeProject.self, from: data),
-              let randomToken = project.tokens.randomElement(),
+              var randomToken = project.tokens.randomElement(),
               let suggestedItem = SuggestedItemsService.allItems.first(where: { $0.id == project.id }) else { return nil }
+        
+        if randomToken.id == notTokenId, let another = project.tokens.randomElement() {
+            randomToken = another
+        }
+        
         let html = createHtml(project: project, token: randomToken)
         let name: String
         if let abId = suggestedItem.abId, randomToken.id.hasPrefix(abId) && randomToken.id != abId {
