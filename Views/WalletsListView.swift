@@ -76,7 +76,7 @@ struct WalletsListView: View {
                             showRandomPlayer()
                         }) {
                             Images.shuffle
-                        }.frame(width: 23)
+                        }
                         
                         Button(action: {
                             showAddWalletPopup = true
