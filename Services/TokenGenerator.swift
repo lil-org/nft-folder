@@ -27,7 +27,7 @@ struct TokenGenerator {
               let suggestedItem = SuggestedItemsService.allItems.first(where: { $0.id == project.id }) else { return nil }
         let html = createHtml(project: project, token: randomToken)
         let name: String
-        if let abId = suggestedItem.abId, randomToken.id.hasPrefix(abId) {
+        if let abId = suggestedItem.abId, randomToken.id.hasPrefix(abId) && randomToken.id != abId {
             name = suggestedItem.name + " #" + randomToken.id.dropFirst(abId.count).drop(while: { $0 == "0" })
         } else {
             name = suggestedItem.name + " #" + randomToken.id
