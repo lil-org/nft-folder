@@ -37,51 +37,102 @@ struct TokenGenerator {
     }
     
     private static func createHtml(project: GenerativeProject, token: GenerativeProject.Token) -> String {
-        let libScript = project.kind == .p5js ? "\n<script>\(p5js)</script>\n" : ""
-        let template =
+        let tokenData =
         """
-        <html>
-        <head>
-            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-            <meta charset="utf-8"/>\(libScript)
-            <script>
-            let tokenData = {
-                "tokenId": "\(token.id)",
-                "hash": "\(token.hash)"
-            }
-            </script>
-            <script>
-                console.log("https://generator.artblocks.io/\(project.contractAddress)/\(token.id)");
-            </script>
-            <script>
-                \(project.script)
-            </script>
-            <style type="text/css">
-            html {
-                height: 100%;
-            }
-        
-            body {
-                min-height: 100%;
-                margin: 0;
-                padding: 0;
-            }
-        
-            canvas {
-                padding: 0;
-                margin: auto;
-                display: block;
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                left: 0;
-                right: 0;
-            }
-            </style>
-        </head>
-        </html>
+        let tokenData = {"tokenId": "\(token.id)", "hash": "\(token.hash)"}
         """
-        return template
+        
+        let html: String
+        switch project.kind {
+        case .svg:
+            html =
+            """
+            <html>
+            <head>
+              <meta charset="utf-8">
+              <style type="text/css">
+                body {
+                  min-height: 100%;
+                  margin: 0;
+                  padding: 0;
+                }
+                svg {
+                  padding: 0;
+                  margin: auto;
+                  display: block;
+                  position: absolute;
+                  top: 0;
+                  bottom: 0;
+                  left: 0;
+                  right: 0;
+                }
+              </style>
+            </head>
+            <body></body>
+            <script>\(tokenData)</script>
+            <script>\(project.script)</script>
+            </html>
+            """
+        case .js, .custom:
+            html =
+            """
+            <html>
+            <head>
+              <meta charset="utf-8">
+              <script>\(tokenData)</script>
+              <style type="text/css">
+                body {
+                  margin: 0;
+                  padding: 0;
+                }
+                canvas {
+                  padding: 0;
+                  margin: auto;
+                  display: block;
+                  position: absolute;
+                  top: 0;
+                  bottom: 0;
+                  left: 0;
+                  right: 0;
+                }
+              </style>
+            </head>
+            <body>
+              <canvas></canvas>
+              <script>\(project.script)</script>
+            </body>
+            </html>
+            """
+        case .p5js:
+            html =
+            """
+            <html>
+            <head>
+              <meta charset="utf-8">
+              <script>\(p5js)</script>
+              <script>\(tokenData)</script>
+              <script>\(project.script)</script>
+              <style type="text/css">
+                body {
+                  margin: 0;
+                  padding: 0;
+                }
+                canvas {
+                  padding: 0;
+                  margin: auto;
+                  display: block;
+                  position: absolute;
+                  top: 0;
+                  bottom: 0;
+                  left: 0;
+                  right: 0;
+                }
+              </style>
+            </head>
+            </html>
+            """
+        }
+        return html
     }
     
 }
