@@ -31,7 +31,7 @@ class Navigator: NSObject {
         
         window.titleVisibility = .hidden
         window.titlebarAppearsTransparent = false
-        window.isMovableByWindowBackground = false
+        window.isMovableByWindowBackground = true
         window.backgroundColor = NSColor.windowBackgroundColor
         window.isOpaque = false
         window.hasShadow = true
