@@ -14,34 +14,36 @@ let fresh =
 
 //removeBundledItem(name: "")
 
-var generativeProjects = [GenerativeProject]() // TODO: read from bundle
+let p5js = try! String(contentsOfFile: dir + "/tools/p5.min.js")
+let generativeDirPath = dir + "/Suggested Items/Suggested.bundle/Generative/"
+let generativeJsonsNames = try! FileManager.default.contentsOfDirectory(atPath: generativeDirPath)
 
-for p in generativeProjects {
+for name in generativeJsonsNames {
+    let data = try! Data(contentsOf: URL(filePath: generativeDirPath + name))
+    let p = try! JSONDecoder().decode(GenerativeProject.self, from: data)
     let html = createRandomTokenHtml(project: p)
-    // TODO: save html
+    try! html.write(toFile: selectedPath + p.id + ".html", atomically: true, encoding: .utf8)
 }
 
 print("🟢 all done")
 
 func createRandomTokenHtml(project: GenerativeProject) -> String {
-    // TODO: fill in template data correctly
+    let token = project.tokens.randomElement()!
+    let libScript = project.kind == .p5js ? "\n<script>\(p5js)</script>\n" : "" // TODO: p5js when needed
     let template =
 """
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-    <meta charset="utf-8"/>
-    <script>
-        // TODO: insert p5js here if needed
-    </script>
+    <meta charset="utf-8"/>\(libScript)
     <script>
     let tokenData = {
-        "tokenId": "114000424",
-        "hash": "0x710e58f1a85051eb392ff157f7118f46cb6313708e2202644c9b3e3278e8a517"
+        "tokenId": "\(token.id)",
+        "hash": "\(token.hash)"
     }
     </script>
     <script>
-        // TODO: insert project script here
+        \(project.script)
     </script>
     <style type="text/css">
     html {
