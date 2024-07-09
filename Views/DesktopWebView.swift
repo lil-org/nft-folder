@@ -9,10 +9,14 @@ struct DesktopWebView: NSViewRepresentable {
     
     func makeNSView(context: Context) -> NSView {
         let containerView = NSView()
+        containerView.wantsLayer = true
+        containerView.layer?.backgroundColor = .black
         DispatchQueue.main.async { [weak containerView] in
             let webConfiguration = WKWebViewConfiguration()
             webConfiguration.suppressesIncrementalRendering = true
             let wkWebView = WKWebView(frame: .zero, configuration: webConfiguration)
+            wkWebView.wantsLayer = true
+            wkWebView.layer?.backgroundColor = .black
             wkWebView.translatesAutoresizingMaskIntoConstraints = false
             if let containerView = containerView {
                 containerView.addSubview(wkWebView)

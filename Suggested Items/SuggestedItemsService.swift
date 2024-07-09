@@ -4,7 +4,7 @@ import Foundation
 
 struct SuggestedItemsService {
     
-    private static let bundle: Bundle = {
+    static let bundle: Bundle = {
         if let bundleURL = Bundle.main.url(forResource: "Suggested", withExtension: "bundle"),
            let suggestedBundle = Bundle(url: bundleURL) {
             return suggestedBundle

@@ -4,18 +4,16 @@ import SwiftUI
 
 struct LocalHtmlView: View {
     
-    @State private var backgroundColor: String = "white"
-    @State private var colorHistory: [String] = []
+    @State private var currentToken = TokenGenerator.generateRandomToken() ?? GeneratedToken(html: "", displayName: "")
+    @State private var history = [GeneratedToken]()
     @State private var currentIndex = 0
     
     var body: some View {
-        DesktopWebView(htmlContent: generateHtml(with: backgroundColor))
+        DesktopWebView(htmlContent: currentToken.html)
             .onAppear {
-                let initialColor = generateRandomColor()
-                backgroundColor = initialColor
-                colorHistory.append(initialColor)
+                history.append(currentToken)
             }
-            .frame(minWidth: 200, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity)
+            .frame(minWidth: 200, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity).background(.black)
             .toolbar {
                 ToolbarItem(placement: .navigation) {
                     Button(action: goBack) {
@@ -31,48 +29,27 @@ struct LocalHtmlView: View {
                     .keyboardShortcut(.rightArrow, modifiers: [])
                 }
                 ToolbarItem(placement: .principal) {
-                    Text(backgroundColor).font(.headline)
+                    Text(currentToken.displayName).font(.headline)
                 }
             }
-    }
-    
-    private func generateHtml(with color: String) -> String {
-        """
-        <html>
-        <head>
-            <style>
-                body { background-color: \(color); }
-            </style>
-        </head>
-        <body>
-        </body>
-        </html>
-        """
-    }
-    
-    private func generateRandomColor() -> String {
-        let red = Int.random(in: 0...255)
-        let green = Int.random(in: 0...255)
-        let blue = Int.random(in: 0...255)
-        return String(format: "#%02X%02X%02X", red, green, blue)
     }
     
     private func goBack() {
         if currentIndex > 0 {
             currentIndex -= 1
-            backgroundColor = colorHistory[currentIndex]
+            currentToken = history[currentIndex]
         }
     }
     
     private func goForward() {
-        if currentIndex < colorHistory.count - 1 {
+        if currentIndex < history.count - 1 {
             currentIndex += 1
-            backgroundColor = colorHistory[currentIndex]
+            currentToken = history[currentIndex]
         } else {
-            let newColor = generateRandomColor()
-            colorHistory.append(newColor)
+            let newToken = TokenGenerator.generateRandomToken() ?? currentToken
+            history.append(newToken)
             currentIndex += 1
-            backgroundColor = newColor
+            currentToken = newToken
         }
     }
     
