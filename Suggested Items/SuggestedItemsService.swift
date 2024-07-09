@@ -13,7 +13,7 @@ struct SuggestedItemsService {
         }
     }()
     
-    private static var allItems = [SuggestedItem]()
+    static var allItems = [SuggestedItem]()
     static var visibleItems = readSuggestedItems()
     static var toHide = Set(Defaults.suggestedItemsToHide)
     
