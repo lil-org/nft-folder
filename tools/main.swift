@@ -22,7 +22,7 @@ for name in generativeJsonsNames {
     let data = try! Data(contentsOf: URL(filePath: generativeDirPath + name))
     let p = try! JSONDecoder().decode(GenerativeProject.self, from: data)
     let html = createRandomTokenHtml(project: p)
-    try! html.write(toFile: selectedPath + p.id + ".html", atomically: true, encoding: .utf8)
+    try! html.write(toFile: selectedPath + p.id + ".artblock", atomically: true, encoding: .utf8)
     print("did generate \(p.id)")
 }
 
