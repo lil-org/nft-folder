@@ -32,7 +32,9 @@ struct TokenGenerator {
         } else {
             name = suggestedItem.name + " #" + randomToken.id
         }
-        let token = GeneratedToken(html: html, displayName: name)
+        
+        let webURL = NftGallery.opensea.url(network: .mainnet, chain: .ethereum, collectionAddress: project.contractAddress, tokenId: randomToken.id)
+        let token = GeneratedToken(html: html, displayName: name, url: webURL, instructions: project.instructions)
         return token
     }
     

@@ -4,9 +4,10 @@ import SwiftUI
 
 struct LocalHtmlView: View {
     
-    @State private var currentToken = TokenGenerator.generateRandomToken() ?? GeneratedToken(html: "", displayName: "")
+    @State private var currentToken = TokenGenerator.generateRandomToken() ?? GeneratedToken(html: "", displayName: "", url: nil, instructions: nil)
     @State private var history = [GeneratedToken]()
     @State private var currentIndex = 0
+    @State private var showingInfoAlert = false
     
     var body: some View {
         DesktopWebView(htmlContent: currentToken.html)
@@ -31,7 +32,35 @@ struct LocalHtmlView: View {
                 ToolbarItem(placement: .principal) {
                     Text(currentToken.displayName).font(.headline)
                 }
+                ToolbarItemGroup() {
+                    Spacer()
+                    Button(action: showInfo) {
+                        Images.info
+                    }
+                    Button(action: viewOnWeb) {
+                        Images.globe
+                    }
+                }
             }
+            .alert(Strings.experimetalOfflineGeneration, isPresented: $showingInfoAlert) {
+                Button(Strings.ok) { }
+            } message: {
+                if let instructions = currentToken.instructions {
+                    Text(Strings.letUsKnowOfIssues + "\n\n" + instructions)
+                } else {
+                    Text(Strings.letUsKnowOfIssues)
+                }
+            }
+    }
+    
+    private func showInfo() {
+        showingInfoAlert = true
+    }
+    
+    private func viewOnWeb() {
+        if let url = currentToken.url {
+            NSWorkspace.shared.open(url)
+        }
     }
     
     private func goBack() {

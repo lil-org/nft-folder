@@ -36,6 +36,8 @@ struct Strings {
     static let downloadAudio = loc("Download audio")
     static let restoreHiddenItems = loc("Restore Hidden Items")
     static let eraseAllContent = loc("Erase All Content")
+    static let experimetalOfflineGeneration = loc("Offline generation is a new experimental feature")
+    static let letUsKnowOfIssues = loc("Let us know of any issues.")
     
     static let zora = "Zora"
     static let opensea = "OpenSea"

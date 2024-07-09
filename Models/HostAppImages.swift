@@ -17,5 +17,7 @@ extension Images {
     static let openFinder = Image(systemName: "folder")
     static let back = Image(systemName: "arrow.left")
     static let forward = Image(systemName: "arrow.right")
+    static let globe = Image(systemName: "globe")
+    static let info = Image(systemName: "info")
     
 }
