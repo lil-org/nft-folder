@@ -28,6 +28,9 @@ struct LocalHtmlView: View {
                         Images.forward
                     }
                 }
+                ToolbarItem(placement: .principal) {
+                    Text(backgroundColor).font(.headline)
+                }
             }
     }
     
