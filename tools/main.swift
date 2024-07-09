@@ -23,13 +23,14 @@ for name in generativeJsonsNames {
     let p = try! JSONDecoder().decode(GenerativeProject.self, from: data)
     let html = createRandomTokenHtml(project: p)
     try! html.write(toFile: selectedPath + p.id + ".html", atomically: true, encoding: .utf8)
+    print("did generate \(p.id)")
 }
 
 print("🟢 all done")
 
 func createRandomTokenHtml(project: GenerativeProject) -> String {
     let token = project.tokens.randomElement()!
-    let libScript = project.kind == .p5js ? "\n<script>\(p5js)</script>\n" : "" // TODO: p5js when needed
+    let libScript = project.kind == .p5js ? "\n<script>\(p5js)</script>\n" : ""
     let template =
 """
 <html>
@@ -41,6 +42,9 @@ func createRandomTokenHtml(project: GenerativeProject) -> String {
         "tokenId": "\(token.id)",
         "hash": "\(token.hash)"
     }
+    </script>
+    <script>
+        console.log("https://generator.artblocks.io/\(project.contractAddress)/\(token.id)");
     </script>
     <script>
         \(project.script)
