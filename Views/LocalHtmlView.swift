@@ -22,11 +22,13 @@ struct LocalHtmlView: View {
                         Images.back
                     }
                     .disabled(currentIndex <= 0)
+                    .keyboardShortcut(.leftArrow, modifiers: [])
                 }
                 ToolbarItem(placement: .navigation) {
                     Button(action: goForward) {
                         Images.forward
                     }
+                    .keyboardShortcut(.rightArrow, modifiers: [])
                 }
                 ToolbarItem(placement: .principal) {
                     Text(backgroundColor).font(.headline)
