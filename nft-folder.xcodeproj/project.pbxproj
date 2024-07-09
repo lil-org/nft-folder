@@ -36,6 +36,7 @@
 		2C3924C12C1F0F1200161154 /* StringTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3924C02C1F0F1200161154 /* StringTask.swift */; };
 		2C3B775F2C3D6DEC000A9B52 /* LocalHtmlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3B775E2C3D6DEC000A9B52 /* LocalHtmlView.swift */; };
 		2C3B77612C3D6F82000A9B52 /* LocalHtmlWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3B77602C3D6F82000A9B52 /* LocalHtmlWindow.swift */; };
+		2C3B77632C3D773B000A9B52 /* DesktopWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3B77622C3D773B000A9B52 /* DesktopWebView.swift */; };
 		2C4039ED2B83A4F000DB94D7 /* SharedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4039EC2B83A4F000DB94D7 /* SharedDefaults.swift */; };
 		2C4039EE2B83A4F000DB94D7 /* SharedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4039EC2B83A4F000DB94D7 /* SharedDefaults.swift */; };
 		2C4039EF2B83A59300DB94D7 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B552B08B6A200DAB623 /* Codable.swift */; };
@@ -186,6 +187,7 @@
 		2C3924C02C1F0F1200161154 /* StringTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTask.swift; sourceTree = "<group>"; };
 		2C3B775E2C3D6DEC000A9B52 /* LocalHtmlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalHtmlView.swift; sourceTree = "<group>"; };
 		2C3B77602C3D6F82000A9B52 /* LocalHtmlWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalHtmlWindow.swift; sourceTree = "<group>"; };
+		2C3B77622C3D773B000A9B52 /* DesktopWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesktopWebView.swift; sourceTree = "<group>"; };
 		2C4039EC2B83A4F000DB94D7 /* SharedDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDefaults.swift; sourceTree = "<group>"; };
 		2C4039F02B83B11100DB94D7 /* FileSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSaver.swift; sourceTree = "<group>"; };
 		2C424F452B9775E6007868F8 /* RightClickActivatingWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightClickActivatingWindow.swift; sourceTree = "<group>"; };
@@ -1428,6 +1430,7 @@
 			isa = PBXGroup;
 			children = (
 				2C3B775E2C3D6DEC000A9B52 /* LocalHtmlView.swift */,
+				2C3B77622C3D773B000A9B52 /* DesktopWebView.swift */,
 				2CCFED972B08246800D98A2E /* WalletsListView.swift */,
 				2C1B60C52B7E1145009949C2 /* PreferencesView.swift */,
 				2C9113272B09751D00A8EE80 /* WalletImageView.swift */,
@@ -1932,6 +1935,7 @@
 				2C1B60CB2B7E2481009949C2 /* Images.swift in Sources */,
 				2CA4CF552B07F75F00CC75F4 /* AppDelegate.swift in Sources */,
 				2C9C60352C2C5FE8001D9B51 /* SuggestedItemsService.swift in Sources */,
+				2C3B77632C3D773B000A9B52 /* DesktopWebView.swift in Sources */,
 				2CE0B5E32B8686CE00B5BF4A /* FooterLink.swift in Sources */,
 				2C4DBFC12C3698D10097AD35 /* Chain.swift in Sources */,
 				2CF524022BB2ECD200C18344 /* CollectionInfo.swift in Sources */,

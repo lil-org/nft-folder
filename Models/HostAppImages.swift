@@ -15,5 +15,7 @@ extension Images {
     static let sync = Image(systemName: "arrow.clockwise")
     static let ellipsis = Image(systemName: "ellipsis")
     static let openFinder = Image(systemName: "folder")
+    static let back = Image(systemName: "arrow.left")
+    static let forward = Image(systemName: "arrow.right")
     
 }
