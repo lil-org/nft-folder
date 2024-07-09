@@ -73,6 +73,12 @@ struct WalletsListView: View {
                         }
                         
                         Button(action: {
+                            showRandomPlayer()
+                        }) {
+                            Images.shuffle
+                        }.frame(width: 23)
+                        
+                        Button(action: {
                             showAddWalletPopup = true
                         }) {
                             Images.plus
@@ -111,6 +117,12 @@ struct WalletsListView: View {
                                 }
                             }) {
                                 Images.openFinder
+                            }.frame(width: 23)
+                            
+                            Button(action: {
+                                showRandomPlayer()
+                            }) {
+                                Images.shuffle
                             }.frame(width: 23)
                             
                             Button(action: {
@@ -316,6 +328,10 @@ struct WalletsListView: View {
                 }
             Spacer()
         }
+    }
+    
+    private func showRandomPlayer() {
+        Navigator.shared.showRandomPlayer()
     }
     
     private func eraseAllContent() {

@@ -6,6 +6,7 @@ extension Images {
     
     static let plus = Image(systemName: "plus")
     static let mint = Image(systemName: "plus.circle")
+    static let shuffle = Image(systemName: "shuffle")
     static let gearshape = Image(systemName: "gearshape")
     static let quit = Image(systemName: "xmark.circle.fill")
     static let extend = Image(systemName: "arrow.down.backward.and.arrow.up.forward.circle.fill")

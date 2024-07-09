@@ -3,6 +3,14 @@
 import Cocoa
 import SwiftUI
 
+struct PlaceholderView: View {
+    
+    var body: some View {
+        Rectangle().background(.red)
+    }
+    
+}
+
 class Navigator: NSObject {
     
     private override init() { super.init() }
@@ -10,6 +18,40 @@ class Navigator: NSObject {
     
     func showNewFolderInput() {
         showControlCenter(addWallet: true)
+    }
+    
+    func showRandomPlayer() {
+        // TODO: tune window
+        // TODO: generate artblocks
+        
+        let window = NSWindow(
+            contentRect: CGRect(origin: .zero, size: CGSize(width: 777, height: 777)),
+            styleMask: [.closable, .fullSizeContentView, .titled, .resizable],
+            backing: .buffered, defer: false)
+        
+        window.titleVisibility = .hidden
+        window.titlebarAppearsTransparent = false
+        window.isMovableByWindowBackground = false
+        window.backgroundColor = NSColor.windowBackgroundColor
+        window.isOpaque = false
+        window.hasShadow = true
+        window.isRestorable = true
+        window.setFrameAutosaveName(Consts.playerFrameAutosaveName)
+        
+        window.contentView?.wantsLayer = true
+        window.contentView?.layer?.cornerRadius = 10
+        window.contentView?.layer?.masksToBounds = true
+        
+        let contentView = PlaceholderView()
+        
+        window.isReleasedWhenClosed = false
+        window.contentView = NSHostingView(rootView: contentView.frame(minWidth: 251, minHeight: 130))
+        NSApp.activate(ignoringOtherApps: true)
+        window.makeKeyAndOrderFront(nil)
+        
+        if window.frame.origin == .zero || !window.isOnActiveSpace || !window.isVisible {
+            window.center()
+        }
     }
     
     func showControlCenter(addWallet: Bool) {
