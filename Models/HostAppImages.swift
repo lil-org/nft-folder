@@ -19,5 +19,6 @@ extension Images {
     static let forward = Image(systemName: "arrow.right")
     static let globe = Image(systemName: "globe")
     static let info = Image(systemName: "info")
+    static let changeCollection = Image(systemName: "goforward")
     
 }

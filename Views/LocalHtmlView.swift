@@ -4,7 +4,7 @@ import SwiftUI
 
 struct LocalHtmlView: View {
     
-    @State private var currentToken = TokenGenerator.generateRandomToken() ?? GeneratedToken(html: "", displayName: "", url: nil, instructions: nil)
+    @State private var currentToken = TokenGenerator.generateRandomToken(specificCollectionId: nil, notCollectionId: nil, notTokenId: nil) ?? GeneratedToken(fullCollectionId: "", id: "", html: "", displayName: "", url: nil, instructions: nil)
     @State private var history = [GeneratedToken]()
     @State private var currentIndex = 0
     @State private var showingInfoAlert = false
@@ -28,6 +28,11 @@ struct LocalHtmlView: View {
                         Images.forward
                     }
                     .keyboardShortcut(.rightArrow, modifiers: [])
+                }
+                ToolbarItem(placement: .navigation) {
+                    Button(action: changeCollection) {
+                        Images.changeCollection
+                    }.keyboardShortcut(.space, modifiers: [])
                 }
                 ToolbarItem(placement: .principal) {
                     Text(currentToken.displayName).font(.headline)
@@ -63,6 +68,14 @@ struct LocalHtmlView: View {
         }
     }
     
+    private func changeCollection() {
+        guard let last = history.last else { return }
+        let newToken = TokenGenerator.generateRandomToken(specificCollectionId: nil, notCollectionId: last.fullCollectionId, notTokenId: nil) ?? currentToken
+        history.append(newToken)
+        currentIndex = history.count - 1
+        currentToken = newToken
+    }
+    
     private func goBack() {
         if currentIndex > 0 {
             currentIndex -= 1
@@ -75,7 +88,7 @@ struct LocalHtmlView: View {
             currentIndex += 1
             currentToken = history[currentIndex]
         } else {
-            let newToken = TokenGenerator.generateRandomToken() ?? currentToken
+            let newToken = TokenGenerator.generateRandomToken(specificCollectionId: currentToken.fullCollectionId, notCollectionId: nil, notTokenId: currentToken.id) ?? currentToken
             history.append(newToken)
             currentIndex += 1
             currentToken = newToken

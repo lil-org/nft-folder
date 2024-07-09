@@ -18,7 +18,9 @@ struct TokenGenerator {
         return Set(fileNames)
     }()
     
-    static func generateRandomToken() -> GeneratedToken? {
+    static func generateRandomToken(specificCollectionId: String?, notCollectionId: String?, notTokenId: String?) -> GeneratedToken? {
+        // TODO: use id preferences
+        
         guard let jsonName = jsonsNames.randomElement() else { return nil }
         let url = dirURL.appendingPathComponent(jsonName)
         guard let data = try? Data(contentsOf: url),
@@ -35,7 +37,7 @@ struct TokenGenerator {
         }
         
         let webURL = NftGallery.opensea.url(network: .mainnet, chain: .ethereum, collectionAddress: project.contractAddress, tokenId: randomToken.id)
-        let token = GeneratedToken(html: html, displayName: name, url: webURL, instructions: project.instructions)
+        let token = GeneratedToken(fullCollectionId: project.id, id: randomToken.id, html: html, displayName: name, url: webURL, instructions: project.instructions)
         return token
     }
     
