@@ -49,6 +49,9 @@ struct LocalHtmlView: View {
                 }
                 ToolbarItemGroup() {
                     Spacer()
+                    Button(action: changeCollection) {
+                        Images.changeCollection.foregroundStyle(toolbarButtonsColor)
+                    }.buttonStyle(LinkButtonStyle()).hidden().keyboardShortcut(.return, modifiers: [])
                     Button(action: showInfo) {
                         Images.info.foregroundStyle(toolbarButtonsColor)
                     }.buttonStyle(LinkButtonStyle())
