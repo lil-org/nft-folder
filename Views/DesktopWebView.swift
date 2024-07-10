@@ -18,6 +18,7 @@ struct DesktopWebView: NSViewRepresentable {
             wkWebView.wantsLayer = true
             wkWebView.layer?.backgroundColor = .black
             wkWebView.translatesAutoresizingMaskIntoConstraints = false
+            wkWebView.configuration.userContentController.addUserScript(WKUserScript(source: "document.addEventListener('contextmenu', function(e) { e.preventDefault(); }, false);", injectionTime: .atDocumentEnd, forMainFrameOnly: true))
             if let containerView = containerView {
                 containerView.addSubview(wkWebView)
                 NSLayoutConstraint.activate([
