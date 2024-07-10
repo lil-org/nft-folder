@@ -68,6 +68,7 @@ struct LocalHtmlView: View {
             }
             .onReceive(NotificationCenter.default.publisher(for: NSWindow.didEnterFullScreenNotification)) { notification in
                 if (notification.object as? NSWindow)?.windowNumber == windowNumber {
+                    NSCursor.setHiddenUntilMouseMoves(true)
                     isFullscreen = true
                 }
             }
@@ -81,6 +82,9 @@ struct LocalHtmlView: View {
     private func updateFullscreenStatus() {
         if let window = NSApplication.shared.windows.first(where: { $0.windowNumber == windowNumber }) {
             isFullscreen = window.styleMask.contains(.fullScreen)
+            if isFullscreen {
+                NSCursor.setHiddenUntilMouseMoves(true)
+            }
         }
     }
     
