@@ -46,6 +46,12 @@
                                                 <action selector="unhideAllApplications:" target="Ady-hI-5gd" id="Dhg-Le-xox"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="kCx-OE-vgT"/>
+                                        <menuItem title="Quit nft folder" keyEquivalent="q" id="4sb-4s-VLi" userLabel="Quit nft folder">
+                                            <connections>
+                                                <action selector="terminate:" target="Ady-hI-5gd" id="Te7-pn-YzF"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>
@@ -80,11 +86,6 @@
                                         <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG">
                                             <connections>
                                                 <action selector="performClose:" target="Ady-hI-5gd" id="HmO-Ls-i7Q"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Close" keyEquivalent="q" id="uby-hq-3WW">
-                                            <connections>
-                                                <action selector="performClose:" target="Ady-hI-5gd" id="uUb-Bq-BbC"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Save…" keyEquivalent="s" id="pxx-59-PXV">
