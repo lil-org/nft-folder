@@ -2236,7 +2236,6 @@
 				INFOPLIST_FILE = "nft-folder/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "nft folder";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
-				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -2272,7 +2271,6 @@
 				INFOPLIST_FILE = "nft-folder/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "nft folder";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
-				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
