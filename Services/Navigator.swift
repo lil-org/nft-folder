@@ -15,7 +15,7 @@ class Navigator: NSObject {
     func showRandomPlayer() {
         Window.closeOtherPlayers()
         let window = LocalHtmlWindow(
-            contentRect: CGRect(origin: .zero, size: CGSize(width: 300, height: 320)),
+            contentRect: CGRect(origin: .zero, size: CGSize(width: 420, height: 420)),
             styleMask: [.closable, .fullSizeContentView, .titled, .resizable, .miniaturizable],
             backing: .buffered, defer: false)
         let contentView = LocalHtmlView(windowNumber: window.windowNumber).background(.black)
