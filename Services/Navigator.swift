@@ -23,7 +23,7 @@ class Navigator: NSObject {
         window.titleVisibility = .hidden
         window.titlebarAppearsTransparent = true
         window.isMovableByWindowBackground = true
-        window.backgroundColor = NSColor.windowBackgroundColor
+        window.backgroundColor = .black
         window.isOpaque = false
         window.hasShadow = true
         window.isRestorable = true
@@ -54,7 +54,7 @@ class Navigator: NSObject {
         window.titleVisibility = .hidden
         window.titlebarAppearsTransparent = false
         window.isMovableByWindowBackground = false
-        window.backgroundColor = NSColor.windowBackgroundColor
+        window.backgroundColor = .windowBackgroundColor
         window.isOpaque = false
         window.hasShadow = true
         window.isRestorable = true
