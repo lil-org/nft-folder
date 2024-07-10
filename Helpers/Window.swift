@@ -12,9 +12,9 @@ struct Window {
         }
     }
     
-    static func closeAll() {
+    static func closeAllControlCenters() {
         NSApplication.shared.windows.forEach {
-            if !($0.className == "NSStatusBarWindow") {
+            if $0 is RightClickActivatingWindow {
                 $0.close()
             }
         }
