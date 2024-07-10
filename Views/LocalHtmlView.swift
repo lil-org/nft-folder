@@ -10,6 +10,7 @@ struct LocalHtmlView: View {
     @State private var showingInfoAlert = false
     
     var body: some View {
+        let toolbarButtonsColor = Color.gray
         DesktopWebView(htmlContent: currentToken.html)
             .onAppear {
                 history.append(currentToken)
@@ -18,33 +19,33 @@ struct LocalHtmlView: View {
             .toolbar {
                 ToolbarItem(placement: .navigation) {
                     Button(action: goBack) {
-                        Images.back
-                    }
+                        Images.back.foregroundStyle(toolbarButtonsColor)
+                    }.buttonStyle(LinkButtonStyle())
                     .disabled(currentIndex <= 0)
                     .keyboardShortcut(.leftArrow, modifiers: [])
                 }
                 ToolbarItem(placement: .navigation) {
                     Button(action: goForward) {
-                        Images.forward
-                    }
+                        Images.forward.foregroundStyle(toolbarButtonsColor)
+                    }.buttonStyle(LinkButtonStyle())
                     .keyboardShortcut(.rightArrow, modifiers: [])
                 }
                 ToolbarItem(placement: .navigation) {
                     Button(action: changeCollection) {
-                        Images.changeCollection
-                    }.keyboardShortcut(.space, modifiers: [])
+                        Images.changeCollection.foregroundStyle(toolbarButtonsColor)
+                    }.buttonStyle(LinkButtonStyle()).keyboardShortcut(.space, modifiers: [])
                 }
                 ToolbarItem(placement: .principal) {
-                    Text(currentToken.displayName).font(.headline)
+                    Text(currentToken.displayName).font(.callout).foregroundStyle(toolbarButtonsColor)
                 }
                 ToolbarItemGroup() {
                     Spacer()
                     Button(action: showInfo) {
-                        Images.info
-                    }
+                        Images.info.foregroundStyle(toolbarButtonsColor)
+                    }.buttonStyle(LinkButtonStyle())
                     Button(action: viewOnWeb) {
-                        Images.globe
-                    }
+                        Images.globe.foregroundStyle(toolbarButtonsColor)
+                    }.buttonStyle(LinkButtonStyle())
                 }
             }
             .alert(Strings.experimetalOfflineGeneration, isPresented: $showingInfoAlert) {
