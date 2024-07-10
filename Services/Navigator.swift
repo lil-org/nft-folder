@@ -14,12 +14,11 @@ class Navigator: NSObject {
     
     func showRandomPlayer() {
         Window.closeOtherPlayers()
-        let contentView = LocalHtmlView().background(.black)
         let window = LocalHtmlWindow(
             contentRect: CGRect(origin: .zero, size: CGSize(width: 300, height: 320)),
             styleMask: [.closable, .fullSizeContentView, .titled, .resizable, .miniaturizable],
             backing: .buffered, defer: false)
-        
+        let contentView = LocalHtmlView(windowNumber: window.windowNumber).background(.black)
         window.titleVisibility = .hidden
         window.titlebarAppearsTransparent = true
         window.isMovableByWindowBackground = true

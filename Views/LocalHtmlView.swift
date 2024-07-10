@@ -1,19 +1,28 @@
 // ∅ nft-folder 2024
 
 import SwiftUI
+import AppKit
 
 struct LocalHtmlView: View {
+    
+    private var windowNumber = 0
     
     @State private var currentToken = TokenGenerator.generateRandomToken(specificCollectionId: nil, notCollectionId: nil, notTokenId: nil) ?? GeneratedToken(fullCollectionId: "", id: "", html: "", displayName: "", url: nil, instructions: nil)
     @State private var history = [GeneratedToken]()
     @State private var currentIndex = 0
     @State private var showingInfoAlert = false
+    @State private var isFullscreen = false
+    
+    init(windowNumber: Int) {
+        self.windowNumber = windowNumber
+    }
     
     var body: some View {
         let toolbarButtonsColor = Color.gray
         DesktopWebView(htmlContent: currentToken.html)
             .onAppear {
                 history.append(currentToken)
+                updateFullscreenStatus()
             }
             .frame(minWidth: 200, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity).background(.black)
             .toolbar {
@@ -47,7 +56,7 @@ struct LocalHtmlView: View {
                         Images.globe.foregroundStyle(toolbarButtonsColor)
                     }.buttonStyle(LinkButtonStyle())
                 }
-            }
+            }.toolbar(!isFullscreen ? .visible : .hidden)
             .alert(Strings.experimetalOfflineGeneration, isPresented: $showingInfoAlert) {
                 Button(Strings.ok) { }
             } message: {
@@ -57,6 +66,22 @@ struct LocalHtmlView: View {
                     Text(Strings.letUsKnowOfIssues)
                 }
             }
+            .onReceive(NotificationCenter.default.publisher(for: NSWindow.didEnterFullScreenNotification)) { notification in
+                if (notification.object as? NSWindow)?.windowNumber == windowNumber {
+                    isFullscreen = true
+                }
+            }
+            .onReceive(NotificationCenter.default.publisher(for: NSWindow.didExitFullScreenNotification)) { notification in
+                if (notification.object as? NSWindow)?.windowNumber == windowNumber {
+                    isFullscreen = false
+                }
+            }
+    }
+    
+    private func updateFullscreenStatus() {
+        if let window = NSApplication.shared.windows.first(where: { $0.windowNumber == windowNumber }) {
+            isFullscreen = window.styleMask.contains(.fullScreen)
+        }
     }
     
     private func showInfo() {
