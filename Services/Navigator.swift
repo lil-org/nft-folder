@@ -17,7 +17,7 @@ class Navigator: NSObject {
         let contentView = LocalHtmlView().background(.black)
         let window = LocalHtmlWindow(
             contentRect: CGRect(origin: .zero, size: CGSize(width: 300, height: 320)),
-            styleMask: [.closable, .fullSizeContentView, .titled, .resizable],
+            styleMask: [.closable, .fullSizeContentView, .titled, .resizable, .miniaturizable],
             backing: .buffered, defer: false)
         
         window.titleVisibility = .hidden
@@ -37,6 +37,7 @@ class Navigator: NSObject {
         window.contentView = NSHostingView(rootView: contentView.frame(minWidth: 251, minHeight: 130))
         NSApp.activate(ignoringOtherApps: true)
         window.makeKeyAndOrderFront(nil)
+        window.makeMain()
         
         if window.frame.origin == .zero || !window.isOnActiveSpace || !window.isVisible {
             window.center()
@@ -49,7 +50,7 @@ class Navigator: NSObject {
         let contentView = WalletsListView(showAddWalletPopup: addWallet, inPopup: false)
         let window = RightClickActivatingWindow(
             contentRect: CGRect(origin: .zero, size: CGSize(width: 777, height: 593)),
-            styleMask: [.closable, .fullSizeContentView, .titled, .resizable],
+            styleMask: [.closable, .fullSizeContentView, .titled, .resizable, .miniaturizable],
             backing: .buffered, defer: false)
         window.titleVisibility = .hidden
         window.titlebarAppearsTransparent = false
@@ -68,6 +69,7 @@ class Navigator: NSObject {
         window.contentView = NSHostingView(rootView: contentView.frame(minWidth: 251, minHeight: 130))
         NSApp.activate(ignoringOtherApps: true)
         window.makeKeyAndOrderFront(nil)
+        window.makeMain()
         
         if window.frame.origin == .zero || !window.isOnActiveSpace || !window.isVisible {
             window.center()

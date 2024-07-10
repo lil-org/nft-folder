@@ -31,7 +31,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let initialMessage = initialMessage {
             processMessage(initialMessage)
             self.initialMessage = nil
-        } else if (aNotification.userInfo?[NSApplication.launchIsDefaultUserInfoKey] as? Bool) != false {
+        } else {
             Navigator.shared.showControlCenter(addWallet: false)
         }
         
