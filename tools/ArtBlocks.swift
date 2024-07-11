@@ -6,8 +6,8 @@ func processAbs() {
     let jsonNames = try! FileManager.default.contentsOfDirectory(atPath: wipPath + "abs/")
     for jsonName in jsonNames {
         let data = try! Data(contentsOf: URL(filePath: wipPath + "abs/" + jsonName))
-        print(jsonName)
         let project = try! JSONDecoder().decode(ProjectMetadata.self, from: data)
+        print(project.name)
     }
 }
 
@@ -25,7 +25,7 @@ struct ProjectMetadata: Codable {
     let disableAutoImageFormat: Bool?
     let previewRenderType: String?
     let renderComplete: Bool?
-    let renderDelay: Int?
+    let renderDelay: Double?
     let renderWithGpu: Bool?
     let artistName: String?
     let description: String?
@@ -40,7 +40,7 @@ struct ProjectMetadata: Codable {
     let scriptCount: Int?
     let scriptJson: ScriptJson?
     let scripts: [Script]
-    let name: String?
+    let name: String
     let externalAssetDependencyCount: Int?
     let creativeCredit: String?
     
@@ -84,9 +84,61 @@ struct Script: Codable {
 }
 
 struct ScriptJson: Codable {
-    
-    // TODO: add all keys
-    
+    let type: String
+    let curationStatus: String?
+    let license: String?
+    let interactive: String?
+    let version: String?
+    let instructions: String?
+    let animationLength: Double?
+    let animationLengthInSeconds: Double?
+    let aspectRatio: Double?
+
+    enum CodingKeys: String, CodingKey {
+        case type
+        case curationStatus
+        case license
+        case interactive
+        case version
+        case instructions
+        case animationLength
+        case animationLengthInSeconds
+        case aspectRatio
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        type = try container.decode(String.self, forKey: .type)
+        curationStatus = try container.decodeIfPresent(String.self, forKey: .curationStatus)
+        license = try container.decodeIfPresent(String.self, forKey: .license)
+        interactive = try container.decodeIfPresent(String.self, forKey: .interactive)
+        version = try container.decodeIfPresent(String.self, forKey: .version)
+        instructions = try container.decodeIfPresent(String.self, forKey: .instructions)
+        
+        if let animationLengthString = try? container.decodeIfPresent(String.self, forKey: .animationLength) {
+            animationLength = Double(animationLengthString)
+        } else if let animationLengthDouble = try? container.decodeIfPresent(Double.self, forKey: .animationLength) {
+            animationLength = animationLengthDouble
+        } else {
+            animationLength = nil
+        }
+        
+        if let animationLengthInSecondsString = try? container.decodeIfPresent(String.self, forKey: .animationLengthInSeconds) {
+            animationLengthInSeconds = Double(animationLengthInSecondsString)
+        } else if let animationLengthInSecondsDouble = try? container.decodeIfPresent(Double.self, forKey: .animationLengthInSeconds) {
+            animationLengthInSeconds = animationLengthInSecondsDouble
+        } else {
+            animationLengthInSeconds = nil
+        }
+        
+        if let aspectRatioString = try? container.decodeIfPresent(String.self, forKey: .aspectRatio) {
+            aspectRatio = Double(aspectRatioString)
+        } else if let aspectRatioDouble = try? container.decodeIfPresent(Double.self, forKey: .aspectRatio) {
+            aspectRatio = aspectRatioDouble
+        } else {
+            aspectRatio = nil
+        }
+    }
 }
 
 struct Token: Codable {
