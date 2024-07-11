@@ -19,7 +19,8 @@ struct ProjectToBundle: Codable {
 let semaphore = DispatchSemaphore(value: 0)
 
 let dir = FileManager.default.currentDirectoryPath
-let selectedPath = dir + "/tools/wip/select/"
+let wipPath = dir + "/tools/wip/"
+let selectedPath = wipPath + "select/"
 let selectedSet = Set(try! FileManager.default.contentsOfDirectory(atPath: selectedPath))
 
 let encoder: JSONEncoder = {
