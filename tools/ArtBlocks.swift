@@ -14,19 +14,19 @@ func processAbs() {
 struct ProjectMetadata: Codable {
     let contractAddress: String
     let projectId: String
-    let scriptTypeAndVersion: String?
+    let scriptTypeAndVersion: String
     let scriptTypeAndVersionOverride: String?
     let script: String?
-    let canvasMode: Bool?
-    let aspectRatio: Double?
-    let primaryRenderType: String?
-    let displayStatic: Bool?
-    let disableSampleGenerator: Bool?
+    let canvasMode: Bool
+    let aspectRatio: Double
+    let primaryRenderType: String
+    let displayStatic: Bool
+    let disableSampleGenerator: Bool
     let disableAutoImageFormat: Bool?
-    let previewRenderType: String?
-    let renderComplete: Bool?
-    let renderDelay: Double?
-    let renderWithGpu: Bool?
+    let previewRenderType: String
+    let renderComplete: Bool
+    let renderDelay: Double
+    let renderWithGpu: Bool
     let artistName: String?
     let description: String?
     let id: String
@@ -35,13 +35,13 @@ struct ProjectMetadata: Codable {
     let license: String?
     let tokens: [Token]
     let contract: Contract?
-    let dependencyNameAndVersion: String?
-    let generateVideoAssets: Bool?
-    let scriptCount: Int?
+    let dependencyNameAndVersion: String
+    let generateVideoAssets: Bool
+    let scriptCount: Int
     let scriptJson: ScriptJson?
     let scripts: [Script]
     let name: String
-    let externalAssetDependencyCount: Int?
+    let externalAssetDependencyCount: Int
     let creativeCredit: String?
     
     enum CodingKeys: String, CodingKey {
