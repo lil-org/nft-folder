@@ -7,7 +7,7 @@ struct LocalHtmlView: View {
     
     private var windowNumber = 0
     
-    @State private var currentToken = TokenGenerator.generateRandomToken(specificCollectionId: nil, notCollectionId: nil, notTokenId: nil) ?? GeneratedToken(fullCollectionId: "", id: "", html: "", displayName: "", url: nil, instructions: nil)
+    @State private var currentToken = TokenGenerator.generateRandomToken(specificCollectionId: nil, notTokenId: nil) ?? GeneratedToken(fullCollectionId: "", id: "", html: "", displayName: "", url: nil, instructions: nil)
     @State private var history = [GeneratedToken]()
     @State private var currentIndex = 0
     @State private var showingInfoAlert = false
@@ -102,8 +102,7 @@ struct LocalHtmlView: View {
     }
     
     private func changeCollection() {
-        guard let last = history.last else { return }
-        let newToken = TokenGenerator.generateRandomToken(specificCollectionId: nil, notCollectionId: last.fullCollectionId, notTokenId: nil) ?? currentToken
+        let newToken = TokenGenerator.generateRandomToken(specificCollectionId: nil, notTokenId: nil) ?? currentToken
         history.append(newToken)
         currentIndex = history.count - 1
         currentToken = newToken
@@ -121,7 +120,7 @@ struct LocalHtmlView: View {
             currentIndex += 1
             currentToken = history[currentIndex]
         } else {
-            let newToken = TokenGenerator.generateRandomToken(specificCollectionId: currentToken.fullCollectionId, notCollectionId: nil, notTokenId: currentToken.id) ?? currentToken
+            let newToken = TokenGenerator.generateRandomToken(specificCollectionId: currentToken.fullCollectionId, notTokenId: currentToken.id) ?? currentToken
             history.append(newToken)
             currentIndex += 1
             currentToken = newToken

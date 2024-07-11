@@ -15,15 +15,23 @@ struct TokenGenerator {
         return Set(fileNames)
     }()
     
-    static func generateRandomToken(specificCollectionId: String?, notCollectionId: String?, notTokenId: String?) -> GeneratedToken? {
+    private static var currentPassSet = Set<String>()
+    
+    private static func nextRandomCollection() -> String {
+        if currentPassSet.isEmpty {
+            currentPassSet = jsonsNames
+        }
+        let next = currentPassSet.randomElement() ?? ""
+        currentPassSet.remove(next)
+        return next
+    }
+    
+    static func generateRandomToken(specificCollectionId: String?, notTokenId: String?) -> GeneratedToken? {
         var jsonName: String
         if let specificCollectionId = specificCollectionId {
             jsonName = specificCollectionId + ".json"
         } else {
-            jsonName = jsonsNames.randomElement() ?? ""
-            if jsonName == notCollectionId {
-                jsonName = jsonsNames.randomElement() ?? ""
-            }
+            jsonName = nextRandomCollection()
         }
         
         let url = dirURL.appendingPathComponent(jsonName)
