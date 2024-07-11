@@ -106,6 +106,7 @@ struct LocalHtmlView: View {
         history.append(newToken)
         currentIndex = history.count - 1
         currentToken = newToken
+        freeUpHistoryIfNeeded()
     }
     
     private func goBack() {
@@ -124,6 +125,15 @@ struct LocalHtmlView: View {
             history.append(newToken)
             currentIndex += 1
             currentToken = newToken
+            freeUpHistoryIfNeeded()
+        }
+    }
+    
+    private func freeUpHistoryIfNeeded() {
+        if history.count > 23 {
+            let cutTarget = 10
+            history.removeFirst(history.count - cutTarget)
+            currentIndex = cutTarget - 1
         }
     }
     
