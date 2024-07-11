@@ -2,21 +2,30 @@
 
 import Foundation
 
+func processAbs() {
+    let jsonNames = try! FileManager.default.contentsOfDirectory(atPath: wipPath + "abs/")
+    for jsonName in jsonNames {
+        let data = try! Data(contentsOf: URL(filePath: wipPath + "abs/" + jsonName))
+        print(jsonName)
+        let project = try! JSONDecoder().decode(ProjectMetadata.self, from: data)
+    }
+}
+
 struct ProjectMetadata: Codable {
     let contractAddress: String
     let projectId: String
     let scriptTypeAndVersion: String?
     let scriptTypeAndVersionOverride: String?
     let script: String?
-    let canvasMode: String?
-    let aspectRatio: String?
+    let canvasMode: Bool?
+    let aspectRatio: Double?
     let primaryRenderType: String?
     let displayStatic: Bool?
     let disableSampleGenerator: Bool?
     let disableAutoImageFormat: Bool?
     let previewRenderType: String?
     let renderComplete: Bool?
-    let renderDelay: String?
+    let renderDelay: Int?
     let renderWithGpu: Bool?
     let artistName: String?
     let description: String?
@@ -25,12 +34,12 @@ struct ProjectMetadata: Codable {
     let maxInvocations: Int
     let license: String?
     let tokens: [Token]
-    let contract: Contract
+    let contract: Contract?
     let dependencyNameAndVersion: String?
     let generateVideoAssets: Bool?
     let scriptCount: Int?
-    let scriptJson: String?
-    let scripts: [String]
+    let scriptJson: ScriptJson?
+    let scripts: [Script]
     let name: String?
     let externalAssetDependencyCount: Int?
     let creativeCredit: String?
@@ -70,6 +79,16 @@ struct ProjectMetadata: Codable {
     }
 }
 
+struct Script: Codable {
+    let script: String
+}
+
+struct ScriptJson: Codable {
+    
+    // TODO: add all keys
+    
+}
+
 struct Token: Codable {
     let id: String
     let hash: String
@@ -88,7 +107,7 @@ struct Contract: Codable {
     let address: String
     let preferredArweaveGateway: String?
     let preferredIpfsGateway: String?
-    let name: String
+    let name: String?
     
     enum CodingKeys: String, CodingKey {
         case address
