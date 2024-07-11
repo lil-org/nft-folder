@@ -16,7 +16,7 @@ struct GenerativeProject: Codable {
     let instructions: String?
     
     enum Kind: String, Codable {
-        case svg, js, p5js, custom
+        case svg, js, p5js100, regl, twemoji, three, tone, paper
     }
     
     struct Token: Codable {

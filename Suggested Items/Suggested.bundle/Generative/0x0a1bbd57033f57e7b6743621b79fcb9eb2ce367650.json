@@ -1,0 +1,408 @@
+{
+  "contractAddress" : "0x0a1bbd57033f57e7b6743621b79fcb9eb2ce3676",
+  "kind" : "three",
+  "projectId" : "50",
+  "script" : "const _0x887e8a=_0x111b;(function($,x){let e=_0x111b,a=$();for(;;)try{let o=-parseInt(e(287))\/1+-parseInt(e(309))\/2+parseInt(e(168))\/3*(parseInt(e(310))\/4)+-parseInt(e(251))\/5*(-parseInt(e(220))\/6)+-parseInt(e(197))\/7+-parseInt(e(312))\/8*(-parseInt(e(325))\/9)+-parseInt(e(333))\/10;if(866592===o)break;a.push(a.shift())}catch(r){a.push(a.shift())}})(_0x5f48,866592),THREE[_0x887e8a(300)]=function($,x,e){let a=_0x887e8a;this[a(181)]=[],this[a(246)]=0;var o=new THREE[a(262)],r=new THREE[a(245)];r.position.z=1;var t={passThruTexture:{value:null}},n=d(a(183),t),c=new THREE[a(285)](new THREE[a(177)](2,2),n);function l(e){let o=a;e.defines[o(324)]=o(271)+$[o(192)](1)+\", \"+x[o(192)](1)+\" )\"}function d($,x){x=x||{};var e=new THREE[a(344)]({uniforms:x,vertexShader:\"void main()\t{\\n\\n\tgl_Position = vec4( position, 1.0 );\\n\\n}\\n\",fragmentShader:$});return l(e),e}o[a(261)](c),this[a(179)]=function($,x,e){let o=a;var r={name:$,initialValueTexture:e,material:this[o(297)](x),dependencies:null,renderTargets:[],wrapS:null,wrapT:null,minFilter:THREE[o(206)],magFilter:THREE[o(206)]};return this[o(181)][o(301)](r),r},this.setVariableDependencies=function($,x){let e=a;$[e(352)]=x},this[a(274)]=function(){let o=a;if(!e[o(233)][o(343)](o(336))&&!e.capabilities[o(348)])return o(318);if(0===e.capabilities[o(341)])return o(288);for(var r=0;r<this[o(181)][o(166)];r++){var t=this.variables[r];t[o(277)][0]=this[o(342)]($,x,t[o(191)],t[o(229)],t[o(205)],t.magFilter),t[o(277)][1]=this[o(342)]($,x,t[o(191)],t[o(229)],t[o(205)],t[o(280)]),this[o(275)](t.initialValueTexture,t[o(277)][0]),this[o(275)](t[o(260)],t[o(277)][1]);var n=t[o(326)],c=n[o(185)];if(null!==t[o(352)])for(var l=0;l<t[o(352)].length;l++){var d=t[o(352)][l];if(d[o(316)]!==t.name){for(var s=!1,f=0;f<this[o(181)].length;f++)if(d[o(316)]===this[o(181)][f].name){s=!0;break}if(!s)return\"Variable dependency not found. Variable=\"+t.name+o(236)+d[o(316)]}c[d.name]={value:null},n.fragmentShader=\"\\nuniform sampler2D \"+d[o(316)]+\";\\n\"+n[o(331)]}}return this[o(246)]=0,null},this[a(167)]=function(){let $=a;for(var x=this.currentTextureIndex,e=0===this.currentTextureIndex?1:0,o=0,r=this[$(181)][$(166)];o<r;o++){var t=this[$(181)][o];if(null!==t.dependencies)for(var n=t[$(326)][$(185)],c=0,l=t.dependencies[$(166)];c<l;c++){var d=t[$(352)][c];n[d[$(316)]][$(294)]=d[$(277)][x][$(228)]}this[$(171)](t.material,t[$(277)][e])}this[$(246)]=e},this.getCurrentRenderTarget=function($){let x=a;return $[x(277)][this[x(246)]]},this.getAlternateRenderTarget=function($){return $[a(277)][0===this.currentTextureIndex?1:0]},this[a(176)]=l,this[a(297)]=d,this[a(342)]=function(e,o,r,t,n,c){let l=a;return e=e||$,o=o||x,r=r||THREE.ClampToEdgeWrapping,t=t||THREE[l(198)],n=n||THREE.NearestFilter,c=c||THREE.NearestFilter,new THREE[l(323)](e,o,{wrapS:r,wrapT:t,minFilter:n,magFilter:c,format:THREE.RGBAFormat,type:\/(iPad|iPhone|iPod)\/g[l(270)](navigator.userAgent)?THREE.HalfFloatType:THREE[l(328)],stencilBuffer:!1,depthBuffer:!1})},this.createTexture=function(){let e=a;var o=new Float32Array($*x*4);return new THREE[e(248)](o,$,x,THREE[e(320)],THREE.FloatType)},this[a(275)]=function($,x){let e=a;t[e(202)][e(294)]=$,this.doRenderTarget(n,x),t.passThruTexture[e(294)]=null},this.doRenderTarget=function($,x){let t=a;var l=e[t(250)]();c[t(326)]=$,e[t(289)](x),e[t(258)](o,r),c[t(326)]=n,e[t(289)](l)}};let render_vertex=\"\\n  varying vec2 vUv;\\n  void main() \\n  {\\n    vUv = uv;\\n    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\\n  }\\n\\n\",render_fragment=_0x887e8a(351),reaction_diffusion_fragment=_0x887e8a(175);function isMobileDevice(){let $=_0x887e8a;return\/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini\/i[$(270)](navigator[$(256)])}const width=window[_0x887e8a(296)],height=window[_0x887e8a(242)],actual_width=Math[_0x887e8a(212)](width*window[_0x887e8a(214)]),actual_height=Math[_0x887e8a(212)](height*window[_0x887e8a(214)]),mobileFactor=isMobileDevice()?2.5:1.75,simulation_width=Math[_0x887e8a(212)](actual_width\/mobileFactor),simulation_height=Math[_0x887e8a(212)](actual_height\/mobileFactor),aspectRatio=window[_0x887e8a(296)]\/window[_0x887e8a(242)];class Random{constructor(){let $=_0x887e8a;this[$(227)]=!1;let x=function(x){let e=$,a=parseInt(x[e(172)](0,8),16),o=parseInt(x[e(172)](8,16),16),r=parseInt(x.substring(16,24),16),t=parseInt(x.substring(24,32),16);return function(){a|=0,o|=0,r|=0;let $=(a+o|0)+(t|=0)|0;return t=t+1|0,a=o^o>>>9,o=r+(r<<3)|0,r=(r=r<<21|r>>>11)+$|0,($>>>0)\/4294967296}};this[$(226)]=new x(tokenData[$(293)].substring(2,34)),this.prngB=new x(tokenData[$(293)][$(172)](34,66));for(let e=0;e<1e6;e+=2)this.prngA(),this.prngB()}[_0x887e8a(308)](){let $=_0x887e8a;return this[$(227)]=!this[$(227)],this.useA?this[$(226)]():this.prngB()}[_0x887e8a(303)]($,x){return $+(x-$)*this[_0x887e8a(308)]()}random_int($,x){return Math[_0x887e8a(290)](this.random_num($,x+1))}[_0x887e8a(252)]($){return this.random_dec()<$}[_0x887e8a(329)]($){return $[this.random_int(0,$.length-1)]}}class SimplexNoise{constructor($){let x=_0x887e8a;this[x(235)]=[[1,1,0],[-1,1,0],[1,-1,0],[-1,-1,0],[1,0,1],[-1,0,1],[1,0,-1],[-1,0,-1],[0,1,1],[0,-1,1],[0,1,-1],[0,-1,-1]],this.p=[];for(let e=0;e<256;e++)this.p[e]=Math.floor(256*$.random_dec());this[x(322)]=Array(512);for(let a=0;a<512;a++)this[x(322)][a]=this.p[255&a]}[_0x887e8a(278)]($,x,e,a){return $[0]*x+$[1]*e+$[2]*a}[_0x887e8a(215)]($,x,e){let a=_0x887e8a,o=1\/6,r,t,n,c,l=($+x+e)*(1\/3),d=Math[a(290)]($+l),s=Math[a(290)](x+l),f=Math.floor(e+l),u=(d+s+f)*o,_=$-(d-u),m=x-(s-u),g=e-(f-u),v,h,b,p,C,T;_>=m?m>=g?(v=1,h=0,b=0,p=1,C=1,T=0):_>=g?(v=1,h=0,b=0,p=1,C=0,T=1):(v=0,h=0,b=1,p=1,C=0,T=1):m<g?(v=0,h=0,b=1,p=0,C=1,T=1):_<g?(v=0,h=1,b=0,p=0,C=1,T=1):(v=0,h=1,b=0,p=1,C=1,T=0);let F=_-v+o,w=m-h+o,y=g-b+o,S=_-p+2*o,k=m-C+2*o,D=g-T+2*o,P=_-1+3*o,A=m-1+3*o,E=g-1+3*o,B=255&d,V=255&s,z=255&f,W=this[a(322)][B+this[a(322)][V+this[a(322)][z]]]%12,M=this[a(322)][B+v+this[a(322)][V+h+this[a(322)][z+b]]]%12,K=this[a(322)][B+p+this[a(322)][V+C+this[a(322)][z+T]]]%12,I=this[a(322)][B+1+this.perm[V+1+this.perm[z+1]]]%12,U=.6-_*_-m*m-g*g;U<0?r=0:(U*=U,r=U*U*this[a(278)](this.grad3[W],_,m,g));let G=.6-F*F-w*w-y*y;G<0?t=0:(G*=G,t=G*G*this[a(278)](this[a(235)][M],F,w,y));let H=.6-S*S-k*k-D*D;H<0?n=0:(H*=H,n=H*H*this[a(278)](this[a(235)][K],S,k,D));let N=.6-P*P-A*A-E*E;return N<0?c=0:(N*=N,c=N*N*this[a(278)](this[a(235)][I],P,A,E)),32*(r+t+n+c)}}let R=new Random;function getRandomArbitrary($,x){return R[_0x887e8a(308)]()*(x-$)+$}let diffScaleArray=[.25,.375,.5],diffScale=selectFromArray(diffScaleArray),diffScaleVar=selectFromArray([diffScale-.125,diffScale-.125]),diffScaleArrayWide=[.5,.625,.75,.875,1],diffScaleWide=selectFromArray(diffScaleArrayWide),diffScaleVarWide=selectFromArray([0,diffScale-.125]),feedVar=getRandomArbitrary(0,.01),killVar=getRandomArbitrary(0,.01),randomRect,randomCirc;function selectFromArray($){let x=_0x887e8a;return $[Math.floor(R[x(308)]()*$[x(166)])]}function selectNumberFromArray($){let x=_0x887e8a;return Math[x(290)](R.random_dec()*$[x(166)])}function getRandomBool($){return R[_0x887e8a(308)]()<$}function hexToRgb($){let x=parseInt($[_0x887e8a(345)](1),16),e=parseInt(x>>16&255),a=parseInt(x>>8&255),o=parseInt(255&x);return[e,a,o]}function getRandomBoolean(){return R.random_dec()>=.5}let palettes={Candy:{background:_0x887e8a(178),accent:\"#E23DB3\",substance:_0x887e8a(209),c4:_0x887e8a(347),c5:_0x887e8a(234)},Color2:{background:_0x887e8a(162),accent:_0x887e8a(162),substance:\"#98D82D\",c4:_0x887e8a(237),c5:_0x887e8a(237)},Color3:{background:\"#F17401\",accent:_0x887e8a(315),substance:_0x887e8a(210),c4:_0x887e8a(210),c5:_0x887e8a(210)},Color4:{background:_0x887e8a(173),accent:\"#FF3C75\",substance:_0x887e8a(201),c4:_0x887e8a(201),c5:_0x887e8a(201)},Color5:{background:\"#000000\",accent:\"#000000\",substance:_0x887e8a(234),c4:_0x887e8a(234),c5:_0x887e8a(234)},Color6:{background:_0x887e8a(315),accent:_0x887e8a(315),substance:_0x887e8a(210),c4:_0x887e8a(210),c5:_0x887e8a(210)},Yayoi:{background:_0x887e8a(219),accent:_0x887e8a(219),substance:_0x887e8a(234),c4:_0x887e8a(234),c5:\"#FFFFFF\"},Gabee:{background:\"#ffffff\",accent:_0x887e8a(190),substance:_0x887e8a(286),c4:_0x887e8a(286),c5:\"#ffffff\"},CMKY:{background:_0x887e8a(196),accent:(getRandomBoolean(),_0x887e8a(244)),substance:_0x887e8a(224),c4:_0x887e8a(194),c5:\"#ffffff\"},RGB:{background:_0x887e8a(218),accent:(getRandomBoolean(),_0x887e8a(165)),substance:_0x887e8a(204),c4:_0x887e8a(231),c5:_0x887e8a(234)},\"30Rack\":{background:_0x887e8a(163),accent:getRandomBoolean()?_0x887e8a(163):_0x887e8a(218),substance:_0x887e8a(163),c4:_0x887e8a(330),c5:_0x887e8a(330)},Mohun:{background:_0x887e8a(263),accent:(getRandomBoolean(),_0x887e8a(339)),substance:_0x887e8a(334),c4:\"#5BC2AC\",c5:_0x887e8a(346)},Q:{background:_0x887e8a(196),accent:_0x887e8a(196),substance:_0x887e8a(213),c4:_0x887e8a(196),c5:_0x887e8a(196)},Skeleton:{background:_0x887e8a(218),accent:_0x887e8a(196),substance:_0x887e8a(218),c4:\"#000000\",c5:_0x887e8a(218)}};const defaultPallette={background:\"#FF0000\",accent:_0x887e8a(165),substance:_0x887e8a(231)},traitColorKeys=Object[_0x887e8a(232)](palettes),randomColorIndex=R.random_int(0,traitColorKeys.length-1),randomColorKey=traitColorKeys[randomColorIndex],randomColorTrait=palettes[randomColorKey],selectedColor={...defaultPallette,...randomColorTrait};console[_0x887e8a(193)](_0x887e8a(216),randomColorKey,\"Colors:\",selectedColor);let main_trait={Zebra:{diffusion_scale:diffScaleWide,diffusion_scale_variation:diffScaleVarWide,feed:.05,feed_variation:0,warped:getRandomBool(.2),kill:.061,kill_variation:0,feed_modifier:-.015,kill_modifier:-.001,anisotropy:selectFromArray([.25,.75]),environment_noise_scale:750,field:!0,substance_color:hexToRgb(selectedColor[_0x887e8a(305)]),middle_color:hexToRgb(selectedColor[_0x887e8a(311)]),background_color:hexToRgb(selectedColor[_0x887e8a(298)]),c4_color:hexToRgb(selectedColor.c4),c5_color:hexToRgb(selectedColor.c5),simfrRate:64},Fingerprint:{diffusion_scale:diffScale,diffusion_scale_variation:diffScaleVar,feed:.037,feed_variation:0,warped:getRandomBool(.2),kill:.06,feed_modifier:.009,kill_modifier:.003,kill_modifier:0,anisotropy:.5,environment_noise_scale:250,field:getRandomBool(.3),substance_color:hexToRgb(selectedColor.substance),middle_color:hexToRgb(selectedColor[_0x887e8a(311)]),background_color:hexToRgb(selectedColor.background),c4_color:hexToRgb(selectedColor.c4),c5_color:hexToRgb(selectedColor.c5),simfrRate:64},\"Dots and Dashes\":{diffusion_scale:diffScale,diffusion_scale_variation:diffScaleVar,feed:.034,feed_variation:0,warped:getRandomBool(.2),kill:.0618,kill_variation:0,feed_modifier:-.004,kill_modifier:.0012,anisotropy:.5,environment_noise_scale:250,field:getRandomBool(.3),substance_color:hexToRgb(selectedColor.substance),middle_color:hexToRgb(selectedColor.accent),background_color:hexToRgb(selectedColor[_0x887e8a(298)]),c4_color:hexToRgb(selectedColor.c4),c5_color:hexToRgb(selectedColor.c5),simfrRate:64},Yayoi:{diffusion_scale:diffScaleWide,diffusion_scale_variation:diffScaleVarWide,feed:.03,feed_variation:0,warped:getRandomBool(.2),kill:.062,kill_variation:0,feed_modifier:0,kill_modifier:-.0065,anisotropy:.5,environment_noise_scale:250,field:getRandomBool(.3),substance_color:hexToRgb(selectedColor[_0x887e8a(305)]),middle_color:hexToRgb(selectedColor[_0x887e8a(311)]),background_color:hexToRgb(selectedColor[_0x887e8a(298)]),c4_color:hexToRgb(selectedColor.c4),c5_color:hexToRgb(selectedColor.c5),simfrRate:64},Spillage:{diffusion_scale:diffScale,diffusion_scale_variation:diffScaleVar,feed:.035,feed_variation:.006,kill:.06,kill_variation:.006,feed_modifier:-.005,kill_modifier:-.0035,anisotropy:.5,environment_noise_scale:250,field:getRandomBool(.3),substance_color:hexToRgb(selectedColor[_0x887e8a(305)]),middle_color:hexToRgb(selectedColor.accent),background_color:hexToRgb(selectedColor[_0x887e8a(298)]),c4_color:hexToRgb(selectedColor.c4),c5_color:hexToRgb(selectedColor.c5),simfrRate:64},Coral:{diffusion_scale:diffScale,diffusion_scale_variation:diffScaleVar,feed:.046,feed_variation:0,warped:getRandomBool(.2),kill:.063,kill_variation:0,feed_modifier:-.009,kill_modifier:-.003,anisotropy:.5,environment_noise_scale:250,field:getRandomBool(.3),substance_color:hexToRgb(selectedColor[_0x887e8a(305)]),middle_color:hexToRgb(selectedColor[_0x887e8a(311)]),background_color:hexToRgb(selectedColor[_0x887e8a(298)]),c4_color:hexToRgb(selectedColor.c4),c5_color:hexToRgb(selectedColor.c5),simfrRate:64},\"Squiggle Maze\":{diffusion_scale:diffScale,diffusion_scale_variation:diffScaleVar,feed:.03,feed_variation:0,warped:getRandomBool(.2),kill:.0565,kill_variation:0,feed_modifier:0,kill_modifier:.0065,anisotropy:.5,environment_noise_scale:250,field:getRandomBool(.3),substance_color:hexToRgb(selectedColor[_0x887e8a(305)]),middle_color:hexToRgb(selectedColor[_0x887e8a(311)]),background_color:hexToRgb(selectedColor[_0x887e8a(298)]),c4_color:hexToRgb(selectedColor.c4),c5_color:hexToRgb(selectedColor.c5),simfrRate:64}};const defaultSettings={anisotropy:.8,simfrRate:64,environment_noise_scale:250,substance_color:[0,0,0],middle_color:[0,255,255],background_color:[255,255,255],c4_color:[0,255,255],background_color:[255,255,255],feed_modifier:0,kill_modifier:0,specular_color:[0,0,0],field:!1,warped:!1,diffusion_scale:.625,diffusion_scale_variation:.375,feed:.042,feed_variation:.001,kill:.06,kill_variation:.001},traitKeys=Object[_0x887e8a(232)](main_trait),randomIndex=Math.floor(R.random_dec()*traitKeys[_0x887e8a(166)]),randomKey=traitKeys[randomIndex],randomTrait=main_trait[randomKey],settings={...defaultSettings,...randomTrait};console.log(_0x887e8a(238),randomKey,_0x887e8a(187),settings);const scene=new THREE[_0x887e8a(262)],camera=new THREE.Camera;camera.position.z=1;const renderer=new THREE.WebGLRenderer;renderer[_0x887e8a(273)](window[_0x887e8a(214)]),renderer.setSize(width,height),document[_0x887e8a(299)][_0x887e8a(169)](renderer[_0x887e8a(279)]);let rendererSize=new THREE[_0x887e8a(259)];renderer.getSize(rendererSize);const getRandomInt=($,x)=>Math[_0x887e8a(290)](R.random_dec()*($-x+1)+x),getRandomColor=()=>(16777215*R.random_dec()<<0)[_0x887e8a(276)](16).padStart(6,\"0\");let elapsedTime=0,frameCounter=0;const updateFrequency=1;function getRandomFloat($,x){return R.random_dec()*(x-$)+$}let isRect=R.random_choice([1,2,3,4]);switch(isRect){case 1:randomRect=new THREE.Vector4(.5*R.random_dec(),0,.2,1),randomCirc=new THREE[_0x887e8a(189)](0,0,0,0);break;case 2:randomRect=new THREE.Vector4(0,0,0,0),randomCirc=new THREE[_0x887e8a(189)](.5,.5,.4,.4);break;case 3:randomRect=new THREE[_0x887e8a(189)](0,0,0,0),randomCirc=new THREE[_0x887e8a(189)](0,0,0,0);break;case 4:randomRect=new THREE[_0x887e8a(189)](.5*R.random_dec(),0,.2,1),randomCirc=new THREE[_0x887e8a(189)](.5,.5,.4,.4);break;default:randomRect=new THREE[_0x887e8a(189)](.5*R.random_dec(),0,.2,1),randomCirc=new THREE.Vector4(0,0,0,0)}const borderSizes=[.01,.03],borderSize=R[_0x887e8a(329)](borderSizes);let borderProportion=borderSize,responsiveBorderSize=borderProportion*Math[_0x887e8a(349)](rendererSize.x,rendererSize.y),caEnabled=!!R.random_bool(.05);console[_0x887e8a(193)](_0x887e8a(225)+caEnabled);const ca_factor=!0===caEnabled?.8:0,caWidth=Math[_0x887e8a(290)](simulation_width\/15),caHeight=Math[_0x887e8a(290)](simulation_height\/15),caData=new Uint8Array(caWidth*caHeight*3);function _0x111b($,x){let e=_0x5f48();return(_0x111b=function($,x){return e[$-=161]})($,x)}for(let i=0;i<caData[_0x887e8a(166)];i+=3){let $=.8>R[_0x887e8a(308)]()?0:255;caData[i]=$,caData[i+1]=$,caData[i+2]=$}const caTexture=new THREE.DataTexture(caData,caWidth,caHeight,THREE[_0x887e8a(266)]);caTexture[_0x887e8a(280)]=THREE.NearestFilter,caTexture[_0x887e8a(205)]=THREE.NearestFilter,caTexture[_0x887e8a(191)]=THREE.ClampToEdgeWrapping,caTexture[_0x887e8a(229)]=THREE[_0x887e8a(198)],caTexture.needsUpdate=!0;const material=new THREE[_0x887e8a(344)]({vertexShader:render_vertex,fragmentShader:render_fragment,uniforms:{reaction_diffusion:{value:null},substance_color:{value:new THREE[_0x887e8a(254)]()[_0x887e8a(203)](settings[_0x887e8a(272)])[_0x887e8a(161)](255)},middle_color:{value:new THREE.Vector3()[_0x887e8a(203)](settings[_0x887e8a(338)])[_0x887e8a(161)](255)},background_color:{value:new THREE.Vector3()[_0x887e8a(203)](settings[_0x887e8a(302)])[_0x887e8a(161)](255)},c4_color:{value:new THREE[_0x887e8a(254)]()[_0x887e8a(203)](settings.c4_color)[_0x887e8a(161)](255)},c5_color:{value:new THREE[_0x887e8a(254)]()[_0x887e8a(203)](settings[_0x887e8a(307)])[_0x887e8a(161)](255)},time:{value:0},noise_texture:{value:null},isRect:{value:isRect},randomRect:{value:randomRect},randomCirc:{value:randomCirc},ca_state:{value:caTexture}},defines:{frag2sim:_0x887e8a(340)+simulation_width\/actual_width+\", \"+simulation_height\/actual_height+\")\",simulation_resolution:\"vec2(\"+simulation_width+\", \"+simulation_height+\")\"}});scene[_0x887e8a(261)](new THREE.Mesh(new THREE.PlaneBufferGeometry(2,2),material));const gpu_compute=new THREE[_0x887e8a(300)](simulation_width,simulation_height,renderer),reaction_diffusion=gpu_compute[_0x887e8a(313)](),reaction_diffusion_variable=gpu_compute[_0x887e8a(179)](\"reaction_diffusion\",reaction_diffusion_fragment,reaction_diffusion);reaction_diffusion_variable[_0x887e8a(191)]=THREE[_0x887e8a(198)],reaction_diffusion_variable.wrapT=THREE[_0x887e8a(198)],gpu_compute[_0x887e8a(211)](reaction_diffusion_variable,[reaction_diffusion_variable]);const rdu=reaction_diffusion_variable.material.uniforms;rdu[_0x887e8a(230)]={value:new THREE.Vector2(-100,-100)};for(let i=0;i<10;i++)rdu[_0x887e8a(295)+i]={value:new THREE[_0x887e8a(259)](getRandomInt(50,simulation_width-50),getRandomInt(50,simulation_height-50))};function updateCA(){let $=_0x887e8a,x=new Uint8Array(caWidth*caHeight*3),e=[1],a=[2,3];for(let o=0;o<caHeight;o++)for(let r=0;r<caWidth;r++){let t=(o*caWidth+r)*3,n=0;for(let c=-1;c<=1;c++)for(let l=-1;l<=1;l++){if(0===l&&0===c)continue;let d=(r+l+caWidth)%caWidth;255===caData[((o+c+caHeight)%caHeight*caWidth+d)*3]&&n++}let s=caData[t],f=n==e[0]||1==s&&a[$(353)](n)?1:0;f=255===s&&(2===n||3===n)?255:0===s&&3===n?255:0,x[t]=f,x[t+1]=f,x[t+2]=f}caData[$(249)](x),caTexture.needsUpdate=!0}rdu.mouse_down={value:!1},rdu[_0x887e8a(337)]={value:settings[_0x887e8a(337)]},rdu[_0x887e8a(317)]={value:settings.kill},rdu.diffusion_scale={value:settings.diffusion_scale},rdu.feed_variation={value:settings[_0x887e8a(241)]},rdu[_0x887e8a(350)]={value:settings.kill_variation},rdu.feed_modifier={value:settings[_0x887e8a(282)]},rdu.kill_modifier={value:settings[_0x887e8a(195)]},rdu[_0x887e8a(292)]={value:settings.diffusion_scale_variation},rdu[_0x887e8a(283)]={value:settings[_0x887e8a(283)]},rdu[_0x887e8a(164)]={value:!1},rdu[_0x887e8a(261)]={value:!1},rdu.field={value:settings.field},rdu[_0x887e8a(321)]={value:settings[_0x887e8a(321)]},rdu[_0x887e8a(174)]={value:ca_factor},rdu[_0x887e8a(284)]={value:caTexture},rdu[_0x887e8a(243)]={value:.6},rdu[_0x887e8a(217)]={value:responsiveBorderSize},rdu.randomRectPos={value:new THREE[_0x887e8a(259)](randomRect.x,randomRect.y)},rdu[_0x887e8a(264)]={value:new THREE[_0x887e8a(259)](randomRect.z,randomRect.w)},rdu.randomCircPos={value:new THREE[_0x887e8a(259)](randomCirc.x,randomCirc.y)},rdu.randomCircSize={value:new THREE[_0x887e8a(259)](randomCirc.z,randomCirc.w)};const caDuration=3e4,maxUpdateFrequency=10;let startTime=Date.now();function animate(){let $=_0x887e8a;if(requestAnimationFrame(animate),frameCounter++,caEnabled){let x=Date[$(335)]()-startTime;if(x<3e4){var e,a=0,o=3e4,r=1,t=10;let n=Math[$(290)]((e=x,r+(e-a)*(10-r)\/(3e4-a)));frameCounter%n==0&&updateCA()}else caEnabled=!1}render()}function _0x5f48(){let $=[\"uniforms\",\"save_image\",\"Settings:\",\"toDataURL\",\"Vector4\",\"#f5f5f0\",\"wrapS\",\"toFixed\",\"log\",\"#ffff00\",\"kill_modifier\",\"#ffffff\",\"861357hvHjWA\",\"ClampToEdgeWrapping\",\"mouse_down\",\"clientY\",\"#FD97C4\",\"passThruTexture\",\"fromArray\",\"#FF0000\",\"minFilter\",\"LinearFilter\",\"forEach\",\"onmouseleave\",\"#FFC234\",\"#EBFF32\",\"setVariableDependencies\",\"round\",\"#e00000\",\"devicePixelRatio\",\"noise3d\",\"palette:\",\"borderSize\",\"#000000\",\"#D03A20\",\"7048974PffXsp\",\"touchstart\",\"reaction_diffusion\",\"click\",\"#ff00ff\",\"Aggressor: \",\"prngA\",\"useA\",\"texture\",\"wrapT\",\"mouse_pos\",\"#0000FF\",\"keys\",\"extensions\",\"#FFFFFF\",\"grad3\",\", dependency=\",\"#98D82D\",\"Growth:\",\"frame\",\"prev_scale\",\"feed_variation\",\"innerHeight\",\"caThreshold\",\"#00ffff\",\"Camera\",\"currentTextureIndex\",\"environment\",\"DataTexture\",\"set\",\"getRenderTarget\",\"5MUdLMR\",\"random_bool\",\"onmouseup\",\"Vector3\",\"href\",\"userAgent\",\"sqrt\",\"render\",\"Vector2\",\"initialValueTexture\",\"add\",\"Scene\",\"#FFFFF1\",\"randomRectSize\",\"resize\",\"RGBFormat\",\"touchend\",\"time\",\"download\",\"test\",\"vec2( \",\"substance_color\",\"setPixelRatio\",\"init\",\"renderTexture\",\"toString\",\"renderTargets\",\"dot\",\"domElement\",\"magFilter\",\"touchcancel\",\"feed_modifier\",\"anisotropy\",\"ca_state\",\"Mesh\",\"#f2f2f2\",\"225841eSKEwX\",\"No support for vertex shader textures.\",\"setRenderTarget\",\"floor\",\"clientX\",\"diffusion_scale_variation\",\"hash\",\"value\",\"point_pos\",\"innerWidth\",\"createShaderMaterial\",\"background\",\"body\",\"GPUComputationRenderer\",\"push\",\"background_color\",\"random_num\",\"save-link\",\"substance\",\"changedTouches\",\"c5_color\",\"random_dec\",\"1021968ztitef\",\"455892dEMzIN\",\"accent\",\"424LVnvvK\",\"createTexture\",\"touches\",\"#F17401\",\"name\",\"kill\",\"No OES_texture_float support for float textures.\",\"environment_noise_scale\",\"RGBAFormat\",\"warped\",\"perm\",\"WebGLRenderTarget\",\"resolution\",\"274860HSTjyJ\",\"material\",\"type\",\"FloatType\",\"random_choice\",\"#df2126\",\"fragmentShader\",\"info\",\"11809540idlVZs\",\"#AFCDF0\",\"now\",\"OES_texture_float\",\"feed\",\"middle_color\",\"#C7AFF0\",\"vec2(\",\"maxVertexTextures\",\"createRenderTarget\",\"get\",\"ShaderMaterial\",\"slice\",\"#DE87B7\",\"#FFFF99\",\"isWebGL2\",\"min\",\"kill_variation\",\"\\n\\n  varying vec2 vUv;\\n\\n  uniform sampler2D reaction_diffusion;\\n  uniform vec3 substance_color;\\n  uniform vec3 background_color;\\n  uniform vec3 middle_color;\\n  uniform vec3 c4_color;\\n  uniform vec3 c5_color;\\n  uniform vec4 randomRect;\\n  uniform vec3 circle;\\n  uniform sampler2D noiseTexture;\\n\\n  void main() {\\n    vec4 texColor = texture2D(reaction_diffusion, vUv);\\n    float h = texColor.g;\\n\\n    vec3 colorA = background_color;\\n    vec3 colorB = middle_color;\\n    vec3 colorC = substance_color;\\n    vec3 colorD = c4_color;\\n    vec3 colorE = c5_color;\\n\\n    float baseEdge0 = 0.0;\\n    float baseEdge1 = 0.075;\\n    float baseEdge2 = 0.175;\\n    float baseEdge3 = 0.275;\\n    float baseEdge4 = 0.375;\\n\\n    float noiseValue = texture2D(noiseTexture, vUv).r;\\n    float edgeVariation = noiseValue * 0.1;\\n\\n    float edge0 = baseEdge0 + edgeVariation;\\n    float edge1 = baseEdge1 + edgeVariation;\\n    float edge2 = baseEdge2 + edgeVariation;\\n    float edge3 = baseEdge3 + edgeVariation;\\n    float edge4 = baseEdge4 + edgeVariation;\\n\\n    vec3 finalColor;\\n\\n    if (h < edge1) {\\n      float t = clamp((h - edge0) \/ (edge1 - edge0), 0.0, 1.0);\\n      finalColor = mix(colorA, colorB, t);\\n    } else if (h < edge2) {\\n      float t = clamp((h - edge1) \/ (edge2 - edge1), 0.0, 1.0);\\n      finalColor = mix(colorB, colorC, t);\\n    } else if (h < edge3) {\\n      float t = clamp((h - edge2) \/ (edge3 - edge2), 0.0, 1.0);\\n      finalColor = mix(colorC, colorD, t);\\n    } else if (h < edge4) {\\n      float t = clamp((h - edge3) \/ (edge4 - edge3), 0.0, 1.0);\\n      finalColor = mix(colorD, colorE, t);\\n    } else {\\n      finalColor = colorE;\\n    }\\n\\n    gl_FragColor = vec4(finalColor, 1.0);\\n  }\\n\\n\",\"dependencies\",\"includes\",\"divideScalar\",\"#AE2029\",\"#b42024\",\"reset\",\"#00FF00\",\"length\",\"compute\",\"3cywfoa\",\"appendChild\",\"touchmove\",\"doRenderTarget\",\"substring\",\"#FF3C75\",\"ca_factor\",\"\\n\\n  uniform sampler2D environment;\\n\\n  uniform float feed;\\n  uniform float kill;\\n  uniform float diffusion_scale;\\n\\n  uniform float feed_variation;\\n  uniform float kill_variation;\\n  uniform bool isRect;\\n  uniform float diffusion_scale_variation;\\n\\n  uniform float anisotropy;\\n  uniform bool field;\\n\\n  uniform float feed_modifier;\\n  uniform float kill_modifier;\\n\\n  uniform vec2 mouse_pos;\\n  uniform vec2 point_pos0;\\n  uniform vec2 point_pos1;\\n  uniform vec2 point_pos2;\\n  uniform vec2 point_pos3;\\n  uniform vec2 point_pos4;\\n  uniform vec2 point_pos5;\\n  uniform vec2 point_pos6;\\n  uniform vec2 point_pos7;\\n  uniform vec2 point_pos8;\\n  uniform vec2 point_pos9;\\n  uniform vec2 point_posR;\\n  uniform bool mouse_down;\\n\\n  uniform bool reset;\\n  uniform bool add;\\n\\n  uniform vec4 randomRect;\\n  uniform vec4 randomCirc;\\n\\n  uniform vec2 randomRectPos;\\n  uniform vec2 randomRectSize;\\n  uniform vec2 randomCircPos;\\n  uniform vec2 randomCircSize;\\n  uniform float borderSize;\\n\\n  uniform vec2 rect_top_left;\\n  uniform vec2 rect_bottom_right;\\n\\n  uniform sampler2D ca_state;\\n  uniform float caThreshold;\\n  uniform float ca_factor;\\n  \\n\\n  #define p2(v) v * v\\n  #define PI 3.14159265358979323846\\n\\n \\n  #define R 10.0\\n  #define borderWidth 20.0\\n  #define rectBorderWidth 2.0\\n\\n  #define s(x, y) texture2D(reaction_diffusion, (gl_FragCoord.xy + vec2(x, y)) \/ resolution).xy\\n\\n  vec2 anisotropicDiffusion(vec2 angles, float a1, vec2 center)\\n    {\\n      vec2\\n      v00 = s(-1, 1), v10 = s(0, 1), v20 = s(1, 1),\\n      v01 = s(-1, 0),                v21 = s(1, 0),\\n      v02 = s(-1,-1), v12 = s(0,-1), v22 = s(1,-1);\\n\\n      vec2 cos_t = cos(angles);\\n      vec2 sin_t = sin(angles);\\n\\n      vec2 cos2_t = p2(cos_t);\\n      vec2 sin2_t = p2(sin_t);\\n\\n      float a2 = 1.0 - a1;\\n\\n      vec2 d = 4.0 * (a2 - a1) * p2(cos_t * sin_t);\\n      vec2 h = 8.0 * (a1 * cos2_t + a2 * sin2_t);\\n      vec2 v = 8.0 * (a2 * cos2_t + a1 * sin2_t);\\n\\n      return ((1.0 - d) * (v00 + v22) + (1.0 + d) * (v20 + v02) + h * (v01 + v21) + v * (v10 + v12) - 20.0 * center) \/ 6.0;\\n    }\\n\\n  float random (vec2 st) {\\n      return fract(sin(dot(st.xy,\\n                          vec2(12.9898,78.233)))*\\n          43758.5453123);\\n  }\\n  bool insideCircle(vec2 point, vec2 center, float radius) {\\n  return distance(point, center) <= radius;\\n  }\\n\\n\\n  void main() {\\n    vec4 env = texture2D(environment, (gl_FragCoord.xy \/ resolution).xy);\\n    vec2 st = gl_FragCoord.xy\/resolution;\\n    vec3 ca_color = texture2D(ca_state, st).rgb;\\n    float ca_intensity = dot(ca_color, vec3(0.299, 0.587, 0.114));\\n       float caValue = texture2D(ca_state, (gl_FragCoord.xy \/ resolution)).r;\\n\\n\\n    float rnd = random( st );\\n    float pct = 0.0;\\n\\n    vec2 randomRectPosA = randomRectPos * resolution;\\n    vec2 randomRectSizeA = randomRectSize * resolution;\\n\\n    vec2 randomCircPosA = randomCircPos * resolution;\\n    vec2 randomCircSizeA = randomCircSize * resolution;\\n\\n    pct = distance(st,vec2(0.5));\\n\\n    float DS = diffusion_scale + env[2] * diffusion_scale_variation;\\n    vec2 angles = (1.0 + vec2(env[3], field ? env[0] : env[3])) * PI;\\n    float caInfluence = float(caValue > caThreshold);\\n    float F = feed + env[0] * feed_variation;\\n    float K = kill + env[1] * kill_variation;\\n\\n  \\n    bool insideRectangle = (gl_FragCoord.x > randomRectPosA.x && gl_FragCoord.x < randomRectPosA.x + randomRectSizeA.x) &&\\n                          (gl_FragCoord.y > randomRectPosA.y && gl_FragCoord.y < randomRectPosA.y + randomRectSizeA.y);\\n\\n    bool insideCircle = insideCircle(gl_FragCoord.xy, randomCircPosA, randomCircSizeA.x);                     \\n\\n    if (insideRectangle) {\\n      K += 0.003;\\n    }\\n\\n    if (insideCircle) {\\n      K += 0.0025;\\n    }\\n\\n    vec2 old = s(0, 0);\\n\\n    vec2 reaction = vec2(-1.0, 1.0) * old[0] * old[1] * old[1] * (1.0 + caInfluence * ca_factor);\\n    vec2 dissipation = vec2(F * (1.0 - old[0]), -old[1] * (K + F));\\n    vec2 diffusion = anisotropicDiffusion(angles, anisotropy, old) * DS * vec2(1.0, 0.5);\\n    float dt = 1.0 \/ (4.0 * DS);\\n    gl_FragColor.xy = old + (reaction + dissipation + diffusion) * dt;\\n    float edgeDistX = min(gl_FragCoord.x, resolution.x - gl_FragCoord.x);\\n    float edgeDistY = min(gl_FragCoord.y, resolution.y - gl_FragCoord.y);\\n    float edgeDist = min(edgeDistX, edgeDistY);\\n        if (edgeDist <= borderSize) {\\n            gl_FragColor.x = 0.0;\\n            gl_FragColor.y = 0.0;\\n        }\\n\\n        if (mouse_down) {\\n            gl_FragColor[1] += max(0.25 - old[1], 0.0) * max(R - distance(gl_FragCoord.xy, mouse_pos), 0.0) \/ R;\\n        }\\n\\n        if (reset) {\\n            gl_FragColor = vec4(0.0);\\n        }\\n\\n        if(add)\\n        {\\n            vec2 pointPositions[10];\\n            pointPositions[0] = point_pos1;\\n            pointPositions[1] = point_pos2;\\n            pointPositions[2] = point_pos3;\\n            pointPositions[3] = point_pos4;\\n            pointPositions[4] = point_pos5;\\n            pointPositions[5] = point_pos6;\\n            pointPositions[6] = point_pos7;\\n            pointPositions[7] = point_pos8;\\n            pointPositions[8] = point_pos9;\\n            pointPositions[9] = point_pos0;\\n\\n            for (int i = 0; i < 10; i++) {\\n                vec2 pointPos = pointPositions[i];\\n                gl_FragColor[1] += max(0.25 - old[1], 0.0) * max(R - distance(gl_FragCoord.xy, pointPos), 0.0) \/ R;\\n            }\\n            gl_FragColor[1] += max(0.25 - old[1], 0.0) * max(R - distance(gl_FragCoord.xy, point_posR), 0.0) \/ R;\\n\\n        }\\n    }\\n\\n\",\"addResolutionDefine\",\"PlaneBufferGeometry\",\"#E23DB3\",\"addVariable\",\"u_time\",\"variables\",\"onmousedown\",\"uniform sampler2D passThruTexture;\\n\\nvoid main() {\\n\\n\tvec2 uv = gl_FragCoord.xy \/ resolution.xy;\\n\\n\tgl_FragColor = texture2D( passThruTexture, uv );\\n\\n}\\n\",\"addEventListener\"];return(_0x5f48=function(){return $})()}function render($){let x=_0x887e8a;if(simulateReactionDiffusion(settings.simfrRate),material[x(185)][x(222)][x(294)]=gpu_compute.getCurrentRenderTarget(reaction_diffusion_variable)[x(228)],elapsedTime+=.01,material[x(185)][x(268)].value=elapsedTime,rdu[x(180)]={value:.001*$},renderer[x(258)](scene,camera),!0===render[x(186)]){render.save_image=!1;let e=document.getElementById(x(304));e[x(269)]=render.savename,e[x(255)]=renderer.domElement[x(188)](),e[x(223)]()}renderer[x(332)][x(258)][x(239)]>=2e3&&renderer[x(332)][x(258)].frame<5e3?rdu[x(261)]={value:!0}:rdu.add={value:!1}}function simulateReactionDiffusion($){let x=_0x887e8a;for(let e=0;e<$;e++)gpu_compute[x(167)]()}function createEnvironment($=!0){let x=_0x887e8a;if(!$&&void 0!==createEnvironment.prev_scale&&createEnvironment[x(240)]===Settings[x(319)])return;createEnvironment[x(240)]=settings.environment_noise_scale;let e=new SimplexNoise(R),a=Array.from({length:4},()=>1e3*R.random_dec()),o=1\/settings[x(319)],r={x:simulation_width\/2,y:simulation_height\/2},t=(r.x,r.y,new Float32Array(simulation_width*simulation_height*4));for(let n=0;n<simulation_height;n++)for(let c=0;c<simulation_width;c++)for(let l=0;l<4;l++)t[(n*simulation_width+c)*4+l]=e.noise3d((c+.5)*o,(n+.5)*(!0===settings[x(321)]?1:o),a[l]);rdu[x(247)]={value:new THREE.DataTexture(t,simulation_width,simulation_height,THREE[x(320)],THREE.FloatType)},rdu[x(247)][x(294)][x(280)]=THREE[x(206)],rdu[x(247)][x(294)][x(205)]=THREE[x(206)];let d=new THREE[x(248)](t,simulation_width,simulation_height,THREE[x(320)],THREE.FloatType);d.magFilter=THREE.LinearFilter,d[x(205)]=THREE[x(206)],material[x(185)].noise_texture[x(294)]=d}function updateMousePos($){let x=_0x887e8a,e=$[x(291)]*(simulation_width\/width),a=simulation_height-$[x(200)]*(simulation_height\/height);rdu[x(230)][x(294)][x(203)]([e,a])}function onMove($){let x=_0x887e8a;updateMousePos($),rdu[x(199)].value=mouse_down&&(brush_move=!0)}function onUp(){let $=_0x887e8a;mouse_down=!1,brush_move=!1,rdu[$(199)].value=!1}function onDown(){mouse_down=!0}function handleTouchEvent($,x){let e=_0x887e8a,a=\"touchend\"===$[e(327)]||$[e(327)]===e(281)?$[e(306)]:$[e(314)];1===a[e(166)]&&($.preventDefault(),x(a[0]))}createEnvironment(),gpu_compute[_0x887e8a(274)](),animate(),renderer[_0x887e8a(279)][_0x887e8a(182)]=onDown,renderer[_0x887e8a(279)][_0x887e8a(253)]=renderer[_0x887e8a(279)][_0x887e8a(208)]=onUp,renderer[_0x887e8a(279)].onmousemove=onMove,[_0x887e8a(221),_0x887e8a(267),_0x887e8a(281),_0x887e8a(170)][_0x887e8a(207)]($=>{let x=_0x887e8a;renderer.domElement[x(184)]($,e=>{let a=x;$===a(221)?handleTouchEvent(e,onDown):$===a(170)?handleTouchEvent(e,onMove):handleTouchEvent(e,onUp)},!1)}),window[_0x887e8a(184)](_0x887e8a(265),function(){let $=_0x887e8a;renderer.getSize(rendererSize),responsiveBorderSize=borderProportion*Math.min(rendererSize.x,rendererSize.y),material.uniforms[$(217)][$(294)]=responsiveBorderSize},!1);",
+  "tokens" : [
+    {
+      "hash" : "0x56a58beabb01b0edd9426a07c7fae9151ea6fd005a3019c643a130aa3ec2ca90",
+      "id" : "50000060"
+    },
+    {
+      "hash" : "0x65304d96ae2b217b9e685b95ff9e875fbb07ce2619c8b293f8177e36695204ee",
+      "id" : "50000042"
+    },
+    {
+      "hash" : "0x31d23b43e23414ad8544dc2734f42aa01800130f4d371ab7f1e28098d6b71c90",
+      "id" : "50000053"
+    },
+    {
+      "hash" : "0x49f46b2a235e43941c6790ef6cc4fad19ca19e2edc50d026f2b39fc8f3ca96b4",
+      "id" : "50000008"
+    },
+    {
+      "hash" : "0xb95ef3dc4b3f5efdc9149a0fb400702d12c21aa2603e0fb43ed54c893f1f61fc",
+      "id" : "50000068"
+    },
+    {
+      "hash" : "0x2c7ca6fa6fb8ec2d15ca62e8d9c94e40b6a9d3a62a98c463037c32400ba54d54",
+      "id" : "50000079"
+    },
+    {
+      "hash" : "0x44e59f2bc162812610c45457d6d4ffceb690e397438e04eba2302eced1102cea",
+      "id" : "50000058"
+    },
+    {
+      "hash" : "0x196b262b2eabe674b27882a9d67f2015e6c043725a5a9f6521991b89f63e7473",
+      "id" : "50000085"
+    },
+    {
+      "hash" : "0x6a77017a5a2fd2eb9341996dfabb39b892c91ab313d1ba49875481ce7a7a9698",
+      "id" : "50000029"
+    },
+    {
+      "hash" : "0x1bd2ad0fefbd1c426656f2c0a7eae640547661785e5e45d977f8450f6d29cae7",
+      "id" : "50000015"
+    },
+    {
+      "hash" : "0xcc51314d7f9fb3fd4cb6e5938d6cdbd58886af1d576b1f0c7f9770ebd0fa310c",
+      "id" : "50000066"
+    },
+    {
+      "hash" : "0xc2b54f9ca3410b14fc454546ae9f78c0652d5d3dec960809680e5785ced639f5",
+      "id" : "50000011"
+    },
+    {
+      "hash" : "0x5f0b6b0432a7d840dfde5a019d9a6f3845dc6d4a1794416f9c86d1ad25b02ab9",
+      "id" : "50000016"
+    },
+    {
+      "hash" : "0x93b1f08f7a637d91fbd8a8a5f6c992138a242cf4a74c5f08d4d728f5157c33e5",
+      "id" : "50000069"
+    },
+    {
+      "hash" : "0x22ed18f1dddf0c2290492bc86f4ddfb579d5bd86126b4909fb2a173a750792e3",
+      "id" : "50000081"
+    },
+    {
+      "hash" : "0xaa9f10a5a65f42fac5b931a555c0923aaa6bca002a1cbbf930e99ee83ca96cf8",
+      "id" : "50000017"
+    },
+    {
+      "hash" : "0xe9a0a642e4092ef920887aa93058a004f233227999ca981877f3ba02476b9d6c",
+      "id" : "50000077"
+    },
+    {
+      "hash" : "0x292b68db5f2d81371d9068cb75ee7ac50f40dcca88f0d9af181b9cb2a06347cd",
+      "id" : "50000027"
+    },
+    {
+      "hash" : "0x77ac07d4acbecba491d9c37906ea619b9dec41fd6243d79e50fa1f8d198f2f78",
+      "id" : "50000037"
+    },
+    {
+      "hash" : "0x186d41aea5e08e7a510ebf8a3ef432fe3714bd3f88879b9167be2dddeee824cb",
+      "id" : "50000020"
+    },
+    {
+      "hash" : "0x45c1a93584446285fbc0241462f8b64aae45b344c64c6119da75aee585cdd07d",
+      "id" : "50000033"
+    },
+    {
+      "hash" : "0xfab8cce9ac7139918baa260dea7c463722ddba93c9c6ec1090138230e31ba4f9",
+      "id" : "50000012"
+    },
+    {
+      "hash" : "0x6f4ac37213fe83cc18f3581ebe5d6ce975e356652e59fd8b3fe20d554e0e069f",
+      "id" : "50000024"
+    },
+    {
+      "hash" : "0x968a59ee7d60486aea3cc55b9c2207f5e4b95432a9308f0bfcc0679bd54c56a6",
+      "id" : "50000056"
+    },
+    {
+      "hash" : "0x9d782808fd33ac9cfe1a81390d1b5ff6ee7ab75582684114bb562c7d7f243de3",
+      "id" : "50000026"
+    },
+    {
+      "hash" : "0x23fb162e6a42e3e7d6945519bc7496ec7067075dbb98f16b7e4f9bd096433d4e",
+      "id" : "50000084"
+    },
+    {
+      "hash" : "0xfc2ca2d8e0c60fb72c5f30490e29a3ff90fb7ace9eab6903f3339070e2477fd4",
+      "id" : "50000031"
+    },
+    {
+      "hash" : "0xa25aeb584d3dd4dc80ad4c31e33de12998136b5245acce36a2bc97b8596bb80e",
+      "id" : "50000057"
+    },
+    {
+      "hash" : "0xadfed79b11afaa8582c9d75c75e2eb7468e5ccd55dffa2f4529768404ae5083a",
+      "id" : "50000055"
+    },
+    {
+      "hash" : "0xf9d3a22774489b11400b5a557d0a3b02ac706ebb160915d3d3187ab9df647231",
+      "id" : "50000038"
+    },
+    {
+      "hash" : "0xb137aa1eb207ee4d3054206dac608749962428365e86c47ca06e97a0b22f7424",
+      "id" : "50000094"
+    },
+    {
+      "hash" : "0xcefa8b684ceed77ceeca9e1809cd86738248d0fa110b581bcc0ec8b99af8a0d5",
+      "id" : "50000025"
+    },
+    {
+      "hash" : "0xa4cc0bddae5485d3c5f35cc7a38178727da650e93e8c8da8c555337e0f6ac3f3",
+      "id" : "50000041"
+    },
+    {
+      "hash" : "0xffa68175e8def9ce39686d6ff98e2a0ec68e93f7058006bd9bc1231dc39d8211",
+      "id" : "50000051"
+    },
+    {
+      "hash" : "0xc202d408076d822b6f0b8a2b392c18338797420a0ad8d754eae4a6085fd74d24",
+      "id" : "50000070"
+    },
+    {
+      "hash" : "0x1d2ae9adc99b7b9a39998641d33e5343cc784ae5f17958fd3d2a564257658d5a",
+      "id" : "50000071"
+    },
+    {
+      "hash" : "0xbf2a9dc7acab4bc323bf58394a10af476956f3517c06ff56db99c43c4619b6de",
+      "id" : "50000082"
+    },
+    {
+      "hash" : "0x7a571bba07c2f16db70d45f8e904a7f2ec2ef6376df9a0fc5d213fdb098f23b9",
+      "id" : "50000074"
+    },
+    {
+      "hash" : "0x1e7017edbc14f9d24eab7cdf8626b514f9ea82c3c4087fbee1a5ed0fd5ffb2e0",
+      "id" : "50000018"
+    },
+    {
+      "hash" : "0x099c6e18c997b838090ae31515d629357c8f701cededbe8c9c9d5aa789794a84",
+      "id" : "50000076"
+    },
+    {
+      "hash" : "0x97b898e79dce772e7dffe36c8ad046deac910c27047df3f33cb39bb05572129c",
+      "id" : "50000019"
+    },
+    {
+      "hash" : "0xbda1b2ee0f8c195820f326d34cf83a4a5471a68b4e3e442a1baed7b5e5ea093a",
+      "id" : "50000023"
+    },
+    {
+      "hash" : "0xbb75d21f74ce8b616c92ac1b6b45d489aae22af074d48e42b34c0916e9ca739d",
+      "id" : "50000002"
+    },
+    {
+      "hash" : "0x350b10a1a0afce7a8bb0d367f4a162240a3167ae067ed77b61027cf1f3a115ea",
+      "id" : "50000063"
+    },
+    {
+      "hash" : "0xd472c6bef9f145a2842f77fd61eb2e2ebff33587f1f4ea3a1ec57770ee51013c",
+      "id" : "50000005"
+    },
+    {
+      "hash" : "0x30b17da346350f20c0c4ed71e40d51e4c4eec99ffc65e561c13d583827a9feaf",
+      "id" : "50000007"
+    },
+    {
+      "hash" : "0xd1a3d77c86113b06368e440cb1d967974dcf831e2c31d9079b325182655f20fc",
+      "id" : "50000009"
+    },
+    {
+      "hash" : "0x69ccbd27927b020211b0d4bc410541717f8fcae36bd17d43fad756edc151acbd",
+      "id" : "50000013"
+    },
+    {
+      "hash" : "0xa58fb523da08f3e3371272de3a3dfbb87225996784e4e13a856d7edf29437172",
+      "id" : "50000021"
+    },
+    {
+      "hash" : "0xf297a891f3dcd8283bd31d674886895ba1cc5d85d645f0f644ecb8e354bdad89",
+      "id" : "50000022"
+    },
+    {
+      "hash" : "0xea3bac2a17559e8076c8411097c2c5ec313a70f52a39a78b3412f871bee3d92b",
+      "id" : "50000045"
+    },
+    {
+      "hash" : "0x025f5742d8ba7875f1c25ca62811c0671464fbb8c9588f1b22925cad106afef9",
+      "id" : "50000065"
+    },
+    {
+      "hash" : "0x63b03821f7f22c3bd2c7bcabd63550f67a0ddaccf614dfeba9a301381c5f12b6",
+      "id" : "50000010"
+    },
+    {
+      "hash" : "0x9d2ea2f776e9ac741bc1e735a09e1ae254757696707837dbd40399aee6d995c1",
+      "id" : "50000044"
+    },
+    {
+      "hash" : "0xc8210fff24c3a072e33d996c38966a32e7292be06611c808c1cdaf94ca69aa30",
+      "id" : "50000004"
+    },
+    {
+      "hash" : "0x8470ecbbd74e61d1fb5c475ff0007c6f21f3a28b2071a356e86dd8bd858211b8",
+      "id" : "50000014"
+    },
+    {
+      "hash" : "0xd00f516b7816c28ef27b7edfd480cb4f57aee17d6fbdb753372c277de1e24b9a",
+      "id" : "50000003"
+    },
+    {
+      "hash" : "0xd68f0e4eacf379fee1bbf4c9ca61ff3216eea31b7db6eae78797c1cc2ac3e3bd",
+      "id" : "50000001"
+    },
+    {
+      "hash" : "0xf91ce56c3ac3d70373a392eb69ab733fe8c946c38b07870c34e8d7ebe990188c",
+      "id" : "50000064"
+    },
+    {
+      "hash" : "0x921412ee73ca82c088afd8985b06d0ac757437da59c4de1a4d878009958cc07e",
+      "id" : "50000034"
+    },
+    {
+      "hash" : "0xdf9163dead0fff337958428cf1268a1d020502952137c01dfd0d4803ec69ad12",
+      "id" : "50000073"
+    },
+    {
+      "hash" : "0xe28da358313dcf72c43930d24ca9e33f636a7aaf7ada5d85992c61c4a924e27f",
+      "id" : "50000091"
+    },
+    {
+      "hash" : "0xdbbc67649358d827626ff2692b221b424f56d11e065b39f60443eb7cb9d72d7b",
+      "id" : "50000000"
+    },
+    {
+      "hash" : "0x5910d8944ce1f3279e0f1dfd99424008c9e00177b49ee01c02f9063e4d2c5c79",
+      "id" : "50000006"
+    },
+    {
+      "hash" : "0x76b5ac436edc2119cf658f0d765ae65ff42e3b4d92b60ebf8fbcfabbfcc840b7",
+      "id" : "50000059"
+    },
+    {
+      "hash" : "0xe17eea55d9b3f9d91f6b2ef7584dd5224e068d7405f5b622a89591cf105e6114",
+      "id" : "50000052"
+    },
+    {
+      "hash" : "0x0e142580f3e8863fed7e5d541f8a434f78fb9a1054518dd3731a9cd50461035d",
+      "id" : "50000040"
+    },
+    {
+      "hash" : "0xfb214c3690169cd534e83cdcf748b55682ecb2584b2bcd85bdca1f4f31703ecc",
+      "id" : "50000032"
+    },
+    {
+      "hash" : "0x555ec33106f026a1bde47668b9e0cbdac4277dc55d07d413ed4fb1d3d5523c18",
+      "id" : "50000092"
+    },
+    {
+      "hash" : "0xa316ba6d855a9a954a32ffe61e4a327e3e8446f156e6ecfbe34db49820297d23",
+      "id" : "50000080"
+    },
+    {
+      "hash" : "0xe4581a20197a904c26d7ef397b05aea6bf9a1e23f7f1fe739f342656414c128b",
+      "id" : "50000086"
+    },
+    {
+      "hash" : "0x67ebd8f02401f23e71a9b0de7a802426464674384db86990884d158bbba0c14d",
+      "id" : "50000096"
+    },
+    {
+      "hash" : "0x7f61bff218ae268ec3f6fd7ec5f9ae083c7febb931edb6056bc8bbe966b5300a",
+      "id" : "50000035"
+    },
+    {
+      "hash" : "0x8c29720af2a3dd0f85818346579f72899b3da798342cbd95078f05e19d7a3c24",
+      "id" : "50000036"
+    },
+    {
+      "hash" : "0xc66db0e8cfd6d93a27926396051d6c531402c901151edd3c3a3393cf180e644e",
+      "id" : "50000039"
+    },
+    {
+      "hash" : "0xc181e54f22f7d52420fa1007b8a46cf64bb780464fd89cb34c11cff04d9a084d",
+      "id" : "50000043"
+    },
+    {
+      "hash" : "0x5950e47b2fd9dfe619a32ca54f4995ef72a1e5f95c0e60186f2968c7c4f15624",
+      "id" : "50000046"
+    },
+    {
+      "hash" : "0x53a006b81fa579078cdd120f36f801185c9e49de935f841fe050e98cf440936d",
+      "id" : "50000047"
+    },
+    {
+      "hash" : "0x14917de83c39467a969e43e70f6ba41b3302d437a0090fa71bdcfe18127ff33c",
+      "id" : "50000049"
+    },
+    {
+      "hash" : "0x829999e45701f7e1d5afc1423153ddbc2fad38d2ced70ccc031a7b1ef15534ad",
+      "id" : "50000087"
+    },
+    {
+      "hash" : "0x882f8e547000f40e79be8d5dacee143d69b69d44ccc08842fdca4e96c763b4e2",
+      "id" : "50000054"
+    },
+    {
+      "hash" : "0xde4f106b5c36cbd3d6f752ecc4b6927c4e988f9f6e940d9340bfcd15b38563b7",
+      "id" : "50000061"
+    },
+    {
+      "hash" : "0x07be2ee0f60069b4ab284a35dbffb79af34d9ffcf821b6b69121eaacd06d0930",
+      "id" : "50000062"
+    },
+    {
+      "hash" : "0x7e93005a5ce1fc25e6bf0a84b43e4323ada55ea78c4ef165158ec62c01efab8d",
+      "id" : "50000067"
+    },
+    {
+      "hash" : "0x8f5b6c12691326b4e7eca9c28ab96f6ec4f583247727d18496127062795c2e48",
+      "id" : "50000078"
+    },
+    {
+      "hash" : "0xd4a4e86b9b87607434760c8097ce55922fa89247171edc38112abbd3fec66452",
+      "id" : "50000083"
+    },
+    {
+      "hash" : "0xd3807df3c37df01d0e86e848e44bd01c291cd8e1e3c836e88c700c17fc37ba48",
+      "id" : "50000088"
+    },
+    {
+      "hash" : "0x692867d8527b6ebd5244758028463352e699df63afd55f7b0a90a872066cd3a7",
+      "id" : "50000089"
+    },
+    {
+      "hash" : "0x2f8dcc8d5345ba2685ec251993be97c65d278b8da059626b9e2227f363caa018",
+      "id" : "50000090"
+    },
+    {
+      "hash" : "0xa5e71073bd8780abc9903af356e8732e5048016c3a29ae5fd55d9de636e33b85",
+      "id" : "50000097"
+    },
+    {
+      "hash" : "0x9a108293d6d0f823736ed2d0431205774a18b6c7d688f56d0ef4381dc5db6569",
+      "id" : "50000093"
+    },
+    {
+      "hash" : "0xc87fc08ebd309319f9877161052897e8b26c7413f2c268571cec1866a953f785",
+      "id" : "50000098"
+    },
+    {
+      "hash" : "0x52e471bdc4e0da0a1502df60c0db07cd79b856a9978e291eec70330a5c571631",
+      "id" : "50000099"
+    },
+    {
+      "hash" : "0x8a6757886daaa55c0ebbf3f8b9b444c9a919c3bc88346010657b3ea6c117fbdb",
+      "id" : "50000048"
+    },
+    {
+      "hash" : "0xc8027996cf18c25023958e5d728d75edcb158a245e9c39698c72415d8845b397",
+      "id" : "50000075"
+    },
+    {
+      "hash" : "0xc3558d373edd1fa10116010cf68fe400a2b6b0bc025bde515363c0a4ffba84e2",
+      "id" : "50000030"
+    },
+    {
+      "hash" : "0x2ad9dd8ce2258a9492da28275bdeb4a707fa83b9ad8a688c1ad9446b27c2bcdd",
+      "id" : "50000072"
+    },
+    {
+      "hash" : "0x0d4a3208c5cf6895112b55f32b3ec346c6a0929a2dd2b557ae83b6c1cf156c64",
+      "id" : "50000050"
+    },
+    {
+      "hash" : "0x3d04b2f22d3333d4370255ba2addbcc73ce0c369bc5ab71734cc09daa3f313a0",
+      "id" : "50000028"
+    },
+    {
+      "hash" : "0xce4fc357362f6b77c14657ffb5ddd603390bbe07eac25dda9e2f2c91dbc7a6fe",
+      "id" : "50000095"
+    }
+  ]
+}

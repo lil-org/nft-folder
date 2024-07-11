@@ -77,6 +77,27 @@ enum ScriptType: String, Codable, CaseIterable {
     
 }
 
+func bundleGenerativeCollections() {
+    let names = try! FileManager.default.contentsOfDirectory(atPath: wipPath + "select/")
+    for name in names where !name.hasPrefix(".") {
+        let jsonName = name.dropLast(4) + "json"
+        let data = try! Data(contentsOf: URL(filePath: wipPath + "abs/" + jsonName))
+        let project = try! JSONDecoder().decode(ProjectMetadata.self, from: data)
+        let type = ScriptType.fromString(project.scriptTypeAndVersion)!
+        let tokens = project.tokens.map { GenerativeProject.Token(id: $0.tokenId, hash: $0.hash) }
+        let kind = GenerativeProject.Kind(rawValue: type.rawValue)
+        let generativeProjectToBundle = GenerativeProject(contractAddress: project.contractAddress,
+                                                          projectId: project.projectId,
+                                                          tokens: tokens,
+                                                          script: project.script!,
+                                                          kind: kind!,
+                                                          instructions: project.scriptJson?.instructions)
+        
+        let dataToWrite = try! encoder.encode(generativeProjectToBundle)
+        try! dataToWrite.write(to: URL(fileURLWithPath: dir + "/Suggested Items/Suggested.bundle/Generative/\(generativeProjectToBundle.id).json"))
+    }
+}
+
 func generatePreviews() {
     let jsonNames = try! FileManager.default.contentsOfDirectory(atPath: wipPath + "abs/")
     for jsonName in jsonNames {
