@@ -19,7 +19,8 @@ struct ProjectToBundle: Codable {
 let semaphore = DispatchSemaphore(value: 0)
 
 let dir = FileManager.default.currentDirectoryPath
-let wipPath = dir + "/tools/wip/"
+let toolsPath = dir + "/tools/"
+let wipPath = toolsPath + "wip/"
 let selectedPath = wipPath + "select/"
 let selectedSet = Set(try! FileManager.default.contentsOfDirectory(atPath: selectedPath))
 

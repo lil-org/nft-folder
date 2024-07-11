@@ -33,7 +33,7 @@ enum ScriptType: String, Codable, CaseIterable {
     }
     
     var localUrl: URL {
-        return URL(filePath: wipPath + "libs/" + rawValue + ".js")
+        return URL(filePath: toolsPath + "libs/" + rawValue + ".js")
     }
     
     static func fromString(_ string: String) -> ScriptType? {
@@ -77,18 +77,7 @@ enum ScriptType: String, Codable, CaseIterable {
     
 }
 
-func getAllLibs() {
-    for scriptType in ScriptType.allCases {
-        if let origin = scriptType.remoteUrl, let url = URL(string: origin) {
-            let data = try! Data(contentsOf: url)
-            try! data.write(to: scriptType.localUrl)
-        }
-    }
-}
-
 func processAbs() {
-    getAllLibs()
-    
 //    let jsonNames = try! FileManager.default.contentsOfDirectory(atPath: wipPath + "abs/")
 //    for jsonName in jsonNames {
 //        let data = try! Data(contentsOf: URL(filePath: wipPath + "abs/" + jsonName))
