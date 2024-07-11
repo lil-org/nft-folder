@@ -7,15 +7,21 @@ func processAbs() {
     for jsonName in jsonNames {
         let data = try! Data(contentsOf: URL(filePath: wipPath + "abs/" + jsonName))
         let project = try! JSONDecoder().decode(ProjectMetadata.self, from: data)
-        print(project.name)
     }
 }
 
 struct ProjectMetadata: Codable {
+    let id: String
+    
+    let name: String
     let contractAddress: String
     let projectId: String
+    
+    let tokens: [Token]
+    
     let scriptTypeAndVersion: String
-    let scriptTypeAndVersionOverride: String?
+    let dependencyNameAndVersion: String
+    
     let script: String?
     let canvasMode: Bool
     let aspectRatio: Double
@@ -27,28 +33,28 @@ struct ProjectMetadata: Codable {
     let renderComplete: Bool
     let renderDelay: Double
     let renderWithGpu: Bool
-    let artistName: String?
-    let description: String?
-    let id: String
+    
     let invocations: Int
     let maxInvocations: Int
-    let license: String?
-    let tokens: [Token]
+    
     let contract: Contract?
-    let dependencyNameAndVersion: String
-    let generateVideoAssets: Bool
+    
     let scriptCount: Int
     let scriptJson: ScriptJson?
     let scripts: [Script]
-    let name: String
+    let generateVideoAssets: Bool
+    
     let externalAssetDependencyCount: Int
+    
+    let artistName: String?
+    let description: String?
     let creativeCredit: String?
+    let license: String?
     
     enum CodingKeys: String, CodingKey {
         case contractAddress = "contract_address"
         case projectId = "project_id"
         case scriptTypeAndVersion = "script_type_and_version"
-        case scriptTypeAndVersionOverride = "script_type_and_version_override"
         case script
         case canvasMode = "canvas_mode"
         case aspectRatio = "aspect_ratio"
