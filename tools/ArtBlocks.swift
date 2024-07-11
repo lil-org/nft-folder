@@ -2,18 +2,216 @@
 
 import Foundation
 
+enum ScriptType: String, Codable {
+    case js, svg, processing, paper, babylon, p5js100, p5js190, three, twemoji, regl, zdog, tone
+    
+    var remoteUrl: String? {
+        switch self {
+        case .js, .svg:
+            return nil
+        case .processing:
+            return "https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.4.6/processing.min.js"
+        case .paper:
+            return "https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.15/paper-full.min.js"
+        case .babylon:
+            return "https://cdnjs.cloudflare.com/ajax/libs/babylonjs/5.0.0/babylon.js"
+        case .p5js100:
+            return "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"
+        case .p5js190:
+            return "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"
+        case .three:
+            return "https://cdnjs.cloudflare.com/ajax/libs/three.js/r124/three.min.js"
+        case .twemoji:
+            return "https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js"
+        case .regl:
+            return "https://cdnjs.cloudflare.com/ajax/libs/regl/2.1.0/regl.min.js"
+        case .zdog:
+            return "https://unpkg.com/zdog@1/dist/zdog.dist.min.js"
+        case .tone:
+            return "https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.15/Tone.js"
+        }
+    }
+    
+    static func fromString(_ string: String) -> ScriptType? {
+        switch string {
+        case "processing-js@1.4.6":
+            return .processing
+        case "paper@0.12.15":
+            return .paper
+        case "custom@na", "js@n/a", "js@undefined", "js@", "js@na":
+            return .js
+        case "svg@na":
+            return .svg
+        case "babylon@5.0.0":
+            return .babylon
+        case "p5@1.9.0":
+            return .p5js190
+        case "three@0.124.0":
+            return .three
+        case "twemoji@14.0.2":
+            return .twemoji
+        case "p5@1.0.0":
+            return .p5js100
+        case "regl@2.1.0":
+            return .regl
+        case "zdog@1.1.2":
+            return .zdog
+        case "tone@14.8.15":
+            return .tone
+        default:
+            return nil
+        }
+    }
+    
+}
+
 func processAbs() {
     let jsonNames = try! FileManager.default.contentsOfDirectory(atPath: wipPath + "abs/")
-    
-    var types = Set<String>()
-    
     for jsonName in jsonNames {
         let data = try! Data(contentsOf: URL(filePath: wipPath + "abs/" + jsonName))
         let project = try! JSONDecoder().decode(ProjectMetadata.self, from: data)
-        types.insert(project.scriptTypeAndVersion)
+        
+        guard project.externalAssetDependencyCount == 0 &&
+                bundledSuggestedItems.contains(where: { $0.id == project.contractAddress + project.projectId })
+                && project.script != nil else { continue }
+        generateRandomToken(project: project)
+    }
+}
+
+func generateRandomToken(project: ProjectMetadata) {
+    let type = ScriptType.fromString(project.scriptTypeAndVersion)!
+    let html = wipHtml(type: type, project: project, token: project.tokens.randomElement()!)
+    try! html.write(toFile: selectedPath + project.id + ".html", atomically: true, encoding: .utf8)
+}
+
+func wipHtml(type: ScriptType, project: ProjectMetadata, token: Token) -> String {
+    let p5js = "" // TODO: min source
+    let script = project.script!
+    let tokenId = token.tokenId // TODO: or should it be .id? check these
+    
+    let tokenData: String
+    
+    if project.contractAddress == "0x059edd72cd353df5106d2b9cc5ab83a52287ac3a" {
+        tokenData =
+            """
+            let tokenData = {"tokenId": "\(token.id)", "hashes": ["\(token.hash)"]}
+            """
+    } else {
+        tokenData =
+            """
+            let tokenData = {"tokenId": "\(token.id)", "hash": "\(token.hash)"}
+            """
     }
     
-    print(types)
+    let html: String
+    switch type {
+    case .svg:
+        html =
+        """
+        <html>
+        <head>
+          <meta charset="utf-8">
+          <style type="text/css">
+            body {
+              min-height: 100%;
+              margin: 0;
+              padding: 0;
+            }
+            svg {
+              padding: 0;
+              margin: auto;
+              display: block;
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              left: 0;
+              right: 0;
+            }
+          </style>
+        </head>
+        <body></body>
+        <script>\(tokenData)</script>
+        <script>\(script)</script>
+        </html>
+        """
+    case .js:
+        html =
+        """
+        <html>
+        <head>
+          <meta charset="utf-8">
+          <script>\(tokenData)</script>
+          <style type="text/css">
+            body {
+              margin: 0;
+              padding: 0;
+            }
+            canvas {
+              padding: 0;
+              margin: auto;
+              display: block;
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              left: 0;
+              right: 0;
+            }
+          </style>
+        </head>
+        <body>
+          <canvas></canvas>
+          <script>\(script)</script>
+        </body>
+        </html>
+        """
+    case .p5js100:
+        html =
+        """
+        <html>
+        <head>
+          <meta charset="utf-8">
+          <script>\(p5js)</script>
+          <script>\(tokenData)</script>
+          <script>\(script)</script>
+          <style type="text/css">
+            body {
+              margin: 0;
+              padding: 0;
+            }
+            canvas {
+              padding: 0;
+              margin: auto;
+              display: block;
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              left: 0;
+              right: 0;
+            }
+          </style>
+        </head>
+        </html>
+        """
+    case .processing:
+        <#code#>
+    case .paper:
+        <#code#>
+    case .babylon:
+        <#code#>
+    case .p5js190:
+        <#code#>
+    case .three:
+        <#code#>
+    case .twemoji:
+        <#code#>
+    case .regl:
+        <#code#>
+    case .zdog:
+        <#code#>
+    case .tone:
+        <#code#>
+    }
+    return html
 }
 
 struct ProjectMetadata: Codable {
