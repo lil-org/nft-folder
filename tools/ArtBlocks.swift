@@ -77,17 +77,17 @@ enum ScriptType: String, Codable, CaseIterable {
     
 }
 
-func processAbs() {
-//    let jsonNames = try! FileManager.default.contentsOfDirectory(atPath: wipPath + "abs/")
-//    for jsonName in jsonNames {
-//        let data = try! Data(contentsOf: URL(filePath: wipPath + "abs/" + jsonName))
-//        let project = try! JSONDecoder().decode(ProjectMetadata.self, from: data)
-//        
-//        guard project.externalAssetDependencyCount == 0 &&
-//                bundledSuggestedItems.contains(where: { $0.id == project.contractAddress + project.projectId })
-//                && project.script != nil else { continue }
-//        generateRandomToken(project: project)
-//    }
+func generatePreviews() {
+    let jsonNames = try! FileManager.default.contentsOfDirectory(atPath: wipPath + "abs/")
+    for jsonName in jsonNames {
+        let data = try! Data(contentsOf: URL(filePath: wipPath + "abs/" + jsonName))
+        let project = try! JSONDecoder().decode(ProjectMetadata.self, from: data)
+        
+        guard project.externalAssetDependencyCount == 0 &&
+                bundledSuggestedItems.contains(where: { $0.id == project.contractAddress + project.projectId })
+                && project.script != nil else { continue }
+        generateRandomToken(project: project)
+    }
 }
 
 func generateRandomToken(project: ProjectMetadata) {
