@@ -2,7 +2,7 @@
 
 import Foundation
 
-enum ScriptType: String, Codable {
+enum ScriptType: String, Codable, CaseIterable {
     case js, svg, processing, paper, babylon, p5js100, p5js190, three, twemoji, regl, zdog, tone
     
     var remoteUrl: String? {
@@ -30,6 +30,10 @@ enum ScriptType: String, Codable {
         case .tone:
             return "https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.15/Tone.js"
         }
+    }
+    
+    var localUrl: URL {
+        return URL(filePath: wipPath + "libs/" + rawValue + ".js")
     }
     
     static func fromString(_ string: String) -> ScriptType? {
@@ -63,155 +67,44 @@ enum ScriptType: String, Codable {
         }
     }
     
+    var libScript: String {
+        if remoteUrl != nil {
+            return try! String(contentsOf: localUrl)
+        } else {
+            return ""
+        }
+    }
+    
+}
+
+func getAllLibs() {
+    for scriptType in ScriptType.allCases {
+        if let origin = scriptType.remoteUrl, let url = URL(string: origin) {
+            let data = try! Data(contentsOf: url)
+            try! data.write(to: scriptType.localUrl)
+        }
+    }
 }
 
 func processAbs() {
-    let jsonNames = try! FileManager.default.contentsOfDirectory(atPath: wipPath + "abs/")
-    for jsonName in jsonNames {
-        let data = try! Data(contentsOf: URL(filePath: wipPath + "abs/" + jsonName))
-        let project = try! JSONDecoder().decode(ProjectMetadata.self, from: data)
-        
-        guard project.externalAssetDependencyCount == 0 &&
-                bundledSuggestedItems.contains(where: { $0.id == project.contractAddress + project.projectId })
-                && project.script != nil else { continue }
-        generateRandomToken(project: project)
-    }
+    getAllLibs()
+    
+//    let jsonNames = try! FileManager.default.contentsOfDirectory(atPath: wipPath + "abs/")
+//    for jsonName in jsonNames {
+//        let data = try! Data(contentsOf: URL(filePath: wipPath + "abs/" + jsonName))
+//        let project = try! JSONDecoder().decode(ProjectMetadata.self, from: data)
+//        
+//        guard project.externalAssetDependencyCount == 0 &&
+//                bundledSuggestedItems.contains(where: { $0.id == project.contractAddress + project.projectId })
+//                && project.script != nil else { continue }
+//        generateRandomToken(project: project)
+//    }
 }
 
 func generateRandomToken(project: ProjectMetadata) {
     let type = ScriptType.fromString(project.scriptTypeAndVersion)!
     let html = wipHtml(type: type, project: project, token: project.tokens.randomElement()!)
     try! html.write(toFile: selectedPath + project.id + ".html", atomically: true, encoding: .utf8)
-}
-
-func wipHtml(type: ScriptType, project: ProjectMetadata, token: Token) -> String {
-    let p5js = "" // TODO: min source
-    let script = project.script!
-    let tokenId = token.tokenId // TODO: or should it be .id? check these
-    
-    let tokenData: String
-    
-    if project.contractAddress == "0x059edd72cd353df5106d2b9cc5ab83a52287ac3a" {
-        tokenData =
-            """
-            let tokenData = {"tokenId": "\(token.id)", "hashes": ["\(token.hash)"]}
-            """
-    } else {
-        tokenData =
-            """
-            let tokenData = {"tokenId": "\(token.id)", "hash": "\(token.hash)"}
-            """
-    }
-    
-    let html: String
-    switch type {
-    case .svg:
-        html =
-        """
-        <html>
-        <head>
-          <meta charset="utf-8">
-          <style type="text/css">
-            body {
-              min-height: 100%;
-              margin: 0;
-              padding: 0;
-            }
-            svg {
-              padding: 0;
-              margin: auto;
-              display: block;
-              position: absolute;
-              top: 0;
-              bottom: 0;
-              left: 0;
-              right: 0;
-            }
-          </style>
-        </head>
-        <body></body>
-        <script>\(tokenData)</script>
-        <script>\(script)</script>
-        </html>
-        """
-    case .js:
-        html =
-        """
-        <html>
-        <head>
-          <meta charset="utf-8">
-          <script>\(tokenData)</script>
-          <style type="text/css">
-            body {
-              margin: 0;
-              padding: 0;
-            }
-            canvas {
-              padding: 0;
-              margin: auto;
-              display: block;
-              position: absolute;
-              top: 0;
-              bottom: 0;
-              left: 0;
-              right: 0;
-            }
-          </style>
-        </head>
-        <body>
-          <canvas></canvas>
-          <script>\(script)</script>
-        </body>
-        </html>
-        """
-    case .p5js100:
-        html =
-        """
-        <html>
-        <head>
-          <meta charset="utf-8">
-          <script>\(p5js)</script>
-          <script>\(tokenData)</script>
-          <script>\(script)</script>
-          <style type="text/css">
-            body {
-              margin: 0;
-              padding: 0;
-            }
-            canvas {
-              padding: 0;
-              margin: auto;
-              display: block;
-              position: absolute;
-              top: 0;
-              bottom: 0;
-              left: 0;
-              right: 0;
-            }
-          </style>
-        </head>
-        </html>
-        """
-    case .processing:
-        <#code#>
-    case .paper:
-        <#code#>
-    case .babylon:
-        <#code#>
-    case .p5js190:
-        <#code#>
-    case .three:
-        <#code#>
-    case .twemoji:
-        <#code#>
-    case .regl:
-        <#code#>
-    case .zdog:
-        <#code#>
-    case .tone:
-        <#code#>
-    }
-    return html
 }
 
 struct ProjectMetadata: Codable {
@@ -350,13 +243,11 @@ struct ScriptJson: Codable {
 }
 
 struct Token: Codable {
-    let id: String
     let hash: String
     let tokenId: String
     let invocation: Int
     
     enum CodingKeys: String, CodingKey {
-        case id
         case hash
         case tokenId = "token_id"
         case invocation
@@ -447,5 +338,4 @@ func getAllArtBlocks() {
     }
     task.resume()
     semaphore.wait()
-
 }
