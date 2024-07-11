@@ -4,10 +4,16 @@ import Foundation
 
 func processAbs() {
     let jsonNames = try! FileManager.default.contentsOfDirectory(atPath: wipPath + "abs/")
+    
+    var types = Set<String>()
+    
     for jsonName in jsonNames {
         let data = try! Data(contentsOf: URL(filePath: wipPath + "abs/" + jsonName))
         let project = try! JSONDecoder().decode(ProjectMetadata.self, from: data)
+        types.insert(project.scriptTypeAndVersion)
     }
+    
+    print(types)
 }
 
 struct ProjectMetadata: Codable {
@@ -20,7 +26,6 @@ struct ProjectMetadata: Codable {
     let tokens: [Token]
     
     let scriptTypeAndVersion: String
-    let dependencyNameAndVersion: String
     
     let script: String?
     let canvasMode: Bool
@@ -74,7 +79,6 @@ struct ProjectMetadata: Codable {
         case license
         case tokens
         case contract
-        case dependencyNameAndVersion = "dependency_name_and_version"
         case generateVideoAssets = "generate_video_assets"
         case scriptCount = "script_count"
         case scriptJson = "script_json"
