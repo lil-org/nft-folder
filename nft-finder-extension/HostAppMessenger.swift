@@ -9,6 +9,7 @@ struct HostAppMessenger {
     }
     
     static func send(_ message: ExtensionMessage) {
+        if case .didEndObservingDirectory = message { return }
         guard let messageString = message.encodedString else { return }
         if hostIsRunning {
             DistributedNotificationCenter.default().post(name: .fromFinder, object: messageString)
