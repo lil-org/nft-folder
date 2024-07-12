@@ -63,6 +63,7 @@
 		2C63720D2C418060001169E8 /* GenerativeProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C8DE82C3C890B00BC83E9 /* GenerativeProject.swift */; };
 		2C63720E2C418068001169E8 /* RawHtmlGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF35AC2C413AE700388574 /* RawHtmlGenerator.swift */; };
 		2C672CB12BFCEFB500E57B21 /* IpfsUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C672CB02BFCEFB500E57B21 /* IpfsUploader.swift */; };
+		2C84554B2C418C690045DBA0 /* thumbnail.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2C84554A2C418C690045DBA0 /* thumbnail.jpeg */; };
 		2C88D95D2C3872DD00009C25 /* RandomGradientShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88D95C2C3872DD00009C25 /* RandomGradientShape.swift */; };
 		2C8A42EA2B1A272600BE4166 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A42E92B1A272600BE4166 /* Network.swift */; };
 		2C8A4CBF2BF9ECBD00F0E9D9 /* MagicEdenApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A4CBE2BF9ECBD00F0E9D9 /* MagicEdenApi.swift */; };
@@ -227,6 +228,7 @@
 		2C6372092C417FC2001169E8 /* nft-screen-saver-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "nft-screen-saver-Bridging-Header.h"; sourceTree = "<group>"; };
 		2C63720A2C417FC2001169E8 /* ScreenSaverHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSaverHelper.swift; sourceTree = "<group>"; };
 		2C672CB02BFCEFB500E57B21 /* IpfsUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IpfsUploader.swift; sourceTree = "<group>"; };
+		2C84554A2C418C690045DBA0 /* thumbnail.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = thumbnail.jpeg; path = NftScreenSaverView/thumbnail.jpeg; sourceTree = "<group>"; };
 		2C88D95C2C3872DD00009C25 /* RandomGradientShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomGradientShape.swift; sourceTree = "<group>"; };
 		2C8A42E92B1A272600BE4166 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		2C8A4CBE2BF9ECBD00F0E9D9 /* MagicEdenApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicEdenApi.swift; sourceTree = "<group>"; };
@@ -1663,6 +1665,7 @@
 			isa = PBXGroup;
 			children = (
 				2C63720A2C417FC2001169E8 /* ScreenSaverHelper.swift */,
+				2C84554A2C418C690045DBA0 /* thumbnail.jpeg */,
 				2CB5A6A42C41863A00A24EC3 /* screen-saver-webview */,
 			);
 			path = "nft-screen-saver";
@@ -1928,6 +1931,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C84554B2C418C690045DBA0 /* thumbnail.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

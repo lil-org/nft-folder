@@ -53,7 +53,6 @@ static NSString *const kScreenSaverName = @"NftScreenSaverView";
         [self setAutoresizesSubviews:YES];
         _isPreview = isPreview;
         if (_isPreview) {
-            // TODO: better preview
             NSBundle *bundle = [NSBundle bundleForClass:self.class];
             NSImageView *logoView = [NSImageView imageViewWithImage:[bundle imageForResource:@"thumbnail"]];
             logoView.frame = self.bounds;
