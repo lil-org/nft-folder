@@ -17,9 +17,9 @@ struct RawHtmlGenerator {
         }
     }
     
-    static func createHtml(project: GenerativeProject, token: GenerativeProject.Token) -> String {
+    static func createHtml(project: GenerativeProject, token: GenerativeProject.Token, forceLibScript: String? = nil) -> String {
         let script = project.script
-        let libScript = libScript(project.kind)
+        let libScript = forceLibScript ?? libScript(project.kind)
         
         let tokenData: String
         if project.contractAddress == "0x059edd72cd353df5106d2b9cc5ab83a52287ac3a" {
