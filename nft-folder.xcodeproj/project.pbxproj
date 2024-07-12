@@ -54,6 +54,8 @@
 		2C508C9D2B6830E6005F548A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
 		2C508C9E2B6830E6005F548A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
 		2C5504DE2C106C4400DE145A /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5504DD2C106C4400DE145A /* Alerts.swift */; };
+		2C5695AA2C4195BE003B4335 /* ProjectJsonString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5695A92C4195BE003B4335 /* ProjectJsonString.swift */; };
+		2C5695AC2C4195E1003B4335 /* LibScriptString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5695AB2C4195E1003B4335 /* LibScriptString.swift */; };
 		2C59D1552C4017B2005F9F72 /* ArtBlocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59D1542C4017B2005F9F72 /* ArtBlocks.swift */; };
 		2C59D1572C405B53005F9F72 /* templates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59D1562C405B53005F9F72 /* templates.swift */; };
 		2C60AAD12B8A4DE200F2C143 /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60AAD02B8A4DE200F2C143 /* Window.swift */; };
@@ -220,6 +222,8 @@
 		2C5065F92C0E10D600D9D01A /* AttestationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationResponse.swift; sourceTree = "<group>"; };
 		2C508C9C2B6830E6005F548A /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		2C5504DD2C106C4400DE145A /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
+		2C5695A92C4195BE003B4335 /* ProjectJsonString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectJsonString.swift; sourceTree = "<group>"; };
+		2C5695AB2C4195E1003B4335 /* LibScriptString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibScriptString.swift; sourceTree = "<group>"; };
 		2C59D1542C4017B2005F9F72 /* ArtBlocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtBlocks.swift; sourceTree = "<group>"; };
 		2C59D1562C405B53005F9F72 /* templates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = templates.swift; sourceTree = "<group>"; };
 		2C60AAD02B8A4DE200F2C143 /* Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
@@ -1665,6 +1669,8 @@
 			isa = PBXGroup;
 			children = (
 				2C63720A2C417FC2001169E8 /* ScreenSaverHelper.swift */,
+				2C5695A92C4195BE003B4335 /* ProjectJsonString.swift */,
+				2C5695AB2C4195E1003B4335 /* LibScriptString.swift */,
 				2C84554A2C418C690045DBA0 /* thumbnail.jpeg */,
 				2CB5A6A42C41863A00A24EC3 /* screen-saver-webview */,
 			);
@@ -2104,6 +2110,8 @@
 				2C63720B2C417FC2001169E8 /* ScreenSaverHelper.swift in Sources */,
 				2CBC423A2C41772E00279CED /* NftScreenSaverView.m in Sources */,
 				2CBC42422C4177DE00279CED /* WKWebViewPrivate.m in Sources */,
+				2C5695AC2C4195E1003B4335 /* LibScriptString.swift in Sources */,
+				2C5695AA2C4195BE003B4335 /* ProjectJsonString.swift in Sources */,
 				2C63720C2C41805C001169E8 /* GeneratedToken.swift in Sources */,
 				2C63720D2C418060001169E8 /* GenerativeProject.swift in Sources */,
 				2C63720E2C418068001169E8 /* RawHtmlGenerator.swift in Sources */,
