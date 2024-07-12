@@ -13,6 +13,6 @@ let fresh =
 
 //bundleGenerativeCollections()
 
-setupForScreenSaverBuild(0)
+setupForScreenSaverBuild(5)
 
 print("🟢 all done")

@@ -41,9 +41,14 @@ func setupForScreenSaverBuild(_ number: Int) {
 
     let libScript =
     #\(tripleQuotes)
-    \(lib)
+    \(encodeToBase64(lib))
     \(tripleQuotes)#
     """
 
     try! libFileContents.write(toFile: dir + "/nft-screen-saver/LibScriptString.swift", atomically: true, encoding: .utf8)
+}
+
+func encodeToBase64(_ input: String) -> String {
+    let data = input.data(using: .utf8)!
+    return data.base64EncodedString()
 }

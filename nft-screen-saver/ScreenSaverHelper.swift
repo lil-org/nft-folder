@@ -5,11 +5,19 @@ import Foundation
 @objc class ScreenSaverHelper: NSObject {
     
     @objc static func generateHtml() -> String {
+        let forceLibScript = decodeFromBase64(libScript)
         guard let data = projectJsonString.data(using: .utf8),
               let project = try? JSONDecoder().decode(GenerativeProject.self, from: data),
               let token = project.tokens.randomElement() else { return randomColorHtml }
-        let html = RawHtmlGenerator.createHtml(project: project, token: token, forceLibScript: libScript)
+        let html = RawHtmlGenerator.createHtml(project: project, token: token, forceLibScript: forceLibScript)
         return html
+    }
+    
+    private static func decodeFromBase64(_ input: String) -> String {
+        guard let data = Data(base64Encoded: input) else {
+            return ""
+        }
+        return String(data: data, encoding: .utf8) ?? ""
     }
     
 }
