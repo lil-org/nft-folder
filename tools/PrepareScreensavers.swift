@@ -14,13 +14,26 @@ func setupForScreenSaverBuild(_ number: Int) {
     NSPasteboard.general.setString(item.name, forType: .string)
     
     let lib = ScriptType(rawValue: generativeProject.kind.rawValue)?.libScript
-    let script = generativeProject.script
+    let projectJsonString = String(data: data, encoding: .utf8)!
     let imageData = try! Data(contentsOf: URL(filePath: toolsPath + "previews/\(item.id).heic"))
     
     let targetImagePath = dir + "/nft-screen-saver/NftScreenSaverView/thumbnail.heic"
     try! FileManager.default.removeItem(atPath: targetImagePath)
     try! imageData.write(to: URL(filePath: targetImagePath))
     
-    // TODO: put script in there
+    let tripleQuotes = "\"\"\""
+    
+    let projectFileContents =
+    """
+    import Foundation
+
+    let projectJsonString =
+    #\(tripleQuotes)
+    \(projectJsonString)
+    \(tripleQuotes)#
+    """
+
+    try! projectFileContents.write(toFile: dir + "/nft-screen-saver/ProjectJsonString.swift", atomically: true, encoding: .utf8)
+    
     // TODO: put library in there
 }
