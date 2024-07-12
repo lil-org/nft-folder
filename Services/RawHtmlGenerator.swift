@@ -10,7 +10,7 @@ struct RawHtmlGenerator {
         if let libScript = libScriptsDict[kind.rawValue] {
             return libScript
         } else {
-            guard let url = SuggestedItemsService.bundle.url(forResource: kind.rawValue, withExtension: "js"),
+            guard let url = Bundle.main.url(forResource: kind.rawValue, withExtension: "js"),
                   let libScript = try? String(contentsOf: url) else { return "" }
             libScriptsDict[kind.rawValue] = libScript
             return libScript
