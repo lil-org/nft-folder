@@ -2462,6 +2462,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "nft-screen-saver/screen-saver-webview/nft-screen-saver-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "nft_screen_saver-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = saver;
@@ -2486,6 +2487,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "nft-screen-saver/screen-saver-webview/nft-screen-saver-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "nft_screen_saver-Swift.h";
 				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = saver;
 			};
