@@ -1647,15 +1647,23 @@
 			name = new;
 			sourceTree = "<group>";
 		};
-		2CBC42362C41772E00279CED /* nft-screen-saver */ = {
+		2CB5A6A42C41863A00A24EC3 /* screen-saver-webview */ = {
 			isa = PBXGroup;
 			children = (
 				2CBC42372C41772E00279CED /* NftScreenSaverView.h */,
 				2CBC42392C41772E00279CED /* NftScreenSaverView.m */,
 				2CBC423E2C41779B00279CED /* WKWebViewPrivate.h */,
 				2CBC42412C4177DE00279CED /* WKWebViewPrivate.m */,
-				2C63720A2C417FC2001169E8 /* ScreenSaverHelper.swift */,
 				2C6372092C417FC2001169E8 /* nft-screen-saver-Bridging-Header.h */,
+			);
+			path = "screen-saver-webview";
+			sourceTree = "<group>";
+		};
+		2CBC42362C41772E00279CED /* nft-screen-saver */ = {
+			isa = PBXGroup;
+			children = (
+				2C63720A2C417FC2001169E8 /* ScreenSaverHelper.swift */,
+				2CB5A6A42C41863A00A24EC3 /* screen-saver-webview */,
 			);
 			path = "nft-screen-saver";
 			sourceTree = "<group>";
@@ -1881,9 +1889,9 @@
 			targets = (
 				2CA4CF502B07F75E00CC75F4 /* nft folder */,
 				2CA34B612B08C01300DAB623 /* nft-finder-extension */,
+				2CBC42342C41772E00279CED /* nft-screen-saver */,
 				2C622BB52BF3C1EA0003B932 /* translate */,
 				2C4659982C308F86008CF97F /* tools */,
-				2CBC42342C41772E00279CED /* nft-screen-saver */,
 			);
 		};
 /* End PBXProject section */
@@ -2441,7 +2449,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-screen-saver";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "nft-screen-saver/nft-screen-saver-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "nft-screen-saver/screen-saver-webview/nft-screen-saver-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = saver;
@@ -2465,7 +2473,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-screen-saver";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "nft-screen-saver/nft-screen-saver-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "nft-screen-saver/screen-saver-webview/nft-screen-saver-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = saver;
 			};
