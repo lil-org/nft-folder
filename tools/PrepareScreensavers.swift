@@ -15,9 +15,12 @@ func setupForScreenSaverBuild(_ number: Int) {
     
     let lib = ScriptType(rawValue: generativeProject.kind.rawValue)?.libScript
     let script = generativeProject.script
-    let imageData = try! Data(contentsOf: URL(filePath: wipPath + "/previews/\(item.id)"))
+    let imageData = try! Data(contentsOf: URL(filePath: toolsPath + "previews/\(item.id).heic"))
+    
+    let targetImagePath = dir + "/nft-screen-saver/NftScreenSaverView/thumbnail.heic"
+    try! FileManager.default.removeItem(atPath: targetImagePath)
+    try! imageData.write(to: URL(filePath: targetImagePath))
     
     // TODO: put script in there
     // TODO: put library in there
-    // TODO: put thumbnail image in there
 }
