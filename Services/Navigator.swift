@@ -31,6 +31,7 @@ class Navigator: NSObject {
         window.contentView?.wantsLayer = true
         window.contentView?.layer?.cornerRadius = 10
         window.contentView?.layer?.masksToBounds = true
+        window.contentView?.layer?.backgroundColor = .black
         
         window.isReleasedWhenClosed = false
         window.contentView = NSHostingView(rootView: contentView.frame(minWidth: 251, minHeight: 130))
