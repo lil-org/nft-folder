@@ -28,7 +28,6 @@ struct Strings {
     static let somethingWentWrong = loc("Something went wrong")
     static let maxFileSize50mb = loc("Max file size 50 MB")
     static let downloadGlb = loc("Download .glb files")
-    static let quit = loc("Quit")
     static let hideFromHere = loc("Hide")
     static let showInMenuBar = loc("Show in menu bar")
     static let pushCustomFolders = loc("Save Folders Onchain")

@@ -43,11 +43,6 @@ struct WalletsListView: View {
                         }) {
                             Images.extend
                         }.keyboardShortcut(.return, modifiers: []).buttonStyle(LinkButtonStyle())
-                        Button(action: {
-                            warnBeforeQuitting()
-                        }) {
-                            Images.quit
-                        }.keyboardShortcut("q", modifiers: [.command]).buttonStyle(BorderlessButtonStyle())
                         Spacer()
                         
                         if isDownloading {
@@ -348,22 +343,6 @@ struct WalletsListView: View {
     private func restoreHiddenItems() {
         suggestedItems = SuggestedItemsService.restoredSuggestedItems(usersWallets: wallets)
         NotificationCenter.default.post(name: .updateAnotherVisibleSuggestions, object: uuid)
-    }
-    
-    private func warnBeforeQuitting() {
-        let alert = NSAlert()
-        alert.messageText = Strings.quit + "?"
-        alert.alertStyle = .warning
-        alert.addButton(withTitle: Strings.ok)
-        alert.addButton(withTitle: Strings.cancel)
-        alert.buttons.last?.keyEquivalent = "\u{1b}"
-        let response = alert.runModal()
-        switch response {
-        case .alertFirstButtonReturn:
-            NSApp.terminate(nil)
-        default:
-            break
-        }
     }
     
     private func suggestedItemContextMenu(item: SuggestedItem) -> some View {
