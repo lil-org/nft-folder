@@ -18,7 +18,7 @@ class LocalHtmlWindow: NSWindow {
         titleBarView?.layer?.backgroundColor = .black
         
         if NSScreen.screens.count <= 1 {
-            mouseMoveEventMonitor = NSEvent.addLocalMonitorForEvents(matching: [.mouseMoved]) { [weak self] event in
+            mouseMoveEventMonitor = NSEvent.addLocalMonitorForEvents(matching: [.mouseMoved, .leftMouseUp, .rightMouseUp, .mouseEntered]) { [weak self] event in
                 self?.resetCursorHideTimer()
                 return event
             }
