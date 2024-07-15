@@ -37,6 +37,7 @@ struct Strings {
     static let eraseAllContent = loc("Erase All Content")
     static let experimetalOfflineGeneration = loc("Offline generation is a new experimental feature")
     static let letUsKnowOfIssues = loc("Let us know of any issues.")
+    static let setScreenSaver = loc("Set Screen Saver")
     
     static let zora = "Zora"
     static let opensea = "OpenSea"

@@ -123,8 +123,19 @@ struct LocalHtmlView: View {
         }
     }
     
+    private func getScreensaver() {
+        if let screensaver = currentToken.screensaver {
+            NSWorkspace.shared.open(screensaver)
+        }
+    }
+    
     private func infoPopoverView() -> some View {
         VStack(alignment: .leading, spacing: 10) {
+            if let screensaver = currentToken.screensaver {
+                Button(Strings.setScreenSaver, action: getScreensaver).buttonStyle(LinkButtonStyle()).fontWeight(Font.Weight.semibold)
+                Divider()
+            }
+            
             Button(Strings.viewOnOpensea, action: viewOnWeb).buttonStyle(LinkButtonStyle()).fontWeight(Font.Weight.semibold)
             
             if let instructions = currentToken.instructions {
