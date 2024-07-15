@@ -10,7 +10,7 @@ struct LocalHtmlView: View {
     @State private var currentToken = TokenGenerator.generateRandomToken(specificCollectionId: nil, notTokenId: nil) ?? GeneratedToken(fullCollectionId: "", id: "", html: "", displayName: "", url: nil, instructions: nil)
     @State private var history = [GeneratedToken]()
     @State private var currentIndex = 0
-    @State private var showingInfoAlert = false
+    @State private var showingInfoPopover = false
     @State private var isFullscreen = false
     
     init(windowNumber: Int) {
@@ -52,23 +52,13 @@ struct LocalHtmlView: View {
                     Button(action: changeCollection) {
                         Images.changeCollection.foregroundStyle(toolbarButtonsColor)
                     }.buttonStyle(LinkButtonStyle()).hidden().keyboardShortcut(.return, modifiers: [])
-                    Button(action: showInfo) {
+                    Button(action: { showingInfoPopover.toggle() }) {
                         Images.info.foregroundStyle(toolbarButtonsColor)
-                    }.buttonStyle(LinkButtonStyle())
-                    Button(action: viewOnWeb) {
-                        Images.globe.foregroundStyle(toolbarButtonsColor)
-                    }.buttonStyle(LinkButtonStyle())
+                    }.buttonStyle(LinkButtonStyle()).popover(isPresented: $showingInfoPopover, arrowEdge: .bottom) {
+                        infoPopoverView()
+                    }
                 }
             }.toolbar(!isFullscreen ? .visible : .hidden)
-            .alert(Strings.experimetalOfflineGeneration, isPresented: $showingInfoAlert) {
-                Button(Strings.ok) { }
-            } message: {
-                if let instructions = currentToken.instructions {
-                    Text(Strings.letUsKnowOfIssues + "\n\n" + instructions)
-                } else {
-                    Text(Strings.letUsKnowOfIssues)
-                }
-            }
             .onReceive(NotificationCenter.default.publisher(for: NSWindow.didEnterFullScreenNotification)) { notification in
                 if (notification.object as? NSWindow)?.windowNumber == windowNumber {
                     NSCursor.setHiddenUntilMouseMoves(true)
@@ -89,10 +79,6 @@ struct LocalHtmlView: View {
                 NSCursor.setHiddenUntilMouseMoves(true)
             }
         }
-    }
-    
-    private func showInfo() {
-        showingInfoAlert = true
     }
     
     private func viewOnWeb() {
@@ -137,4 +123,20 @@ struct LocalHtmlView: View {
         }
     }
     
+    private func infoPopoverView() -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Button(Strings.viewOnOpensea, action: viewOnWeb).buttonStyle(LinkButtonStyle()).fontWeight(Font.Weight.semibold)
+            
+            if let instructions = currentToken.instructions {
+                Divider()
+                Text(instructions).font(.body)
+            }
+            
+            Divider()
+            
+            Text(Strings.experimetalOfflineGeneration).font(.headline)
+            Text(Strings.letUsKnowOfIssues).font(.footnote)
+        }
+        .padding().frame(width: 230)
+    }
 }
