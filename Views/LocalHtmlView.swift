@@ -7,7 +7,7 @@ struct LocalHtmlView: View {
     
     private var windowNumber = 0
     
-    @State private var currentToken = TokenGenerator.generateRandomToken(specificCollectionId: nil, notTokenId: nil) ?? GeneratedToken(fullCollectionId: "", id: "", html: "", displayName: "", url: nil, instructions: nil)
+    @State private var currentToken = TokenGenerator.generateRandomToken(specificCollectionId: nil, notTokenId: nil) ?? GeneratedToken.empty
     @State private var history = [GeneratedToken]()
     @State private var currentIndex = 0
     @State private var showingInfoPopover = false

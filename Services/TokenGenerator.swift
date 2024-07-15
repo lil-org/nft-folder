@@ -52,7 +52,13 @@ struct TokenGenerator {
         }
         
         let webURL = NftGallery.opensea.url(network: .mainnet, chain: .ethereum, collectionAddress: project.contractAddress, tokenId: randomToken.id)
-        let token = GeneratedToken(fullCollectionId: project.id, id: randomToken.id, html: html, displayName: name, url: webURL, instructions: project.instructions)
+        let token = GeneratedToken(fullCollectionId: project.id,
+                                   id: randomToken.id,
+                                   html: html,
+                                   displayName: name,
+                                   url: webURL,
+                                   instructions: project.instructions,
+                                   screensaver: project.screensaverUrl)
         return token
     }
     

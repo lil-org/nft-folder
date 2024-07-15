@@ -9,4 +9,7 @@ struct GeneratedToken {
     let displayName: String
     let url: URL?
     let instructions: String?
+    let screensaver: URL?
+    
+    static let empty = GeneratedToken(fullCollectionId: "", id: "", html: "", displayName: "", url: nil, instructions: nil, screensaver: nil)
 }
