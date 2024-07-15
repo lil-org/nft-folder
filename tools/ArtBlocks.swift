@@ -77,6 +77,21 @@ enum ScriptType: String, Codable, CaseIterable {
     
 }
 
+func updateBundledGenerativeProjects() {
+    let jsonNames = try! FileManager.default.contentsOfDirectory(atPath: dir + "/Suggested Items/Suggested.bundle/Generative/").sorted()
+
+    for jsonName in jsonNames {
+        let url = URL(filePath: dir + "/Suggested Items/Suggested.bundle/Generative/" + jsonName)
+        let data = try! Data(contentsOf: url)
+        try! FileManager.default.removeItem(at: url)
+        
+        var generativeProject = try! JSONDecoder().decode(GenerativeProject.self, from: data)
+        let item = bundledSuggestedItems.first(where: { $0.id == generativeProject.id })!
+        let updatedData = try! encoder.encode(generativeProject)
+        try! updatedData.write(to: url)
+    }
+}
+
 func bundleGenerativeCollections() {
     let names = try! FileManager.default.contentsOfDirectory(atPath: wipPath + "select/")
     for name in names where !name.hasPrefix(".") {
@@ -91,7 +106,8 @@ func bundleGenerativeCollections() {
                                                           tokens: tokens,
                                                           script: project.script!,
                                                           kind: kind!,
-                                                          instructions: project.scriptJson?.instructions)
+                                                          instructions: project.scriptJson?.instructions,
+                                                          screensaverFileName: nil)
         
         let dataToWrite = try! encoder.encode(generativeProjectToBundle)
         try! dataToWrite.write(to: URL(fileURLWithPath: dir + "/Suggested Items/Suggested.bundle/Generative/\(generativeProjectToBundle.id).json"))

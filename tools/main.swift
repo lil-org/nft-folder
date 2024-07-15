@@ -12,7 +12,7 @@ let fresh =
 //removeBundledItem(name: "")
 
 //bundleGenerativeCollections()
-
-setupForScreenSaverBuild(5)
+//setupForScreenSaverBuild(5)
+//updateBundledGenerativeProjects()
 
 print("🟢 all done")
