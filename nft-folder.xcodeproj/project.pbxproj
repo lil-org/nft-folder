@@ -68,6 +68,7 @@
 		2C88D95D2C3872DD00009C25 /* RandomGradientShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88D95C2C3872DD00009C25 /* RandomGradientShape.swift */; };
 		2C8A42EA2B1A272600BE4166 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A42E92B1A272600BE4166 /* Network.swift */; };
 		2C8A4CBF2BF9ECBD00F0E9D9 /* MagicEdenApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A4CBE2BF9ECBD00F0E9D9 /* MagicEdenApi.swift */; };
+		2C8ADAA82C46F3FC008BC560 /* PlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8ADAA72C46F3FC008BC560 /* PlayerModel.swift */; };
 		2C8C8DE92C3C890B00BC83E9 /* GenerativeProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C8DE82C3C890B00BC83E9 /* GenerativeProject.swift */; };
 		2C8E246F2C24A6E200C13536 /* FirstMouseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8E246E2C24A6E200C13536 /* FirstMouseView.swift */; };
 		2C8EDD032C0CFE3F003CB35D /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8EDD022C0CFE3F003CB35D /* Snapshot.swift */; };
@@ -236,6 +237,7 @@
 		2C88D95C2C3872DD00009C25 /* RandomGradientShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomGradientShape.swift; sourceTree = "<group>"; };
 		2C8A42E92B1A272600BE4166 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		2C8A4CBE2BF9ECBD00F0E9D9 /* MagicEdenApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicEdenApi.swift; sourceTree = "<group>"; };
+		2C8ADAA72C46F3FC008BC560 /* PlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerModel.swift; sourceTree = "<group>"; };
 		2C8C8DE82C3C890B00BC83E9 /* GenerativeProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerativeProject.swift; sourceTree = "<group>"; };
 		2C8E246E2C24A6E200C13536 /* FirstMouseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstMouseView.swift; sourceTree = "<group>"; };
 		2C8EDD022C0CFE3F003CB35D /* Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
@@ -812,6 +814,16 @@
 				2CDDE0D22C1B1EAC002DB025 /* Language.swift */,
 			);
 			path = helpers;
+			sourceTree = "<group>";
+		};
+		2C8ADAA62C46F3D5008BC560 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				2C3B77602C3D6F82000A9B52 /* LocalHtmlWindow.swift */,
+				2C3B775E2C3D6DEC000A9B52 /* LocalHtmlView.swift */,
+				2C8ADAA72C46F3FC008BC560 /* PlayerModel.swift */,
+			);
+			path = Player;
 			sourceTree = "<group>";
 		};
 		2C8FD03C2BF4B33C00B3D327 /* ar-SA */ = {
@@ -1484,7 +1496,6 @@
 		2C91131C2B08FCDF00A8EE80 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2C3B775E2C3D6DEC000A9B52 /* LocalHtmlView.swift */,
 				2C3B77622C3D773B000A9B52 /* DesktopWebView.swift */,
 				2CCFED972B08246800D98A2E /* WalletsListView.swift */,
 				2C1B60C52B7E1145009949C2 /* PreferencesView.swift */,
@@ -1499,7 +1510,6 @@
 			children = (
 				2C5504DD2C106C4400DE145A /* Alerts.swift */,
 				2C424F452B9775E6007868F8 /* RightClickActivatingWindow.swift */,
-				2C3B77602C3D6F82000A9B52 /* LocalHtmlWindow.swift */,
 				2C60AAD02B8A4DE200F2C143 /* Window.swift */,
 				2C9EF2E32B8A612F00297B32 /* StatusBarItem.swift */,
 				2CE0B5E22B8686CE00B5BF4A /* FooterLink.swift */,
@@ -1569,6 +1579,7 @@
 				2CA4CF532B07F75F00CC75F4 /* nft-folder */,
 				2CF4C49C2B7FB0AC000AB4A6 /* Downloads */,
 				2C4D84102B1886D600952BF5 /* Models */,
+				2C8ADAA62C46F3D5008BC560 /* Player */,
 				2C4D840F2B18869400952BF5 /* Services */,
 				2C9113262B093EE800A8EE80 /* Helpers */,
 				2C91131C2B08FCDF00A8EE80 /* Views */,
@@ -2093,6 +2104,7 @@
 				2C508C9D2B6830E6005F548A /* Notification.swift in Sources */,
 				2C086E872C2F3C3600D4268D /* BundledTokens.swift in Sources */,
 				2C8E246F2C24A6E200C13536 /* FirstMouseView.swift in Sources */,
+				2C8ADAA82C46F3FC008BC560 /* PlayerModel.swift in Sources */,
 				2C1B60C42B7D41D1009949C2 /* HostAppImages.swift in Sources */,
 				2CB308E72C30AD0000D914A5 /* NSImage.swift in Sources */,
 				2CC943032B825907003219C7 /* ZoraRequest.swift in Sources */,

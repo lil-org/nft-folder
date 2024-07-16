@@ -18,7 +18,7 @@ class Navigator: NSObject {
             contentRect: CGRect(origin: .zero, size: CGSize(width: 420, height: 420)),
             styleMask: [.closable, .fullSizeContentView, .titled, .resizable, .miniaturizable],
             backing: .buffered, defer: false)
-        let contentView = LocalHtmlView(windowNumber: window.windowNumber).background(.black)
+        
         window.titleVisibility = .hidden
         window.titlebarAppearsTransparent = true
         window.isMovableByWindowBackground = true
@@ -34,7 +34,6 @@ class Navigator: NSObject {
         window.contentView?.layer?.backgroundColor = .black
         
         window.isReleasedWhenClosed = false
-        window.contentView = NSHostingView(rootView: contentView.frame(minWidth: 251, minHeight: 130))
         NSApp.activate(ignoringOtherApps: true)
         window.makeKeyAndOrderFront(nil)
         window.makeMain()

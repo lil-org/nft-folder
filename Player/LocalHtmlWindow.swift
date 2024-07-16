@@ -1,9 +1,11 @@
 // ∅ nft-folder 2024
 
 import Cocoa
+import SwiftUI
 
 class LocalHtmlWindow: NSWindow {
     
+    private var playerModel = PlayerModel()
     private var cursorHideTimer: Timer?
     private var mouseMoveEventMonitor: Any?
 
@@ -13,6 +15,9 @@ class LocalHtmlWindow: NSWindow {
     
     override init(contentRect: NSRect, styleMask style: NSWindow.StyleMask, backing backingStoreType: NSWindow.BackingStoreType, defer flag: Bool) {
         super.init(contentRect: contentRect, styleMask: style, backing: backingStoreType, defer: flag)
+        
+        let htmlView = LocalHtmlView(playerModel: playerModel, windowNumber: windowNumber).background(.black)
+        self.contentView = NSHostingView(rootView: htmlView.frame(minWidth: 251, minHeight: 130))
         
         if NSScreen.screens.count <= 1 {
             mouseMoveEventMonitor = NSEvent.addLocalMonitorForEvents(matching: [.mouseMoved, .leftMouseUp, .rightMouseUp, .mouseEntered]) { [weak self] event in
@@ -33,8 +38,6 @@ class LocalHtmlWindow: NSWindow {
         // TODO: use actual title
         // TODO: add extra constraints to prevent overlapping with buttons
         
-        guard false else { return } // TODO: enable title bar setup when interactions are working
-        
         let titleLabel = NSTextField(labelWithString: "")
         titleLabel.font = NSFont.preferredFont(forTextStyle: .callout)
         titleLabel.textColor = .gray
@@ -49,6 +52,7 @@ class LocalHtmlWindow: NSWindow {
         ])
         
         let infoButton = NSButton(image: Images.infoTitleBar, target: self, action: #selector(infoButtonClicked))
+        infoButton.keyEquivalent = "i"
         infoButton.isBordered = false
         infoButton.contentTintColor = .gray
         titleBarView.addSubview(infoButton)
@@ -59,6 +63,7 @@ class LocalHtmlWindow: NSWindow {
         ])
         
         let leftButton = NSButton(image: Images.backTitleBar, target: self, action: #selector(backButtonClicked))
+        leftButton.keyEquivalent = String(Character(UnicodeScalar(NSLeftArrowFunctionKey)!))
         leftButton.isBordered = false
         leftButton.contentTintColor = .gray
         titleBarView.addSubview(leftButton)
@@ -69,6 +74,7 @@ class LocalHtmlWindow: NSWindow {
         ])
         
         let rightButton = NSButton(image: Images.forwardTitleBar, target: self, action: #selector(forwardButtonClicked))
+        rightButton.keyEquivalent = String(Character(UnicodeScalar(NSRightArrowFunctionKey)!))
         rightButton.isBordered = false
         rightButton.contentTintColor = .gray
         titleBarView.addSubview(rightButton)
@@ -79,6 +85,7 @@ class LocalHtmlWindow: NSWindow {
         ])
         
         let nextCollectionButton = NSButton(image: Images.nextCollectionTitleBar, target: self, action: #selector(nextCollectionButtonClicked))
+        nextCollectionButton.keyEquivalent = "\r" // TODO: handle space as well
         nextCollectionButton.isBordered = false
         nextCollectionButton.contentTintColor = .gray
         titleBarView.addSubview(nextCollectionButton)
@@ -99,17 +106,17 @@ class LocalHtmlWindow: NSWindow {
             }
         }
     }
-
+    
     @objc private func nextCollectionButtonClicked() {
-        // TODO: implement
+        playerModel.changeCollection()
     }
     
     @objc private func forwardButtonClicked() {
-        // TODO: implement
+        playerModel.goForward()
     }
     
     @objc private func backButtonClicked() {
-        // TODO: implement
+        playerModel.goBack()
     }
     
     @objc private func infoButtonClicked() {
