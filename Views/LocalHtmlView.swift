@@ -131,7 +131,7 @@ struct LocalHtmlView: View {
     
     private func infoPopoverView() -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            if let screensaver = currentToken.screensaver {
+            if currentToken.screensaver != nil {
                 Button(Strings.setScreenSaver, action: getScreensaver).buttonStyle(LinkButtonStyle()).fontWeight(Font.Weight.semibold)
                 Divider()
             }
