@@ -4,6 +4,8 @@ import Cocoa
 
 class LocalHtmlWindow: NSWindow {
     
+    private weak var infoButton: NSButton?
+    
     private var cursorHideTimer: Timer?
     private var mouseMoveEventMonitor: Any?
 
@@ -34,6 +36,36 @@ class LocalHtmlWindow: NSWindow {
                 }
             }
         }
+    }
+    
+    override func toggleFullScreen(_ sender: Any?) {
+        super.toggleFullScreen(sender)
+        if styleMask.contains(.fullScreen) {
+            if let infoButton = infoButton {
+                infoButton.isHidden = true // TODO: show it
+            } else {
+                let infoButton = NSButton(image: Images.infoTitleBar, target: self, action: #selector(infoButtonClicked))
+                infoButton.isHidden = true // TODO: show it
+                infoButton.bezelStyle = .circular
+                infoButton.isBordered = false
+                infoButton.contentTintColor = .gray
+                standardWindowButton(.closeButton)?.superview?.addSubview(infoButton)
+                infoButton.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                    infoButton.centerYAnchor.constraint(equalTo: (standardWindowButton(.closeButton)?.centerYAnchor)!),
+                    infoButton.trailingAnchor.constraint(equalTo: (standardWindowButton(.closeButton)?.superview?.trailingAnchor)!, constant: -8)
+                ])
+                self.infoButton = infoButton
+            }
+        } else {
+            if let infoButton = infoButton {
+                infoButton.isHidden = true
+            }
+        }
+    }
+
+    @objc func infoButtonClicked() {
+        // TODO: show info popup
     }
     
     deinit {

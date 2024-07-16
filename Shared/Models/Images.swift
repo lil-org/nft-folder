@@ -9,6 +9,7 @@ struct Images {
     static var zora: NSImage { named("zora") }
     static var mintfun: NSImage { named("mintfun") }
     static var opensea: NSImage { named("opensea") }
+    static var infoTitleBar: NSImage { systemName("info.circle") }
     
     private static func named(_ name: String) -> NSImage {
         return NSImage(named: name)!
