@@ -10,6 +10,9 @@ struct Images {
     static var mintfun: NSImage { named("mintfun") }
     static var opensea: NSImage { named("opensea") }
     static var infoTitleBar: NSImage { systemName("info.circle") }
+    static var backTitleBar: NSImage { systemName("chevron.backward") }
+    static var forwardTitleBar: NSImage { systemName("chevron.forward") }
+    static var nextCollectionTitleBar: NSImage { systemName("goforward") }
     
     private static func named(_ name: String) -> NSImage {
         return NSImage(named: name)!

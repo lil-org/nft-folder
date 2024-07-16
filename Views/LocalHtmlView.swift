@@ -58,7 +58,7 @@ struct LocalHtmlView: View {
                         infoPopoverView()
                     }
                 }
-            }.toolbar(!isFullscreen ? .visible : .hidden)
+            }.toolbar(!isFullscreen ? .visible : .hidden) // TODO: hide it when title bar version is ready
             .onReceive(NotificationCenter.default.publisher(for: NSWindow.didEnterFullScreenNotification)) { notification in
                 if (notification.object as? NSWindow)?.windowNumber == windowNumber {
                     NSCursor.setHiddenUntilMouseMoves(true)
