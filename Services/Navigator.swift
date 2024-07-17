@@ -27,12 +27,6 @@ class Navigator: NSObject {
         window.hasShadow = true
         window.isRestorable = true
         window.setFrameAutosaveName(Consts.playerFrameAutosaveName)
-        
-        window.contentView?.wantsLayer = true
-        window.contentView?.layer?.cornerRadius = 10
-        window.contentView?.layer?.masksToBounds = true
-        window.contentView?.layer?.backgroundColor = .black
-        
         window.isReleasedWhenClosed = false
         NSApp.activate(ignoringOtherApps: true)
         window.makeKeyAndOrderFront(nil)
@@ -59,11 +53,6 @@ class Navigator: NSObject {
         window.hasShadow = true
         window.isRestorable = true
         window.setFrameAutosaveName(Consts.controlCenterFrameAutosaveName)
-        
-        window.contentView?.wantsLayer = true
-        window.contentView?.layer?.cornerRadius = 10
-        window.contentView?.layer?.masksToBounds = true
-        
         window.isReleasedWhenClosed = false
         window.contentView = NSHostingView(rootView: contentView.frame(minWidth: 251, minHeight: 130))
         NSApp.activate(ignoringOtherApps: true)
