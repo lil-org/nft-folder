@@ -8,6 +8,7 @@ class LocalHtmlWindow: NSWindow {
     private var playerModel = PlayerModel()
     private var cursorHideTimer: Timer?
     private var mouseMoveEventMonitor: Any?
+    private var navigationKeysEventMonitor: Any?
 
     private var isFullScreenOnActiveSpace: Bool {
         return styleMask.contains(.fullScreen) && isOnActiveSpace
@@ -63,7 +64,6 @@ class LocalHtmlWindow: NSWindow {
         ])
         
         let leftButton = NSButton(image: Images.backTitleBar, target: self, action: #selector(backButtonClicked))
-        leftButton.keyEquivalent = String(Character(UnicodeScalar(NSLeftArrowFunctionKey)!))
         leftButton.isBordered = false
         leftButton.contentTintColor = .gray
         titleBarView.addSubview(leftButton)
@@ -74,7 +74,6 @@ class LocalHtmlWindow: NSWindow {
         ])
         
         let rightButton = NSButton(image: Images.forwardTitleBar, target: self, action: #selector(forwardButtonClicked))
-        rightButton.keyEquivalent = String(Character(UnicodeScalar(NSRightArrowFunctionKey)!))
         rightButton.isBordered = false
         rightButton.contentTintColor = .gray
         titleBarView.addSubview(rightButton)
@@ -85,7 +84,6 @@ class LocalHtmlWindow: NSWindow {
         ])
         
         let nextCollectionButton = NSButton(image: Images.nextCollectionTitleBar, target: self, action: #selector(nextCollectionButtonClicked))
-        nextCollectionButton.keyEquivalent = "\r" // TODO: handle space as well
         nextCollectionButton.isBordered = false
         nextCollectionButton.contentTintColor = .gray
         titleBarView.addSubview(nextCollectionButton)
@@ -94,6 +92,29 @@ class LocalHtmlWindow: NSWindow {
             nextCollectionButton.centerYAnchor.constraint(equalTo: closeButton.centerYAnchor),
             nextCollectionButton.leadingAnchor.constraint(equalTo: rightButton.trailingAnchor, constant: 8)
         ])
+        
+        navigationKeysEventMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event in
+            if let keyCode = event.charactersIgnoringModifiers?.unicodeScalars.first?.value {
+                switch keyCode {
+                case 0x0D, 0x20:
+                    self?.nextCollectionButtonClicked()
+                    return nil
+                case 0xF700, 0xF701, 0xF702, 0xF703:
+                    switch keyCode {
+                    case 0xF700, 0xF702:
+                        self?.backButtonClicked()
+                    case 0xF701, 0xF703:
+                        self?.forwardButtonClicked()
+                    default:
+                        break
+                    }
+                    return nil
+                default:
+                    break
+                }
+            }
+            return event
+        }
     }
     
     private func resetCursorHideTimer() {
@@ -125,6 +146,10 @@ class LocalHtmlWindow: NSWindow {
     
     deinit {
         if let monitor = mouseMoveEventMonitor {
+            NSEvent.removeMonitor(monitor)
+        }
+        
+        if let monitor = navigationKeysEventMonitor {
             NSEvent.removeMonitor(monitor)
         }
     }
