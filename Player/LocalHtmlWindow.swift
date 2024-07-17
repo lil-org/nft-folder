@@ -48,6 +48,16 @@ class LocalHtmlWindow: NSWindow {
         titleBarView.addSubview(titleLabel)
         self.titleLabel = titleLabel
         
+        let nextCollectionButton = NSButton(image: Images.nextCollectionTitleBar, target: self, action: #selector(nextCollectionButtonClicked))
+        nextCollectionButton.isBordered = false
+        nextCollectionButton.contentTintColor = .gray
+        titleBarView.addSubview(nextCollectionButton)
+        nextCollectionButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            nextCollectionButton.centerYAnchor.constraint(equalTo: closeButton.centerYAnchor),
+            nextCollectionButton.trailingAnchor.constraint(equalTo: titleBarView.trailingAnchor, constant: -8)
+        ])
+        
         let infoButton = NSButton(image: Images.infoTitleBar, target: self, action: #selector(infoButtonClicked))
         infoButton.keyEquivalent = "i"
         infoButton.isBordered = false
@@ -56,7 +66,7 @@ class LocalHtmlWindow: NSWindow {
         infoButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             infoButton.centerYAnchor.constraint(equalTo: closeButton.centerYAnchor),
-            infoButton.trailingAnchor.constraint(equalTo: titleBarView.trailingAnchor, constant: -8)
+            infoButton.trailingAnchor.constraint(equalTo: nextCollectionButton.leadingAnchor, constant: -8)
         ])
         
         let leftButton = NSButton(image: Images.backTitleBar, target: self, action: #selector(backButtonClicked))
@@ -79,16 +89,6 @@ class LocalHtmlWindow: NSWindow {
             rightButton.leadingAnchor.constraint(equalTo: leftButton.trailingAnchor, constant: 8)
         ])
         
-        let nextCollectionButton = NSButton(image: Images.nextCollectionTitleBar, target: self, action: #selector(nextCollectionButtonClicked))
-        nextCollectionButton.isBordered = false
-        nextCollectionButton.contentTintColor = .gray
-        titleBarView.addSubview(nextCollectionButton)
-        nextCollectionButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            nextCollectionButton.centerYAnchor.constraint(equalTo: closeButton.centerYAnchor),
-            nextCollectionButton.trailingAnchor.constraint(equalTo: infoButton.leadingAnchor, constant: -8)
-        ])
-        
         NSLayoutConstraint.activate([
             titleLabel.centerYAnchor.constraint(equalTo: closeButton.centerYAnchor),
             {
@@ -102,7 +102,7 @@ class LocalHtmlWindow: NSWindow {
                 return constraint
             }(),
             {
-                let constraint = titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: nextCollectionButton.leadingAnchor, constant: -8)
+                let constraint = titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: infoButton.leadingAnchor, constant: -8)
                 constraint.priority = .defaultHigh
                 return constraint
             }()

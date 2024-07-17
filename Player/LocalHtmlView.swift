@@ -17,14 +17,14 @@ struct LocalHtmlView: View {
     
     var body: some View {
         ZStack(alignment: .topTrailing, content: {
-            Rectangle().frame(width: 32, height: isFullscreen ? 32 : 0).background(.clear).popover(isPresented: Binding(
+            Rectangle().frame(width: isFullscreen ? 2 : 39, height: isFullscreen ? 32 : 0).background(.clear).popover(isPresented: Binding(
                 get: { playerModel.showingInfoPopover },
                 set: { newValue in
                     DispatchQueue.main.async {
                         playerModel.showingInfoPopover = newValue
                     }
                 }
-            ), attachmentAnchor: .point(.bottom), arrowEdge: .bottom, content: {
+            ), attachmentAnchor: .point(.bottomLeading), arrowEdge: .bottom, content: {
                 infoPopoverView()
             })
             
