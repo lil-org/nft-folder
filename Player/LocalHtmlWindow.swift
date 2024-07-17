@@ -49,6 +49,7 @@ class LocalHtmlWindow: NSWindow {
         self.titleLabel = titleLabel
         
         let nextCollectionButton = NSButton(image: Images.nextCollectionTitleBar, target: self, action: #selector(nextCollectionButtonClicked))
+        nextCollectionButton.keyEquivalent = "\r"
         nextCollectionButton.isBordered = false
         nextCollectionButton.contentTintColor = .gray
         titleBarView.addSubview(nextCollectionButton)
@@ -109,26 +110,16 @@ class LocalHtmlWindow: NSWindow {
         ])
         
         navigationKeysEventMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event in
-            if let keyCode = event.charactersIgnoringModifiers?.unicodeScalars.first?.value {
-                switch keyCode {
-                case 0x0D, 0x20:
-                    self?.nextCollectionButtonClicked()
-                    return nil
-                case 0xF700, 0xF701, 0xF702, 0xF703:
-                    switch keyCode {
-                    case 0xF700, 0xF702:
-                        self?.backButtonClicked()
-                    case 0xF701, 0xF703:
-                        self?.forwardButtonClicked()
-                    default:
-                        break
-                    }
-                    return nil
-                default:
-                    break
-                }
+            switch event.charactersIgnoringModifiers?.unicodeScalars.first?.value {
+            case 0xF700, 0xF702:
+                self?.backButtonClicked()
+                return nil
+            case 0xF701, 0xF703, 0x20:
+                self?.forwardButtonClicked()
+                return nil
+            default:
+                return event
             }
-            return event
         }
     }
     
