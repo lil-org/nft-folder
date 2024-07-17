@@ -90,7 +90,7 @@ class LocalHtmlWindow: NSWindow {
         nextCollectionButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             nextCollectionButton.centerYAnchor.constraint(equalTo: closeButton.centerYAnchor),
-            nextCollectionButton.leadingAnchor.constraint(equalTo: rightButton.trailingAnchor, constant: 8)
+            nextCollectionButton.trailingAnchor.constraint(equalTo: infoButton.leadingAnchor, constant: -8)
         ])
         
         navigationKeysEventMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event in
