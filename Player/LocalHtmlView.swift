@@ -32,7 +32,7 @@ struct LocalHtmlView: View {
                         playerModel.showingInfoPopover = newValue
                     }
                 }
-            ), content: {
+            ), attachmentAnchor: .point(.top), arrowEdge: .bottom, content: {
                 infoPopoverView()
             })
         
