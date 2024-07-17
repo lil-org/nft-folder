@@ -9,6 +9,7 @@ class LocalHtmlWindow: NSWindow {
     private var cursorHideTimer: Timer?
     private var mouseMoveEventMonitor: Any?
     private var navigationKeysEventMonitor: Any?
+    private weak var titleLabel: NSTextField?
 
     private var isFullScreenOnActiveSpace: Bool {
         return styleMask.contains(.fullScreen) && isOnActiveSpace
@@ -36,10 +37,9 @@ class LocalHtmlWindow: NSWindow {
         titleBarView.wantsLayer = true
         titleBarView.layer?.backgroundColor = .black
         
-        // TODO: use actual title
         // TODO: add extra constraints to prevent overlapping with buttons
         
-        let titleLabel = NSTextField(labelWithString: "")
+        let titleLabel = NSTextField(labelWithString: playerModel.currentToken.displayName)
         titleLabel.font = NSFont.preferredFont(forTextStyle: .callout)
         titleLabel.textColor = .gray
         titleLabel.backgroundColor = .clear
@@ -47,6 +47,7 @@ class LocalHtmlWindow: NSWindow {
         titleLabel.isEditable = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleBarView.addSubview(titleLabel)
+        self.titleLabel = titleLabel
         NSLayoutConstraint.activate([
             titleLabel.centerYAnchor.constraint(equalTo: closeButton.centerYAnchor),
             titleLabel.centerXAnchor.constraint(equalTo: titleBarView.centerXAnchor)
@@ -128,16 +129,23 @@ class LocalHtmlWindow: NSWindow {
         }
     }
     
+    private func updateTitle() {
+        titleLabel?.stringValue = playerModel.currentToken.displayName
+    }
+    
     @objc private func nextCollectionButtonClicked() {
         playerModel.changeCollection()
+        updateTitle()
     }
     
     @objc private func forwardButtonClicked() {
         playerModel.goForward()
+        updateTitle()
     }
     
     @objc private func backButtonClicked() {
         playerModel.goBack()
+        updateTitle()
     }
     
     @objc private func infoButtonClicked() {
