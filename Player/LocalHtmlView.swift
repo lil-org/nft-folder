@@ -8,6 +8,7 @@ struct LocalHtmlView: View {
     private var windowNumber = 0
     
     @ObservedObject var playerModel: PlayerModel
+    @State private var isFullscreen = false
     
     init(playerModel: PlayerModel, windowNumber: Int) {
         self.playerModel = playerModel
@@ -23,6 +24,12 @@ struct LocalHtmlView: View {
             .onReceive(NotificationCenter.default.publisher(for: NSWindow.didEnterFullScreenNotification)) { notification in
                 if (notification.object as? NSWindow)?.windowNumber == windowNumber {
                     NSCursor.setHiddenUntilMouseMoves(true)
+                    isFullscreen = true
+                }
+            }
+            .onReceive(NotificationCenter.default.publisher(for: NSWindow.didExitFullScreenNotification)) { notification in
+                if (notification.object as? NSWindow)?.windowNumber == windowNumber {
+                    isFullscreen = false
                 }
             }
             .popover(isPresented: Binding(
@@ -32,14 +39,15 @@ struct LocalHtmlView: View {
                         playerModel.showingInfoPopover = newValue
                     }
                 }
-            ), attachmentAnchor: .point(UnitPoint(x: 0.5, y: 0.995)), arrowEdge: .top, content: {
+            ), attachmentAnchor: .point(UnitPoint(x: 0.5, y: isFullscreen ? 0.994 : 0)), arrowEdge: isFullscreen ? . top : .bottom, content: {
                 infoPopoverView()
             })
     }
     
     private func updateFullscreenStatus() {
         if let window = NSApplication.shared.windows.first(where: { $0.windowNumber == windowNumber }) {
-            if window.styleMask.contains(.fullScreen) {
+            isFullscreen = window.styleMask.contains(.fullScreen)
+            if isFullscreen {
                 NSCursor.setHiddenUntilMouseMoves(true)
             }
         }
