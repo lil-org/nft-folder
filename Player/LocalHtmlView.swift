@@ -16,32 +16,38 @@ struct LocalHtmlView: View {
     }
     
     var body: some View {
-        DesktopWebView(htmlContent: playerModel.currentToken.html)
-            .onAppear {
-                updateFullscreenStatus()
-            }
-            .frame(minWidth: 200, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity).background(.black)
-            .onReceive(NotificationCenter.default.publisher(for: NSWindow.didEnterFullScreenNotification)) { notification in
-                if (notification.object as? NSWindow)?.windowNumber == windowNumber {
-                    NSCursor.setHiddenUntilMouseMoves(true)
-                    isFullscreen = true
+        ZStack(alignment: .top, content: {
+            DesktopWebView(htmlContent: playerModel.currentToken.html)
+                .onAppear {
+                    updateFullscreenStatus()
                 }
-            }
-            .onReceive(NotificationCenter.default.publisher(for: NSWindow.didExitFullScreenNotification)) { notification in
-                if (notification.object as? NSWindow)?.windowNumber == windowNumber {
-                    isFullscreen = false
-                }
-            }
-            .popover(isPresented: Binding(
-                get: { playerModel.showingInfoPopover },
-                set: { newValue in
-                    DispatchQueue.main.async {
-                        playerModel.showingInfoPopover = newValue
+                .frame(minWidth: 200, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity).background(.black)
+                .onReceive(NotificationCenter.default.publisher(for: NSWindow.didEnterFullScreenNotification)) { notification in
+                    if (notification.object as? NSWindow)?.windowNumber == windowNumber {
+                        NSCursor.setHiddenUntilMouseMoves(true)
+                        isFullscreen = true
                     }
                 }
-            ), attachmentAnchor: .point(UnitPoint(x: 0.5, y: isFullscreen ? 0.994 : 0)), arrowEdge: isFullscreen ? . top : .bottom, content: {
-                infoPopoverView()
-            })
+                .onReceive(NotificationCenter.default.publisher(for: NSWindow.didExitFullScreenNotification)) { notification in
+                    if (notification.object as? NSWindow)?.windowNumber == windowNumber {
+                        isFullscreen = false
+                    }
+                }
+                .popover(isPresented: Binding(
+                    get: { playerModel.showingInfoPopover },
+                    set: { newValue in
+                        DispatchQueue.main.async {
+                            playerModel.showingInfoPopover = newValue
+                        }
+                    }
+                ), attachmentAnchor: .point(UnitPoint(x: 0.5, y: isFullscreen ? 0.027 : 0)), arrowEdge: .bottom, content: {
+                    infoPopoverView()
+                })
+            
+            if playerModel.showingInfoPopover && isFullscreen {
+                Text(playerModel.currentToken.displayName).padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8)).font(.callout).foregroundColor(.white).background(.black)
+            }
+        })
     }
     
     private func updateFullscreenStatus() {
