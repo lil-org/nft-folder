@@ -32,10 +32,9 @@ struct LocalHtmlView: View {
                         playerModel.showingInfoPopover = newValue
                     }
                 }
-            ), attachmentAnchor: .point(.top), arrowEdge: .bottom, content: {
+            ), attachmentAnchor: .point(UnitPoint(x: 0.5, y: 0.995)), arrowEdge: .top, content: {
                 infoPopoverView()
             })
-        
     }
     
     private func updateFullscreenStatus() {
