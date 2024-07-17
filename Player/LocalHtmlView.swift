@@ -16,7 +16,18 @@ struct LocalHtmlView: View {
     }
     
     var body: some View {
-        ZStack(alignment: .top, content: {
+        ZStack(alignment: .topTrailing, content: {
+            Rectangle().frame(width: 32, height: isFullscreen ? 32 : 0).background(.clear).popover(isPresented: Binding(
+                get: { playerModel.showingInfoPopover },
+                set: { newValue in
+                    DispatchQueue.main.async {
+                        playerModel.showingInfoPopover = newValue
+                    }
+                }
+            ), attachmentAnchor: .point(.bottom), arrowEdge: .bottom, content: {
+                infoPopoverView()
+            })
+            
             DesktopWebView(htmlContent: playerModel.currentToken.html)
                 .onAppear {
                     updateFullscreenStatus()
@@ -33,19 +44,9 @@ struct LocalHtmlView: View {
                         isFullscreen = false
                     }
                 }
-                .popover(isPresented: Binding(
-                    get: { playerModel.showingInfoPopover },
-                    set: { newValue in
-                        DispatchQueue.main.async {
-                            playerModel.showingInfoPopover = newValue
-                        }
-                    }
-                ), attachmentAnchor: .point(UnitPoint(x: 0.5, y: isFullscreen ? 0.027 : 0)), arrowEdge: .bottom, content: {
-                    infoPopoverView()
-                })
             
             if playerModel.showingInfoPopover && isFullscreen {
-                Text(playerModel.currentToken.displayName).padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8)).font(.callout).foregroundColor(.white).background(.black)
+                Text(playerModel.currentToken.displayName).padding(EdgeInsets(top: 6, leading: 10, bottom: 6, trailing: 10)).font(.callout).foregroundColor(.primary).background(.thickMaterial)
             }
         })
     }
