@@ -37,21 +37,16 @@ class LocalHtmlWindow: NSWindow {
         titleBarView.wantsLayer = true
         titleBarView.layer?.backgroundColor = .black
         
-        // TODO: add extra constraints to prevent overlapping with buttons
-        
         let titleLabel = NSTextField(labelWithString: playerModel.currentToken.displayName)
         titleLabel.font = NSFont.preferredFont(forTextStyle: .callout)
         titleLabel.textColor = .gray
         titleLabel.backgroundColor = .clear
+        titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         titleLabel.isBezeled = false
         titleLabel.isEditable = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleBarView.addSubview(titleLabel)
         self.titleLabel = titleLabel
-        NSLayoutConstraint.activate([
-            titleLabel.centerYAnchor.constraint(equalTo: closeButton.centerYAnchor),
-            titleLabel.centerXAnchor.constraint(equalTo: titleBarView.centerXAnchor)
-        ])
         
         let infoButton = NSButton(image: Images.infoTitleBar, target: self, action: #selector(infoButtonClicked))
         infoButton.keyEquivalent = "i"
@@ -92,6 +87,25 @@ class LocalHtmlWindow: NSWindow {
         NSLayoutConstraint.activate([
             nextCollectionButton.centerYAnchor.constraint(equalTo: closeButton.centerYAnchor),
             nextCollectionButton.trailingAnchor.constraint(equalTo: infoButton.leadingAnchor, constant: -8)
+        ])
+        
+        NSLayoutConstraint.activate([
+            titleLabel.centerYAnchor.constraint(equalTo: closeButton.centerYAnchor),
+            {
+                let constraint = titleLabel.centerXAnchor.constraint(equalTo: titleBarView.centerXAnchor)
+                constraint.priority = .defaultLow
+                return constraint
+            }(),
+            {
+                let constraint = titleLabel.leadingAnchor.constraint(greaterThanOrEqualTo: rightButton.trailingAnchor, constant: 8)
+                constraint.priority = .defaultHigh
+                return constraint
+            }(),
+            {
+                let constraint = titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: nextCollectionButton.leadingAnchor, constant: -8)
+                constraint.priority = .defaultHigh
+                return constraint
+            }()
         ])
         
         navigationKeysEventMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event in
