@@ -8,7 +8,6 @@ struct LocalHtmlView: View {
     private var windowNumber = 0
     
     @ObservedObject var playerModel: PlayerModel
-    @State private var showingInfoPopover = false
     
     init(playerModel: PlayerModel, windowNumber: Int) {
         self.playerModel = playerModel
@@ -26,6 +25,17 @@ struct LocalHtmlView: View {
                     NSCursor.setHiddenUntilMouseMoves(true)
                 }
             }
+            .popover(isPresented: Binding(
+                get: { playerModel.showingInfoPopover },
+                set: { newValue in
+                    DispatchQueue.main.async {
+                        playerModel.showingInfoPopover = newValue
+                    }
+                }
+            ), content: {
+                infoPopoverView()
+            })
+        
     }
     
     private func updateFullscreenStatus() {

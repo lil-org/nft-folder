@@ -163,7 +163,7 @@ class LocalHtmlWindow: NSWindow {
     }
     
     @objc private func infoButtonClicked() {
-        // TODO: show info popup
+        playerModel.showingInfoPopover.toggle()
     }
     
     deinit {
