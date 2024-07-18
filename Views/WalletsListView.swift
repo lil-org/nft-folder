@@ -42,7 +42,7 @@ struct WalletsListView: View {
                             Navigator.shared.showControlCenter(addWallet: false)
                         }) {
                             Images.extend
-                        }.keyboardShortcut(.return, modifiers: []).buttonStyle(LinkButtonStyle())
+                        }.keyboardShortcut(.return, modifiers: []).buttonStyle(LinkButtonStyle()).foregroundStyle(.secondary)
                         Spacer()
                         
                         if isDownloading {
