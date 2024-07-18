@@ -7,6 +7,7 @@ struct FolderSyncService {
     private static let ownerFoldersType: UInt32 = 4242424242
     private static let assembledFoldersType: UInt32 = 69696969
     private static let ownerFoldersTypeHexString = "fcde41b2"
+    private static let assembledFoldersTypeHexString = "4277dc9"
     
     static func pushCustomFolders(wallet: WatchOnlyWallet, completion: @escaping (URL?) -> Void) {
         guard let snapshot = makeFoldersSnapshot(wallet: wallet), let fileData = try? JSONEncoder().encode(snapshot) else {
