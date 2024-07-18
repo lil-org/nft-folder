@@ -54,6 +54,7 @@ struct WalletsListView: View {
                         }
                         
                         Button(action: {
+                            NSApp.activate(ignoringOtherApps: true)
                             showSettingsPopup = true
                         }) {
                             Images.gearshape
