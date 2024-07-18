@@ -60,7 +60,6 @@ class LocalHtmlWindow: NSWindow {
         ])
         
         let infoButton = NSButton(image: Images.infoTitleBar, target: self, action: #selector(infoButtonClicked))
-        infoButton.keyEquivalent = "i"
         infoButton.isBordered = false
         infoButton.contentTintColor = .gray
         titleBarView.addSubview(infoButton)
@@ -110,6 +109,11 @@ class LocalHtmlWindow: NSWindow {
         ])
         
         navigationKeysEventMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event in
+            if event.keyCode == 0x22 && event.modifierFlags.intersection(.deviceIndependentFlagsMask) == [] {
+                self?.infoButtonClicked()
+                return nil
+            }
+            
             switch event.charactersIgnoringModifiers?.unicodeScalars.first?.value {
             case 0xF700, 0xF702:
                 self?.backButtonClicked()
