@@ -91,9 +91,9 @@ struct FolderSyncService {
     private static func foldersToSync(url: URL) -> [Folder] {
         let fileManager = FileManager.default
         var folders = [Folder]()
-        if let rootContents = try? fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil, options: .skipsHiddenFiles) {
+        if let rootContents = try? fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil) {
             for item in rootContents {
-                if item.hasDirectoryPath {
+                if item.hasDirectoryPath && item.lastPathComponent != ".nft" {
                     let tokens = tokensInFolder(url: item)
                     let folder = Folder(name: item.lastPathComponent, tokens: tokens, description: nil, cover: nil)
                     folders.append(folder)
