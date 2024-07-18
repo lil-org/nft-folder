@@ -121,4 +121,29 @@ struct FolderSyncService {
         return tokens
     }
     
+    private static func query() -> String {
+        // TODO: implement for both folder types
+        let q =
+        """
+        query Attestation {
+            attestations(
+                take: 20,
+                skip: 0,
+                orderBy: { timeCreated: desc },
+                where: {
+                    schemaId: { equals: "0x8c138d949f94e74f6503a8633bb25982946709fddc196764e26c9325b8c04f73" },
+                    attester: { equals: "0xE26067c76fdbe877F48b0a8400cf5Db8B47aF0fE" }, # assembler address
+                    data: { contains: "4277dc9"} # corresponds to folderType 69696969
+                }
+            ) {
+                attester
+                recipient
+                decodedDataJson
+                timeCreated
+            }
+        }
+        """
+        return q
+    }
+    
 }
