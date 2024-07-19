@@ -47,6 +47,7 @@ class LocalHtmlWindow: NSWindow {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleBarView.addSubview(titleLabel)
         self.titleLabel = titleLabel
+        updateTitle()
         
         let nextCollectionButton = NSButton(image: Images.nextCollectionTitleBar, target: self, action: #selector(nextCollectionButtonClicked))
         nextCollectionButton.keyEquivalent = "\r"
@@ -149,7 +150,9 @@ class LocalHtmlWindow: NSWindow {
     }
     
     private func updateTitle() {
-        titleLabel?.stringValue = playerModel.currentToken.displayName
+        let newTitle = playerModel.currentToken.displayName
+        titleLabel?.stringValue = newTitle
+        title = newTitle
     }
     
     @objc private func nextCollectionButtonClicked() {
