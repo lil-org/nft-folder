@@ -59,6 +59,16 @@ class LocalHtmlWindow: NSWindow {
             nextCollectionButton.trailingAnchor.constraint(equalTo: titleBarView.trailingAnchor, constant: -8)
         ])
         
+        let listButton = NSButton(image: Images.playlistConfiguration, target: self, action: #selector(listButtonClicked))
+        listButton.isBordered = false
+        listButton.contentTintColor = .gray
+        titleBarView.addSubview(listButton)
+        listButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            listButton.centerYAnchor.constraint(equalTo: closeButton.centerYAnchor),
+            listButton.trailingAnchor.constraint(equalTo: nextCollectionButton.leadingAnchor, constant: -8)
+        ])
+        
         let infoButton = NSButton(image: Images.infoTitleBar, target: self, action: #selector(infoButtonClicked))
         infoButton.isBordered = false
         infoButton.contentTintColor = .gray
@@ -66,7 +76,7 @@ class LocalHtmlWindow: NSWindow {
         infoButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             infoButton.centerYAnchor.constraint(equalTo: closeButton.centerYAnchor),
-            infoButton.trailingAnchor.constraint(equalTo: nextCollectionButton.leadingAnchor, constant: -8)
+            infoButton.trailingAnchor.constraint(equalTo: listButton.leadingAnchor, constant: -8)
         ])
         
         let leftButton = NSButton(image: Images.backTitleBar, target: self, action: #selector(backButtonClicked))
@@ -145,6 +155,10 @@ class LocalHtmlWindow: NSWindow {
     @objc private func nextCollectionButtonClicked() {
         playerModel.changeCollection()
         updateTitle()
+    }
+    
+    @objc private func listButtonClicked() {
+        playerModel.showingListPopover.toggle()
     }
     
     @objc private func forwardButtonClicked() {

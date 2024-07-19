@@ -17,7 +17,7 @@ struct LocalHtmlView: View {
     
     var body: some View {
         ZStack(alignment: .topTrailing, content: {
-            Rectangle().frame(width: isFullscreen ? 2 : 39, height: isFullscreen ? 32 : 0).background(.clear).popover(isPresented: Binding(
+            Rectangle().frame(width: 62, height: isFullscreen ? 32 : 0).background(.clear).popover(isPresented: Binding(
                 get: { playerModel.showingInfoPopover },
                 set: { newValue in
                     DispatchQueue.main.async {
@@ -26,6 +26,17 @@ struct LocalHtmlView: View {
                 }
             ), attachmentAnchor: .point(.bottomLeading), arrowEdge: .bottom, content: {
                 infoPopoverView()
+            })
+            
+            Rectangle().frame(width: isFullscreen ? 2 : 39, height: isFullscreen ? 32 : 0).background(.clear).popover(isPresented: Binding(
+                get: { playerModel.showingListPopover },
+                set: { newValue in
+                    DispatchQueue.main.async {
+                        playerModel.showingListPopover = newValue
+                    }
+                }
+            ), attachmentAnchor: .point(.bottomLeading), arrowEdge: .bottom, content: {
+                listPopoverView()
             })
             
             DesktopWebView(htmlContent: playerModel.currentToken.html)
@@ -45,7 +56,7 @@ struct LocalHtmlView: View {
                     }
                 }
             
-            if playerModel.showingInfoPopover && isFullscreen {
+            if (playerModel.showingInfoPopover || playerModel.showingListPopover) && isFullscreen {
                 Text(playerModel.currentToken.displayName).padding(EdgeInsets(top: 6, leading: 10, bottom: 6, trailing: 10)).font(.callout).foregroundColor(.primary).background(.thickMaterial)
             }
         })
@@ -72,6 +83,15 @@ struct LocalHtmlView: View {
         }
     }
     
+    private func listPopoverView() -> some View {
+        // TODO: add playlist configuration
+        VStack(alignment: .leading, spacing: 10) {
+            Text(Strings.experimetalOfflineGeneration).font(.headline)
+            Text(Strings.letUsKnowOfIssues).font(.footnote)
+        }
+        .padding().frame(width: 230)
+    }
+    
     private func infoPopoverView() -> some View {
         VStack(alignment: .leading, spacing: 10) {
             if playerModel.currentToken.screensaver != nil {
@@ -85,11 +105,6 @@ struct LocalHtmlView: View {
                 Divider()
                 Text(instructions).font(.body)
             }
-            
-            Divider()
-            
-            Text(Strings.experimetalOfflineGeneration).font(.headline)
-            Text(Strings.letUsKnowOfIssues).font(.footnote)
         }
         .padding().frame(width: 230)
     }

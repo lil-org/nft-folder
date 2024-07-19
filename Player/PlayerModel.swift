@@ -8,6 +8,7 @@ class PlayerModel: ObservableObject {
     @Published var history: [GeneratedToken]
     @Published var currentIndex: Int = 0
     @Published var showingInfoPopover = false
+    @Published var showingListPopover = false
 
     init() {
         let token = TokenGenerator.generateRandomToken(specificCollectionId: nil, notTokenId: nil) ?? GeneratedToken.empty
@@ -21,6 +22,7 @@ class PlayerModel: ObservableObject {
             currentToken = history[currentIndex]
         }
         showingInfoPopover = false
+        showingListPopover = false
     }
 
     func goForward() {
@@ -35,6 +37,7 @@ class PlayerModel: ObservableObject {
             freeUpHistoryIfNeeded()
         }
         showingInfoPopover = false
+        showingListPopover = false
     }
 
     func changeCollection() {
@@ -44,6 +47,7 @@ class PlayerModel: ObservableObject {
         currentToken = newToken
         freeUpHistoryIfNeeded()
         showingInfoPopover = false
+        showingListPopover = false
     }
     
     private func freeUpHistoryIfNeeded() {
