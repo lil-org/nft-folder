@@ -59,7 +59,7 @@ struct LocalHtmlView: View {
                 }
             
             if (playerModel.showingInfoPopover || playerModel.showingListPopover) && isFullscreen {
-                Text(playerModel.currentToken.displayName).padding(EdgeInsets(top: 6, leading: 10, bottom: 6, trailing: 10)).font(.callout).foregroundColor(.primary).background(.thickMaterial)
+                Text(playerModel.currentToken.displayName).padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10)).font(.callout).foregroundColor(.primary).background(.thickMaterial).cornerRadius(8).offset(x: -4, y: 4)
             }
         })
     }
