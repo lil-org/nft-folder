@@ -4,8 +4,11 @@ import WebKit
 
 class WebViewWithMenu: WKWebView {
     
-    override init(frame: CGRect, configuration: WKWebViewConfiguration) {
+    private weak var playerMenuDelegate: PlayerMenuDelegate?
+    
+    init(frame: CGRect, configuration: WKWebViewConfiguration, playerMenuDelegate: PlayerMenuDelegate?) {
         super.init(frame: frame, configuration: configuration)
+        self.playerMenuDelegate = playerMenuDelegate
         setupRightClickGesture()
     }
     
@@ -21,26 +24,7 @@ class WebViewWithMenu: WKWebView {
     }
     
     @objc private func handleRightClick(_ gestureRecognizer: NSClickGestureRecognizer) {
-        // TODO: handle action and show menu
-         // popUpMenu()
+        playerMenuDelegate?.popUpMenu(view: self)
     }
     
-    private func popUpMenu() {
-        // TODO: more items
-        
-        let menu = NSMenu()
-        menu.addItem(NSMenuItem(title: "Back", action: #selector(backItemSelected), keyEquivalent: ""))
-        menu.addItem(NSMenuItem(title: "Forward", action: #selector(forwardItemSelected), keyEquivalent: ""))
-        if let event = NSApp.currentEvent {
-            NSMenu.popUpContextMenu(menu, with: event, for: self)
-        }
-    }
-    
-    @objc private func backItemSelected() {
-        print("back")
-    }
-    
-    @objc private func forwardItemSelected() {
-        print("forward")
-    }
 }

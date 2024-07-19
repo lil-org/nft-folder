@@ -6,6 +6,7 @@ import WebKit
 struct DesktopWebView: NSViewRepresentable {
     
     var htmlContent: String
+    weak var playerMenuDelegate: PlayerMenuDelegate?
     
     func makeNSView(context: Context) -> NSView {
         let containerView = NSView()
@@ -14,7 +15,7 @@ struct DesktopWebView: NSViewRepresentable {
         DispatchQueue.main.async { [weak containerView] in
             let webConfiguration = WKWebViewConfiguration()
             webConfiguration.suppressesIncrementalRendering = true
-            let wkWebView = WebViewWithMenu(frame: .zero, configuration: webConfiguration)
+            let wkWebView = WebViewWithMenu(frame: .zero, configuration: webConfiguration, playerMenuDelegate: playerMenuDelegate)
             wkWebView.wantsLayer = true
             wkWebView.layer?.backgroundColor = .black
             wkWebView.translatesAutoresizingMaskIntoConstraints = false

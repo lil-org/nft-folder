@@ -79,6 +79,7 @@
 		2C98C4AD2BEE9E390040383D /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98C4AC2BEE9E390040383D /* Consts.swift */; };
 		2C98C4AE2BEE9E390040383D /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98C4AC2BEE9E390040383D /* Consts.swift */; };
 		2C9973FE2C4AEAAB00C058E2 /* WebViewWithMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9973FD2C4AEAAB00C058E2 /* WebViewWithMenu.swift */; };
+		2C9974002C4AF12400C058E2 /* PlayerMenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9973FF2C4AF12400C058E2 /* PlayerMenuDelegate.swift */; };
 		2C9C60352C2C5FE8001D9B51 /* SuggestedItemsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C60342C2C5FE8001D9B51 /* SuggestedItemsService.swift */; };
 		2C9EF2E42B8A612F00297B32 /* StatusBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9EF2E32B8A612F00297B32 /* StatusBarItem.swift */; };
 		2CA34B3D2B082BDF00DAB623 /* WalletsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCFED972B08246800D98A2E /* WalletsListView.swift */; };
@@ -602,6 +603,7 @@
 		2C9113272B09751D00A8EE80 /* WalletImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletImageView.swift; sourceTree = "<group>"; };
 		2C98C4AC2BEE9E390040383D /* Consts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
 		2C9973FD2C4AEAAB00C058E2 /* WebViewWithMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewWithMenu.swift; sourceTree = "<group>"; };
+		2C9973FF2C4AF12400C058E2 /* PlayerMenuDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerMenuDelegate.swift; sourceTree = "<group>"; };
 		2C9C1B4C2C0F188D00A9DFFB /* SYNCING-CUSTOM-NFT-FOLDERS.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "SYNCING-CUSTOM-NFT-FOLDERS.md"; sourceTree = SOURCE_ROOT; };
 		2C9C60342C2C5FE8001D9B51 /* SuggestedItemsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestedItemsService.swift; sourceTree = "<group>"; };
 		2C9EF2E32B8A612F00297B32 /* StatusBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarItem.swift; sourceTree = "<group>"; };
@@ -822,6 +824,7 @@
 			isa = PBXGroup;
 			children = (
 				2C3B77602C3D6F82000A9B52 /* LocalHtmlWindow.swift */,
+				2C9973FF2C4AF12400C058E2 /* PlayerMenuDelegate.swift */,
 				2C3B775E2C3D6DEC000A9B52 /* LocalHtmlView.swift */,
 				2C8ADAA72C46F3FC008BC560 /* PlayerModel.swift */,
 			);
@@ -2101,6 +2104,7 @@
 				2CA4CF552B07F75F00CC75F4 /* AppDelegate.swift in Sources */,
 				2C9C60352C2C5FE8001D9B51 /* SuggestedItemsService.swift in Sources */,
 				2C3B77632C3D773B000A9B52 /* DesktopWebView.swift in Sources */,
+				2C9974002C4AF12400C058E2 /* PlayerMenuDelegate.swift in Sources */,
 				2CE0B5E32B8686CE00B5BF4A /* FooterLink.swift in Sources */,
 				2C4DBFC12C3698D10097AD35 /* Chain.swift in Sources */,
 				2CF524022BB2ECD200C18344 /* CollectionInfo.swift in Sources */,

@@ -38,6 +38,8 @@ struct Strings {
     static let experimetalOfflineGeneration = loc("Offline generation is a new experimental feature")
     static let letUsKnowOfIssues = loc("Let us know of any issues.")
     static let setScreenSaver = loc("Set Screen Saver")
+    static let back = loc("Back")
+    static let forward = loc("Forward")
     
     static let zora = "Zora"
     static let opensea = "OpenSea"

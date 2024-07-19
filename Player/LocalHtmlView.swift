@@ -6,13 +6,15 @@ import AppKit
 struct LocalHtmlView: View {
     
     private var windowNumber = 0
+    private weak var playerMenuDelegate: PlayerMenuDelegate?
     
     @ObservedObject var playerModel: PlayerModel
     @State private var isFullscreen = false
     
-    init(playerModel: PlayerModel, windowNumber: Int) {
+    init(playerModel: PlayerModel, windowNumber: Int, playerMenuDelegate: PlayerMenuDelegate) {
         self.playerModel = playerModel
         self.windowNumber = windowNumber
+        self.playerMenuDelegate = playerMenuDelegate
     }
     
     var body: some View {
@@ -39,7 +41,7 @@ struct LocalHtmlView: View {
                 listPopoverView()
             })
             
-            DesktopWebView(htmlContent: playerModel.currentToken.html)
+            DesktopWebView(htmlContent: playerModel.currentToken.html, playerMenuDelegate: playerMenuDelegate)
                 .onAppear {
                     updateFullscreenStatus()
                 }

@@ -18,7 +18,7 @@ class LocalHtmlWindow: NSWindow {
     override init(contentRect: NSRect, styleMask style: NSWindow.StyleMask, backing backingStoreType: NSWindow.BackingStoreType, defer flag: Bool) {
         super.init(contentRect: contentRect, styleMask: style, backing: backingStoreType, defer: flag)
         
-        let htmlView = LocalHtmlView(playerModel: playerModel, windowNumber: windowNumber).background(.black)
+        let htmlView = LocalHtmlView(playerModel: playerModel, windowNumber: windowNumber, playerMenuDelegate: self).background(.black)
         self.contentView = NSHostingView(rootView: htmlView.frame(minWidth: 251, minHeight: 130))
         
         if NSScreen.screens.count <= 1 {
@@ -182,6 +182,19 @@ class LocalHtmlWindow: NSWindow {
         
         if let monitor = navigationKeysEventMonitor {
             NSEvent.removeMonitor(monitor)
+        }
+    }
+    
+}
+
+extension LocalHtmlWindow: PlayerMenuDelegate {
+    
+    func popUpMenu(view: NSView) {
+        let menu = NSMenu()
+        menu.addItem(NSMenuItem(title: Strings.back, action: #selector(backButtonClicked), keyEquivalent: ""))
+        menu.addItem(NSMenuItem(title: Strings.forward, action: #selector(forwardButtonClicked), keyEquivalent: ""))
+        if let event = NSApp.currentEvent {
+            NSMenu.popUpContextMenu(menu, with: event, for: view)
         }
     }
     
