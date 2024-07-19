@@ -40,6 +40,9 @@ struct Strings {
     static let setScreenSaver = loc("Set Screen Saver")
     static let back = loc("Back")
     static let forward = loc("Forward")
+    static let info = loc("Info")
+    static let editPlaylist = loc("Edit Playlist")
+    static let nextCollection = loc("Next Collection")
     
     static let zora = "Zora"
     static let opensea = "OpenSea"

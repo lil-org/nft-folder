@@ -193,8 +193,13 @@ extension LocalHtmlWindow: PlayerMenuDelegate {
         let menu = NSMenu()
         menu.addItem(NSMenuItem(title: playerModel.currentToken.displayName, action: nil, keyEquivalent: ""))
         menu.addItem(.separator())
+        menu.addItem(NSMenuItem(title: Strings.info, action: #selector(infoButtonClicked), keyEquivalent: ""))
+        menu.addItem(.separator())
         menu.addItem(NSMenuItem(title: Strings.back, action: #selector(backButtonClicked), keyEquivalent: ""))
         menu.addItem(NSMenuItem(title: Strings.forward, action: #selector(forwardButtonClicked), keyEquivalent: ""))
+        menu.addItem(.separator())
+        menu.addItem(NSMenuItem(title: Strings.editPlaylist, action: #selector(listButtonClicked), keyEquivalent: ""))
+        menu.addItem(NSMenuItem(title: Strings.nextCollection, action: #selector(nextCollectionButtonClicked), keyEquivalent: ""))
         if let event = NSApp.currentEvent {
             NSMenu.popUpContextMenu(menu, with: event, for: view)
         }
