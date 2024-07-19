@@ -14,7 +14,7 @@ struct DesktopWebView: NSViewRepresentable {
         DispatchQueue.main.async { [weak containerView] in
             let webConfiguration = WKWebViewConfiguration()
             webConfiguration.suppressesIncrementalRendering = true
-            let wkWebView = WKWebView(frame: .zero, configuration: webConfiguration)
+            let wkWebView = WebViewWithMenu(frame: .zero, configuration: webConfiguration)
             wkWebView.wantsLayer = true
             wkWebView.layer?.backgroundColor = .black
             wkWebView.translatesAutoresizingMaskIntoConstraints = false
