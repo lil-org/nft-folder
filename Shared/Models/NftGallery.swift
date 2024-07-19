@@ -67,7 +67,7 @@ enum NftGallery: Int, CaseIterable, Codable {
             case .base:
                 prefix = "base"
             case .arbitrum:
-                prefix = "arbitrum"
+                prefix = "arb"
             case .blast:
                 prefix = "blast"
             }
