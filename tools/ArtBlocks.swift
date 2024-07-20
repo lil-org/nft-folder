@@ -84,8 +84,7 @@ func updateBundledGenerativeProjects() {
         let url = URL(filePath: dir + "/Suggested Items/Suggested.bundle/Generative/" + jsonName)
         let data = try! Data(contentsOf: url)
         try! FileManager.default.removeItem(at: url)
-        
-        var generativeProject = try! JSONDecoder().decode(GenerativeProject.self, from: data)
+        let generativeProject = try! JSONDecoder().decode(GenerativeProject.self, from: data)
         let item = bundledSuggestedItems.first(where: { $0.id == generativeProject.id })!
         let updatedData = try! encoder.encode(generativeProject)
         try! updatedData.write(to: url)
@@ -119,18 +118,19 @@ func generatePreviews() {
     for jsonName in jsonNames {
         let data = try! Data(contentsOf: URL(filePath: wipPath + "abs/" + jsonName))
         let project = try! JSONDecoder().decode(ProjectMetadata.self, from: data)
-        
-        guard project.externalAssetDependencyCount == 0 &&
-                bundledSuggestedItems.contains(where: { $0.id == project.contractAddress + project.projectId })
-                && project.script != nil else { continue }
+        guard project.externalAssetDependencyCount == 0 && project.script != nil else { continue }
         generateRandomToken(project: project)
     }
 }
 
 func generateRandomToken(project: ProjectMetadata) {
-    let type = ScriptType.fromString(project.scriptTypeAndVersion)!
-    let html = wipHtml(type: type, project: project, token: project.tokens.randomElement()!)
-    try! html.write(toFile: selectedPath + project.id + ".html", atomically: true, encoding: .utf8)
+    guard !project.tokens.isEmpty, let type = ScriptType.fromString(project.scriptTypeAndVersion) else { return }
+    let dirProjectPath = selectedPath + project.id + "/"
+    try! FileManager.default.createDirectory(atPath: dirProjectPath, withIntermediateDirectories: true)
+    for i in 1...5 {
+        let html = wipHtml(type: type, project: project, token: project.tokens.randomElement()!)
+        try! html.write(toFile: dirProjectPath + "\(i).html", atomically: true, encoding: .utf8)
+    }
 }
 
 struct ProjectMetadata: Codable {
