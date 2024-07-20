@@ -11,6 +11,7 @@ let fresh =
 //rebundleImages(onlyMissing: true, useCollectionImage: false)
 //removeBundledItem(name: "")
 
+//generatePreviews()
 //bundleGenerativeCollections()
 //setupForScreenSaverBuild(5)
 //updateBundledGenerativeProjects()
