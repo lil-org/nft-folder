@@ -8,6 +8,12 @@ func setupForScreenSaverBuild(_ number: Int) {
     let jsonName = jsonNames[number]
     let data = try! Data(contentsOf: URL(filePath: dir + "/Suggested Items/Suggested.bundle/Generative/" + jsonName))
     let generativeProject = try! JSONDecoder().decode(GenerativeProject.self, from: data)
+    
+    if generativeProject.screensaverFileName != nil {
+        setupForScreenSaverBuild(number + 1)
+        return
+    }
+    
     let item = bundledSuggestedItems.first(where: { $0.id == generativeProject.id })!
     
     NSPasteboard.general.clearContents()
@@ -46,6 +52,8 @@ func setupForScreenSaverBuild(_ number: Int) {
     """
 
     try! libFileContents.write(toFile: dir + "/nft-screen-saver/LibScriptString.swift", atomically: true, encoding: .utf8)
+    print(item.name)
+    print("NEXT NUMBER: \(number + 1)")
 }
 
 func encodeToBase64(_ input: String) -> String {
