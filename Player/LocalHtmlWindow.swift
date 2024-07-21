@@ -126,6 +126,9 @@ class LocalHtmlWindow: NSWindow {
             }
             
             switch event.charactersIgnoringModifiers?.unicodeScalars.first?.value {
+            case 0x0D:
+                self?.nextCollectionButtonClicked()
+                return nil
             case 0xF700, 0xF702:
                 self?.backButtonClicked()
                 return nil
