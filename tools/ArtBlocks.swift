@@ -94,7 +94,7 @@ func updateBundledGenerativeProjects() {
 func bundleGenerativeCollections() {
     let names = try! FileManager.default.contentsOfDirectory(atPath: wipPath + "select/")
     for name in names where !name.hasPrefix(".") {
-        let jsonName = name.dropLast(4) + "json"
+        let jsonName = name + ".json"
         let data = try! Data(contentsOf: URL(filePath: wipPath + "abs/" + jsonName))
         let project = try! JSONDecoder().decode(ProjectMetadata.self, from: data)
         let type = ScriptType.fromString(project.scriptTypeAndVersion)!
