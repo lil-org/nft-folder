@@ -15,5 +15,6 @@ let fresh =
 //bundleGenerativeCollections(onlyIds: Set(ids.map { String($0) }))
 //setupForScreenSaverBuild(5)
 //updateBundledGenerativeProjects()
+//addMissingSuggestedItemsForGenerativeArtblocks()
 
 print("🟢 all done")

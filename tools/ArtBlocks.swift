@@ -77,6 +77,42 @@ enum ScriptType: String, Codable, CaseIterable {
     
 }
 
+func addMissingSuggestedItemsForGenerativeArtblocks() {
+    let jsonNames = try! FileManager.default.contentsOfDirectory(atPath: dir + "/Suggested Items/Suggested.bundle/Generative/").sorted()
+
+    for jsonName in jsonNames {
+        let url = URL(filePath: dir + "/Suggested Items/Suggested.bundle/Generative/" + jsonName)
+        let data = try! Data(contentsOf: url)
+        let generativeProject = try! JSONDecoder().decode(GenerativeProject.self, from: data)
+        guard !bundledSuggestedItems.contains(where: { $0.id == generativeProject.id }) else { continue }
+        
+        let allProjectMetadataData = try! Data(contentsOf: URL(filePath: "\(wipPath)abs/\(generativeProject.contractAddress)-\(generativeProject.projectId).json"))
+        let allProjectMetadata = try! JSONDecoder().decode(ProjectMetadata.self, from: allProjectMetadataData)
+        
+        let suggestedItem = SuggestedItem(name: allProjectMetadata.name,
+                                          address: allProjectMetadata.contractAddress,
+                                          chainId: 1,
+                                          chain: .ethereum,
+                                          collectionId: nil,
+                                          abId: generativeProject.projectId,
+                                          hasVideo: false)
+        bundledSuggestedItems.append(suggestedItem)
+        let tokens = generativeProject.tokens.map { BundledTokens.Item(id: $0.id, name: nil, url: nil) }
+        let bundledTokens = BundledTokens(isComplete: true, items: tokens)
+        
+        let bundledTokensData = try! JSONEncoder().encode(bundledTokens)
+        let jsonString = String(data: bundledTokensData, encoding: .utf8)!
+        try! jsonString.write(to: URL(fileURLWithPath: dir + "/Suggested Items/Suggested.bundle/Tokens/\(generativeProject.id).json"), atomically: true, encoding: .utf8)
+        
+        print("✅ did add \(allProjectMetadata.name)")
+    }
+    
+    let updatedSuggestedItemsData = try! encoder.encode(bundledSuggestedItems)
+    try! updatedSuggestedItemsData.write(to: bundledSuggestedItemsUrl)
+    
+    rebundleImages(onlyMissing: true, useCollectionImage: false)
+}
+
 func updateBundledGenerativeProjects() {
     let jsonNames = try! FileManager.default.contentsOfDirectory(atPath: dir + "/Suggested Items/Suggested.bundle/Generative/").sorted()
 
