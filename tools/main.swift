@@ -16,5 +16,6 @@ let fresh =
 //setupForScreenSaverBuild(5)
 //updateBundledGenerativeProjects()
 //addMissingSuggestedItemsForGenerativeArtblocks()
+//addMissingCollectionIds()
 
 print("🟢 all done")

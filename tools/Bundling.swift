@@ -55,6 +55,33 @@ func bundleSelected(useCollectionImages: Bool) {
     try! updatedSuggestedItemsData.write(to: bundledSuggestedItemsUrl)
 }
 
+func addMissingCollectionIds() {
+    let toUpdate = bundledSuggestedItems.enumerated().filter { $0.element.collectionId == nil && $0.element.abId != nil }
+    var count = toUpdate.count
+    
+    for (index, item) in toUpdate {
+        if item.collectionId == nil && item.abId != nil {
+            print(item.name)
+            SimpleHash.getNft(contract: item.address, chain: .ethereum) { nft in
+                let updatedItem = SuggestedItem(name: item.name, address: item.address, chainId: item.chainId, chain: item.chain, collectionId: nft.collection?.collectionId, abId: item.abId, hasVideo: item.hasVideo)
+                bundledSuggestedItems[index] = updatedItem
+                print("did update \(item.name)")
+                count -= 1
+                
+                if count == 0 {
+                    let updatedSuggestedItemsData = try! encoder.encode(bundledSuggestedItems)
+                    try! updatedSuggestedItemsData.write(to: bundledSuggestedItemsUrl)
+                    semaphore.signal()
+                }
+                
+            }
+        }
+    }
+    if count > 0 {
+        semaphore.wait()
+    }
+}
+
 fileprivate func bundleProjects(projects: [ProjectToBundle], useCollectionImages: Bool) {
     if let project = projects.first {
         let suggestedItem = SuggestedItem(name: project.name,
