@@ -12,7 +12,7 @@ let fresh =
 //removeBundledItem(name: "")
 
 //generatePreviews()
-//bundleGenerativeCollections()
+//bundleGenerativeCollections(onlyIds: Set(ids.map { String($0) }))
 //setupForScreenSaverBuild(5)
 //updateBundledGenerativeProjects()
 

@@ -86,28 +86,29 @@ func updateBundledGenerativeProjects() {
         try! FileManager.default.removeItem(at: url)
         let generativeProject = try! JSONDecoder().decode(GenerativeProject.self, from: data)
         let item = bundledSuggestedItems.first(where: { $0.id == generativeProject.id })!
+        print(item.name)
         let updatedData = try! encoder.encode(generativeProject)
         try! updatedData.write(to: url)
     }
 }
 
-func bundleGenerativeCollections() {
+func bundleGenerativeCollections(onlyIds: Set<String>?) {
     let names = try! FileManager.default.contentsOfDirectory(atPath: wipPath + "select/")
     for name in names where !name.hasPrefix(".") {
         let jsonName = name + ".json"
         let data = try! Data(contentsOf: URL(filePath: wipPath + "abs/" + jsonName))
         let project = try! JSONDecoder().decode(ProjectMetadata.self, from: data)
         let type = ScriptType.fromString(project.scriptTypeAndVersion)!
+        guard let kind = GenerativeProject.Kind(rawValue: type.rawValue) else { continue }
         let tokens = project.tokens.map { GenerativeProject.Token(id: $0.tokenId, hash: $0.hash) }
-        let kind = GenerativeProject.Kind(rawValue: type.rawValue)
         let generativeProjectToBundle = GenerativeProject(contractAddress: project.contractAddress,
                                                           projectId: project.projectId,
                                                           tokens: tokens,
                                                           script: project.script!,
-                                                          kind: kind!,
+                                                          kind: kind,
                                                           instructions: project.scriptJson?.instructions,
                                                           screensaverFileName: nil)
-        
+        if let onlyIds, !onlyIds.contains(generativeProjectToBundle.id) { continue }
         let dataToWrite = try! encoder.encode(generativeProjectToBundle)
         try! dataToWrite.write(to: URL(fileURLWithPath: dir + "/Suggested Items/Suggested.bundle/Generative/\(generativeProjectToBundle.id).json"))
     }

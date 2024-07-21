@@ -17,7 +17,7 @@ struct GenerativeProject: Codable {
     let screensaverFileName: String?
     
     enum Kind: String, Codable {
-        case svg, js, p5js100, regl, twemoji, three, tone, paper, p5js190, babylon, processing, zdog
+        case svg, js, p5js100, regl, twemoji, three, tone, paper, p5js190
     }
     
     struct Token: Codable {

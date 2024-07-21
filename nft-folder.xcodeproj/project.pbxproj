@@ -123,6 +123,7 @@
 		2CDDE0D32C1B1EAC002DB025 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDE0D22C1B1EAC002DB025 /* Language.swift */; };
 		2CDDE0D52C1B1EC4002DB025 /* MetadataKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDE0D42C1B1EC4002DB025 /* MetadataKind.swift */; };
 		2CE0B5E32B8686CE00B5BF4A /* FooterLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE0B5E22B8686CE00B5BF4A /* FooterLink.swift */; };
+		2CE0F1582C4D37E6003004F2 /* p5js190.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CE0F1572C4D37E6003004F2 /* p5js190.js */; };
 		2CE33D9A2B865CFB008473E1 /* AvatarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE33D992B865CFB008473E1 /* AvatarService.swift */; };
 		2CE9A5762C3DA9FB009AEAF4 /* TokenGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE9A5752C3DA9FB009AEAF4 /* TokenGenerator.swift */; };
 		2CE9A5782C3DAB03009AEAF4 /* GeneratedToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE9A5772C3DAB03009AEAF4 /* GeneratedToken.swift */; };
@@ -663,6 +664,7 @@
 		2CDDE0D22C1B1EAC002DB025 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		2CDDE0D42C1B1EC4002DB025 /* MetadataKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataKind.swift; sourceTree = "<group>"; };
 		2CE0B5E22B8686CE00B5BF4A /* FooterLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterLink.swift; sourceTree = "<group>"; };
+		2CE0F1572C4D37E6003004F2 /* p5js190.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = p5js190.js; sourceTree = "<group>"; };
 		2CE33D992B865CFB008473E1 /* AvatarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarService.swift; sourceTree = "<group>"; };
 		2CE9A5752C3DA9FB009AEAF4 /* TokenGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenGenerator.swift; sourceTree = "<group>"; };
 		2CE9A5772C3DAB03009AEAF4 /* GeneratedToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedToken.swift; sourceTree = "<group>"; };
@@ -1716,6 +1718,7 @@
 				2CEF35B02C413D9F00388574 /* paper.js */,
 				2CEF35AF2C413D9F00388574 /* regl.js */,
 				2CEF35B12C413D9F00388574 /* three.js */,
+				2CE0F1572C4D37E6003004F2 /* p5js190.js */,
 				2CEF35B22C413D9F00388574 /* tone.js */,
 				2CEF35B32C413DA000388574 /* twemoji.js */,
 			);
@@ -1940,6 +1943,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CEF35B92C413DA000388574 /* twemoji.js in Resources */,
+				2CE0F1582C4D37E6003004F2 /* p5js190.js in Resources */,
 				2CEF35B82C413DA000388574 /* tone.js in Resources */,
 				2CEF35B52C413DA000388574 /* regl.js in Resources */,
 				2CA4CF592B07F76000CC75F4 /* Assets.xcassets in Resources */,
