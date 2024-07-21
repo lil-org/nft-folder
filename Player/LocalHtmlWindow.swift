@@ -141,6 +141,14 @@ class LocalHtmlWindow: NSWindow {
         }
     }
     
+    override func performKeyEquivalent(with event: NSEvent) -> Bool {
+        if event.modifierFlags.contains(.command) {
+            return false
+        } else {
+            return super.performKeyEquivalent(with: event)
+        }
+    }
+    
     private func resetCursorHideTimer() {
         cursorHideTimer?.invalidate()
         if isFullScreenOnActiveSpace {
