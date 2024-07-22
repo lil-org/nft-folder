@@ -29,7 +29,7 @@ struct GenerativeProject: Codable {
     
     var screensaverUrl: URL? {
         if let fileName = screensaverFileName {
-            return URL(string: "https://github.com/lil-org/screensavers/releases/download/1.0.0/\(fileName).zip")
+            return URL(string: "https://github.com/lil-org/screen-savers/releases/download/1.0.0/\(fileName).zip")
         } else {
             return nil
         }
