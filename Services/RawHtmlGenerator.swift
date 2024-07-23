@@ -17,14 +17,14 @@ struct RawHtmlGenerator {
         }
     }
     
-    static func createHtml(script: Script, address: String, token: BundledTokens.Item, forceLibScript: String? = nil) -> String {
+    static func createHtml(script: Script, token: BundledTokens.Item, forceLibScript: String? = nil) -> String {
         guard let hash = token.hash else { return "" }
         
         let id = token.id
         let libScript = forceLibScript ?? libScript(script.kind)
         
         let tokenData: String
-        if address == "0x059edd72cd353df5106d2b9cc5ab83a52287ac3a" {
+        if script.address == "0x059edd72cd353df5106d2b9cc5ab83a52287ac3a" {
             tokenData =
                 """
                 let tokenData = {"tokenId": "\(id)", "hashes": ["\(hash)"]}
