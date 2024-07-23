@@ -199,7 +199,7 @@ struct ProjectMetadata: Codable {
     
     let scriptCount: Int
     let scriptJson: ScriptJson?
-    let scripts: [Script]
+    let scripts: [ScriptData]
     let generateVideoAssets: Bool
     
     let externalAssetDependencyCount: Int
@@ -242,7 +242,7 @@ struct ProjectMetadata: Codable {
     }
 }
 
-struct Script: Codable {
+struct ScriptData: Codable {
     let script: String
 }
 

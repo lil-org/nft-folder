@@ -62,20 +62,20 @@
 		2C622BB92BF3C1EA0003B932 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C622BB82BF3C1EA0003B932 /* main.swift */; };
 		2C63720B2C417FC2001169E8 /* ScreenSaverHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63720A2C417FC2001169E8 /* ScreenSaverHelper.swift */; };
 		2C63720C2C41805C001169E8 /* GeneratedToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE9A5772C3DAB03009AEAF4 /* GeneratedToken.swift */; };
-		2C63720D2C418060001169E8 /* GenerativeProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C8DE82C3C890B00BC83E9 /* GenerativeProject.swift */; };
+		2C63720D2C418060001169E8 /* Script.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C8DE82C3C890B00BC83E9 /* Script.swift */; };
 		2C63720E2C418068001169E8 /* RawHtmlGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF35AC2C413AE700388574 /* RawHtmlGenerator.swift */; };
 		2C672CB12BFCEFB500E57B21 /* IpfsUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C672CB02BFCEFB500E57B21 /* IpfsUploader.swift */; };
 		2C88D95D2C3872DD00009C25 /* RandomGradientShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88D95C2C3872DD00009C25 /* RandomGradientShape.swift */; };
 		2C8A42EA2B1A272600BE4166 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A42E92B1A272600BE4166 /* Network.swift */; };
 		2C8A4CBF2BF9ECBD00F0E9D9 /* MagicEdenApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A4CBE2BF9ECBD00F0E9D9 /* MagicEdenApi.swift */; };
 		2C8ADAA82C46F3FC008BC560 /* PlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8ADAA72C46F3FC008BC560 /* PlayerModel.swift */; };
-		2C8C8DE92C3C890B00BC83E9 /* GenerativeProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C8DE82C3C890B00BC83E9 /* GenerativeProject.swift */; };
+		2C8C8DE92C3C890B00BC83E9 /* Script.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C8DE82C3C890B00BC83E9 /* Script.swift */; };
 		2C8E246F2C24A6E200C13536 /* FirstMouseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8E246E2C24A6E200C13536 /* FirstMouseView.swift */; };
 		2C8EDD032C0CFE3F003CB35D /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8EDD022C0CFE3F003CB35D /* Snapshot.swift */; };
 		2C8EDD052C0D00EA003CB35D /* FolderSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8EDD042C0D00EA003CB35D /* FolderSyncService.swift */; };
 		2C91131A2B08F71200A8EE80 /* WalletDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9113192B08F71200A8EE80 /* WalletDownloader.swift */; };
 		2C9113282B09751D00A8EE80 /* WalletImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9113272B09751D00A8EE80 /* WalletImageView.swift */; };
-		2C937BD22C3C8D1A00B3B6D1 /* GenerativeProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C8DE82C3C890B00BC83E9 /* GenerativeProject.swift */; };
+		2C937BD22C3C8D1A00B3B6D1 /* Script.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C8DE82C3C890B00BC83E9 /* Script.swift */; };
 		2C98C4AD2BEE9E390040383D /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98C4AC2BEE9E390040383D /* Consts.swift */; };
 		2C98C4AE2BEE9E390040383D /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98C4AC2BEE9E390040383D /* Consts.swift */; };
 		2C9973FE2C4AEAAB00C058E2 /* WebViewWithMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9973FD2C4AEAAB00C058E2 /* WebViewWithMenu.swift */; };
@@ -241,7 +241,7 @@
 		2C8A42E92B1A272600BE4166 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		2C8A4CBE2BF9ECBD00F0E9D9 /* MagicEdenApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicEdenApi.swift; sourceTree = "<group>"; };
 		2C8ADAA72C46F3FC008BC560 /* PlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerModel.swift; sourceTree = "<group>"; };
-		2C8C8DE82C3C890B00BC83E9 /* GenerativeProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerativeProject.swift; sourceTree = "<group>"; };
+		2C8C8DE82C3C890B00BC83E9 /* Script.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Script.swift; sourceTree = "<group>"; };
 		2C8E246E2C24A6E200C13536 /* FirstMouseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstMouseView.swift; sourceTree = "<group>"; };
 		2C8EDD022C0CFE3F003CB35D /* Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
 		2C8EDD042C0D00EA003CB35D /* FolderSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderSyncService.swift; sourceTree = "<group>"; };
@@ -1535,7 +1535,7 @@
 				2C9C60342C2C5FE8001D9B51 /* SuggestedItemsService.swift */,
 				2CFF885A2C288C9A0007045F /* SuggestedItem.swift */,
 				2C086E862C2F3C3600D4268D /* BundledTokens.swift */,
-				2C8C8DE82C3C890B00BC83E9 /* GenerativeProject.swift */,
+				2C8C8DE82C3C890B00BC83E9 /* Script.swift */,
 				2CE9A5772C3DAB03009AEAF4 /* GeneratedToken.swift */,
 				2C4659932C308B44008CF97F /* Covers.xcassets */,
 				2C09BAE32C308145009BA300 /* Suggested.bundle */,
@@ -2003,7 +2003,7 @@
 				2C59D1572C405B53005F9F72 /* templates.swift in Sources */,
 				2C3214332C33DF7C0050BBC1 /* SimpleHash.swift in Sources */,
 				2CB308E32C30A2E800D914A5 /* BundledTokens.swift in Sources */,
-				2C937BD22C3C8D1A00B3B6D1 /* GenerativeProject.swift in Sources */,
+				2C937BD22C3C8D1A00B3B6D1 /* Script.swift in Sources */,
 				2CB308E82C30AD0000D914A5 /* NSImage.swift in Sources */,
 				2CB308E42C30A2E800D914A5 /* SuggestedItem.swift in Sources */,
 			);
@@ -2120,7 +2120,7 @@
 				2C1B60C42B7D41D1009949C2 /* HostAppImages.swift in Sources */,
 				2CB308E72C30AD0000D914A5 /* NSImage.swift in Sources */,
 				2CC943032B825907003219C7 /* ZoraRequest.swift in Sources */,
-				2C8C8DE92C3C890B00BC83E9 /* GenerativeProject.swift in Sources */,
+				2C8C8DE92C3C890B00BC83E9 /* Script.swift in Sources */,
 				2CE33D9A2B865CFB008473E1 /* AvatarService.swift in Sources */,
 				2CA34B5A2B08B7CF00DAB623 /* URL.swift in Sources */,
 				2C8EDD052C0D00EA003CB35D /* FolderSyncService.swift in Sources */,
@@ -2141,7 +2141,7 @@
 				2C5695AC2C4195E1003B4335 /* LibScriptString.swift in Sources */,
 				2C5695AA2C4195BE003B4335 /* ProjectJsonString.swift in Sources */,
 				2C63720C2C41805C001169E8 /* GeneratedToken.swift in Sources */,
-				2C63720D2C418060001169E8 /* GenerativeProject.swift in Sources */,
+				2C63720D2C418060001169E8 /* Script.swift in Sources */,
 				2C63720E2C418068001169E8 /* RawHtmlGenerator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
