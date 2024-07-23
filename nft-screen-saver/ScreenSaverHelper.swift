@@ -6,10 +6,12 @@ import Foundation
     
     @objc static func generateHtml() -> String {
         let forceLibScript = decodeFromBase64(libScript)
-        guard let data = projectJsonString.data(using: .utf8),
-              let project = try? JSONDecoder().decode(GenerativeProject.self, from: data),
-              let token = project.tokens.randomElement() else { return randomColorHtml }
-        let html = RawHtmlGenerator.createHtml(project: project, token: token, forceLibScript: forceLibScript)
+        guard let scriptData = scriptJsonString.data(using: .utf8),
+              let script = try? JSONDecoder().decode(Script.self, from: scriptData),
+              let tokensData = tokensJsonString.data(using: .utf8),
+              let tokens = try? JSONDecoder().decode(BundledTokens.self, from: tokensData),
+              let token = tokens.items.randomElement() else { return randomColorHtml }
+        let html = RawHtmlGenerator.createHtml(script: script, address: address, token: token, forceLibScript: forceLibScript)
         return html
     }
     

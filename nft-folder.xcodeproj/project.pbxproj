@@ -32,6 +32,7 @@
 		2C1FD2AE2B88D2EF004F42B3 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1FD2AC2B88D2EF004F42B3 /* Int.swift */; };
 		2C2329DA2B68367F00001936 /* RightClickServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2329D92B68367F00001936 /* RightClickServiceProvider.swift */; };
 		2C2B5AD12B84E2DA005C38B0 /* DownloadFileTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2B5AD02B84E2DA005C38B0 /* DownloadFileTask.swift */; };
+		2C309C312C50297700C9B08A /* BundledTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C086E862C2F3C3600D4268D /* BundledTokens.swift */; };
 		2C3214332C33DF7C0050BBC1 /* SimpleHash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3214322C33DF7C0050BBC1 /* SimpleHash.swift */; };
 		2C3924C12C1F0F1200161154 /* StringTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3924C02C1F0F1200161154 /* StringTask.swift */; };
 		2C3B775F2C3D6DEC000A9B52 /* LocalHtmlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3B775E2C3D6DEC000A9B52 /* LocalHtmlView.swift */; };
@@ -54,7 +55,7 @@
 		2C508C9D2B6830E6005F548A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
 		2C508C9E2B6830E6005F548A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
 		2C5504DE2C106C4400DE145A /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5504DD2C106C4400DE145A /* Alerts.swift */; };
-		2C5695AA2C4195BE003B4335 /* ProjectJsonString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5695A92C4195BE003B4335 /* ProjectJsonString.swift */; };
+		2C5695AA2C4195BE003B4335 /* ScriptJsonString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5695A92C4195BE003B4335 /* ScriptJsonString.swift */; };
 		2C5695AC2C4195E1003B4335 /* LibScriptString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5695AB2C4195E1003B4335 /* LibScriptString.swift */; };
 		2C59D1552C4017B2005F9F72 /* ArtBlocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59D1542C4017B2005F9F72 /* ArtBlocks.swift */; };
 		2C59D1572C405B53005F9F72 /* templates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59D1562C405B53005F9F72 /* templates.swift */; };
@@ -227,7 +228,7 @@
 		2C5065F92C0E10D600D9D01A /* AttestationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationResponse.swift; sourceTree = "<group>"; };
 		2C508C9C2B6830E6005F548A /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		2C5504DD2C106C4400DE145A /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
-		2C5695A92C4195BE003B4335 /* ProjectJsonString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectJsonString.swift; sourceTree = "<group>"; };
+		2C5695A92C4195BE003B4335 /* ScriptJsonString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptJsonString.swift; sourceTree = "<group>"; };
 		2C5695AB2C4195E1003B4335 /* LibScriptString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibScriptString.swift; sourceTree = "<group>"; };
 		2C59D1542C4017B2005F9F72 /* ArtBlocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtBlocks.swift; sourceTree = "<group>"; };
 		2C59D1562C405B53005F9F72 /* templates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = templates.swift; sourceTree = "<group>"; };
@@ -1691,7 +1692,7 @@
 			isa = PBXGroup;
 			children = (
 				2C63720A2C417FC2001169E8 /* ScreenSaverHelper.swift */,
-				2C5695A92C4195BE003B4335 /* ProjectJsonString.swift */,
+				2C5695A92C4195BE003B4335 /* ScriptJsonString.swift */,
 				2C5695AB2C4195E1003B4335 /* LibScriptString.swift */,
 				2CD0DA5A2C41C7AF00DB709C /* thumbnail.heic */,
 				2CB5A6A42C41863A00A24EC3 /* screen-saver-webview */,
@@ -2135,11 +2136,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C309C312C50297700C9B08A /* BundledTokens.swift in Sources */,
 				2C63720B2C417FC2001169E8 /* ScreenSaverHelper.swift in Sources */,
 				2CBC423A2C41772E00279CED /* NftScreenSaverView.m in Sources */,
 				2CBC42422C4177DE00279CED /* WKWebViewPrivate.m in Sources */,
 				2C5695AC2C4195E1003B4335 /* LibScriptString.swift in Sources */,
-				2C5695AA2C4195BE003B4335 /* ProjectJsonString.swift in Sources */,
+				2C5695AA2C4195BE003B4335 /* ScriptJsonString.swift in Sources */,
 				2C63720C2C41805C001169E8 /* GeneratedToken.swift in Sources */,
 				2C63720D2C418060001169E8 /* Script.swift in Sources */,
 				2C63720E2C418068001169E8 /* RawHtmlGenerator.swift in Sources */,

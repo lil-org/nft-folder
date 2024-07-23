@@ -3,23 +3,24 @@
 import Cocoa
 
 func setupForScreenSaverBuild(_ number: Int) {
-    let jsonNames = try! FileManager.default.contentsOfDirectory(atPath: dir + "/Suggested Items/Suggested.bundle/Generative/").sorted()
+    let jsonNames = try! FileManager.default.contentsOfDirectory(atPath: dir + "/Suggested Items/Suggested.bundle/Scripts/").sorted()
     
     let jsonName = jsonNames[number]
-    let data = try! Data(contentsOf: URL(filePath: dir + "/Suggested Items/Suggested.bundle/Generative/" + jsonName))
-    let generativeProject = try! JSONDecoder().decode(GenerativeProject.self, from: data)
+    let id = String(jsonName.dropLast(5))
+    let data = try! Data(contentsOf: URL(filePath: dir + "/Suggested Items/Suggested.bundle/Scripts/" + jsonName))
+    let script = try! JSONDecoder().decode(Script.self, from: data)
     
-    if generativeProject.screensaverFileName != nil {
+    if script.screensaverFileName != nil {
         setupForScreenSaverBuild(number + 1)
         return
     }
     
-    let item = bundledSuggestedItems.first(where: { $0.id == generativeProject.id })!
+    let item = bundledSuggestedItems.first(where: { $0.id == id })!
     
     NSPasteboard.general.clearContents()
     NSPasteboard.general.setString(item.name, forType: .string)
     
-    let lib = ScriptType(rawValue: generativeProject.kind.rawValue)!.libScript
+    let lib = ScriptType(rawValue: script.kind.rawValue)!.libScript
     let projectJsonString = String(data: data, encoding: .utf8)!
     let imageData = try! Data(contentsOf: URL(filePath: toolsPath + "previews/\(item.id).heic"))
     

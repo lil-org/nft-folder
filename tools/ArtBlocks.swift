@@ -77,56 +77,6 @@ enum ScriptType: String, Codable, CaseIterable {
     
 }
 
-func addMissingSuggestedItemsForGenerativeArtblocks() {
-    let jsonNames = try! FileManager.default.contentsOfDirectory(atPath: dir + "/Suggested Items/Suggested.bundle/Generative/").sorted()
-
-    for jsonName in jsonNames {
-        let url = URL(filePath: dir + "/Suggested Items/Suggested.bundle/Generative/" + jsonName)
-        let data = try! Data(contentsOf: url)
-        let generativeProject = try! JSONDecoder().decode(GenerativeProject.self, from: data)
-        guard !bundledSuggestedItems.contains(where: { $0.id == generativeProject.id }) else { continue }
-        
-        let allProjectMetadataData = try! Data(contentsOf: URL(filePath: "\(wipPath)abs/\(generativeProject.contractAddress)-\(generativeProject.projectId).json"))
-        let allProjectMetadata = try! JSONDecoder().decode(ProjectMetadata.self, from: allProjectMetadataData)
-        
-        let suggestedItem = SuggestedItem(name: allProjectMetadata.name,
-                                          address: allProjectMetadata.contractAddress,
-                                          chainId: 1,
-                                          chain: .ethereum,
-                                          collectionId: nil,
-                                          abId: generativeProject.projectId)
-        bundledSuggestedItems.append(suggestedItem)
-        let tokens = generativeProject.tokens.map { BundledTokens.Item(id: $0.id, name: nil, url: nil, hash: $0.hash) }
-        let bundledTokens = BundledTokens(isComplete: true, items: tokens)
-        
-        let bundledTokensData = try! JSONEncoder().encode(bundledTokens)
-        let jsonString = String(data: bundledTokensData, encoding: .utf8)!
-        try! jsonString.write(to: URL(fileURLWithPath: dir + "/Suggested Items/Suggested.bundle/Tokens/\(generativeProject.id).json"), atomically: true, encoding: .utf8)
-        
-        print("✅ did add \(allProjectMetadata.name)")
-    }
-    
-    let updatedSuggestedItemsData = try! encoder.encode(bundledSuggestedItems)
-    try! updatedSuggestedItemsData.write(to: bundledSuggestedItemsUrl)
-    
-    rebundleImages(onlyMissing: true, useCollectionImage: false)
-}
-
-func updateBundledGenerativeProjects() {
-    let jsonNames = try! FileManager.default.contentsOfDirectory(atPath: dir + "/Suggested Items/Suggested.bundle/Generative/").sorted()
-
-    for jsonName in jsonNames {
-        let url = URL(filePath: dir + "/Suggested Items/Suggested.bundle/Generative/" + jsonName)
-        let data = try! Data(contentsOf: url)
-        try! FileManager.default.removeItem(at: url)
-        let generativeProject = try! JSONDecoder().decode(GenerativeProject.self, from: data)
-        let item = bundledSuggestedItems.first(where: { $0.id == generativeProject.id })!
-        print(item.name)
-        let updatedData = try! encoder.encode(generativeProject)
-        try! updatedData.write(to: url)
-    }
-}
-
 func bundleGenerativeCollections(onlyIds: Set<String>?) {
     let names = try! FileManager.default.contentsOfDirectory(atPath: wipPath + "select/")
     for name in names where !name.hasPrefix(".") {
@@ -134,18 +84,12 @@ func bundleGenerativeCollections(onlyIds: Set<String>?) {
         let data = try! Data(contentsOf: URL(filePath: wipPath + "abs/" + jsonName))
         let project = try! JSONDecoder().decode(ProjectMetadata.self, from: data)
         let type = ScriptType.fromString(project.scriptTypeAndVersion)!
-        guard let kind = GenerativeProject.Kind(rawValue: type.rawValue) else { continue }
-        let tokens = project.tokens.map { GenerativeProject.Token(id: $0.tokenId, hash: $0.hash) }
-        let generativeProjectToBundle = GenerativeProject(contractAddress: project.contractAddress,
-                                                          projectId: project.projectId,
-                                                          tokens: tokens,
-                                                          script: project.script!,
-                                                          kind: kind,
-                                                          instructions: project.scriptJson?.instructions,
-                                                          screensaverFileName: nil)
-        if let onlyIds, !onlyIds.contains(generativeProjectToBundle.id) { continue }
-        let dataToWrite = try! encoder.encode(generativeProjectToBundle)
-        try! dataToWrite.write(to: URL(fileURLWithPath: dir + "/Suggested Items/Suggested.bundle/Generative/\(generativeProjectToBundle.id).json"))
+        guard let kind = Script.Kind(rawValue: type.rawValue) else { continue }
+        let tokens = project.tokens.map { BundledTokens.Item(id: $0.tokenId, name: nil, url: nil, hash: $0.hash) }
+        let scriptToBundle = Script(value: project.script!, kind: kind, instructions: project.scriptJson?.instructions, screensaverFileName: nil)
+        if let onlyIds, !onlyIds.contains(name) { continue }
+        let dataToWrite = try! encoder.encode(scriptToBundle)
+        try! dataToWrite.write(to: URL(fileURLWithPath: dir + "/Suggested Items/Suggested.bundle/Scripts/\(name).json"))
     }
 }
 

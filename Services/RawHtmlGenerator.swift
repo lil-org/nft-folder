@@ -6,7 +6,7 @@ struct RawHtmlGenerator {
     
     private static var libScriptsDict = [String: String]()
     
-    private static func libScript(_ kind: GenerativeProject.Kind) -> String {
+    private static func libScript(_ kind: Script.Kind) -> String {
         if let libScript = libScriptsDict[kind.rawValue] {
             return libScript
         } else {
@@ -17,20 +17,22 @@ struct RawHtmlGenerator {
         }
     }
     
-    static func createHtml(project: GenerativeProject, token: GenerativeProject.Token, forceLibScript: String? = nil) -> String {
-        let script = project.script
-        let libScript = forceLibScript ?? libScript(project.kind)
+    static func createHtml(script: Script, address: String, token: BundledTokens.Item, forceLibScript: String? = nil) -> String {
+        guard let hash = token.hash else { return "" }
+        
+        let id = token.id
+        let libScript = forceLibScript ?? libScript(script.kind)
         
         let tokenData: String
-        if project.contractAddress == "0x059edd72cd353df5106d2b9cc5ab83a52287ac3a" {
+        if address == "0x059edd72cd353df5106d2b9cc5ab83a52287ac3a" {
             tokenData =
                 """
-                let tokenData = {"tokenId": "\(token.id)", "hashes": ["\(token.hash)"]}
+                let tokenData = {"tokenId": "\(id)", "hashes": ["\(hash)"]}
                 """
         } else {
             tokenData =
                 """
-                let tokenData = {"tokenId": "\(token.id)", "hash": "\(token.hash)"}
+                let tokenData = {"tokenId": "\(id)", "hash": "\(hash)"}
                 """
         }
         
@@ -40,7 +42,7 @@ struct RawHtmlGenerator {
             """
         
         let html: String
-        switch project.kind {
+        switch script.kind {
         case .svg:
             html =
             """
@@ -68,7 +70,7 @@ struct RawHtmlGenerator {
             </head>
             <body></body>
             <script>\(tokenData)</script>
-            <script>\(script)</script>
+            <script>\(script.value)</script>
             </html>
             """
         case .js:
@@ -98,7 +100,7 @@ struct RawHtmlGenerator {
             </head>
             <body>
               <canvas></canvas>
-              <script>\(script)</script>
+              <script>\(script.value)</script>
             </body>
             </html>
             """
@@ -111,7 +113,7 @@ struct RawHtmlGenerator {
               <meta charset="utf-8">
               <script>\(libScript)</script>
               <script>\(tokenData)</script>
-              <script>\(script)</script>
+              <script>\(script.value)</script>
               <style type="text/css">
                 html {
                   height: 100%;
@@ -144,7 +146,7 @@ struct RawHtmlGenerator {
                 <meta charset="utf-8"/>
                 <script>\(libScript)</script>
                 <script>\(tokenData)</script>
-                <script>\(script)</script>
+                <script>\(script.value)</script>
                     <style type="text/css">
                     html {
                         height: 100%;
@@ -197,7 +199,7 @@ struct RawHtmlGenerator {
               </head>
               <body></body>
               <script>\(tokenData)</script>
-              <script>\(script)</script>
+              <script>\(script.value)</script>
             </html>
             """
         case .twemoji:
@@ -209,7 +211,7 @@ struct RawHtmlGenerator {
                 <meta charset="utf-8"/>
                 <script>\(libScript)</script>
                 <script>\(tokenData)</script>
-                <script>\(script)</script>
+                <script>\(script.value)</script>
                 <style type="text/css">
                     html {
                         height: 100%;
@@ -262,7 +264,7 @@ struct RawHtmlGenerator {
                 </style>
               </head>
               <body>
-                <script>\(script)</script>
+                <script>\(script.value)</script>
               </body>
             </html>
             """
@@ -295,7 +297,7 @@ struct RawHtmlGenerator {
                 <canvas></canvas>
               </body>
               <script>\(tokenData)</script>
-              <script>\(script)</script>
+              <script>\(script.value)</script>
             </html>
             """
         }
