@@ -8,6 +8,7 @@ struct BundledTokens: Codable {
         let id: String
         let name: String?
         let url: String?
+        let hash: String?
     }
     
     let isComplete: Bool

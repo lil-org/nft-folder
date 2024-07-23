@@ -48,7 +48,14 @@ let projects: [ProjectToBundle] = {
 }()
 
 func cleanupModels() {
-    
+    let jsonNames = try! FileManager.default.contentsOfDirectory(atPath: dir + "/Suggested Items/Suggested.bundle/Generative/").sorted()
+    for jsonName in jsonNames {
+        let url = URL(filePath: dir + "/Suggested Items/Suggested.bundle/Generative/" + jsonName)
+        let data = try! Data(contentsOf: url)
+        let generativeProject = try! JSONDecoder().decode(GenerativeProject.self, from: data)
+        let tokensData = try! Data(contentsOf: URL(fileURLWithPath: dir + "/Suggested Items/Suggested.bundle/Tokens/\(generativeProject.id).json"))
+        let tokens = try! JSONDecoder().decode(BundledTokens.self, from: tokensData)
+    }
 }
 
 func bundleSelected(useCollectionImages: Bool) {

@@ -96,7 +96,7 @@ func addMissingSuggestedItemsForGenerativeArtblocks() {
                                           collectionId: nil,
                                           abId: generativeProject.projectId)
         bundledSuggestedItems.append(suggestedItem)
-        let tokens = generativeProject.tokens.map { BundledTokens.Item(id: $0.id, name: nil, url: nil) }
+        let tokens = generativeProject.tokens.map { BundledTokens.Item(id: $0.id, name: nil, url: nil, hash: $0.hash) }
         let bundledTokens = BundledTokens(isComplete: true, items: tokens)
         
         let bundledTokensData = try! JSONEncoder().encode(bundledTokens)

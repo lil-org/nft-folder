@@ -51,7 +51,7 @@ struct SimpleHash {
         }
         
         var toBundle: BundledTokens.Item {
-            return BundledTokens.Item(id: tokenId, name: name, url: imageUrl)
+            return BundledTokens.Item(id: tokenId, name: name, url: imageUrl, hash: nil)
         }
     }
     
