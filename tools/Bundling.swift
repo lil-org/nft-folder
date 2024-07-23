@@ -48,10 +48,23 @@ let projects: [ProjectToBundle] = {
 }()
 
 func cleanupModels() {
-    for jsonName in try! FileManager.default.contentsOfDirectory(atPath: dir + "/Suggested Items/Suggested.bundle/Scripts/") {
-        let scriptData = try! Data(contentsOf: URL(filePath: dir + "/Suggested Items/Suggested.bundle/Scripts/" + jsonName))
-        let script = try! JSONDecoder().decode(Script.self, from: scriptData)
-        print(script.name)
+    for jsonName in try! FileManager.default.contentsOfDirectory(atPath: dir + "/Suggested Items/Suggested.bundle/Tokens/") {
+        let id = jsonName.dropLast(5)
+        let data = try! Data(contentsOf: URL(filePath: dir + "/Suggested Items/Suggested.bundle/Tokens/" + jsonName))
+        let bundledTokens = try! JSONDecoder().decode(BundledTokens.self, from: data)
+        
+        let shPrefix = "https://cdn.simplehash.com/assets/"
+        let allSh = !bundledTokens.items.contains(where: { $0.url == nil || $0.url?.starts(with: shPrefix) == false })
+        
+        if allSh {
+            let newItems = bundledTokens.items.map { BundledTokens.Item(id: $0.id, name: $0.name, url: nil, sh: String($0.url!.dropFirst(shPrefix.count)), hash: $0.hash) }
+            let newBundledTokens = BundledTokens(isComplete: bundledTokens.isComplete, items: newItems)
+            
+            
+            let newData = try! JSONEncoder().encode(newBundledTokens)
+            let jsonString = String(data: newData, encoding: .utf8)!
+            try! jsonString.write(to: URL(fileURLWithPath: dir + "/Suggested Items/Suggested.bundle/Tokens/\(jsonName)"), atomically: true, encoding: .utf8)
+        }
     }
 }
 

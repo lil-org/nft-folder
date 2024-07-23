@@ -42,7 +42,11 @@ class WalletDownloader {
             for item in bundledTokens.items.shuffled() {
                 let name: String?
                 let contentRepresentations: [ContentRepresentation]
-                if let url = item.url {
+                if let sh = item.sh {
+                    guard let content = ContentRepresentation(url: "https://cdn.simplehash.com/assets/\(sh)", size: nil, mimeType: nil, knownKind: nil) else { continue }
+                    contentRepresentations = [content]
+                    name = item.name
+                } else if let url = item.url {
                     guard let content = ContentRepresentation(url: url, size: nil, mimeType: nil, knownKind: nil) else { continue }
                     contentRepresentations = [content]
                     name = item.name

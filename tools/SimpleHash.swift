@@ -51,7 +51,10 @@ struct SimpleHash {
         }
         
         var toBundle: BundledTokens.Item {
-            return BundledTokens.Item(id: tokenId, name: name, url: imageUrl, hash: nil)
+            let shPrefix = "https://cdn.simplehash.com/assets/"
+            guard imageUrl!.hasPrefix(shPrefix) else { assert(false) }
+            let sh = String(imageUrl!.dropFirst(shPrefix.count))
+            return BundledTokens.Item(id: tokenId, name: name, url: nil, sh: sh, hash: nil)
         }
     }
     
