@@ -86,7 +86,7 @@ func bundleGenerativeCollections(onlyIds: Set<String>?) {
         let type = ScriptType.fromString(project.scriptTypeAndVersion)!
         guard let kind = Script.Kind(rawValue: type.rawValue) else { continue }
         let tokens = project.tokens.map { BundledTokens.Item(id: $0.tokenId, name: nil, url: nil, hash: $0.hash) }
-        let scriptToBundle = Script(value: project.script!, kind: kind, instructions: project.scriptJson?.instructions, screensaverFileName: nil)
+        let scriptToBundle = Script(address: project.contractAddress, name: project.name, abId: project.projectId, value: project.script!, kind: kind, instructions: project.scriptJson?.instructions, screensaverFileName: nil)
         if let onlyIds, !onlyIds.contains(name) { continue }
         let dataToWrite = try! encoder.encode(scriptToBundle)
         try! dataToWrite.write(to: URL(fileURLWithPath: dir + "/Suggested Items/Suggested.bundle/Scripts/\(name).json"))

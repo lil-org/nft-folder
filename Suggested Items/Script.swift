@@ -4,6 +4,9 @@ import Foundation
 
 struct Script: Codable {
     
+    let address: String
+    let name: String
+    let abId: String
     let value: String
     let kind: Kind
     let instructions: String?

@@ -48,7 +48,11 @@ let projects: [ProjectToBundle] = {
 }()
 
 func cleanupModels() {
-    
+    for jsonName in try! FileManager.default.contentsOfDirectory(atPath: dir + "/Suggested Items/Suggested.bundle/Scripts/") {
+        let scriptData = try! Data(contentsOf: URL(filePath: dir + "/Suggested Items/Suggested.bundle/Scripts/" + jsonName))
+        let script = try! JSONDecoder().decode(Script.self, from: scriptData)
+        print(script.name)
+    }
 }
 
 func bundleSelected(useCollectionImages: Bool) {
