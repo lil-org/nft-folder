@@ -17,5 +17,6 @@ let fresh =
 //updateBundledGenerativeProjects()
 //addMissingSuggestedItemsForGenerativeArtblocks()
 //addMissingCollectionIds()
+//cleanupModels()
 
 print("🟢 all done")

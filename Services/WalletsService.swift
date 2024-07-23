@@ -110,7 +110,7 @@ struct WalletsService {
             if let responseCollections = response?.collections?.nodes {
                 let collections = responseCollections.compactMap { collectionNode in
                     if let network = Network.withName(collectionNode.networkInfo.network) {
-                        return CollectionInfo(name: collectionNode.name, network: network, chain: nil, hasVideo: nil)
+                        return CollectionInfo(name: collectionNode.name, network: network, chain: nil)
                     } else {
                         return nil
                     }

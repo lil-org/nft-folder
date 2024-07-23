@@ -94,8 +94,7 @@ func addMissingSuggestedItemsForGenerativeArtblocks() {
                                           chainId: 1,
                                           chain: .ethereum,
                                           collectionId: nil,
-                                          abId: generativeProject.projectId,
-                                          hasVideo: false)
+                                          abId: generativeProject.projectId)
         bundledSuggestedItems.append(suggestedItem)
         let tokens = generativeProject.tokens.map { BundledTokens.Item(id: $0.id, name: nil, url: nil) }
         let bundledTokens = BundledTokens(isComplete: true, items: tokens)

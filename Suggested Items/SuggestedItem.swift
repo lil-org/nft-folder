@@ -16,6 +16,5 @@ struct SuggestedItem: Identifiable, Hashable, Codable {
     let chain: Chain
     let collectionId: String?
     let abId: String?
-    let hasVideo: Bool?
     
 }

@@ -47,6 +47,10 @@ let projects: [ProjectToBundle] = {
     return result
 }()
 
+func cleanupModels() {
+    
+}
+
 func bundleSelected(useCollectionImages: Bool) {
     let projectsToBundle = projects.filter { !bundledIds.contains($0.id) && selectedSet.contains($0.id) }
     bundleProjects(projects: projectsToBundle, useCollectionImages: useCollectionImages)
@@ -63,7 +67,7 @@ func addMissingCollectionIds() {
         if item.collectionId == nil && item.abId != nil {
             print(item.name)
             SimpleHash.getNft(contract: item.address, chain: .ethereum) { nft in
-                let updatedItem = SuggestedItem(name: item.name, address: item.address, chainId: item.chainId, chain: item.chain, collectionId: nft.collection?.collectionId, abId: item.abId, hasVideo: item.hasVideo)
+                let updatedItem = SuggestedItem(name: item.name, address: item.address, chainId: item.chainId, chain: item.chain, collectionId: nft.collection?.collectionId, abId: item.abId)
                 bundledSuggestedItems[index] = updatedItem
                 print("did update \(item.name)")
                 count -= 1
@@ -89,8 +93,7 @@ fileprivate func bundleProjects(projects: [ProjectToBundle], useCollectionImages
                                           chainId: project.chain.network.rawValue,
                                           chain: project.chain,
                                           collectionId: project.collectionId,
-                                          abId: nil,
-                                          hasVideo: nil)
+                                          abId: nil)
         bundledSuggestedItems.append(suggestedItem)
         
         SimpleHash.getAllNfts(collectionId: project.collectionId, next: nil, addTo: []) { nfts in

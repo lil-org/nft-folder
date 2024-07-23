@@ -431,7 +431,7 @@ struct WalletsListView: View {
     }
     
     private func didSelectSuggestedItem(_ item: SuggestedItem) {
-        let collections = [CollectionInfo(name: item.name, network: item.network, chain: item.chain, hasVideo: item.hasVideo)]
+        let collections = [CollectionInfo(name: item.name, network: item.network, chain: item.chain)]
         let projectId = item.abId ?? item.collectionId
         
         var walletName = item.name

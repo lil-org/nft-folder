@@ -49,16 +49,7 @@ class WalletDownloader {
                 } else {
                     if let imageContent = ContentRepresentation(url: "https://media-proxy.artblocks.io/\(wallet.address)/\(item.id).png",
                                                                 size: nil, mimeType: nil, knownKind: .image) {
-                        if collection.hasVideo == true,
-                           let videoContent = ContentRepresentation(url: "https://media-proxy.artblocks.io/\(wallet.address)/\(item.id).mp4",
-                                                                    size: nil,
-                                                                    mimeType: nil,
-                                                                    knownKind: .video) {
-                            contentRepresentations = [videoContent, imageContent]
-                        } else {
-                            contentRepresentations = [imageContent]
-                        }
-                        
+                        contentRepresentations = [imageContent]
                         if let knownName = item.name {
                             name = knownName
                         } else if let projectId = wallet.projectId, item.id.hasPrefix(projectId), item.id != projectId {

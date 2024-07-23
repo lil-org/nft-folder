@@ -37,7 +37,7 @@ struct MetadataStorage {
             if WalletsService.shared.hasWallet(folderName: suggestedItem.name) {
                 walletName += " " + suggestedItem.address.suffix(4)
             }
-            let wallet = WatchOnlyWallet(address: suggestedItem.address, name: walletName, avatar: nil, projectId: suggestedItem.abId ?? suggestedItem.collectionId, chain: suggestedItem.chain, collections: [CollectionInfo(name: suggestedItem.name, network: suggestedItem.network, chain: suggestedItem.chain, hasVideo: suggestedItem.hasVideo)])
+            let wallet = WatchOnlyWallet(address: suggestedItem.address, name: walletName, avatar: nil, projectId: suggestedItem.abId ?? suggestedItem.collectionId, chain: suggestedItem.chain, collections: [CollectionInfo(name: suggestedItem.name, network: suggestedItem.network, chain: suggestedItem.chain)])
             return wallet
         }
         
@@ -48,7 +48,7 @@ struct MetadataStorage {
                let detailedMetadata = detailedMetadata(nftFilePath: filePath),
                minimalMetadata.collectionAddress == detailedMetadata.collectionAddress,
                let collectionName = detailedMetadata.collectionName, name.contains(collectionName) {
-                let collectionInfo = CollectionInfo(name: collectionName, network: detailedMetadata.network, chain: detailedMetadata.chain, hasVideo: nil)
+                let collectionInfo = CollectionInfo(name: collectionName, network: detailedMetadata.network, chain: detailedMetadata.chain)
                 return WatchOnlyWallet(address: detailedMetadata.collectionAddress, name: collectionName, avatar: nil, projectId: nil, chain: detailedMetadata.chain, collections: [collectionInfo])
             } else {
                 return nil
