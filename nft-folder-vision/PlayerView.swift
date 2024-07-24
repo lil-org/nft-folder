@@ -18,6 +18,31 @@ struct PlayerView: View {
     }
     
     var body: some View {
-        MobileWebView(htmlString: playerModel.currentToken.html)
+        VStack {
+            MobileWebView(htmlString: playerModel.currentToken.html)
+            HStack {
+                Button(action: {
+                    DispatchQueue.main.async { playerModel.goBack() }
+                }) {
+                    Images.back
+                }
+                Button(action: {
+                    DispatchQueue.main.async { playerModel.goForward() }
+                }) {
+                    Images.forward
+                }
+                Button(action: {
+                    DispatchQueue.main.async { playerModel.changeCollection() }
+                }) {
+                    Images.changeCollection
+                }
+                Button(action: {
+                    DispatchQueue.main.async { playerModel.showingInfoPopover.toggle() }
+                }) {
+                    Images.info
+                }
+            }
+            .padding()
+        }
     }
 }

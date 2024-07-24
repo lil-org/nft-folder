@@ -16,7 +16,7 @@ extension Images {
     static let openFinder = Image(systemName: "folder")
     static let back = Image(systemName: "chevron.backward")
     static let forward = Image(systemName: "chevron.forward")
-    static let info = Image(systemName: "info.circle")
-    static let changeCollection = Image(systemName: "goforward")
+    static let info = Image(systemName: "info")
+    static let changeCollection = Image(systemName: "forward")
     
 }
