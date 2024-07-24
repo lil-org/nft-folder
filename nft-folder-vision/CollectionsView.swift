@@ -13,6 +13,22 @@ struct CollectionsView: View {
     @State private var showMorePreferences = false
     
     var body: some View {
+        ZStack {
+            HStack {
+                Spacer()
+                Text(Consts.noggles)
+                Spacer()
+            }
+            HStack {
+                Spacer()
+                Button(action: {
+                    showRandomPlayer()
+                }) {
+                    Images.shuffle
+                }
+            }
+        }
+        .frame(height: 42).padding(.horizontal).padding(.top, 8)
         ScrollView {
             createGrid().frame(maxWidth: .infinity)
         }
