@@ -25,12 +25,12 @@ struct PlayerView: View {
                     DispatchQueue.main.async { playerModel.goBack() }
                 }) {
                     Images.back
-                }
+                }.keyboardShortcut("[", modifiers: .command)
                 Button(action: {
                     DispatchQueue.main.async { playerModel.goForward() }
                 }) {
                     Images.forward
-                }
+                }.keyboardShortcut("]", modifiers: .command)
                 Button(action: {
                     DispatchQueue.main.async { playerModel.changeCollection() }
                 }) {
@@ -40,7 +40,7 @@ struct PlayerView: View {
                     DispatchQueue.main.async { playerModel.showingInfoPopover.toggle() }
                 }) {
                     Images.info
-                }.popover(isPresented: Binding(
+                }.keyboardShortcut("i", modifiers: .command).popover(isPresented: Binding(
                     get: { playerModel.showingInfoPopover },
                     set: { newValue in
                         DispatchQueue.main.async {
@@ -54,7 +54,6 @@ struct PlayerView: View {
             .padding()
         }
     }
-    
     
     private func viewOnWeb() {
         if let url = playerModel.currentToken.url {
