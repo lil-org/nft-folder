@@ -2423,7 +2423,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.0.16;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder-vision";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = xros;
 				SUPPORTED_PLATFORMS = "xros xrsimulator";
@@ -2453,7 +2453,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.0.16;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder-vision";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = xros;
 				SUPPORTED_PLATFORMS = "xros xrsimulator";
