@@ -78,6 +78,9 @@
 		2C5A59C92C51503D00788870 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A42E92B1A272600BE4166 /* Network.swift */; };
 		2C5A59CA2C51504900788870 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA623E62BEE8A0200BD78FF /* UserDefaults.swift */; };
 		2C5A59CB2C51516700788870 /* HostAppImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60C32B7D41D1009949C2 /* HostAppImages.swift */; };
+		2C5A59CD2C51529800788870 /* CollectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5A59CC2C51529800788870 /* CollectionsView.swift */; };
+		2C5A59CF2C5152A600788870 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5A59CE2C5152A600788870 /* PlayerView.swift */; };
+		2C5A59D12C5152B000788870 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5A59D02C5152B000788870 /* Helpers.swift */; };
 		2C60AAD12B8A4DE200F2C143 /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60AAD02B8A4DE200F2C143 /* Window.swift */; };
 		2C622BB92BF3C1EA0003B932 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C622BB82BF3C1EA0003B932 /* main.swift */; };
 		2C63720B2C417FC2001169E8 /* ScreenSaverHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63720A2C417FC2001169E8 /* ScreenSaverHelper.swift */; };
@@ -259,6 +262,9 @@
 		2C5A59B02C51400200788870 /* nft_folder_tvosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nft_folder_tvosApp.swift; sourceTree = "<group>"; };
 		2C5A59B22C51400200788870 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2C5A59B42C51400300788870 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2C5A59CC2C51529800788870 /* CollectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsView.swift; sourceTree = "<group>"; };
+		2C5A59CE2C5152A600788870 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		2C5A59D02C5152B000788870 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		2C60AAD02B8A4DE200F2C143 /* Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
 		2C622BB62BF3C1EA0003B932 /* translate */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = translate; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C622BB82BF3C1EA0003B932 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -845,6 +851,9 @@
 			isa = PBXGroup;
 			children = (
 				2C5A599D2C51073F00788870 /* nft_folder_visionApp.swift */,
+				2C5A59CC2C51529800788870 /* CollectionsView.swift */,
+				2C5A59CE2C5152A600788870 /* PlayerView.swift */,
+				2C5A59D02C5152B000788870 /* Helpers.swift */,
 				2C5A59A12C51074B00788870 /* Assets.xcassets */,
 				2C5A59A62C51074B00788870 /* Info.plist */,
 			);
@@ -2144,12 +2153,15 @@
 				2C5A59C12C514FE400788870 /* SuggestedItem.swift in Sources */,
 				2C5A59C42C51500500788870 /* Defaults.swift in Sources */,
 				2C5A59C52C51501500788870 /* WatchOnlyWallet.swift in Sources */,
+				2C5A59CF2C5152A600788870 /* PlayerView.swift in Sources */,
 				2C5A59C72C51502300788870 /* Chain.swift in Sources */,
 				2C5A59C02C514FDE00788870 /* BundledTokens.swift in Sources */,
 				2C5A59C92C51503D00788870 /* Network.swift in Sources */,
 				2C5A599E2C51073F00788870 /* nft_folder_visionApp.swift in Sources */,
 				2C5A59BF2C514FDB00788870 /* Script.swift in Sources */,
+				2C5A59CD2C51529800788870 /* CollectionsView.swift in Sources */,
 				2C5A59CA2C51504900788870 /* UserDefaults.swift in Sources */,
+				2C5A59D12C5152B000788870 /* Helpers.swift in Sources */,
 				2C5A59CB2C51516700788870 /* HostAppImages.swift in Sources */,
 				2C5A59C22C514FF400788870 /* SuggestedItemsService.swift in Sources */,
 				2C5A59BE2C514FD700788870 /* GeneratedToken.swift in Sources */,
