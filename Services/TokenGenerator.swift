@@ -58,7 +58,7 @@ struct TokenGenerator {
         }
         
         let html = RawHtmlGenerator.createHtml(script: script, token: randomToken)
-        let cleanId = randomToken.id.dropFirst(script.abId.count).drop(while: { $0 == "0" })
+        let cleanId = (randomToken.id.hasPrefix(script.abId) && randomToken.id != script.abId) ? String(randomToken.id.dropFirst(script.abId.count).drop(while: { $0 == "0" })) : randomToken.id
         let name = script.name + " #" + (cleanId.isEmpty ? "0" : cleanId)
         
         let webURL = NftGallery.opensea.url(network: .mainnet, chain: .ethereum, collectionAddress: script.address, tokenId: randomToken.id)
