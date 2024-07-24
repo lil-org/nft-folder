@@ -9,7 +9,18 @@ struct TokenGenerator {
     private static let jsonsNames: Set<String> = {
         let fileManager = FileManager.default
         let fileURLs = (try? fileManager.contentsOfDirectory(at: dirURL, includingPropertiesForKeys: nil)) ?? []
+#if canImport(AppKit)
         let fileNames = fileURLs.map { $0.lastPathComponent }
+#else
+        let tmpDisabledForVisionPro = Set([
+            "0x0a1bbd57033f57e7b6743621b79fcb9eb2ce367650",
+            "0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270250",
+            "0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270356",
+            "0x99a9b7c1116f9ceeb1652de04d5969cce509b069472",
+            "0x0a1bbd57033f57e7b6743621b79fcb9eb2ce367667",
+        ])
+        let fileNames = fileURLs.compactMap { tmpDisabledForVisionPro.contains(String($0.lastPathComponent.dropLast(5))) ? nil : $0.lastPathComponent }
+#endif
         return Set(fileNames)
     }()
     
