@@ -5,7 +5,7 @@ import SwiftUI
 
 class LocalHtmlWindow: NSWindow {
     
-    private var playerModel = PlayerModel()
+    private var playerModel = PlayerModel(specificCollectionId: nil, notTokenId: nil)
     private var cursorHideTimer: Timer?
     private var mouseMoveEventMonitor: Any?
     private var navigationKeysEventMonitor: Any?

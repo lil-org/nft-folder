@@ -2,7 +2,7 @@
 
 import Foundation
 
-struct GeneratedToken {
+struct GeneratedToken: Codable {
     let fullCollectionId: String
     let id: String
     let html: String

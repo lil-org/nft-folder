@@ -9,8 +9,10 @@ struct nft_folder_visionApp: App {
             CollectionsView()
         }
         
-        WindowGroup(id: WindowId.player) {
-            PlayerView()
+        WindowGroup(for: PlayerWindowConfig.self) { $config in
+            if let config = config {
+                PlayerView(config: config)
+            }
         }
     }
 }

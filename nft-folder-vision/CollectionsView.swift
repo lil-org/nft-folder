@@ -79,13 +79,11 @@ struct CollectionsView: View {
     }
     
     private func didSelectSuggestedItem(_ item: SuggestedItem) {
-        // TODO: setup player with selected item
-        openWindow(id: WindowId.player)
+        openWindow(value: PlayerWindowConfig(initialItemId: item.id))
     }
-    
+
     private func showRandomPlayer() {
-        // TODO: make sure player gets set up with a random content
-        openWindow(id: WindowId.player)
+        openWindow(value: PlayerWindowConfig(initialItemId: nil))
     }
     
 }

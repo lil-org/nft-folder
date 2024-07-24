@@ -10,8 +10,8 @@ class PlayerModel: ObservableObject {
     @Published var showingInfoPopover = false
     @Published var showingListPopover = false
 
-    init() {
-        let token = TokenGenerator.generateRandomToken(specificCollectionId: nil, notTokenId: nil) ?? GeneratedToken.empty
+    init(specificCollectionId: String?, notTokenId: String?) {
+        let token = TokenGenerator.generateRandomToken(specificCollectionId: specificCollectionId, notTokenId: notTokenId) ?? GeneratedToken.empty
         self.currentToken = token
         self.history = [token]
     }
