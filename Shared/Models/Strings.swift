@@ -43,6 +43,7 @@ struct Strings {
     static let info = loc("Info")
     static let editPlaylist = loc("Edit Playlist")
     static let nextCollection = loc("Next Collection")
+    static let play = loc("Play")
     
     static let zora = "Zora"
     static let opensea = "OpenSea"

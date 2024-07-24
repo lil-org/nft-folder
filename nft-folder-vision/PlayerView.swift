@@ -5,7 +5,7 @@ import SwiftUI
 struct PlayerView: View {
     
     var body: some View {
-        Text("playing...").font(.headline)
+        Rectangle()
     }
     
 }
