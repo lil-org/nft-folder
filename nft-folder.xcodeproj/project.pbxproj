@@ -60,7 +60,6 @@
 		2C59D1552C4017B2005F9F72 /* ArtBlocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59D1542C4017B2005F9F72 /* ArtBlocks.swift */; };
 		2C59D1572C405B53005F9F72 /* templates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59D1562C405B53005F9F72 /* templates.swift */; };
 		2C5A599E2C51073F00788870 /* nft_folder_visionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5A599D2C51073F00788870 /* nft_folder_visionApp.swift */; };
-		2C5A59A02C51073F00788870 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5A599F2C51073F00788870 /* ContentView.swift */; };
 		2C5A59A22C51074B00788870 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C5A59A12C51074B00788870 /* Assets.xcassets */; };
 		2C60AAD12B8A4DE200F2C143 /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60AAD02B8A4DE200F2C143 /* Window.swift */; };
 		2C622BB92BF3C1EA0003B932 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C622BB82BF3C1EA0003B932 /* main.swift */; };
@@ -237,7 +236,6 @@
 		2C59D1562C405B53005F9F72 /* templates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = templates.swift; sourceTree = "<group>"; };
 		2C5A59972C51073F00788870 /* nft-folder-vision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nft-folder-vision.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5A599D2C51073F00788870 /* nft_folder_visionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nft_folder_visionApp.swift; sourceTree = "<group>"; };
-		2C5A599F2C51073F00788870 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2C5A59A12C51074B00788870 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C5A59A62C51074B00788870 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C60AAD02B8A4DE200F2C143 /* Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
@@ -819,7 +817,6 @@
 			isa = PBXGroup;
 			children = (
 				2C5A599D2C51073F00788870 /* nft_folder_visionApp.swift */,
-				2C5A599F2C51073F00788870 /* ContentView.swift */,
 				2C5A59A12C51074B00788870 /* Assets.xcassets */,
 				2C5A59A62C51074B00788870 /* Info.plist */,
 			);
@@ -2073,7 +2070,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C5A59A02C51073F00788870 /* ContentView.swift in Sources */,
 				2C5A599E2C51073F00788870 /* nft_folder_visionApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
