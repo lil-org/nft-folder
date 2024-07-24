@@ -11,7 +11,7 @@ struct nft_folder_visionApp: App {
         
         WindowGroup(for: PlayerWindowConfig.self) { $config in
             if let config = config {
-                PlayerView(config: config)
+                PlayerView(config: config).handlesExternalEvents(preferring: [], allowing: [])
             }
         }
     }
