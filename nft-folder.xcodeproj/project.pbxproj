@@ -59,6 +59,9 @@
 		2C5695AC2C4195E1003B4335 /* LibScriptString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5695AB2C4195E1003B4335 /* LibScriptString.swift */; };
 		2C59D1552C4017B2005F9F72 /* ArtBlocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59D1542C4017B2005F9F72 /* ArtBlocks.swift */; };
 		2C59D1572C405B53005F9F72 /* templates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59D1562C405B53005F9F72 /* templates.swift */; };
+		2C5A599E2C51073F00788870 /* nft_folder_visionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5A599D2C51073F00788870 /* nft_folder_visionApp.swift */; };
+		2C5A59A02C51073F00788870 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5A599F2C51073F00788870 /* ContentView.swift */; };
+		2C5A59A22C51074B00788870 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C5A59A12C51074B00788870 /* Assets.xcassets */; };
 		2C60AAD12B8A4DE200F2C143 /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60AAD02B8A4DE200F2C143 /* Window.swift */; };
 		2C622BB92BF3C1EA0003B932 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C622BB82BF3C1EA0003B932 /* main.swift */; };
 		2C63720B2C417FC2001169E8 /* ScreenSaverHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63720A2C417FC2001169E8 /* ScreenSaverHelper.swift */; };
@@ -232,6 +235,11 @@
 		2C5695AB2C4195E1003B4335 /* LibScriptString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibScriptString.swift; sourceTree = "<group>"; };
 		2C59D1542C4017B2005F9F72 /* ArtBlocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtBlocks.swift; sourceTree = "<group>"; };
 		2C59D1562C405B53005F9F72 /* templates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = templates.swift; sourceTree = "<group>"; };
+		2C5A59972C51073F00788870 /* nft-folder-vision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nft-folder-vision.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C5A599D2C51073F00788870 /* nft_folder_visionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nft_folder_visionApp.swift; sourceTree = "<group>"; };
+		2C5A599F2C51073F00788870 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2C5A59A12C51074B00788870 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2C5A59A62C51074B00788870 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C60AAD02B8A4DE200F2C143 /* Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
 		2C622BB62BF3C1EA0003B932 /* translate */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = translate; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C622BB82BF3C1EA0003B932 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -695,6 +703,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2C5A59942C51073F00788870 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2C622BB32BF3C1EA0003B932 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -798,6 +813,17 @@
 				2C8EDD022C0CFE3F003CB35D /* Snapshot.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		2C5A59982C51073F00788870 /* nft-folder-vision */ = {
+			isa = PBXGroup;
+			children = (
+				2C5A599D2C51073F00788870 /* nft_folder_visionApp.swift */,
+				2C5A599F2C51073F00788870 /* ContentView.swift */,
+				2C5A59A12C51074B00788870 /* Assets.xcassets */,
+				2C5A59A62C51074B00788870 /* Info.plist */,
+			);
+			path = "nft-folder-vision";
 			sourceTree = "<group>";
 		};
 		2C622BB72BF3C1EA0003B932 /* translate */ = {
@@ -1601,6 +1627,7 @@
 				2C8FD1CB2BF4B33C00B3D327 /* fastlane */,
 				2CD488FD2B10C6B000A53950 /* Supporting Files */,
 				2CBC42362C41772E00279CED /* nft-screen-saver */,
+				2C5A59982C51073F00788870 /* nft-folder-vision */,
 				2CA4CF522B07F75F00CC75F4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -1613,6 +1640,7 @@
 				2C622BB62BF3C1EA0003B932 /* translate */,
 				2C4659992C308F86008CF97F /* tools */,
 				2CBC42352C41772E00279CED /* nft-screen-saver.saver */,
+				2C5A59972C51073F00788870 /* nft-folder-vision.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1770,6 +1798,25 @@
 			productReference = 2C4659992C308F86008CF97F /* tools */;
 			productType = "com.apple.product-type.tool";
 		};
+		2C5A59962C51073F00788870 /* nft-folder-vision */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C5A59A92C51074B00788870 /* Build configuration list for PBXNativeTarget "nft-folder-vision" */;
+			buildPhases = (
+				2C5A59932C51073F00788870 /* Sources */,
+				2C5A59942C51073F00788870 /* Frameworks */,
+				2C5A59952C51073F00788870 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "nft-folder-vision";
+			packageProductDependencies = (
+			);
+			productName = "nft-folder-vision";
+			productReference = 2C5A59972C51073F00788870 /* nft-folder-vision.app */;
+			productType = "com.apple.product-type.application";
+		};
 		2C622BB52BF3C1EA0003B932 /* translate */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2C622BBC2BF3C1EA0003B932 /* Build configuration list for PBXNativeTarget "translate" */;
@@ -1857,6 +1904,9 @@
 					2C4659982C308F86008CF97F = {
 						CreatedOnToolsVersion = 15.4;
 					};
+					2C5A59962C51073F00788870 = {
+						CreatedOnToolsVersion = 15.4;
+					};
 					2C622BB52BF3C1EA0003B932 = {
 						CreatedOnToolsVersion = 15.3;
 					};
@@ -1921,6 +1971,7 @@
 			projectRoot = "";
 			targets = (
 				2CA4CF502B07F75E00CC75F4 /* nft folder */,
+				2C5A59962C51073F00788870 /* nft-folder-vision */,
 				2CA34B612B08C01300DAB623 /* nft-finder-extension */,
 				2CBC42342C41772E00279CED /* nft-screen-saver */,
 				2C622BB52BF3C1EA0003B932 /* translate */,
@@ -1930,6 +1981,14 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		2C5A59952C51073F00788870 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C5A59A22C51074B00788870 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2CA34B602B08C01300DAB623 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2007,6 +2066,15 @@
 				2C937BD22C3C8D1A00B3B6D1 /* Script.swift in Sources */,
 				2CB308E82C30AD0000D914A5 /* NSImage.swift in Sources */,
 				2CB308E42C30A2E800D914A5 /* SuggestedItem.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C5A59932C51073F00788870 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C5A59A02C51073F00788870 /* ContentView.swift in Sources */,
+				2C5A599E2C51073F00788870 /* nft_folder_visionApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2191,6 +2259,67 @@
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		2C5A59A72C51074B00788870 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 82;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 8DXC3N7E7P;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "$(TARGET_NAME)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "nft folder";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.0.16;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder-vision";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = xros;
+				SUPPORTED_PLATFORMS = "xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 1.0;
+			};
+			name = Debug;
+		};
+		2C5A59A82C51074B00788870 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 82;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 8DXC3N7E7P;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "$(TARGET_NAME)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "nft folder";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.0.16;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder-vision";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = xros;
+				SUPPORTED_PLATFORMS = "xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				VALIDATE_PRODUCT = YES;
+				XROS_DEPLOYMENT_TARGET = 1.0;
 			};
 			name = Release;
 		};
@@ -2537,6 +2666,15 @@
 			buildConfigurations = (
 				2C46599E2C308F86008CF97F /* Debug */,
 				2C46599F2C308F86008CF97F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2C5A59A92C51074B00788870 /* Build configuration list for PBXNativeTarget "nft-folder-vision" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C5A59A72C51074B00788870 /* Debug */,
+				2C5A59A82C51074B00788870 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
