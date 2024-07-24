@@ -2,34 +2,47 @@
 
 import SwiftUI
 
+struct WindowId {
+    
+    static let collections = "collections"
+    static let player = "player"
+    
+}
+
+struct Images {
+    
+}
+
 @main
 struct nft_folder_visionApp: App {
     var body: some Scene {
-        WindowGroup(id: "suggested-items") {
-            ContentView()
+        WindowGroup(id: WindowId.collections) {
+            CollectionsView()
         }
         
-        WindowGroup(id: "player") {
+        WindowGroup(id: WindowId.player) {
             PlayerView()
         }
     }
 }
 
-struct ContentView: View {
+struct CollectionsView: View {
     
     @Environment(\.openWindow) private var openWindow
     
     var body: some View {
         VStack {
-            Button("Play", action: {
+            Button(action: {
                 play()
-            })
+            }) {
+                Images.shuffle
+            }
         }
         .padding()
     }
     
     private func play() {
-        openWindow(id: "player")
+        openWindow(id: WindowId.player)
     }
     
 }

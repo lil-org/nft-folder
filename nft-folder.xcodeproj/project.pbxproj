@@ -64,6 +64,20 @@
 		2C5A59B12C51400200788870 /* nft_folder_tvosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5A59B02C51400200788870 /* nft_folder_tvosApp.swift */; };
 		2C5A59B32C51400200788870 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5A59B22C51400200788870 /* ContentView.swift */; };
 		2C5A59B52C51400300788870 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C5A59B42C51400300788870 /* Assets.xcassets */; };
+		2C5A59BC2C514FCF00788870 /* Covers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C4659932C308B44008CF97F /* Covers.xcassets */; };
+		2C5A59BD2C514FD200788870 /* Suggested.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2C09BAE32C308145009BA300 /* Suggested.bundle */; };
+		2C5A59BE2C514FD700788870 /* GeneratedToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE9A5772C3DAB03009AEAF4 /* GeneratedToken.swift */; };
+		2C5A59BF2C514FDB00788870 /* Script.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C8DE82C3C890B00BC83E9 /* Script.swift */; };
+		2C5A59C02C514FDE00788870 /* BundledTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C086E862C2F3C3600D4268D /* BundledTokens.swift */; };
+		2C5A59C12C514FE400788870 /* SuggestedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFF885A2C288C9A0007045F /* SuggestedItem.swift */; };
+		2C5A59C22C514FF400788870 /* SuggestedItemsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C60342C2C5FE8001D9B51 /* SuggestedItemsService.swift */; };
+		2C5A59C42C51500500788870 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF4C49F2B7FCDDC000AB4A6 /* Defaults.swift */; };
+		2C5A59C52C51501500788870 /* WatchOnlyWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B502B08B33C00DAB623 /* WatchOnlyWallet.swift */; };
+		2C5A59C72C51502300788870 /* Chain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4DBFC02C3698D10097AD35 /* Chain.swift */; };
+		2C5A59C82C51502C00788870 /* CollectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF524012BB2ECD200C18344 /* CollectionInfo.swift */; };
+		2C5A59C92C51503D00788870 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A42E92B1A272600BE4166 /* Network.swift */; };
+		2C5A59CA2C51504900788870 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA623E62BEE8A0200BD78FF /* UserDefaults.swift */; };
+		2C5A59CB2C51516700788870 /* HostAppImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60C32B7D41D1009949C2 /* HostAppImages.swift */; };
 		2C60AAD12B8A4DE200F2C143 /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60AAD02B8A4DE200F2C143 /* Window.swift */; };
 		2C622BB92BF3C1EA0003B932 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C622BB82BF3C1EA0003B932 /* main.swift */; };
 		2C63720B2C417FC2001169E8 /* ScreenSaverHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63720A2C417FC2001169E8 /* ScreenSaverHelper.swift */; };
@@ -2030,6 +2044,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C5A59A22C51074B00788870 /* Assets.xcassets in Resources */,
+				2C5A59BD2C514FD200788870 /* Suggested.bundle in Resources */,
+				2C5A59BC2C514FCF00788870 /* Covers.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2125,7 +2141,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C5A59C12C514FE400788870 /* SuggestedItem.swift in Sources */,
+				2C5A59C42C51500500788870 /* Defaults.swift in Sources */,
+				2C5A59C52C51501500788870 /* WatchOnlyWallet.swift in Sources */,
+				2C5A59C72C51502300788870 /* Chain.swift in Sources */,
+				2C5A59C02C514FDE00788870 /* BundledTokens.swift in Sources */,
+				2C5A59C92C51503D00788870 /* Network.swift in Sources */,
 				2C5A599E2C51073F00788870 /* nft_folder_visionApp.swift in Sources */,
+				2C5A59BF2C514FDB00788870 /* Script.swift in Sources */,
+				2C5A59CA2C51504900788870 /* UserDefaults.swift in Sources */,
+				2C5A59CB2C51516700788870 /* HostAppImages.swift in Sources */,
+				2C5A59C22C514FF400788870 /* SuggestedItemsService.swift in Sources */,
+				2C5A59BE2C514FD700788870 /* GeneratedToken.swift in Sources */,
+				2C5A59C82C51502C00788870 /* CollectionInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
