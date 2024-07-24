@@ -8,7 +8,7 @@ struct CollectionsView: View {
     @Environment(\.openWindow) private var openWindow
     
     @State private var showSettingsPopup = false
-    @State private var suggestedItems = SuggestedItemsService.visibleItems
+    @State private var suggestedItems = TokenGenerator.allGenerativeSuggestedItems
     @State private var didAppear = false
     @State private var showMorePreferences = false
     
@@ -21,7 +21,6 @@ struct CollectionsView: View {
     private func createGrid() -> some View {
         let gridLayout = [GridItem(.adaptive(minimum: 100), spacing: 0)]
         let grid = LazyVGrid(columns: gridLayout, alignment: .leading, spacing: 0) {
-            // TODO: only show items with scripts
             ForEach(suggestedItems) { item in
                 ZStack {
                     Image(item.id).resizable().scaledToFill().clipped().aspectRatio(1, contentMode: .fit).contentShape(Rectangle())

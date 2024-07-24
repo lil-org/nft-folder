@@ -1,6 +1,9 @@
 // ∅ nft-folder 2024
 
+import Foundation
+#if canImport(AppKit)
 import Cocoa
+#endif
 
 enum NftGallery: Int, CaseIterable, Codable {
     
@@ -8,6 +11,7 @@ enum NftGallery: Int, CaseIterable, Codable {
     
     case zora, mintfun, opensea
     
+#if canImport(AppKit)
     var image: NSImage {
         switch self {
         case .zora:
@@ -18,6 +22,7 @@ enum NftGallery: Int, CaseIterable, Codable {
             return Images.opensea
         }
     }
+#endif
     
     var title: String {
         switch self {

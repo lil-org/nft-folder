@@ -109,6 +109,9 @@
 		2C94428D2C5154E00078C051 /* p5js190.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CE0F1572C4D37E6003004F2 /* p5js190.js */; };
 		2C94428E2C5154E00078C051 /* tone.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CEF35B22C413D9F00388574 /* tone.js */; };
 		2C94428F2C51555D0078C051 /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98C4AC2BEE9E390040383D /* Consts.swift */; };
+		2C9442902C515A490078C051 /* TokenGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE9A5752C3DA9FB009AEAF4 /* TokenGenerator.swift */; };
+		2C9442912C515A570078C051 /* NftGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA979AB2B62BA2400DB3AC8 /* NftGallery.swift */; };
+		2C9442922C515AC40078C051 /* RawHtmlGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF35AC2C413AE700388574 /* RawHtmlGenerator.swift */; };
 		2C98C4AD2BEE9E390040383D /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98C4AC2BEE9E390040383D /* Consts.swift */; };
 		2C98C4AE2BEE9E390040383D /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98C4AC2BEE9E390040383D /* Consts.swift */; };
 		2C9973FE2C4AEAAB00C058E2 /* WebViewWithMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9973FD2C4AEAAB00C058E2 /* WebViewWithMenu.swift */; };
@@ -2170,6 +2173,7 @@
 			files = (
 				2C5A59C12C514FE400788870 /* SuggestedItem.swift in Sources */,
 				2C5A59C42C51500500788870 /* Defaults.swift in Sources */,
+				2C9442922C515AC40078C051 /* RawHtmlGenerator.swift in Sources */,
 				2C5A59C52C51501500788870 /* WatchOnlyWallet.swift in Sources */,
 				2C5A59CF2C5152A600788870 /* PlayerView.swift in Sources */,
 				2C5A59C72C51502300788870 /* Chain.swift in Sources */,
@@ -2177,6 +2181,7 @@
 				2C5A59C92C51503D00788870 /* Network.swift in Sources */,
 				2C94428F2C51555D0078C051 /* Consts.swift in Sources */,
 				2C5A599E2C51073F00788870 /* nft_folder_visionApp.swift in Sources */,
+				2C9442902C515A490078C051 /* TokenGenerator.swift in Sources */,
 				2C5A59BF2C514FDB00788870 /* Script.swift in Sources */,
 				2C5A59CD2C51529800788870 /* CollectionsView.swift in Sources */,
 				2C5A59CA2C51504900788870 /* UserDefaults.swift in Sources */,
@@ -2186,6 +2191,7 @@
 				2C5A59C22C514FF400788870 /* SuggestedItemsService.swift in Sources */,
 				2C5A59BE2C514FD700788870 /* GeneratedToken.swift in Sources */,
 				2C5A59C82C51502C00788870 /* CollectionInfo.swift in Sources */,
+				2C9442912C515A570078C051 /* NftGallery.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,6 +13,10 @@ struct TokenGenerator {
         return Set(fileNames)
     }()
     
+    static var allGenerativeSuggestedItems: [SuggestedItem] {
+        return SuggestedItemsService.visibleItems.filter { jsonsNames.contains($0.id + ".json") }
+    }
+    
     private static var currentPassSet = Set<String>()
     
     private static func nextRandomCollection() -> String {
