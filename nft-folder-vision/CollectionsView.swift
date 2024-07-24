@@ -35,7 +35,7 @@ struct CollectionsView: View {
     }
     
     private func createGrid() -> some View {
-        let gridLayout = [GridItem(.adaptive(minimum: 100), spacing: 0)]
+        let gridLayout = [GridItem(.adaptive(minimum: 150), spacing: 0)]
         let grid = LazyVGrid(columns: gridLayout, alignment: .leading, spacing: 0) {
             ForEach(suggestedItems) { item in
                 ZStack {
@@ -57,7 +57,7 @@ struct CollectionsView: View {
     
     private func gridItemText(_ text: String, onTap: @escaping () -> Void) -> some View {
         HStack {
-            Text(text).font(.system(size: 10, weight: .regular)).lineLimit(2)
+            Text(text).font(.system(size: 15, weight: .regular)).lineLimit(2)
                 .foregroundColor(.white)
                 .padding(.horizontal, 1)
                 .background(Color.black.opacity(0.7)).cornerRadius(3)
