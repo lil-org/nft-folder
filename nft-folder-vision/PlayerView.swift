@@ -18,6 +18,6 @@ struct PlayerView: View {
     }
     
     var body: some View {
-        Text(playerModel.currentToken.displayName)
+        MobileWebView(htmlString: playerModel.currentToken.html)
     }
 }
