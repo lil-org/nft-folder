@@ -61,7 +61,11 @@ struct TokenGenerator {
         let cleanId = (randomToken.id.hasPrefix(script.abId) && randomToken.id != script.abId) ? String(randomToken.id.dropFirst(script.abId.count).drop(while: { $0 == "0" })) : randomToken.id
         let name = script.name + " #" + (cleanId.isEmpty ? "0" : cleanId)
         
+#if canImport(AppKit)
         let webURL = NftGallery.opensea.url(network: .mainnet, chain: .ethereum, collectionAddress: script.address, tokenId: randomToken.id)
+#else
+        let webURL = NftGallery.etherscan.url(network: .mainnet, chain: .ethereum, collectionAddress: script.address, tokenId: randomToken.id)
+#endif
         let token = GeneratedToken(fullCollectionId: script.id,
                                    id: randomToken.id,
                                    html: html,
