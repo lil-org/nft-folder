@@ -62,7 +62,6 @@
 		2C5A599E2C51073F00788870 /* nft_folder_visionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5A599D2C51073F00788870 /* nft_folder_visionApp.swift */; };
 		2C5A59A22C51074B00788870 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C5A59A12C51074B00788870 /* Assets.xcassets */; };
 		2C5A59B12C51400200788870 /* nft_folder_tvosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5A59B02C51400200788870 /* nft_folder_tvosApp.swift */; };
-		2C5A59B32C51400200788870 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5A59B22C51400200788870 /* ContentView.swift */; };
 		2C5A59B52C51400300788870 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C5A59B42C51400300788870 /* Assets.xcassets */; };
 		2C5A59BC2C514FCF00788870 /* Covers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C4659932C308B44008CF97F /* Covers.xcassets */; };
 		2C5A59BD2C514FD200788870 /* Suggested.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2C09BAE32C308145009BA300 /* Suggested.bundle */; };
@@ -275,7 +274,6 @@
 		2C5A59A62C51074B00788870 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C5A59AE2C51400100788870 /* nft-folder-tvos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nft-folder-tvos.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5A59B02C51400200788870 /* nft_folder_tvosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nft_folder_tvosApp.swift; sourceTree = "<group>"; };
-		2C5A59B22C51400200788870 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2C5A59B42C51400300788870 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C5A59CC2C51529800788870 /* CollectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsView.swift; sourceTree = "<group>"; };
 		2C5A59CE2C5152A600788870 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
@@ -881,7 +879,6 @@
 			isa = PBXGroup;
 			children = (
 				2C5A59B02C51400200788870 /* nft_folder_tvosApp.swift */,
-				2C5A59B22C51400200788870 /* ContentView.swift */,
 				2C5A59B42C51400300788870 /* Assets.xcassets */,
 			);
 			path = "nft-folder-tvos";
@@ -2205,7 +2202,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C5A59B32C51400200788870 /* ContentView.swift in Sources */,
 				2C5A59B12C51400200788870 /* nft_folder_tvosApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
