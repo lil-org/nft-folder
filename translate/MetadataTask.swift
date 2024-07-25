@@ -17,6 +17,7 @@ struct MetadataTask: AI.Task {
     var prompt: String {
         let metadataName: String
         let clarifications: String
+        let finalWarning = metadataKind == .subtitle ? "\nyou must respond with a string that is shorter than 30 symbols. if it does not fit, rewrite it in simpler / your own words to make sure it fits 30 symbols." : ""
         
         switch metadataKind {
         case .description:
@@ -42,7 +43,7 @@ struct MetadataTask: AI.Task {
             
             make sure the translated version communicates the same message.
             
-            keep it lowercased if possible.\(metadataKind == .subtitle ? " the output string MUST fit in 30 chars." : "")
+            keep it lowercased if possible.\(metadataKind == .subtitle ? " you MUST respons with a string that is shorter than 30 symbols." : "")
             """
         case .keywords:
             clarifications = """
@@ -83,7 +84,7 @@ struct MetadataTask: AI.Task {
         russian:
         "\(russianText)"
         
-        respond only with a \(language.name) version. do not add anything else to the response.
+        respond only with a \(language.name) version. do not add anything else to the response.\(finalWarning)
         """
         
         return output
