@@ -652,7 +652,6 @@
 		2C9113192B08F71200A8EE80 /* WalletDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDownloader.swift; sourceTree = "<group>"; };
 		2C9113272B09751D00A8EE80 /* WalletImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletImageView.swift; sourceTree = "<group>"; };
 		2C9442952C5186530078C051 /* MobileWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileWebView.swift; sourceTree = "<group>"; };
-		2C9442982C51886E0078C051 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = Platforms/XROS.platform/Developer/SDKs/XROS1.2.sdk/System/Library/Frameworks/Metal.framework; sourceTree = DEVELOPER_DIR; };
 		2C98C4AC2BEE9E390040383D /* Consts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
 		2C9973FD2C4AEAAB00C058E2 /* WebViewWithMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewWithMenu.swift; sourceTree = "<group>"; };
 		2C9973FF2C4AF12400C058E2 /* PlayerMenuDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerMenuDelegate.swift; sourceTree = "<group>"; };
@@ -1618,14 +1617,6 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		2C9442972C51886E0078C051 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				2C9442982C51886E0078C051 /* Metal.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		2C9C60332C2C34D4001D9B51 /* Suggested Items */ = {
 			isa = PBXGroup;
 			children = (
@@ -1700,7 +1691,6 @@
 				2C5A59982C51073F00788870 /* nft-folder-vision */,
 				2C5A59AF2C51400100788870 /* nft-folder-tvos */,
 				2CA4CF522B07F75F00CC75F4 /* Products */,
-				2C9442972C51886E0078C051 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
