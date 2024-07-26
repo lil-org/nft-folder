@@ -7,6 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C0218032C53CC200012EC40 /* CollectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0218022C53CC200012EC40 /* CollectionsView.swift */; };
+		2C0218042C53CE3D0012EC40 /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98C4AC2BEE9E390040383D /* Consts.swift */; };
+		2C0218052C53CE6D0012EC40 /* p5js100.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CEF35B42C413DA000388574 /* p5js100.js */; };
+		2C0218062C53CE6D0012EC40 /* paper.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CEF35B02C413D9F00388574 /* paper.js */; };
+		2C0218072C53CE6D0012EC40 /* regl.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CEF35AF2C413D9F00388574 /* regl.js */; };
+		2C0218082C53CE6D0012EC40 /* three.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CEF35B12C413D9F00388574 /* three.js */; };
+		2C0218092C53CE6D0012EC40 /* p5js190.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CE0F1572C4D37E6003004F2 /* p5js190.js */; };
+		2C02180A2C53CE6D0012EC40 /* tone.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CEF35B22C413D9F00388574 /* tone.js */; };
+		2C02180B2C53CE6D0012EC40 /* twemoji.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CEF35B32C413DA000388574 /* twemoji.js */; };
+		2C02180C2C53CE940012EC40 /* Covers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C4659932C308B44008CF97F /* Covers.xcassets */; };
+		2C02180D2C53CE940012EC40 /* Suggested.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2C09BAE32C308145009BA300 /* Suggested.bundle */; };
+		2C02180E2C53CECD0012EC40 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A42E92B1A272600BE4166 /* Network.swift */; };
+		2C02180F2C53CECD0012EC40 /* PlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8ADAA72C46F3FC008BC560 /* PlayerModel.swift */; };
+		2C0218102C53CECD0012EC40 /* TokenGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE9A5752C3DA9FB009AEAF4 /* TokenGenerator.swift */; };
+		2C0218112C53CECD0012EC40 /* RawHtmlGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF35AC2C413AE700388574 /* RawHtmlGenerator.swift */; };
+		2C0218122C53CECD0012EC40 /* NftGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA979AB2B62BA2400DB3AC8 /* NftGallery.swift */; };
+		2C0218132C53CECD0012EC40 /* Chain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4DBFC02C3698D10097AD35 /* Chain.swift */; };
+		2C0218142C53CECD0012EC40 /* WatchOnlyWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B502B08B33C00DAB623 /* WatchOnlyWallet.swift */; };
+		2C0218152C53CECD0012EC40 /* CollectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF524012BB2ECD200C18344 /* CollectionInfo.swift */; };
+		2C0218162C53CECD0012EC40 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60BC2B7D3505009949C2 /* Strings.swift */; };
+		2C0218172C53CECD0012EC40 /* SuggestedItemsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C60342C2C5FE8001D9B51 /* SuggestedItemsService.swift */; };
+		2C0218182C53CECD0012EC40 /* SuggestedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFF885A2C288C9A0007045F /* SuggestedItem.swift */; };
+		2C0218192C53CECD0012EC40 /* BundledTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C086E862C2F3C3600D4268D /* BundledTokens.swift */; };
+		2C02181A2C53CECD0012EC40 /* Script.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C8DE82C3C890B00BC83E9 /* Script.swift */; };
+		2C02181B2C53CECD0012EC40 /* GeneratedToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE9A5772C3DAB03009AEAF4 /* GeneratedToken.swift */; };
+		2C02181C2C53CF5B0012EC40 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF4C49F2B7FCDDC000AB4A6 /* Defaults.swift */; };
+		2C02181D2C53CF610012EC40 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA623E62BEE8A0200BD78FF /* UserDefaults.swift */; };
 		2C086E872C2F3C3600D4268D /* BundledTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C086E862C2F3C3600D4268D /* BundledTokens.swift */; };
 		2C09BAE42C308145009BA300 /* Suggested.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2C09BAE32C308145009BA300 /* Suggested.bundle */; };
 		2C0D86C42B08E67000106915 /* WalletsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C32B08E67000106915 /* WalletsService.swift */; };
@@ -228,6 +255,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2C0218022C53CC200012EC40 /* CollectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsView.swift; sourceTree = "<group>"; };
 		2C086E862C2F3C3600D4268D /* BundledTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundledTokens.swift; sourceTree = "<group>"; };
 		2C09BAE32C308145009BA300 /* Suggested.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Suggested.bundle; sourceTree = "<group>"; };
 		2C0D86C32B08E67000106915 /* WalletsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsService.swift; sourceTree = "<group>"; };
@@ -879,6 +907,7 @@
 			isa = PBXGroup;
 			children = (
 				2C5A59B02C51400200788870 /* nft_folder_tvosApp.swift */,
+				2C0218022C53CC200012EC40 /* CollectionsView.swift */,
 				2C5A59B42C51400300788870 /* Assets.xcassets */,
 			);
 			path = "nft-folder-tvos";
@@ -2084,6 +2113,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C02180C2C53CE940012EC40 /* Covers.xcassets in Resources */,
+				2C02180D2C53CE940012EC40 /* Suggested.bundle in Resources */,
+				2C0218052C53CE6D0012EC40 /* p5js100.js in Resources */,
+				2C0218062C53CE6D0012EC40 /* paper.js in Resources */,
+				2C0218072C53CE6D0012EC40 /* regl.js in Resources */,
+				2C0218082C53CE6D0012EC40 /* three.js in Resources */,
+				2C0218092C53CE6D0012EC40 /* p5js190.js in Resources */,
+				2C02180A2C53CE6D0012EC40 /* tone.js in Resources */,
+				2C02180B2C53CE6D0012EC40 /* twemoji.js in Resources */,
 				2C5A59B52C51400300788870 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2202,6 +2240,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C02180E2C53CECD0012EC40 /* Network.swift in Sources */,
+				2C02180F2C53CECD0012EC40 /* PlayerModel.swift in Sources */,
+				2C0218102C53CECD0012EC40 /* TokenGenerator.swift in Sources */,
+				2C0218112C53CECD0012EC40 /* RawHtmlGenerator.swift in Sources */,
+				2C0218122C53CECD0012EC40 /* NftGallery.swift in Sources */,
+				2C0218132C53CECD0012EC40 /* Chain.swift in Sources */,
+				2C0218142C53CECD0012EC40 /* WatchOnlyWallet.swift in Sources */,
+				2C0218152C53CECD0012EC40 /* CollectionInfo.swift in Sources */,
+				2C0218162C53CECD0012EC40 /* Strings.swift in Sources */,
+				2C02181C2C53CF5B0012EC40 /* Defaults.swift in Sources */,
+				2C0218172C53CECD0012EC40 /* SuggestedItemsService.swift in Sources */,
+				2C0218182C53CECD0012EC40 /* SuggestedItem.swift in Sources */,
+				2C0218192C53CECD0012EC40 /* BundledTokens.swift in Sources */,
+				2C02181D2C53CF610012EC40 /* UserDefaults.swift in Sources */,
+				2C02181A2C53CECD0012EC40 /* Script.swift in Sources */,
+				2C02181B2C53CECD0012EC40 /* GeneratedToken.swift in Sources */,
+				2C0218032C53CC200012EC40 /* CollectionsView.swift in Sources */,
+				2C0218042C53CE3D0012EC40 /* Consts.swift in Sources */,
 				2C5A59B12C51400200788870 /* nft_folder_tvosApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

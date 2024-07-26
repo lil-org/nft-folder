@@ -6,7 +6,7 @@ import SwiftUI
 struct nft_folder_tvosApp: App {
     var body: some Scene {
         WindowGroup {
-            Text("yo")
+            CollectionsView()
         }
     }
 }
