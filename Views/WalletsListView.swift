@@ -217,6 +217,8 @@ struct WalletsListView: View {
     }
     
     private func openFolderForWallet(_ wallet: WatchOnlyWallet) {
+        // TODO: start player for generative collection
+        
         if let nftDirectory = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: true) {
             NSWorkspace.shared.open(nftDirectory)
         }
@@ -431,6 +433,8 @@ struct WalletsListView: View {
     }
     
     private func didSelectSuggestedItem(_ item: SuggestedItem) {
+        // TODO: start player for generative collection
+        
         let collections = [CollectionInfo(name: item.name, network: item.network, chain: item.chain)]
         let projectId = item.abId ?? item.collectionId
         
