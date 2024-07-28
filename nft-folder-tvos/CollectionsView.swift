@@ -15,7 +15,7 @@ struct CollectionsView: View {
                 createGrid().frame(maxWidth: .infinity)
             }.navigationTitle(Consts.noggles)
             .background(
-                NavigationLink(destination: TvPlayerView(initialItemId: selectedItemId), isActive: $isNavigatingToPlayer) {
+                NavigationLink(destination: TvPlayerView(initialItemId: selectedItemId).edgesIgnoringSafeArea(.all), isActive: $isNavigatingToPlayer) {
                     EmptyView()
                 }
             )

@@ -24,6 +24,7 @@ struct GeneratedTokenView: UIViewRepresentable {
            let viewObject = viewClass as? NSObject.Type {
             let view: AnyObject = viewObject.init()
             view.scrollView?.backgroundColor = .black
+            view.scrollView?.contentInsetAdjustmentBehavior = .never
             view.subviews?.first?.superview?.isOpaque = false
             view.subviews?.first?.superview?.backgroundColor = .black
             loadContent = { [weak view] content in

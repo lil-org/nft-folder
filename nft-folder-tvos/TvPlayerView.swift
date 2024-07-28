@@ -11,7 +11,7 @@ struct TvPlayerView: View {
     }
     
     var body: some View {
-        GeneratedTokenView(contentString: playerModel.currentToken.html)
+        GeneratedTokenView(contentString: playerModel.currentToken.html).edgesIgnoringSafeArea(.all)
             .onAppear() {
                 if !playerModel.history.isEmpty {
                     playerModel.goForward()
