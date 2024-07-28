@@ -73,6 +73,10 @@
 		2C4659942C308B47008CF97F /* Covers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C4659932C308B44008CF97F /* Covers.xcassets */; };
 		2C46599C2C308F86008CF97F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C46599B2C308F86008CF97F /* main.swift */; };
 		2C4659A22C30911C008CF97F /* Bundling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4659A12C30911C008CF97F /* Bundling.swift */; };
+		2C4D315F2C56AC7F00C586D1 /* TvPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4D315E2C56AC7F00C586D1 /* TvPlayerView.swift */; };
+		2C4D31612C56B10E00C586D1 /* HostAppImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60C32B7D41D1009949C2 /* HostAppImages.swift */; };
+		2C4D31632C56B29000C586D1 /* TvHtmlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4D31622C56B29000C586D1 /* TvHtmlView.swift */; };
+		2C4D31652C56B65E00C586D1 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4D31642C56B65E00C586D1 /* Helpers.swift */; };
 		2C4DBFC12C3698D10097AD35 /* Chain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4DBFC02C3698D10097AD35 /* Chain.swift */; };
 		2C4DBFC22C3698D10097AD35 /* Chain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4DBFC02C3698D10097AD35 /* Chain.swift */; };
 		2C4DBFC32C36CD1A0097AD35 /* Chain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4DBFC02C3698D10097AD35 /* Chain.swift */; };
@@ -287,6 +291,9 @@
 		2C4659992C308F86008CF97F /* tools */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = tools; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C46599B2C308F86008CF97F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		2C4659A12C30911C008CF97F /* Bundling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundling.swift; sourceTree = "<group>"; };
+		2C4D315E2C56AC7F00C586D1 /* TvPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvPlayerView.swift; sourceTree = "<group>"; };
+		2C4D31622C56B29000C586D1 /* TvHtmlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvHtmlView.swift; sourceTree = "<group>"; };
+		2C4D31642C56B65E00C586D1 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		2C4DBFC02C3698D10097AD35 /* Chain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chain.swift; sourceTree = "<group>"; };
 		2C5065F62C0DFC8700D9D01A /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		2C5065F92C0E10D600D9D01A /* AttestationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationResponse.swift; sourceTree = "<group>"; };
@@ -908,6 +915,9 @@
 			children = (
 				2C5A59B02C51400200788870 /* nft_folder_tvosApp.swift */,
 				2C0218022C53CC200012EC40 /* CollectionsView.swift */,
+				2C4D31622C56B29000C586D1 /* TvHtmlView.swift */,
+				2C4D315E2C56AC7F00C586D1 /* TvPlayerView.swift */,
+				2C4D31642C56B65E00C586D1 /* Helpers.swift */,
 				2C5A59B42C51400300788870 /* Assets.xcassets */,
 			);
 			path = "nft-folder-tvos";
@@ -2244,6 +2254,7 @@
 				2C02180F2C53CECD0012EC40 /* PlayerModel.swift in Sources */,
 				2C0218102C53CECD0012EC40 /* TokenGenerator.swift in Sources */,
 				2C0218112C53CECD0012EC40 /* RawHtmlGenerator.swift in Sources */,
+				2C4D31652C56B65E00C586D1 /* Helpers.swift in Sources */,
 				2C0218122C53CECD0012EC40 /* NftGallery.swift in Sources */,
 				2C0218132C53CECD0012EC40 /* Chain.swift in Sources */,
 				2C0218142C53CECD0012EC40 /* WatchOnlyWallet.swift in Sources */,
@@ -2252,13 +2263,16 @@
 				2C02181C2C53CF5B0012EC40 /* Defaults.swift in Sources */,
 				2C0218172C53CECD0012EC40 /* SuggestedItemsService.swift in Sources */,
 				2C0218182C53CECD0012EC40 /* SuggestedItem.swift in Sources */,
+				2C4D31612C56B10E00C586D1 /* HostAppImages.swift in Sources */,
 				2C0218192C53CECD0012EC40 /* BundledTokens.swift in Sources */,
+				2C4D31632C56B29000C586D1 /* TvHtmlView.swift in Sources */,
 				2C02181D2C53CF610012EC40 /* UserDefaults.swift in Sources */,
 				2C02181A2C53CECD0012EC40 /* Script.swift in Sources */,
 				2C02181B2C53CECD0012EC40 /* GeneratedToken.swift in Sources */,
 				2C0218032C53CC200012EC40 /* CollectionsView.swift in Sources */,
 				2C0218042C53CE3D0012EC40 /* Consts.swift in Sources */,
 				2C5A59B12C51400200788870 /* nft_folder_tvosApp.swift in Sources */,
+				2C4D315F2C56AC7F00C586D1 /* TvPlayerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

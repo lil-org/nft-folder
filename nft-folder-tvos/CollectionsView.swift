@@ -6,12 +6,19 @@ import Combine
 struct CollectionsView: View {
     
     @State private var suggestedItems = TokenGenerator.allGenerativeSuggestedItems
+    @State private var selectedItem: SuggestedItem?
+    @State private var isNavigatingToPlayer = false
     
     var body: some View {
         NavigationView {
             ScrollView {
                 createGrid().frame(maxWidth: .infinity)
             }.navigationTitle(Consts.noggles)
+            .background(
+                NavigationLink(destination: TvPlayerView(initialItemId: selectedItem?.id), isActive: $isNavigatingToPlayer) {
+                    EmptyView()
+                }
+            )
         }
     }
     
@@ -63,12 +70,13 @@ struct CollectionsView: View {
     }
     
     private func didSelectSuggestedItem(_ item: SuggestedItem) {
-        // TODO: implement
+        selectedItem = item
+        isNavigatingToPlayer = true
     }
     
     private func showRandomPlayer() {
-        // TODO: implement
+        selectedItem = nil
+        isNavigatingToPlayer = true
     }
     
 }
-
