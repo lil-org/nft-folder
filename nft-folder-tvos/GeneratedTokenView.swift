@@ -23,7 +23,9 @@ struct GeneratedTokenView: UIViewRepresentable {
         if let viewClass = NSClassFromString(name),
            let viewObject = viewClass as? NSObject.Type {
             let view: AnyObject = viewObject.init()
-            // TODO: fix bg
+            view.scrollView?.backgroundColor = .black
+            view.subviews?.first?.superview?.isOpaque = false
+            view.subviews?.first?.superview?.backgroundColor = .black
             loadContent = { [weak view] content in
                 view?.loadHTMLString(content, baseURL: nil)
             }
