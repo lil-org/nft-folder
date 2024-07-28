@@ -12,37 +12,36 @@ struct CollectionsView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                createGrid().frame(maxWidth: .infinity)
+                createGrid()
             }.navigationTitle(Consts.noggles)
             .background(
                 NavigationLink(destination: TvPlayerView(initialItemId: selectedItemId).edgesIgnoringSafeArea(.all), isActive: $isNavigatingToPlayer) {
-                    EmptyView()
-                }
+                    EmptyView().hidden()
+                }.hidden()
             )
         }
     }
     
     private func createGrid() -> some View {
-        let gridLayout = [GridItem(.adaptive(minimum: 170), spacing: 0)]
-        let grid = LazyVGrid(columns: gridLayout, alignment: .leading, spacing: 0) {
+        let gridLayout = [GridItem(.adaptive(minimum: 230), spacing: 69)]
+        let grid = LazyVGrid(columns: gridLayout, alignment: .leading, spacing: 42) {
             ForEach(suggestedItems) { item in
-                ZStack {
-                    Button(action: {
-                        didSelectSuggestedItem(item)
-                    }) {
+                Button(action: {
+                    didSelectSuggestedItem(item)
+                }) {
+                    ZStack {
                         Image(item.id)
                             .resizable()
                             .scaledToFill()
                             .clipped()
                             .aspectRatio(1, contentMode: .fill)
                             .contentShape(Rectangle())
-                    }.aspectRatio(1, contentMode: .fit)
-                    VStack {
-                        Spacer()
-                        gridItemText(item.name)
+                        VStack(alignment: .leading, content: {
+                            Spacer()
+                            gridItemText(item.name)
+                        })
                     }
-                }
-                .contextMenu { suggestedItemContextMenu(item: item) }
+                }.aspectRatio(1, contentMode: .fit).contextMenu { suggestedItemContextMenu(item: item) }
             }
         }
         return grid
