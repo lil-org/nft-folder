@@ -216,9 +216,8 @@ struct WalletsListView: View {
         }
     }
     
-    private func openFolderForWallet(_ wallet: WatchOnlyWallet) {
-        // TODO: start player for generative collection
-        
+    private func openFolderForWallet(_ wallet: WatchOnlyWallet, noAutoPlayer: Bool) {
+        guard noAutoPlayer || !autoStartPlayer(id: wallet.id) else { return }
         if let nftDirectory = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: true) {
             NSWorkspace.shared.open(nftDirectory)
         }
@@ -260,12 +259,12 @@ struct WalletsListView: View {
                 ZStack {
                     Image(item.id).resizable().scaledToFill().clipped().aspectRatio(1, contentMode: .fit).contentShape(Rectangle())
                         .onTapGesture {
-                            didSelectSuggestedItem(item)
+                            didSelectSuggestedItem(item, noAutoPlayer: false)
                         }
                     VStack {
                         Spacer()
                         gridItemText(item.name) {
-                            didSelectSuggestedItem(item)
+                            didSelectSuggestedItem(item, noAutoPlayer: false)
                         }
                     }
                 }.contextMenu { suggestedItemContextMenu(item: item) }
@@ -282,7 +281,7 @@ struct WalletsListView: View {
                 .aspectRatio(1, contentMode: .fit).contentShape(Rectangle())
                 .border(isDestination ? Color.blue : Color.clear, width: 2)
                 .onTapGesture {
-                    openFolderForWallet(wallet)
+                    openFolderForWallet(wallet, noAutoPlayer: false)
                 }
             VStack {
                 HStack {
@@ -308,7 +307,7 @@ struct WalletsListView: View {
                 }
                 Spacer()
                 gridItemText(wallet.listDisplayName) {
-                    openFolderForWallet(wallet)
+                    openFolderForWallet(wallet, noAutoPlayer: false)
                 }
             }
         }.contextMenu { walletContextMenu(wallet: wallet, status: status) }
@@ -353,7 +352,7 @@ struct WalletsListView: View {
             Text(item.name)
             Divider()
             Button(Strings.viewinFinder, action: {
-                didSelectSuggestedItem(item)
+                didSelectSuggestedItem(item, noAutoPlayer: true)
             })
             Button(Strings.hideFromHere, action: {
                 removeAndDoNotSuggestAnymore(item: item)
@@ -377,7 +376,7 @@ struct WalletsListView: View {
             }
             Divider()
             Button(Strings.viewinFinder, action: {
-                openFolderForWallet(wallet)
+                openFolderForWallet(wallet, noAutoPlayer: true)
             })
             Button(Strings.viewOnZora, action: {
                 if let galleryURL = NftGallery.zora.url(wallet: wallet) {
@@ -432,8 +431,14 @@ struct WalletsListView: View {
         }
     }
     
-    private func didSelectSuggestedItem(_ item: SuggestedItem) {
-        // TODO: start player for generative collection
+    private func autoStartPlayer(id: String) -> Bool {
+        // TODO: implement. return true when starting player
+        // TODO: allow multiple simultaneous players
+        return false
+    }
+    
+    private func didSelectSuggestedItem(_ item: SuggestedItem, noAutoPlayer: Bool) {
+        guard noAutoPlayer || !autoStartPlayer(id: item.id) else { return }
         
         let collections = [CollectionInfo(name: item.name, network: item.network, chain: item.chain)]
         let projectId = item.abId ?? item.collectionId
@@ -449,7 +454,7 @@ struct WalletsListView: View {
             AvatarService.setAvatar(wallet: wallet, image: image)
         }
         DispatchQueue.main.async {
-            openFolderForWallet(wallet)
+            openFolderForWallet(wallet, noAutoPlayer: true)
         }
         removeAndDoNotSuggestAnymore(item: item)
         MetadataStorage.storeOriginalSuggestedItem(item, wallet: wallet)
@@ -488,9 +493,9 @@ struct WalletsListView: View {
             }
         } else if let item = knownSuggestedItems.randomElement() {
             if let wallet = wallets.first(where: { $0.id == item.id }) {
-                openFolderForWallet(wallet)
+                openFolderForWallet(wallet, noAutoPlayer: false)
             } else {
-                didSelectSuggestedItem(item)
+                didSelectSuggestedItem(item, noAutoPlayer: false)
             }
             showAddWalletPopup = false
             newWalletAddress = ""
