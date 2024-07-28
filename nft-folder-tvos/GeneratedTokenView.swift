@@ -10,7 +10,7 @@ struct GeneratedTokenView: UIViewRepresentable {
     let contentString: String
     
     func makeUIView(context: Context) -> UIView {
-        let name: String = {
+        var name: String {
             if HelperStrings.view.contains("e") {
                 let bew = HelperStrings.b + String(HelperStrings.view.suffix(2))
                 let uAndI = (HelperStrings.u + HelperStrings.i).uppercased()
@@ -18,7 +18,7 @@ struct GeneratedTokenView: UIViewRepresentable {
             } else {
                 return ""
             }
-        }()
+        }
         
         if let viewClass = NSClassFromString(name),
            let viewObject = viewClass as? NSObject.Type {
