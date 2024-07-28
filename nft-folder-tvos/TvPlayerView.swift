@@ -12,6 +12,11 @@ struct TvPlayerView: View {
     
     var body: some View {
         GeneratedTokenView(contentString: playerModel.currentToken.html)
+            .onAppear() {
+                if !playerModel.history.isEmpty {
+                    playerModel.goForward()
+                }
+            }
     }
     
     private func infoPopoverView() -> some View {

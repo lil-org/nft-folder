@@ -6,7 +6,7 @@ import Combine
 struct CollectionsView: View {
     
     @State private var suggestedItems = TokenGenerator.allGenerativeSuggestedItems
-    @State private var selectedItem: SuggestedItem?
+    @State private var selectedItemId: String?
     @State private var isNavigatingToPlayer = false
     
     var body: some View {
@@ -15,7 +15,7 @@ struct CollectionsView: View {
                 createGrid().frame(maxWidth: .infinity)
             }.navigationTitle(Consts.noggles)
             .background(
-                NavigationLink(destination: TvPlayerView(initialItemId: selectedItem?.id), isActive: $isNavigatingToPlayer) {
+                NavigationLink(destination: TvPlayerView(initialItemId: selectedItemId), isActive: $isNavigatingToPlayer) {
                     EmptyView()
                 }
             )
@@ -70,12 +70,12 @@ struct CollectionsView: View {
     }
     
     private func didSelectSuggestedItem(_ item: SuggestedItem) {
-        selectedItem = item
+        selectedItemId = item.id
         isNavigatingToPlayer = true
     }
     
     private func showRandomPlayer() {
-        selectedItem = nil
+        selectedItemId = nil
         isNavigatingToPlayer = true
     }
     
