@@ -23,39 +23,37 @@ struct CollectionsView: View {
     }
     
     private func createGrid() -> some View {
-        let gridLayout = [GridItem(.adaptive(minimum: 230), spacing: 69)]
-        let grid = LazyVGrid(columns: gridLayout, alignment: .leading, spacing: 42) {
+        let gridLayout = [GridItem(.adaptive(minimum: 230), spacing: 20)]
+        let grid = LazyVGrid(columns: gridLayout, alignment: .center, spacing: 23) {
             ForEach(suggestedItems) { item in
                 Button(action: {
                     didSelectSuggestedItem(item)
                 }) {
-                    ZStack {
+                    VStack {
                         Image(item.id)
                             .resizable()
-                            .scaledToFill()
-                            .clipped()
-                            .aspectRatio(1, contentMode: .fill)
-                            .contentShape(Rectangle())
-                        VStack(alignment: .leading, content: {
-                            Spacer()
-                            gridItemText(item.name)
-                        })
+                            .scaledToFit()
+                            .aspectRatio(contentMode: .fit)
+                            .cornerRadius(10)
+                        gridItemText(item.name)
                     }
-                }.aspectRatio(1, contentMode: .fit).contextMenu { suggestedItemContextMenu(item: item) }
+                }
+                .contextMenu { suggestedItemContextMenu(item: item) }
             }
         }
+        .padding(.horizontal)
         return grid
     }
     
     private func gridItemText(_ text: String) -> some View {
-        HStack {
-            Text(text).font(.system(size: 15, weight: .regular)).lineLimit(2)
-                .foregroundColor(.white)
-                .padding(.horizontal, 1)
-                .background(Color.black.opacity(0.7)).cornerRadius(3)
-                .padding(.leading, 4).padding(.bottom, 3)
-            Spacer()
-        }
+        Text(text)
+            .font(.system(size: 15, weight: .regular))
+            .lineLimit(2)
+            .foregroundColor(.white)
+            .frame(height: 40)
+            .frame(maxWidth: .infinity)
+            .background(Color.black.opacity(0.7))
+            .cornerRadius(5)
     }
     
     private func suggestedItemContextMenu(item: SuggestedItem) -> some View {
