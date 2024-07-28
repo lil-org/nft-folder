@@ -4,6 +4,8 @@ import SwiftUI
 
 class PlayerModel: ObservableObject {
     
+    let specificCollectionId: String?
+    
     @Published var currentToken: GeneratedToken
     @Published var history: [GeneratedToken]
     @Published var currentIndex: Int = 0
@@ -14,6 +16,12 @@ class PlayerModel: ObservableObject {
         let token = TokenGenerator.generateRandomToken(specificCollectionId: specificCollectionId, notTokenId: notTokenId) ?? GeneratedToken.empty
         self.currentToken = token
         self.history = [token]
+        self.specificCollectionId = specificCollectionId
+    }
+    
+    func showInitialCollection() {
+        let newToken = TokenGenerator.generateRandomToken(specificCollectionId: specificCollectionId, notTokenId: nil) ?? currentToken
+        showNewToken(newToken)
     }
     
     func goBack() {
@@ -42,6 +50,10 @@ class PlayerModel: ObservableObject {
 
     func changeCollection() {
         let newToken = TokenGenerator.generateRandomToken(specificCollectionId: nil, notTokenId: nil) ?? currentToken
+        showNewToken(newToken)
+    }
+    
+    private func showNewToken(_ newToken: GeneratedToken) {
         history.append(newToken)
         currentIndex = history.count - 1
         currentToken = newToken

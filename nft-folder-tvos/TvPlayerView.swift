@@ -16,7 +16,9 @@ struct TvPlayerView: View {
         ZStack(alignment: .topTrailing) {
             GeneratedTokenView(contentString: playerModel.currentToken.html).edgesIgnoringSafeArea(.all)
                 .onAppear() {
-                    if !playerModel.history.isEmpty {
+                    if let initialSpecific = playerModel.specificCollectionId, initialSpecific != playerModel.currentToken.fullCollectionId {
+                        playerModel.showInitialCollection()
+                    } else if !playerModel.history.isEmpty {
                         playerModel.goForward()
                     }
                 }
