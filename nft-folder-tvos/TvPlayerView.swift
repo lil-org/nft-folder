@@ -11,7 +11,7 @@ struct TvPlayerView: View {
     }
     
     var body: some View {
-        TvHtmlView(htmlString: playerModel.currentToken.html)
+        GeneratedTokenView(contentString: playerModel.currentToken.html)
     }
     
     private func infoPopoverView() -> some View {
