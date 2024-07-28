@@ -38,18 +38,24 @@ struct CollectionsView: View {
         let gridLayout = [GridItem(.adaptive(minimum: 150), spacing: 0)]
         let grid = LazyVGrid(columns: gridLayout, alignment: .leading, spacing: 0) {
             ForEach(suggestedItems) { item in
-                ZStack {
-                    Image(item.id).resizable().scaledToFill().clipped().aspectRatio(1, contentMode: .fit).contentShape(Rectangle())
-                        .onTapGesture {
-                            didSelectSuggestedItem(item)
-                        }
-                    VStack {
-                        Spacer()
-                        gridItemText(item.name) {
-                            didSelectSuggestedItem(item)
+                Button(action: {
+                    didSelectSuggestedItem(item)
+                }) {
+                    ZStack {
+                        Image(item.id)
+                            .resizable()
+                            .scaledToFill()
+                            .clipped()
+                            .aspectRatio(1, contentMode: .fill)
+                            .contentShape(Rectangle())
+                        VStack {
+                            Spacer()
+                            gridItemText(item.name) {
+                                didSelectSuggestedItem(item)
+                            }
                         }
                     }
-                }.contextMenu { suggestedItemContextMenu(item: item) }
+                }.aspectRatio(1, contentMode: .fit).contextMenu { suggestedItemContextMenu(item: item) }
             }
         }
         return grid
