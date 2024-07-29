@@ -48,6 +48,12 @@ class PlayerModel: ObservableObject {
         showingListPopover = false
     }
 
+    func tryNavigatingTo(inputTokenId: String) {
+        if let newToken = TokenGenerator.generateRandomToken(specificCollectionId: currentToken.fullCollectionId, specificInputTokenId: inputTokenId) {
+            showNewToken(newToken)
+        }
+    }
+    
     func changeCollection() {
         let newToken = TokenGenerator.generateRandomToken(specificCollectionId: nil, notTokenId: nil) ?? currentToken
         showNewToken(newToken)

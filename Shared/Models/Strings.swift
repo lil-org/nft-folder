@@ -45,6 +45,8 @@ struct Strings {
     static let editPlaylist = loc("Edit Playlist")
     static let nextCollection = loc("Next Collection")
     static let play = loc("Play")
+    static let go = loc("Go")
+    static let tokenId = loc("Token Id")
     
     static let zora = "Zora"
     static let etherscan = "Etherscan"

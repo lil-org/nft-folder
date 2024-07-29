@@ -53,6 +53,11 @@ struct TokenGenerator {
         return next
     }
     
+    static func generateRandomToken(specificCollectionId: String?, specificInputTokenId: String?) -> GeneratedToken? {
+        // TODO: implement
+        return nil
+    }
+    
     static func generateRandomToken(specificCollectionId: String?, notTokenId: String?) -> GeneratedToken? {
         var jsonName: String
         if let specificCollectionId = specificCollectionId {
@@ -71,23 +76,27 @@ struct TokenGenerator {
             randomToken = another
         }
         
-        let html = RawHtmlGenerator.createHtml(script: script, token: randomToken)
-        let cleanId = (randomToken.id.hasPrefix(script.abId) && randomToken.id != script.abId) ? String(randomToken.id.dropFirst(script.abId.count).drop(while: { $0 == "0" })) : randomToken.id
+        return generateToken(randomToken, script: script)
+    }
+    
+    private static func generateToken(_ token: BundledTokens.Item, script: Script) -> GeneratedToken? {
+        let html = RawHtmlGenerator.createHtml(script: script, token: token)
+        let cleanId = (token.id.hasPrefix(script.abId) && token.id != script.abId) ? String(token.id.dropFirst(script.abId.count).drop(while: { $0 == "0" })) : token.id
         let name = script.name + " #" + (cleanId.isEmpty ? "0" : cleanId)
         
 #if canImport(AppKit)
-        let webURL = NftGallery.opensea.url(network: .mainnet, chain: .ethereum, collectionAddress: script.address, tokenId: randomToken.id)
+        let webURL = NftGallery.opensea.url(network: .mainnet, chain: .ethereum, collectionAddress: script.address, tokenId: token.id)
 #else
-        let webURL = NftGallery.etherscan.url(network: .mainnet, chain: .ethereum, collectionAddress: script.address, tokenId: randomToken.id)
+        let webURL = NftGallery.etherscan.url(network: .mainnet, chain: .ethereum, collectionAddress: script.address, tokenId: token.id)
 #endif
-        let token = GeneratedToken(fullCollectionId: script.id,
-                                   id: randomToken.id,
+        let generatedToken = GeneratedToken(fullCollectionId: script.id,
+                                   id: token.id,
                                    html: html,
                                    displayName: name,
                                    url: webURL,
                                    instructions: script.instructions,
                                    screensaver: script.screensaverUrl)
-        return token
+        return generatedToken
     }
     
 }

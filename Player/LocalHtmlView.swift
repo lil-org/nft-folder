@@ -10,6 +10,7 @@ struct LocalHtmlView: View {
     
     @ObservedObject var playerModel: PlayerModel
     @State private var isFullscreen = false
+    @State private var inputTokenId = ""
     
     init(playerModel: PlayerModel, windowNumber: Int, playerMenuDelegate: PlayerMenuDelegate) {
         self.playerModel = playerModel
@@ -86,12 +87,26 @@ struct LocalHtmlView: View {
     }
     
     private func listPopoverView() -> some View {
-        // TODO: add playlist configuration
         VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                TextField(Strings.tokenId, text: $inputTokenId)
+                    .textFieldStyle(PlainTextFieldStyle())
+                Button(action: {
+                    handleGoButtonClick()
+                }) {
+                    Text(Strings.go)
+                }.keyboardShortcut(.defaultAction)
+            }
+            Divider()
             Text(Strings.experimetalOfflineGeneration).font(.headline)
             Text(Strings.letUsKnowOfIssues).font(.footnote)
+        }.padding().frame(width: 230).onAppear {
+            inputTokenId = ""
         }
-        .padding().frame(width: 230)
+    }
+    
+    private func handleGoButtonClick() {
+        playerModel.tryNavigatingTo(inputTokenId: inputTokenId)
     }
     
     private func infoPopoverView() -> some View {
