@@ -107,6 +107,7 @@ struct LocalHtmlView: View {
     
     private func handleGoButtonClick() {
         playerModel.tryNavigatingTo(inputTokenId: inputTokenId)
+        playerMenuDelegate?.updateTitle()
     }
     
     private func infoPopoverView() -> some View {

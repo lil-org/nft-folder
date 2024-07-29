@@ -53,9 +53,18 @@ struct TokenGenerator {
         return next
     }
     
-    static func generateRandomToken(specificCollectionId: String?, specificInputTokenId: String?) -> GeneratedToken? {
-        // TODO: implement
-        return nil
+    static func generateRandomToken(specificCollectionId: String, specificInputTokenId: String) -> GeneratedToken? {
+        guard !specificInputTokenId.isEmpty && !specificInputTokenId.contains(where: { $0.isLetter }) else { return nil }
+        let url = dirURL.appendingPathComponent(specificCollectionId + ".json")
+        guard let data = try? Data(contentsOf: url),
+              let script = try? JSONDecoder().decode(Script.self, from: data),
+              let tokens = SuggestedItemsService.bundledTokens(collectionId: script.id)?.items else { return nil }
+        let cleanInput = specificInputTokenId.filter { $0.isNumber }
+        if let target = tokens.first(where: { $0.id == cleanInput }) ?? tokens.first(where: { $0.id.hasSuffix("000" + cleanInput) }) {
+            return generateToken(target, script: script)
+        } else {
+            return nil
+        }
     }
     
     static func generateRandomToken(specificCollectionId: String?, notTokenId: String?) -> GeneratedToken? {

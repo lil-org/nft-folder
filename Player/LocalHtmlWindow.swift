@@ -165,12 +165,6 @@ class LocalHtmlWindow: NSWindow {
         }
     }
     
-    private func updateTitle() {
-        let newTitle = playerModel.currentToken.displayName
-        titleLabel?.stringValue = newTitle
-        title = newTitle
-    }
-    
     @objc private func nextCollectionButtonClicked() {
         playerModel.changeCollection()
         updateTitle()
@@ -222,6 +216,12 @@ extension LocalHtmlWindow: PlayerMenuDelegate {
         if let event = NSApp.currentEvent {
             NSMenu.popUpContextMenu(menu, with: event, for: view)
         }
+    }
+    
+    func updateTitle() {
+        let newTitle = playerModel.currentToken.displayName
+        titleLabel?.stringValue = newTitle
+        title = newTitle
     }
     
 }
