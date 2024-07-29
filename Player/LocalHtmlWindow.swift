@@ -5,7 +5,7 @@ import SwiftUI
 
 class LocalHtmlWindow: NSWindow {
     
-    private var playerModel = PlayerModel(specificCollectionId: nil, notTokenId: nil)
+    private var playerModel: PlayerModel
     private var cursorHideTimer: Timer?
     private var mouseMoveEventMonitor: Any?
     private var navigationKeysEventMonitor: Any?
@@ -15,7 +15,8 @@ class LocalHtmlWindow: NSWindow {
         return styleMask.contains(.fullScreen) && isOnActiveSpace
     }
     
-    override init(contentRect: NSRect, styleMask style: NSWindow.StyleMask, backing backingStoreType: NSWindow.BackingStoreType, defer flag: Bool) {
+    init(id: String?, contentRect: NSRect, styleMask style: NSWindow.StyleMask, backing backingStoreType: NSWindow.BackingStoreType, defer flag: Bool) {
+        self.playerModel = PlayerModel(specificCollectionId: id, notTokenId: nil)
         super.init(contentRect: contentRect, styleMask: style, backing: backingStoreType, defer: flag)
         
         let htmlView = LocalHtmlView(playerModel: playerModel, windowNumber: windowNumber, playerMenuDelegate: self).background(.black)

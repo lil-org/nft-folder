@@ -69,7 +69,7 @@ struct WalletsListView: View {
                         }
                         
                         Button(action: {
-                            showRandomPlayer()
+                            showPlayer(id: nil)
                         }) {
                             Images.shuffle
                         }
@@ -116,7 +116,7 @@ struct WalletsListView: View {
                             }.frame(width: 23)
                             
                             Button(action: {
-                                showRandomPlayer()
+                                showPlayer(id: nil)
                             }) {
                                 Images.shuffle
                             }.frame(width: 23)
@@ -327,8 +327,8 @@ struct WalletsListView: View {
         }
     }
     
-    private func showRandomPlayer() {
-        Navigator.shared.showRandomPlayer()
+    private func showPlayer(id: String?) {
+        Navigator.shared.showPlayer(id: id)
     }
     
     private func eraseAllContent() {
@@ -432,9 +432,12 @@ struct WalletsListView: View {
     }
     
     private func autoStartPlayer(id: String) -> Bool {
-        // TODO: implement. return true when starting player
-        // TODO: allow multiple simultaneous players
-        return false
+        if TokenGenerator.canGenerate(id: id) {
+            Navigator.shared.showPlayer(id: id)
+            return true
+        } else {
+            return false
+        }        
     }
     
     private func didSelectSuggestedItem(_ item: SuggestedItem, noAutoPlayer: Bool) {

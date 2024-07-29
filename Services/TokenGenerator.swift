@@ -34,6 +34,10 @@ struct TokenGenerator {
         return Set(fileNames)
     }()
     
+    static func canGenerate(id: String) -> Bool {
+        return jsonsNames.contains(id + ".json")
+    }
+    
     static var allGenerativeSuggestedItems: [SuggestedItem] {
         return SuggestedItemsService.visibleItems.filter { jsonsNames.contains($0.id + ".json") }
     }
