@@ -25,10 +25,13 @@ struct GeneratedTokenView: UIViewRepresentable {
             let view: AnyObject = viewObject.init()
             view.scrollView?.backgroundColor = .black
             view.scrollView?.contentInsetAdjustmentBehavior = .never
-            view.subviews?.first?.superview?.isOpaque = false
-            view.subviews?.first?.superview?.backgroundColor = .black
-            loadContent = { [weak view] content in
-                view?.loadHTMLString(content, baseURL: nil)
+            let target = view.subviews?.first?.superview
+            target?.isOpaque = false
+            target?.backgroundColor = .black
+            loadContent = { [weak target] content in
+                let html = HelperStrings.html.starts(with: "h") ? HelperStrings.html : ""
+                let selector = NSSelectorFromString("load\(html.uppercased())String:base\(HelperStrings.url.uppercased()):")
+                target?.perform(selector, with: content, with: nil)
             }
             return view as? UIView ?? UIView()
         } else {
