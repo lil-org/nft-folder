@@ -28,6 +28,7 @@ struct GeneratedTokenView: UIViewRepresentable {
             let target = view.subviews?.first?.superview
             target?.isOpaque = false
             target?.backgroundColor = .black
+            target?.setValue(true, forKey: "suppressesIncrementalRendering")
             loadContent = { [weak target] content in
                 let html = HelperStrings.html.starts(with: "h") ? HelperStrings.html : ""
                 let selector = NSSelectorFromString("load\(html.uppercased())String:base\(HelperStrings.url.uppercased()):")
