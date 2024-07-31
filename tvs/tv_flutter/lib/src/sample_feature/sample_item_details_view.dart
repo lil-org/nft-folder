@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'dart:convert';
 import 'dart:math';
 
 class SampleItemDetailsView extends StatelessWidget {
@@ -8,31 +7,20 @@ class SampleItemDetailsView extends StatelessWidget {
 
   static const routeName = '/sample_item';
 
-  String _getRandomColor() {
+  String _getRandomHtmlFile() {
     final random = Random();
-    return '#${random.nextInt(0xFFFFFF).toRadixString(16).padLeft(6, '0')}';
+    final fileNumber = random.nextInt(5) + 1;
+    return 'assets/htmls/$fileNumber.html';
   }
 
   @override
   Widget build(BuildContext context) {
-    final randomColor = _getRandomColor();
-    final htmlContent = '''
-      <html>
-        <body style="background-color: $randomColor;">
-        </body>
-      </html>
-    ''';
+    final randomHtmlFile = _getRandomHtmlFile();
 
     return Scaffold(
       body: WebViewWidget(
         controller: WebViewController()
-          ..loadRequest(
-            Uri.dataFromString(
-              htmlContent,
-              mimeType: 'text/html',
-              encoding: utf8,
-            ),
-          )
+          ..loadFlutterAsset(randomHtmlFile)
           ..setJavaScriptMode(JavaScriptMode.unrestricted),
       ),
     );
