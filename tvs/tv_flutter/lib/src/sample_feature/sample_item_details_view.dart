@@ -24,9 +24,6 @@ class SampleItemDetailsView extends StatelessWidget {
     ''';
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('webview'),
-      ),
       body: WebViewWidget(
         controller: WebViewController()
           ..loadRequest(
