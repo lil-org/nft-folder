@@ -51,6 +51,14 @@ func cleanupModels() {
 
 }
 
+func bundleAssetsForSmartTvs() {
+    // TODO: copy libs
+    // TODO: copy covers
+    // TODO: copy filtered items.json
+    // TODO: copy scripts
+    // TODO: copy tokens
+}
+
 func bundleSelected(useCollectionImages: Bool) {
     let projectsToBundle = projects.filter { !bundledIds.contains($0.id) && selectedSet.contains($0.id) }
     bundleProjects(projects: projectsToBundle, useCollectionImages: useCollectionImages)
