@@ -18,14 +18,6 @@ class SampleItemListView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('⌐◨-◨'),
-        // actions: [
-        //   IconButton(
-        //     icon: const Icon(Icons.settings),
-        //     onPressed: () {
-        //       Navigator.restorablePushNamed(context, SettingsView.routeName);
-        //     },
-        //   ),
-        // ],
       ),
 
       body: ListView.builder(
