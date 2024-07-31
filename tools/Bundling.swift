@@ -30,7 +30,8 @@ let encoder: JSONEncoder = {
     return new
 }()
 
-let bundledSuggestedItemsUrl = URL(fileURLWithPath: dir + "/Suggested Items/Suggested.bundle/items.json")
+let suggestedBundlePath = dir + "/Suggested Items/Suggested.bundle/"
+let bundledSuggestedItemsUrl = URL(fileURLWithPath: suggestedBundlePath + "items.json")
 let currentBundledData = try! Data(contentsOf: bundledSuggestedItemsUrl)
 var bundledSuggestedItems = try! JSONDecoder().decode([SuggestedItem].self, from: currentBundledData)
 let bundledIds = Set(bundledSuggestedItems.map { $0.id })
@@ -52,11 +53,33 @@ func cleanupModels() {
 }
 
 func bundleAssetsForSmartTvs() {
-    // TODO: copy libs
-    // TODO: copy covers
-    // TODO: copy filtered items.json
-    // TODO: copy scripts
-    // TODO: copy tokens
+    let tvAssetsPath = dir + "/tvs/tv_flutter/assets/items/"
+    let scriptsFilesNames = try! FileManager.default.contentsOfDirectory(atPath: suggestedBundlePath + "Scripts/")
+    var genIds = Set<String>()
+    
+    for scriptFileName in scriptsFilesNames where !scriptFileName.hasPrefix(".") {
+        let id = String(scriptFileName.dropLast(5))
+        
+        let fromScript = suggestedBundlePath + "Scripts/" + scriptFileName
+        let toScript = tvAssetsPath + "scripts/" + scriptFileName
+        
+        let fromTokens = suggestedBundlePath + "Tokens/" + scriptFileName
+        let toTokens = tvAssetsPath + "tokens/" + scriptFileName
+        
+        let fromCover = dir + "/Suggested Items/Covers.xcassets/\(id).imageset/\(id).heic"
+        let toCover = tvAssetsPath + "covers/" + "\(id).heic"
+        
+        try? FileManager.default.copyItem(atPath: fromScript, toPath: toScript)
+        try? FileManager.default.copyItem(atPath: fromTokens, toPath: toTokens)
+        try? FileManager.default.copyItem(atPath: fromCover, toPath: toCover)
+        
+        genIds.insert(id)
+    }
+    
+    let filteredItems = bundledSuggestedItems.filter { genIds.contains($0.id) }
+    let filteredSuggestedItemsData = try! encoder.encode(filteredItems)
+    try? FileManager.default.removeItem(atPath: tvAssetsPath + "items.json")
+    try! filteredSuggestedItemsData.write(to: URL(filePath: tvAssetsPath + "items.json"))
 }
 
 func bundleSelected(useCollectionImages: Bool) {
