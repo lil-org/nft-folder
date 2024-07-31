@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Displays detailed information about a SampleItem.
 class SampleItemDetailsView extends StatelessWidget {
   const SampleItemDetailsView({super.key});
 
@@ -10,10 +9,10 @@ class SampleItemDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Item Details'),
+        title: const Text('item details'),
       ),
       body: const Center(
-        child: Text('More Information Here'),
+        child: Text('more info'),
       ),
     );
   }
