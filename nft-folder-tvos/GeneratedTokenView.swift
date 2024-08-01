@@ -4,6 +4,7 @@ import SwiftUI
 import UIKit
 
 private var loadContent: ((String, URL?) -> Void)?
+private var currentFallbackImageTask: URLSessionDataTask?
 
 struct GeneratedTokenView: UIViewRepresentable {
     
@@ -49,6 +50,7 @@ struct GeneratedTokenView: UIViewRepresentable {
                             let newFallbackView = UIImageView()
                             target?.addSubview(newFallbackView)
                             newFallbackView.translatesAutoresizingMaskIntoConstraints = false
+                            newFallbackView.contentMode = .scaleAspectFill
                             if let parentView = target {
                                 NSLayoutConstraint.activate([
                                     newFallbackView.topAnchor.constraint(equalTo: parentView.topAnchor),
@@ -71,7 +73,15 @@ struct GeneratedTokenView: UIViewRepresentable {
     private let tmpDev = false
     
     private func updateFallbackView(_ fallbackView: UIImageView, url: URL?) {
-        // TODO: implement
+        guard let url = url else { return }
+        fallbackView.image = nil
+        currentFallbackImageTask?.cancel()
+        let task = URLSession.shared.dataTask(with: url) { data, _, error in
+            guard let data = data, error == nil else { return }
+            DispatchQueue.main.async { fallbackView.image = UIImage(data: data) }
+        }
+        currentFallbackImageTask = task
+        task.resume()
     }
     
     func updateUIView(_ uiView: UIView, context: Context) {
