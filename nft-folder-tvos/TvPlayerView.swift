@@ -8,6 +8,7 @@ struct TvPlayerView: View {
     
     @ObservedObject private var playerModel: PlayerModel
     @State private var showInfoPopover = false
+    @State private var showTutorial = false
     
     init(initialItemId: String?) {
         self.playerModel = PlayerModel(specificCollectionId: initialItemId, notTokenId: nil)
@@ -21,6 +22,11 @@ struct TvPlayerView: View {
                         playerModel.showInitialCollection()
                     } else if !playerModel.history.isEmpty {
                         playerModel.goForward()
+                    }
+                    if !Defaults.didShowTutorial {
+                        showTutorial = true
+                        showInfoPopover = true
+                        Defaults.didShowTutorial = true
                     }
                 }
                 .focusable()
@@ -39,6 +45,7 @@ struct TvPlayerView: View {
                     }
                 }
                 .onPlayPauseCommand {
+                    showTutorial = false
                     showInfoPopover.toggle()
                 }
             
@@ -59,6 +66,11 @@ struct TvPlayerView: View {
                 .scaledToFit()
                 .frame(width: 200, height: 200)
             Text(playerModel.currentToken.displayName)
+            if showTutorial {
+                Divider()
+                Text("↔️↕️ navigate")
+                Text("⏯️ toggle info")
+            }
         }
         .padding().frame(width: 230)
     }

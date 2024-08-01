@@ -52,6 +52,15 @@ struct Defaults {
         return "folder-cid-\(wallet.address)\(isCidAttested ? "" : "-pending")"
     }
     
+    static var didShowTutorial: Bool {
+        get {
+            userDefaults.bool(forKey: "didShowTutorial")
+        }
+        set {
+            userDefaults.set(newValue, forKey: "didShowTutorial")
+        }
+    }
+    
     static var cleanupVersion: Int {
         get {
             userDefaults.integer(forKey: "cleanupVersion")
