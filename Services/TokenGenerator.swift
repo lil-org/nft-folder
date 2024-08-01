@@ -99,12 +99,13 @@ struct TokenGenerator {
         let webURL = NftGallery.etherscan.url(network: .mainnet, chain: .ethereum, collectionAddress: script.address, tokenId: token.id)
 #endif
         let generatedToken = GeneratedToken(fullCollectionId: script.id,
-                                   id: token.id,
-                                   html: html,
-                                   displayName: name,
-                                   url: webURL,
-                                   instructions: script.instructions,
-                                   screensaver: script.screensaverUrl)
+                                            address: script.address,
+                                            id: token.id,
+                                            html: html,
+                                            displayName: name,
+                                            url: webURL,
+                                            instructions: script.instructions,
+                                            screensaver: script.screensaverUrl)
         return generatedToken
     }
     

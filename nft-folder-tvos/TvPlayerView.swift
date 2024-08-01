@@ -16,7 +16,7 @@ struct TvPlayerView: View {
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            GeneratedTokenView(contentString: playerModel.currentToken.html).edgesIgnoringSafeArea(.all)
+            GeneratedTokenView(contentString: playerModel.currentToken.html, fallbackURL: fallbackURL()).edgesIgnoringSafeArea(.all)
                 .onAppear() {
                     if let initialSpecific = playerModel.specificCollectionId, initialSpecific != playerModel.currentToken.fullCollectionId {
                         playerModel.showInitialCollection()
@@ -56,6 +56,10 @@ struct TvPlayerView: View {
                     .padding()
             }
         }
+    }
+    
+    private func fallbackURL() -> URL? {
+        return URL(string: "https://media-proxy.artblocks.io/\(playerModel.currentToken.address)/\(playerModel.currentToken.id).png")
     }
     
     private func infoPopoverView() -> some View {

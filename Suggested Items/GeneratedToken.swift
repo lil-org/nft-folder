@@ -4,6 +4,7 @@ import Foundation
 
 struct GeneratedToken: Codable {
     let fullCollectionId: String
+    let address: String
     let id: String
     let html: String
     let displayName: String
@@ -11,5 +12,5 @@ struct GeneratedToken: Codable {
     let instructions: String?
     let screensaver: URL?
     
-    static let empty = GeneratedToken(fullCollectionId: "", id: "", html: "", displayName: "", url: nil, instructions: nil, screensaver: nil)
+    static let empty = GeneratedToken(fullCollectionId: "", address: "", id: "", html: "", displayName: "", url: nil, instructions: nil, screensaver: nil)
 }

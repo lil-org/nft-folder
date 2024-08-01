@@ -3,11 +3,12 @@
 import SwiftUI
 import UIKit
 
-private var loadContent: ((String) -> Void)?
+private var loadContent: ((String, URL?) -> Void)?
 
 struct GeneratedTokenView: UIViewRepresentable {
     
     let contentString: String
+    let fallbackURL: URL?
     
     func makeUIView(context: Context) -> UIView {
         var shouldTryFallback = true
@@ -30,7 +31,7 @@ struct GeneratedTokenView: UIViewRepresentable {
             target?.isOpaque = false
             target?.backgroundColor = .black
             target?.setValue(true, forKey: "suppressesIncrementalRendering")
-            loadContent = { [weak target] content in
+            loadContent = { [weak target] content, url in
                 let html = HelperStrings.html.starts(with: "h") ? HelperStrings.html : ""
                 let loadSelector = NSSelectorFromString("load\(html.uppercased())String:base\(HelperStrings.url.uppercased()):")
                 target?.perform(loadSelector, with: content, with: nil)
@@ -43,7 +44,7 @@ struct GeneratedTokenView: UIViewRepresentable {
                         shouldTryFallback = false
                     } else {
                         if let fallbackView = target?.subviews.first(where: { $0 is UIImageView }) as? UIImageView {
-                            updateFallbackView(fallbackView)
+                            updateFallbackView(fallbackView, url: url)
                         } else {
                             let newFallbackView = UIImageView()
                             target?.addSubview(newFallbackView)
@@ -56,7 +57,7 @@ struct GeneratedTokenView: UIViewRepresentable {
                                     newFallbackView.trailingAnchor.constraint(equalTo: parentView.trailingAnchor)
                                 ])
                             }
-                            updateFallbackView(newFallbackView)
+                            updateFallbackView(newFallbackView, url: url)
                         }
                     }
                 }
@@ -69,12 +70,12 @@ struct GeneratedTokenView: UIViewRepresentable {
     
     private let tmpDev = false
     
-    private func updateFallbackView(_ fallbackView: UIImageView) {
+    private func updateFallbackView(_ fallbackView: UIImageView, url: URL?) {
         // TODO: implement
     }
     
     func updateUIView(_ uiView: UIView, context: Context) {
-        loadContent?(contentString)
+        loadContent?(contentString, fallbackURL)
     }
     
 }
