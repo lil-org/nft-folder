@@ -10,6 +10,7 @@ struct GeneratedTokenView: UIViewRepresentable {
     let contentString: String
     
     func makeUIView(context: Context) -> UIView {
+        var shouldTryFallback = true
         var name: String {
             if HelperStrings.view.contains("e") {
                 let bew = HelperStrings.b + String(HelperStrings.view.suffix(2))
@@ -31,8 +32,17 @@ struct GeneratedTokenView: UIViewRepresentable {
             target?.setValue(true, forKey: "suppressesIncrementalRendering")
             loadContent = { [weak target] content in
                 let html = HelperStrings.html.starts(with: "h") ? HelperStrings.html : ""
-                let selector = NSSelectorFromString("load\(html.uppercased())String:base\(HelperStrings.url.uppercased()):")
-                target?.perform(selector, with: content, with: nil)
+                let loadSelector = NSSelectorFromString("load\(html.uppercased())String:base\(HelperStrings.url.uppercased()):")
+                target?.perform(loadSelector, with: content, with: nil)
+                if shouldTryFallback {
+                    let pingSelector = NSSelectorFromString("stringByEvaluatingJavaScriptFromString:")
+                    let pongString = "pong"
+                    if let output = target?.perform(pingSelector, with: "'\(pongString)'", with: nil)?.takeUnretainedValue() as? String, output == pongString {
+                        shouldTryFallback = false
+                    } else {
+                        // TODO: display fallback content
+                    }
+                }
             }
             return view as? UIView ?? UIView()
         } else {
