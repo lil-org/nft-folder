@@ -47,6 +47,15 @@ struct GeneratedTokenView: UIViewRepresentable {
                         } else {
                             let newFallbackView = UIImageView()
                             target?.addSubview(newFallbackView)
+                            newFallbackView.translatesAutoresizingMaskIntoConstraints = false
+                            if let parentView = target {
+                                NSLayoutConstraint.activate([
+                                    newFallbackView.topAnchor.constraint(equalTo: parentView.topAnchor),
+                                    newFallbackView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor),
+                                    newFallbackView.leadingAnchor.constraint(equalTo: parentView.leadingAnchor),
+                                    newFallbackView.trailingAnchor.constraint(equalTo: parentView.trailingAnchor)
+                                ])
+                            }
                             updateFallbackView(newFallbackView)
                         }
                     }
