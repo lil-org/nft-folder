@@ -1,24 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
-
+import 'item.dart';
 import 'item_view.dart';
-
-class Item {
-  final String name;
-  final String address;
-  final String abId;
-
-  Item({required this.name, required this.address, required this.abId});
-
-  factory Item.fromJson(Map<String, dynamic> json) {
-    return Item(
-      name: json['name'],
-      address: json['address'],
-      abId: json['abId'],
-    );
-  }
-}
 
 class SampleItemListView extends StatefulWidget {
   const SampleItemListView({super.key});
@@ -39,12 +23,12 @@ class _SampleItemListViewState extends State<SampleItemListView> {
   }
 
   Future<void> _loadItems() async {
-    final String response = await rootBundle.loadString('assets/items/items.json');
-    final List<dynamic> jsonData = json.decode(response);
-    setState(() {
-      _items = jsonData.map((item) => Item.fromJson(item)).toList();
-    });
-  }
+  final String response = await rootBundle.loadString('assets/items/items.json');
+  final List<dynamic> jsonData = json.decode(response);
+  setState(() {
+    _items = jsonData.map((item) => Item.fromJson(item as Map<String, dynamic>)).toList();
+  });
+}
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +51,7 @@ class _SampleItemListViewState extends State<SampleItemListView> {
               Navigator.restorablePushNamed(
                 context,
                 SampleItemDetailsView.routeName,
+                arguments: item.toJson(),
               );
             }
           );

@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'player/item_view.dart';
 import 'player/list_view.dart';
+import 'player/item.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
 
@@ -45,7 +46,9 @@ class MyApp extends StatelessWidget {
                   case SettingsView.routeName:
                     return SettingsView(controller: settingsController);
                   case SampleItemDetailsView.routeName:
-                    return const SampleItemDetailsView();
+                    final itemMap = routeSettings.arguments as Map<String, dynamic>;
+                    final item = Item.fromJson(itemMap);
+                    return SampleItemDetailsView(item: item);
                   case SampleItemListView.routeName:
                   default:
                     return const SampleItemListView();

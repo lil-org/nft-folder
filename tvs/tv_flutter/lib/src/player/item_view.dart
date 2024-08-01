@@ -1,23 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'item.dart';
+import 'dart:convert';
 import 'dart:math';
+import 'package:flutter/services.dart';
 
 class SampleItemDetailsView extends StatelessWidget {
-  const SampleItemDetailsView({super.key});
+  final Item item;
+
+  const SampleItemDetailsView({super.key, required this.item});
 
   static const routeName = '/sample_item';
 
-  String _generateRandomColorHtml() {
+  String _generateHtmlContent() {
+    // TODO: load content
 
-    // TODO: read tokens json
-    // TODO: read script json
-    // TODO: read corresponding lib
-    // TODO: make an html
+    // final String tokensJson = await rootBundle.loadString('assets/items/tokens.json');
+    // final String scriptJson = await rootBundle.loadString('assets/items/script.json');
+    // final String libContent = await rootBundle.loadString('assets/items/lib/${item.address}${item.abId}.js');
+
+    // TODO: build html
 
     final random = Random();
     final r = random.nextInt(256);
     final g = random.nextInt(256);
     final b = random.nextInt(256);
+
     return '''
       <!DOCTYPE html>
       <html>
@@ -35,19 +43,19 @@ class SampleItemDetailsView extends StatelessWidget {
           }
           h1 {
             color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
           }
         </style>
       </head>
-      <body></body>
+      <body>
+        <h1>${item.name}</h1>
+      </body>
       </html>
     ''';
   }
 
   @override
   Widget build(BuildContext context) {
-    final randomHtml = _generateRandomColorHtml();
-
+    final randomHtml = _generateHtmlContent();
     return Scaffold(
       body: WebViewWidget(
         controller: WebViewController()
