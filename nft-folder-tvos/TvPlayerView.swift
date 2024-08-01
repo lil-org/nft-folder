@@ -52,6 +52,7 @@ struct TvPlayerView: View {
     
     private func infoPopoverView() -> some View {
         VStack(alignment: .leading, spacing: 10) {
+            // TODO: display playerModel.currentToken.url string as qr code image
             Text(playerModel.currentToken.displayName)
         }
         .padding().frame(minWidth: 250)
