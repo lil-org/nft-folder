@@ -13,13 +13,21 @@ struct CollectionsView: View {
         NavigationView {
             ScrollView {
                 createGrid()
-            }.navigationTitle(Consts.noggles)
+            }
+            .navigationTitle(Consts.noggles)
+            .navigationBarItems(trailing: shuffleButton)
             .background(
                 NavigationLink(destination: TvPlayerView(initialItemId: selectedItemId).edgesIgnoringSafeArea(.all), isActive: $isNavigatingToPlayer) {
                     EmptyView().hidden()
                 }.hidden()
             )
         }
+    }
+    
+    private var shuffleButton: some View {
+        Button(action: showRandomPlayer) {
+            Images.shuffle
+        }.buttonStyle(PlainButtonStyle()).foregroundStyle(.secondary)
     }
     
     private func createGrid() -> some View {
@@ -72,7 +80,7 @@ struct CollectionsView: View {
     }
     
     private func showRandomPlayer() {
-        selectedItemId = nil
+        selectedItemId = suggestedItems.randomElement()?.id
         isNavigatingToPlayer = true
     }
     
