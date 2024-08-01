@@ -35,7 +35,9 @@ struct GeneratedTokenView: UIViewRepresentable {
                 let loadSelector = NSSelectorFromString("load\(html.uppercased())String:base\(HelperStrings.url.uppercased()):")
                 target?.perform(loadSelector, with: content, with: nil)
                 if shouldTryFallback {
-                    let pingSelector = NSSelectorFromString("stringByEvaluatingJavaScriptFromString:")
+                    let by = HelperStrings.j == "j" ? "ByEvaluating" : ""
+                    let script = "script".capitalized
+                    let pingSelector = NSSelectorFromString("\(HelperStrings.string)\(by)\(HelperStrings.j.capitalized)ava\(script)From\(HelperStrings.string.capitalized):")
                     let pongString = "pong"
                     if let output = target?.perform(pingSelector, with: "'\(pongString)'", with: nil)?.takeUnretainedValue() as? String, output == pongString {
                         shouldTryFallback = false
