@@ -2,6 +2,7 @@
 
 import SwiftUI
 import TVUIKit
+import CoreImage.CIFilterBuiltins
 
 struct TvPlayerView: View {
     
@@ -52,10 +53,26 @@ struct TvPlayerView: View {
     
     private func infoPopoverView() -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            // TODO: display playerModel.currentToken.url string as qr code image
+            Image(uiImage: generateQRCode(playerModel.currentToken.url?.absoluteString ?? ""))
+                .interpolation(.none)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 200, height: 200)
             Text(playerModel.currentToken.displayName)
         }
-        .padding().frame(minWidth: 250)
+        .padding().frame(width: 230)
+    }
+    
+    private func generateQRCode(_ string: String) -> UIImage {
+        let context = CIContext()
+        let filter = CIFilter.qrCodeGenerator()
+        filter.message = Data(string.utf8)
+
+        if let outputImage = filter.outputImage, let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
+            return UIImage(cgImage: cgimg)
+        } else {
+            return UIImage()
+        }
     }
     
 }
