@@ -8,6 +8,12 @@ class SampleItemDetailsView extends StatelessWidget {
   static const routeName = '/sample_item';
 
   String _generateRandomColorHtml() {
+
+    // TODO: read tokens json
+    // TODO: read script json
+    // TODO: read corresponding lib
+    // TODO: make an html
+
     final random = Random();
     final r = random.nextInt(256);
     final g = random.nextInt(256);
