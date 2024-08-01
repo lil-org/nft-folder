@@ -27,7 +27,7 @@ struct CollectionsView: View {
     private var shuffleButton: some View {
         Button(action: showRandomPlayer) {
             Images.shuffle
-        }.buttonStyle(PlainButtonStyle()).foregroundStyle(.secondary)
+        }.buttonStyle(PlainButtonStyle()).foregroundStyle(.tertiary)
     }
     
     private func createGrid() -> some View {
