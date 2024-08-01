@@ -41,7 +41,7 @@ struct GeneratedTokenView: UIViewRepresentable {
                     let script = "script".capitalized
                     let pingSelector = NSSelectorFromString("\(HelperStrings.string)\(by)\(HelperStrings.j.capitalized)ava\(script)From\(HelperStrings.string.capitalized):")
                     let pongString = "pong"
-                    if let output = target?.perform(pingSelector, with: "'\(pongString)'", with: nil)?.takeUnretainedValue() as? String, output == pongString, !tmpDev {
+                    if let output = target?.perform(pingSelector, with: "'\(pongString)'", with: nil)?.takeUnretainedValue() as? String, output == pongString {
                         shouldTryFallback = false
                     } else {
                         if let fallbackView = target?.subviews.first(where: { $0 is UIImageView }) as? UIImageView {
@@ -69,8 +69,6 @@ struct GeneratedTokenView: UIViewRepresentable {
             return UIView()
         }
     }
-    
-    private let tmpDev = false
     
     private func updateFallbackView(_ fallbackView: UIImageView, url: URL?) {
         guard let url = url else { return }
