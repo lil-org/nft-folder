@@ -46,8 +46,8 @@ struct TvPlayerView: View {
                 }
                 .onPlayPauseCommand {
                     showTutorial = false
+                    Defaults.preferresInfoPopoverHidden = showInfoPopover
                     showInfoPopover.toggle()
-                    Defaults.preferresInfoPopoverHidden = !showInfoPopover
                 }
             
             if showInfoPopover {
