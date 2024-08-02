@@ -23,6 +23,7 @@ class _SampleItemDetailsViewState extends State<SampleItemDetailsView> {
   final ItemRepository _itemRepository = ItemRepository();
   bool _showQrCode = false;
   String _currentTokenId = '';
+  final FocusNode _focusNode = FocusNode();
 
   @override
   void initState() {
@@ -32,10 +33,22 @@ class _SampleItemDetailsViewState extends State<SampleItemDetailsView> {
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(const Color(0x00000000));
     _loadContent();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      FocusScope.of(context).requestFocus(_focusNode);
+    });
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    _controller.clearCache();
+    _controller.clearLocalStorage();
+    super.dispose();
   }
 
   Future<void> _loadContent() async {
     Map<String, String> content = await generateHtmlContent(currentItem);
+    if (!mounted) return;
     await _controller.loadHtmlString(content['html']!);
     setState(() {
       _currentTokenId = content['tokenId']!;
@@ -51,7 +64,7 @@ class _SampleItemDetailsViewState extends State<SampleItemDetailsView> {
           _loadContent();
         });
       } else if (event.logicalKey == LogicalKeyboardKey.arrowLeft ||
-                 event.logicalKey == LogicalKeyboardKey.arrowRight) {
+          event.logicalKey == LogicalKeyboardKey.arrowRight) {
         _loadContent();
       } else if (event.logicalKey == LogicalKeyboardKey.select) {
         setState(() {
@@ -65,10 +78,21 @@ class _SampleItemDetailsViewState extends State<SampleItemDetailsView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: KeyboardListener(
-        focusNode: FocusNode(),
-        onKeyEvent: _handleKeyEvent,
-        autofocus: true,
+      body: Focus(
+        focusNode: _focusNode,
+        onKeyEvent: (FocusNode node, KeyEvent event) {
+          if (event is KeyDownEvent) {
+            if (event.logicalKey == LogicalKeyboardKey.arrowUp ||
+                event.logicalKey == LogicalKeyboardKey.arrowDown ||
+                event.logicalKey == LogicalKeyboardKey.arrowLeft ||
+                event.logicalKey == LogicalKeyboardKey.arrowRight ||
+                event.logicalKey == LogicalKeyboardKey.select) {
+              _handleKeyEvent(event);
+              return KeyEventResult.handled;
+            }
+          }
+          return KeyEventResult.ignored;
+        },
         child: Stack(
           children: [
             WebViewWidget(controller: _controller),
@@ -77,7 +101,8 @@ class _SampleItemDetailsViewState extends State<SampleItemDetailsView> {
                 top: 10,
                 right: 10,
                 child: QrImageView(
-                  data: 'https://etherscan.io/nft/${currentItem.address}/$_currentTokenId',
+                  data:
+                      'https://etherscan.io/nft/${currentItem.address}/$_currentTokenId',
                   version: QrVersions.auto,
                   size: 100.0,
                   backgroundColor: Colors.white,
