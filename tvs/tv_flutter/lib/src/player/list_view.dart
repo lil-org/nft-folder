@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:flutter/services.dart';
-import 'item.dart';
+import 'item_repository.dart';
 import 'item_view.dart';
 
 class SampleItemListView extends StatefulWidget {
@@ -14,7 +12,7 @@ class SampleItemListView extends StatefulWidget {
 }
 
 class _SampleItemListViewState extends State<SampleItemListView> {
-  List<Item> _items = [];
+  final ItemRepository _itemRepository = ItemRepository();
 
   @override
   void initState() {
@@ -23,12 +21,9 @@ class _SampleItemListViewState extends State<SampleItemListView> {
   }
 
   Future<void> _loadItems() async {
-  final String response = await rootBundle.loadString('assets/items/items.json');
-  final List<dynamic> jsonData = json.decode(response);
-  setState(() {
-    _items = jsonData.map((item) => Item.fromJson(item as Map<String, dynamic>)).toList();
-  });
-}
+    await _itemRepository.loadItems();
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +33,9 @@ class _SampleItemListViewState extends State<SampleItemListView> {
       ),
       body: ListView.builder(
         restorationId: 'sampleItemListView',
-        itemCount: _items.length,
+        itemCount: _itemRepository.items.length,
         itemBuilder: (BuildContext context, int index) {
-          final item = _items[index];
+          final item = _itemRepository.items[index];
 
           return ListTile(
             title: Text(item.name),
