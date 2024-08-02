@@ -55,7 +55,7 @@ class BundledTokenItem {
   }
 }
 
-Future<String> generateHtmlContent(Item item) async {
+Future<Map<String, String>> generateHtmlContent(Item item) async {
   final String id = item.address + item.abId;
   final String tokensJsonString = await rootBundle.loadString('assets/items/tokens/$id.json');
   final BundledTokens bundledTokens = BundledTokens.fromJson(json.decode(tokensJsonString));
@@ -304,5 +304,8 @@ Future<String> generateHtmlContent(Item item) async {
     default:
       html = '<html><body>hmm</body></html>';
   }
-  return html;
+  return {
+    'html': html,
+    'tokenId': tokenid,
+  };
 }

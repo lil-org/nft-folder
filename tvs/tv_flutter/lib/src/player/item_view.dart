@@ -22,6 +22,7 @@ class _SampleItemDetailsViewState extends State<SampleItemDetailsView> {
   late WebViewController _controller;
   final ItemRepository _itemRepository = ItemRepository();
   bool _showQrCode = false;
+  String _currentTokenId = '';
 
   @override
   void initState() {
@@ -34,8 +35,11 @@ class _SampleItemDetailsViewState extends State<SampleItemDetailsView> {
   }
 
   Future<void> _loadContent() async {
-    String htmlContent = await generateHtmlContent(currentItem);
-    await _controller.loadHtmlString(htmlContent);
+    Map<String, String> content = await generateHtmlContent(currentItem);
+    await _controller.loadHtmlString(content['html']!);
+    setState(() {
+      _currentTokenId = content['tokenId']!;
+    });
   }
 
   void _handleKeyEvent(KeyEvent event) {
@@ -73,7 +77,7 @@ class _SampleItemDetailsViewState extends State<SampleItemDetailsView> {
                 top: 10,
                 right: 10,
                 child: QrImageView(
-                  data: currentItem.address + currentItem.abId,
+                  data: 'https://etherscan.io/nft/${currentItem.address}/$_currentTokenId',
                   version: QrVersions.auto,
                   size: 100.0,
                   backgroundColor: Colors.white,
