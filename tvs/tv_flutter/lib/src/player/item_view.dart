@@ -70,7 +70,7 @@ class SampleItemDetailsView extends StatelessWidget {
     final BundledTokens bundledTokens = BundledTokens.fromJson(json.decode(tokensJsonString));
     final String scriptJsonString = await rootBundle.loadString('assets/items/scripts/$id.json');
     final Script script = Script.fromJson(json.decode(scriptJsonString));
-    // final String libContent = await rootBundle.loadString('assets/items/lib/${item.address}${item.abId}.js');
+    final String lib = (script.kind == "js" || script.kind == "svg") ? "" : await rootBundle.loadString('assets/items/libs/${script.kind}.js');
 
     final random = Random();
     final r = random.nextInt(256);
@@ -99,7 +99,7 @@ class SampleItemDetailsView extends StatelessWidget {
         </style>
       </head>
       <body>
-        <h1>${item.name} ${script.name} ${script.kind} ${bundledTokens.items.length}</h1>
+        <h1>${item.name} ${script.name} ${script.kind} ${bundledTokens.items.length} $lib</h1>
       </body>
       </html>
     ''';
