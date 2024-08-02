@@ -12,14 +12,11 @@ class SampleItemDetailsView extends StatelessWidget {
 
   static const routeName = '/sample_item';
 
-  String _generateHtmlContent() {
-    // TODO: load content
-
-    // final String tokensJson = await rootBundle.loadString('assets/items/tokens.json');
-    // final String scriptJson = await rootBundle.loadString('assets/items/script.json');
+  Future<String> _generateHtmlContent() async {
+    final String id = item.address + item.abId;
+    final String tokensJson = await rootBundle.loadString('assets/items/tokens/$id.json');
+    final String scriptJson = await rootBundle.loadString('assets/items/scripts/$id.json');
     // final String libContent = await rootBundle.loadString('assets/items/lib/${item.address}${item.abId}.js');
-
-    // TODO: build html
 
     final random = Random();
     final r = random.nextInt(256);
@@ -35,6 +32,7 @@ class SampleItemDetailsView extends StatelessWidget {
           body { 
             background-color: rgb($r, $g, $b);
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -47,7 +45,7 @@ class SampleItemDetailsView extends StatelessWidget {
         </style>
       </head>
       <body>
-        <h1>${item.name}</h1>
+        <h1>${item.name} $scriptJson</h1>
       </body>
       </html>
     ''';
@@ -55,12 +53,20 @@ class SampleItemDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final randomHtml = _generateHtmlContent();
     return Scaffold(
-      body: WebViewWidget(
-        controller: WebViewController()
-          ..loadHtmlString(randomHtml)
-          ..setJavaScriptMode(JavaScriptMode.unrestricted),
+      body: FutureBuilder<String>(
+        future: _generateHtmlContent(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return WebViewWidget(
+              controller: WebViewController()
+                ..loadHtmlString(snapshot.data!)
+                ..setJavaScriptMode(JavaScriptMode.unrestricted),
+            );
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
       ),
     );
   }
