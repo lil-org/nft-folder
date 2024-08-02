@@ -52,12 +52,21 @@ struct Defaults {
         return "folder-cid-\(wallet.address)\(isCidAttested ? "" : "-pending")"
     }
     
-    static var didShowTutorial: Bool {
+    static var didShowPlayerTutorial: Bool {
         get {
-            userDefaults.bool(forKey: "didShowTutorial")
+            userDefaults.bool(forKey: "didShowPlayerTutorial")
         }
         set {
-            userDefaults.set(newValue, forKey: "didShowTutorial")
+            userDefaults.set(newValue, forKey: "didShowPlayerTutorial")
+        }
+    }
+    
+    static var preferresInfoPopoverHidden: Bool {
+        get {
+            userDefaults.bool(forKey: "preferresInfoPopoverHidden")
+        }
+        set {
+            userDefaults.set(newValue, forKey: "preferresInfoPopoverHidden")
         }
     }
     

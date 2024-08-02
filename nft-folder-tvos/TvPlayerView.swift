@@ -7,7 +7,7 @@ import CoreImage.CIFilterBuiltins
 struct TvPlayerView: View {
     
     @ObservedObject private var playerModel: PlayerModel
-    @State private var showInfoPopover = false
+    @State private var showInfoPopover = !Defaults.preferresInfoPopoverHidden
     @State private var showTutorial = false
     
     init(initialItemId: String?) {
@@ -23,10 +23,10 @@ struct TvPlayerView: View {
                     } else if !playerModel.history.isEmpty {
                         playerModel.goForward()
                     }
-                    if !Defaults.didShowTutorial {
+                    if !Defaults.didShowPlayerTutorial {
                         showTutorial = true
                         showInfoPopover = true
-                        Defaults.didShowTutorial = true
+                        Defaults.didShowPlayerTutorial = true
                     }
                 }
                 .focusable()
@@ -47,6 +47,7 @@ struct TvPlayerView: View {
                 .onPlayPauseCommand {
                     showTutorial = false
                     showInfoPopover.toggle()
+                    Defaults.preferresInfoPopoverHidden = !showInfoPopover
                 }
             
             if showInfoPopover {
