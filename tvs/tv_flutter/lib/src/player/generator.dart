@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'item.dart';
+import 'dart:math';
 
 class Script {
   final String address;
@@ -62,7 +63,8 @@ Future<String> generateHtmlContent(Item item) async {
   final Script script = Script.fromJson(json.decode(scriptJsonString));
   final String lib = (script.kind == "js" || script.kind == "svg") ? "" : await rootBundle.loadString('assets/items/libs/${script.kind}.js');
 
-  final token = bundledTokens.items.first;
+  final random = Random();
+  final token = bundledTokens.items[random.nextInt(bundledTokens.items.length)];
   final hash = token.hash;
   final tokenid = token.id;
 
