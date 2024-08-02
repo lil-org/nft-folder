@@ -5,6 +5,32 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/services.dart';
 
+class Script {
+  final String address;
+  final String name;
+  final String abId;
+  final String value;
+  final String kind;
+
+  Script({
+    required this.address,
+    required this.name,
+    required this.abId,
+    required this.value,
+    required this.kind,
+  });
+
+  factory Script.fromJson(Map<String, dynamic> json) {
+    return Script(
+      address: json['address'],
+      name: json['name'],
+      abId: json['abId'],
+      value: json['value'],
+      kind: json['kind'],
+    );
+  }
+}
+
 class SampleItemDetailsView extends StatelessWidget {
   final Item item;
 
@@ -15,7 +41,8 @@ class SampleItemDetailsView extends StatelessWidget {
   Future<String> _generateHtmlContent() async {
     final String id = item.address + item.abId;
     final String tokensJson = await rootBundle.loadString('assets/items/tokens/$id.json');
-    final String scriptJson = await rootBundle.loadString('assets/items/scripts/$id.json');
+    final String scriptJsonString = await rootBundle.loadString('assets/items/scripts/$id.json');
+    final Script script = Script.fromJson(json.decode(scriptJsonString));
     // final String libContent = await rootBundle.loadString('assets/items/lib/${item.address}${item.abId}.js');
 
     final random = Random();
@@ -45,7 +72,7 @@ class SampleItemDetailsView extends StatelessWidget {
         </style>
       </head>
       <body>
-        <h1>${item.name} $scriptJson</h1>
+        <h1>${item.name} ${script.name} ${script.kind}</h1>
       </body>
       </html>
     ''';
