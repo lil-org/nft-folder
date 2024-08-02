@@ -31,6 +31,32 @@ class Script {
   }
 }
 
+class BundledTokens {
+  final List<BundledTokenItem> items;
+
+  BundledTokens({required this.items});
+
+  factory BundledTokens.fromJson(Map<String, dynamic> json) {
+    var itemsList = json['items'] as List;
+    List<BundledTokenItem> items = itemsList.map((i) => BundledTokenItem.fromJson(i)).toList();
+    return BundledTokens(items: items);
+  }
+}
+
+class BundledTokenItem {
+  final String id;
+  final String hash;
+
+  BundledTokenItem({required this.id, required this.hash});
+
+  factory BundledTokenItem.fromJson(Map<String, dynamic> json) {
+    return BundledTokenItem(
+      id: json['id'],
+      hash: json['hash'],
+    );
+  }
+}
+
 class SampleItemDetailsView extends StatelessWidget {
   final Item item;
 
@@ -40,7 +66,8 @@ class SampleItemDetailsView extends StatelessWidget {
 
   Future<String> _generateHtmlContent() async {
     final String id = item.address + item.abId;
-    final String tokensJson = await rootBundle.loadString('assets/items/tokens/$id.json');
+    final String tokensJsonString = await rootBundle.loadString('assets/items/tokens/$id.json');
+    final BundledTokens bundledTokens = BundledTokens.fromJson(json.decode(tokensJsonString));
     final String scriptJsonString = await rootBundle.loadString('assets/items/scripts/$id.json');
     final Script script = Script.fromJson(json.decode(scriptJsonString));
     // final String libContent = await rootBundle.loadString('assets/items/lib/${item.address}${item.abId}.js');
@@ -72,7 +99,7 @@ class SampleItemDetailsView extends StatelessWidget {
         </style>
       </head>
       <body>
-        <h1>${item.name} ${script.name} ${script.kind}</h1>
+        <h1>${item.name} ${script.name} ${script.kind} ${bundledTokens.items.length}</h1>
       </body>
       </html>
     ''';
