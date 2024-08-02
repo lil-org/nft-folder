@@ -328,7 +328,7 @@ class SampleItemDetailsView extends StatelessWidget {
                 ..setJavaScriptMode(JavaScriptMode.unrestricted),
             );
           } else {
-            return const Center(child: CircularProgressIndicator());
+            return const SizedBox.shrink();
           }
         },
       ),
