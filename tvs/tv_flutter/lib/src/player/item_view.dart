@@ -314,10 +314,10 @@ class SampleItemDetailsView extends StatelessWidget {
     }
     return html;
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: FutureBuilder<String>(
         future: _generateHtmlContent(),
         builder: (context, snapshot) {
@@ -325,7 +325,8 @@ class SampleItemDetailsView extends StatelessWidget {
             return WebViewWidget(
               controller: WebViewController()
                 ..loadHtmlString(snapshot.data!)
-                ..setJavaScriptMode(JavaScriptMode.unrestricted),
+                ..setJavaScriptMode(JavaScriptMode.unrestricted)
+                ..setBackgroundColor(const Color(0x00000000)),
             );
           } else {
             return const SizedBox.shrink();
