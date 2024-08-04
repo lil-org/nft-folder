@@ -24,6 +24,8 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <meta-data android:name="android.tv.banner"
+                    android:resource="@drawable/tv_banner" />
     </application>
     <queries>
         <intent>
