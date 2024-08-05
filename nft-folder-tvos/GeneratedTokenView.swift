@@ -32,12 +32,23 @@ struct GeneratedTokenView: UIViewRepresentable {
             target?.isOpaque = false
             target?.backgroundColor = .black
             target?.setValue(true, forKey: "suppressesIncrementalRendering")
+            let documentType = HelperStrings.html.starts(with: "h") ? HelperStrings.html : ""
+            let loadSelector = NSSelectorFromString("load\(documentType.uppercased())String:base\(HelperStrings.url.uppercased()):")
+            
+            let sample = """
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <style>body { background-color: #333; }</style>
+            </head>
+            <body></body>
+            </html>
+            """
+            target?.perform(loadSelector, with: sample, with: nil)
             
             let shouldFallback = shouldTryFallback // TODO: implement - render a sample view to see if should fallback
             
             loadContent = { [weak target] content, url in
-                let html = HelperStrings.html.starts(with: "h") ? HelperStrings.html : ""
-                let loadSelector = NSSelectorFromString("load\(html.uppercased())String:base\(HelperStrings.url.uppercased()):")
                 target?.perform(loadSelector, with: content, with: nil)
                 
                 if shouldFallback {
