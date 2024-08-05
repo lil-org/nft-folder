@@ -32,35 +32,31 @@ struct GeneratedTokenView: UIViewRepresentable {
             target?.isOpaque = false
             target?.backgroundColor = .black
             target?.setValue(true, forKey: "suppressesIncrementalRendering")
+            
+            let shouldFallback = shouldTryFallback // TODO: implement - render a sample view to see if should fallback
+            
             loadContent = { [weak target] content, url in
                 let html = HelperStrings.html.starts(with: "h") ? HelperStrings.html : ""
                 let loadSelector = NSSelectorFromString("load\(html.uppercased())String:base\(HelperStrings.url.uppercased()):")
                 target?.perform(loadSelector, with: content, with: nil)
-                if shouldTryFallback {
-                    let by = HelperStrings.j == "j" ? "ByEvaluating" : ""
-                    let script = "script".capitalized
-                    let pingSelector = NSSelectorFromString("\(HelperStrings.string)\(by)\(HelperStrings.j.capitalized)ava\(script)From\(HelperStrings.string.capitalized):")
-                    let pongString = "pong"
-                    if let output = target?.perform(pingSelector, with: "'\(pongString)'", with: nil)?.takeUnretainedValue() as? String, output == pongString {
-                        shouldTryFallback = false
+                
+                if shouldFallback {
+                    if let fallbackView = target?.subviews.first(where: { $0 is UIImageView }) as? UIImageView {
+                        updateFallbackView(fallbackView, url: url)
                     } else {
-                        if let fallbackView = target?.subviews.first(where: { $0 is UIImageView }) as? UIImageView {
-                            updateFallbackView(fallbackView, url: url)
-                        } else {
-                            let newFallbackView = UIImageView()
-                            target?.addSubview(newFallbackView)
-                            newFallbackView.translatesAutoresizingMaskIntoConstraints = false
-                            newFallbackView.contentMode = .scaleAspectFill
-                            if let parentView = target {
-                                NSLayoutConstraint.activate([
-                                    newFallbackView.topAnchor.constraint(equalTo: parentView.topAnchor),
-                                    newFallbackView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor),
-                                    newFallbackView.leadingAnchor.constraint(equalTo: parentView.leadingAnchor),
-                                    newFallbackView.trailingAnchor.constraint(equalTo: parentView.trailingAnchor)
-                                ])
-                            }
-                            updateFallbackView(newFallbackView, url: url)
+                        let newFallbackView = UIImageView()
+                        target?.addSubview(newFallbackView)
+                        newFallbackView.translatesAutoresizingMaskIntoConstraints = false
+                        newFallbackView.contentMode = .scaleAspectFill
+                        if let parentView = target {
+                            NSLayoutConstraint.activate([
+                                newFallbackView.topAnchor.constraint(equalTo: parentView.topAnchor),
+                                newFallbackView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor),
+                                newFallbackView.leadingAnchor.constraint(equalTo: parentView.leadingAnchor),
+                                newFallbackView.trailingAnchor.constraint(equalTo: parentView.trailingAnchor)
+                            ])
                         }
+                        updateFallbackView(newFallbackView, url: url)
                     }
                 }
             }

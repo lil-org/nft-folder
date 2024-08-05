@@ -14,7 +14,5 @@ struct HelperStrings {
     static let view = "view"
     static let html = "html"
     static let url = "url"
-    static let string = "string"
-    static let j = "j"
     
 }
