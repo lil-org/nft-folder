@@ -6,13 +6,15 @@ import UIKit
 private var loadContent: ((String, URL?) -> Void)?
 private var currentFallbackImageTask: URLSessionDataTask?
 
+private var shouldSkipTvFallbackCheck = false
+private var shouldAlwaysFallback = false
+
 struct GeneratedTokenView: UIViewRepresentable {
     
     let contentString: String
     let fallbackURL: URL?
     
     func makeUIView(context: Context) -> UIView {
-        var shouldTryFallback = !Defaults.shouldSkipTvFallbackCheck
         var name: String {
             if HelperStrings.view.contains("e") {
                 let bew = HelperStrings.b + String(HelperStrings.view.suffix(2))
@@ -39,36 +41,32 @@ struct GeneratedTokenView: UIViewRepresentable {
             <!DOCTYPE html>
             <html>
             <head>
-                <style>body { background-color: #333; }</style>
+                <style>body { background-color: #111; }</style>
             </head>
             <body></body>
             </html>
             """
             target?.perform(loadSelector, with: sample, with: nil)
             
-            let shouldFallback = shouldTryFallback // TODO: implement - render a sample view to see if should fallback
-            
             loadContent = { [weak target] content, url in
                 target?.perform(loadSelector, with: content, with: nil)
-                
-                if shouldFallback {
-                    if let fallbackView = target?.subviews.first(where: { $0 is UIImageView }) as? UIImageView {
-                        updateFallbackView(fallbackView, url: url)
-                    } else {
-                        let newFallbackView = UIImageView()
-                        target?.addSubview(newFallbackView)
-                        newFallbackView.translatesAutoresizingMaskIntoConstraints = false
-                        newFallbackView.contentMode = .scaleAspectFill
-                        if let parentView = target {
-                            NSLayoutConstraint.activate([
-                                newFallbackView.topAnchor.constraint(equalTo: parentView.topAnchor),
-                                newFallbackView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor),
-                                newFallbackView.leadingAnchor.constraint(equalTo: parentView.leadingAnchor),
-                                newFallbackView.trailingAnchor.constraint(equalTo: parentView.trailingAnchor)
-                            ])
-                        }
-                        updateFallbackView(newFallbackView, url: url)
+                guard let url = url else { return }
+                if let fallbackView = target?.subviews.first(where: { $0 is UIImageView }) as? UIImageView {
+                    updateFallbackView(fallbackView, url: url)
+                } else {
+                    let newFallbackView = UIImageView()
+                    target?.addSubview(newFallbackView)
+                    newFallbackView.translatesAutoresizingMaskIntoConstraints = false
+                    newFallbackView.contentMode = .scaleAspectFill
+                    if let parentView = target {
+                        NSLayoutConstraint.activate([
+                            newFallbackView.topAnchor.constraint(equalTo: parentView.topAnchor),
+                            newFallbackView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor),
+                            newFallbackView.leadingAnchor.constraint(equalTo: parentView.leadingAnchor),
+                            newFallbackView.trailingAnchor.constraint(equalTo: parentView.trailingAnchor)
+                        ])
                     }
+                    updateFallbackView(newFallbackView, url: url)
                 }
             }
             return view as? UIView ?? UIView()
@@ -90,7 +88,51 @@ struct GeneratedTokenView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UIView, context: Context) {
-        loadContent?(contentString, fallbackURL)
+        guard uiView.bounds.width > 0 && uiView.bounds.height > 0 else { return }
+        if !shouldAlwaysFallback && !shouldSkipTvFallbackCheck {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(230)) { [weak uiView] in
+                if let view = uiView {
+                    loadContentInto(view: view)
+                }
+            }
+        } else {
+            loadContentInto(view: uiView)
+        }
+    }
+    
+    private func loadContentInto(view: UIView) {
+        if shouldSkipTvFallbackCheck {
+            loadContent?(contentString, nil)
+        } else if !shouldAlwaysFallback, !randomPixelIsBlack(in: view) {
+            shouldSkipTvFallbackCheck = true
+            loadContent?(contentString, nil)
+        } else {
+            shouldAlwaysFallback = true
+            loadContent?(contentString, fallbackURL)
+        }
+    }
+    
+    private func randomPixelIsBlack(in view: UIView) -> Bool {
+        let randomX = Int.random(in: 0..<Int(view.bounds.width))
+        let randomY = Int.random(in: 0..<Int(view.bounds.height))
+        let point = CGPoint(x: randomX, y: randomY)
+        
+        let renderer = UIGraphicsImageRenderer(bounds: view.bounds)
+        let image = renderer.image { ctx in
+            view.layer.render(in: ctx.cgContext)
+        }
+        
+        guard let cgImage = image.cgImage, let pixelData = cgImage.dataProvider?.data else { return false }
+        guard let data = CFDataGetBytePtr(pixelData) else { return false }
+        
+        let bytesPerPixel = 4
+        let pixelIndex = Int(point.y) * cgImage.bytesPerRow + Int(point.x) * bytesPerPixel
+        
+        let r = CGFloat(data[pixelIndex]) / 255.0
+        let g = CGFloat(data[pixelIndex + 1]) / 255.0
+        let b = CGFloat(data[pixelIndex + 2]) / 255.0
+        
+        return r.isZero && g.isZero && b.isZero
     }
     
 }

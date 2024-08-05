@@ -52,15 +52,6 @@ struct Defaults {
         return "folder-cid-\(wallet.address)\(isCidAttested ? "" : "-pending")"
     }
     
-    static var shouldSkipTvFallbackCheck: Bool {
-        get {
-            userDefaults.bool(forKey: "shouldSkipTvFallbackCheck")
-        }
-        set {
-            userDefaults.set(newValue, forKey: "shouldSkipTvFallbackCheck")
-        }
-    }
-    
     static var didShowPlayerTutorial: Bool {
         get {
             userDefaults.bool(forKey: "didShowPlayerTutorial")
