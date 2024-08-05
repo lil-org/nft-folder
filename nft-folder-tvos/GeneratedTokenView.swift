@@ -12,7 +12,7 @@ struct GeneratedTokenView: UIViewRepresentable {
     let fallbackURL: URL?
     
     func makeUIView(context: Context) -> UIView {
-        var shouldTryFallback = true
+        var shouldTryFallback = !Defaults.shouldSkipTvFallbackCheck
         var name: String {
             if HelperStrings.view.contains("e") {
                 let bew = HelperStrings.b + String(HelperStrings.view.suffix(2))
