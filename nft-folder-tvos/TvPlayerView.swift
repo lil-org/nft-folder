@@ -23,10 +23,10 @@ struct TvPlayerView: View {
                     } else if !playerModel.history.isEmpty {
                         playerModel.goForward()
                     }
-                    if !Defaults.didShowPlayerTutorial {
+                    if !Defaults.didShowTvPlayerTutorial {
                         showTutorial = true
                         showInfoPopover = true
-                        Defaults.didShowPlayerTutorial = true
+                        Defaults.didShowTvPlayerTutorial = true
                     }
                 }
                 .focusable()

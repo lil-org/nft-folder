@@ -103,7 +103,7 @@ struct GeneratedTokenView: UIViewRepresentable {
     private func loadContentInto(view: UIView) {
         if shouldSkipTvFallbackCheck {
             loadContent?(contentString, nil)
-        } else if !shouldAlwaysFallback, !randomPixelIsBlack(in: view) {
+        } else if !shouldAlwaysFallback, !randomPixelIsBlackOrTransparent(in: view) {
             shouldSkipTvFallbackCheck = true
             loadContent?(contentString, nil)
         } else {
@@ -112,7 +112,7 @@ struct GeneratedTokenView: UIViewRepresentable {
         }
     }
     
-    private func randomPixelIsBlack(in view: UIView) -> Bool {
+    private func randomPixelIsBlackOrTransparent(in view: UIView) -> Bool {
         let randomX = Int.random(in: 0..<Int(view.bounds.width))
         let randomY = Int.random(in: 0..<Int(view.bounds.height))
         let point = CGPoint(x: randomX, y: randomY)
@@ -131,8 +131,9 @@ struct GeneratedTokenView: UIViewRepresentable {
         let r = CGFloat(data[pixelIndex]) / 255.0
         let g = CGFloat(data[pixelIndex + 1]) / 255.0
         let b = CGFloat(data[pixelIndex + 2]) / 255.0
+        let a = CGFloat(data[pixelIndex + 3]) / 255.0
         
-        return r.isZero && g.isZero && b.isZero
+        return (r.isZero && g.isZero && b.isZero) || a.isZero
     }
     
 }
