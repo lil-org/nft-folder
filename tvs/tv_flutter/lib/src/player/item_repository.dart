@@ -17,7 +17,10 @@ class ItemRepository {
   Future<void> loadItems() async {
     final String response = await rootBundle.loadString('assets/items/items.json');
     final List<dynamic> jsonData = json.decode(response);
-    _items = jsonData.map((item) => Item.fromJson(item as Map<String, dynamic>)).toList();
+    _items = jsonData
+        .map((item) => Item.fromJson(item as Map<String, dynamic>))
+        .where((item) => item.didNotWorkOnProjector != true)
+        .toList();
   }
 
   List<Item> get items => _items;
