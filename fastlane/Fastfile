@@ -67,6 +67,19 @@ lane :deliver_metadata_tvos do
   end
 end
 
+lane :deliver_metadata_visionos do
+  update_and_login
+  platform :xros do
+    deliver(
+      metadata_path: "./fastlane/metadata/visionos",
+      platform: "xros",
+      run_precheck_before_submit: false,
+      force: true,
+      ignore_language_directory_validation: true,
+    )
+  end
+end
+
 lane :release_tvos do
   platform :tvos do
     gym(scheme: "nft-folder-tvos", output_directory: "fastlane/build/tvos", clean: true, export_method: "app-store", export_options: {
@@ -85,25 +98,12 @@ lane :release_tvos do
       automatic_release: true,
       submission_information: { add_id_info_uses_idfa: false },
     )
-  end
-  clean
-end
-
-lane :deliver_metadata_visionos do
-  update_and_login
-  platform :xros do
-    deliver(
-      metadata_path: "./fastlane/metadata/visionos",
-      platform: "xros",
-      run_precheck_before_submit: false,
-      force: true,
-      ignore_language_directory_validation: true,
-    )
+    clean
   end
 end
 
 lane :release_visionos do
-  platform :mac do
+  platform :xros do
     gym(scheme: "nft-folder-vision", output_directory: "fastlane/build/visionos", clean: true)
     deliver(
       metadata_path: "./fastlane/metadata/visionos",
@@ -115,8 +115,8 @@ lane :release_visionos do
       automatic_release: true,
       submission_information: { add_id_info_uses_idfa: false },
     )
+    clean
   end
-  clean
 end
 
 lane :release_macos do
@@ -133,17 +133,20 @@ lane :release_macos do
       automatic_release: true,
       submission_information: { add_id_info_uses_idfa: false },
     )
+    clean
   end
-  clean
 end
 
 lane :release do
   update_and_login
-  release_macos
   release_visionos
+  release_macos
   release_tvos
+  sh "rm -rf #{File.expand_path('build')}"
+  clean_build_artifacts
 end
 
 lane :clean do
-  sh "rm -rf #{File.expand_path('build')}"
+  xcclean
+  clear_derived_data
 end
