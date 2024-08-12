@@ -1,3 +1,15 @@
+lane :bb do
+  new_build_number = increment_build_number()
+
+  git_add(path: "nft-folder.xcodeproj/project.pbxproj")
+  git_commit(
+    path: "nft-folder.xcodeproj/project.pbxproj",
+    message: "bump build number #{new_build_number}"
+  )
+
+  push_to_git_remote
+end
+
 lane :bump do |options|
   current_version = get_version_number(xcodeproj: "nft-folder.xcodeproj", target: "nft folder")
   version_parts = current_version.split(".").map(&:to_i)
