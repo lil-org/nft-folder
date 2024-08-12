@@ -56,7 +56,6 @@ lane :deliver_metadata_tvos do
 end
 
 lane :release_tvos do
-  update_and_login
   platform :tvos do
     gym(scheme: "nft-folder-tvos", output_directory: "fastlane/build/tvos", clean: true, export_method: "app-store", export_options: {
       provisioningProfiles: {
@@ -92,7 +91,6 @@ lane :deliver_metadata_visionos do
 end
 
 lane :release_visionos do
-  update_and_login
   platform :mac do
     gym(scheme: "nft-folder-vision", output_directory: "fastlane/build/visionos", clean: true)
     deliver(
@@ -110,7 +108,6 @@ lane :release_visionos do
 end
 
 lane :release_macos do
-  update_and_login
   platform :mac do
     gym(scheme: "nft-folder", output_directory: "fastlane/build/macos", clean: true)
     deliver(
@@ -126,6 +123,13 @@ lane :release_macos do
     )
   end
   clean
+end
+
+lane :release do
+  update_and_login
+  release_macos
+  release_visionos
+  release_tvos
 end
 
 lane :clean do
