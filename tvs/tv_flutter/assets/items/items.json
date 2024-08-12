@@ -739,7 +739,8 @@
     "chain" : "ethereum",
     "chainId" : 1,
     "collectionId" : "c7bef60eb9e0cf81c6b2439ef2b6383d",
-    "name" : "Facets"
+    "name" : "Facets",
+    "didNotWorkOnProjector" : true
   },
   {
     "abId" : "3",
@@ -747,7 +748,8 @@
     "chain" : "ethereum",
     "chainId" : 1,
     "collectionId" : "e815cc32a10e64a529e84f64402ae1b4",
-    "name" : "Contractions"
+    "name" : "Contractions",
+    "didNotWorkOnProjector" : true
   },
   {
     "abId" : "112",
