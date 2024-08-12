@@ -31,7 +31,7 @@ lane :deliver_metadata_macos do
   update_and_login
   platform :mac do
     deliver(
-      metadata_path: "./fastlane/metadata",
+      metadata_path: "./fastlane/metadata/macos",
       screenshots_path: "./fastlane/screenshots/macos",
       overwrite_screenshots: true, 
       platform: "osx",
@@ -45,7 +45,7 @@ lane :deliver_metadata_tvos do
   update_and_login
   platform :tvos do
     deliver(
-      metadata_path: "./fastlane/metadata",
+      metadata_path: "./fastlane/metadata/tvos",
       screenshots_path: "./fastlane/screenshots/tvos",
       overwrite_screenshots: true, 
       platform: "appletvos",
@@ -64,7 +64,7 @@ lane :release_tvos do
       }
     })
     deliver(
-      metadata_path: "./fastlane/metadata",
+      metadata_path: "./fastlane/metadata/tvos",
       screenshots_path: "./fastlane/screenshots/tvos",
       overwrite_screenshots: true,
       platform: "appletvos",
@@ -82,7 +82,7 @@ lane :deliver_metadata_visionos do
   update_and_login
   platform :xros do
     deliver(
-      metadata_path: "./fastlane/metadata",
+      metadata_path: "./fastlane/metadata/visionos",
       platform: "xros",
       run_precheck_before_submit: false,
       force: true,
@@ -96,7 +96,7 @@ lane :release_visionos do
   platform :mac do
     gym(scheme: "nft-folder-vision", output_directory: "fastlane/build/visionos", clean: true)
     deliver(
-      metadata_path: "./fastlane/metadata",
+      metadata_path: "./fastlane/metadata/visionos",
       ignore_language_directory_validation: true,
       platform: "xros",
       run_precheck_before_submit: false,
@@ -114,7 +114,7 @@ lane :release_macos do
   platform :mac do
     gym(scheme: "nft-folder", output_directory: "fastlane/build/macos", clean: true)
     deliver(
-      metadata_path: "./fastlane/metadata",
+      metadata_path: "./fastlane/metadata/macos",
       screenshots_path: "./fastlane/screenshots/macos",
       overwrite_screenshots: true, 
       platform: "osx",
