@@ -7,11 +7,10 @@ lane :bump do |options|
   increment_version_number(version_number: new_version)
   new_build_number = increment_build_number()
 
-  commit_version_bump(
-    message: "bump version to #{new_version} (#{new_build_number})",
-    xcodeproj: "nft-folder.xcodeproj",
-    force: true,
-    include: ['nft-folder.xcodeproj/project.pbxproj']
+  git_add(path: "nft-folder.xcodeproj/project.pbxproj")
+  git_commit(
+    path: "nft-folder.xcodeproj/project.pbxproj",
+    message: "bump version to #{new_version} (#{new_build_number})"
   )
 
   push_to_git_remote
