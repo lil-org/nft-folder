@@ -32,9 +32,23 @@ lane :deliver_metadata do
   platform :mac do
     deliver(
       metadata_path: "./fastlane/metadata",
-      screenshots_path: "./fastlane/screenshots",
+      screenshots_path: "./fastlane/screenshots/macos",
       overwrite_screenshots: true, 
       platform: "osx",
+      run_precheck_before_submit: false,
+      force: true,
+    )
+  end
+end
+
+lane :deliver_metadata_tvos do
+  update_and_login
+  platform :tvos do
+    deliver(
+      metadata_path: "./fastlane/metadata",
+      screenshots_path: "./fastlane/screenshots/tvos",
+      overwrite_screenshots: true, 
+      platform: "appletvos",
       run_precheck_before_submit: false,
       force: true,
     )
@@ -47,7 +61,7 @@ lane :release do
     gym(scheme: "nft-folder", output_directory: "fastlane/build", clean: true)
     deliver(
       metadata_path: "./fastlane/metadata",
-      screenshots_path: "./fastlane/screenshots",
+      screenshots_path: "./fastlane/screenshots/macos",
       overwrite_screenshots: true, 
       platform: "osx",
       run_precheck_before_submit: false,

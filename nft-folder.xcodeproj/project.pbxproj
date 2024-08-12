@@ -264,7 +264,6 @@
 		2C09BAE32C308145009BA300 /* Suggested.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Suggested.bundle; sourceTree = "<group>"; };
 		2C0D86C32B08E67000106915 /* WalletsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsService.swift; sourceTree = "<group>"; };
 		2C0D86C62B08E7BF00106915 /* EnsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnsResponse.swift; sourceTree = "<group>"; };
-		2C16579D2C2D8DED0050A896 /* 0_APP_DESKTOP_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0_APP_DESKTOP_0.png; sourceTree = "<group>"; };
 		2C1B60B82B7D3245009949C2 /* DirectoryMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryMonitor.swift; sourceTree = "<group>"; };
 		2C1B60BC2B7D3505009949C2 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		2C1B60C32B7D41D1009949C2 /* HostAppImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostAppImages.swift; sourceTree = "<group>"; };
@@ -741,6 +740,11 @@
 		2CC096F42B099F3400F24DD2 /* FolderIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderIcon.swift; sourceTree = "<group>"; };
 		2CC0C62A2C6A3D1C00FB56BB /* review_notes_tvos.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = review_notes_tvos.txt; sourceTree = "<group>"; };
 		2CC0C62B2C6A3D2E00FB56BB /* review_notes_visionos.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = review_notes_visionos.txt; sourceTree = "<group>"; };
+		2CC0C62E2C6A44BB00FB56BB /* 0_APP_DESKTOP_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0_APP_DESKTOP_0.png; sourceTree = "<group>"; };
+		2CC0C6312C6A44BB00FB56BB /* 0_APP_APPLE_TV_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0_APP_APPLE_TV_0.png; sourceTree = "<group>"; };
+		2CC0C6322C6A44BB00FB56BB /* 1_APP_APPLE_TV_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1_APP_APPLE_TV_1.png; sourceTree = "<group>"; };
+		2CC0C6332C6A44BB00FB56BB /* 2_APP_APPLE_TV_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2_APP_APPLE_TV_2.png; sourceTree = "<group>"; };
+		2CC0C6362C6A44BB00FB56BB /* 0_APP_VISION_OS_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0_APP_VISION_OS_0.png; sourceTree = "<group>"; };
 		2CC943002B8248CE003219C7 /* ZoraResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoraResponse.swift; sourceTree = "<group>"; };
 		2CC943022B825907003219C7 /* ZoraRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoraRequest.swift; sourceTree = "<group>"; };
 		2CCFED972B08246800D98A2E /* WalletsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsListView.swift; sourceTree = "<group>"; };
@@ -1619,27 +1623,11 @@
 			path = metadata;
 			sourceTree = "<group>";
 		};
-		2C8FD1C42BF4B33C00B3D327 /* en-GB */ = {
-			isa = PBXGroup;
-			children = (
-				2C16579D2C2D8DED0050A896 /* 0_APP_DESKTOP_0.png */,
-			);
-			path = "en-GB";
-			sourceTree = "<group>";
-		};
-		2C8FD1C52BF4B33C00B3D327 /* screenshots */ = {
-			isa = PBXGroup;
-			children = (
-				2C8FD1C42BF4B33C00B3D327 /* en-GB */,
-			);
-			path = screenshots;
-			sourceTree = "<group>";
-		};
 		2C8FD1CB2BF4B33C00B3D327 /* fastlane */ = {
 			isa = PBXGroup;
 			children = (
+				2CC0C6392C6A44BB00FB56BB /* screenshots */,
 				2C8FD1C22BF4B33C00B3D327 /* metadata */,
-				2C8FD1C52BF4B33C00B3D327 /* screenshots */,
 				2C8FD1C62BF4B33C00B3D327 /* Appfile */,
 				2C8FD1C72BF4B33C00B3D327 /* Fastfile */,
 			);
@@ -1850,6 +1838,67 @@
 			);
 			path = "nft-screen-saver";
 			sourceTree = "<group>";
+		};
+		2CC0C62F2C6A44BB00FB56BB /* en-GB */ = {
+			isa = PBXGroup;
+			children = (
+				2CC0C62E2C6A44BB00FB56BB /* 0_APP_DESKTOP_0.png */,
+			);
+			path = "en-GB";
+			sourceTree = "<group>";
+		};
+		2CC0C6302C6A44BB00FB56BB /* macos */ = {
+			isa = PBXGroup;
+			children = (
+				2CC0C62F2C6A44BB00FB56BB /* en-GB */,
+			);
+			path = macos;
+			sourceTree = "<group>";
+		};
+		2CC0C6342C6A44BB00FB56BB /* en-GB */ = {
+			isa = PBXGroup;
+			children = (
+				2CC0C6312C6A44BB00FB56BB /* 0_APP_APPLE_TV_0.png */,
+				2CC0C6322C6A44BB00FB56BB /* 1_APP_APPLE_TV_1.png */,
+				2CC0C6332C6A44BB00FB56BB /* 2_APP_APPLE_TV_2.png */,
+			);
+			path = "en-GB";
+			sourceTree = "<group>";
+		};
+		2CC0C6352C6A44BB00FB56BB /* tvos */ = {
+			isa = PBXGroup;
+			children = (
+				2CC0C6342C6A44BB00FB56BB /* en-GB */,
+			);
+			path = tvos;
+			sourceTree = "<group>";
+		};
+		2CC0C6372C6A44BB00FB56BB /* en-GB */ = {
+			isa = PBXGroup;
+			children = (
+				2CC0C6362C6A44BB00FB56BB /* 0_APP_VISION_OS_0.png */,
+			);
+			path = "en-GB";
+			sourceTree = "<group>";
+		};
+		2CC0C6382C6A44BB00FB56BB /* visionos */ = {
+			isa = PBXGroup;
+			children = (
+				2CC0C6372C6A44BB00FB56BB /* en-GB */,
+			);
+			path = visionos;
+			sourceTree = "<group>";
+		};
+		2CC0C6392C6A44BB00FB56BB /* screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				2CC0C6302C6A44BB00FB56BB /* macos */,
+				2CC0C6352C6A44BB00FB56BB /* tvos */,
+				2CC0C6382C6A44BB00FB56BB /* visionos */,
+			);
+			name = screenshots;
+			path = fastlane/screenshots;
+			sourceTree = SOURCE_ROOT;
 		};
 		2CD488FD2B10C6B000A53950 /* Supporting Files */ = {
 			isa = PBXGroup;
