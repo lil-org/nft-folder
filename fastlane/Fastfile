@@ -1,38 +1,35 @@
-default_platform(:mac)
+lane :bump do |options|
+  current_version = get_version_number(xcodeproj: "nft-folder.xcodeproj", target: "nft folder")
+  version_parts = current_version.split(".").map(&:to_i)
+  version_parts[-1] += 1
+  new_version = options[:version] || version_parts.join(".")
+  sh("sed -i '' -e 's/MARKETING_VERSION \\= [^\\;]*\\;/MARKETING_VERSION = #{new_version};/' ../nft-folder.xcodeproj/project.pbxproj")
+  increment_version_number(version_number: new_version)
+  increment_build_number()
 
-platform :mac do
+  commit_version_bump(
+    message: "bump version to #{new_version} (#{get_build_number})",
+    xcodeproj: "nft-folder.xcodeproj",
+    force: true
+  )
 
-  lane :bump do |options|
-    current_version = get_version_number(xcodeproj: "nft-folder.xcodeproj", target: "nft folder")
-    version_parts = current_version.split(".").map(&:to_i)
-    version_parts[-1] += 1
-    new_version = options[:version] || version_parts.join(".")
-    sh("sed -i '' -e 's/MARKETING_VERSION \\= [^\\;]*\\;/MARKETING_VERSION = #{new_version};/' ../nft-folder.xcodeproj/project.pbxproj")
-    increment_version_number(version_number: new_version)
-    increment_build_number()
+  push_to_git_remote
+end
 
-    commit_version_bump(
-      message: "bump version to #{new_version} (#{get_build_number})",
-      xcodeproj: "nft-folder.xcodeproj",
-      force: true
-    )
-  
-    push_to_git_remote
-  end
+lane :update_and_login do
+  local_fastlane_password = ENV['FASTLANE_PASSWORD']
+  ENV['FASTLANE_PASSWORD'] = nil
 
-  lane :update_and_login do
-    local_fastlane_password = ENV['FASTLANE_PASSWORD']
-    ENV['FASTLANE_PASSWORD'] = nil
+  require 'spaceship'
+  Spaceship::Tunes.login('ivan@ivan.lol')
 
-    require 'spaceship'
-    Spaceship::Tunes.login('ivan@ivan.lol')
+  update_fastlane
+  ENV['FASTLANE_PASSWORD'] = local_fastlane_password
+end
 
-    update_fastlane
-    ENV['FASTLANE_PASSWORD'] = local_fastlane_password
-  end
-
-  lane :deliver_metadata do
-    update_and_login
+lane :deliver_metadata do
+  update_and_login
+  platform :mac do
     deliver(
       metadata_path: "./fastlane/metadata",
       screenshots_path: "./fastlane/screenshots",
@@ -42,9 +39,11 @@ platform :mac do
       force: true,
     )
   end
+end
 
-  lane :release do
-    update_and_login
+lane :release do
+  update_and_login
+  platform :mac do
     gym(scheme: "nft-folder", output_directory: "fastlane/build", clean: true)
     deliver(
       metadata_path: "./fastlane/metadata",
@@ -57,11 +56,10 @@ platform :mac do
       automatic_release: true,
       submission_information: { add_id_info_uses_idfa: false },
     )
-    clean
   end
+  clean
+end
 
-  lane :clean do
-    sh "rm -rf #{File.expand_path('build')}"
-  end
-
+lane :clean do
+  sh "rm -rf #{File.expand_path('build')}"
 end
