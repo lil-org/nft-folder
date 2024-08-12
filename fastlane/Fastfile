@@ -5,12 +5,13 @@ lane :bump do |options|
   new_version = options[:version] || version_parts.join(".")
   sh("sed -i '' -e 's/MARKETING_VERSION \\= [^\\;]*\\;/MARKETING_VERSION = #{new_version};/' ../nft-folder.xcodeproj/project.pbxproj")
   increment_version_number(version_number: new_version)
-  increment_build_number()
+  new_build_number = increment_build_number()
 
   commit_version_bump(
-    message: "bump version to #{new_version} (#{get_build_number})",
+    message: "bump version to #{new_version} (#{new_build_number})",
     xcodeproj: "nft-folder.xcodeproj",
-    force: true
+    force: true,
+    include: ['nft-folder.xcodeproj/project.pbxproj']
   )
 
   push_to_git_remote
