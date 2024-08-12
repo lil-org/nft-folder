@@ -90,7 +90,6 @@
 		2C59D1552C4017B2005F9F72 /* ArtBlocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59D1542C4017B2005F9F72 /* ArtBlocks.swift */; };
 		2C59D1572C405B53005F9F72 /* templates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C59D1562C405B53005F9F72 /* templates.swift */; };
 		2C5A599E2C51073F00788870 /* nft_folder_visionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5A599D2C51073F00788870 /* nft_folder_visionApp.swift */; };
-		2C5A59A22C51074B00788870 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C5A59A12C51074B00788870 /* Assets.xcassets */; };
 		2C5A59B12C51400200788870 /* nft_folder_tvosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5A59B02C51400200788870 /* nft_folder_tvosApp.swift */; };
 		2C5A59B52C51400300788870 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C5A59B42C51400300788870 /* Assets.xcassets */; };
 		2C5A59BC2C514FCF00788870 /* Covers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C4659932C308B44008CF97F /* Covers.xcassets */; };
@@ -182,6 +181,7 @@
 		2CBC42402C4177AF00279CED /* WKWebViewPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CBC423E2C41779B00279CED /* WKWebViewPrivate.h */; };
 		2CBC42422C4177DE00279CED /* WKWebViewPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CBC42412C4177DE00279CED /* WKWebViewPrivate.m */; };
 		2CC096F52B099F3400F24DD2 /* FolderIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC096F42B099F3400F24DD2 /* FolderIcon.swift */; };
+		2CC0C63A2C6A630700FB56BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C5A59A12C51074B00788870 /* Assets.xcassets */; };
 		2CC943012B8248CE003219C7 /* ZoraResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC943002B8248CE003219C7 /* ZoraResponse.swift */; };
 		2CC943032B825907003219C7 /* ZoraRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC943022B825907003219C7 /* ZoraRequest.swift */; };
 		2CD0DA592C41B4CF00DB709C /* PrepareScreensavers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD0DA582C41B4CF00DB709C /* PrepareScreensavers.swift */; };
@@ -2180,12 +2180,12 @@
 			files = (
 				2C9442892C5154E00078C051 /* p5js100.js in Resources */,
 				2C94428A2C5154E00078C051 /* paper.js in Resources */,
+				2CC0C63A2C6A630700FB56BB /* Assets.xcassets in Resources */,
 				2C94428B2C5154E00078C051 /* regl.js in Resources */,
 				2C94428C2C5154E00078C051 /* three.js in Resources */,
 				2C94428D2C5154E00078C051 /* p5js190.js in Resources */,
 				2C94428E2C5154E00078C051 /* tone.js in Resources */,
 				2C9442882C5154CF0078C051 /* twemoji.js in Resources */,
-				2C5A59A22C51074B00788870 /* Assets.xcassets in Resources */,
 				2C5A59BD2C514FD200788870 /* Suggested.bundle in Resources */,
 				2C5A59D32C5153EF00788870 /* Localizable.xcstrings in Resources */,
 				2C5A59BC2C514FCF00788870 /* Covers.xcassets in Resources */,

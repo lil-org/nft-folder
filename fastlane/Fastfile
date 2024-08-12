@@ -27,7 +27,7 @@ lane :update_and_login do
   ENV['FASTLANE_PASSWORD'] = local_fastlane_password
 end
 
-lane :deliver_metadata do
+lane :deliver_metadata_macos do
   update_and_login
   platform :mac do
     deliver(
@@ -91,7 +91,25 @@ lane :deliver_metadata_visionos do
   end
 end
 
-lane :release do
+lane :release_visionos do
+  update_and_login
+  platform :mac do
+    gym(scheme: "nft-folder-vision", output_directory: "fastlane/build/visionos", clean: true)
+    deliver(
+      metadata_path: "./fastlane/metadata",
+      ignore_language_directory_validation: true,
+      platform: "xros",
+      run_precheck_before_submit: false,
+      force: true,
+      submit_for_review: true,
+      automatic_release: true,
+      submission_information: { add_id_info_uses_idfa: false },
+    )
+  end
+  clean
+end
+
+lane :release_macos do
   update_and_login
   platform :mac do
     gym(scheme: "nft-folder", output_directory: "fastlane/build/macos", clean: true)
