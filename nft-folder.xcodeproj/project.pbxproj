@@ -744,7 +744,7 @@
 		2CC0C6312C6A44BB00FB56BB /* 0_APP_APPLE_TV_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0_APP_APPLE_TV_0.png; sourceTree = "<group>"; };
 		2CC0C6322C6A44BB00FB56BB /* 1_APP_APPLE_TV_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1_APP_APPLE_TV_1.png; sourceTree = "<group>"; };
 		2CC0C6332C6A44BB00FB56BB /* 2_APP_APPLE_TV_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2_APP_APPLE_TV_2.png; sourceTree = "<group>"; };
-		2CC0C6362C6A44BB00FB56BB /* 0_APP_VISION_OS_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0_APP_VISION_OS_0.png; sourceTree = "<group>"; };
+		2CC0C6362C6A44BB00FB56BB /* 0_APP_VISION_PRO_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0_APP_VISION_PRO_0.png; sourceTree = "<group>"; };
 		2CC943002B8248CE003219C7 /* ZoraResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoraResponse.swift; sourceTree = "<group>"; };
 		2CC943022B825907003219C7 /* ZoraRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoraRequest.swift; sourceTree = "<group>"; };
 		2CCFED972B08246800D98A2E /* WalletsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsListView.swift; sourceTree = "<group>"; };
@@ -1876,7 +1876,7 @@
 		2CC0C6372C6A44BB00FB56BB /* en-GB */ = {
 			isa = PBXGroup;
 			children = (
-				2CC0C6362C6A44BB00FB56BB /* 0_APP_VISION_OS_0.png */,
+				2CC0C6362C6A44BB00FB56BB /* 0_APP_VISION_PRO_0.png */,
 			);
 			path = "en-GB";
 			sourceTree = "<group>";
