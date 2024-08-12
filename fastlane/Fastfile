@@ -55,6 +55,29 @@ lane :deliver_metadata_tvos do
   end
 end
 
+lane :release_tvos do
+  update_and_login
+  platform :tvos do
+    gym(scheme: "nft-folder-tvos", output_directory: "fastlane/build/tvos", clean: true, export_method: "app-store", export_options: {
+      provisioningProfiles: {
+        "org.lil.nft-folder" => "nft-folder-tv"
+      }
+    })
+    deliver(
+      metadata_path: "./fastlane/metadata",
+      screenshots_path: "./fastlane/screenshots/tvos",
+      overwrite_screenshots: true,
+      platform: "appletvos",
+      run_precheck_before_submit: false,
+      force: true,
+      submit_for_review: true,
+      automatic_release: true,
+      submission_information: { add_id_info_uses_idfa: false },
+    )
+  end
+  clean
+end
+
 lane :deliver_metadata_visionos do
   update_and_login
   platform :xros do
@@ -71,7 +94,7 @@ end
 lane :release do
   update_and_login
   platform :mac do
-    gym(scheme: "nft-folder", output_directory: "fastlane/build", clean: true)
+    gym(scheme: "nft-folder", output_directory: "fastlane/build/macos", clean: true)
     deliver(
       metadata_path: "./fastlane/metadata",
       screenshots_path: "./fastlane/screenshots/macos",
