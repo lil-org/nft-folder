@@ -287,6 +287,8 @@
 		2C4039EC2B83A4F000DB94D7 /* SharedDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDefaults.swift; sourceTree = "<group>"; };
 		2C4039F02B83B11100DB94D7 /* FileSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSaver.swift; sourceTree = "<group>"; };
 		2C424F452B9775E6007868F8 /* RightClickActivatingWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightClickActivatingWindow.swift; sourceTree = "<group>"; };
+		2C425D6E2C6A34C2007A2CDC /* description_tvos.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = description_tvos.txt; sourceTree = "<group>"; };
+		2C425D702C6A3547007A2CDC /* description_visionos.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = description_visionos.txt; sourceTree = "<group>"; };
 		2C4659932C308B44008CF97F /* Covers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Covers.xcassets; sourceTree = "<group>"; };
 		2C4659992C308F86008CF97F /* tools */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = tools; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C46599B2C308F86008CF97F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -843,6 +845,22 @@
 				2C4039EC2B83A4F000DB94D7 /* SharedDefaults.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		2C425D6D2C6A349A007A2CDC /* tvos */ = {
+			isa = PBXGroup;
+			children = (
+				2C425D6E2C6A34C2007A2CDC /* description_tvos.txt */,
+			);
+			name = tvos;
+			sourceTree = "<group>";
+		};
+		2C425D6F2C6A3524007A2CDC /* visionos */ = {
+			isa = PBXGroup;
+			children = (
+				2C425D702C6A3547007A2CDC /* description_visionos.txt */,
+			);
+			name = visionos;
 			sourceTree = "<group>";
 		};
 		2C46599A2C308F86008CF97F /* tools */ = {
@@ -1760,6 +1778,8 @@
 		2CA7EE8C2C1C746900C7AEB5 /* app_store */ = {
 			isa = PBXGroup;
 			children = (
+				2C425D6F2C6A3524007A2CDC /* visionos */,
+				2C425D6D2C6A349A007A2CDC /* tvos */,
 				2CA7EE9A2C1C75F900C7AEB5 /* new */,
 				2CA7EE992C1C75ED00C7AEB5 /* texts */,
 				2CA7EE982C1C75CB00C7AEB5 /* links */,
