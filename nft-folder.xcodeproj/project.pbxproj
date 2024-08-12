@@ -739,6 +739,8 @@
 		2CBC423E2C41779B00279CED /* WKWebViewPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WKWebViewPrivate.h; sourceTree = "<group>"; };
 		2CBC42412C4177DE00279CED /* WKWebViewPrivate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WKWebViewPrivate.m; sourceTree = "<group>"; };
 		2CC096F42B099F3400F24DD2 /* FolderIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderIcon.swift; sourceTree = "<group>"; };
+		2CC0C62A2C6A3D1C00FB56BB /* review_notes_tvos.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = review_notes_tvos.txt; sourceTree = "<group>"; };
+		2CC0C62B2C6A3D2E00FB56BB /* review_notes_visionos.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = review_notes_visionos.txt; sourceTree = "<group>"; };
 		2CC943002B8248CE003219C7 /* ZoraResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoraResponse.swift; sourceTree = "<group>"; };
 		2CC943022B825907003219C7 /* ZoraRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoraRequest.swift; sourceTree = "<group>"; };
 		2CCFED972B08246800D98A2E /* WalletsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsListView.swift; sourceTree = "<group>"; };
@@ -851,6 +853,7 @@
 			isa = PBXGroup;
 			children = (
 				2C425D6E2C6A34C2007A2CDC /* description_tvos.txt */,
+				2CC0C62A2C6A3D1C00FB56BB /* review_notes_tvos.txt */,
 			);
 			name = tvos;
 			sourceTree = "<group>";
@@ -859,6 +862,7 @@
 			isa = PBXGroup;
 			children = (
 				2C425D702C6A3547007A2CDC /* description_visionos.txt */,
+				2CC0C62B2C6A3D2E00FB56BB /* review_notes_visionos.txt */,
 			);
 			name = visionos;
 			sourceTree = "<group>";
