@@ -23,9 +23,13 @@ struct MetadataTask: AI.Task {
         switch metadataKind {
         case .subtitle:
             finalWarning = """
-            your response should not be longer than 30 symbols.
+            your response should be max 30 symbols.
             
-            if it does not fit, rewrite it in simpler / your own words to make sure it fits 30 symbols.
+            if it does not fit, rewrite it to make sure it fits 30 symbols.
+            
+            for example, if it does not fit, say "view art offline" instead of "view high-res art offline"
+            
+            find a way to communicate the same meaning while fitting in 30 chars.
             """
         default:
             finalWarning = ""
@@ -53,48 +57,42 @@ struct MetadataTask: AI.Task {
             clarifications = """
             feel free to tune it to make \(language.name) version sound natural.
             
-            make sure the translated version communicates the same message.
-            
-            keep it lowercased if possible.\(metadataKind == .subtitle ? " you MUST respons with a string that is shorter than 30 symbols." : "")
+            keep it lowercased.
             """
         case .keywords:
             clarifications = """
-            make sure the output keywords are no longer than 100 chars.
-            
             separate keywords with an english comma.
             
             do not add whitespaces after comma — in order to fit more keywords in.
             
-            feel free to slightly change and reorder the words used.
+            feel free to change and reorder the words used.
             
-            the output should be good to be used as app store keywords.
+            your response should be good to be used as app store keywords.
             
-            make sure the output text is no longer than 100 chars.
+            make sure your response fits in 100 chars.
             """
         default:
             clarifications = """
             feel free to tune it to make \(language.name) version sound natural.
-            
-            make sure the translated version communicates the same message.
             
             keep formatting, capitalization, and punctuation style as close to the original as possible.
             """
         }
         
         let output = """
-        translate the \(metadataName) to \(language.name).
+        help me localize the \(metadataName).
         
-        \(clarifications)
-        
-        keep it simple and straightforward.
-        
-        use english and russian texts below as a reference.
+        i need that in \(language.name). use both english and russian versions below as a reference.
         
         english:
         "\(englishText)"
         
         russian:
         "\(russianText)"
+        
+        \(clarifications)
+        
+        keep it simple and straightforward.
         
         respond only with a \(language.name) version. do not add anything else to the response.
         
