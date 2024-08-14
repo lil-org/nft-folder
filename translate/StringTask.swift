@@ -15,19 +15,17 @@ struct StringTask: AI.Task {
     
     var prompt: String {
         let output = """
-        help me localize macos app that downloads nfts.
+        help me localize the string for the app.
         
-        translate the string to \(language.name).
-        
-        feel free to tune it to make \(language.name) version sound natural.
-        
-        use both english and russian versions below as a reference.
+        i need that string in \(language.name). use both english and russian versions below as a reference.
         
         english:
         "\(englishText)"
         
         russian:
         "\(russianText)"
+        
+        feel free to tune it to make \(language.name) version sound natural.
                 
         keep it simple and straightforward.
                     
