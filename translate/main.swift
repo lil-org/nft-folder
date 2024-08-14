@@ -6,7 +6,7 @@ let semaphore = DispatchSemaphore(value: 0)
 let queue = DispatchQueue(label: UUID().uuidString, qos: .default)
 let projectDir = FileManager.default.currentDirectoryPath
 
-translateAppStoreMetadata(.highQuality)
-translateAllStrings(.highQuality)
+translateAppStoreMetadata(.cheap)
+translateAllStrings(.cheap)
 
 print("🟢 all done")
