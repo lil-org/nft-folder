@@ -1610,14 +1610,14 @@
 		2C25BFEE2C6D2E6E0084FD7A /* tvos */ = {
 			isa = PBXGroup;
 			children = (
-				2C25BFF62C6D2F820084FD7A /* description_ru.txt */,
 				2C25BFF72C6D2F820084FD7A /* description.txt */,
-				2C25BFF12C6D2F810084FD7A /* keywords_ru.txt */,
+				2C25BFF62C6D2F820084FD7A /* description_ru.txt */,
 				2C25BFF32C6D2F810084FD7A /* keywords.txt */,
-				2C25BFF52C6D2F820084FD7A /* promotional_text_ru.txt */,
-				2C25BFF22C6D2F810084FD7A /* promotional_text.txt */,
-				2C25BFF02C6D2F810084FD7A /* release_notes_ru.txt */,
+				2C25BFF12C6D2F810084FD7A /* keywords_ru.txt */,
 				2C25BFF42C6D2F820084FD7A /* release_notes.txt */,
+				2C25BFF02C6D2F810084FD7A /* release_notes_ru.txt */,
+				2C25BFF22C6D2F810084FD7A /* promotional_text.txt */,
+				2C25BFF52C6D2F820084FD7A /* promotional_text_ru.txt */,
 			);
 			path = tvos;
 			sourceTree = "<group>";
@@ -1625,14 +1625,14 @@
 		2C25BFEF2C6D2E8A0084FD7A /* visionos */ = {
 			isa = PBXGroup;
 			children = (
-				2C25BFFC2C6D2F940084FD7A /* description_ru.txt */,
 				2C25BFFB2C6D2F940084FD7A /* description.txt */,
-				2C25BFFE2C6D2F940084FD7A /* keywords_ru.txt */,
+				2C25BFFC2C6D2F940084FD7A /* description_ru.txt */,
 				2C25BFFF2C6D2F940084FD7A /* keywords.txt */,
-				2C25BFFA2C6D2F940084FD7A /* promotional_text_ru.txt */,
-				2C25BFFD2C6D2F940084FD7A /* promotional_text.txt */,
-				2C25BFF92C6D2F940084FD7A /* release_notes_ru.txt */,
+				2C25BFFE2C6D2F940084FD7A /* keywords_ru.txt */,
 				2C25BFF82C6D2F940084FD7A /* release_notes.txt */,
+				2C25BFF92C6D2F940084FD7A /* release_notes_ru.txt */,
+				2C25BFFD2C6D2F940084FD7A /* promotional_text.txt */,
+				2C25BFFA2C6D2F940084FD7A /* promotional_text_ru.txt */,
 			);
 			path = visionos;
 			sourceTree = "<group>";
