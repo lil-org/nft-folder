@@ -7,7 +7,7 @@ func translateAppStoreMetadata(_ model: AI.Model) {
     
     for platform in Platform.allCases {
         for metadataKind in MetadataKind.allCases {
-            if metadataKind.isCommonForAllPlatforms && platform != .common { continue }
+            if metadataKind.isCommonForAllPlatforms && platform != .common || !metadataKind.isCommonForAllPlatforms && platform == .common { continue }
             
             let englishText = originalMetadata(kind: metadataKind, platform: platform, language: .english)
             let russianText = originalMetadata(kind: metadataKind, platform: platform, language: .russian)
@@ -49,7 +49,7 @@ func write(_ newValue: String, metadataKind: MetadataKind, platform: Platform, l
     // TODO: handle potential subtitle and keywords overflows
     let actualPlatformsToWrite: [Platform] = platform == .common ? [.macos, .tvos, .visionos] : [platform]
     for p in actualPlatformsToWrite {
-        let url = URL(fileURLWithPath: projectDir + "/fastlane/metadata/\(p.rawValue)" + "\(language.metadataLocalizationKey)/\(metadataKind.fileName).txt")
+        let url = URL(fileURLWithPath: projectDir + "/fastlane/metadata/\(p.rawValue)/" + "\(language.metadataLocalizationKey)/\(metadataKind.fileName).txt")
         let data = newValue.data(using: .utf8)!
         try! data.write(to: url)
     }
