@@ -96,7 +96,7 @@ lane :release_tvos do
       force: true,
       submit_for_review: true,
       automatic_release: true,
-      submission_information: { add_id_info_uses_idfa: false },
+      submission_information: { add_id_info_uses_idfa: false, export_compliance_uses_encryption: false },
     )
     clean
   end
@@ -113,7 +113,7 @@ lane :release_visionos do
       force: true,
       submit_for_review: true,
       automatic_release: true,
-      submission_information: { add_id_info_uses_idfa: false },
+      submission_information: { add_id_info_uses_idfa: false, export_compliance_uses_encryption: false },
     )
     clean
   end
