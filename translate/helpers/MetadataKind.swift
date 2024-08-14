@@ -27,4 +27,13 @@ enum MetadataKind: String, CaseIterable {
         }
     }
     
+    var isCommonForAllPlatforms: Bool {
+        switch self {
+        case .description, .releaseNotes, .keywords, .promotionalText:
+            return false
+        case .marketingURL, .privacyURL, .supportURL, .appleTvPrivacyPolicy, .name, .subtitle:
+            return true
+        }
+    }
+    
 }

@@ -72,8 +72,8 @@ struct AI {
 
 extension AI.Task {
     var hash: String {
-        let description = prompt + model.name
-        let data = description.data(using: .utf8)
+        let asString = prompt + model.name + description
+        let data = asString.data(using: .utf8)
         return String(data!.fnv1aHash())
     }
 }

@@ -6,12 +6,13 @@ struct MetadataTask: AI.Task {
     
     let model: AI.Model
     let metadataKind: MetadataKind
+    let platform: Platform
     let language: Language
     let englishText: String
     let russianText: String
     
     var description: String {
-        return "\(language.name) \(metadataKind.fileName)"
+        return "\(language.name) \(metadataKind.fileName) \(platform.rawValue)"
     }
     
     var prompt: String {
@@ -105,7 +106,7 @@ struct MetadataTask: AI.Task {
     }
     
     private var hashURL: URL {
-        return URL(fileURLWithPath: projectDir + "/translate/latest/" + "\(language.metadataLocalizationKey)-\(metadataKind.fileName)")
+        return URL(fileURLWithPath: projectDir + "/translate/latest/" + "\(language.metadataLocalizationKey)-\(metadataKind.fileName)-\(platform.rawValue)")
     }
     
 }

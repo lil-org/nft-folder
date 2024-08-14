@@ -5,21 +5,25 @@ import Foundation
 func translateAppStoreMetadata(_ model: AI.Model) {
     var tasks = [MetadataTask]()
     
-    for metadataKind in MetadataKind.allCases {
-        let englishText = originalMetadata(kind: metadataKind, language: .english)
-        let russianText = originalMetadata(kind: metadataKind, language: .russian)
-        write(englishText, metadataKind: metadataKind, language: .english)
-        write(russianText, metadataKind: metadataKind, language: .russian)
-        let notEmpty = !englishText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-        
-        for language in Language.allCases where language != .english && language != .russian {
-            if metadataKind.toTranslate && notEmpty {
-                let task = MetadataTask(model: model, metadataKind: metadataKind, language: language, englishText: englishText, russianText: russianText)
-                if !task.wasCompletedBefore {
-                    tasks.append(task)
+    for platform in Platform.allCases {
+        for metadataKind in MetadataKind.allCases {
+            if metadataKind.isCommonForAllPlatforms && platform != .common { continue }
+            
+            let englishText = originalMetadata(kind: metadataKind, platform: platform, language: .english)
+            let russianText = originalMetadata(kind: metadataKind, platform: platform, language: .russian)
+            write(englishText, metadataKind: metadataKind, platform: platform, language: .english)
+            write(russianText, metadataKind: metadataKind, platform: platform, language: .russian)
+            let notEmpty = !englishText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+            
+            for language in Language.allCases where language != .english && language != .russian {
+                if metadataKind.toTranslate && notEmpty {
+                    let task = MetadataTask(model: model, metadataKind: metadataKind, platform: platform, language: language, englishText: englishText, russianText: russianText)
+                    if !task.wasCompletedBefore {
+                        tasks.append(task)
+                    }
+                } else {
+                    write(englishText, metadataKind: metadataKind, platform: platform, language: language)
                 }
-            } else {
-                write(englishText, metadataKind: metadataKind, language: language)
             }
         }
     }
@@ -27,7 +31,7 @@ func translateAppStoreMetadata(_ model: AI.Model) {
     var finalTasksCount = tasks.count
     for task in tasks {
         AI.translate(task: task) { translation in
-            write(translation, metadataKind: task.metadataKind, language: task.language)
+            write(translation, metadataKind: task.metadataKind, platform: task.platform, language: task.language)
             task.storeAsCompleted()
             finalTasksCount -= 1
             if finalTasksCount == 0 {
@@ -41,37 +45,20 @@ func translateAppStoreMetadata(_ model: AI.Model) {
     }
 }
 
-func read(metadataKind: MetadataKind, language: Language) -> String {
-    let url = url(metadataKind: metadataKind, language: language)
-    return read(url: url)
+func write(_ newValue: String, metadataKind: MetadataKind, platform: Platform, language: Language) {
+    // TODO: handle potential subtitle and keywords overflows
+    let actualPlatformsToWrite: [Platform] = platform == .common ? [.macos, .tvos, .visionos] : [platform]
+    for p in actualPlatformsToWrite {
+        let url = URL(fileURLWithPath: projectDir + "/fastlane/metadata/\(p.rawValue)" + "\(language.metadataLocalizationKey)/\(metadataKind.fileName).txt")
+        let data = newValue.data(using: .utf8)!
+        try! data.write(to: url)
+    }
 }
 
-func read(url: URL) -> String {
+func originalMetadata(kind: MetadataKind, platform: Platform, language: Language) -> String {
+    let suffix = kind.toTranslate && language == .russian ? "_ru" : ""
+    let url = URL(fileURLWithPath: projectDir + "/app_store/\(platform.rawValue)/" + "\(kind.fileName)\(suffix).txt")
     let data = try! Data(contentsOf: url)
     let text = String(data: data, encoding: .utf8)!
     return text.trimmingCharacters(in: .whitespacesAndNewlines)
-}
-
-func write(_ newValue: String, metadataKind: MetadataKind, language: Language) {
-    let textToWrite: String = {
-        if metadataKind == .keywords && newValue.count > 100 {
-            print("🟡 trimming \(language.name) keywords")
-            return String(newValue.prefix(100))
-        } else {
-            return newValue
-        }
-    }()
-    let url = url(metadataKind: metadataKind, language: language)
-    let data = textToWrite.data(using: .utf8)!
-    try! data.write(to: url)
-}
-
-func originalMetadata(kind: MetadataKind, language: Language) -> String {
-    let suffix = kind.toTranslate && language == .russian ? "_ru" : ""
-    let url = URL(fileURLWithPath: projectDir + "/app_store/" + "\(kind.fileName)\(suffix).txt")
-    return read(url: url)
-}
-
-func url(metadataKind: MetadataKind, language: Language) -> URL {
-    return URL(fileURLWithPath: projectDir + "/fastlane/metadata/" + "\(language.metadataLocalizationKey)/\(metadataKind.fileName).txt")
 }

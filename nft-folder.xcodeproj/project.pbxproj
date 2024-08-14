@@ -58,6 +58,7 @@
 		2C1FD2AD2B88D2EF004F42B3 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1FD2AC2B88D2EF004F42B3 /* Int.swift */; };
 		2C1FD2AE2B88D2EF004F42B3 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1FD2AC2B88D2EF004F42B3 /* Int.swift */; };
 		2C2329DA2B68367F00001936 /* RightClickServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2329D92B68367F00001936 /* RightClickServiceProvider.swift */; };
+		2C25BFEB2C6D28410084FD7A /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C25BFEA2C6D28410084FD7A /* Platform.swift */; };
 		2C2B5AD12B84E2DA005C38B0 /* DownloadFileTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2B5AD02B84E2DA005C38B0 /* DownloadFileTask.swift */; };
 		2C309C312C50297700C9B08A /* BundledTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C086E862C2F3C3600D4268D /* BundledTokens.swift */; };
 		2C3214332C33DF7C0050BBC1 /* SimpleHash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3214322C33DF7C0050BBC1 /* SimpleHash.swift */; };
@@ -278,6 +279,23 @@
 		2C1FD2AC2B88D2EF004F42B3 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		2C2329D92B68367F00001936 /* RightClickServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightClickServiceProvider.swift; sourceTree = "<group>"; };
 		2C25BFE92C6CD6E30084FD7A /* apple_tv_privacy_policy.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = apple_tv_privacy_policy.txt; sourceTree = "<group>"; };
+		2C25BFEA2C6D28410084FD7A /* Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
+		2C25BFF02C6D2F810084FD7A /* release_notes_ru.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes_ru.txt; sourceTree = "<group>"; };
+		2C25BFF12C6D2F810084FD7A /* keywords_ru.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keywords_ru.txt; sourceTree = "<group>"; };
+		2C25BFF22C6D2F810084FD7A /* promotional_text.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = promotional_text.txt; sourceTree = "<group>"; };
+		2C25BFF32C6D2F810084FD7A /* keywords.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keywords.txt; sourceTree = "<group>"; };
+		2C25BFF42C6D2F820084FD7A /* release_notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.txt; sourceTree = "<group>"; };
+		2C25BFF52C6D2F820084FD7A /* promotional_text_ru.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = promotional_text_ru.txt; sourceTree = "<group>"; };
+		2C25BFF62C6D2F820084FD7A /* description_ru.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = description_ru.txt; sourceTree = "<group>"; };
+		2C25BFF72C6D2F820084FD7A /* description.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = description.txt; sourceTree = "<group>"; };
+		2C25BFF82C6D2F940084FD7A /* release_notes.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = release_notes.txt; sourceTree = "<group>"; };
+		2C25BFF92C6D2F940084FD7A /* release_notes_ru.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = release_notes_ru.txt; sourceTree = "<group>"; };
+		2C25BFFA2C6D2F940084FD7A /* promotional_text_ru.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = promotional_text_ru.txt; sourceTree = "<group>"; };
+		2C25BFFB2C6D2F940084FD7A /* description.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = description.txt; sourceTree = "<group>"; };
+		2C25BFFC2C6D2F940084FD7A /* description_ru.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = description_ru.txt; sourceTree = "<group>"; };
+		2C25BFFD2C6D2F940084FD7A /* promotional_text.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = promotional_text.txt; sourceTree = "<group>"; };
+		2C25BFFE2C6D2F940084FD7A /* keywords_ru.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = keywords_ru.txt; sourceTree = "<group>"; };
+		2C25BFFF2C6D2F940084FD7A /* keywords.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = keywords.txt; sourceTree = "<group>"; };
 		2C2B5AD02B84E2DA005C38B0 /* DownloadFileTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadFileTask.swift; sourceTree = "<group>"; };
 		2C3214322C33DF7C0050BBC1 /* SimpleHash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleHash.swift; sourceTree = "<group>"; };
 		2C3924C02C1F0F1200161154 /* StringTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTask.swift; sourceTree = "<group>"; };
@@ -287,8 +305,6 @@
 		2C4039EC2B83A4F000DB94D7 /* SharedDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDefaults.swift; sourceTree = "<group>"; };
 		2C4039F02B83B11100DB94D7 /* FileSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSaver.swift; sourceTree = "<group>"; };
 		2C424F452B9775E6007868F8 /* RightClickActivatingWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightClickActivatingWindow.swift; sourceTree = "<group>"; };
-		2C425D6E2C6A34C2007A2CDC /* description_tvos.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = description_tvos.txt; sourceTree = "<group>"; };
-		2C425D702C6A3547007A2CDC /* description_visionos.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = description_visionos.txt; sourceTree = "<group>"; };
 		2C4659932C308B44008CF97F /* Covers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Covers.xcassets; sourceTree = "<group>"; };
 		2C4659992C308F86008CF97F /* tools */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = tools; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C46599B2C308F86008CF97F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -386,8 +402,6 @@
 		2CBC423E2C41779B00279CED /* WKWebViewPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WKWebViewPrivate.h; sourceTree = "<group>"; };
 		2CBC42412C4177DE00279CED /* WKWebViewPrivate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WKWebViewPrivate.m; sourceTree = "<group>"; };
 		2CC096F42B099F3400F24DD2 /* FolderIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderIcon.swift; sourceTree = "<group>"; };
-		2CC0C62A2C6A3D1C00FB56BB /* review_notes_tvos.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = review_notes_tvos.txt; sourceTree = "<group>"; };
-		2CC0C62B2C6A3D2E00FB56BB /* review_notes_visionos.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = review_notes_visionos.txt; sourceTree = "<group>"; };
 		2CC0C62E2C6A44BB00FB56BB /* 0_APP_DESKTOP_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0_APP_DESKTOP_0.png; sourceTree = "<group>"; };
 		2CC0C6312C6A44BB00FB56BB /* 0_APP_APPLE_TV_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0_APP_APPLE_TV_0.png; sourceTree = "<group>"; };
 		2CC0C6322C6A44BB00FB56BB /* 1_APP_APPLE_TV_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1_APP_APPLE_TV_1.png; sourceTree = "<group>"; };
@@ -1563,22 +1577,64 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		2C425D6D2C6A349A007A2CDC /* tvos */ = {
+		2C25BFEC2C6D2C6A0084FD7A /* common */ = {
 			isa = PBXGroup;
 			children = (
-				2C425D6E2C6A34C2007A2CDC /* description_tvos.txt */,
-				2CC0C62A2C6A3D1C00FB56BB /* review_notes_tvos.txt */,
+				2CA7EE932C1C752400C7AEB5 /* name.txt */,
+				2CA7EE9C2C1C782400C7AEB5 /* name_ru.txt */,
+				2CA7EE902C1C752400C7AEB5 /* subtitle.txt */,
+				2CA7EE9D2C1C782400C7AEB5 /* subtitle_ru.txt */,
+				2CA7EE8F2C1C752400C7AEB5 /* marketing_url.txt */,
+				2C25BFE92C6CD6E30084FD7A /* apple_tv_privacy_policy.txt */,
+				2CA7EE942C1C752400C7AEB5 /* privacy_url.txt */,
+				2CA7EE922C1C752400C7AEB5 /* support_url.txt */,
 			);
-			name = tvos;
+			path = common;
 			sourceTree = "<group>";
 		};
-		2C425D6F2C6A3524007A2CDC /* visionos */ = {
+		2C25BFED2C6D2E660084FD7A /* macos */ = {
 			isa = PBXGroup;
 			children = (
-				2C425D702C6A3547007A2CDC /* description_visionos.txt */,
-				2CC0C62B2C6A3D2E00FB56BB /* review_notes_visionos.txt */,
+				2CA7EE952C1C752400C7AEB5 /* description.txt */,
+				2CA7EE9E2C1C782400C7AEB5 /* description_ru.txt */,
+				2CA7EE912C1C752400C7AEB5 /* keywords.txt */,
+				2CA7EE9B2C1C782400C7AEB5 /* keywords_ru.txt */,
+				2CA7EE8E2C1C752400C7AEB5 /* release_notes.txt */,
+				2CA7EE9F2C1C784300C7AEB5 /* release_notes_ru.txt */,
+				2CA7EE8D2C1C752400C7AEB5 /* promotional_text.txt */,
+				2CA7EEA02C1C784300C7AEB5 /* promotional_text_ru.txt */,
 			);
-			name = visionos;
+			path = macos;
+			sourceTree = "<group>";
+		};
+		2C25BFEE2C6D2E6E0084FD7A /* tvos */ = {
+			isa = PBXGroup;
+			children = (
+				2C25BFF62C6D2F820084FD7A /* description_ru.txt */,
+				2C25BFF72C6D2F820084FD7A /* description.txt */,
+				2C25BFF12C6D2F810084FD7A /* keywords_ru.txt */,
+				2C25BFF32C6D2F810084FD7A /* keywords.txt */,
+				2C25BFF52C6D2F820084FD7A /* promotional_text_ru.txt */,
+				2C25BFF22C6D2F810084FD7A /* promotional_text.txt */,
+				2C25BFF02C6D2F810084FD7A /* release_notes_ru.txt */,
+				2C25BFF42C6D2F820084FD7A /* release_notes.txt */,
+			);
+			path = tvos;
+			sourceTree = "<group>";
+		};
+		2C25BFEF2C6D2E8A0084FD7A /* visionos */ = {
+			isa = PBXGroup;
+			children = (
+				2C25BFFC2C6D2F940084FD7A /* description_ru.txt */,
+				2C25BFFB2C6D2F940084FD7A /* description.txt */,
+				2C25BFFE2C6D2F940084FD7A /* keywords_ru.txt */,
+				2C25BFFF2C6D2F940084FD7A /* keywords.txt */,
+				2C25BFFA2C6D2F940084FD7A /* promotional_text_ru.txt */,
+				2C25BFFD2C6D2F940084FD7A /* promotional_text.txt */,
+				2C25BFF92C6D2F940084FD7A /* release_notes_ru.txt */,
+				2C25BFF82C6D2F940084FD7A /* release_notes.txt */,
+			);
+			path = visionos;
 			sourceTree = "<group>";
 		};
 		2C46599A2C308F86008CF97F /* tools */ = {
@@ -1676,6 +1732,7 @@
 				2CB392022C1E162C0011CC94 /* TranslateStrings.swift */,
 				2CB392002C1E15630011CC94 /* TranslateMetadata.swift */,
 				2CDDE0D42C1B1EC4002DB025 /* MetadataKind.swift */,
+				2C25BFEA2C6D28410084FD7A /* Platform.swift */,
 				2CA7EE892C1C66D800C7AEB5 /* AI.swift */,
 				2CDDE0D22C1B1EAC002DB025 /* Language.swift */,
 			);
@@ -1840,50 +1897,12 @@
 		2CA7EE8C2C1C746900C7AEB5 /* app_store */ = {
 			isa = PBXGroup;
 			children = (
-				2C425D6F2C6A3524007A2CDC /* visionos */,
-				2C425D6D2C6A349A007A2CDC /* tvos */,
-				2CA7EE9A2C1C75F900C7AEB5 /* new */,
-				2CA7EE992C1C75ED00C7AEB5 /* texts */,
-				2CA7EE982C1C75CB00C7AEB5 /* links */,
+				2C25BFED2C6D2E660084FD7A /* macos */,
+				2C25BFEF2C6D2E8A0084FD7A /* visionos */,
+				2C25BFEE2C6D2E6E0084FD7A /* tvos */,
+				2C25BFEC2C6D2C6A0084FD7A /* common */,
 			);
 			path = app_store;
-			sourceTree = "<group>";
-		};
-		2CA7EE982C1C75CB00C7AEB5 /* links */ = {
-			isa = PBXGroup;
-			children = (
-				2CA7EE8F2C1C752400C7AEB5 /* marketing_url.txt */,
-				2C25BFE92C6CD6E30084FD7A /* apple_tv_privacy_policy.txt */,
-				2CA7EE942C1C752400C7AEB5 /* privacy_url.txt */,
-				2CA7EE922C1C752400C7AEB5 /* support_url.txt */,
-			);
-			name = links;
-			sourceTree = "<group>";
-		};
-		2CA7EE992C1C75ED00C7AEB5 /* texts */ = {
-			isa = PBXGroup;
-			children = (
-				2CA7EE952C1C752400C7AEB5 /* description.txt */,
-				2CA7EE9E2C1C782400C7AEB5 /* description_ru.txt */,
-				2CA7EE912C1C752400C7AEB5 /* keywords.txt */,
-				2CA7EE9B2C1C782400C7AEB5 /* keywords_ru.txt */,
-				2CA7EE902C1C752400C7AEB5 /* subtitle.txt */,
-				2CA7EE9D2C1C782400C7AEB5 /* subtitle_ru.txt */,
-				2CA7EE932C1C752400C7AEB5 /* name.txt */,
-				2CA7EE9C2C1C782400C7AEB5 /* name_ru.txt */,
-			);
-			name = texts;
-			sourceTree = "<group>";
-		};
-		2CA7EE9A2C1C75F900C7AEB5 /* new */ = {
-			isa = PBXGroup;
-			children = (
-				2CA7EE8E2C1C752400C7AEB5 /* release_notes.txt */,
-				2CA7EE9F2C1C784300C7AEB5 /* release_notes_ru.txt */,
-				2CA7EE8D2C1C752400C7AEB5 /* promotional_text.txt */,
-				2CA7EEA02C1C784300C7AEB5 /* promotional_text_ru.txt */,
-			);
-			name = new;
 			sourceTree = "<group>";
 		};
 		2CB5A6A42C41863A00A24EC3 /* screen-saver-webview */ = {
@@ -4357,6 +4376,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C25BFEB2C6D28410084FD7A /* Platform.swift in Sources */,
 				2CA7EE8A2C1C66D800C7AEB5 /* AI.swift in Sources */,
 				2CB392032C1E162C0011CC94 /* TranslateStrings.swift in Sources */,
 				2CA7EEA32C1CC18300C7AEB5 /* Data.swift in Sources */,
