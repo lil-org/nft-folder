@@ -11,8 +11,8 @@ func translateAppStoreMetadata(_ model: AI.Model) {
             
             let englishText = originalMetadata(kind: metadataKind, platform: platform, language: .english)
             let russianText = originalMetadata(kind: metadataKind, platform: platform, language: .russian)
-            write(englishText, metadataKind: metadataKind, platform: platform, language: .english)
-            write(russianText, metadataKind: metadataKind, platform: platform, language: .russian)
+            write(englishText, englishOriginal: englishText, metadataKind: metadataKind, platform: platform, language: .english)
+            write(russianText, englishOriginal: englishText, metadataKind: metadataKind, platform: platform, language: .russian)
             let notEmpty = !englishText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
             
             for language in Language.allCases where language != .english && language != .russian {
@@ -22,7 +22,7 @@ func translateAppStoreMetadata(_ model: AI.Model) {
                         tasks.append(task)
                     }
                 } else {
-                    write(englishText, metadataKind: metadataKind, platform: platform, language: language)
+                    write(englishText, englishOriginal: englishText, metadataKind: metadataKind, platform: platform, language: language)
                 }
             }
         }
@@ -31,7 +31,7 @@ func translateAppStoreMetadata(_ model: AI.Model) {
     var finalTasksCount = tasks.count
     for task in tasks {
         AI.translate(task: task) { translation in
-            write(translation, metadataKind: task.metadataKind, platform: task.platform, language: task.language)
+            write(translation, englishOriginal: task.englishText, metadataKind: task.metadataKind, platform: task.platform, language: task.language)
             task.storeAsCompleted()
             finalTasksCount -= 1
             if finalTasksCount == 0 {
@@ -45,12 +45,20 @@ func translateAppStoreMetadata(_ model: AI.Model) {
     }
 }
 
-func write(_ newValue: String, metadataKind: MetadataKind, platform: Platform, language: Language) {
-    // TODO: handle potential subtitle and keywords overflows
+func write(_ newValue: String, englishOriginal: String, metadataKind: MetadataKind, platform: Platform, language: Language) {
+    let toWrite: String
+    if metadataKind == .subtitle && newValue.count > 30 {
+        toWrite = englishOriginal
+    } else if metadataKind == .keywords && newValue.count > 100 {
+        toWrite = englishOriginal
+    } else {
+        toWrite = newValue
+    }
+    
     let actualPlatformsToWrite: [Platform] = platform == .common ? [.macos, .tvos, .visionos] : [platform]
     for p in actualPlatformsToWrite {
         let url = URL(fileURLWithPath: projectDir + "/fastlane/metadata/\(p.rawValue)/" + "\(language.metadataLocalizationKey)/\(metadataKind.fileName).txt")
-        let data = newValue.data(using: .utf8)!
+        let data = toWrite.data(using: .utf8)!
         try! data.write(to: url)
     }
 }
