@@ -12,6 +12,7 @@ enum MetadataKind: String, CaseIterable {
     case marketingURL = "marketing_url"
     case privacyURL = "privacy_url"
     case supportURL = "support_url"
+    case appleTvPrivacyPolicy = "apple_tv_privacy_policy"
     
     var fileName: String {
         return rawValue
@@ -21,7 +22,7 @@ enum MetadataKind: String, CaseIterable {
         switch self {
         case .description, .keywords, .name, .subtitle, .promotionalText, .releaseNotes:
             return true
-        case .marketingURL, .privacyURL, .supportURL:
+        case .marketingURL, .privacyURL, .supportURL, .appleTvPrivacyPolicy:
             return false
         }
     }

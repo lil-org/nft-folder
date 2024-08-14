@@ -277,6 +277,7 @@
 		2C1FD2AA2B88B53F004F42B3 /* ContentRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentRepresentation.swift; sourceTree = "<group>"; };
 		2C1FD2AC2B88D2EF004F42B3 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		2C2329D92B68367F00001936 /* RightClickServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightClickServiceProvider.swift; sourceTree = "<group>"; };
+		2C25BFE92C6CD6E30084FD7A /* apple_tv_privacy_policy.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = apple_tv_privacy_policy.txt; sourceTree = "<group>"; };
 		2C2B5AD02B84E2DA005C38B0 /* DownloadFileTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadFileTask.swift; sourceTree = "<group>"; };
 		2C3214322C33DF7C0050BBC1 /* SimpleHash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleHash.swift; sourceTree = "<group>"; };
 		2C3924C02C1F0F1200161154 /* StringTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTask.swift; sourceTree = "<group>"; };
@@ -1852,6 +1853,7 @@
 			isa = PBXGroup;
 			children = (
 				2CA7EE8F2C1C752400C7AEB5 /* marketing_url.txt */,
+				2C25BFE92C6CD6E30084FD7A /* apple_tv_privacy_policy.txt */,
 				2CA7EE942C1C752400C7AEB5 /* privacy_url.txt */,
 				2CA7EE922C1C752400C7AEB5 /* support_url.txt */,
 			);
