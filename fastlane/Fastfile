@@ -137,11 +137,22 @@ lane :release_macos do
   end
 end
 
-lane :release do
+lane :release do |options|
   update_and_login
-  release_visionos
-  release_macos
-  release_tvos
+  platform = options[:platform]
+
+  if platform.nil?
+    release_visionos
+    release_macos
+    release_tvos
+  elsif platform == "macos"
+    release_macos
+  elsif platform == "visionos"
+    release_visionos
+  elsif platform == "tvos"
+    release_tvos
+  end
+
   sh "rm -rf #{File.expand_path('build')}"
   clean_build_artifacts
 end
