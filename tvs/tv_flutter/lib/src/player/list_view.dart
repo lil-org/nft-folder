@@ -44,27 +44,52 @@ class _SampleItemListViewState extends State<SampleItemListView> {
     if (event is KeyDownEvent) {
       int itemCount = _itemRepository.items.length;
       int oldFocusedIndex = _focusedIndex;
+      int currentRow = _focusedIndex ~/ crossAxisCount;
+      int currentCol = _focusedIndex % crossAxisCount;
+      int lastRowItemCount = itemCount % crossAxisCount;
+      if (lastRowItemCount == 0) lastRowItemCount = crossAxisCount;
+      int totalRows = (itemCount / crossAxisCount).ceil();
 
       switch (event.logicalKey) {
         case LogicalKeyboardKey.arrowUp:
           setState(() {
-            _focusedIndex = (_focusedIndex - crossAxisCount) % itemCount;
-            if (_focusedIndex < 0) _focusedIndex += itemCount;
+            if (currentRow > 0) {
+              _focusedIndex -= crossAxisCount;
+            } else {
+              int newRow = totalRows - 1;
+              while (newRow * crossAxisCount + currentCol >= itemCount) {
+                newRow--;
+              }
+              _focusedIndex = newRow * crossAxisCount + currentCol;
+            }
           });
           break;
         case LogicalKeyboardKey.arrowDown:
           setState(() {
-            _focusedIndex = (_focusedIndex + crossAxisCount) % itemCount;
+            if (currentRow < totalRows - 1 && _focusedIndex + crossAxisCount < itemCount) {
+              _focusedIndex += crossAxisCount;
+            } else {
+              _focusedIndex = currentCol;
+            }
           });
           break;
         case LogicalKeyboardKey.arrowLeft:
           setState(() {
-            _focusedIndex = (_focusedIndex - 1 + itemCount) % itemCount;
+            if (currentCol > 0) {
+              _focusedIndex--;
+            } else {
+              int rightmostCol = (currentRow == totalRows - 1) ? (lastRowItemCount - 1) : (crossAxisCount - 1);
+              _focusedIndex = currentRow * crossAxisCount + rightmostCol;
+            }
           });
           break;
         case LogicalKeyboardKey.arrowRight:
           setState(() {
-            _focusedIndex = (_focusedIndex + 1) % itemCount;
+            if (currentCol < crossAxisCount - 1 && _focusedIndex < itemCount - 1) {
+              _focusedIndex++;
+            } else {
+              _focusedIndex = currentRow * crossAxisCount;
+            }
           });
           break;
         case LogicalKeyboardKey.select:
