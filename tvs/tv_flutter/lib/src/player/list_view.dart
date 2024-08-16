@@ -16,6 +16,8 @@ class _SampleItemListViewState extends State<SampleItemListView> {
   final ItemRepository _itemRepository = ItemRepository();
   int _focusedIndex = 0;
   final FocusNode _gridFocusNode = FocusNode();
+  final ScrollController _scrollController = ScrollController();
+  static const int crossAxisCount = 5;
 
   @override
   void initState() {
@@ -29,6 +31,7 @@ class _SampleItemListViewState extends State<SampleItemListView> {
   @override
   void dispose() {
     _gridFocusNode.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -39,8 +42,8 @@ class _SampleItemListViewState extends State<SampleItemListView> {
 
   void _handleKeyEvent(KeyEvent event) {
     if (event is KeyDownEvent) {
-      int crossAxisCount = 5;
       int itemCount = _itemRepository.items.length;
+      int oldFocusedIndex = _focusedIndex;
 
       switch (event.logicalKey) {
         case LogicalKeyboardKey.arrowUp:
@@ -71,6 +74,27 @@ class _SampleItemListViewState extends State<SampleItemListView> {
         default:
           break;
       }
+
+      if (_focusedIndex != oldFocusedIndex) {
+        _scrollToFocusedItem();
+      }
+    }
+  }
+
+  void _scrollToFocusedItem() {
+    final itemHeight = MediaQuery.of(context).size.width / crossAxisCount * (1 / 1.25);
+    final itemsPerColumn = (MediaQuery.of(context).size.height / itemHeight).floor();
+    final rowIndex = _focusedIndex ~/ crossAxisCount;
+    final visibleRowsStart = _scrollController.offset ~/ itemHeight;
+    final visibleRowsEnd = visibleRowsStart + itemsPerColumn - 1;
+
+    if (rowIndex < visibleRowsStart || rowIndex > visibleRowsEnd) {
+      final targetScroll = rowIndex * itemHeight;
+      _scrollController.animateTo(
+        targetScroll,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
     }
   }
 
@@ -93,8 +117,9 @@ class _SampleItemListViewState extends State<SampleItemListView> {
         autofocus: true,
         onKeyEvent: _handleKeyEvent,
         child: GridView.builder(
+          controller: _scrollController,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 5,
+            crossAxisCount: crossAxisCount,
             childAspectRatio: 1.25,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
