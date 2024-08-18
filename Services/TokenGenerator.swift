@@ -21,15 +21,13 @@ struct TokenGenerator {
         ])
         let fileNames = fileURLs.compactMap { tmpDisabledForVisionPro.contains(String($0.lastPathComponent.dropLast(5))) ? nil : $0.lastPathComponent }
 #elseif os(tvOS)
-        let tmpDisabled = Set([
-            "0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd27029",
-            "0x64780ce53f6e966e18a22af13a2f97369580ec113",
+        let disabledForTv = Set([
             "0x99a9b7c1116f9ceeb1652de04d5969cce509b069472",
             "0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270356",
             "0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270250",
             "0x0a1bbd57033f57e7b6743621b79fcb9eb2ce367664",
         ])
-        let fileNames = fileURLs.compactMap { tmpDisabled.contains(String($0.lastPathComponent.dropLast(5))) ? nil : $0.lastPathComponent }
+        let fileNames = fileURLs.compactMap { disabledForTv.contains(String($0.lastPathComponent.dropLast(5))) ? nil : $0.lastPathComponent }
 #endif
         return Set(fileNames)
     }()
