@@ -16,10 +16,10 @@ struct FooterLink: Hashable {
     }
     
     static let all = [
-        FooterLink(url: URL(string: "https://g.lil.org")!, imageName: "github"),
-        FooterLink(url: URL(string: "https://x.lil.org")!, imageName: "x"),
-        FooterLink(url: URL(string: "https://mint.lil.org")!, imageName: nil),
-        FooterLink(url: URL(string: "https://f.lil.org")!, imageName: "fc"),
+        FooterLink(url: URL(string: "https://github.com/lil-org")!, imageName: "github"),
+        FooterLink(url: URL(string: "https://x.com/lildotorg")!, imageName: "x"),
+        FooterLink(url: URL(string: "https://zora.co/collect/zora:0x01c077fd6b4df827490cd4f95650d55d6b35c35d")!, imageName: nil),
+        FooterLink(url: URL(string: "https://warpcast.com/org")!, imageName: "fc"),
     ]
     
 }
