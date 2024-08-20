@@ -107,7 +107,9 @@ SPDX-License-Identifier: Apache-2.0
 			} else {
 				var visibilityElement = document.getElementById("visibility");
 				visibilityElement.innerHTML = "App Shown";
-				createIframe();
+				setTimeout(() => {
+					createIframe();
+				}, 2300);
 			}
 		},
 		true
@@ -127,15 +129,21 @@ SPDX-License-Identifier: Apache-2.0
 
 	function removeIframe() {
 		var iframe = document.getElementById('colorFrame');
+		isShowingPlayer = false;
 		if (iframe) {
 			iframe.remove();
 		}
 	}
 
+	var isShowingPlayer = false;
+
 	function createIframe() {
+		if (isShowingPlayer) { return; }
+		if (document[hidden]) { return; }
 		var container = document.querySelector('.container');
 		if (!container) { return; }
 		var iframe = document.createElement('iframe');
+		isShowingPlayer = true;
 		iframe.id = 'colorFrame';
 		container.appendChild(iframe);
 		updateIframeContent();
