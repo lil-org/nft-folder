@@ -97,6 +97,8 @@ SPDX-License-Identifier: Apache-2.0
 		visibilityChange = "webkitvisibilitychange";
 	}
 
+	let createIframeTimeout;
+
 	document.addEventListener(
 		visibilityChange,
 		function () {
@@ -104,10 +106,13 @@ SPDX-License-Identifier: Apache-2.0
 				var visibilityElement = document.getElementById("visibility");
 				visibilityElement.innerHTML = "App Hidden";
 				removeIframe();
+				if (createIframeTimeout) {
+					clearTimeout(createIframeTimeout);
+				}
 			} else {
 				var visibilityElement = document.getElementById("visibility");
 				visibilityElement.innerHTML = "App Shown";
-				setTimeout(() => {
+				createIframeTimeout = setTimeout(() => {
 					createIframe();
 				}, 2300);
 			}
