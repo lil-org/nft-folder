@@ -47,11 +47,55 @@ SPDX-License-Identifier: Apache-2.0
 			console.log("Failed to getTime");
 		}
 	});
+
+	document.addEventListener(
+		"webOSLaunch",
+		function (inData) {
+			var launchElement = document.getElementById("launch");
+			launchElement.innerHTML = "App Launched";
+		},
+		true
+	);
+
+	document.addEventListener(
+		"webOSRelaunch",
+		function (inData) {
+			var launchElement = document.getElementById("reLaunch");
+			launchElement.innerHTML = "App Relaunched";
+		},
+		true
+	);
+
+	var hidden, visibilityChange;
+	if (typeof document.hidden !== "undefined") {
+		hidden = "hidden";
+		visibilityChange = "visibilitychange";
+	} else if (typeof document.webkitHidden !== "undefined") {
+		hidden = "webkitHidden";
+		visibilityChange = "webkitvisibilitychange";
+	}
+
+	document.addEventListener(
+		visibilityChange,
+		function () {
+			if (document[hidden]) {
+				var visibilityElement = document.getElementById("visibility");
+				visibilityElement.innerHTML = "App Hidden";
+			} else {
+				var visibilityElement = document.getElementById("visibility");
+				visibilityElement.innerHTML = "App Shown";
+			}
+		},
+		true
+	);
 </script>
 
 <body>
 	<div>
 		<h1>nft folder webos</h1>
+		<h1 id="launch"></h1>
+		<h1 id="reLaunch"></h1>
+		<h1 id="visibility"></h1>
 	</div>
 </body>
 
