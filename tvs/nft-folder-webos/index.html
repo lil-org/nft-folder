@@ -157,6 +157,27 @@ SPDX-License-Identifier: Apache-2.0
 	window.onload = function() {
 		createIframe();
 	};
+
+	document.addEventListener(
+		"keydown",
+		function (event) {
+			console.log("keydown", event.keyCode);
+			// 37 left
+			// 39 right
+			// 13 center
+			// 38 top
+			// 40 bottom
+			// 413 stop
+			// 415 play
+			// 19 pause
+			// 412 back
+			// 417 forward
+			var keyCodeElement = document.getElementById("keyCode");
+			var timestamp = new Date().toISOString();
+			keyCodeElement.innerHTML = "Latest Key Code: " + event.keyCode + "<br>" + timestamp;
+		},
+		false
+	);
 </script>
 
 <body>
@@ -166,6 +187,7 @@ SPDX-License-Identifier: Apache-2.0
 			<h1 id="launch"></h1>
 			<h1 id="reLaunch"></h1>
 			<h1 id="visibility"></h1>
+			<h1 id="keyCode"></h1>
 		</div>
 	</div>
 </body>
