@@ -94,7 +94,7 @@ struct TokenGenerator {
 #if canImport(AppKit)
         let webURL = NftGallery.opensea.url(network: .mainnet, chain: .ethereum, collectionAddress: script.address, tokenId: token.id)
 #else
-        let webURL = NftGallery.etherscan.url(network: .mainnet, chain: .ethereum, collectionAddress: script.address, tokenId: token.id)
+        let webURL = NftGallery.blockExplorer.url(network: .mainnet, chain: .ethereum, collectionAddress: script.address, tokenId: token.id)
 #endif
         let generatedToken = GeneratedToken(fullCollectionId: script.id,
                                             address: script.address,

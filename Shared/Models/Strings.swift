@@ -12,7 +12,7 @@ struct Strings {
     static let removeFolder = loc("Remove Folder")
     static let hardReset = loc("Hard Reset")
     static let viewOnArtBlocks = loc("View on Art Blocks")
-    static let viewOnEtherscan = loc("View on Etherscan")
+    static let viewOnBlockscout = loc("View on Blockscout")
     static let viewOnOpensea = loc("View on OpenSea")
     static let viewinFinder = loc("Show in Finder")
     static let viewOnZora = loc("View on Zora")
@@ -49,7 +49,7 @@ struct Strings {
     static let tokenId = loc("Token Id")
     
     static let zora = "Zora"
-    static let etherscan = "Etherscan"
+    static let blockExplorer = "Blockscout"
     static let opensea = "OpenSea"
     static let mintfun = "mint.fun"
     static let ens = "ENS"

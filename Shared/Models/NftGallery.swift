@@ -9,12 +9,12 @@ enum NftGallery: Int, CaseIterable, Codable {
     
     static let referrer = "0xE26067c76fdbe877F48b0a8400cf5Db8B47aF0fE"
     
-    case zora, mintfun, opensea, etherscan
+    case zora, mintfun, opensea, blockExplorer
     
 #if canImport(AppKit)
     var image: NSImage {
         switch self {
-        case .etherscan:
+        case .blockExplorer:
             return Images.infoTitleBar
         case .zora:
             return Images.zora
@@ -34,8 +34,8 @@ enum NftGallery: Int, CaseIterable, Codable {
             Strings.mintfun
         case .opensea:
             Strings.opensea
-        case .etherscan:
-            Strings.etherscan
+        case .blockExplorer:
+            Strings.blockExplorer
         }
     }
     
@@ -52,8 +52,8 @@ enum NftGallery: Int, CaseIterable, Codable {
         // https://magiceden.io/marketplace/CjL5WpAmf4cMEEGwZGTfTDKWok9a92ykq9aLZrEK2D5H
         
         switch self {
-        case .etherscan:
-            return URL(string: "https://etherscan.io/address/\(walletAddress)")
+        case .blockExplorer:
+            return URL(string: "https://eth.blockscout.com/address/\(walletAddress)")
         case .zora:
             return URL(string: "https://zora.co/\(walletAddress)?referrer=\(NftGallery.referrer)")
         case .mintfun:
@@ -66,8 +66,9 @@ enum NftGallery: Int, CaseIterable, Codable {
     func url(network: Network, chain: Chain?, collectionAddress: String, tokenId: String?) -> URL? {
         // TODO: use chain for non eth explorers
         switch self {
-        case .etherscan:
-            return URL(string: "https://etherscan.io/nft/\(collectionAddress)/\(tokenId ?? "")")
+        case .blockExplorer:
+            let urlString = "https://eth.blockscout.com/token/\(collectionAddress)" + (tokenId != nil ? "/instance/\(tokenId!)?tab=metadata" : "")
+            return URL(string: urlString)
         case .zora:
             let prefix: String
             switch network {

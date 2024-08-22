@@ -65,7 +65,7 @@ struct PlayerView: View {
         VStack(alignment: .leading, spacing: 10) {
             Text(playerModel.currentToken.displayName)
             Divider()
-            Button(Strings.viewOnEtherscan, action: viewOnWeb)
+            Button(Strings.viewOnBlockscout, action: viewOnWeb)
             if let instructions = playerModel.currentToken.instructions {
                 Divider()
                 Text(instructions).font(.body)
