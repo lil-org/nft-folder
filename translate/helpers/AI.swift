@@ -57,7 +57,7 @@ struct AI {
                   let firstChoice = choices.first,
                   let message = firstChoice["message"] as? [String: Any],
                   let content = message["content"] as? String {
-                completion(content.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines.union(CharacterSet(charactersIn: "\""))))
+                completion(content.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines.union(CharacterSet(charactersIn: "\"“"))))
             } else {
                 print("🕰️ will retry in 30 seconds")
                 queue.asyncAfter(deadline: .now() + .seconds(30)) {
