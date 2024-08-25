@@ -1,4 +1,6 @@
 <!--
+∅ lil org
+
 Copyright (c) 2024 LG Electronics Inc.
 
 SPDX-License-Identifier: Apache-2.0
@@ -176,6 +178,8 @@ SPDX-License-Identifier: Apache-2.0
 			var keyCodeElement = document.getElementById("keyCode");
 			var timestamp = new Date().toISOString();
 			keyCodeElement.innerHTML = "Latest Key Code: " + event.keyCode + "<br>" + timestamp;
+
+			updateIframeContent(); // TODO: different updates for different keys
 		},
 		false
 	);
