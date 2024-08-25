@@ -18,25 +18,15 @@ SPDX-License-Identifier: Apache-2.0
 			background-color: #202020;
 			margin: 0;
 			padding: 0;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-		}
-
-		.container {
-			position: relative;
-			width: 100%;
-			height: 100%;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
+			overflow: hidden;
 		}
 
 		iframe {
-			width: 420px;
-			height: 420px;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
 			border: none;
 		}
 
@@ -44,9 +34,7 @@ SPDX-License-Identifier: Apache-2.0
 			position: absolute;
 			top: 10px;
 			left: 10px;
-			display: flex;
-			flex-direction: column;
-			align-items: flex-start;
+			z-index: 1000;
 		}
 
 		h1 {
@@ -59,7 +47,7 @@ SPDX-License-Identifier: Apache-2.0
 
 <script src="webOSTVjs-1.2.10/webOSTV.js" charset="utf-8"></script>
 <script src="webOSTVjs-1.2.10/webOSTV-dev.js" charset="utf-8"></script>
-<script src="src/main.js" charset="utf-8"></script>
+<script src="main.js" charset="utf-8"></script>
 <script type="text/javascript">
 	//sample code for calling LS2 API
 	webOS.service.request("luna://com.palm.systemservice", {
@@ -77,7 +65,7 @@ SPDX-License-Identifier: Apache-2.0
 		"webOSLaunch",
 		function (inData) {
 			var launchElement = document.getElementById("launch");
-			launchElement.innerHTML = "App Launched";
+			launchElement.innerHTML = "launched";
 		},
 		true
 	);
@@ -86,7 +74,7 @@ SPDX-License-Identifier: Apache-2.0
 		"webOSRelaunch",
 		function (inData) {
 			var launchElement = document.getElementById("reLaunch");
-			launchElement.innerHTML = "App Relaunched";
+			launchElement.innerHTML = "relaunched";
 		},
 		true
 	);
@@ -100,24 +88,17 @@ SPDX-License-Identifier: Apache-2.0
 		visibilityChange = "webkitvisibilitychange";
 	}
 
-	let createIframeTimeout;
-
 	document.addEventListener(
 		visibilityChange,
 		function () {
 			if (document[hidden]) {
 				var visibilityElement = document.getElementById("visibility");
-				visibilityElement.innerHTML = "App Hidden";
+				visibilityElement.innerHTML = "hidden";
 				removeIframe();
-				if (createIframeTimeout) {
-					clearTimeout(createIframeTimeout);
-				}
 			} else {
 				var visibilityElement = document.getElementById("visibility");
-				visibilityElement.innerHTML = "App Shown";
-				createIframeTimeout = setTimeout(() => {
-					createIframe();
-				}, 2300);
+				visibilityElement.innerHTML = "shown";
+				createIframe();
 			}
 		},
 		true
@@ -148,12 +129,10 @@ SPDX-License-Identifier: Apache-2.0
 	function createIframe() {
 		if (isShowingPlayer) { return; }
 		if (document[hidden]) { return; }
-		var container = document.querySelector('.container');
-		if (!container) { return; }
 		var iframe = document.createElement('iframe');
 		isShowingPlayer = true;
 		iframe.id = 'colorFrame';
-		container.appendChild(iframe);
+		document.body.appendChild(iframe);
 		updateIframeContent();
 	}
 
@@ -177,7 +156,7 @@ SPDX-License-Identifier: Apache-2.0
 			// 417 forward
 			var keyCodeElement = document.getElementById("keyCode");
 			var timestamp = new Date().toISOString();
-			keyCodeElement.innerHTML = "Latest Key Code: " + event.keyCode + "<br>" + timestamp;
+			keyCodeElement.innerHTML = "key code: " + event.keyCode + "<br>" + timestamp;
 
 			updateIframeContent(); // TODO: different updates for different keys
 		},
@@ -186,14 +165,12 @@ SPDX-License-Identifier: Apache-2.0
 </script>
 
 <body>
-	<div class="container">
-		<div class="text-container">
-			<h1>nft folder webos</h1>
-			<h1 id="launch"></h1>
-			<h1 id="reLaunch"></h1>
-			<h1 id="visibility"></h1>
-			<h1 id="keyCode"></h1>
-		</div>
+	<div class="text-container">
+		<h1>nft folder webos</h1>
+		<h1 id="launch"></h1>
+		<h1 id="reLaunch"></h1>
+		<h1 id="visibility"></h1>
+		<h1 id="keyCode"></h1>
 	</div>
 </body>
 
