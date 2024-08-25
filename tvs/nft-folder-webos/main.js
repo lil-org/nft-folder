@@ -24,30 +24,37 @@ async function fetchHtml(notUsedYetItem) {
     return htmlContent.html;
 }
 
-// TODO: use plain system apis
+const filePromises = new Map();
+
 function readFileContent(filePath) {
-  return new Promise((resolve, reject) => {
-      const iframe = document.createElement('iframe');
-      iframe.style.display = 'none';
-      iframe.src = filePath;
-      document.body.appendChild(iframe);
+    if (!filePromises.has(filePath)) {
+        filePromises.set(filePath, loadFile(filePath));
+    }
+    return filePromises.get(filePath);
+}
 
-      iframe.onload = function() {
-          try {
-              const content = iframe.contentDocument.body.textContent || iframe.contentDocument.body.innerText;
-              resolve(content);
-          } catch (error) {
-              reject(new Error('Error reading file content: ' + error.message));
-          } finally {
-              document.body.removeChild(iframe);
-          }
-      };
+function loadFile(filePath) {
+    return new Promise((resolve, reject) => {
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = filePath;
+        document.body.appendChild(iframe);
 
-      iframe.onerror = function() {
-          reject(new Error('Failed to load file: ' + filePath));
-          document.body.removeChild(iframe);
-      };
-  });
+        iframe.onload = function() {
+            try {
+                const content = iframe.contentDocument.body.textContent || iframe.contentDocument.body.innerText;
+                resolve(content);
+            } catch (error) {} finally {
+                document.body.removeChild(iframe);
+                filePromises.delete(filePath);
+            }
+        };
+
+        iframe.onerror = function() {
+            document.body.removeChild(iframe);
+            filePromises.delete(filePath);
+        };
+    });
 }
 
 async function generateHtmlContent(item) {
