@@ -57,6 +57,7 @@ SPDX-License-Identifier: Apache-2.0
 
 <script src="webOSTVjs-1.2.10/webOSTV.js" charset="utf-8"></script>
 <script src="webOSTVjs-1.2.10/webOSTV-dev.js" charset="utf-8"></script>
+<script src="src/main.js" charset="utf-8"></script>
 <script type="text/javascript">
 	//sample code for calling LS2 API
 	webOS.service.request("luna://com.palm.systemservice", {
@@ -123,12 +124,12 @@ SPDX-License-Identifier: Apache-2.0
 	function updateIframeContent() {
 		var iframe = document.getElementById('colorFrame');
 		if (iframe) {
-			fetch('sample.html')
-				.then(response => response.text())
+			fetchHtml('sample') // TODO: pass item
 				.then(content => {
-					iframe.srcdoc = content;
-				})
-				.catch(() => {});
+					if (content) {
+						iframe.srcdoc = content;
+					}
+				});
 		}
 	}
 
