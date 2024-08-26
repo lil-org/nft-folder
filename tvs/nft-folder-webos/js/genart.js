@@ -29,7 +29,7 @@ async function fetchHtml(itemIndex) {
     } catch (error) {
       return null;
     }
-    lastTokenId = htmlContent.tokenid;
+    lastTokenId = htmlContent.tokenId;
     return htmlContent.html;
   }
   

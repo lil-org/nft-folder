@@ -286,6 +286,32 @@ document.addEventListener(
           // 40 bottom
           // 412 back
         } else if (keyCode == 13) {
+          var iframe = document.getElementById("generativePlayerFrame");
+          if (iframe && iframe.contentDocument) {
+            var existingQR = iframe.contentDocument.querySelector('div[style*="position: absolute"][style*="top: 10px"][style*="right: 10px"]');
+            if (existingQR) {
+              existingQR.remove();
+            } else {
+              function createQRCode(text) {
+                var qrContainer = document.createElement("div");
+                qrContainer.style.position = "absolute";
+                qrContainer.style.top = "10px";
+                qrContainer.style.right = "10px";
+                qrContainer.style.zIndex = "9999";
+                var qr = new QRCode(qrContainer, {
+                  text: text,
+                  width: 128,
+                  height: 128,
+                  colorDark : "#000000",
+                  colorLight : "#ffffff",
+                  correctLevel : QRCode.CorrectLevel.H
+                });
+                return qrContainer;
+              }
+              var qrCode = createQRCode("https://etherscan.io/nft/" + allItems[currentCollectionIndex].address + "/" + lastTokenId);
+              iframe.contentDocument.body.appendChild(qrCode);
+            }
+          }
           // 13 center
         }
         // 413 stop
