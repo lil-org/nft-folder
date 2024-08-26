@@ -248,7 +248,6 @@ function showPlayer(itemId) {
   updateIframeContent();
   SpatialNavigation.pause();
 }
-
 document.addEventListener(
   "keydown",
   function (event) {
@@ -288,16 +287,20 @@ document.addEventListener(
         } else if (keyCode == 13) {
           var iframe = document.getElementById("generativePlayerFrame");
           if (iframe && iframe.contentDocument) {
-            var existingQR = iframe.contentDocument.querySelector('div[style*="position: absolute"][style*="top: 10px"][style*="right: 10px"]');
+            var existingQR = iframe.contentDocument.getElementById('qrCodeContainer');
             if (existingQR) {
               existingQR.remove();
             } else {
               function createQRCode(text) {
                 var qrContainer = document.createElement("div");
+                qrContainer.id = 'qrCodeContainer';
                 qrContainer.style.position = "absolute";
                 qrContainer.style.top = "10px";
                 qrContainer.style.right = "10px";
                 qrContainer.style.zIndex = "9999";
+                qrContainer.style.width = "128px";
+                qrContainer.style.height = "128px";
+                qrContainer.style.visibility = "hidden";
                 var qr = new QRCode(qrContainer, {
                   text: text,
                   width: 128,
@@ -310,6 +313,8 @@ document.addEventListener(
               }
               var qrCode = createQRCode("https://etherscan.io/nft/" + allItems[currentCollectionIndex].address + "/" + lastTokenId);
               iframe.contentDocument.body.appendChild(qrCode);
+              qrCode.offsetHeight;
+              qrCode.style.visibility = "visible";
             }
           }
           // 13 center
