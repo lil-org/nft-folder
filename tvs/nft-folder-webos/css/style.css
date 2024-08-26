@@ -39,7 +39,7 @@ html {
 
 .item {
   width: calc(20% - 2rem);
-  aspect-ratio: 1;
+  aspect-ratio: 0.888;
   display: flex;
   justify-content: center;
   align-items: center;

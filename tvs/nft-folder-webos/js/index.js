@@ -102,13 +102,18 @@ window.addEventListener("load", function () {
         const coverContainer = document.createElement("div");
         coverContainer.className = "item-cover-container";
         coverContainer.style.width = "100%";
-        coverContainer.style.height = "80%";
+        coverContainer.style.paddingBottom = "100%";
+        coverContainer.style.position = "relative";
         coverContainer.style.overflow = "hidden";
+        coverContainer.style.backgroundColor = "#404040";
 
         const coverImage = document.createElement("img");
         coverImage.src = `assets/covers/${item.address}${item.abId}.webp`;
         coverImage.alt = item.name;
         coverImage.className = "item-cover";
+        coverImage.style.position = "absolute";
+        coverImage.style.top = "0";
+        coverImage.style.left = "0";
         coverImage.style.width = "100%";
         coverImage.style.height = "100%";
         coverImage.style.objectFit = "cover";
@@ -118,10 +123,8 @@ window.addEventListener("load", function () {
         itemName.textContent = item.name;
         itemName.className = "item-name";
         itemName.style.width = "100%";
-        itemName.style.height = "20%";
-        itemName.style.display = "flex";
-        itemName.style.alignItems = "center";
-        itemName.style.justifyContent = "center";
+        itemName.style.padding = "0.5rem 0";
+        itemName.style.textAlign = "center";
         itemName.style.overflow = "hidden";
         itemName.style.textOverflow = "ellipsis";
         itemName.style.whiteSpace = "nowrap";
