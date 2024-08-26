@@ -266,18 +266,22 @@ document.addEventListener(
           // 37 left
           // 39 right
         } else if (keyCode == 38 || keyCode == 417) {
-          currentCollectionIndex += 1;
-          if (currentCollectionIndex >= allItems.length) {
-            currentCollectionIndex = 0;
-          }
+          let newIndex = currentCollectionIndex;
+          do {
+            newIndex = (newIndex + 1) % allItems.length;
+            if (newIndex === currentCollectionIndex) break;
+          } while (allItems.length > 0 && !allItems[newIndex].worksOnOldTv);
+          currentCollectionIndex = newIndex;
           updateIframeContent();
           // 38 top
           // 417 forward
         } else if (keyCode == 40 || keyCode == 412) {
-          currentCollectionIndex -= 1;
-          currentCollectionIndex = (currentCollectionIndex < 0) 
-            ? Math.max(0, allItems.length - 1) 
-            : currentCollectionIndex;
+          let newIndex = currentCollectionIndex;
+          do {
+            newIndex = (newIndex - 1 + allItems.length) % allItems.length;
+            if (newIndex === currentCollectionIndex) break;
+          } while (allItems.length > 0 && !allItems[newIndex].worksOnOldTv);
+          currentCollectionIndex = newIndex;
           updateIframeContent();
           // 40 bottom
           // 412 back
