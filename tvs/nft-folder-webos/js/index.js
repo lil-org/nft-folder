@@ -117,6 +117,7 @@ window.addEventListener("load", function () {
         coverImage.style.width = "100%";
         coverImage.style.height = "100%";
         coverImage.style.objectFit = "cover";
+        coverImage.style.pointerEvents = "none";
         coverContainer.appendChild(coverImage);
 
         const itemName = document.createElement("div");
@@ -128,6 +129,7 @@ window.addEventListener("load", function () {
         itemName.style.overflow = "hidden";
         itemName.style.textOverflow = "ellipsis";
         itemName.style.whiteSpace = "nowrap";
+        itemName.style.pointerEvents = "none";
 
         const itemWrapper = document.createElement("div");
         itemWrapper.className = "item-wrapper";
@@ -135,10 +137,12 @@ window.addEventListener("load", function () {
         itemWrapper.style.height = "100%";
         itemWrapper.style.display = "flex";
         itemWrapper.style.flexDirection = "column";
+        itemWrapper.style.pointerEvents = "none";
         itemWrapper.appendChild(coverContainer);
         itemWrapper.appendChild(itemName);
 
         itemElement.appendChild(itemWrapper);
+        itemElement.style.position = "relative";
 
         grid.appendChild(itemElement);
 
