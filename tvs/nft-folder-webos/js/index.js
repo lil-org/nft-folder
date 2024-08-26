@@ -90,6 +90,16 @@ var eventRegister = (function () {
 })();
 
 window.addEventListener("load", function () {
+  const grid = document.querySelector('.grid');
+  for (let i = 1; i <= 15; i++) {
+    const item = document.createElement('div');
+    item.className = 'item';
+    item.tabIndex = 0;
+    item.id = `item${i}`;
+    item.textContent = `item ${i}`;
+    grid.appendChild(item);
+  }
+
   SpatialNavigation.init();
   SpatialNavigation.add({
     selector: ".item",
