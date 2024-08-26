@@ -13,6 +13,8 @@ async function getItems() {
     return allItems;
 }
 
+var lastTokenId = "0";
+
 async function fetchHtml(itemIndex) {
     const items = await getItems();
     if (items.length === 0) {
@@ -27,7 +29,7 @@ async function fetchHtml(itemIndex) {
     } catch (error) {
       return null;
     }
-  
+    lastTokenId = htmlContent.tokenid;
     return htmlContent.html;
   }
   
