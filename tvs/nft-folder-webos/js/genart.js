@@ -13,16 +13,13 @@ async function getItems() {
     return allItems;
 }
 
-async function fetchHtml(notUsedYetItem) {
-    // TODO: use passed item or stop passing it at all
-  
+async function fetchHtml(itemIndex) {
     const items = await getItems();
     if (items.length === 0) {
         return null;
     }
   
-    const random = Math.floor(Math.random() * items.length);
-    const item = items[random];
+    const item = items[itemIndex];
   
     let htmlContent;
     try {

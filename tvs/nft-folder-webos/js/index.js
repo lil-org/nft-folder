@@ -1,3 +1,5 @@
+var currentCollectionIndex = 0;
+
 var eventRegister = (function () {
   var lastClickedId = null;
   var itemArray = document.getElementsByClassName("item");
@@ -19,7 +21,7 @@ var eventRegister = (function () {
     lastClickedId = e.target.id;
     updateText("p.ok_select", lastClickedId);
 
-    showPlayer(); // TODO: dev tmp. show specific items.
+    showPlayer(lastClickedId);
   };
 
   var _onMouseOverEvent = function (e) {
@@ -96,7 +98,7 @@ window.addEventListener("load", function () {
         const itemElement = document.createElement("div");
         itemElement.className = "item";
         itemElement.tabIndex = 0;
-        itemElement.id = `item${index + 1}`;
+        itemElement.id = `item${index}`;
 
         const coverContainer = document.createElement("div");
         coverContainer.className = "item-cover-container";
@@ -183,7 +185,7 @@ document.addEventListener(
 function updateIframeContent() {
   var iframe = document.getElementById("generativePlayerFrame");
   if (iframe) {
-    fetchHtml("sample") // TODO: pass item
+    fetchHtml(currentCollectionIndex)
       .then((content) => {
         if (content) {
           iframe.srcdoc = content;
@@ -202,8 +204,8 @@ function removePlayer() {
 
 var isShowingPlayer = false;
 
-function showPlayer() {
-  // TODO: if showing player again after it was hidden, make sure to start with the same item
+function showPlayer(itemId) {  
+  currentCollectionIndex = parseInt(itemId.replace("item", ""));
   if (isShowingPlayer) {
     return;
   }
@@ -238,6 +240,9 @@ document.addEventListener(
       // 19 pause
       // 412 back
       // 417 forward
+
+      // TODO: change currentCollectionIndex if needed
+
       updateIframeContent(); // TODO: different updates for different keys
     }
   },
