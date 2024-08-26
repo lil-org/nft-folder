@@ -19,7 +19,7 @@ var eventRegister = (function () {
     lastClickedId = e.target.id;
     updateText("p.ok_select", lastClickedId);
 
-    showPlayer(); // TODO: dev tmp. play selected item, not a random one
+    showPlayer(); // TODO: dev tmp. show specific items.
   };
 
   var _onMouseOverEvent = function (e) {
@@ -182,18 +182,26 @@ function showPlayer() {
 document.addEventListener(
   "keydown",
   function (event) {
-    console.log("keydown", event.keyCode);
-    // 37 left
-    // 39 right
-    // 13 center
-    // 38 top
-    // 40 bottom
-    // 413 stop
-    // 415 play
-    // 19 pause
-    // 412 back
-    // 417 forward
-    updateIframeContent(); // TODO: different updates for different keys
+    const keyCode = event.keyCode;
+    if (keyCode === 461) {
+      if (isShowingPlayer) {
+        removePlayer();
+      } else {
+        webOS.platformBack();
+      }
+    } else if (keyCode !== "undefined") {
+      // 37 left
+      // 39 right
+      // 13 center
+      // 38 top
+      // 40 bottom
+      // 413 stop
+      // 415 play
+      // 19 pause
+      // 412 back
+      // 417 forward
+      updateIframeContent(); // TODO: different updates for different keys
+    }
   },
   false
 );
