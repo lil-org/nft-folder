@@ -1,3 +1,96 @@
+document.addEventListener(
+  "webOSLaunch",
+  function (inData) {
+    console.log("webOSLaunch");
+  },
+  true
+);
+
+document.addEventListener(
+  "webOSRelaunch",
+  function (inData) {
+    console.log("webOSRelaunch");
+  },
+  true
+);
+
+var hidden, visibilityChange;
+if (typeof document.hidden !== "undefined") {
+  hidden = "hidden";
+  visibilityChange = "visibilitychange";
+} else if (typeof document.webkitHidden !== "undefined") {
+  hidden = "webkitHidden";
+  visibilityChange = "webkitvisibilitychange";
+}
+
+document.addEventListener(
+  visibilityChange,
+  function () {
+    if (document[hidden]) {
+      removeIframe();
+    } else {
+      createIframe();
+    }
+  },
+  true
+);
+
+function updateIframeContent() {
+  var iframe = document.getElementById('colorFrame');
+  if (iframe) {
+    fetchHtml('sample') // TODO: pass item
+      .then(content => {
+        if (content) {
+          iframe.srcdoc = content;
+        }
+      });
+  }
+}
+
+function removeIframe() {
+  var iframe = document.getElementById('colorFrame');
+  isShowingPlayer = false;
+  if (iframe) {
+    iframe.remove();
+  }
+}
+
+var isShowingPlayer = false;
+
+function createIframe() {
+  // TODO: if showing player again after it was hidden, make sure to start with the same item
+  if (isShowingPlayer) { return; }
+  if (document[hidden]) { return; }
+  var iframe = document.createElement('iframe');
+  isShowingPlayer = true;
+  iframe.id = 'colorFrame';
+  document.body.appendChild(iframe);
+  updateIframeContent();
+}
+
+window.onload = function() {
+  createIframe();
+};
+
+document.addEventListener(
+  "keydown",
+  function (event) {
+    console.log("keydown", event.keyCode);
+    // 37 left
+    // 39 right
+    // 13 center
+    // 38 top
+    // 40 bottom
+    // 413 stop
+    // 415 play
+    // 19 pause
+    // 412 back
+    // 417 forward
+    updateIframeContent(); // TODO: different updates for different keys
+  },
+  false
+);
+
 async function fetchHtml(notUsedYetItem) {
     // TODO: use passed item or stop passing it at all
 
