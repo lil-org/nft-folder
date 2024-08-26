@@ -98,7 +98,18 @@ window.addEventListener("load", function () {
         itemElement.className = "item";
         itemElement.tabIndex = 0;
         itemElement.id = `item${index + 1}`;
-        itemElement.textContent = item.name;
+
+        const coverImage = document.createElement("img");
+        coverImage.src = `assets/covers/${item.address}${item.abId}.webp`;
+        coverImage.alt = item.name;
+        coverImage.className = "item-cover";
+        itemElement.appendChild(coverImage);
+
+        const itemName = document.createElement("div");
+        itemName.textContent = item.name;
+        itemName.className = "item-name";
+        itemElement.appendChild(itemName);
+
         grid.appendChild(itemElement);
       });
       setupNavigation();
