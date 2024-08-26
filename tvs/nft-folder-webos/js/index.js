@@ -260,20 +260,34 @@ document.addEventListener(
         webOS.platformBack();
       }
     } else if (keyCode !== "undefined") {
-      // 37 left
-      // 39 right
-      // 13 center
-      // 38 top
-      // 40 bottom
-      // 413 stop
-      // 415 play
-      // 19 pause
-      // 412 back
-      // 417 forward
-
-      // TODO: change currentCollectionIndex if needed
-
-      updateIframeContent(); // TODO: different updates for different keys
+      if (isShowingPlayer) {
+        if (keyCode == 37 || keyCode == 39) {
+          updateIframeContent();
+          // 37 left
+          // 39 right
+        } else if (keyCode == 38 || keyCode == 417) {
+          currentCollectionIndex += 1;
+          if (currentCollectionIndex >= allItems.length) {
+            currentCollectionIndex = 0;
+          }
+          updateIframeContent();
+          // 38 top
+          // 417 forward
+        } else if (keyCode == 40 || keyCode == 412) {
+          currentCollectionIndex -= 1;
+          currentCollectionIndex = (currentCollectionIndex < 0) 
+            ? Math.max(0, allItems.length - 1) 
+            : currentCollectionIndex;
+          updateIframeContent();
+          // 40 bottom
+          // 412 back
+        } else if (keyCode == 13) {
+          // 13 center
+        }
+        // 413 stop
+        // 415 play
+        // 19 pause
+      }
     }
   },
   false
