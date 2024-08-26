@@ -226,6 +226,7 @@ function removePlayer() {
   var iframe = document.getElementById("generativePlayerFrame");
   isShowingPlayer = false;
   if (iframe) {
+    SpatialNavigation.resume();
     iframe.remove();
   }
 }
@@ -245,6 +246,7 @@ function showPlayer(itemId) {
   iframe.id = "generativePlayerFrame";
   document.body.appendChild(iframe);
   updateIframeContent();
+  SpatialNavigation.pause();
 }
 
 document.addEventListener(
