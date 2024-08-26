@@ -31,7 +31,6 @@ var eventRegister = (function () {
     document.getElementById(e.target.id).focus();
   };
   var _removeFocus = function (item) {
-    item.blur();
   };
   var _itemKeyDownHandler = function (e) {
     if (e.keyCode === 13) {
@@ -102,19 +101,37 @@ window.addEventListener("load", function () {
 
         const coverContainer = document.createElement("div");
         coverContainer.className = "item-cover-container";
+        coverContainer.style.width = "100%";
+        coverContainer.style.height = "80%";
+        coverContainer.style.overflow = "hidden";
 
         const coverImage = document.createElement("img");
         coverImage.src = `assets/covers/${item.address}${item.abId}.webp`;
         coverImage.alt = item.name;
         coverImage.className = "item-cover";
+        coverImage.style.width = "100%";
+        coverImage.style.height = "100%";
+        coverImage.style.objectFit = "cover";
         coverContainer.appendChild(coverImage);
 
         const itemName = document.createElement("div");
         itemName.textContent = item.name;
         itemName.className = "item-name";
+        itemName.style.width = "100%";
+        itemName.style.height = "20%";
+        itemName.style.display = "flex";
+        itemName.style.alignItems = "center";
+        itemName.style.justifyContent = "center";
+        itemName.style.overflow = "hidden";
+        itemName.style.textOverflow = "ellipsis";
+        itemName.style.whiteSpace = "nowrap";
 
         const itemWrapper = document.createElement("div");
         itemWrapper.className = "item-wrapper";
+        itemWrapper.style.width = "100%";
+        itemWrapper.style.height = "100%";
+        itemWrapper.style.display = "flex";
+        itemWrapper.style.flexDirection = "column";
         itemWrapper.appendChild(coverContainer);
         itemWrapper.appendChild(itemName);
 
@@ -204,7 +221,7 @@ function removePlayer() {
 
 var isShowingPlayer = false;
 
-function showPlayer(itemId) {  
+function showPlayer(itemId) {
   currentCollectionIndex = parseInt(itemId.replace("item", ""));
   if (isShowingPlayer) {
     return;
