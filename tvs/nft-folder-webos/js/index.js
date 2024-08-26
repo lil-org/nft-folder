@@ -141,6 +141,10 @@ window.addEventListener("load", function () {
         itemElement.appendChild(itemWrapper);
 
         grid.appendChild(itemElement);
+
+        if (index == 0) {
+          itemElement.focus();
+        }
       });
       setupNavigation();
     })
