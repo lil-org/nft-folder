@@ -75,7 +75,6 @@ var eventRegister = (function () {
       updateText("span.key_code", keyCode);
       updateText("span.key_status", type);
     }
-    //cursor hide for webOS 1.x
     if (type === "keydown" && keyCode === 1537) {
       console.log(type + "  " + keyCode + "  " + key);
       updateText("span.x_coor", "-");
@@ -145,8 +144,6 @@ function setupNavigation() {
   );
   document.addEventListener("keyup", eventRegister.keyEventHandler, false);
 }
-
-// TODO: merge the code above with the code below
 
 document.addEventListener(
   "webOSLaunch",
