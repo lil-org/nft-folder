@@ -20,103 +20,30 @@ html {
   font-size: 62.5%;
 }
 
-.container {
-  width: 80%;
-  margin: 0 auto;
-  padding: 1%;
-}
-
-.header {
+.grid {
   display: -webkit-flex;
   display: flex;
-}
-
-.header > div:first-child {
-  margin-left: auto;
-}
-
-.main_container {
-  background-color: #262626;
-  margin: 0.5%;
-  padding: 0.5%;
-}
-
-.row {
-  display: -webkit-flex;
-  display: flex;
-}
-
-.row > .side {
-  width: 20%;
-}
-
-.row > .side > div {
-  text-align: center;
-}
-
-.row > .main {
-  width: 80%;
-  height: 69rem;
+  width: 100%;
+  height: 100vh;
   overflow: auto;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-justify-content: center;
+  -webkit-justify-content: left;
   -webkit-align-items: center;
   -webkit-flex-wrap: wrap;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
   flex-wrap: wrap;
 }
 
-.main .item {
-  width: 26%;
-  height: 18rem;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-justify-content: center;
-  -webkit-align-items: center;
-  justify-content: center;
-  align-items: center;
-}
-
-.annotation {
-  font-size: 3rem;
-  display: -webkit-flex;
-  display: flex;
-  color: #fff;
-  padding-bottom: 2.5rem;
-  -webkit-justify-content: center;
-  justify-content: center;
-}
-
-.annotation > div {
-  width: 25%;
-  height: 20rem;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  margin: 0.5%;
-  padding: 0.5%;
-  border: 2px solid gray;
-  background-color: #262626;
-  -webkit-justify-content: center;
-  -webkit-align-items: center;
-  justify-content: center;
-  align-items: center;
-  /* background-color: #262626; */
-}
-
-.annotation > div:last-child {
-  width: 33%;
-}
-
-.annotation > div > header {
-  background: gray;
-  padding: 0.5rem;
-  font-weight: bold;
-  text-align: center;
-}
-
 .item {
+  width: 22%;
+  aspect-ratio: 1;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  -webkit-align-items: center;
+  justify-content: center;
+  align-items: center;
+
   font-size: 3rem;
   margin: 1rem;
   padding: 1rem;
@@ -165,10 +92,4 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(207, 6, 82, 0.5);
-}
-
-@media only screen and (max-width: 1280px) {
-  html {
-    font-size: 40%;
-  }
 }
