@@ -1,16 +1,24 @@
+const allItems = [];
+
+async function getItems() {
+    if (allItems.length === 0) {
+        const itemsJsonString = await readFileContent("assets/items.json");
+        try {
+            const parsedItems = JSON.parse(itemsJsonString);
+            if (Array.isArray(parsedItems) && parsedItems.length > 0) {
+                allItems.push(...parsedItems);
+            }
+        } catch (error) {}
+    }
+    return allItems;
+}
+
 async function fetchHtml(notUsedYetItem) {
     // TODO: use passed item or stop passing it at all
   
-    const itemsJsonString = await readFileContent("assets/items.json");
-    let items;
-    try {
-      items = JSON.parse(itemsJsonString);
-    } catch (error) {
-      return null;
-    }
-  
-    if (!Array.isArray(items) || items.length === 0) {
-      return null;
+    const items = await getItems();
+    if (items.length === 0) {
+        return null;
     }
   
     const random = Math.floor(Math.random() * items.length);

@@ -90,16 +90,23 @@ var eventRegister = (function () {
 })();
 
 window.addEventListener("load", function () {
-  const grid = document.querySelector('.grid');
-  for (let i = 1; i <= 15; i++) {
-    const item = document.createElement('div');
-    item.className = 'item';
-    item.tabIndex = 0;
-    item.id = `item${i}`;
-    item.textContent = `item ${i}`;
-    grid.appendChild(item);
-  }
+  const grid = document.querySelector(".grid");
+  getItems()
+    .then((items) => {
+      items.forEach((item, index) => {
+        const itemElement = document.createElement("div");
+        itemElement.className = "item";
+        itemElement.tabIndex = 0;
+        itemElement.id = `item${index + 1}`;
+        itemElement.textContent = item.name;
+        grid.appendChild(itemElement);
+      });
+      setupNavigation();
+    })
+    .catch(() => {});
+});
 
+function setupNavigation() {
   SpatialNavigation.init();
   SpatialNavigation.add({
     selector: ".item",
@@ -111,9 +118,13 @@ window.addEventListener("load", function () {
     eventRegister.cursorVisibilityChange,
     false
   );
-  document.addEventListener("keydown", eventRegister.keyEventHandler, false);
+  document.addEventListener(
+    "keydown",
+    eventRegister.keyEventHandler,
+    false
+  );
   document.addEventListener("keyup", eventRegister.keyEventHandler, false);
-});
+}
 
 // TODO: merge the code above with the code below
 
