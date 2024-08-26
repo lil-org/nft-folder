@@ -99,16 +99,25 @@ window.addEventListener("load", function () {
         itemElement.tabIndex = 0;
         itemElement.id = `item${index + 1}`;
 
+        const coverContainer = document.createElement("div");
+        coverContainer.className = "item-cover-container";
+
         const coverImage = document.createElement("img");
         coverImage.src = `assets/covers/${item.address}${item.abId}.webp`;
         coverImage.alt = item.name;
         coverImage.className = "item-cover";
-        itemElement.appendChild(coverImage);
+        coverContainer.appendChild(coverImage);
 
         const itemName = document.createElement("div");
         itemName.textContent = item.name;
         itemName.className = "item-name";
-        itemElement.appendChild(itemName);
+
+        const itemWrapper = document.createElement("div");
+        itemWrapper.className = "item-wrapper";
+        itemWrapper.appendChild(coverContainer);
+        itemWrapper.appendChild(itemName);
+
+        itemElement.appendChild(itemWrapper);
 
         grid.appendChild(itemElement);
       });
