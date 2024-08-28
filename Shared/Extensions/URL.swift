@@ -11,7 +11,7 @@ extension URL {
     static let ipfsGateway = "https://ipfs.decentralized-content.com/ipfs/"
     
     static let easScanBase = "https://base.easscan.org"
-    static let attestationSchemaId = "0x8c138d949f94e74f6503a8633bb25982946709fddc196764e26c9325b8c04f73"
+    static let attestationSchemaId = "0x24a31e6646f2d422a173165d76984a4ee1cfd2bea26be543ba15f7e9319bca4b"
     
     private enum MetadataKind: String {
         case address, minimal, detailed, hashed

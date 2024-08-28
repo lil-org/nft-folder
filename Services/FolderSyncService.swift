@@ -4,10 +4,11 @@ import Foundation
 
 struct FolderSyncService {
     
-    private static let ownerFoldersType: UInt32 = 4242424242
-    private static let assembledFoldersType: UInt32 = 69696969
-    private static let ownerFoldersTypeHexString = "fcde41b2"
-    private static let assembledFoldersTypeHexString = "4277dc9"
+    private static let ownerFoldersType: UInt32 = 42
+    private static let assembledFoldersType: UInt32 = 69
+    
+    private static let ownerFoldersPrefix = "0x000000000000000000000000000000000000000000000000000000000000002a"
+    private static let assembledFoldersPrefix = "0x0000000000000000000000000000000000000000000000000000000000000045"
     
     static func pushCustomFolders(wallet: WatchOnlyWallet, completion: @escaping (URL?) -> Void) {
         guard let snapshot = makeFoldersSnapshot(wallet: wallet), let fileData = try? JSONEncoder().encode(snapshot) else {
@@ -30,19 +31,26 @@ struct FolderSyncService {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        // TODO: this is a query only for created folders. make it work for updates too
         let query: [String: Any] = [
             "query": """
                 query Attestation {
                     attestations(
-                        take: 1,
-                        orderBy: { timeCreated: desc},
-                        where: { schemaId: { equals: "\(URL.attestationSchemaId)" }, recipient: { equals: "\(wallet.address)" }, attester: { equals: "\(wallet.address)" }, data: { contains: "\(ownerFoldersTypeHexString)"} }
-                    ) {
-                        attester
-                        recipient
-                        decodedDataJson
-                        timeCreated
-                    }
+                            take: 20,
+                            skip: 0,
+                            orderBy: { timeCreated: desc },
+                            where: {
+                                schemaId: { equals: "\(URL.attestationSchemaId)" },
+                                attester: { equals: "\(wallet.address)" },
+                                refUID: { equals: "0x0000000000000000000000000000000000000000000000000000000000000000" },
+                                revoked: { equals: false },
+                                data: { startsWith: "\(ownerFoldersPrefix)"}
+                            }
+                        ) {
+                            decodedDataJson
+                            refUID
+                            id
+                        }
                 }
             """,
             "variables": [:]
@@ -119,31 +127,6 @@ struct FolderSyncService {
             }
         }
         return tokens
-    }
-    
-    private static func query() -> String {
-        // TODO: implement for both folder types
-        let q =
-        """
-        query Attestation {
-            attestations(
-                take: 20,
-                skip: 0,
-                orderBy: { timeCreated: desc },
-                where: {
-                    schemaId: { equals: "0x8c138d949f94e74f6503a8633bb25982946709fddc196764e26c9325b8c04f73" },
-                    attester: { equals: "0xE26067c76fdbe877F48b0a8400cf5Db8B47aF0fE" }, # assembler address
-                    data: { contains: "4277dc9"} # corresponds to folderType 69696969
-                }
-            ) {
-                attester
-                recipient
-                decodedDataJson
-                timeCreated
-            }
-        }
-        """
-        return q
     }
     
 }
