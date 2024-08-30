@@ -31,30 +31,7 @@ struct FolderSyncService {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        // TODO: this is a query only for created folders. make it work for updates too
-        let query: [String: Any] = [
-            "query": """
-                query Attestation {
-                    attestations(
-                            take: 20,
-                            skip: 0,
-                            orderBy: { timeCreated: desc },
-                            where: {
-                                schemaId: { equals: "\(URL.attestationSchemaId)" },
-                                attester: { equals: "\(wallet.address)" },
-                                refUID: { equals: "0x0000000000000000000000000000000000000000000000000000000000000000" },
-                                revoked: { equals: false },
-                                data: { startsWith: "\(ownerFoldersPrefix)"}
-                            }
-                        ) {
-                            decodedDataJson
-                            refUID
-                            id
-                        }
-                }
-            """,
-            "variables": [:]
-        ]
+        let query = query(attester: wallet.address)
         guard let data = try? JSONSerialization.data(withJSONObject: query) else { return }
         request.httpBody = data
         let task = URLSession.shared.dataTask(with: request) { data, _, _ in
@@ -127,6 +104,34 @@ struct FolderSyncService {
             }
         }
         return tokens
+    }
+    
+    private static func query(attester: String) -> [String: Any] {
+        // TODO: this is a query only for created folders. make it work for updates too
+        let query: [String: Any] = [
+            "query": """
+                query Attestation {
+                    attestations(
+                            take: 20,
+                            skip: 0,
+                            orderBy: { timeCreated: desc },
+                            where: {
+                                schemaId: { equals: "\(URL.attestationSchemaId)" },
+                                attester: { equals: "\(attester)" },
+                                refUID: { equals: "0x0000000000000000000000000000000000000000000000000000000000000000" },
+                                revoked: { equals: false },
+                                data: { startsWith: "\(ownerFoldersPrefix)"}
+                            }
+                        ) {
+                            decodedDataJson
+                            refUID
+                            id
+                        }
+                }
+            """,
+            "variables": [:]
+        ]
+        return query
     }
     
 }
