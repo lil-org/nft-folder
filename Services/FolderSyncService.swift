@@ -4,6 +4,10 @@ import Foundation
 
 struct FolderSyncService {
     
+    private enum AttestationType {
+        case createFolder, updateFolder
+    }
+    
     static func pushCustomFolders(wallet: WatchOnlyWallet, completion: @escaping (URL?) -> Void) {
         guard let snapshot = makeFoldersSnapshot(wallet: wallet), let fileData = try? JSONEncoder().encode(snapshot) else {
             completion(nil)
@@ -22,12 +26,15 @@ struct FolderSyncService {
     
     static func getOnchainSyncedFolder(wallet: WatchOnlyWallet, completion: @escaping (Snapshot?) -> Void) {
         let folderType = FolderType.organized // TODO: support curated as well
+        let take = 20 // TODO: paginate through all folders
+        let skip = 0
+        let attestationType: AttestationType? = nil // TODO: get them all
         
         let url = URL(string: "\(URL.easScanBase)/graphql")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        let query = query(attester: wallet.address, folderType: folderType)
+        let query = query(attester: wallet.address, folderType: folderType, take: take, skip: skip, attestationType: attestationType)
         guard let data = try? JSONSerialization.data(withJSONObject: query) else { return }
         request.httpBody = data
         let task = URLSession.shared.dataTask(with: request) { data, _, _ in
@@ -102,14 +109,15 @@ struct FolderSyncService {
         return tokens
     }
     
-    private static func query(attester: String, folderType: FolderType) -> [String: Any] {
-        // TODO: this is a query only for created folders. make it work for updates too
+    private static func query(attester: String, folderType: FolderType, take: Int, skip: Int, attestationType: AttestationType?) -> [String: Any] {
+        // TODO: use attestationType value
+        
         let query: [String: Any] = [
             "query": """
                 query Attestation {
                     attestations(
-                            take: 20,
-                            skip: 0,
+                            take: \(take),
+                            skip: \(skip),
                             orderBy: { timeCreated: desc },
                             where: {
                                 schemaId: { equals: "\(URL.attestationSchemaId)" },
