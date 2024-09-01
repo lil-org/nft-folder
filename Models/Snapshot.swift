@@ -10,6 +10,20 @@ struct Snapshot: Codable {
     var cid: String?
 }
 
+enum FolderType: UInt32 {
+    case organized = 42
+    case curated = 69
+    
+    var dataPrefix: String {
+        switch self {
+        case .organized:
+            return "0x000000000000000000000000000000000000000000000000000000000000002a"
+        case .curated:
+            return "0x0000000000000000000000000000000000000000000000000000000000000045"
+        }
+    }
+}
+
 struct Folder: Codable {
     let name: String
     let tokens: [Token]

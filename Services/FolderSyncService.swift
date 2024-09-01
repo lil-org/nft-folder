@@ -4,12 +4,6 @@ import Foundation
 
 struct FolderSyncService {
     
-    private static let ownerFoldersType: UInt32 = 42
-    private static let assembledFoldersType: UInt32 = 69
-    
-    private static let ownerFoldersPrefix = "0x000000000000000000000000000000000000000000000000000000000000002a"
-    private static let assembledFoldersPrefix = "0x0000000000000000000000000000000000000000000000000000000000000045"
-    
     static func pushCustomFolders(wallet: WatchOnlyWallet, completion: @escaping (URL?) -> Void) {
         guard let snapshot = makeFoldersSnapshot(wallet: wallet), let fileData = try? JSONEncoder().encode(snapshot) else {
             completion(nil)
@@ -17,7 +11,7 @@ struct FolderSyncService {
         }
         
         IpfsUploader.upload(name: wallet.address, mimeType: "application/json", data: fileData) { cid in
-            if let cid = cid, let url = URL.newAttestation(recipient: wallet.address, cid: cid, folderType: ownerFoldersType) {
+            if let cid = cid, let url = URL.newAttestation(recipient: wallet.address, cid: cid, folderType: FolderType.organized.rawValue) {
                 Defaults.addKnownFolderCid(cid, isCidAttested: false, for: wallet)
                 completion(url)
             } else {
@@ -27,11 +21,13 @@ struct FolderSyncService {
     }
     
     static func getOnchainSyncedFolder(wallet: WatchOnlyWallet, completion: @escaping (Snapshot?) -> Void) {
+        let folderType = FolderType.organized // TODO: support curated as well
+        
         let url = URL(string: "\(URL.easScanBase)/graphql")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        let query = query(attester: wallet.address)
+        let query = query(attester: wallet.address, folderType: folderType)
         guard let data = try? JSONSerialization.data(withJSONObject: query) else { return }
         request.httpBody = data
         let task = URLSession.shared.dataTask(with: request) { data, _, _ in
@@ -106,7 +102,7 @@ struct FolderSyncService {
         return tokens
     }
     
-    private static func query(attester: String) -> [String: Any] {
+    private static func query(attester: String, folderType: FolderType) -> [String: Any] {
         // TODO: this is a query only for created folders. make it work for updates too
         let query: [String: Any] = [
             "query": """
@@ -120,7 +116,7 @@ struct FolderSyncService {
                                 attester: { equals: "\(attester)" },
                                 refUID: { equals: "0x0000000000000000000000000000000000000000000000000000000000000000" },
                                 revoked: { equals: false },
-                                data: { startsWith: "\(ownerFoldersPrefix)"}
+                                data: { startsWith: "\(folderType.dataPrefix)"}
                             }
                         ) {
                             decodedDataJson
