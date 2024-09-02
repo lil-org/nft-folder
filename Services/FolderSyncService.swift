@@ -111,6 +111,7 @@ struct FolderSyncService {
     
     private static func query(attester: String, folderType: FolderType, take: Int, skip: Int, attestationType: AttestationType?) -> [String: Any] {
         // TODO: use attestationType value
+        // TODO: batch query edits and created folders
         
         let query: [String: Any] = [
             "query": """
