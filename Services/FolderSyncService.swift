@@ -136,6 +136,31 @@ struct FolderSyncService {
             """,
             "variables": [:]
         ]
+        
+        let editsQuery: [String: Any] = [
+            "query": """
+                query Attestation {
+                    attestations(
+                            take: \(take),
+                            skip: \(skip),
+                            orderBy: { timeCreated: desc },
+                            where: {
+                                schemaId: { equals: "\(URL.attestationSchemaId)" },
+                                attester: { equals: "\(attester)" },
+                                refUID: { notIn: "0x0000000000000000000000000000000000000000000000000000000000000000" },
+                                revoked: { equals: false },
+                            },
+                            distinct: [refUID]
+                        ) {
+                            decodedDataJson
+                            refUID
+                            id
+                        }
+                }
+            """,
+            "variables": [:]
+        ]
+        
         return query
     }
     
