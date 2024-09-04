@@ -18,6 +18,5 @@ let fresh =
 //addMissingSuggestedItemsForGenerativeArtblocks()
 //addMissingCollectionIds()
 //cleanupModels()
-//bundleAssetsForSmartTvs()
 
 print("🟢 all done")

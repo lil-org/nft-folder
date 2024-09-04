@@ -52,36 +52,6 @@ func cleanupModels() {
 
 }
 
-func bundleAssetsForSmartTvs() {
-    let tvAssetsPath = dir + "/tvs/tv_flutter/assets/items/"
-    let scriptsFilesNames = try! FileManager.default.contentsOfDirectory(atPath: suggestedBundlePath + "Scripts/")
-    var genIds = Set<String>()
-    
-    for scriptFileName in scriptsFilesNames where !scriptFileName.hasPrefix(".") {
-        let id = String(scriptFileName.dropLast(5))
-        
-        let fromScript = suggestedBundlePath + "Scripts/" + scriptFileName
-        let toScript = tvAssetsPath + "scripts/" + scriptFileName
-        
-        let fromTokens = suggestedBundlePath + "Tokens/" + scriptFileName
-        let toTokens = tvAssetsPath + "tokens/" + scriptFileName
-        
-        let fromCover = dir + "/Suggested Items/Covers.xcassets/\(id).imageset/\(id).heic"
-        let toCover = tvAssetsPath + "covers/" + "\(id).heic"
-        
-        try? FileManager.default.copyItem(atPath: fromScript, toPath: toScript)
-        try? FileManager.default.copyItem(atPath: fromTokens, toPath: toTokens)
-        try? FileManager.default.copyItem(atPath: fromCover, toPath: toCover)
-        
-        genIds.insert(id)
-    }
-    
-    let filteredItems = bundledSuggestedItems.filter { genIds.contains($0.id) }
-    let filteredSuggestedItemsData = try! encoder.encode(filteredItems)
-    try? FileManager.default.removeItem(atPath: tvAssetsPath + "items.json")
-    try! filteredSuggestedItemsData.write(to: URL(filePath: tvAssetsPath + "items.json"))
-}
-
 func bundleSelected(useCollectionImages: Bool) {
     let projectsToBundle = projects.filter { !bundledIds.contains($0.id) && selectedSet.contains($0.id) }
     bundleProjects(projects: projectsToBundle, useCollectionImages: useCollectionImages)
