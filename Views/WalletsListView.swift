@@ -14,7 +14,7 @@ struct WalletsListView: View {
     @State private var showAddWalletPopup: Bool
     @State private var showSettingsPopup = false
     @State private var newWalletAddress = ""
-    @State private var wallets = [WatchOnlyWallet]()
+    @State private var wallets = WalletsService.shared.wallets
     @State private var suggestedItems = SuggestedItemsService.visibleItems
     @State private var didAppear = false
     @State private var isDownloading = false
@@ -207,7 +207,7 @@ struct WalletsListView: View {
                 }
                 .store(in: &cancellables)
             
-            updateDisplayedWallets()
+            updateIsDownloading()
             didAppear = true
         }.onDisappear() {
             cancellables.forEach { $0.cancel() }
@@ -508,6 +508,10 @@ struct WalletsListView: View {
     private func updateDisplayedWallets() {
         wallets = WalletsService.shared.wallets
         downloadsStatuses = AllDownloadsManager.shared.statuses
+        updateIsDownloading()
+    }
+    
+    private func updateIsDownloading() {
         isDownloading = downloadsStatuses.contains(where: { $0.value == .downloading })
     }
     
