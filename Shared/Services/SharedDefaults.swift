@@ -4,7 +4,7 @@ import Foundation
 
 struct SharedDefaults {
     
-    private static let userDefaults = UserDefaults(suiteName: "group.org.lil.nft-folder")!
+    private static let userDefaults = UserDefaults(suiteName: "8DXC3N7E7P.group.org.lil.wallet")!
 
     static func eraseAllContent() {
         let dictionary = userDefaults.dictionaryRepresentation()

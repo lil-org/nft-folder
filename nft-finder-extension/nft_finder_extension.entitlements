@@ -6,7 +6,7 @@
 	<true/>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.org.lil.nft-folder</string>
+		<string>$(TeamIdentifierPrefix)group.org.lil.folder</string>
 	</array>
 	<key>com.apple.security.assets.music.read-write</key>
 	<true/>
