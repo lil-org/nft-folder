@@ -1,4 +1,4 @@
-// ∅ nft-folder 2024
+// ∅ 2025 lil org
 
 import SwiftUI
 import WebKit
