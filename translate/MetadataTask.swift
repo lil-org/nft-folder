@@ -96,6 +96,8 @@ struct MetadataTask: AI.Task {
         
         respond only with a \(language.name) version. do not add anything else to the response.
         
+        do not surround the response with quotation marks.
+        
         \(finalWarning)
         """
         
