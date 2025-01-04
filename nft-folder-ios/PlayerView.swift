@@ -28,6 +28,10 @@ struct PlayerView: View {
                         dismiss()
                     }) {
                         Images.close
+                            .frame(width: 32, height: 32)
+                            .padding(12)
+                            .background(.ultraThinMaterial)
+                            .clipShape(Circle())
                     }
                     .padding()
                     Spacer()
@@ -37,27 +41,43 @@ struct PlayerView: View {
             
             VStack {
                 Spacer()
-                HStack {
+                HStack(spacing: 20) {
                     Button(action: {
                         DispatchQueue.main.async { playerModel.goBack() }
                     }) {
                         Images.back
-                    }.keyboardShortcut("[", modifiers: .command)
+                            .frame(width: 32, height: 32)
+                            .padding(16)
+                            .background(.ultraThinMaterial)
+                            .clipShape(Circle())
+                    }
                     Button(action: {
                         DispatchQueue.main.async { playerModel.goForward() }
                     }) {
                         Images.forward
-                    }.keyboardShortcut("]", modifiers: .command)
+                            .frame(width: 32, height: 32)
+                            .padding(16)
+                            .background(.ultraThinMaterial)
+                            .clipShape(Circle())
+                    }
                     Button(action: {
                         DispatchQueue.main.async { playerModel.changeCollection() }
                     }) {
                         Images.changeCollection
+                            .frame(width: 32, height: 32)
+                            .padding(16)
+                            .background(.ultraThinMaterial)
+                            .clipShape(Circle())
                     }
                     Button(action: {
                         DispatchQueue.main.async { playerModel.showingInfoPopover.toggle() }
                     }) {
                         Images.info
-                    }.keyboardShortcut("i", modifiers: .command).popover(isPresented: Binding(
+                            .frame(width: 32, height: 32)
+                            .padding(16)
+                            .background(.ultraThinMaterial)
+                            .clipShape(Circle())
+                    }.popover(isPresented: Binding(
                         get: { playerModel.showingInfoPopover },
                         set: { newValue in
                             DispatchQueue.main.async {
@@ -68,7 +88,8 @@ struct PlayerView: View {
                         infoPopoverView()
                     })
                 }
-                .padding()
+                .padding(.horizontal, 20)
+                .padding(.bottom, 30)
             }
         }
     }
