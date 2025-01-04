@@ -9,7 +9,7 @@ struct CollectionsView: View {
     @State private var suggestedItems = TokenGenerator.allGenerativeSuggestedItems
     @State private var didAppear = false
     @State private var showMorePreferences = false
-    @State private var selectedItem: SuggestedItem?
+    @State private var selectedConfig: PlayerWindowConfig?
     
     var body: some View {
         NavigationStack {
@@ -37,8 +37,8 @@ struct CollectionsView: View {
                     createGrid().frame(maxWidth: .infinity)
                 }
             }
-            .navigationDestination(item: $selectedItem) { item in
-                PlayerView(config: PlayerWindowConfig(initialItemId: item.id))
+            .navigationDestination(item: $selectedConfig) { config in
+                PlayerView(config: config)
             }
         }
     }
@@ -94,11 +94,11 @@ struct CollectionsView: View {
     }
     
     private func didSelectSuggestedItem(_ item: SuggestedItem) {
-        selectedItem = item
+        selectedConfig = PlayerWindowConfig(initialItemId: item.id)
     }
     
     private func showRandomPlayer() {
-        selectedItem = nil
+        selectedConfig = PlayerWindowConfig(initialItemId: nil)
     }
     
 }
