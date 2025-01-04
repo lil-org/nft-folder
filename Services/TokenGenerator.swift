@@ -9,9 +9,9 @@ struct TokenGenerator {
     private static let jsonsNames: Set<String> = {
         let fileManager = FileManager.default
         let fileURLs = (try? fileManager.contentsOfDirectory(at: dirURL, includingPropertiesForKeys: nil)) ?? []
-#if os(macOS)
+#if os(macOS) || os(iOS) || os(watchOS)
         let fileNames = fileURLs.map { $0.lastPathComponent }
-#elseif os(visionOS) || os(iOS) || os(watchOS)
+#elseif os(visionOS)
         let tmpDisabledForVisionPro = Set([
             "0x0a1bbd57033f57e7b6743621b79fcb9eb2ce367650",
             "0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270250",
