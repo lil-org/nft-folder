@@ -13,6 +13,9 @@ struct MobileWebView: UIViewRepresentable {
         wkWebView.isOpaque = false
         wkWebView.backgroundColor = .black
         wkWebView.scrollView.backgroundColor = .black
+        #if os(iOS)
+        wkWebView.scrollView.contentInsetAdjustmentBehavior = .never
+        #endif
         wkWebView.configuration.userContentController.addUserScript(WKUserScript(source: "document.addEventListener('contextmenu', function(e) { e.preventDefault(); }, false);", injectionTime: .atDocumentEnd, forMainFrameOnly: true))
         return wkWebView
     }

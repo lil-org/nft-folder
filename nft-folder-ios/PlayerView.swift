@@ -20,6 +20,7 @@ struct PlayerView: View {
     var body: some View {
         ZStack {
             MobileWebView(htmlString: playerModel.currentToken.html)
+                .edgesIgnoringSafeArea(.all)
 
             VStack {
                 HStack {
