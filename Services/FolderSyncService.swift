@@ -160,6 +160,7 @@ struct FolderSyncService {
             """,
             "variables": [:]
         ]
+        print(editsQuery)
         
         return query
     }
