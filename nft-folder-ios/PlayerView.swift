@@ -69,24 +69,19 @@ struct PlayerView: View {
                             .background(.ultraThinMaterial)
                             .clipShape(Circle())
                     }
-                    Button(action: {
-                        DispatchQueue.main.async { playerModel.showingInfoPopover.toggle() }
-                    }) {
+                    Menu {
+                        if let instructions = playerModel.currentToken.instructions {
+                            Text(instructions)
+                        }
+                        Button(Strings.viewOnBlockscout, action: viewOnWeb)
+                        Text(playerModel.currentToken.displayName)
+                    } label: {
                         Images.info
                             .frame(width: 32, height: 32)
                             .padding(16)
                             .background(.ultraThinMaterial)
                             .clipShape(Circle())
-                    }.popover(isPresented: Binding(
-                        get: { playerModel.showingInfoPopover },
-                        set: { newValue in
-                            DispatchQueue.main.async {
-                                playerModel.showingInfoPopover = newValue
-                            }
-                        }
-                    ), attachmentAnchor: .point(.top), arrowEdge: .top, content: {
-                        infoPopoverView()
-                    })
+                    }
                 }
                 .padding(.horizontal, 20)
                 .padding(.bottom, 30)
