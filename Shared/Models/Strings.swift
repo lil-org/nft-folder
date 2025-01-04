@@ -47,7 +47,12 @@ struct Strings {
     static let play = loc("Play")
     static let go = loc("Go")
     static let tokenId = loc("Token Id")
+    static let sendFeedback = loc("Send Feedback")
+    static let mail = loc("Mail")
     
+    static let x = "𝕏"
+    static let warpcast = "Warpcast"
+    static let github = "GitHub"
     static let zora = "Zora"
     static let blockExplorer = "Blockscout"
     static let opensea = "OpenSea"

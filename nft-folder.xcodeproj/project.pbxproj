@@ -145,6 +145,7 @@
 		2C6359532D29C07F00E40241 /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6359522D29C07D00E40241 /* Links.swift */; };
 		2C6359542D29C07F00E40241 /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6359522D29C07D00E40241 /* Links.swift */; };
 		2C6359552D29C0E400E40241 /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6359522D29C07D00E40241 /* Links.swift */; };
+		2C6359562D29C5A400E40241 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2CE9A7702BAD8ECD00579BF7 /* Localizable.xcstrings */; };
 		2C63720B2C417FC2001169E8 /* ScreenSaverHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63720A2C417FC2001169E8 /* ScreenSaverHelper.swift */; };
 		2C63720C2C41805C001169E8 /* GeneratedToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE9A5772C3DAB03009AEAF4 /* GeneratedToken.swift */; };
 		2C63720D2C418060001169E8 /* Script.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C8DE82C3C890B00BC83E9 /* Script.swift */; };
@@ -4289,6 +4290,7 @@
 				2C08041D2D2991F200CA9AB2 /* three.js in Resources */,
 				2C08041E2D2991F200CA9AB2 /* p5js190.js in Resources */,
 				2C08041F2D2991F200CA9AB2 /* tone.js in Resources */,
+				2C6359562D29C5A400E40241 /* Localizable.xcstrings in Resources */,
 				2C0804202D2991F200CA9AB2 /* twemoji.js in Resources */,
 				2C460EED2D2990EA0083124E /* p5js100.js in Resources */,
 				2C460EDF2D2987000083124E /* Suggested.bundle in Resources */,

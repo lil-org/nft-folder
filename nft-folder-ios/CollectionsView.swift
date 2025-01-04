@@ -22,13 +22,14 @@ struct CollectionsView: View {
             .navigationTitle(Consts.noggles)
             .toolbar {
                 Menu {
-                    Button("Warpcast", action: { UIApplication.shared.open(URL.warpcast) })
-                    Button("GitHub", action: { UIApplication.shared.open(URL.github) })
-                    Button("Zora", action: { UIApplication.shared.open(URL.zora) })
-                    Button("Mail", action: { UIApplication.shared.open(URL.mail) })
-                    Button("𝕏", action: { UIApplication.shared.open(URL.x) })
+                    Text(Strings.sendFeedback)
+                    Button(Strings.warpcast, action: { UIApplication.shared.open(URL.warpcast) })
+                    Button(Strings.github, action: { UIApplication.shared.open(URL.github) })
+                    Button(Strings.zora, action: { UIApplication.shared.open(URL.zora) })
+                    Button(Strings.mail, action: { UIApplication.shared.open(URL.mail) })
+                    Button(Strings.x, action: { UIApplication.shared.open(URL.x) })
                 } label: {
-                    Image(systemName: "gearshape")
+                    Images.preferences
                 }
                 
                 Button(action: {
