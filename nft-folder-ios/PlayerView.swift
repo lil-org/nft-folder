@@ -80,7 +80,7 @@ struct PlayerView: View {
                                 .clipShape(Circle())
                         }
                         Menu {
-                            if let instructions = playerModel.currentToken.instructions {
+                            if !doNotShowInstructionsTmp, let instructions = playerModel.currentToken.instructions {
                                 Text(instructions)
                             }
                             Button(Strings.viewOnBlockscout, action: viewOnWeb)
@@ -104,19 +104,6 @@ struct PlayerView: View {
         if let url = playerModel.currentToken.url {
             UIApplication.shared.open(url)
         }
-    }
-    
-    private func infoPopoverView() -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text(playerModel.currentToken.displayName)
-            Divider()
-            Button(Strings.viewOnBlockscout, action: viewOnWeb)
-            if !doNotShowInstructionsTmp, let instructions = playerModel.currentToken.instructions {
-                Divider()
-                Text(instructions).font(.body)
-            }
-        }
-        .padding().frame(width: 230)
     }
     
 }
