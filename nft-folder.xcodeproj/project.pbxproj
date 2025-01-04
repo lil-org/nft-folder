@@ -5706,7 +5706,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.0.21;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -5742,7 +5742,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.0.21;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
