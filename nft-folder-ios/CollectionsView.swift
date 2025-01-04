@@ -21,6 +21,16 @@ struct CollectionsView: View {
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle(Consts.noggles)
             .toolbar {
+                Menu {
+                    Button("Warpcast", action: { UIApplication.shared.open(URL.warpcast) })
+                    Button("GitHub", action: { UIApplication.shared.open(URL.github) })
+                    Button("Zora", action: { UIApplication.shared.open(URL.zora) })
+                    Button("Mail", action: { UIApplication.shared.open(URL.mail) })
+                    Button("𝕏", action: { UIApplication.shared.open(URL.x) })
+                } label: {
+                    Image(systemName: "gearshape")
+                }
+                
                 Button(action: {
                     showRandomPlayer()
                 }) {

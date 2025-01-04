@@ -142,6 +142,9 @@
 		2C5A59D32C5153EF00788870 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2CE9A7702BAD8ECD00579BF7 /* Localizable.xcstrings */; };
 		2C60AAD12B8A4DE200F2C143 /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60AAD02B8A4DE200F2C143 /* Window.swift */; };
 		2C622BB92BF3C1EA0003B932 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C622BB82BF3C1EA0003B932 /* main.swift */; };
+		2C6359532D29C07F00E40241 /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6359522D29C07D00E40241 /* Links.swift */; };
+		2C6359542D29C07F00E40241 /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6359522D29C07D00E40241 /* Links.swift */; };
+		2C6359552D29C0E400E40241 /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6359522D29C07D00E40241 /* Links.swift */; };
 		2C63720B2C417FC2001169E8 /* ScreenSaverHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63720A2C417FC2001169E8 /* ScreenSaverHelper.swift */; };
 		2C63720C2C41805C001169E8 /* GeneratedToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE9A5772C3DAB03009AEAF4 /* GeneratedToken.swift */; };
 		2C63720D2C418060001169E8 /* Script.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C8DE82C3C890B00BC83E9 /* Script.swift */; };
@@ -363,6 +366,7 @@
 		2C60AAD02B8A4DE200F2C143 /* Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
 		2C622BB62BF3C1EA0003B932 /* translate */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = translate; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C622BB82BF3C1EA0003B932 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		2C6359522D29C07D00E40241 /* Links.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Links.swift; sourceTree = "<group>"; };
 		2C6372092C417FC2001169E8 /* nft-screen-saver-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "nft-screen-saver-Bridging-Header.h"; sourceTree = "<group>"; };
 		2C63720A2C417FC2001169E8 /* ScreenSaverHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSaverHelper.swift; sourceTree = "<group>"; };
 		2C672CB02BFCEFB500E57B21 /* IpfsUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IpfsUploader.swift; sourceTree = "<group>"; };
@@ -1875,6 +1879,7 @@
 				2C1E2B8D2B877F290035E0CA /* Data.swift */,
 				2C508C9C2B6830E6005F548A /* Notification.swift */,
 				2CA34B552B08B6A200DAB623 /* Codable.swift */,
+				2C6359522D29C07D00E40241 /* Links.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -4398,6 +4403,7 @@
 				2C460ECA2D29855A0083124E /* MobileWebView.swift in Sources */,
 				2C460ECC2D2985790083124E /* UserDefaults.swift in Sources */,
 				2C460EDB2D29863A0083124E /* BundledTokens.swift in Sources */,
+				2C6359552D29C0E400E40241 /* Links.swift in Sources */,
 				2C460EDD2D2986530083124E /* SuggestedItem.swift in Sources */,
 				2C460EDA2D2986240083124E /* GeneratedToken.swift in Sources */,
 				2C460ED72D2985FF0083124E /* TokenGenerator.swift in Sources */,
@@ -4530,6 +4536,7 @@
 				2CF524002BB2EC9B00C18344 /* Network.swift in Sources */,
 				2C1B60C92B7E1DD7009949C2 /* NftGallery.swift in Sources */,
 				2CA623E82BEE8A0200BD78FF /* UserDefaults.swift in Sources */,
+				2C6359532D29C07F00E40241 /* Links.swift in Sources */,
 				2C1B60CE2B7E2699009949C2 /* HostAppMessenger.swift in Sources */,
 				2C1B60D42B7EA27E009949C2 /* Bundle.swift in Sources */,
 				2C4039EE2B83A4F000DB94D7 /* SharedDefaults.swift in Sources */,
@@ -4572,6 +4579,7 @@
 				2C91131A2B08F71200A8EE80 /* WalletDownloader.swift in Sources */,
 				2CF4C49E2B7FB26C000AB4A6 /* DetailedTokenMetadata.swift in Sources */,
 				2C2B5AD12B84E2DA005C38B0 /* DownloadFileTask.swift in Sources */,
+				2C6359542D29C07F00E40241 /* Links.swift in Sources */,
 				2C672CB12BFCEFB500E57B21 /* IpfsUploader.swift in Sources */,
 				2CFA24732B19FB92009B58FD /* FileExtension.swift in Sources */,
 				2C4039F12B83B11100DB94D7 /* FileSaver.swift in Sources */,
