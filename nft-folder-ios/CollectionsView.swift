@@ -79,7 +79,6 @@ struct CollectionsView: View {
     private func suggestedItemContextMenu(item: SuggestedItem) -> some View {
         Group {
             Text(item.name)
-            Divider()
             Button(Strings.play, action: {
                 didSelectSuggestedItem(item)
             })
