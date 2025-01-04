@@ -8,7 +8,7 @@ struct PlayerWindowConfig: Hashable, Codable, Identifiable {
 }
 
 struct PlayerView: View {
-    
+    @Environment(\.dismiss) private var dismiss
     @ObservedObject private var playerModel: PlayerModel
     private var config: PlayerWindowConfig
     
@@ -18,40 +18,57 @@ struct PlayerView: View {
     }
     
     var body: some View {
-        VStack {
+        ZStack {
             MobileWebView(htmlString: playerModel.currentToken.html)
-            HStack {
-                Button(action: {
-                    DispatchQueue.main.async { playerModel.goBack() }
-                }) {
-                    Images.back
-                }.keyboardShortcut("[", modifiers: .command)
-                Button(action: {
-                    DispatchQueue.main.async { playerModel.goForward() }
-                }) {
-                    Images.forward
-                }.keyboardShortcut("]", modifiers: .command)
-                Button(action: {
-                    DispatchQueue.main.async { playerModel.changeCollection() }
-                }) {
-                    Images.changeCollection
-                }
-                Button(action: {
-                    DispatchQueue.main.async { playerModel.showingInfoPopover.toggle() }
-                }) {
-                    Images.info
-                }.keyboardShortcut("i", modifiers: .command).popover(isPresented: Binding(
-                    get: { playerModel.showingInfoPopover },
-                    set: { newValue in
-                        DispatchQueue.main.async {
-                            playerModel.showingInfoPopover = newValue
-                        }
+
+            VStack {
+                HStack {
+                    Button(action: {
+                        dismiss()
+                    }) {
+                        Images.close
                     }
-                ), attachmentAnchor: .point(.top), arrowEdge: .top, content: {
-                    infoPopoverView()
-                })
+                    .padding()
+                    Spacer()
+                }
+                Spacer()
             }
-            .padding()
+            
+            VStack {
+                Spacer()
+                HStack {
+                    Button(action: {
+                        DispatchQueue.main.async { playerModel.goBack() }
+                    }) {
+                        Images.back
+                    }.keyboardShortcut("[", modifiers: .command)
+                    Button(action: {
+                        DispatchQueue.main.async { playerModel.goForward() }
+                    }) {
+                        Images.forward
+                    }.keyboardShortcut("]", modifiers: .command)
+                    Button(action: {
+                        DispatchQueue.main.async { playerModel.changeCollection() }
+                    }) {
+                        Images.changeCollection
+                    }
+                    Button(action: {
+                        DispatchQueue.main.async { playerModel.showingInfoPopover.toggle() }
+                    }) {
+                        Images.info
+                    }.keyboardShortcut("i", modifiers: .command).popover(isPresented: Binding(
+                        get: { playerModel.showingInfoPopover },
+                        set: { newValue in
+                            DispatchQueue.main.async {
+                                playerModel.showingInfoPopover = newValue
+                            }
+                        }
+                    ), attachmentAnchor: .point(.top), arrowEdge: .top, content: {
+                        infoPopoverView()
+                    })
+                }
+                .padding()
+            }
         }
     }
     

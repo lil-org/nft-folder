@@ -27,9 +27,12 @@ struct CollectionsView: View {
                     Images.shuffle
                 }
             }
-            .navigationDestination(item: $selectedConfig) { config in
-                PlayerView(config: config)
-            }
+        }
+        .fullScreenCover(item: $selectedConfig) { config in
+            PlayerView(config: config)
+        }
+        .transaction { transaction in
+            transaction.disablesAnimations = true
         }
     }
     
