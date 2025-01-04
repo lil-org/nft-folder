@@ -14,27 +14,17 @@ struct CollectionsView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                ZStack {
-                    HStack {
-                        Spacer()
-                        Text(Consts.noggles)
-                        Spacer()
-                    }
-                    HStack {
-                        Spacer()
-                        Button(action: {
-                            showRandomPlayer()
-                        }) {
-                            Images.shuffle
-                        }
-                    }
-                }
-                .frame(height: 42)
-                .padding(.horizontal)
-                .padding(.top, 8)
-                
                 ScrollView {
                     createGrid().frame(maxWidth: .infinity)
+                }
+            }
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle(Consts.noggles)
+            .toolbar {
+                Button(action: {
+                    showRandomPlayer()
+                }) {
+                    Images.shuffle
                 }
             }
             .navigationDestination(item: $selectedConfig) { config in
