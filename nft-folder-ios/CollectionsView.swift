@@ -40,7 +40,7 @@ struct CollectionsView: View {
             }
         }
         .fullScreenCover(item: $selectedConfig) { config in
-            PlayerView(config: config)
+            PlayerView(config: config).persistentSystemOverlays(.hidden)
         }
         .transaction { transaction in
             transaction.disablesAnimations = true
