@@ -7,10 +7,13 @@ struct PlayerWindowConfig: Hashable, Codable, Identifiable {
     var initialItemId: String?
 }
 
+let doNotShowInstructionsTmp = true
+
 struct PlayerView: View {
     @Environment(\.dismiss) private var dismiss
     @ObservedObject private var playerModel: PlayerModel
     private var config: PlayerWindowConfig
+    @State private var showControls = false
     
     init(config: PlayerWindowConfig) {
         self.config = config
@@ -23,70 +26,75 @@ struct PlayerView: View {
                 .edgesIgnoringSafeArea(.all)
                 .allowsHitTesting(false)
                 .contentShape(Rectangle())
+                .onTapGesture {
+                    showControls.toggle()
+                }
 
-            VStack {
-                HStack {
-                    Button(action: {
-                        dismiss()
-                    }) {
-                        Images.close
-                            .frame(width: 32, height: 32)
-                            .padding(12)
-                            .background(.ultraThinMaterial)
-                            .clipShape(Circle())
+            if showControls {
+                VStack {
+                    HStack {
+                        Button(action: {
+                            dismiss()
+                        }) {
+                            Images.close
+                                .frame(width: 32, height: 32)
+                                .padding(12)
+                                .background(.ultraThinMaterial)
+                                .clipShape(Circle())
+                        }
+                        .padding()
+                        Spacer()
                     }
-                    .padding()
                     Spacer()
                 }
-                Spacer()
-            }
-            
-            VStack {
-                Spacer()
-                HStack(spacing: 20) {
-                    Button(action: {
-                        DispatchQueue.main.async { playerModel.goBack() }
-                    }) {
-                        Images.back
-                            .frame(width: 32, height: 32)
-                            .padding(16)
-                            .background(.ultraThinMaterial)
-                            .clipShape(Circle())
-                    }
-                    Button(action: {
-                        DispatchQueue.main.async { playerModel.goForward() }
-                    }) {
-                        Images.forward
-                            .frame(width: 32, height: 32)
-                            .padding(16)
-                            .background(.ultraThinMaterial)
-                            .clipShape(Circle())
-                    }
-                    Button(action: {
-                        DispatchQueue.main.async { playerModel.changeCollection() }
-                    }) {
-                        Images.changeCollection
-                            .frame(width: 32, height: 32)
-                            .padding(16)
-                            .background(.ultraThinMaterial)
-                            .clipShape(Circle())
-                    }
-                    Menu {
-                        if let instructions = playerModel.currentToken.instructions {
-                            Text(instructions)
+                
+                VStack {
+                    Spacer()
+                    HStack(spacing: 20) {
+                        Button(action: {
+                            DispatchQueue.main.async { playerModel.goBack() }
+                        }) {
+                            Images.back
+                                .frame(width: 32, height: 32)
+                                .padding(16)
+                                .background(.ultraThinMaterial)
+                                .clipShape(Circle())
                         }
-                        Button(Strings.viewOnBlockscout, action: viewOnWeb)
-                        Text(playerModel.currentToken.displayName)
-                    } label: {
-                        Images.info
-                            .frame(width: 32, height: 32)
-                            .padding(16)
-                            .background(.ultraThinMaterial)
-                            .clipShape(Circle())
+                        Button(action: {
+                            DispatchQueue.main.async { playerModel.goForward() }
+                        }) {
+                            Images.forward
+                                .frame(width: 32, height: 32)
+                                .padding(16)
+                                .background(.ultraThinMaterial)
+                                .clipShape(Circle())
+                        }
+                        Button(action: {
+                            DispatchQueue.main.async { playerModel.changeCollection() }
+                        }) {
+                            Images.changeCollection
+                                .frame(width: 32, height: 32)
+                                .padding(16)
+                                .background(.ultraThinMaterial)
+                                .clipShape(Circle())
+                        }
+                        Menu {
+                            if let instructions = playerModel.currentToken.instructions {
+                                Text(instructions)
+                            }
+                            Button(Strings.viewOnBlockscout, action: viewOnWeb)
+                            Text(playerModel.currentToken.displayName)
+                        } label: {
+                            Images.info
+                                .frame(width: 32, height: 32)
+                                .padding(16)
+                                .background(.ultraThinMaterial)
+                                .clipShape(Circle())
+                        }
                     }
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 30)
                 }
-                .padding(.horizontal, 20)
-                .padding(.bottom, 30)
             }
         }
     }
@@ -102,7 +110,7 @@ struct PlayerView: View {
             Text(playerModel.currentToken.displayName)
             Divider()
             Button(Strings.viewOnBlockscout, action: viewOnWeb)
-            if let instructions = playerModel.currentToken.instructions {
+            if !doNotShowInstructionsTmp, let instructions = playerModel.currentToken.instructions {
                 Divider()
                 Text(instructions).font(.body)
             }
