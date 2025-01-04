@@ -29,6 +29,7 @@ struct PlayerView: View {
                 .onTapGesture {
                     showControls.toggle()
                 }
+                .statusBar(hidden: !showControls)
 
             if showControls {
                 VStack {
