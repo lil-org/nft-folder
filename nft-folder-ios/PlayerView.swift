@@ -21,6 +21,8 @@ struct PlayerView: View {
         ZStack {
             MobileWebView(htmlString: playerModel.currentToken.html)
                 .edgesIgnoringSafeArea(.all)
+                .allowsHitTesting(false)
+                .contentShape(Rectangle())
 
             VStack {
                 HStack {
