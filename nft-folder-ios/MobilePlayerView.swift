@@ -118,8 +118,8 @@ struct MobilePlayerView: View {
     }
     
     private func startPip() {
-        // TODO: start pip
-        print("yo")
+        // TODO: clean up and refactor
+        NotificationCenter.default.post(name: NSNotification.Name("togglePip"), object: nil)
     }
     
 }
