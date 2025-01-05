@@ -21,6 +21,16 @@ struct VisionCollectionsView: View {
             }
             HStack {
                 Spacer()
+                Menu {
+                    Text(Strings.sendFeedback)
+                    Button(Strings.warpcast, action: { UIApplication.shared.open(URL.warpcast) })
+                    Button(Strings.github, action: { UIApplication.shared.open(URL.github) })
+                    Button(Strings.zora, action: { UIApplication.shared.open(URL.zora) })
+                    Button(Strings.mail, action: { UIApplication.shared.open(URL.mail) })
+                    Button(Strings.x, action: { UIApplication.shared.open(URL.x) })
+                } label: {
+                    Images.preferences
+                }
                 Button(action: {
                     showRandomPlayer()
                 }) {

@@ -1,6 +1,6 @@
 // ∅ 2025 lil org
 
-import Foundation
+import SwiftUI
 
 struct WindowId {
     
@@ -10,5 +10,7 @@ struct WindowId {
 }
 
 struct Images {
+    
+    static let preferences = Image(systemName: "gearshape")
     
 }
