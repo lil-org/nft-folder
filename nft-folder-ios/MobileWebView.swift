@@ -31,16 +31,21 @@ class PipWebView: WKWebView {
     private var playerLayer: AVPlayerLayer!
     var pipController: AVPictureInPictureController!
     
+    private var currentHtmlString: String?
+    
     override init(frame: CGRect, configuration: WKWebViewConfiguration) {
         super.init(frame: frame, configuration: configuration)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleTogglePip), name: NSNotification.Name("togglePip"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleTogglePip(_:)), name: NSNotification.Name("togglePip"), object: nil)
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
-    @objc private func handleTogglePip() {
+    @objc private func handleTogglePip(_ notification: Notification) {
+        if let htmlString = notification.object as? String {
+            currentHtmlString = htmlString
+        }
         togglePip()
     }
     
@@ -53,9 +58,18 @@ class PipWebView: WKWebView {
     }
     
     func createNewCustomPipView() -> UIView {
-        let pipView = UIView()
-        pipView.backgroundColor = .green
-        return pipView
+        let webConfiguration = WKWebViewConfiguration()
+        webConfiguration.suppressesIncrementalRendering = true
+        let wkWebView = WKWebView(frame: .zero, configuration: webConfiguration)
+        wkWebView.isOpaque = false
+        wkWebView.backgroundColor = .black
+        wkWebView.scrollView.backgroundColor = .black
+        wkWebView.scrollView.contentInsetAdjustmentBehavior = .never
+        wkWebView.configuration.userContentController.addUserScript(WKUserScript(source: "document.addEventListener('contextmenu', function(e) { e.preventDefault(); }, false);", injectionTime: .atDocumentEnd, forMainFrameOnly: true))
+        if let htmlString = currentHtmlString {
+            wkWebView.loadHTMLString(htmlString, baseURL: nil)
+        }
+        return wkWebView
     }
     
     func setupPlayer() {
