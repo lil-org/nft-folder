@@ -6,5 +6,6 @@ struct Images {
     
     static let close = Image(systemName: "xmark")
     static let preferences = Image(systemName: "gearshape")
+    static let pip = Image(systemName: "pip")
     
 }

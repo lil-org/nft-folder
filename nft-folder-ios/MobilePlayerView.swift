@@ -7,7 +7,9 @@ struct MobilePlayerConfig: Hashable, Codable, Identifiable {
     var initialItemId: String?
 }
 
-let doNotShowInstructionsTmp = true
+private let doNotShowInstructionsTmp = true
+private let buttonIconSize: CGFloat = 23
+private let buttonPadding: CGFloat = 10
 
 struct MobilePlayerView: View {
     @Environment(\.dismiss) private var dismiss
@@ -38,8 +40,8 @@ struct MobilePlayerView: View {
                             dismiss()
                         }) {
                             Images.close
-                                .frame(width: 32, height: 32)
-                                .padding(12)
+                                .frame(width: buttonIconSize, height: buttonIconSize)
+                                .padding(buttonPadding)
                                 .background(.ultraThinMaterial)
                                 .clipShape(Circle())
                         }
@@ -56,8 +58,8 @@ struct MobilePlayerView: View {
                             DispatchQueue.main.async { playerModel.goBack() }
                         }) {
                             Images.back
-                                .frame(width: 32, height: 32)
-                                .padding(16)
+                                .frame(width: buttonIconSize, height: buttonIconSize)
+                                .padding(buttonPadding)
                                 .background(.ultraThinMaterial)
                                 .clipShape(Circle())
                         }
@@ -65,8 +67,8 @@ struct MobilePlayerView: View {
                             DispatchQueue.main.async { playerModel.goForward() }
                         }) {
                             Images.forward
-                                .frame(width: 32, height: 32)
-                                .padding(16)
+                                .frame(width: buttonIconSize, height: buttonIconSize)
+                                .padding(buttonPadding)
                                 .background(.ultraThinMaterial)
                                 .clipShape(Circle())
                         }
@@ -74,8 +76,8 @@ struct MobilePlayerView: View {
                             DispatchQueue.main.async { playerModel.changeCollection() }
                         }) {
                             Images.changeCollection
-                                .frame(width: 32, height: 32)
-                                .padding(16)
+                                .frame(width: buttonIconSize, height: buttonIconSize)
+                                .padding(buttonPadding)
                                 .background(.ultraThinMaterial)
                                 .clipShape(Circle())
                         }
@@ -87,8 +89,17 @@ struct MobilePlayerView: View {
                             Text(playerModel.currentToken.displayName)
                         } label: {
                             Images.info
-                                .frame(width: 32, height: 32)
-                                .padding(16)
+                                .frame(width: buttonIconSize, height: buttonIconSize)
+                                .padding(buttonPadding)
+                                .background(.ultraThinMaterial)
+                                .clipShape(Circle())
+                        }
+                        Button(action: {
+                            startPip()
+                        }) {
+                            Images.pip
+                                .frame(width: buttonIconSize, height: buttonIconSize)
+                                .padding(buttonPadding)
                                 .background(.ultraThinMaterial)
                                 .clipShape(Circle())
                         }
@@ -104,6 +115,11 @@ struct MobilePlayerView: View {
         if let url = playerModel.currentToken.url {
             UIApplication.shared.open(url)
         }
+    }
+    
+    private func startPip() {
+        // TODO: start pip
+        print("yo")
     }
     
 }
