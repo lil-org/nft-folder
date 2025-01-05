@@ -3,7 +3,7 @@
 import SwiftUI
 import Combine
 
-struct CollectionsView: View {
+struct TvCollectionsView: View {
     
     @State private var suggestedItems = TokenGenerator.allGenerativeSuggestedItems
     @State private var selectedItemId: String?

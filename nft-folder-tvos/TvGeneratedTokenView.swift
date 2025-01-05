@@ -9,7 +9,7 @@ private var currentFallbackImageTask: URLSessionDataTask?
 private var shouldSkipTvFallbackCheck = false
 private var shouldAlwaysFallback = false
 
-struct GeneratedTokenView: UIViewRepresentable {
+struct TvGeneratedTokenView: UIViewRepresentable {
     
     let contentString: String
     let fallbackURL: URL?

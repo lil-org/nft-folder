@@ -2,20 +2,20 @@
 
 import SwiftUI
 
-struct PlayerWindowConfig: Hashable, Codable, Identifiable {
+struct MobilePlayerConfig: Hashable, Codable, Identifiable {
     var id = UUID()
     var initialItemId: String?
 }
 
 let doNotShowInstructionsTmp = true
 
-struct PlayerView: View {
+struct MobilePlayerView: View {
     @Environment(\.dismiss) private var dismiss
     @ObservedObject private var playerModel: PlayerModel
-    private var config: PlayerWindowConfig
+    private var config: MobilePlayerConfig
     @State private var showControls = false
     
-    init(config: PlayerWindowConfig) {
+    init(config: MobilePlayerConfig) {
         self.config = config
         self.playerModel = PlayerModel(specificCollectionId: config.initialItemId, notTokenId: nil)
     }

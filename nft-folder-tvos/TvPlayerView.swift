@@ -16,7 +16,7 @@ struct TvPlayerView: View {
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            GeneratedTokenView(contentString: playerModel.currentToken.html, fallbackURL: fallbackURL()).edgesIgnoringSafeArea(.all)
+            TvGeneratedTokenView(contentString: playerModel.currentToken.html, fallbackURL: fallbackURL()).edgesIgnoringSafeArea(.all)
                 .onAppear() {
                     if let initialSpecific = playerModel.specificCollectionId, initialSpecific != playerModel.currentToken.fullCollectionId {
                         playerModel.showInitialCollection()

@@ -3,24 +3,35 @@
 import SwiftUI
 import Combine
 
-struct CollectionsView: View {
-    
-    @Environment(\.openWindow) private var openWindow
+struct MobileCollectionsView: View {
     
     @State private var showSettingsPopup = false
     @State private var suggestedItems = TokenGenerator.allGenerativeSuggestedItems
     @State private var didAppear = false
     @State private var showMorePreferences = false
+    @State private var selectedConfig: MobilePlayerConfig?
     
     var body: some View {
-        ZStack {
-            HStack {
-                Spacer()
-                Text(Consts.noggles)
-                Spacer()
+        NavigationStack {
+            VStack {
+                ScrollView {
+                    createGrid().frame(maxWidth: .infinity)
+                }
             }
-            HStack {
-                Spacer()
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle(Consts.noggles)
+            .toolbar {
+                Menu {
+                    Text(Strings.sendFeedback)
+                    Button(Strings.warpcast, action: { UIApplication.shared.open(URL.warpcast) })
+                    Button(Strings.github, action: { UIApplication.shared.open(URL.github) })
+                    Button(Strings.zora, action: { UIApplication.shared.open(URL.zora) })
+                    Button(Strings.mail, action: { UIApplication.shared.open(URL.mail) })
+                    Button(Strings.x, action: { UIApplication.shared.open(URL.x) })
+                } label: {
+                    Images.preferences
+                }
+                
                 Button(action: {
                     showRandomPlayer()
                 }) {
@@ -28,14 +39,16 @@ struct CollectionsView: View {
                 }
             }
         }
-        .frame(height: 42).padding(.horizontal).padding(.top, 8)
-        ScrollView {
-            createGrid().frame(maxWidth: .infinity)
+        .fullScreenCover(item: $selectedConfig) { config in
+            MobilePlayerView(config: config).persistentSystemOverlays(.hidden)
+        }
+        .transaction { transaction in
+            transaction.disablesAnimations = true
         }
     }
     
     private func createGrid() -> some View {
-        let gridLayout = [GridItem(.adaptive(minimum: 150), spacing: 0)]
+        let gridLayout = [GridItem(.adaptive(minimum: 100), spacing: 0)]
         let grid = LazyVGrid(columns: gridLayout, alignment: .leading, spacing: 0) {
             ForEach(suggestedItems) { item in
                 Button(action: {
@@ -63,7 +76,7 @@ struct CollectionsView: View {
     
     private func gridItemText(_ text: String, onTap: @escaping () -> Void) -> some View {
         HStack {
-            Text(text).font(.system(size: 15, weight: .regular)).lineLimit(2)
+            Text(text).font(.system(size: 10, weight: .regular)).lineLimit(2)
                 .foregroundColor(.white)
                 .padding(.horizontal, 1)
                 .background(Color.black.opacity(0.7)).cornerRadius(3)
@@ -77,7 +90,6 @@ struct CollectionsView: View {
     private func suggestedItemContextMenu(item: SuggestedItem) -> some View {
         Group {
             Text(item.name)
-            Divider()
             Button(Strings.play, action: {
                 didSelectSuggestedItem(item)
             })
@@ -85,11 +97,11 @@ struct CollectionsView: View {
     }
     
     private func didSelectSuggestedItem(_ item: SuggestedItem) {
-        openWindow(value: PlayerWindowConfig(initialItemId: item.id))
+        selectedConfig = MobilePlayerConfig(initialItemId: item.id)
     }
-
+    
     private func showRandomPlayer() {
-        openWindow(value: PlayerWindowConfig(initialItemId: nil))
+        selectedConfig = MobilePlayerConfig(initialItemId: nil)
     }
     
 }

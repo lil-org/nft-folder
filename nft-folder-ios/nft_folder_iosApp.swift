@@ -6,7 +6,7 @@ import SwiftUI
 struct nft_folder_iosApp: App {
     var body: some Scene {
         WindowGroup {
-            CollectionsView()
+            MobileCollectionsView()
         }
     }
 }

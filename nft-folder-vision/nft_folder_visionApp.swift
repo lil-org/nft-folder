@@ -6,12 +6,12 @@ import SwiftUI
 struct nft_folder_visionApp: App {
     var body: some Scene {
         WindowGroup(id: WindowId.collections) {
-            CollectionsView()
+            VisionCollectionsView()
         }
         
-        WindowGroup(for: PlayerWindowConfig.self) { $config in
+        WindowGroup(for: VisionPlayerWindowConfig.self) { $config in
             if let config = config {
-                PlayerView(config: config).handlesExternalEvents(preferring: [], allowing: [])
+                VisionPlayerView(config: config).handlesExternalEvents(preferring: [], allowing: [])
             }
         }
     }

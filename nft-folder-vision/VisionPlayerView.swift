@@ -2,24 +2,24 @@
 
 import SwiftUI
 
-struct PlayerWindowConfig: Hashable, Codable, Identifiable {
+struct VisionPlayerWindowConfig: Hashable, Codable, Identifiable {
     var id = UUID()
     var initialItemId: String?
 }
 
-struct PlayerView: View {
+struct VisionPlayerView: View {
     
     @ObservedObject private var playerModel: PlayerModel
-    private var config: PlayerWindowConfig
+    private var config: VisionPlayerWindowConfig
     
-    init(config: PlayerWindowConfig) {
+    init(config: VisionPlayerWindowConfig) {
         self.config = config
         self.playerModel = PlayerModel(specificCollectionId: config.initialItemId, notTokenId: nil)
     }
     
     var body: some View {
         VStack {
-            MobileWebView(htmlString: playerModel.currentToken.html)
+            VisionWebView(htmlString: playerModel.currentToken.html)
             HStack {
                 Button(action: {
                     DispatchQueue.main.async { playerModel.goBack() }
