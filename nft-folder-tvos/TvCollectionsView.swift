@@ -8,6 +8,7 @@ struct TvCollectionsView: View {
     @State private var suggestedItems = TokenGenerator.allGenerativeSuggestedItems
     @State private var selectedItemId: String?
     @State private var isNavigatingToPlayer = false
+    @State private var showPreferencesAlert = false
     
     var body: some View {
         NavigationView {
@@ -15,7 +16,24 @@ struct TvCollectionsView: View {
                 createGrid()
             }
             .navigationTitle(Consts.noggles)
-            .navigationBarItems(trailing: shuffleButton)
+            .navigationBarItems(trailing: HStack {
+                Button(action: {
+                    showPreferencesAlert = true
+                }) {
+                    Images.preferences
+                }
+                .buttonStyle(PlainButtonStyle())
+                .foregroundStyle(.tertiary)
+                .alert(isPresented: $showPreferencesAlert) {
+                    Alert(
+                        title: Text(Strings.sendFeedback),
+                        message: Text("🌐 lil.org 👈"),
+                        dismissButton: .default(Text(Strings.ok))
+                    )
+                }
+                
+                shuffleButton
+            })
             .background(
                 NavigationLink(destination: TvPlayerView(initialItemId: selectedItemId).edgesIgnoringSafeArea(.all), isActive: $isNavigatingToPlayer) {
                     EmptyView().hidden()
