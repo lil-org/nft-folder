@@ -25,7 +25,7 @@ struct MobileWebView: UIViewRepresentable {
     }
 }
 
-
+// based on https://github.com/CaiWanFeng/PiP
 class PipWebView: WKWebView {
     
     private var playerLayer: AVPlayerLayer!
@@ -77,7 +77,7 @@ class PipWebView: WKWebView {
         try? AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
         
         playerLayer = AVPlayerLayer()
-        playerLayer.frame = CGRect(x: 90, y: 90, width: 200, height: 150)
+        playerLayer.frame = CGRect(x: 0, y: 0, width: 1, height: 1)
         
         let mp4Video = Bundle.main.url(forResource: "video", withExtension: "mp4")!
         let asset = AVAsset(url: mp4Video)
