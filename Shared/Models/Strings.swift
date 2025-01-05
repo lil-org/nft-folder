@@ -50,6 +50,9 @@ struct Strings {
     static let sendFeedback = loc("Send Feedback")
     static let mail = loc("Mail")
     
+    static let navigate = loc("Navigate")
+    static let toggleInfo = loc("Toggle Info")
+    
     static let x = "𝕏"
     static let warpcast = "Warpcast"
     static let github = "GitHub"
@@ -58,6 +61,7 @@ struct Strings {
     static let opensea = "OpenSea"
     static let mintfun = "mint.fun"
     static let ens = "ENS"
+    static let lilOrgLinkWithEmojis = "🌐 lil.org 👈"
     
     private static func loc(_ string: String.LocalizationValue) -> String {
         return String(localized: string)

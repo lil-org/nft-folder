@@ -242,6 +242,7 @@
 		2CF08AAD2D2A937400D82ACA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CF08AA32D2A937400D82ACA /* Assets.xcassets */; };
 		2CF08AB02D2A956400D82ACA /* VisionWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08AAF2D2A955D00D82ACA /* VisionWebView.swift */; };
 		2CF08AB22D2A991000D82ACA /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6359522D29C07D00E40241 /* Links.swift */; };
+		2CF08AB32D2A9FEE00D82ACA /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2CE9A7702BAD8ECD00579BF7 /* Localizable.xcstrings */; };
 		2CF19B412C5AC0CA00A7AF1E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C46599B2C308F86008CF97F /* main.swift */; };
 		2CF4C49B2B7F567B000AB4A6 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF4C49A2B7F567B000AB4A6 /* Navigator.swift */; };
 		2CF4C49E2B7FB26C000AB4A6 /* DetailedTokenMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF4C49D2B7FB26C000AB4A6 /* DetailedTokenMetadata.swift */; };
@@ -5356,6 +5357,7 @@
 				2C0218052C53CE6D0012EC40 /* p5js100.js in Resources */,
 				2C0218062C53CE6D0012EC40 /* paper.js in Resources */,
 				2C0218072C53CE6D0012EC40 /* regl.js in Resources */,
+				2CF08AB32D2A9FEE00D82ACA /* Localizable.xcstrings in Resources */,
 				2C0218082C53CE6D0012EC40 /* three.js in Resources */,
 				2C0218092C53CE6D0012EC40 /* p5js190.js in Resources */,
 				2C02180A2C53CE6D0012EC40 /* tone.js in Resources */,

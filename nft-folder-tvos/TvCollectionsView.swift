@@ -27,7 +27,7 @@ struct TvCollectionsView: View {
                 .alert(isPresented: $showPreferencesAlert) {
                     Alert(
                         title: Text(Strings.sendFeedback),
-                        message: Text("🌐 lil.org 👈"),
+                        message: Text(Strings.lilOrgLinkWithEmojis),
                         dismissButton: .default(Text(Strings.ok))
                     )
                 }

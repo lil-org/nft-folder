@@ -71,8 +71,8 @@ struct TvPlayerView: View {
             Text(playerModel.currentToken.displayName)
             if showTutorial {
                 Divider()
-                Text("↔️↕️ navigate")
-                Text("⏯️ toggle info")
+                Text("↔️↕️ " + Strings.navigate)
+                Text("⏯️ " + Strings.toggleInfo)
             }
         }
         .padding().frame(width: 230)
