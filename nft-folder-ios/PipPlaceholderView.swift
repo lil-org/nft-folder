@@ -19,13 +19,12 @@ class PipPlaceholderView: UIView {
     
     private var playerLayer: AVPlayerLayer?
     private var pipController: AVPictureInPictureController?
-    
     private var currentHtmlString: String?
+    private var didSetupPlayer = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         NotificationCenter.default.addObserver(self, selector: #selector(handleTogglePip(_:)), name: NSNotification.Name("togglePip"), object: nil)
-        setupPlayer()
     }
     
     required init?(coder: NSCoder) {
@@ -66,11 +65,24 @@ class PipPlaceholderView: UIView {
         togglePip()
     }
     
-    private func togglePip() {
-        if pipController?.isPictureInPictureActive == true {
-            pipController?.stopPictureInPicture()
+    private func togglePip(retryCount: Int = 0) {
+        if !didSetupPlayer {
+            setupPlayer()
+            didSetupPlayer = true
+        }
+        
+        guard let pipController = pipController else { return }
+        
+        if pipController.isPictureInPictureActive {
+            pipController.stopPictureInPicture()
         } else {
-            pipController?.startPictureInPicture()
+            if pipController.isPictureInPicturePossible {
+                pipController.startPictureInPicture()
+            } else if retryCount < 3 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) { [weak self] in
+                    self?.togglePip(retryCount: retryCount + 1)
+                }
+            }
         }
     }
     
@@ -99,11 +111,9 @@ extension PipPlaceholderView: AVPictureInPictureControllerDelegate {
         ])
     }
     
-    func pictureInPictureControllerDidStartPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
-        
-    }
+    func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, failedToStartPictureInPictureWithError error: any Error) {}
     
-    func pictureInPictureControllerDidStopPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
-        
-    }
+    func pictureInPictureControllerDidStartPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {}
+    
+    func pictureInPictureControllerDidStopPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {}
 }
