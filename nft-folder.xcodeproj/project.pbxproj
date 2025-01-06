@@ -68,6 +68,7 @@
 		2C2B5AD12B84E2DA005C38B0 /* DownloadFileTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2B5AD02B84E2DA005C38B0 /* DownloadFileTask.swift */; };
 		2C309C312C50297700C9B08A /* BundledTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C086E862C2F3C3600D4268D /* BundledTokens.swift */; };
 		2C3214332C33DF7C0050BBC1 /* SimpleHash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3214322C33DF7C0050BBC1 /* SimpleHash.swift */; };
+		2C3386842D2C35EE00B608DD /* PipPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3386832D2C35ED00B608DD /* PipPlaceholderView.swift */; };
 		2C3924C12C1F0F1200161154 /* StringTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3924C02C1F0F1200161154 /* StringTask.swift */; };
 		2C3B775F2C3D6DEC000A9B52 /* LocalHtmlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3B775E2C3D6DEC000A9B52 /* LocalHtmlView.swift */; };
 		2C3B77612C3D6F82000A9B52 /* LocalHtmlWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3B77602C3D6F82000A9B52 /* LocalHtmlWindow.swift */; };
@@ -340,6 +341,7 @@
 		2C2B5AD02B84E2DA005C38B0 /* DownloadFileTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadFileTask.swift; sourceTree = "<group>"; };
 		2C2CB47C2D29545F00042E74 /* nft-folder-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nft-folder-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C3214322C33DF7C0050BBC1 /* SimpleHash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleHash.swift; sourceTree = "<group>"; };
+		2C3386832D2C35ED00B608DD /* PipPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipPlaceholderView.swift; sourceTree = "<group>"; };
 		2C3924C02C1F0F1200161154 /* StringTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTask.swift; sourceTree = "<group>"; };
 		2C3B775E2C3D6DEC000A9B52 /* LocalHtmlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalHtmlView.swift; sourceTree = "<group>"; };
 		2C3B77602C3D6F82000A9B52 /* LocalHtmlWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalHtmlWindow.swift; sourceTree = "<group>"; };
@@ -5037,6 +5039,7 @@
 				2CF08AA42D2A937400D82ACA /* MobileCollectionsView.swift */,
 				2CF08AA82D2A937400D82ACA /* MobilePlayerView.swift */,
 				2C9442952C5186530078C051 /* MobileWebView.swift */,
+				2C3386832D2C35ED00B608DD /* PipPlaceholderView.swift */,
 				2CF08AA52D2A937400D82ACA /* MobileHelpers.swift */,
 				2CF08AA72D2A937400D82ACA /* nft_folder_iosApp.swift */,
 				2CF08B032D2B239300D82ACA /* videoS.mp4 */,
@@ -5450,6 +5453,7 @@
 				2C460EDD2D2986530083124E /* SuggestedItem.swift in Sources */,
 				2C460EDA2D2986240083124E /* GeneratedToken.swift in Sources */,
 				2C460ED72D2985FF0083124E /* TokenGenerator.swift in Sources */,
+				2C3386842D2C35EE00B608DD /* PipPlaceholderView.swift in Sources */,
 				2C460ED82D2985FF0083124E /* RawHtmlGenerator.swift in Sources */,
 				2C460ED32D2985D20083124E /* Network.swift in Sources */,
 				2C460ED42D2985D20083124E /* HostAppImages.swift in Sources */,

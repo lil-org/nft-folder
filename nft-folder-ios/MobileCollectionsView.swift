@@ -15,7 +15,10 @@ struct MobileCollectionsView: View {
         NavigationStack {
             VStack {
                 ScrollView {
-                    createGrid().frame(maxWidth: .infinity)
+                    ZStack {
+                        createGrid().frame(maxWidth: .infinity)
+                        PipPlaceholderOverlay().frame(width: 1, height: 1).position(x: 0, y: 0)
+                    }
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
