@@ -28,8 +28,8 @@ struct MobileWebView: UIViewRepresentable {
 // based on https://github.com/CaiWanFeng/PiP
 class PipWebView: WKWebView {
     
-    private var playerLayer: AVPlayerLayer!
-    var pipController: AVPictureInPictureController!
+    private var playerLayer: AVPlayerLayer?
+    private var pipController: AVPictureInPictureController?
     
     private var currentHtmlString: String?
     
@@ -42,6 +42,32 @@ class PipWebView: WKWebView {
         super.init(coder: coder)
     }
     
+    func setupPlayer() {
+        try? AVAudioSession.sharedInstance().setCategory(.playback)
+        try? AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
+        
+        playerLayer = AVPlayerLayer()
+        
+        guard let mp4Video = Bundle.main.url(forResource: "videoH", withExtension: "mp4"),
+              let playerLayer = playerLayer else { return }
+        
+        playerLayer.frame = CGRect(x: 0, y: 0, width: 1, height: 1)
+        
+        let asset = AVAsset(url: mp4Video)
+        let playerItem = AVPlayerItem(asset: asset)
+        
+        let player = AVPlayer(playerItem: playerItem)
+        playerLayer.player = player
+        player.isMuted = true
+        player.allowsExternalPlayback = true
+        
+        layer.addSublayer(playerLayer)
+        
+        pipController = AVPictureInPictureController(playerLayer: playerLayer)
+        pipController?.delegate = self
+        pipController?.setValue(1, forKey: "controlsStyle")
+    }
+    
     @objc private func handleTogglePip(_ notification: Notification) {
         if let htmlString = notification.object as? String {
             currentHtmlString = htmlString
@@ -49,15 +75,15 @@ class PipWebView: WKWebView {
         togglePip()
     }
     
-    func togglePip() {
-        if pipController.isPictureInPictureActive {
-            pipController.stopPictureInPicture()
+    private func togglePip() {
+        if pipController?.isPictureInPictureActive == true {
+            pipController?.stopPictureInPicture()
         } else {
-            pipController.startPictureInPicture()
+            pipController?.startPictureInPicture()
         }
     }
     
-    func createNewCustomPipView() -> UIView {
+    private func createNewCustomPipView() -> UIView {
         let webConfiguration = WKWebViewConfiguration()
         webConfiguration.suppressesIncrementalRendering = true
         let wkWebView = WKWebView(frame: .zero, configuration: webConfiguration)
@@ -70,29 +96,6 @@ class PipWebView: WKWebView {
             wkWebView.loadHTMLString(htmlString, baseURL: nil)
         }
         return wkWebView
-    }
-    
-    func setupPlayer() {
-        try? AVAudioSession.sharedInstance().setCategory(.playback)
-        try? AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
-        
-        playerLayer = AVPlayerLayer()
-        playerLayer.frame = CGRect(x: 0, y: 0, width: 1, height: 1)
-        
-        let mp4Video = Bundle.main.url(forResource: "videoH", withExtension: "mp4")!
-        let asset = AVAsset(url: mp4Video)
-        let playerItem = AVPlayerItem(asset: asset)
-        
-        let player = AVPlayer(playerItem: playerItem)
-        playerLayer.player = player
-        player.isMuted = true
-        player.allowsExternalPlayback = true
-        
-        layer.addSublayer(playerLayer)
-        
-        pipController = AVPictureInPictureController(playerLayer: playerLayer)!
-        pipController.delegate = self
-        pipController.setValue(1, forKey: "controlsStyle")
     }
     
 }
