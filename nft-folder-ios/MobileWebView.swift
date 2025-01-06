@@ -79,7 +79,7 @@ class PipWebView: WKWebView {
         playerLayer = AVPlayerLayer()
         playerLayer.frame = CGRect(x: 0, y: 0, width: 1, height: 1)
         
-        let mp4Video = Bundle.main.url(forResource: "video", withExtension: "mp4")!
+        let mp4Video = Bundle.main.url(forResource: "videoH", withExtension: "mp4")!
         let asset = AVAsset(url: mp4Video)
         let playerItem = AVPlayerItem(asset: asset)
         
