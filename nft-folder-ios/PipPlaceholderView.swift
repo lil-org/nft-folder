@@ -99,7 +99,7 @@ class PipPlaceholderView: UIView {
 extension PipPlaceholderView: AVPictureInPictureControllerDelegate {
     
     func pictureInPictureControllerWillStartPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
-        guard let window = UIApplication.shared.windows.first else { return }
+        guard let window = (UIApplication.shared.value(forKey: "windows") as? [UIWindow])?.first else { return }
         let customPipView = createNewCustomPipView()
         window.addSubview(customPipView)
         customPipView.translatesAutoresizingMaskIntoConstraints = false
