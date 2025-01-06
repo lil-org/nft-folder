@@ -52,6 +52,7 @@ class PipWebView: WKWebView {
               let playerLayer = playerLayer else { return }
         
         playerLayer.frame = CGRect(x: 0, y: 0, width: 1, height: 1)
+        playerLayer.isHidden = true
         
         let asset = AVAsset(url: mp4Video)
         let playerItem = AVPlayerItem(asset: asset)
