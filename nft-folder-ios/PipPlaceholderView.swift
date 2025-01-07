@@ -27,7 +27,7 @@ class PipPlaceholderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleTogglePip(_:)), name: NSNotification.Name("togglePip"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleTogglePip(_:)), name: Notification.Name.togglePip, object: nil)
     }
     
     required init?(coder: NSCoder) {

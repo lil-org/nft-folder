@@ -9,3 +9,9 @@ struct Images {
     static let pip = Image(systemName: "pip")
     
 }
+
+extension Notification.Name {
+    
+    static let togglePip = Notification.Name("togglePip")
+    
+}
