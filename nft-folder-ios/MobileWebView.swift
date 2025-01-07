@@ -58,6 +58,10 @@ class AutoReloadingWebView: WKWebView {
         
         loadedForBounds = bounds
         
+        if !hasVisibleSize {
+            stopLoading()
+        }
+        
         guard hasVisibleSize, newBounds || newHtmlContent else { return nil }
         return super.loadHTMLString(string, baseURL: baseURL)
     }
