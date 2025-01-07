@@ -13,18 +13,21 @@ private let buttonIconSize: CGFloat = 23
 private let buttonPadding: CGFloat = 10
 
 struct MobilePlayerView: View {
-    @Environment(\.dismiss) private var dismiss
     @ObservedObject private var playerModel: PlayerModel
-    private var config: MobilePlayerConfig
+    @Binding var config: MobilePlayerConfig?
     @State private var showControls = false
     
-    init(config: MobilePlayerConfig) {
-        self.config = config
-        if let token = config.specificToken {
-            self.playerModel = PlayerModel(token: token)
+    init(config: Binding<MobilePlayerConfig?>) {
+        if let c = config.wrappedValue {
+            if let token = c.specificToken {
+                self.playerModel = PlayerModel(token: token)
+            } else {
+                self.playerModel = PlayerModel(specificCollectionId: c.initialItemId, notTokenId: nil)
+            }
         } else {
-            self.playerModel = PlayerModel(specificCollectionId: config.initialItemId, notTokenId: nil)
+            self.playerModel = PlayerModel(specificCollectionId: nil, notTokenId: nil)
         }
+        self._config = config
     }
     
     var body: some View {
@@ -37,12 +40,12 @@ struct MobilePlayerView: View {
                     showControls.toggle()
                 }
                 .statusBar(hidden: !showControls)
-
+            
             if showControls {
                 VStack {
                     HStack {
                         Button(action: {
-                            dismiss()
+                            config = nil
                         }) {
                             Images.close
                                 .frame(width: buttonIconSize, height: buttonIconSize)
