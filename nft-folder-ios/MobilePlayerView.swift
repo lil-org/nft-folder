@@ -5,6 +5,7 @@ import SwiftUI
 struct MobilePlayerConfig: Hashable, Codable, Identifiable {
     var id = UUID()
     var initialItemId: String?
+    var specificToken: GeneratedToken?
 }
 
 private let doNotShowInstructionsTmp = true
@@ -19,7 +20,11 @@ struct MobilePlayerView: View {
     
     init(config: MobilePlayerConfig) {
         self.config = config
-        self.playerModel = PlayerModel(specificCollectionId: config.initialItemId, notTokenId: nil)
+        if let token = config.specificToken {
+            self.playerModel = PlayerModel(token: token)
+        } else {
+            self.playerModel = PlayerModel(specificCollectionId: config.initialItemId, notTokenId: nil)
+        }
     }
     
     var body: some View {

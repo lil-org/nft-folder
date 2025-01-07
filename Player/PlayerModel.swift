@@ -19,6 +19,12 @@ class PlayerModel: ObservableObject {
         self.specificCollectionId = specificCollectionId
     }
     
+    init(token: GeneratedToken) {
+        self.currentToken = token
+        self.history = [token]
+        self.specificCollectionId = token.fullCollectionId
+    }
+    
     func showInitialCollection() {
         let newToken = TokenGenerator.generateRandomToken(specificCollectionId: specificCollectionId, notTokenId: nil) ?? currentToken
         showNewToken(newToken)

@@ -48,6 +48,11 @@ struct MobileCollectionsView: View {
         .transaction { transaction in
             transaction.disablesAnimations = true
         }
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.restoreMinimizedPip)) { notification in
+            if let token = notification.object as? GeneratedToken, selectedConfig == nil {
+                selectedConfig = MobilePlayerConfig(initialItemId: nil, specificToken: token)
+            }
+        }
     }
     
     private func createGrid() -> some View {
