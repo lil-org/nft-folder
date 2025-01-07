@@ -62,7 +62,9 @@ class PipPlaceholderView: UIView {
     }
     
     @objc private func handleTogglePip(_ notification: Notification) {
-        guard let htmlString = notification.object as? String else { return }
+        guard let generatedToken = notification.object as? GeneratedToken else { return }
+        let htmlString = generatedToken.html
+        
         let isPipActive = pipController?.isPictureInPictureActive == true
         let sameHtml = currentHtmlString == htmlString
         
