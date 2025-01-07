@@ -40,7 +40,7 @@ class PipPlaceholderView: UIView {
         
         playerLayer = AVPlayerLayer()
         
-        guard let mp4Video = Bundle.main.url(forResource: "videoH", withExtension: "mp4"),
+        guard let mp4Video = Bundle.main.url(forResource: "square", withExtension: "mp4"),
               let playerLayer = playerLayer else { return }
         
         playerLayer.frame = CGRect(x: 0, y: 0, width: 1, height: 1)
