@@ -6,6 +6,7 @@
 
 import SwiftUI
 import AVKit
+import WebKit
 
 struct PipPlaceholderOverlay: UIViewRepresentable {
     func makeUIView(context: Context) -> PipPlaceholderView {
@@ -21,6 +22,8 @@ class PipPlaceholderView: UIView {
     private var pipController: AVPictureInPictureController?
     private var currentHtmlString: String?
     private var didSetupPlayer = false
+    
+    private weak var displayedWebView: WKWebView?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -59,10 +62,21 @@ class PipPlaceholderView: UIView {
     }
     
     @objc private func handleTogglePip(_ notification: Notification) {
-        if let htmlString = notification.object as? String {
-            currentHtmlString = htmlString
+        guard let htmlString = notification.object as? String else { return }
+        let isPipActive = pipController?.isPictureInPictureActive == true
+        let sameHtml = currentHtmlString == htmlString
+        
+        currentHtmlString = htmlString
+        
+        if isPipActive {
+            if sameHtml {
+                pipController?.stopPictureInPicture()
+            } else {
+                displayedWebView?.loadHTMLString(htmlString, baseURL: nil)
+            }
+        } else {
+            togglePip()
         }
-        togglePip()
     }
     
     private func togglePip(retryCount: Int = 0) {
@@ -91,6 +105,7 @@ class PipPlaceholderView: UIView {
         if let htmlString = currentHtmlString {
             webView.loadHTMLString(htmlString, baseURL: nil)
         }
+        displayedWebView = webView
         return webView
     }
     
