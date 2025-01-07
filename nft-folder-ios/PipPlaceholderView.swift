@@ -20,7 +20,7 @@ class PipPlaceholderView: UIView {
     
     private var playerLayer: AVPlayerLayer?
     private var pipController: AVPictureInPictureController?
-    private var currentHtmlString: String?
+    private var currentPipToken: GeneratedToken?
     private var didSetupPlayer = false
     
     private weak var displayedWebView: WKWebView?
@@ -63,18 +63,17 @@ class PipPlaceholderView: UIView {
     
     @objc private func handleTogglePip(_ notification: Notification) {
         guard let generatedToken = notification.object as? GeneratedToken else { return }
-        let htmlString = generatedToken.html
         
         let isPipActive = pipController?.isPictureInPictureActive == true
-        let sameHtml = currentHtmlString == htmlString
+        let sameToken = currentPipToken?.html == generatedToken.html
         
-        currentHtmlString = htmlString
+        currentPipToken = generatedToken
         
         if isPipActive {
-            if sameHtml {
+            if sameToken {
                 pipController?.stopPictureInPicture()
             } else {
-                displayedWebView?.loadHTMLString(htmlString, baseURL: nil)
+                displayedWebView?.loadHTMLString(generatedToken.html, baseURL: nil)
             }
         } else {
             togglePip()
@@ -104,8 +103,8 @@ class PipPlaceholderView: UIView {
     
     private func createNewCustomPipView() -> UIView {
         let webView = MobileWebView.makeNewWebView()
-        if let htmlString = currentHtmlString {
-            webView.loadHTMLString(htmlString, baseURL: nil)
+        if let token = currentPipToken {
+            webView.loadHTMLString(token.html, baseURL: nil)
         }
         displayedWebView = webView
         return webView
@@ -131,6 +130,10 @@ extension PipPlaceholderView: AVPictureInPictureControllerDelegate {
     func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, failedToStartPictureInPictureWithError error: any Error) {}
     
     func pictureInPictureControllerDidStartPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {}
+    
+    func pictureInPictureControllerWillStopPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
+        
+    }
     
     func pictureInPictureControllerDidStopPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {}
 }
