@@ -13,5 +13,6 @@ struct Images {
 extension Notification.Name {
     
     static let togglePip = Notification.Name("togglePip")
+    static let restoreMinimizedPip = Notification.Name("restoreMinimizedPip")
     
 }

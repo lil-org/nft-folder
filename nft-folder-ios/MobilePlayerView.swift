@@ -109,6 +109,13 @@ struct MobilePlayerView: View {
                 }
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.restoreMinimizedPip)) { notification in
+            if let token = notification.object as? GeneratedToken {
+                if token.id != playerModel.currentToken.id {
+                    DispatchQueue.main.async { playerModel.showNewToken(token) }
+                }
+            }
+        }
     }
     
     private func viewOnWeb() {

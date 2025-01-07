@@ -59,7 +59,7 @@ class PlayerModel: ObservableObject {
         showNewToken(newToken)
     }
     
-    private func showNewToken(_ newToken: GeneratedToken) {
+    func showNewToken(_ newToken: GeneratedToken) {
         history.append(newToken)
         currentIndex = history.count - 1
         currentToken = newToken
