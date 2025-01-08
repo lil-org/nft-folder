@@ -96,14 +96,29 @@ struct MobileCollectionsView: View {
             Spacer()
         }
     }
-    
     private func suggestedItemContextMenu(item: SuggestedItem) -> some View {
         Group {
             Text(item.name)
-            Button(Strings.play) {
+            Button(action: {
                 didSelectSuggestedItem(item)
+            }) {
+                HStack {
+                    Images.play
+                    Text(Strings.play)
+                }
+            }
+            Button(action: {
+                didSelectPip(item)
+            }) {
+                HStack {
+                    Images.pip
+                    Text(Strings.pip)
+                }
             }
         }
+    }
+    private func didSelectPip(_ item: SuggestedItem) {
+        // TODO: start pip
     }
     
     private func didSelectSuggestedItem(_ item: SuggestedItem) {

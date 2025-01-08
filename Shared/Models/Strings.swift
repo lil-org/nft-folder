@@ -52,7 +52,8 @@ struct Strings {
     
     static let navigate = loc("Navigate")
     static let toggleInfo = loc("Toggle Info")
-    
+
+    static let pip = "PiP"
     static let x = "𝕏"
     static let warpcast = "Warpcast"
     static let github = "GitHub"
