@@ -118,7 +118,8 @@ struct MobileCollectionsView: View {
         }
     }
     private func didSelectPip(_ item: SuggestedItem) {
-        // TODO: start pip
+        let token = TokenGenerator.generateRandomToken(specificCollectionId: item.id, notTokenId: nil)
+        NotificationCenter.default.post(name: Notification.Name.togglePip, object: token)
     }
     
     private func didSelectSuggestedItem(_ item: SuggestedItem) {
