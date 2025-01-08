@@ -91,7 +91,7 @@ private class SpecificPageViewController: UIViewController {
     
     func renderCurrentItem() {
         if webView == nil {
-            webView = WKWebView()
+            webView = MobileWebView.makeNewWebView()
             webView.isUserInteractionEnabled = false
             webView.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(webView)
