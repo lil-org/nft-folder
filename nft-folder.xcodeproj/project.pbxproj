@@ -217,6 +217,7 @@
 		2CC0C63A2C6A630700FB56BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C5A59A12C51074B00788870 /* Assets.xcassets */; };
 		2CC943012B8248CE003219C7 /* ZoraResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC943002B8248CE003219C7 /* ZoraResponse.swift */; };
 		2CC943032B825907003219C7 /* ZoraRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC943022B825907003219C7 /* ZoraRequest.swift */; };
+		2CC971632D2F4219005A8C4C /* FourDirectionalPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC971622D2F4214005A8C4C /* FourDirectionalPlayer.swift */; };
 		2CD0DA592C41B4CF00DB709C /* PrepareScreensavers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD0DA582C41B4CF00DB709C /* PrepareScreensavers.swift */; };
 		2CD0DA5B2C41C7AF00DB709C /* thumbnail.heic in Resources */ = {isa = PBXBuildFile; fileRef = 2CD0DA5A2C41C7AF00DB709C /* thumbnail.heic */; };
 		2CD4FC8A2B684A0900C965F6 /* IpfsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD4FC892B684A0900C965F6 /* IpfsResponse.swift */; };
@@ -1877,6 +1878,7 @@
 		2CC161FE2C6CD3C800E3E03D /* secondary_second_sub_category.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = secondary_second_sub_category.txt; sourceTree = "<group>"; };
 		2CC943002B8248CE003219C7 /* ZoraResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoraResponse.swift; sourceTree = "<group>"; };
 		2CC943022B825907003219C7 /* ZoraRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoraRequest.swift; sourceTree = "<group>"; };
+		2CC971622D2F4214005A8C4C /* FourDirectionalPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourDirectionalPlayer.swift; sourceTree = "<group>"; };
 		2CCFED972B08246800D98A2E /* WalletsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsListView.swift; sourceTree = "<group>"; };
 		2CD0DA582C41B4CF00DB709C /* PrepareScreensavers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepareScreensavers.swift; sourceTree = "<group>"; };
 		2CD0DA5A2C41C7AF00DB709C /* thumbnail.heic */ = {isa = PBXFileReference; lastKnownFileType = file; name = thumbnail.heic; path = NftScreenSaverView/thumbnail.heic; sourceTree = "<group>"; };
@@ -5036,6 +5038,7 @@
 			children = (
 				2CF08AA42D2A937400D82ACA /* MobileCollectionsView.swift */,
 				2CF08AA82D2A937400D82ACA /* MobilePlayerView.swift */,
+				2CC971622D2F4214005A8C4C /* FourDirectionalPlayer.swift */,
 				2C9442952C5186530078C051 /* MobileWebView.swift */,
 				2C3386832D2C35ED00B608DD /* PipPlaceholderView.swift */,
 				2CF08AA52D2A937400D82ACA /* MobileHelpers.swift */,
@@ -5457,6 +5460,7 @@
 				2CF08AAA2D2A937400D82ACA /* MobileHelpers.swift in Sources */,
 				2CF08AAB2D2A937400D82ACA /* nft_folder_iosApp.swift in Sources */,
 				2CF08AAC2D2A937400D82ACA /* MobilePlayerView.swift in Sources */,
+				2CC971632D2F4219005A8C4C /* FourDirectionalPlayer.swift in Sources */,
 				2C460ECE2D2985A90083124E /* Consts.swift in Sources */,
 				2C460ECF2D2985A90083124E /* CollectionInfo.swift in Sources */,
 				2C460ED02D2985A90083124E /* NftGallery.swift in Sources */,
