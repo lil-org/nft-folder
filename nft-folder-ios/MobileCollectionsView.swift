@@ -54,7 +54,7 @@ struct MobileCollectionsView: View {
     }
     
     private func createGrid() -> some View {
-        let gridLayout = [GridItem(.adaptive(minimum: 100), spacing: 0)]
+        let gridLayout = [GridItem(.adaptive(minimum: UIDevice.current.userInterfaceIdiom == .pad ? 130 : 100), spacing: 0)]
         return LazyVGrid(columns: gridLayout, alignment: .leading, spacing: 0) {
             ForEach(suggestedItems) { item in
                 Button {
