@@ -17,15 +17,8 @@ struct MobilePlayerView: View {
     
     @State private var showControls = false
     @State private var isAllowedToHideStatusBar = false
-
-    @ObservedObject private var playerModel: PlayerModel
     
     init(config: MobilePlayerConfig, dismiss: @escaping () -> Void) {
-        if let token = config.specificToken {
-            self.playerModel = PlayerModel(token: token)
-        } else {
-            self.playerModel = PlayerModel(specificCollectionId: config.initialItemId, notTokenId: nil)
-        }
         self.initialConfig = config
         self.dismiss = dismiss
     }
@@ -42,7 +35,7 @@ struct MobilePlayerView: View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
             
-            FourDirectionalPlayerContainerView()
+            FourDirectionalPlayerContainerView(initialConfig: initialConfig)
                 .edgesIgnoringSafeArea(.all)
                 .onTapGesture {
                     showControls.toggle()
@@ -60,11 +53,11 @@ struct MobilePlayerView: View {
                         .padding()
                         Spacer()
                         Menu {
-                            if !doNotShowInstructionsTmp, let instructions = playerModel.currentToken.instructions {
+                            if !doNotShowInstructionsTmp, let instructions = getCurrentToken().instructions {
                                 Text(instructions)
                             }
                             Button(Strings.viewOnBlockscout, action: viewOnWeb)
-                            Text(playerModel.currentToken.displayName)
+                            Text(getCurrentToken().displayName)
                         } label: {
                             makeCircularImageView(image: Images.info)
                         }
@@ -125,41 +118,41 @@ struct MobilePlayerView: View {
         }
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name.restoreMinimizedPip)) { notification in
             if let token = notification.object as? GeneratedToken {
-                if token.id != playerModel.currentToken.id {
-                    DispatchQueue.main.async { playerModel.showNewToken(token) }
+                if token.id != getCurrentToken().id {
+                    DispatchQueue.main.async { MobilePlaybackController.shared.showNewToken(token) }
                 }
             }
         }
     }
     
     private func goForward() {
-        // TODO: remake
-        DispatchQueue.main.async { playerModel.goForward() }
+        MobilePlaybackController.shared.goForward()
     }
     
     private func goBack() {
-        // TODO: remake
-        DispatchQueue.main.async { playerModel.goBack() }
+        MobilePlaybackController.shared.goBack()
     }
     
     private func goUp() {
-        // TODO: remake
-        DispatchQueue.main.async { playerModel.goBack() }
+        MobilePlaybackController.shared.goUp()
     }
     
     private func goDown() {
-        // TODO: remake
-        DispatchQueue.main.async { playerModel.changeCollection() }
+        MobilePlaybackController.shared.goDown()
     }
     
     private func viewOnWeb() {
-        if let url = playerModel.currentToken.url {
+        if let url = getCurrentToken().url {
             UIApplication.shared.open(url)
         }
     }
     
     private func startPip() {
-        NotificationCenter.default.post(name: Notification.Name.togglePip, object: playerModel.currentToken)
+        NotificationCenter.default.post(name: Notification.Name.togglePip, object: getCurrentToken())
+    }
+    
+    private func getCurrentToken() -> GeneratedToken {
+        return MobilePlaybackController.shared.getCurrentToken(config: initialConfig)
     }
     
 }

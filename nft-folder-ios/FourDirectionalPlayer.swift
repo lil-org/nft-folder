@@ -4,10 +4,49 @@ import UIKit
 import SwiftUI
 import WebKit
 
+struct MobilePlaybackController {
+    
+    private init() {}
+    
+    static let shared = MobilePlaybackController()
+    
+    func getCurrentToken(config: MobilePlayerConfig) -> GeneratedToken {
+        // TODO: implement
+        return GeneratedToken.empty
+    }
+    
+    func showNewToken(_ token: GeneratedToken) {
+        // TODO: implement
+    }
+    
+    func goForward() {
+        // TODO: implement
+    }
+    
+    func goBack() {
+        // TODO: implement
+    }
+    
+    func goUp() {
+        // TODO: implement
+    }
+    
+    func goDown() {
+        // TODO: implement
+    }
+    
+}
+
 struct FourDirectionalPlayerContainerView: UIViewControllerRepresentable {
     
+    private let initialConfig: MobilePlayerConfig
+    
+    init(initialConfig: MobilePlayerConfig) {
+        self.initialConfig = initialConfig
+    }
+    
     func makeUIViewController(context: Context) -> FourDirectionalPlayerContainer {
-        return FourDirectionalPlayerContainer()
+        return FourDirectionalPlayerContainer(initialConfig: initialConfig)
     }
     
     func updateUIViewController(_ uiViewController: FourDirectionalPlayerContainer, context: Context) {
@@ -17,7 +56,18 @@ struct FourDirectionalPlayerContainerView: UIViewControllerRepresentable {
 
 class FourDirectionalPlayerContainer: UIViewController, FourDirectionalPlayerDataSource {
     
+    private let initialConfig: MobilePlayerConfig
+    
     private lazy var verticalVC = VerticalPageViewController(fourDirectionalPlayerDataSource: self)
+
+    init(initialConfig: MobilePlayerConfig) {
+        self.initialConfig = initialConfig
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("yo")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
