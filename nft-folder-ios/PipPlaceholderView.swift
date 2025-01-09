@@ -102,7 +102,7 @@ class PipPlaceholderView: UIView {
     }
     
     private func createNewCustomPipView() -> UIView {
-        let webView = MobileWebView.makeNewWebView()
+        let webView = AutoReloadingWebView.new
         if let token = currentPipToken {
             webView.loadHTMLString(token.html, baseURL: nil)
         }

@@ -32,10 +32,8 @@ struct MobilePlayerView: View {
     
     var body: some View {
         ZStack {
-            MobileWebView(htmlString: playerModel.currentToken.html)
+            FourDirectionalPlayerContainerView()
                 .edgesIgnoringSafeArea(.all)
-                .allowsHitTesting(false)
-                .contentShape(Rectangle())
                 .onTapGesture {
                     showControls.toggle()
                 }

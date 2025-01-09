@@ -3,18 +3,12 @@
 import SwiftUI
 import WebKit
 
-struct MobileWebView: UIViewRepresentable {
-    let htmlString: String
+class AutoReloadingWebView: WKWebView {
     
-    func makeUIView(context: Context) -> WKWebView {
-        return MobileWebView.makeNewWebView()
-    }
+    private var lastLoadedHtmlString: String?
+    private var loadedForBounds: CGRect?
     
-    func updateUIView(_ uiView: WKWebView, context: Context) {
-        uiView.loadHTMLString(htmlString, baseURL: nil)
-    }
-    
-    static func makeNewWebView() -> WKWebView {
+    static var new: AutoReloadingWebView {
         let webConfiguration = WKWebViewConfiguration()
         webConfiguration.suppressesIncrementalRendering = true
         let wkWebView = AutoReloadingWebView(frame: .zero, configuration: webConfiguration)
@@ -25,17 +19,11 @@ struct MobileWebView: UIViewRepresentable {
         wkWebView.configuration.userContentController.addUserScript(WKUserScript(source: "document.addEventListener('contextmenu', function(e) { e.preventDefault(); }, false);", injectionTime: .atDocumentEnd, forMainFrameOnly: true))
         return wkWebView
     }
-}
-
-class AutoReloadingWebView: WKWebView {
-    
-    private var lastLoadedHtmlString: String?
-    private var loadedForBounds: CGRect?
     
     override var bounds: CGRect {
         didSet {
             if bounds != oldValue, let html = lastLoadedHtmlString {
-                _ = loadHTMLString(html, baseURL: nil)
+                loadHTMLString(html, baseURL: nil)
             }
         }
     }
@@ -43,12 +31,12 @@ class AutoReloadingWebView: WKWebView {
     override var frame: CGRect {
         didSet {
             if frame != oldValue, let html = lastLoadedHtmlString {
-                _ = loadHTMLString(html, baseURL: nil)
+                loadHTMLString(html, baseURL: nil)
             }
         }
     }
     
-    override func loadHTMLString(_ string: String, baseURL: URL?) -> WKNavigation? {
+    @discardableResult override func loadHTMLString(_ string: String, baseURL: URL?) -> WKNavigation? {
         let newHtmlContent = lastLoadedHtmlString != string
         let newBounds = bounds != loadedForBounds
         

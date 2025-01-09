@@ -1,7 +1,19 @@
 // ∅ 2025 lil org
 
 import UIKit
+import SwiftUI
 import WebKit
+
+struct FourDirectionalPlayerContainerView: UIViewControllerRepresentable {
+    
+    func makeUIViewController(context: Context) -> FourDirectionalPlayerContainer {
+        return FourDirectionalPlayerContainer()
+    }
+    
+    func updateUIViewController(_ uiViewController: FourDirectionalPlayerContainer, context: Context) {
+        
+    }
+}
 
 class FourDirectionalPlayerContainer: UIViewController, FourDirectionalPlayerDataSource {
     
@@ -91,7 +103,7 @@ private class SpecificPageViewController: UIViewController {
     
     func renderCurrentItem() {
         if webView == nil {
-            webView = MobileWebView.makeNewWebView()
+            webView = AutoReloadingWebView.new
             webView.isUserInteractionEnabled = false
             webView.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(webView)

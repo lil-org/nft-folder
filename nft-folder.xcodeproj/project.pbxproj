@@ -78,7 +78,7 @@
 		2C4039EF2B83A59300DB94D7 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B552B08B6A200DAB623 /* Codable.swift */; };
 		2C4039F12B83B11100DB94D7 /* FileSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4039F02B83B11100DB94D7 /* FileSaver.swift */; };
 		2C424F462B9775E6007868F8 /* RightClickActivatingWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C424F452B9775E6007868F8 /* RightClickActivatingWindow.swift */; };
-		2C460ECA2D29855A0083124E /* MobileWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9442952C5186530078C051 /* MobileWebView.swift */; };
+		2C460ECA2D29855A0083124E /* AutoReloadingWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9442952C5186530078C051 /* AutoReloadingWebView.swift */; };
 		2C460ECC2D2985790083124E /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA623E62BEE8A0200BD78FF /* UserDefaults.swift */; };
 		2C460ECD2D2985910083124E /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60BC2B7D3505009949C2 /* Strings.swift */; };
 		2C460ECE2D2985A90083124E /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98C4AC2BEE9E390040383D /* Consts.swift */; };
@@ -756,7 +756,7 @@
 		2C8FD1C72BF4B33C00B3D327 /* Fastfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; };
 		2C9113192B08F71200A8EE80 /* WalletDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDownloader.swift; sourceTree = "<group>"; };
 		2C9113272B09751D00A8EE80 /* WalletImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletImageView.swift; sourceTree = "<group>"; };
-		2C9442952C5186530078C051 /* MobileWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileWebView.swift; sourceTree = "<group>"; };
+		2C9442952C5186530078C051 /* AutoReloadingWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoReloadingWebView.swift; sourceTree = "<group>"; };
 		2C98C4AC2BEE9E390040383D /* Consts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
 		2C9973FD2C4AEAAB00C058E2 /* WebViewWithMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewWithMenu.swift; sourceTree = "<group>"; };
 		2C9973FF2C4AF12400C058E2 /* PlayerMenuDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerMenuDelegate.swift; sourceTree = "<group>"; };
@@ -5039,7 +5039,7 @@
 				2CF08AA42D2A937400D82ACA /* MobileCollectionsView.swift */,
 				2CF08AA82D2A937400D82ACA /* MobilePlayerView.swift */,
 				2CC971622D2F4214005A8C4C /* FourDirectionalPlayer.swift */,
-				2C9442952C5186530078C051 /* MobileWebView.swift */,
+				2C9442952C5186530078C051 /* AutoReloadingWebView.swift */,
 				2C3386832D2C35ED00B608DD /* PipPlaceholderView.swift */,
 				2CF08AA52D2A937400D82ACA /* MobileHelpers.swift */,
 				2CF08AA72D2A937400D82ACA /* nft_folder_iosApp.swift */,
@@ -5445,7 +5445,7 @@
 				2C460ED52D2985E20083124E /* PlayerModel.swift in Sources */,
 				2C460ED62D2985F60083124E /* Defaults.swift in Sources */,
 				2C460EDE2D29865F0083124E /* Script.swift in Sources */,
-				2C460ECA2D29855A0083124E /* MobileWebView.swift in Sources */,
+				2C460ECA2D29855A0083124E /* AutoReloadingWebView.swift in Sources */,
 				2C460ECC2D2985790083124E /* UserDefaults.swift in Sources */,
 				2C460EDB2D29863A0083124E /* BundledTokens.swift in Sources */,
 				2C6359552D29C0E400E40241 /* Links.swift in Sources */,
