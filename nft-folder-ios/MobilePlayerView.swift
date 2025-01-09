@@ -16,6 +16,7 @@ struct MobilePlayerView: View {
     @ObservedObject private var playerModel: PlayerModel
     @Binding var config: MobilePlayerConfig?
     @State private var showControls = false
+    @State private var isAllowedToHideStatusBar = false
     
     init(config: Binding<MobilePlayerConfig?>) {
         if let c = config.wrappedValue {
@@ -39,7 +40,7 @@ struct MobilePlayerView: View {
                 .onTapGesture {
                     showControls.toggle()
                 }
-                .statusBar(hidden: !showControls)
+                .statusBar(hidden: isAllowedToHideStatusBar && !showControls)
             
             if showControls {
                 VStack {
@@ -124,6 +125,20 @@ struct MobilePlayerView: View {
                     }
                     .padding(.horizontal, 20)
                     .padding(.bottom, 30)
+                }
+            }
+        }
+        .onAppear {
+            if !isAllowedToHideStatusBar {
+                let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+                let window = scene?.windows.first
+                let topSafeArea = window?.safeAreaInsets.top ?? 0
+                if topSafeArea < 44 {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(230)) {
+                        isAllowedToHideStatusBar = true
+                    }
+                } else {
+                    isAllowedToHideStatusBar = true
                 }
             }
         }
