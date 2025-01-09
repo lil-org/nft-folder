@@ -77,24 +77,6 @@ struct MobilePlayerView: View {
                     Spacer()
                     HStack(spacing: 20) {
                         Button(action: {
-                            goBack()
-                        }) {
-                            Images.back
-                                .frame(width: buttonIconSize, height: buttonIconSize)
-                                .padding(buttonPadding)
-                                .background(.ultraThinMaterial)
-                                .clipShape(Circle())
-                        }
-                        Button(action: {
-                            goForward()
-                        }) {
-                            Images.forward
-                                .frame(width: buttonIconSize, height: buttonIconSize)
-                                .padding(buttonPadding)
-                                .background(.ultraThinMaterial)
-                                .clipShape(Circle())
-                        }
-                        Button(action: {
                             goUp()
                         }) {
                             Images.up
@@ -107,6 +89,24 @@ struct MobilePlayerView: View {
                             goDown()
                         }) {
                             Images.down
+                                .frame(width: buttonIconSize, height: buttonIconSize)
+                                .padding(buttonPadding)
+                                .background(.ultraThinMaterial)
+                                .clipShape(Circle())
+                        }
+                        Button(action: {
+                            goBack()
+                        }) {
+                            Images.back
+                                .frame(width: buttonIconSize, height: buttonIconSize)
+                                .padding(buttonPadding)
+                                .background(.ultraThinMaterial)
+                                .clipShape(Circle())
+                        }
+                        Button(action: {
+                            goForward()
+                        }) {
+                            Images.forward
                                 .frame(width: buttonIconSize, height: buttonIconSize)
                                 .padding(buttonPadding)
                                 .background(.ultraThinMaterial)
