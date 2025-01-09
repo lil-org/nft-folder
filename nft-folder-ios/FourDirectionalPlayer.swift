@@ -65,6 +65,7 @@ private class SpecificPageViewController: UIViewController {
     private(set) var verticalIndex: Int
     
     private var renderedCoordinate: (Int, Int)?
+    private var willOrDidAppear = false
 
     init(horizontalIndex: Int, verticalIndex: Int, fourDirectionalPlayerDataSource: FourDirectionalPlayerDataSource?) {
         self.fourDirectionalPlayerDataSource = fourDirectionalPlayerDataSource
@@ -85,6 +86,7 @@ private class SpecificPageViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        willOrDidAppear = true
         renderCurrentItem()
     }
     
@@ -102,6 +104,8 @@ private class SpecificPageViewController: UIViewController {
     }
     
     func renderCurrentItem() {
+        guard willOrDidAppear else { return }
+        
         if webView == nil {
             webView = AutoReloadingWebView.new
             webView.isUserInteractionEnabled = false
