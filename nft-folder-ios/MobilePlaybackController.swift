@@ -90,6 +90,9 @@ private class GeneratedTokensDataSource {
     private var collectionIds = [Int: String]()
     private var tokenIds = [String: [Int: String]]()
     
+    private var latestToken: GeneratedToken?
+    private var latestCoordinate: PlayerCoordinate?
+    
     func pushToken(_ token: GeneratedToken, coordinate: PlayerCoordinate, sameCollection: Bool) {
         let newCoordinate = sameCollection ? PlayerCoordinate(x: coordinate.x + 1, y: coordinate.y) : PlayerCoordinate(x: coordinate.x, y: coordinate.y + 1)
         if sameCollection {
@@ -101,7 +104,10 @@ private class GeneratedTokensDataSource {
     }
     
     func getToken(coordinate: PlayerCoordinate) -> GeneratedToken {
-        // TODO: it gets called twice for each new token — optimize it
+        if latestCoordinate == coordinate, let token = latestToken {
+            return token
+        }
+        
         let token: GeneratedToken?
         if let collectionId = collectionIds[coordinate.y] {
             if let tokenId = tokenIds[collectionId]?[coordinate.x] {
@@ -131,6 +137,12 @@ private class GeneratedTokensDataSource {
                 tokenIds[token.fullCollectionId] = [coordinate.x: token.id]
             }
         }
+        
+        if let token = token {
+            latestToken = token
+            latestCoordinate = coordinate
+        }
+        
         return token ?? .empty
     }
     
