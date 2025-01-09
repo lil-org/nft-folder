@@ -25,8 +25,7 @@ class MobilePlaybackController {
     
     func showNewToken(displayId: UUID, token: GeneratedToken, sameCollection: Bool, coordinate: PlayerCoordinate) {
         guard let dataSource = tokensDataSources[displayId] else { return }
-        let newCoordinate = sameCollection ? PlayerCoordinate(x: coordinate.x + 1, y: coordinate.y) : PlayerCoordinate(x: coordinate.x, y: coordinate.y + 1)
-        dataSource.pushToken(token, coordinate: newCoordinate)
+        dataSource.pushToken(token, coordinate: coordinate, sameCollection: sameCollection)
         if sameCollection {
             goForward(uuid: displayId)
         } else {
@@ -91,8 +90,14 @@ private class GeneratedTokensDataSource {
     private var collectionIds = [Int: String]()
     private var tokenIds = [String: [Int: String]]()
     
-    func pushToken(_ token: GeneratedToken, coordinate: PlayerCoordinate) {
-        // TODO: implement
+    func pushToken(_ token: GeneratedToken, coordinate: PlayerCoordinate, sameCollection: Bool) {
+        let newCoordinate = sameCollection ? PlayerCoordinate(x: coordinate.x + 1, y: coordinate.y) : PlayerCoordinate(x: coordinate.x, y: coordinate.y + 1)
+        if sameCollection {
+            tokenIds[token.fullCollectionId]?[newCoordinate.x] = token.id
+        } else {
+            collectionIds[newCoordinate.y] = token.fullCollectionId
+            tokenIds[token.fullCollectionId] = [newCoordinate.x: token.id]
+        }
     }
     
     func getToken(coordinate: PlayerCoordinate) -> GeneratedToken {
