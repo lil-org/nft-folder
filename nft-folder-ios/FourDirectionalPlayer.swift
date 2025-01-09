@@ -235,6 +235,27 @@ private class HorizontalPageViewController: UIPageViewController, UIPageViewCont
         destinationPage.renderCurrentItem()
     }
     
+    func navigate(_ direction: UIPageViewController.NavigationDirection, completion: @escaping () -> Void) {
+        guard let currentPage = viewControllers?.first as? SpecificPageViewController else { return }
+        
+        let targetViewControllers: [UIViewController]
+        switch direction {
+        case .reverse:
+            guard let targetViewController = pageViewController(self, viewControllerBefore: currentPage) else { return }
+            targetViewControllers = [targetViewController]
+        case .forward:
+            guard let targetViewController = pageViewController(self, viewControllerAfter: currentPage) else { return }
+            targetViewControllers = [targetViewController]
+        default:
+            return
+        }
+        
+        pageViewController(self, willTransitionTo: targetViewControllers)
+        setViewControllers(targetViewControllers, direction: direction, animated: true) { _ in
+            completion()
+        }
+    }
+    
 }
 
 private class VerticalPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
@@ -268,6 +289,7 @@ private class VerticalPageViewController: UIPageViewController, UIPageViewContro
         guard !isNavigating, let currentHorizontalController = viewControllers?.first as? HorizontalPageViewController else { return }
         
         isNavigating = true
+        
         let pageViewControllerDirection: UIPageViewController.NavigationDirection
         let targetViewControllers: [UIViewController]
         
@@ -281,10 +303,14 @@ private class VerticalPageViewController: UIPageViewController, UIPageViewContro
             pageViewControllerDirection = .forward
             targetViewControllers = [targetViewController]
         case .back, .forward:
-            return // TODO: pass to horizontal. pass animating completion there as well to prevent simultaneous animations
+            currentHorizontalController.navigate(direction == .back ? .reverse : .forward) { [weak self] in
+                self?.isNavigating = false
+            }
+            return
         }
+        
         pageViewController(self, willTransitionTo: targetViewControllers)
-        setViewControllers(targetViewControllers, direction: pageViewControllerDirection, animated: true) { [weak self] finished in
+        setViewControllers(targetViewControllers, direction: pageViewControllerDirection, animated: true) { [weak self] _ in
             self?.isNavigating = false
         }
     }
