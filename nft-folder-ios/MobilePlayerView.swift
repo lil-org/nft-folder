@@ -134,8 +134,10 @@ struct MobilePlayerView: View {
                 let window = scene?.windows.first
                 let topSafeArea = window?.safeAreaInsets.top ?? 0
                 if topSafeArea < 44 {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(230)) {
-                        isAllowedToHideStatusBar = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200)) {
+                        withAnimation(.easeInOut(duration: 0.2)) {
+                            isAllowedToHideStatusBar = true
+                        }
                     }
                 } else {
                     isAllowedToHideStatusBar = true
