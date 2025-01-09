@@ -18,6 +18,7 @@ struct MobilePlayerView: View {
     @State private var showControls = false
     @State private var isAllowedToHideStatusBar = false
     @State private var currentToken = GeneratedToken.empty
+    @State private var currentCoordinate = PlayerCoordinate(x: 0, y: 0)
     
     init(config: MobilePlayerConfig, dismiss: @escaping () -> Void) {
         self.initialConfig = config
@@ -36,6 +37,7 @@ struct MobilePlayerView: View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
             FourDirectionalPlayerContainerView(initialConfig: initialConfig, onCoordinateUpdate: { newCoordinate in
+                currentCoordinate = newCoordinate
                 currentToken = MobilePlaybackController.shared.getToken(uuid: initialConfig.id, coordinate: newCoordinate)
             }).edgesIgnoringSafeArea(.all)
                 .onTapGesture {
@@ -121,7 +123,12 @@ struct MobilePlayerView: View {
             if let token = notification.object as? GeneratedToken {
                 if token.id != currentToken.id {
                     let sameCollection = token.fullCollectionId == currentToken.fullCollectionId
-                    DispatchQueue.main.async { MobilePlaybackController.shared.showNewToken(displayId: initialConfig.id, token: token, sameCollection: sameCollection)}
+                    DispatchQueue.main.async {
+                        MobilePlaybackController.shared.showNewToken(displayId: initialConfig.id,
+                                                                     token: token,
+                                                                     sameCollection: sameCollection,
+                                                                     coordinate: currentCoordinate)
+                    }
                 }
             }
         }

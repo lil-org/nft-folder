@@ -23,7 +23,7 @@ class MobilePlaybackController {
     private var initialConfigs = [UUID: MobilePlayerConfig]()
     private var tokensDataSources = [UUID: GeneratedTokensDataSource]()
     
-    func showNewToken(displayId: UUID, token: GeneratedToken, sameCollection: Bool) {
+    func showNewToken(displayId: UUID, token: GeneratedToken, sameCollection: Bool, coordinate: PlayerCoordinate) {
         guard let _ = displays[displayId] else { return }
         
         // TODO: push into history
