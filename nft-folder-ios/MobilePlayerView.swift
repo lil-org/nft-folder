@@ -55,6 +55,20 @@ struct MobilePlayerView: View {
                         }
                         .padding()
                         Spacer()
+                        Menu {
+                            if !doNotShowInstructionsTmp, let instructions = playerModel.currentToken.instructions {
+                                Text(instructions)
+                            }
+                            Button(Strings.viewOnBlockscout, action: viewOnWeb)
+                            Text(playerModel.currentToken.displayName)
+                        } label: {
+                            Images.info
+                                .frame(width: buttonIconSize, height: buttonIconSize)
+                                .padding(buttonPadding)
+                                .background(.ultraThinMaterial)
+                                .clipShape(Circle())
+                        }
+                        .padding()
                     }
                     Spacer()
                 }
@@ -93,19 +107,6 @@ struct MobilePlayerView: View {
                             goDown()
                         }) {
                             Images.down
-                                .frame(width: buttonIconSize, height: buttonIconSize)
-                                .padding(buttonPadding)
-                                .background(.ultraThinMaterial)
-                                .clipShape(Circle())
-                        }
-                        Menu {
-                            if !doNotShowInstructionsTmp, let instructions = playerModel.currentToken.instructions {
-                                Text(instructions)
-                            }
-                            Button(Strings.viewOnBlockscout, action: viewOnWeb)
-                            Text(playerModel.currentToken.displayName)
-                        } label: {
-                            Images.info
                                 .frame(width: buttonIconSize, height: buttonIconSize)
                                 .padding(buttonPadding)
                                 .background(.ultraThinMaterial)
