@@ -51,6 +51,10 @@ class FourDirectionalPlayerContainer: UIViewController, FourDirectionalPlayerDat
         ])
     }
     
+    func getCurrentCoordinate() -> (Int, Int) {
+        return verticalVC.getCurrentCoordinate()
+    }
+    
     func navigate(_ direction: PlaybackNavigationDirection) {
         verticalVC.navigate(direction)
     }
@@ -285,6 +289,12 @@ private class VerticalPageViewController: UIPageViewController, UIPageViewContro
         setViewControllers([horizontal1], direction: .forward, animated: false, completion: nil)
     }
 
+    func getCurrentCoordinate() -> (Int, Int) {
+        guard let currentHorizontalController = viewControllers?.first as? HorizontalPageViewController,
+              let currentPage = currentHorizontalController.viewControllers?.first as? SpecificPageViewController else { return (0, 0) }
+        return (currentPage.horizontalIndex, currentPage.verticalIndex)
+    }
+    
     func navigate(_ direction: PlaybackNavigationDirection) {
         guard !isNavigating, let currentHorizontalController = viewControllers?.first as? HorizontalPageViewController else { return }
         

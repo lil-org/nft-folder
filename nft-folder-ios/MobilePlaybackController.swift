@@ -5,6 +5,7 @@ import UIKit
 protocol MobilePlaybackControllerDisplay: AnyObject {
     
     func navigate(_ direction: PlaybackNavigationDirection)
+    func getCurrentCoordinate() -> (Int, Int)
     
 }
 
@@ -23,13 +24,15 @@ class MobilePlaybackController {
     
     func getCurrentToken(displayId: UUID) -> GeneratedToken {
         guard let display = displays[displayId] else { return GeneratedToken.empty }
-        // TODO: implement
-        return GeneratedToken.empty
+        let (x, y) = display.getCurrentCoordinate()
+        let token = getToken(uuid: displayId, x: x, y: y)
+        return token
     }
     
     func showNewToken(displayId: UUID, token: GeneratedToken) {
         guard let display = displays[displayId] else { return }
         // TODO: implement
+        // TODO: push the token into history and navigate player down or forward – depending if it is from the same or different collection
     }
     
     func goForward(uuid: UUID) {
