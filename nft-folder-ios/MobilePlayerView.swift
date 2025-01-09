@@ -17,6 +17,7 @@ struct MobilePlayerView: View {
     
     @State private var showControls = false
     @State private var isAllowedToHideStatusBar = false
+    @State private var currentToken = GeneratedToken.empty
     
     init(config: MobilePlayerConfig, dismiss: @escaping () -> Void) {
         self.initialConfig = config
@@ -35,9 +36,7 @@ struct MobilePlayerView: View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
             FourDirectionalPlayerContainerView(initialConfig: initialConfig, onCoordinateUpdate: { newCoordinate in
-                print(newCoordinate)
-                // TODO: update state
-                // TODO: mb stop using get current token, get specific instead
+                currentToken = MobilePlaybackController.shared.getToken(uuid: initialConfig.id, coordinate: newCoordinate)
             }).edgesIgnoringSafeArea(.all)
                 .onTapGesture {
                     showControls.toggle()
@@ -55,11 +54,11 @@ struct MobilePlayerView: View {
                         .padding()
                         Spacer()
                         Menu {
-                            if !doNotShowInstructionsTmp, let instructions = getCurrentToken().instructions {
+                            if !doNotShowInstructionsTmp, let instructions = currentToken.instructions {
                                 Text(instructions)
                             }
                             Button(Strings.viewOnBlockscout, action: viewOnWeb)
-                            Text(getCurrentToken().displayName)
+                            Text(currentToken.displayName)
                         } label: {
                             makeCircularImageView(image: Images.info)
                         }
@@ -120,7 +119,7 @@ struct MobilePlayerView: View {
         }
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name.restoreMinimizedPip)) { notification in
             if let token = notification.object as? GeneratedToken {
-                if token.id != getCurrentToken().id {
+                if token.id != currentToken.id {
                     DispatchQueue.main.async { MobilePlaybackController.shared.showNewToken(displayId: initialConfig.id, token: token)}
                 }
             }
@@ -144,17 +143,13 @@ struct MobilePlayerView: View {
     }
     
     private func viewOnWeb() {
-        if let url = getCurrentToken().url {
+        if let url = currentToken.url {
             UIApplication.shared.open(url)
         }
     }
     
     private func startPip() {
-        NotificationCenter.default.post(name: Notification.Name.togglePip, object: getCurrentToken())
-    }
-    
-    private func getCurrentToken() -> GeneratedToken {
-        return MobilePlaybackController.shared.getCurrentToken(displayId: initialConfig.id)
+        NotificationCenter.default.post(name: Notification.Name.togglePip, object: currentToken)
     }
     
 }

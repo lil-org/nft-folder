@@ -70,7 +70,7 @@ class FourDirectionalPlayerContainer: UIViewController, FourDirectionalPlayerDat
     }
     
     fileprivate func getHtml(x: Int, y: Int) -> String {
-        return MobilePlaybackController.shared.getToken(uuid: initialConfig.id, x: x, y: y).html
+        return MobilePlaybackController.shared.getToken(uuid: initialConfig.id, coordinate: PlayerCoordinate(x: x, y: y)).html
     }
     
     fileprivate func didRenderCoordinate(_ coordinate: (Int, Int)) {

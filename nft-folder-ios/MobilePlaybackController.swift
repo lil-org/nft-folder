@@ -21,13 +21,7 @@ class MobilePlaybackController {
     
     private var displays = [UUID: MobilePlaybackControllerDisplay]()
     private var initialConfigs = [UUID: MobilePlayerConfig]()
-    
-    func getCurrentToken(displayId: UUID) -> GeneratedToken {
-        guard let display = displays[displayId] else { return GeneratedToken.empty }
-        let (x, y) = display.getCurrentCoordinate()
-        let token = getToken(uuid: displayId, x: x, y: y)
-        return token
-    }
+    private var tokensDataSources = [UUID: GeneratedTokensDataSource]()
     
     func showNewToken(displayId: UUID, token: GeneratedToken) {
         guard let display = displays[displayId] else { return }
@@ -63,23 +57,55 @@ class MobilePlaybackController {
     func stopAndDisconnect(uuid: UUID) {
         displays.removeValue(forKey: uuid)
         initialConfigs.removeValue(forKey: uuid)
+        tokensDataSources.removeValue(forKey: uuid)
     }
     
-    private var collectionIds = [Int: String]() // TODO: different for different displays
-    
-    func getToken(uuid: UUID, x: Int, y: Int) -> GeneratedToken {
-        // TODO: implement with history
+    func getToken(uuid: UUID, coordinate: PlayerCoordinate) -> GeneratedToken {
         guard let initialConfig = initialConfigs[uuid] else { return GeneratedToken.empty }
-        
-        let token: GeneratedToken?
-        
-        if let collectionId = collectionIds[y] {
-            token = TokenGenerator.generateRandomToken(specificCollectionId: collectionId, notTokenId: nil)
+        if let dataSource = tokensDataSources[uuid] {
+            return dataSource.getToken(coordinate: coordinate)
         } else {
-            token = TokenGenerator.generateRandomToken(specificCollectionId: y == 0 ? initialConfig.initialItemId : nil, notTokenId: nil)
-            collectionIds[y] = token?.fullCollectionId
+            let newDataSource = GeneratedTokensDataSource(initialCollectionId: initialConfig.initialItemId, specificInitialToken: initialConfig.specificToken)
+            tokensDataSources[uuid] = newDataSource
+            return newDataSource.getToken(coordinate: coordinate)
         }
-        
+    }
+    
+}
+
+private class GeneratedTokensDataSource {
+    
+    private let initialCollectionId: String?
+    private let specificInitialToken: GeneratedToken?
+    
+    init(initialCollectionId: String?, specificInitialToken: GeneratedToken?) {
+        self.initialCollectionId = initialCollectionId
+        self.specificInitialToken = specificInitialToken
+    }
+    
+    private var collectionIds = [Int: String]()
+    private var tokenIds = [String: [Int: String]]()
+    
+    func getToken(coordinate: PlayerCoordinate) -> GeneratedToken {
+        // TODO: it gets called twice for each new token — optimize it
+        // TODO: pass notTokenId when possible to avoid duplicates
+        let token: GeneratedToken?
+        if let collectionId = collectionIds[coordinate.y] {
+            if let tokenId = tokenIds[collectionId]?[coordinate.x] {
+                token = TokenGenerator.generateRandomToken(specificCollectionId: collectionId, specificInputTokenId: tokenId)
+            } else {
+                token = TokenGenerator.generateRandomToken(specificCollectionId: collectionId, notTokenId: nil)
+                if let token = token {
+                    tokenIds[token.fullCollectionId]?[coordinate.x] = token.id
+                }
+            }
+        } else {
+            token = TokenGenerator.generateRandomToken(specificCollectionId: coordinate.y == 0 ? initialCollectionId : nil, notTokenId: nil)
+            if let token = token {
+                collectionIds[coordinate.y] = token.fullCollectionId
+                tokenIds[token.fullCollectionId] = [coordinate.x: token.id]
+            }
+        }
         return token ?? .empty
     }
     
