@@ -62,20 +62,22 @@ class MobilePlaybackController {
         initialConfigs.removeValue(forKey: uuid)
     }
     
+    private var collectionIds = [Int: String]() // TODO: different for different displays
+    
     func getToken(uuid: UUID, x: Int, y: Int) -> GeneratedToken {
-        let randomColor = String(format: "#%06X", Int.random(in: 0x000000...0xFFFFFF))
-        let html = """
-        <html>
-        <body style="margin:0; display:flex; justify-content:center; align-items:center; background-color:\(randomColor);">
-            <div style="font-size:48px; font-weight:bold; color:#FFFFFF;">
-                (\(x), \(y))
-            </div>
-        </body>
-        </html>
-        """
+        // TODO: implement with history
+        guard let initialConfig = initialConfigs[uuid] else { return GeneratedToken.empty }
         
-        let token = GeneratedToken(fullCollectionId: "", address: "", id: "", html: html, displayName: "", url: nil, instructions: nil, screensaver: nil)
-        return token
+        let token: GeneratedToken?
+        
+        if let collectionId = collectionIds[y] {
+            token = TokenGenerator.generateRandomToken(specificCollectionId: collectionId, notTokenId: nil)
+        } else {
+            token = TokenGenerator.generateRandomToken(specificCollectionId: y == 0 ? initialConfig.initialItemId : nil, notTokenId: nil)
+            collectionIds[y] = token?.fullCollectionId
+        }
+        
+        return token ?? .empty
     }
     
 }
