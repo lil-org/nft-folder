@@ -9,8 +9,6 @@ struct MobilePlayerConfig: Hashable, Codable, Identifiable {
 }
 
 private let doNotShowInstructionsTmp = true
-private let buttonIconSize: CGFloat = 23
-private let buttonPadding: CGFloat = 10
 
 struct MobilePlayerView: View {
     @ObservedObject private var playerModel: PlayerModel
@@ -31,6 +29,14 @@ struct MobilePlayerView: View {
         self._config = config
     }
     
+    private func makeCircularImageView(image: Image) -> some View {
+        image
+            .frame(width: 23, height: 23)
+            .padding(10)
+            .background(.ultraThinMaterial)
+            .clipShape(Circle())
+    }
+    
     var body: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
@@ -48,11 +54,7 @@ struct MobilePlayerView: View {
                         Button(action: {
                             config = nil
                         }) {
-                            Images.close
-                                .frame(width: buttonIconSize, height: buttonIconSize)
-                                .padding(buttonPadding)
-                                .background(.ultraThinMaterial)
-                                .clipShape(Circle())
+                            makeCircularImageView(image: Images.close)
                         }
                         .padding()
                         Spacer()
@@ -63,11 +65,7 @@ struct MobilePlayerView: View {
                             Button(Strings.viewOnBlockscout, action: viewOnWeb)
                             Text(playerModel.currentToken.displayName)
                         } label: {
-                            Images.info
-                                .frame(width: buttonIconSize, height: buttonIconSize)
-                                .padding(buttonPadding)
-                                .background(.ultraThinMaterial)
-                                .clipShape(Circle())
+                            makeCircularImageView(image: Images.info)
                         }
                         .padding()
                     }
@@ -80,47 +78,27 @@ struct MobilePlayerView: View {
                         Button(action: {
                             goUp()
                         }) {
-                            Images.up
-                                .frame(width: buttonIconSize, height: buttonIconSize)
-                                .padding(buttonPadding)
-                                .background(.ultraThinMaterial)
-                                .clipShape(Circle())
+                            makeCircularImageView(image: Images.up)
                         }
                         Button(action: {
                             goDown()
                         }) {
-                            Images.down
-                                .frame(width: buttonIconSize, height: buttonIconSize)
-                                .padding(buttonPadding)
-                                .background(.ultraThinMaterial)
-                                .clipShape(Circle())
+                            makeCircularImageView(image: Images.down)
                         }
                         Button(action: {
                             goBack()
                         }) {
-                            Images.back
-                                .frame(width: buttonIconSize, height: buttonIconSize)
-                                .padding(buttonPadding)
-                                .background(.ultraThinMaterial)
-                                .clipShape(Circle())
+                            makeCircularImageView(image: Images.back)
                         }
                         Button(action: {
                             goForward()
                         }) {
-                            Images.forward
-                                .frame(width: buttonIconSize, height: buttonIconSize)
-                                .padding(buttonPadding)
-                                .background(.ultraThinMaterial)
-                                .clipShape(Circle())
+                            makeCircularImageView(image: Images.forward)
                         }
                         Button(action: {
                             startPip()
                         }) {
-                            Images.pip
-                                .frame(width: buttonIconSize, height: buttonIconSize)
-                                .padding(buttonPadding)
-                                .background(.ultraThinMaterial)
-                                .clipShape(Circle())
+                            makeCircularImageView(image: Images.pip)
                         }
                     }
                     .padding(.horizontal, 20)
