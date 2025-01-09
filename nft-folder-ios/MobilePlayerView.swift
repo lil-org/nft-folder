@@ -63,7 +63,7 @@ struct MobilePlayerView: View {
                     Spacer()
                     HStack(spacing: 20) {
                         Button(action: {
-                            DispatchQueue.main.async { playerModel.goBack() }
+                            goBack()
                         }) {
                             Images.back
                                 .frame(width: buttonIconSize, height: buttonIconSize)
@@ -72,7 +72,7 @@ struct MobilePlayerView: View {
                                 .clipShape(Circle())
                         }
                         Button(action: {
-                            DispatchQueue.main.async { playerModel.goForward() }
+                            goForward()
                         }) {
                             Images.forward
                                 .frame(width: buttonIconSize, height: buttonIconSize)
@@ -81,9 +81,18 @@ struct MobilePlayerView: View {
                                 .clipShape(Circle())
                         }
                         Button(action: {
-                            DispatchQueue.main.async { playerModel.changeCollection() }
+                            goUp()
                         }) {
-                            Images.changeCollection
+                            Images.up
+                                .frame(width: buttonIconSize, height: buttonIconSize)
+                                .padding(buttonPadding)
+                                .background(.ultraThinMaterial)
+                                .clipShape(Circle())
+                        }
+                        Button(action: {
+                            goDown()
+                        }) {
+                            Images.down
                                 .frame(width: buttonIconSize, height: buttonIconSize)
                                 .padding(buttonPadding)
                                 .background(.ultraThinMaterial)
@@ -124,6 +133,26 @@ struct MobilePlayerView: View {
                 }
             }
         }
+    }
+    
+    private func goForward() {
+        // TODO: remake
+        DispatchQueue.main.async { playerModel.goForward() }
+    }
+    
+    private func goBack() {
+        // TODO: remake
+        DispatchQueue.main.async { playerModel.goBack() }
+    }
+    
+    private func goUp() {
+        // TODO: remake
+        DispatchQueue.main.async { playerModel.goBack() }
+    }
+    
+    private func goDown() {
+        // TODO: remake
+        DispatchQueue.main.async { playerModel.changeCollection() }
     }
     
     private func viewOnWeb() {

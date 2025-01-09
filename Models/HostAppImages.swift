@@ -18,5 +18,7 @@ extension Images {
     static let forward = Image(systemName: "chevron.forward")
     static let info = Image(systemName: "info")
     static let changeCollection = Image(systemName: "forward")
+    static let up = Image(systemName: "chevron.up")
+    static let down = Image(systemName: "chevron.down")
     
 }
