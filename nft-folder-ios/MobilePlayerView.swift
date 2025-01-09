@@ -32,6 +32,8 @@ struct MobilePlayerView: View {
     
     var body: some View {
         ZStack {
+            Color.black.edgesIgnoringSafeArea(.all)
+            
             FourDirectionalPlayerContainerView()
                 .edgesIgnoringSafeArea(.all)
                 .onTapGesture {
