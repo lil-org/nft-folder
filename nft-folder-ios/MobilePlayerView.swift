@@ -33,7 +33,7 @@ struct MobilePlayerView: View {
         image
             .frame(width: 23, height: 23)
             .padding(10)
-            .background(.ultraThinMaterial)
+            .background(.thinMaterial)
             .clipShape(Circle())
     }
     
