@@ -55,7 +55,7 @@ func write(_ newValue: String, englishOriginal: String, metadataKind: MetadataKi
         toWrite = newValue
     }
     
-    let actualPlatformsToWrite: [Platform] = platform == .common ? [.macos, .tvos, .visionos] : [platform]
+    let actualPlatformsToWrite: [Platform] = platform == .common ? [.ios, .macos, .tvos, .visionos] : [platform]
     for p in actualPlatformsToWrite {
         let url = URL(fileURLWithPath: projectDir + "/fastlane/metadata/\(p.rawValue)/" + "\(language.metadataLocalizationKey)/\(metadataKind.fileName).txt")
         let data = toWrite.data(using: .utf8)!
