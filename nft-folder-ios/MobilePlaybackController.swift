@@ -23,10 +23,16 @@ class MobilePlaybackController {
     private var initialConfigs = [UUID: MobilePlayerConfig]()
     private var tokensDataSources = [UUID: GeneratedTokensDataSource]()
     
-    func showNewToken(displayId: UUID, token: GeneratedToken) {
-        guard let display = displays[displayId] else { return }
-        // TODO: implement
-        // TODO: push the token into history and navigate player down or forward – depending if it is from the same or different collection
+    func showNewToken(displayId: UUID, token: GeneratedToken, sameCollection: Bool) {
+        guard let _ = displays[displayId] else { return }
+        
+        // TODO: push into history
+        
+        if sameCollection {
+            goForward(uuid: displayId)
+        } else {
+            goDown(uuid: displayId)
+        }
     }
     
     func goForward(uuid: UUID) {
@@ -100,7 +106,16 @@ private class GeneratedTokensDataSource {
                 }
             }
         } else {
-            token = TokenGenerator.generateRandomToken(specificCollectionId: coordinate.y == 0 ? initialCollectionId : nil, notTokenId: nil)
+            if coordinate.y == 0 {
+                if let specificToken = specificInitialToken {
+                    token = TokenGenerator.generateRandomToken(specificCollectionId: specificToken.fullCollectionId, specificInputTokenId: specificToken.id)
+                } else {
+                    token = TokenGenerator.generateRandomToken(specificCollectionId: initialCollectionId, notTokenId: nil)
+                }
+            } else {
+                token = TokenGenerator.generateRandomToken(specificCollectionId: nil, notTokenId: nil)
+            }
+
             if let token = token {
                 collectionIds[coordinate.y] = token.fullCollectionId
                 tokenIds[token.fullCollectionId] = [coordinate.x: token.id]

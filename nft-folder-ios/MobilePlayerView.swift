@@ -120,7 +120,8 @@ struct MobilePlayerView: View {
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name.restoreMinimizedPip)) { notification in
             if let token = notification.object as? GeneratedToken {
                 if token.id != currentToken.id {
-                    DispatchQueue.main.async { MobilePlaybackController.shared.showNewToken(displayId: initialConfig.id, token: token)}
+                    let sameCollection = token.fullCollectionId == currentToken.fullCollectionId
+                    DispatchQueue.main.async { MobilePlaybackController.shared.showNewToken(displayId: initialConfig.id, token: token, sameCollection: sameCollection)}
                 }
             }
         }
