@@ -52,8 +52,7 @@ class FourDirectionalPlayerContainer: UIViewController, FourDirectionalPlayerDat
     }
     
     func navigate(_ direction: PlaybackNavigationDirection) {
-        // TODO: implement
-        print("FourDirectionalPlayerContainer navigate", direction)
+        verticalVC.navigate(direction)
     }
     
     fileprivate func getHtml(x: Int, y: Int) -> String {
@@ -244,6 +243,7 @@ private class VerticalPageViewController: UIPageViewController, UIPageViewContro
     let horizontal2: HorizontalPageViewController
     let horizontal3: HorizontalPageViewController
     
+    private var isNavigating = false
     private var latestHorizontalIndexes = [Int: Int]()
 
     init(fourDirectionalPlayerDataSource: FourDirectionalPlayerDataSource) {
@@ -264,6 +264,31 @@ private class VerticalPageViewController: UIPageViewController, UIPageViewContro
         setViewControllers([horizontal1], direction: .forward, animated: false, completion: nil)
     }
 
+    func navigate(_ direction: PlaybackNavigationDirection) {
+        guard !isNavigating, let currentHorizontalController = viewControllers?.first as? HorizontalPageViewController else { return }
+        
+        isNavigating = true
+        let pageViewControllerDirection: UIPageViewController.NavigationDirection
+        let targetViewControllers: [UIViewController]
+        
+        switch direction {
+        case .up:
+            guard let targetViewController = pageViewController(self, viewControllerBefore: currentHorizontalController) else { return }
+            pageViewControllerDirection = .reverse
+            targetViewControllers = [targetViewController]
+        case .down:
+            guard let targetViewController = pageViewController(self, viewControllerAfter: currentHorizontalController) else { return }
+            pageViewControllerDirection = .forward
+            targetViewControllers = [targetViewController]
+        case .back, .forward:
+            return // TODO: pass to horizontal. pass animating completion there as well to prevent simultaneous animations
+        }
+        pageViewController(self, willTransitionTo: targetViewControllers)
+        setViewControllers(targetViewControllers, direction: pageViewControllerDirection, animated: true) { [weak self] finished in
+            self?.isNavigating = false
+        }
+    }
+    
     func pageViewController(_ pvc: UIPageViewController, viewControllerBefore vc: UIViewController) -> UIViewController? {
         switch vc {
         case horizontal1:
