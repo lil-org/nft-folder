@@ -11,22 +11,23 @@ struct MobilePlayerConfig: Hashable, Codable, Identifiable {
 private let doNotShowInstructionsTmp = true
 
 struct MobilePlayerView: View {
-    @ObservedObject private var playerModel: PlayerModel
-    @Binding var config: MobilePlayerConfig?
+    
+    private let initialConfig: MobilePlayerConfig
+    private let dismiss: () -> Void
+    
     @State private var showControls = false
     @State private var isAllowedToHideStatusBar = false
+
+    @ObservedObject private var playerModel: PlayerModel
     
-    init(config: Binding<MobilePlayerConfig?>) {
-        if let c = config.wrappedValue {
-            if let token = c.specificToken {
-                self.playerModel = PlayerModel(token: token)
-            } else {
-                self.playerModel = PlayerModel(specificCollectionId: c.initialItemId, notTokenId: nil)
-            }
+    init(config: MobilePlayerConfig, dismiss: @escaping () -> Void) {
+        if let token = config.specificToken {
+            self.playerModel = PlayerModel(token: token)
         } else {
-            self.playerModel = PlayerModel(specificCollectionId: nil, notTokenId: nil)
+            self.playerModel = PlayerModel(specificCollectionId: config.initialItemId, notTokenId: nil)
         }
-        self._config = config
+        self.initialConfig = config
+        self.dismiss = dismiss
     }
     
     private func makeCircularImageView(image: Image) -> some View {
@@ -52,7 +53,7 @@ struct MobilePlayerView: View {
                 VStack {
                     HStack {
                         Button(action: {
-                            config = nil
+                            dismiss()
                         }) {
                             makeCircularImageView(image: Images.close)
                         }

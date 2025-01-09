@@ -39,10 +39,10 @@ struct MobileCollectionsView: View {
                     }
                 }
             }
-            if let _ = selectedConfig {
-                MobilePlayerView(config: $selectedConfig)
-                    .persistentSystemOverlays(.hidden)
-                    .transition(.opacity)
+            if let selectedConfig = selectedConfig {
+                MobilePlayerView(config: selectedConfig) {
+                    self.selectedConfig = nil
+                }.persistentSystemOverlays(.hidden).transition(.opacity).id(selectedConfig.id)
             }
         }
         .animation(.easeInOut, value: selectedConfig)
