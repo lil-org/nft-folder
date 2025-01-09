@@ -42,6 +42,7 @@ struct MobileCollectionsView: View {
             if let selectedConfig = selectedConfig {
                 MobilePlayerView(config: selectedConfig) {
                     self.selectedConfig = nil
+                    MobilePlaybackController.shared.stopAndDisconnect(uuid: selectedConfig.id)
                 }.persistentSystemOverlays(.hidden).transition(.opacity).id(selectedConfig.id)
             }
         }

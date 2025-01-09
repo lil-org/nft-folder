@@ -119,26 +119,26 @@ struct MobilePlayerView: View {
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name.restoreMinimizedPip)) { notification in
             if let token = notification.object as? GeneratedToken {
                 if token.id != getCurrentToken().id {
-                    DispatchQueue.main.async { MobilePlaybackController.shared.showNewToken(token) }
+                    DispatchQueue.main.async { MobilePlaybackController.shared.showNewToken(displayId: initialConfig.id, token: token)}
                 }
             }
         }
     }
     
     private func goForward() {
-        MobilePlaybackController.shared.goForward()
+        MobilePlaybackController.shared.goForward(uuid: initialConfig.id)
     }
     
     private func goBack() {
-        MobilePlaybackController.shared.goBack()
+        MobilePlaybackController.shared.goBack(uuid: initialConfig.id)
     }
     
     private func goUp() {
-        MobilePlaybackController.shared.goUp()
+        MobilePlaybackController.shared.goUp(uuid: initialConfig.id)
     }
     
     private func goDown() {
-        MobilePlaybackController.shared.goDown()
+        MobilePlaybackController.shared.goDown(uuid: initialConfig.id)
     }
     
     private func viewOnWeb() {
@@ -152,7 +152,7 @@ struct MobilePlayerView: View {
     }
     
     private func getCurrentToken() -> GeneratedToken {
-        return MobilePlaybackController.shared.getCurrentToken(config: initialConfig)
+        return MobilePlaybackController.shared.getCurrentToken(displayId: initialConfig.id)
     }
     
 }

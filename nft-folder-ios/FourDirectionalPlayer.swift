@@ -4,39 +4,6 @@ import UIKit
 import SwiftUI
 import WebKit
 
-struct MobilePlaybackController {
-    
-    private init() {}
-    
-    static let shared = MobilePlaybackController()
-    
-    func getCurrentToken(config: MobilePlayerConfig) -> GeneratedToken {
-        // TODO: implement
-        return GeneratedToken.empty
-    }
-    
-    func showNewToken(_ token: GeneratedToken) {
-        // TODO: implement
-    }
-    
-    func goForward() {
-        // TODO: implement
-    }
-    
-    func goBack() {
-        // TODO: implement
-    }
-    
-    func goUp() {
-        // TODO: implement
-    }
-    
-    func goDown() {
-        // TODO: implement
-    }
-    
-}
-
 struct FourDirectionalPlayerContainerView: UIViewControllerRepresentable {
     
     private let initialConfig: MobilePlayerConfig
@@ -54,7 +21,7 @@ struct FourDirectionalPlayerContainerView: UIViewControllerRepresentable {
     }
 }
 
-class FourDirectionalPlayerContainer: UIViewController, FourDirectionalPlayerDataSource {
+class FourDirectionalPlayerContainer: UIViewController, FourDirectionalPlayerDataSource, MobilePlaybackControllerDisplay {
     
     private let initialConfig: MobilePlayerConfig
     
@@ -71,6 +38,7 @@ class FourDirectionalPlayerContainer: UIViewController, FourDirectionalPlayerDat
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        MobilePlaybackController.shared.subscribe(config: initialConfig, display: self)
         addChild(verticalVC)
         view.addSubview(verticalVC.view)
         verticalVC.didMove(toParent: self)
@@ -83,18 +51,13 @@ class FourDirectionalPlayerContainer: UIViewController, FourDirectionalPlayerDat
         ])
     }
     
+    func navigate(_ direction: PlaybackNavigationDirection) {
+        // TODO: implement
+        print("FourDirectionalPlayerContainer navigate", direction)
+    }
+    
     fileprivate func getHtml(x: Int, y: Int) -> String {
-        let randomColor = String(format: "#%06X", Int.random(in: 0x000000...0xFFFFFF))
-        let html = """
-        <html>
-        <body style="margin:0; display:flex; justify-content:center; align-items:center; background-color:\(randomColor);">
-            <div style="font-size:48px; font-weight:bold; color:#FFFFFF;">
-                (\(x), \(y))
-            </div>
-        </body>
-        </html>
-        """
-        return html
+        return MobilePlaybackController.shared.getToken(uuid: initialConfig.id, x: x, y: y).html
     }
     
 }
