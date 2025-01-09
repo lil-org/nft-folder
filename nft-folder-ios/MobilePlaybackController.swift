@@ -102,13 +102,15 @@ private class GeneratedTokensDataSource {
     
     func getToken(coordinate: PlayerCoordinate) -> GeneratedToken {
         // TODO: it gets called twice for each new token — optimize it
-        // TODO: pass notTokenId when possible to avoid duplicates
         let token: GeneratedToken?
         if let collectionId = collectionIds[coordinate.y] {
             if let tokenId = tokenIds[collectionId]?[coordinate.x] {
                 token = TokenGenerator.generateRandomToken(specificCollectionId: collectionId, specificInputTokenId: tokenId)
             } else {
-                token = TokenGenerator.generateRandomToken(specificCollectionId: collectionId, notTokenId: nil)
+                let biggerX = coordinate.x + 1
+                let smallerX = coordinate.x - 1
+                let notTokenId = tokenIds[collectionId]?[smallerX] ?? tokenIds[collectionId]?[biggerX]
+                token = TokenGenerator.generateRandomToken(specificCollectionId: collectionId, notTokenId: notTokenId)
                 if let token = token {
                     tokenIds[token.fullCollectionId]?[coordinate.x] = token.id
                 }
