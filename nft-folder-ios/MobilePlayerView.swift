@@ -72,22 +72,22 @@ struct MobilePlayerView: View {
                         Button(action: {
                             goUp()
                         }) {
-                            makeCircularImageView(image: Images.up)
+                            makeCircularImageView(image: Images.back)
                         }
                         Button(action: {
                             goDown()
                         }) {
-                            makeCircularImageView(image: Images.down)
+                            makeCircularImageView(image: Images.forward)
                         }
                         Button(action: {
                             goBack()
                         }) {
-                            makeCircularImageView(image: Images.back)
+                            makeCircularImageView(image: Images.up)
                         }
                         Button(action: {
                             goForward()
                         }) {
-                            makeCircularImageView(image: Images.forward)
+                            makeCircularImageView(image: Images.down)
                         }
                         Button(action: {
                             startPip()

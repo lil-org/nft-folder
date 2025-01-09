@@ -158,7 +158,7 @@ private class HorizontalPageViewController: UIPageViewController, UIPageViewCont
         pageA = SpecificPageViewController(horizontalIndex: 0, verticalIndex: verticalIndex, fourDirectionalPlayerDataSource: fourDirectionalPlayerDataSource)
         pageB = SpecificPageViewController(horizontalIndex: 1, verticalIndex: verticalIndex, fourDirectionalPlayerDataSource: fourDirectionalPlayerDataSource)
         pageC = SpecificPageViewController(horizontalIndex: -1, verticalIndex: verticalIndex, fourDirectionalPlayerDataSource: fourDirectionalPlayerDataSource)
-        super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+        super.init(transitionStyle: .scroll, navigationOrientation: .vertical, options: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -275,7 +275,7 @@ private class VerticalPageViewController: UIPageViewController, UIPageViewContro
         horizontal1 = HorizontalPageViewController(verticalIndex: 0, fourDirectionalPlayerDataSource: fourDirectionalPlayerDataSource)
         horizontal2 = HorizontalPageViewController(verticalIndex: 1, fourDirectionalPlayerDataSource: fourDirectionalPlayerDataSource)
         horizontal3 = HorizontalPageViewController(verticalIndex: -1, fourDirectionalPlayerDataSource: fourDirectionalPlayerDataSource)
-        super.init(transitionStyle: .scroll, navigationOrientation: .vertical, options: nil)
+        super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     }
 
     required init?(coder: NSCoder) {
