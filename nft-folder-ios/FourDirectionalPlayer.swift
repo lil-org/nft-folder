@@ -4,16 +4,23 @@ import UIKit
 import SwiftUI
 import WebKit
 
+struct PlayerCoordinate: Hashable {
+    let x: Int
+    let y: Int
+}
+
 struct FourDirectionalPlayerContainerView: UIViewControllerRepresentable {
     
     private let initialConfig: MobilePlayerConfig
+    private let onCoordinateUpdate: ((PlayerCoordinate) -> Void)
     
-    init(initialConfig: MobilePlayerConfig) {
+    init(initialConfig: MobilePlayerConfig, onCoordinateUpdate: @escaping (PlayerCoordinate) -> Void) {
         self.initialConfig = initialConfig
+        self.onCoordinateUpdate = onCoordinateUpdate
     }
     
     func makeUIViewController(context: Context) -> FourDirectionalPlayerContainer {
-        return FourDirectionalPlayerContainer(initialConfig: initialConfig)
+        return FourDirectionalPlayerContainer(initialConfig: initialConfig, onCoordinateUpdate: onCoordinateUpdate)
     }
     
     func updateUIViewController(_ uiViewController: FourDirectionalPlayerContainer, context: Context) {
@@ -24,11 +31,14 @@ struct FourDirectionalPlayerContainerView: UIViewControllerRepresentable {
 class FourDirectionalPlayerContainer: UIViewController, FourDirectionalPlayerDataSource, MobilePlaybackControllerDisplay {
     
     private let initialConfig: MobilePlayerConfig
+    private let onCoordinateUpdate: ((PlayerCoordinate) -> Void)
     
     private lazy var verticalVC = VerticalPageViewController(fourDirectionalPlayerDataSource: self)
+    private var renderedCoordinates = Set<PlayerCoordinate>()
 
-    init(initialConfig: MobilePlayerConfig) {
+    init(initialConfig: MobilePlayerConfig, onCoordinateUpdate: @escaping (PlayerCoordinate) -> Void) {
         self.initialConfig = initialConfig
+        self.onCoordinateUpdate = onCoordinateUpdate
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -63,14 +73,31 @@ class FourDirectionalPlayerContainer: UIViewController, FourDirectionalPlayerDat
         return MobilePlaybackController.shared.getToken(uuid: initialConfig.id, x: x, y: y).html
     }
     
+    fileprivate func didRenderCoordinate(_ coordinate: (Int, Int)) {
+        renderedCoordinates.insert(PlayerCoordinate(x: coordinate.0, y: coordinate.1))
+        didUpdateRenderedCoordinates()
+    }
+    
+    fileprivate func didCleanupCoordinate(_ coordinate: (Int, Int)) {
+        renderedCoordinates.remove(PlayerCoordinate(x: coordinate.0, y: coordinate.1))
+        didUpdateRenderedCoordinates()
+    }
+    
+    private func didUpdateRenderedCoordinates() {
+        if renderedCoordinates.count == 1, let coordinate = renderedCoordinates.first {
+            onCoordinateUpdate(coordinate)
+        }
+    }
+    
 }
 
 private protocol FourDirectionalPlayerDataSource: AnyObject {
     
     func getHtml(x: Int, y: Int) -> String
+    func didRenderCoordinate(_ coordinate: (Int, Int))
+    func didCleanupCoordinate(_ coordinate: (Int, Int))
     
 }
-
 
 private class SpecificPageViewController: UIViewController {
     
@@ -108,6 +135,9 @@ private class SpecificPageViewController: UIViewController {
     
     private func cleanupDisplayedContent() {
         webView.loadHTMLString("", baseURL: nil)
+        if let renderedCoordinate = renderedCoordinate {
+            fourDirectionalPlayerDataSource?.didCleanupCoordinate(renderedCoordinate)
+        }
         renderedCoordinate = nil
     }
     
@@ -143,6 +173,7 @@ private class SpecificPageViewController: UIViewController {
             if let html = fourDirectionalPlayerDataSource?.getHtml(x: horizontalIndex, y: verticalIndex) {
                 webView.loadHTMLString(html, baseURL: nil)
             }
+            fourDirectionalPlayerDataSource?.didRenderCoordinate(newCoordinate)
         }
     }
     

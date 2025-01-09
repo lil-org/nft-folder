@@ -34,9 +34,11 @@ struct MobilePlayerView: View {
     var body: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
-            
-            FourDirectionalPlayerContainerView(initialConfig: initialConfig)
-                .edgesIgnoringSafeArea(.all)
+            FourDirectionalPlayerContainerView(initialConfig: initialConfig, onCoordinateUpdate: { newCoordinate in
+                print(newCoordinate)
+                // TODO: update state
+                // TODO: mb stop using get current token, get specific instead
+            }).edgesIgnoringSafeArea(.all)
                 .onTapGesture {
                     showControls.toggle()
                 }
