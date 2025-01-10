@@ -53,7 +53,7 @@ struct MobileCollectionsView: View {
             if let token = notification.object as? GeneratedToken, selectedConfig == nil {
                 selectedConfig = MobilePlayerConfig(initialItemId: nil, specificToken: token)
             }
-        }
+        }.persistentSystemOverlays(.hidden)
     }
     
     private func createGrid() -> some View {
