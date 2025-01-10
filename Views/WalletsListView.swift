@@ -160,6 +160,11 @@ struct WalletsListView: View {
                         Images.ellipsis
                     }.popover(isPresented: $showMorePreferences, arrowEdge: .bottom) {
                         VStack(spacing: 13) {
+                            Button(Strings.rateOnTheAppStore) {
+                                NSWorkspace.shared.open(URL.writeAppStoreReview)
+                                showSettingsPopup = false
+                                showMorePreferences = false
+                            }
                             Button(Strings.restoreHiddenItems) {
                                 restoreHiddenItems()
                                 showSettingsPopup = false
@@ -170,7 +175,7 @@ struct WalletsListView: View {
                                 showSettingsPopup = false
                                 showMorePreferences = false
                             }.buttonStyle(BorderlessButtonStyle()).foregroundColor(.red)
-                        }.frame(height: 69).padding()
+                        }.frame(height: 81).padding()
                     }
                     Spacer()
                     Button(Strings.ok, action: {
