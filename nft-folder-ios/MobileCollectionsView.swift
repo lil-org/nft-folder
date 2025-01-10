@@ -31,6 +31,8 @@ struct MobileCollectionsView: View {
                         Button(Strings.zora) { UIApplication.shared.open(URL.zora) }
                         Button(Strings.mail) { UIApplication.shared.open(URL.mail) }
                         Button(Strings.x) { UIApplication.shared.open(URL.x) }
+                        Divider()
+                        Button(Strings.rateOnTheAppStore) { UIApplication.shared.open(URL.writeAppStoreReview) }
                     } label: {
                         Images.preferences
                     }
