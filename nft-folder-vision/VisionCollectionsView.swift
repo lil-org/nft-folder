@@ -28,6 +28,8 @@ struct VisionCollectionsView: View {
                     Button(Strings.zora, action: { UIApplication.shared.open(URL.zora) })
                     Button(Strings.mail, action: { UIApplication.shared.open(URL.mail) })
                     Button(Strings.x, action: { UIApplication.shared.open(URL.x) })
+                    Divider()
+                    Button(Strings.rateOnTheAppStore) { UIApplication.shared.open(URL.writeAppStoreReview) }
                 } label: {
                     Images.preferences
                 }
