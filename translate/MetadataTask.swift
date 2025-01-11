@@ -56,8 +56,6 @@ struct MetadataTask: AI.Task {
         case .name, .subtitle:
             clarifications = """
             feel free to tune it to make \(language.name) version sound natural.
-            
-            keep it lowercased.
             """
         case .keywords:
             clarifications = """
