@@ -805,6 +805,11 @@
 		2CB308E62C30AD0000D914A5 /* NSImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSImage.swift; sourceTree = "<group>"; };
 		2CB392002C1E15630011CC94 /* TranslateMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateMetadata.swift; sourceTree = "<group>"; };
 		2CB392022C1E162C0011CC94 /* TranslateStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateStrings.swift; sourceTree = "<group>"; };
+		2CB67BF62D32D22400C5D799 /* 0_APP_IPAD_PRO_3GEN_129_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0_APP_IPAD_PRO_3GEN_129_0.png; sourceTree = "<group>"; };
+		2CB67BF72D32D22400C5D799 /* 0_APP_IPAD_PRO_129_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0_APP_IPAD_PRO_129_0.png; sourceTree = "<group>"; };
+		2CB67BF82D32D22400C5D799 /* 0_APP_IPHONE_67_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0_APP_IPHONE_67_0.png; sourceTree = "<group>"; };
+		2CB67BF92D32D22400C5D799 /* 1_APP_IPHONE_67_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1_APP_IPHONE_67_1.png; sourceTree = "<group>"; };
+		2CB67BFA2D32D22400C5D799 /* 2_APP_IPHONE_67_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2_APP_IPHONE_67_2.png; sourceTree = "<group>"; };
 		2CBC42352C41772E00279CED /* nft-screen-saver.saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "nft-screen-saver.saver"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CBC42372C41772E00279CED /* NftScreenSaverView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NftScreenSaverView.h; sourceTree = "<group>"; };
 		2CBC42392C41772E00279CED /* NftScreenSaverView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NftScreenSaverView.m; sourceTree = "<group>"; };
@@ -3002,6 +3007,26 @@
 			path = "screen-saver-webview";
 			sourceTree = "<group>";
 		};
+		2CB67BF02D32D1CA00C5D799 /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				2CB67BFB2D32D22400C5D799 /* en-GB */,
+			);
+			path = ios;
+			sourceTree = "<group>";
+		};
+		2CB67BFB2D32D22400C5D799 /* en-GB */ = {
+			isa = PBXGroup;
+			children = (
+				2CB67BF62D32D22400C5D799 /* 0_APP_IPAD_PRO_3GEN_129_0.png */,
+				2CB67BF72D32D22400C5D799 /* 0_APP_IPAD_PRO_129_0.png */,
+				2CB67BF82D32D22400C5D799 /* 0_APP_IPHONE_67_0.png */,
+				2CB67BF92D32D22400C5D799 /* 1_APP_IPHONE_67_1.png */,
+				2CB67BFA2D32D22400C5D799 /* 2_APP_IPHONE_67_2.png */,
+			);
+			path = "en-GB";
+			sourceTree = "<group>";
+		};
 		2CBC42362C41772E00279CED /* nft-screen-saver */ = {
 			isa = PBXGroup;
 			children = (
@@ -3067,6 +3092,7 @@
 		2CC0C6392C6A44BB00FB56BB /* screenshots */ = {
 			isa = PBXGroup;
 			children = (
+				2CB67BF02D32D1CA00C5D799 /* ios */,
 				2CC0C6302C6A44BB00FB56BB /* macos */,
 				2CC0C6352C6A44BB00FB56BB /* tvos */,
 				2CC0C6382C6A44BB00FB56BB /* visionos */,
