@@ -25,7 +25,7 @@ struct Strings {
     static let newFolderMenuItem = newFolder
     static let didNotUpload = loc("Did not upload")
     static let retry = loc("Retry")
-    static let nftFolder = loc("nft folder")
+    static let nftFolder = loc("Nft Folder")
     static let somethingWentWrong = loc("Something went wrong")
     static let maxFileSize50mb = loc("Max file size 50 MB")
     static let downloadGlb = loc("Download .glb files")

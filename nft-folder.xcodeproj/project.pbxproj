@@ -775,7 +775,7 @@
 		2CA34B722B08C71800DAB623 /* ExtensionAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ExtensionAssets.xcassets; sourceTree = "<group>"; };
 		2CA34B742B08CA8200DAB623 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2CA3C2A02B18C91600AF33D6 /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
-		2CA4CF512B07F75F00CC75F4 /* nft folder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nft folder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CA4CF512B07F75F00CC75F4 /* Nft Folder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nft Folder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CA4CF542B07F75F00CC75F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2CA4CF582B07F76000CC75F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2CA4CF5B2B07F76000CC75F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -2953,7 +2953,7 @@
 		2CA4CF522B07F75F00CC75F4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2CA4CF512B07F75F00CC75F4 /* nft folder.app */,
+				2CA4CF512B07F75F00CC75F4 /* Nft Folder.app */,
 				2CA34B622B08C01300DAB623 /* nft-finder-extension.appex */,
 				2C622BB62BF3C1EA0003B932 /* translate */,
 				2C4659992C308F86008CF97F /* tools */,
@@ -5205,7 +5205,7 @@
 			packageProductDependencies = (
 			);
 			productName = "nft-folder";
-			productReference = 2CA4CF512B07F75F00CC75F4 /* nft folder.app */;
+			productReference = 2CA4CF512B07F75F00CC75F4 /* Nft Folder.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2CBC42342C41772E00279CED /* nft-screen-saver */ = {
@@ -6186,7 +6186,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 2.0.22;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Nft Folder";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -6221,7 +6221,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 2.0.22;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Nft Folder";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
