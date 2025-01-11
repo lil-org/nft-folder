@@ -53,7 +53,11 @@ struct MetadataTask: AI.Task {
         }
         
         switch metadataKind {
-        case .name, .subtitle:
+        case .name:
+            clarifications = """
+            i prefer NFT to be spelled as Nft (in Russian: НФТ as Нфт). use a similar capitalization style for a translation.
+            """
+        case .subtitle:
             clarifications = """
             feel free to tune it to make \(language.name) version sound natural.
             """
