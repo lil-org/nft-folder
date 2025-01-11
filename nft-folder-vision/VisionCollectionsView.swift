@@ -79,6 +79,7 @@ struct VisionCollectionsView: View {
                 .foregroundColor(.white)
                 .padding(.horizontal, 1)
                 .background(Color.black.opacity(0.7)).cornerRadius(3)
+                .multilineTextAlignment(.leading)
                 .padding(.leading, 4).padding(.bottom, 3).onTapGesture {
                     onTap()
                 }

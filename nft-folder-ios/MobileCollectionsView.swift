@@ -95,6 +95,7 @@ struct MobileCollectionsView: View {
                 .cornerRadius(3)
                 .padding(.leading, 4)
                 .padding(.bottom, 3)
+                .multilineTextAlignment(.leading)
                 .onTapGesture { onTap() }
             Spacer()
         }
