@@ -77,21 +77,25 @@ struct MobilePlayerView: View {
                         }) {
                             makeCircularImageView(image: Images.back)
                         }
+                        .keyboardShortcut(.leftArrow, modifiers: [])
                         Button(action: {
                             goDown()
                         }) {
                             makeCircularImageView(image: Images.forward)
                         }
+                        .keyboardShortcut(.rightArrow, modifiers: [])
                         Button(action: {
                             goBack()
                         }) {
                             makeCircularImageView(image: Images.up)
                         }
+                        .keyboardShortcut(.upArrow, modifiers: [])
                         Button(action: {
                             goForward()
                         }) {
                             makeCircularImageView(image: Images.down)
                         }
+                        .keyboardShortcut(.downArrow, modifiers: [])
                         Button(action: {
                             startPip()
                         }) {
