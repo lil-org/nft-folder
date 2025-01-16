@@ -59,6 +59,11 @@ class FourDirectionalPlayerContainer: UIViewController, FourDirectionalPlayerDat
             verticalVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             verticalVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
+        UIApplication.shared.isIdleTimerDisabled = true
+    }
+    
+    deinit {
+        UIApplication.shared.isIdleTimerDisabled = false
     }
     
     func getCurrentCoordinate() -> (Int, Int) {
