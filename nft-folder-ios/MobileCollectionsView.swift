@@ -8,6 +8,13 @@ struct MobileCollectionsView: View {
     @State private var showMorePreferences = false
     @State private var selectedConfig: MobilePlayerConfig?
     
+    init() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        appearance.backgroundColor = UIColor.quaternarySystemFill
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+    }
+    
     var body: some View {
         ZStack {
             NavigationStack {
@@ -57,7 +64,7 @@ struct MobileCollectionsView: View {
     }
     
     private func createGrid() -> some View {
-        let gridLayout = [GridItem(.adaptive(minimum: UIDevice.current.userInterfaceIdiom == .pad ? 130 : 100), spacing: 0)]
+        let gridLayout = [GridItem(.adaptive(minimum: UIDevice.current.userInterfaceIdiom == .pad ? 130 : 98), spacing: 0)]
         return LazyVGrid(columns: gridLayout, alignment: .leading, spacing: 0) {
             ForEach(suggestedItems) { item in
                 Button {
