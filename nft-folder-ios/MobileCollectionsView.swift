@@ -28,7 +28,6 @@ struct MobileCollectionsView: View {
                         Text(Strings.sendFeedback)
                         Button(Strings.warpcast) { UIApplication.shared.open(URL.warpcast) }
                         Button(Strings.github) { UIApplication.shared.open(URL.github) }
-                        Button(Strings.zora) { UIApplication.shared.open(URL.zora) }
                         Button(Strings.mail) { UIApplication.shared.open(URL.mail) }
                         Button(Strings.x) { UIApplication.shared.open(URL.x) }
                         Divider()
