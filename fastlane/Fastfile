@@ -123,6 +123,24 @@ lane :release_tvos do
   end
 end
 
+lane :release_ios do
+  update_and_login
+  platform :ios do
+    gym(scheme: "nft-folder-ios", output_directory: "fastlane/build/ios", clean: true)
+    deliver(
+      metadata_path: "./fastlane/metadata/ios",
+      ignore_language_directory_validation: true,
+      platform: "ios",
+      run_precheck_before_submit: false,
+      force: true,
+      submit_for_review: true,
+      automatic_release: true,
+      submission_information: { add_id_info_uses_idfa: false, export_compliance_uses_encryption: false },
+    )
+    clean
+  end
+end
+
 lane :release_visionos do
   platform :xros do
     gym(scheme: "nft-folder-vision", output_directory: "fastlane/build/visionos", clean: true)
