@@ -43,6 +43,9 @@ struct MobilePlayerView: View {
                 .onTapGesture {
                     showControls.toggle()
                 }
+                .onLongPressGesture {
+                    showControls.toggle()
+                }
                 .statusBar(hidden: isAllowedToHideStatusBar && !showControls)
             
             if showControls {

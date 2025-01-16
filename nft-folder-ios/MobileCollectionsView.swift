@@ -44,6 +44,7 @@ struct MobileCollectionsView: View {
                 MobilePlayerView(config: selectedConfig) {
                     self.selectedConfig = nil
                     MobilePlaybackController.shared.stopAndDisconnect(uuid: selectedConfig.id)
+                    Haptic.selectionChanged()
                 }.persistentSystemOverlays(.hidden).transition(.opacity).id(selectedConfig.id)
             }
         }
@@ -127,9 +128,11 @@ struct MobileCollectionsView: View {
     
     private func didSelectSuggestedItem(_ item: SuggestedItem) {
         selectedConfig = MobilePlayerConfig(initialItemId: item.id)
+        Haptic.selectionChanged()
     }
     
     private func showRandomPlayer() {
         selectedConfig = MobilePlayerConfig(initialItemId: nil)
+        Haptic.selectionChanged()
     }
 }
