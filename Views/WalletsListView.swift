@@ -92,6 +92,7 @@ struct WalletsListView: View {
                         }
                         
                         ToolbarItemGroup() {
+                            PipPlaceholderOverlay().frame(width: 1, height: 1).position(x: 0, y: 0)
                             Spacer()
                             if isDownloading {
                                 Button(action: {
@@ -446,7 +447,11 @@ struct WalletsListView: View {
     
     private func autoStartPlayer(id: String) -> Bool {
         if TokenGenerator.canGenerate(id: id) {
-            Navigator.shared.showPlayer(id: id)
+            
+            let token = TokenGenerator.generateRandomToken(specificCollectionId: id, notTokenId: nil)
+            NotificationCenter.default.post(name: Notification.Name.togglePip, object: token)
+            
+            //            Navigator.shared.showPlayer(id: id)
             return true
         } else {
             return false
