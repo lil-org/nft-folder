@@ -268,6 +268,9 @@ struct WalletsListView: View {
                         }
                     VStack {
                         Spacer()
+                        if TokenGenerator.canGenerate(id: item.id) {
+                            Images.canGenerateIndicator
+                        }
                         gridItemText(item.name) {
                             didSelectSuggestedItem(item, noAutoPlayer: false)
                         }

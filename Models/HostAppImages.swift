@@ -20,5 +20,6 @@ extension Images {
     static let changeCollection = Image(systemName: "forward")
     static let up = Image(systemName: "chevron.up")
     static let down = Image(systemName: "chevron.down")
+    static let canGenerateIndicator = Image(systemName: "play.circle.fill")
     
 }
