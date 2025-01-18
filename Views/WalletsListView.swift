@@ -269,7 +269,9 @@ struct WalletsListView: View {
                     VStack {
                         if TokenGenerator.canGenerate(id: item.id) {
                             HStack {
-                                Images.canGenerateIndicator.frame(width: 27, height: 27)
+                                Images.canGenerateIndicator.frame(width: 27, height: 27).onTapGesture {
+                                    didSelectSuggestedItem(item, noAutoPlayer: false)
+                                }
                                 Spacer()
                             }
                         }
