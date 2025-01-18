@@ -88,6 +88,7 @@ class PipPlaceholderView: NSView {
     
     private func createNewCustomPipView() -> NSView {
         // TODO: make auto reloading
+        // TODO: reuse desktop webview initializer
         let webView = WKWebView()
         if let token = currentPipToken {
             webView.loadHTMLString(token.html, baseURL: nil)
