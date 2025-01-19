@@ -43,6 +43,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         allDownloadsManager.start()
         StatusBarItem.shared.showIfNeeded()
         AvatarService.setup()
+        
+        AmbientAgent.start() // TODO: dev tmp, only start it when pip is needed
     }
     
     private func cleanupDefaultsIfNeeded() {

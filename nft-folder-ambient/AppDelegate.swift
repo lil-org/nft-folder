@@ -14,21 +14,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func createMainWindow() {
-        let windowRect = NSRect(x: 0, y: 0, width: 800, height: 600)
-
+        let windowRect = NSRect(x: 0, y: 0, width: 1, height: 1) // TODO: try 0, 0 too
+        
         window = NSWindow(
             contentRect: windowRect,
-            styleMask: [.titled, .closable, .resizable, .miniaturizable],
+            styleMask: [.borderless],
             backing: .buffered,
             defer: false
         )
 
         window?.isReleasedWhenClosed = false
         window?.center()
+        window?.level = .floating
+        window?.isMovable = false
+        window?.ignoresMouseEvents = true
+        window?.backgroundColor = .clear
 
         let viewController = ViewController()
         window?.contentViewController = viewController
         window?.makeKeyAndOrderFront(nil)
+        window?.contentView?.isHidden = true
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
