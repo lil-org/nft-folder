@@ -44,8 +44,6 @@
 		2C09BAE42C308145009BA300 /* Suggested.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2C09BAE32C308145009BA300 /* Suggested.bundle */; };
 		2C0D86C42B08E67000106915 /* WalletsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C32B08E67000106915 /* WalletsService.swift */; };
 		2C0D86C72B08E7BF00106915 /* EnsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C62B08E7BF00106915 /* EnsResponse.swift */; };
-		2C17BDC42D3C37000015C58B /* PipPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C17BDC32D3C36FF0015C58B /* PipPlaceholderView.swift */; };
-		2C17BDC52D3C398A0015C58B /* square.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2CF08B032D2B239300D82ACA /* square.mp4 */; };
 		2C1B60B92B7D3245009949C2 /* DirectoryMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60B82B7D3245009949C2 /* DirectoryMonitor.swift */; };
 		2C1B60BD2B7D3505009949C2 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60BC2B7D3505009949C2 /* Strings.swift */; };
 		2C1B60BE2B7D3505009949C2 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60BC2B7D3505009949C2 /* Strings.swift */; };
@@ -160,6 +158,10 @@
 		2C6BA8242D3D2BFC0072B001 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C6BA81D2D3D2BFC0072B001 /* Main.storyboard */; };
 		2C6BA8262D3D2D4E0072B001 /* nft-folder-ambient.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2C6BA80B2D3D2BF50072B001 /* nft-folder-ambient.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2C6BA82A2D3D31AA0072B001 /* AmbientAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BA8292D3D31A50072B001 /* AmbientAgent.swift */; };
+		2C6BA82B2D3D388A0072B001 /* square.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2CF08B032D2B239300D82ACA /* square.mp4 */; };
+		2C6BA82C2D3D38B20072B001 /* PipPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C17BDC32D3C36FF0015C58B /* PipPlaceholderView.swift */; };
+		2C6BA82D2D3D38C90072B001 /* GeneratedToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE9A5772C3DAB03009AEAF4 /* GeneratedToken.swift */; };
+		2C6BA82E2D3D38DA0072B001 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
 		2C7134D62D30460B001E33DC /* MobilePlaybackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7134D52D304609001E33DC /* MobilePlaybackController.swift */; };
 		2C88D95D2C3872DD00009C25 /* RandomGradientShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88D95C2C3872DD00009C25 /* RandomGradientShape.swift */; };
 		2C8A42EA2B1A272600BE4166 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A42E92B1A272600BE4166 /* Network.swift */; };
@@ -2860,6 +2862,7 @@
 				2C6BA81D2D3D2BFC0072B001 /* Main.storyboard */,
 				2C6BA81E2D3D2BFC0072B001 /* nft_folder_ambient.entitlements */,
 				2C6BA81F2D3D2BFC0072B001 /* ViewController.swift */,
+				2C17BDC32D3C36FF0015C58B /* PipPlaceholderView.swift */,
 			);
 			path = "nft-folder-ambient";
 			sourceTree = "<group>";
@@ -2903,7 +2906,6 @@
 			isa = PBXGroup;
 			children = (
 				2C3B77622C3D773B000A9B52 /* DesktopWebView.swift */,
-				2C17BDC32D3C36FF0015C58B /* PipPlaceholderView.swift */,
 				2C9973FD2C4AEAAB00C058E2 /* WebViewWithMenu.swift */,
 				2CCFED972B08246800D98A2E /* WalletsListView.swift */,
 				2C1B60C52B7E1145009949C2 /* PreferencesView.swift */,
@@ -5490,6 +5492,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C6BA82B2D3D388A0072B001 /* square.mp4 in Resources */,
 				2C6BA8232D3D2BFC0072B001 /* Assets.xcassets in Resources */,
 				2C6BA8242D3D2BFC0072B001 /* Main.storyboard in Resources */,
 			);
@@ -5515,7 +5518,6 @@
 				2CA4CF592B07F76000CC75F4 /* Assets.xcassets in Resources */,
 				2CA4CF5C2B07F76000CC75F4 /* Main.storyboard in Resources */,
 				2CEF35B72C413DA000388574 /* three.js in Resources */,
-				2C17BDC52D3C398A0015C58B /* square.mp4 in Resources */,
 				2CEF35BA2C413DA000388574 /* p5js100.js in Resources */,
 				2CEF35B62C413DA000388574 /* paper.js in Resources */,
 				2C4659942C308B47008CF97F /* Covers.xcassets in Resources */,
@@ -5692,8 +5694,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C6BA82C2D3D38B20072B001 /* PipPlaceholderView.swift in Sources */,
+				2C6BA82E2D3D38DA0072B001 /* Notification.swift in Sources */,
 				2C6BA8212D3D2BFC0072B001 /* AppDelegate.swift in Sources */,
 				2C6BA8222D3D2BFC0072B001 /* ViewController.swift in Sources */,
+				2C6BA82D2D3D38C90072B001 /* GeneratedToken.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5758,7 +5763,6 @@
 				2CA34B512B08B33C00DAB623 /* WatchOnlyWallet.swift in Sources */,
 				2C4039ED2B83A4F000DB94D7 /* SharedDefaults.swift in Sources */,
 				2C88D95D2C3872DD00009C25 /* RandomGradientShape.swift in Sources */,
-				2C17BDC42D3C37000015C58B /* PipPlaceholderView.swift in Sources */,
 				2C91131A2B08F71200A8EE80 /* WalletDownloader.swift in Sources */,
 				2CF4C49E2B7FB26C000AB4A6 /* DetailedTokenMetadata.swift in Sources */,
 				2C2B5AD12B84E2DA005C38B0 /* DownloadFileTask.swift in Sources */,
