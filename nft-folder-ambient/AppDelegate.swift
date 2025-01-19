@@ -30,9 +30,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window?.ignoresMouseEvents = true
         window?.backgroundColor = .clear
 
-        let viewController = ViewController()
+        let viewController = PipPlaceholderViewController()
         window?.contentViewController = viewController
-        window?.makeKeyAndOrderFront(nil)
+        window?.makeKeyAndOrderFront(nil) // TODO: not sure it's needed
         window?.contentView?.isHidden = true
     }
 

@@ -1,16 +1,7 @@
 // ∅ 2025 lil org
 
-import SwiftUI
 import AVKit
 import WebKit
-
-struct PipPlaceholderOverlay: NSViewRepresentable {
-    func makeNSView(context: Context) -> PipPlaceholderView {
-        PipPlaceholderView(frame: .zero)
-    }
-    
-    func updateNSView(_ nsView: PipPlaceholderView, context: Context) {}
-}
 
 class PipPlaceholderView: NSView {
     private var playerLayer: AVPlayerLayer?

@@ -153,7 +153,7 @@
 		2C63720E2C418068001169E8 /* RawHtmlGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF35AC2C413AE700388574 /* RawHtmlGenerator.swift */; };
 		2C672CB12BFCEFB500E57B21 /* IpfsUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C672CB02BFCEFB500E57B21 /* IpfsUploader.swift */; };
 		2C6BA8212D3D2BFC0072B001 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BA81A2D3D2BFC0072B001 /* AppDelegate.swift */; };
-		2C6BA8222D3D2BFC0072B001 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BA81F2D3D2BFC0072B001 /* ViewController.swift */; };
+		2C6BA8222D3D2BFC0072B001 /* PipPlaceholderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BA81F2D3D2BFC0072B001 /* PipPlaceholderViewController.swift */; };
 		2C6BA8232D3D2BFC0072B001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C6BA81B2D3D2BFC0072B001 /* Assets.xcassets */; };
 		2C6BA8242D3D2BFC0072B001 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C6BA81D2D3D2BFC0072B001 /* Main.storyboard */; };
 		2C6BA8262D3D2D4E0072B001 /* nft-folder-ambient.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2C6BA80B2D3D2BF50072B001 /* nft-folder-ambient.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -778,7 +778,7 @@
 		2C6BA81B2D3D2BFC0072B001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C6BA81C2D3D2BFC0072B001 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2C6BA81E2D3D2BFC0072B001 /* nft_folder_ambient.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = nft_folder_ambient.entitlements; sourceTree = "<group>"; };
-		2C6BA81F2D3D2BFC0072B001 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2C6BA81F2D3D2BFC0072B001 /* PipPlaceholderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipPlaceholderViewController.swift; sourceTree = "<group>"; };
 		2C6BA8292D3D31A50072B001 /* AmbientAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbientAgent.swift; sourceTree = "<group>"; };
 		2C7134D52D304609001E33DC /* MobilePlaybackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobilePlaybackController.swift; sourceTree = "<group>"; };
 		2C88D95C2C3872DD00009C25 /* RandomGradientShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomGradientShape.swift; sourceTree = "<group>"; };
@@ -2858,7 +2858,7 @@
 			isa = PBXGroup;
 			children = (
 				2C6BA81A2D3D2BFC0072B001 /* AppDelegate.swift */,
-				2C6BA81F2D3D2BFC0072B001 /* ViewController.swift */,
+				2C6BA81F2D3D2BFC0072B001 /* PipPlaceholderViewController.swift */,
 				2C17BDC32D3C36FF0015C58B /* PipPlaceholderView.swift */,
 				2C6BA81B2D3D2BFC0072B001 /* Assets.xcassets */,
 				2C6BA81D2D3D2BFC0072B001 /* Main.storyboard */,
@@ -5697,7 +5697,7 @@
 				2C6BA82C2D3D38B20072B001 /* PipPlaceholderView.swift in Sources */,
 				2C6BA82E2D3D38DA0072B001 /* Notification.swift in Sources */,
 				2C6BA8212D3D2BFC0072B001 /* AppDelegate.swift in Sources */,
-				2C6BA8222D3D2BFC0072B001 /* ViewController.swift in Sources */,
+				2C6BA8222D3D2BFC0072B001 /* PipPlaceholderViewController.swift in Sources */,
 				2C6BA82D2D3D38C90072B001 /* GeneratedToken.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
