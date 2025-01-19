@@ -154,6 +154,10 @@
 		2C63720D2C418060001169E8 /* Script.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C8DE82C3C890B00BC83E9 /* Script.swift */; };
 		2C63720E2C418068001169E8 /* RawHtmlGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF35AC2C413AE700388574 /* RawHtmlGenerator.swift */; };
 		2C672CB12BFCEFB500E57B21 /* IpfsUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C672CB02BFCEFB500E57B21 /* IpfsUploader.swift */; };
+		2C6BA8212D3D2BFC0072B001 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BA81A2D3D2BFC0072B001 /* AppDelegate.swift */; };
+		2C6BA8222D3D2BFC0072B001 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BA81F2D3D2BFC0072B001 /* ViewController.swift */; };
+		2C6BA8232D3D2BFC0072B001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C6BA81B2D3D2BFC0072B001 /* Assets.xcassets */; };
+		2C6BA8242D3D2BFC0072B001 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C6BA81D2D3D2BFC0072B001 /* Main.storyboard */; };
 		2C7134D62D30460B001E33DC /* MobilePlaybackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7134D52D304609001E33DC /* MobilePlaybackController.swift */; };
 		2C88D95D2C3872DD00009C25 /* RandomGradientShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88D95C2C3872DD00009C25 /* RandomGradientShape.swift */; };
 		2C8A42EA2B1A272600BE4166 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A42E92B1A272600BE4166 /* Network.swift */; };
@@ -748,6 +752,12 @@
 		2C6372092C417FC2001169E8 /* nft-screen-saver-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "nft-screen-saver-Bridging-Header.h"; sourceTree = "<group>"; };
 		2C63720A2C417FC2001169E8 /* ScreenSaverHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSaverHelper.swift; sourceTree = "<group>"; };
 		2C672CB02BFCEFB500E57B21 /* IpfsUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IpfsUploader.swift; sourceTree = "<group>"; };
+		2C6BA80B2D3D2BF50072B001 /* nft-folder-ambient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nft-folder-ambient.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C6BA81A2D3D2BFC0072B001 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2C6BA81B2D3D2BFC0072B001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2C6BA81C2D3D2BFC0072B001 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2C6BA81E2D3D2BFC0072B001 /* nft_folder_ambient.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = nft_folder_ambient.entitlements; sourceTree = "<group>"; };
+		2C6BA81F2D3D2BFC0072B001 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2C7134D52D304609001E33DC /* MobilePlaybackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobilePlaybackController.swift; sourceTree = "<group>"; };
 		2C88D95C2C3872DD00009C25 /* RandomGradientShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomGradientShape.swift; sourceTree = "<group>"; };
 		2C8A42E92B1A272600BE4166 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
@@ -1963,6 +1973,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2C6BA8082D3D2BF50072B001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2CA34B5F2B08C01300DAB623 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -2815,6 +2832,18 @@
 			path = ios;
 			sourceTree = "<group>";
 		};
+		2C6BA8202D3D2BFC0072B001 /* nft-folder-ambient */ = {
+			isa = PBXGroup;
+			children = (
+				2C6BA81A2D3D2BFC0072B001 /* AppDelegate.swift */,
+				2C6BA81B2D3D2BFC0072B001 /* Assets.xcassets */,
+				2C6BA81D2D3D2BFC0072B001 /* Main.storyboard */,
+				2C6BA81E2D3D2BFC0072B001 /* nft_folder_ambient.entitlements */,
+				2C6BA81F2D3D2BFC0072B001 /* ViewController.swift */,
+			);
+			path = "nft-folder-ambient";
+			sourceTree = "<group>";
+		};
 		2C7DD7F52C1F530D00AB5CEF /* helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -2937,6 +2966,7 @@
 			isa = PBXGroup;
 			children = (
 				2CA4CF532B07F75F00CC75F4 /* nft-folder */,
+				2C6BA8202D3D2BFC0072B001 /* nft-folder-ambient */,
 				2CF4C49C2B7FB0AC000AB4A6 /* Downloads */,
 				2C4D84102B1886D600952BF5 /* Models */,
 				2C8ADAA62C46F3D5008BC560 /* Player */,
@@ -2970,6 +3000,7 @@
 				2C5A59972C51073F00788870 /* nft-folder-vision.app */,
 				2C5A59AE2C51400100788870 /* nft-folder-tvos.app */,
 				2C2CB47C2D29545F00042E74 /* nft-folder-ios.app */,
+				2C6BA80B2D3D2BF50072B001 /* nft-folder-ambient.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -5199,6 +5230,25 @@
 			productReference = 2C622BB62BF3C1EA0003B932 /* translate */;
 			productType = "com.apple.product-type.tool";
 		};
+		2C6BA80A2D3D2BF50072B001 /* nft-folder-ambient */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C6BA8192D3D2BF60072B001 /* Build configuration list for PBXNativeTarget "nft-folder-ambient" */;
+			buildPhases = (
+				2C6BA8072D3D2BF50072B001 /* Sources */,
+				2C6BA8082D3D2BF50072B001 /* Frameworks */,
+				2C6BA8092D3D2BF50072B001 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "nft-folder-ambient";
+			packageProductDependencies = (
+			);
+			productName = "nft-folder-ambient";
+			productReference = 2C6BA80B2D3D2BF50072B001 /* nft-folder-ambient.app */;
+			productType = "com.apple.product-type.application";
+		};
 		2CA34B612B08C01300DAB623 /* nft-finder-extension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2CA34B6B2B08C01300DAB623 /* Build configuration list for PBXNativeTarget "nft-finder-extension" */;
@@ -5281,6 +5331,9 @@
 					2C622BB52BF3C1EA0003B932 = {
 						CreatedOnToolsVersion = 15.3;
 					};
+					2C6BA80A2D3D2BF50072B001 = {
+						CreatedOnToolsVersion = 16.2;
+					};
 					2CA34B612B08C01300DAB623 = {
 						CreatedOnToolsVersion = 15.0.1;
 					};
@@ -5342,6 +5395,7 @@
 			projectRoot = "";
 			targets = (
 				2CA4CF502B07F75E00CC75F4 /* nft folder */,
+				2C6BA80A2D3D2BF50072B001 /* nft-folder-ambient */,
 				2C5A59962C51073F00788870 /* nft-folder-vision */,
 				2C5A59AD2C51400100788870 /* nft-folder-tvos */,
 				2C2CB47B2D29545F00042E74 /* nft-folder-ios */,
@@ -5406,6 +5460,15 @@
 				2C02180A2C53CE6D0012EC40 /* tone.js in Resources */,
 				2C02180B2C53CE6D0012EC40 /* twemoji.js in Resources */,
 				2C5A59B52C51400300788870 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C6BA8092D3D2BF50072B001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C6BA8232D3D2BFC0072B001 /* Assets.xcassets in Resources */,
+				2C6BA8242D3D2BFC0072B001 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5602,6 +5665,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2C6BA8072D3D2BF50072B001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C6BA8212D3D2BFC0072B001 /* AppDelegate.swift in Sources */,
+				2C6BA8222D3D2BFC0072B001 /* ViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2CA34B5E2B08C01300DAB623 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -5738,6 +5810,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		2C6BA81D2D3D2BFC0072B001 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C6BA81C2D3D2BFC0072B001 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		2CA4CF5A2B07F76000CC75F4 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -6000,6 +6080,62 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		2C6BA8172D3D2BF60072B001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "nft-folder-ambient/nft_folder_ambient.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 134;
+				DEVELOPMENT_TEAM = 8DXC3N7E7P;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 2.0.25;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder.ambient";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		2C6BA8182D3D2BF60072B001 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "nft-folder-ambient/nft_folder_ambient.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 134;
+				DEVELOPMENT_TEAM = 8DXC3N7E7P;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 2.0.25;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder.ambient";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -6359,6 +6495,15 @@
 			buildConfigurations = (
 				2C622BBA2BF3C1EA0003B932 /* Debug */,
 				2C622BBB2BF3C1EA0003B932 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2C6BA8192D3D2BF60072B001 /* Build configuration list for PBXNativeTarget "nft-folder-ambient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C6BA8172D3D2BF60072B001 /* Debug */,
+				2C6BA8182D3D2BF60072B001 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
