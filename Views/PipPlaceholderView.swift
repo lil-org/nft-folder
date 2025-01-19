@@ -96,6 +96,18 @@ class PipPlaceholderView: NSView {
         displayedWebView = webView
         return webView
     }
+    
+    private func webViewForStatusBarPlayer() -> WKWebView {
+        let webConfiguration = WKWebViewConfiguration()
+        webConfiguration.suppressesIncrementalRendering = true
+        let webView = WKWebView(frame: .zero, configuration: webConfiguration)
+        webView.wantsLayer = true
+        webView.layer?.backgroundColor = NSColor.clear.cgColor
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        webView.setValue(true, forKey: "drawsTransparentBackground")
+        return webView
+    }
+    
 }
 
 extension PipPlaceholderView: AVPictureInPictureControllerDelegate {
