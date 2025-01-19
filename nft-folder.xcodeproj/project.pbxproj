@@ -158,6 +158,8 @@
 		2C6BA8222D3D2BFC0072B001 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BA81F2D3D2BFC0072B001 /* ViewController.swift */; };
 		2C6BA8232D3D2BFC0072B001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C6BA81B2D3D2BFC0072B001 /* Assets.xcassets */; };
 		2C6BA8242D3D2BFC0072B001 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C6BA81D2D3D2BFC0072B001 /* Main.storyboard */; };
+		2C6BA8262D3D2D4E0072B001 /* nft-folder-ambient.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2C6BA80B2D3D2BF50072B001 /* nft-folder-ambient.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		2C6BA82A2D3D31AA0072B001 /* AmbientAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BA8292D3D31A50072B001 /* AmbientAgent.swift */; };
 		2C7134D62D30460B001E33DC /* MobilePlaybackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7134D52D304609001E33DC /* MobilePlaybackController.swift */; };
 		2C88D95D2C3872DD00009C25 /* RandomGradientShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88D95C2C3872DD00009C25 /* RandomGradientShape.swift */; };
 		2C8A42EA2B1A272600BE4166 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A42E92B1A272600BE4166 /* Network.swift */; };
@@ -267,6 +269,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2C6BA8272D3D2D730072B001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2CA4CF492B07F75E00CC75F4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2C6BA80A2D3D2BF50072B001;
+			remoteInfo = "nft-folder-ambient";
+		};
 		2CA34B682B08C01300DAB623 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2CA4CF492B07F75E00CC75F4 /* Project object */;
@@ -294,6 +303,16 @@
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 1;
+		};
+		2C6BA8252D3D2D3F0072B001 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Helpers;
+			dstSubfolderSpec = 1;
+			files = (
+				2C6BA8262D3D2D4E0072B001 /* nft-folder-ambient.app in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		2CA34B4E2B082CFB00DAB623 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -758,6 +777,7 @@
 		2C6BA81C2D3D2BFC0072B001 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2C6BA81E2D3D2BFC0072B001 /* nft_folder_ambient.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = nft_folder_ambient.entitlements; sourceTree = "<group>"; };
 		2C6BA81F2D3D2BFC0072B001 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2C6BA8292D3D31A50072B001 /* AmbientAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbientAgent.swift; sourceTree = "<group>"; };
 		2C7134D52D304609001E33DC /* MobilePlaybackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobilePlaybackController.swift; sourceTree = "<group>"; };
 		2C88D95C2C3872DD00009C25 /* RandomGradientShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomGradientShape.swift; sourceTree = "<group>"; };
 		2C8A42E92B1A272600BE4166 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
@@ -3009,6 +3029,7 @@
 			isa = PBXGroup;
 			children = (
 				2CA4CF542B07F75F00CC75F4 /* AppDelegate.swift */,
+				2C6BA8292D3D31A50072B001 /* AmbientAgent.swift */,
 				2CA4CF582B07F76000CC75F4 /* Assets.xcassets */,
 				2CA4CF5A2B07F76000CC75F4 /* Main.storyboard */,
 				2CA4CF5D2B07F76000CC75F4 /* nft_folder.entitlements */,
@@ -5275,10 +5296,12 @@
 				2CA4CF4E2B07F75E00CC75F4 /* Frameworks */,
 				2CA4CF4F2B07F75E00CC75F4 /* Resources */,
 				2CA34B4E2B082CFB00DAB623 /* Embed Foundation Extensions */,
+				2C6BA8252D3D2D3F0072B001 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				2C6BA8282D3D2D730072B001 /* PBXTargetDependency */,
 				2CA34B692B08C01300DAB623 /* PBXTargetDependency */,
 			);
 			name = "nft folder";
@@ -5739,6 +5762,7 @@
 				2C91131A2B08F71200A8EE80 /* WalletDownloader.swift in Sources */,
 				2CF4C49E2B7FB26C000AB4A6 /* DetailedTokenMetadata.swift in Sources */,
 				2C2B5AD12B84E2DA005C38B0 /* DownloadFileTask.swift in Sources */,
+				2C6BA82A2D3D31AA0072B001 /* AmbientAgent.swift in Sources */,
 				2C6359542D29C07F00E40241 /* Links.swift in Sources */,
 				2C672CB12BFCEFB500E57B21 /* IpfsUploader.swift in Sources */,
 				2CFA24732B19FB92009B58FD /* FileExtension.swift in Sources */,
@@ -5802,6 +5826,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		2C6BA8282D3D2D730072B001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2C6BA80A2D3D2BF50072B001 /* nft-folder-ambient */;
+			targetProxy = 2C6BA8272D3D2D730072B001 /* PBXContainerItemProxy */;
+		};
 		2CA34B692B08C01300DAB623 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 2CA34B612B08C01300DAB623 /* nft-finder-extension */;
@@ -6096,6 +6125,8 @@
 				DEVELOPMENT_TEAM = 8DXC3N7E7P;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Nft Player Agent";
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -6124,6 +6155,8 @@
 				DEVELOPMENT_TEAM = 8DXC3N7E7P;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Nft Player Agent";
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
