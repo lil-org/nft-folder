@@ -2858,11 +2858,11 @@
 			isa = PBXGroup;
 			children = (
 				2C6BA81A2D3D2BFC0072B001 /* AppDelegate.swift */,
+				2C6BA81F2D3D2BFC0072B001 /* ViewController.swift */,
+				2C17BDC32D3C36FF0015C58B /* PipPlaceholderView.swift */,
 				2C6BA81B2D3D2BFC0072B001 /* Assets.xcassets */,
 				2C6BA81D2D3D2BFC0072B001 /* Main.storyboard */,
 				2C6BA81E2D3D2BFC0072B001 /* nft_folder_ambient.entitlements */,
-				2C6BA81F2D3D2BFC0072B001 /* ViewController.swift */,
-				2C17BDC32D3C36FF0015C58B /* PipPlaceholderView.swift */,
 			);
 			path = "nft-folder-ambient";
 			sourceTree = "<group>";
