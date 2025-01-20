@@ -3,13 +3,6 @@ import QuartzCore
 import Metal
 import WebKit
 
-func CGSMainConnectionID() -> UInt32 {
-    let symbol = dlsym(UnsafeMutableRawPointer(bitPattern: -2), "CGSMainConnectionID")
-    typealias CGSMainConnectionIDFunc = @convention(c) () -> UInt32
-    let function = unsafeBitCast(symbol, to: CGSMainConnectionIDFunc.self)
-    return function()
-}
-
 class MetalRenderer {
     let device: MTLDevice
     let commandQueue: MTLCommandQueue
@@ -230,4 +223,11 @@ func setupWindows() {
     } else {
         print("Error: Invalid context ID received.")
     }
+}
+
+func CGSMainConnectionID() -> UInt32 {
+    let symbol = dlsym(UnsafeMutableRawPointer(bitPattern: -2), "CGSMainConnectionID")
+    typealias CGSMainConnectionIDFunc = @convention(c) () -> UInt32
+    let function = unsafeBitCast(symbol, to: CGSMainConnectionIDFunc.self)
+    return function()
 }
