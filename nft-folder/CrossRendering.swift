@@ -32,6 +32,7 @@ class SourceWindow: NSWindow {
     private func setupWebView() {
         let webViewFrame = NSRect(x: 0, y: 0, width: 400, height: 600)
         webView = WKWebView(frame: webViewFrame)
+        webView.wantsLayer = true
         webView.loadHTMLString(htmlString, baseURL: nil)
         self.contentView?.addSubview(webView)
     }
