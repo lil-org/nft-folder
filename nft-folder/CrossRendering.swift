@@ -65,14 +65,18 @@ class SourceWindow: NSWindow {
         animatedLayer.add(animation, forKey: "positionAnimation")
     }
     
-    private func setupLayerSharing() {
+}
+
+extension SourceWindow {
+    
+    func setupLayerSharing() {
         let connectionId = CGSMainConnectionID()
         let options: NSDictionary = [:]
         
         if let contextClass = NSClassFromString("CAContext") as? NSObject.Type,
-           let contextInstance = contextClass.perform(Selector(("contextWithCGSConnection:options:")), with: connectionId, with: options)?.takeUnretainedValue() {
+           let contextInstance = contextClass.perform(Selector(("remoteContextWithOptions:")), with: options)?.takeUnretainedValue() {
             remoteContext = contextInstance
-            remoteContext?.setValue(sourceLayer, forKey: "layer")
+            remoteContext?.setValue(webView.layer, forKey: "layer")
             
             if let retrievedContextId = remoteContext?.value(forKey: "contextId") as? UInt32 {
                 contextId = retrievedContextId
@@ -88,5 +92,5 @@ class SourceWindow: NSWindow {
     func getContextID() -> UInt32 {
         return contextId
     }
+    
 }
-
