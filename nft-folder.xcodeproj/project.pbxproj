@@ -162,6 +162,9 @@
 		2C6BA82C2D3D38B20072B001 /* PipPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C17BDC32D3C36FF0015C58B /* PipPlaceholderView.swift */; };
 		2C6BA82D2D3D38C90072B001 /* GeneratedToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE9A5772C3DAB03009AEAF4 /* GeneratedToken.swift */; };
 		2C6BA82E2D3D38DA0072B001 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
+		2C6BA8372D3E54AC0072B001 /* PipPlaceholderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BA81F2D3D2BFC0072B001 /* PipPlaceholderViewController.swift */; };
+		2C6BA8382D3E54B00072B001 /* PipPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C17BDC32D3C36FF0015C58B /* PipPlaceholderView.swift */; };
+		2C6BA8392D3E54BA0072B001 /* square.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2CF08B032D2B239300D82ACA /* square.mp4 */; };
 		2C7134D62D30460B001E33DC /* MobilePlaybackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7134D52D304609001E33DC /* MobilePlaybackController.swift */; };
 		2C88D95D2C3872DD00009C25 /* RandomGradientShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88D95C2C3872DD00009C25 /* RandomGradientShape.swift */; };
 		2C8A42EA2B1A272600BE4166 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A42E92B1A272600BE4166 /* Network.swift */; };
@@ -5521,6 +5524,7 @@
 				2CA4CF592B07F76000CC75F4 /* Assets.xcassets in Resources */,
 				2CA4CF5C2B07F76000CC75F4 /* Main.storyboard in Resources */,
 				2CEF35B72C413DA000388574 /* three.js in Resources */,
+				2C6BA8392D3E54BA0072B001 /* square.mp4 in Resources */,
 				2CEF35BA2C413DA000388574 /* p5js100.js in Resources */,
 				2CEF35B62C413DA000388574 /* paper.js in Resources */,
 				2C4659942C308B47008CF97F /* Covers.xcassets in Resources */,
@@ -5768,11 +5772,13 @@
 				2C88D95D2C3872DD00009C25 /* RandomGradientShape.swift in Sources */,
 				2C91131A2B08F71200A8EE80 /* WalletDownloader.swift in Sources */,
 				2CF4C49E2B7FB26C000AB4A6 /* DetailedTokenMetadata.swift in Sources */,
+				2C6BA8372D3E54AC0072B001 /* PipPlaceholderViewController.swift in Sources */,
 				2C2B5AD12B84E2DA005C38B0 /* DownloadFileTask.swift in Sources */,
 				2C6BA82A2D3D31AA0072B001 /* AmbientAgent.swift in Sources */,
 				2C6359542D29C07F00E40241 /* Links.swift in Sources */,
 				2C672CB12BFCEFB500E57B21 /* IpfsUploader.swift in Sources */,
 				2CFA24732B19FB92009B58FD /* FileExtension.swift in Sources */,
+				2C6BA8382D3E54B00072B001 /* PipPlaceholderView.swift in Sources */,
 				2C4039F12B83B11100DB94D7 /* FileSaver.swift in Sources */,
 				2CA34B562B08B6A200DAB623 /* Codable.swift in Sources */,
 				2C9113282B09751D00A8EE80 /* WalletImageView.swift in Sources */,

@@ -2,8 +2,12 @@
 
 import Cocoa
 
+var pipPlaceholderViewController: PipPlaceholderViewController?
+
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
+    
+    var window: NSWindow?
     
     private var didFinishLaunching = false
     private var initialMessage: ExtensionMessage?
@@ -18,6 +22,32 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         manager.setEventHandler(self, andSelector: #selector(self.getUrl(_:withReplyEvent:)),
                                 forEventClass: AEEventClass(kInternetEventClass),
                                 andEventID: AEEventID(kAEGetURL))
+    }
+    
+    private func createMainWindow() {
+        let windowRect = NSRect(x: 0, y: 0, width: 100, height: 100) // TODO: try 0, 0 too
+        
+        window = NSWindow(
+            contentRect: windowRect,
+            styleMask: [.borderless],
+            backing: .buffered,
+            defer: false
+        )
+        
+        window?.isReleasedWhenClosed = false
+        window?.center()
+        window?.level = .floating
+        window?.isMovable = false
+        window?.ignoresMouseEvents = true
+        window?.backgroundColor = .clear
+        
+        let viewController = PipPlaceholderViewController()
+        window?.contentViewController = viewController
+        window?.makeKeyAndOrderFront(nil) // TODO: not sure it's needed
+        window?.contentView?.isHidden = true
+        NSLog("did create main window")
+        
+        pipPlaceholderViewController = viewController
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -43,6 +73,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         allDownloadsManager.start()
         StatusBarItem.shared.showIfNeeded()
         AvatarService.setup()
+        
+        createMainWindow()
     }
     
     private func cleanupDefaultsIfNeeded() {
