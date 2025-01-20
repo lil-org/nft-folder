@@ -11,22 +11,33 @@ class SourceWindow: NSWindow {
     private var webView: WKWebView!
     
     init() {
-        let frame = NSMakeRect(100, 100, 800, 600)
+        let frame = NSMakeRect(0, 0, 800, 600)
         super.init(
             contentRect: frame,
-            styleMask: [.titled, .resizable, .closable],
+            styleMask: [.borderless],
             backing: .buffered,
             defer: false
         )
-        self.title = "Source Window"
-        self.makeKeyAndOrderFront(nil)
-        self.contentView?.wantsLayer = true
+
+        level = .floating
+        backgroundColor = .clear
+        makeKeyAndOrderFront(nil)
         
+        contentView?.wantsLayer = true
         setupWebView()
+        contentView?.alphaValue = 0.001
         
         DispatchQueue.main.async { [weak self] in
             self?.setupLayerSharing()
         }
+    }
+    
+    override var canBecomeKey: Bool {
+        return false
+    }
+    
+    override var canBecomeMain: Bool {
+        return false
     }
     
     private func setupWebView() {
