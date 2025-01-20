@@ -68,18 +68,36 @@ class SourceMetalWindow: NSWindow {
             print("Metal device not available")
             return
         }
-        
+
         metalLayer = CAMetalLayer()
         metalLayer.device = device
         metalLayer.pixelFormat = .bgra8Unorm
         metalLayer.contentsScale = NSScreen.main?.backingScaleFactor ?? 1.0
         metalLayer.frame = self.contentView!.bounds
         metalLayer.backgroundColor = NSColor.blue.cgColor
-        
+
         self.contentView?.layer?.addSublayer(metalLayer)
         self.contentView?.layer?.backgroundColor = NSColor.gray.cgColor
-        
+
         metalRenderer = MetalRenderer(device: device)
+        
+        addPlaceholderAnimation()
+    }
+
+    private func addPlaceholderAnimation() {
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.fromValue = NSValue(point: NSMakePoint(100, 100))
+        animation.toValue = NSValue(point: NSMakePoint(400, 300))
+        animation.duration = 2.0
+        animation.autoreverses = true
+        animation.repeatCount = .infinity
+        
+        let animatedLayer = CALayer()
+        animatedLayer.frame = CGRect(x: 50, y: 50, width: 100, height: 100)
+        animatedLayer.backgroundColor = NSColor.red.cgColor
+        metalLayer.addSublayer(animatedLayer)
+        
+        animatedLayer.add(animation, forKey: "positionAnimation")
     }
     
     private func setupLayerSharing() {
