@@ -3,6 +3,7 @@
 import Cocoa
 
 var pipPlaceholderViewController: PipPlaceholderViewController?
+var sharedSourceWindow: SourceWindow?
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -51,6 +52,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSLog("did create main window")
         
         pipPlaceholderViewController = viewController
+        sharedSourceWindow = SourceWindow() // TODO: tmp, will only go in agent
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -78,9 +80,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         AvatarService.setup()
         
         createMainWindow()
-        
-        
-        setupWindows() // TODO: tmp, will only go in agent
     }
     
     private func cleanupDefaultsIfNeeded() {

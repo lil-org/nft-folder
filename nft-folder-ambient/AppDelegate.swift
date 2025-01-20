@@ -2,6 +2,7 @@
 
 import Cocoa
 
+var sharedSourceWindow: SourceWindow?
 var currentGeneratedToken: GeneratedToken?
 
 @main
