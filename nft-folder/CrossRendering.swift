@@ -1,6 +1,7 @@
 import Cocoa
 import QuartzCore
 import Metal
+import WebKit
 
 func CGSMainConnectionID() -> UInt32 {
     let symbol = dlsym(UnsafeMutableRawPointer(bitPattern: -2), "CGSMainConnectionID")
@@ -44,21 +45,23 @@ class SourceMetalWindow: NSWindow {
     var contextId: UInt32 = 0
     var metalRenderer: MetalRenderer?
     var displayLink: CADisplayLink?
-    
+    var webView: WKWebView!
+
     init() {
-        let frame = NSMakeRect(100, 100, 600, 400)
+        let frame = NSMakeRect(100, 100, 800, 600)
         super.init(
             contentRect: frame,
             styleMask: [.titled, .resizable, .closable],
             backing: .buffered,
             defer: false
         )
-        self.title = "Metal Source Window"
+        self.title = "Source Window"
         self.makeKeyAndOrderFront(nil)
         self.contentView?.wantsLayer = true
         
         setupMetalLayer()
         setupLayerSharing()
+        setupWebView()
         startRendering()
     }
     
@@ -67,28 +70,28 @@ class SourceMetalWindow: NSWindow {
             print("Metal device not available")
             return
         }
-        
+
         metalLayer = CAMetalLayer()
         metalLayer.device = device
         metalLayer.pixelFormat = .bgra8Unorm
         metalLayer.contentsScale = NSScreen.main?.backingScaleFactor ?? 1.0
-        metalLayer.frame = self.contentView!.bounds
+        metalLayer.frame = NSRect(x: 0, y: 0, width: 400, height: 600)
         metalLayer.backgroundColor = NSColor.blue.cgColor
         metalLayer.isOpaque = true
-        metalLayer.drawableSize = self.contentView!.bounds.size
-        
+        metalLayer.drawableSize = metalLayer.frame.size
+
         self.contentView?.layer?.addSublayer(metalLayer)
         self.contentView?.layer?.backgroundColor = NSColor.gray.cgColor
-        
+
         metalRenderer = MetalRenderer(device: device)
         
         addPlaceholderAnimation()
     }
-    
+
     private func addPlaceholderAnimation() {
         let animation = CABasicAnimation(keyPath: "position")
         animation.fromValue = NSValue(point: NSMakePoint(100, 100))
-        animation.toValue = NSValue(point: NSMakePoint(400, 300))
+        animation.toValue = NSValue(point: NSMakePoint(300, 300))
         animation.duration = 2.0
         animation.autoreverses = true
         animation.repeatCount = .infinity
@@ -100,7 +103,7 @@ class SourceMetalWindow: NSWindow {
         
         animatedLayer.add(animation, forKey: "positionAnimation")
     }
-    
+
     private func setupLayerSharing() {
         let connectionId = CGSMainConnectionID()
         let options: NSDictionary = [:]
@@ -121,6 +124,39 @@ class SourceMetalWindow: NSWindow {
         }
     }
     
+    private func setupWebView() {
+        let webViewFrame = NSRect(x: 0, y: 0, width: 400, height: 600)
+        webView = WKWebView(frame: webViewFrame)
+        
+        let htmlString = """
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <style>
+                body { margin: 0; overflow: hidden; background: #000; }
+                .box {
+                    width: 100px;
+                    height: 100px;
+                    background: linear-gradient(45deg, #ff0000, #ff7300, #ffeb00, #00ff00, #0099ff, #4b0082, #8b00ff);
+                    position: absolute;
+                    animation: move 4s infinite alternate ease-in-out;
+                }
+                @keyframes move {
+                    from { transform: translate(50px, 50px); }
+                    to { transform: translate(250px, 400px); }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="box"></div>
+        </body>
+        </html>
+        """
+
+        webView.loadHTMLString(htmlString, baseURL: nil)
+        self.contentView?.addSubview(webView)
+    }
+    
     private func startRendering() {
         guard let contentView = self.contentView else {
             print("Content view is nil")
@@ -138,11 +174,11 @@ class SourceMetalWindow: NSWindow {
             }
         }
     }
-    
+
     func getContextID() -> UInt32 {
         return contextId
     }
-    
+
     deinit {
         displayLink?.invalidate()
     }
