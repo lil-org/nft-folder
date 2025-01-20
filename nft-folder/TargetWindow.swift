@@ -45,7 +45,7 @@ class TargetWindow: NSWindow {
 func setupWindows() {
     let sourceWindow = SourceWindow()
     
-    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
+    DispatchQueue.main.async {
         let contextId = sourceWindow.getContextID()
         if contextId != 0 {
             _ = TargetWindow(sourceContextId: contextId)
@@ -53,13 +53,6 @@ func setupWindows() {
             print("Error: Invalid context ID received.")
         }
     }
-}
-
-func CGSMainConnectionID() -> UInt32 {
-    let symbol = dlsym(UnsafeMutableRawPointer(bitPattern: -2), "CGSMainConnectionID")
-    typealias CGSMainConnectionIDFunc = @convention(c) () -> UInt32
-    let function = unsafeBitCast(symbol, to: CGSMainConnectionIDFunc.self)
-    return function()
 }
 
 let htmlString = """
