@@ -26,11 +26,13 @@ class SourceWindow: NSWindow {
         
         setupWebView()
         
-        setupLayerSharing()
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+            self.setupLayerSharing()
+        }
     }
     
     private func setupWebView() {
-        let webViewFrame = NSRect(x: 0, y: 0, width: 400, height: 600)
+        let webViewFrame = NSRect(x: 0, y: 0, width: 1000, height: 1000)
         webView = WKWebView(frame: webViewFrame)
         webView.wantsLayer = true
         webView.loadHTMLString(htmlString, baseURL: nil)

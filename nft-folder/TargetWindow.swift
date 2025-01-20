@@ -45,7 +45,7 @@ class TargetWindow: NSWindow {
 func setupWindows() {
     let sourceWindow = SourceWindow()
     
-    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
         let contextId = sourceWindow.getContextID()
         if contextId != 0 {
             _ = TargetWindow(sourceContextId: contextId)
