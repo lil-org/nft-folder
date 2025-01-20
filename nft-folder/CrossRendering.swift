@@ -20,9 +20,7 @@ class MetalRenderer {
     }
     
     func render(to drawable: CAMetalDrawable) {
-        guard let commandBuffer = commandQueue.makeCommandBuffer() else {
-            return
-        }
+        guard let commandBuffer = commandQueue.makeCommandBuffer() else { return }
         
         let renderPassDescriptor = MTLRenderPassDescriptor()
         renderPassDescriptor.colorAttachments[0].texture = drawable.texture
@@ -45,6 +43,7 @@ class SourceMetalWindow: NSWindow {
     var remoteContext: AnyObject?
     var contextId: UInt32 = 0
     var metalRenderer: MetalRenderer?
+    var displayLink: CADisplayLink?
     
     init() {
         let frame = NSMakeRect(100, 100, 600, 400)
@@ -60,7 +59,7 @@ class SourceMetalWindow: NSWindow {
         
         setupMetalLayer()
         setupLayerSharing()
-        renderLoop()
+        startRendering()
     }
     
     private func setupMetalLayer() {
@@ -68,22 +67,24 @@ class SourceMetalWindow: NSWindow {
             print("Metal device not available")
             return
         }
-
+        
         metalLayer = CAMetalLayer()
         metalLayer.device = device
         metalLayer.pixelFormat = .bgra8Unorm
         metalLayer.contentsScale = NSScreen.main?.backingScaleFactor ?? 1.0
         metalLayer.frame = self.contentView!.bounds
         metalLayer.backgroundColor = NSColor.blue.cgColor
-
+        metalLayer.isOpaque = true
+        metalLayer.drawableSize = self.contentView!.bounds.size
+        
         self.contentView?.layer?.addSublayer(metalLayer)
         self.contentView?.layer?.backgroundColor = NSColor.gray.cgColor
-
+        
         metalRenderer = MetalRenderer(device: device)
         
         addPlaceholderAnimation()
     }
-
+    
     private func addPlaceholderAnimation() {
         let animation = CABasicAnimation(keyPath: "position")
         animation.fromValue = NSValue(point: NSMakePoint(100, 100))
@@ -120,18 +121,30 @@ class SourceMetalWindow: NSWindow {
         }
     }
     
-    private func renderLoop() {
-        Timer.scheduledTimer(withTimeInterval: 1.0 / 60.0, repeats: true) { _ in
-            autoreleasepool {
-                if let drawable = self.metalLayer.nextDrawable() {
-                    self.metalRenderer?.render(to: drawable)
-                }
+    private func startRendering() {
+        guard let contentView = self.contentView else {
+            print("Content view is nil")
+            return
+        }
+        
+        displayLink = contentView.displayLink(target: self, selector: #selector(renderFrame))
+        displayLink?.add(to: .main, forMode: .common)
+    }
+    
+    @objc private func renderFrame() {
+        autoreleasepool {
+            if let drawable = metalLayer.nextDrawable() {
+                metalRenderer?.render(to: drawable)
             }
         }
     }
     
     func getContextID() -> UInt32 {
         return contextId
+    }
+    
+    deinit {
+        displayLink?.invalidate()
     }
 }
 
