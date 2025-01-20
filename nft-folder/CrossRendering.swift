@@ -2,6 +2,8 @@ import Cocoa
 import QuartzCore
 import WebKit
 
+var html = ""
+
 class SourceWindow: NSWindow {
     
     private var sourceLayer: CALayer!
@@ -18,9 +20,26 @@ class SourceWindow: NSWindow {
             backing: .buffered,
             defer: false
         )
-
-        level = .floating
-        backgroundColor = .clear
+        
+        // TODO: tune in agent to make it always present
+        //        collectionBehavior = [
+        //                    .canJoinAllSpaces,  // Allows window across all spaces
+        //                    .stationary,        // Prevents window from being moved by Mission Control
+        //                    .fullScreenAuxiliary, // Allows overlaying on full-screen apps
+        //                    .ignoresCycle       // Avoids cycling through Mission Control spaces
+        //                ]
+        
+        collectionBehavior = [
+            //                   .canJoinAllSpaces,      // Allow window to appear on all Spaces
+            .fullScreenNone,        // Prevent it from entering fullscreen mode
+            .moveToActiveSpace,     // Ensures it follows to the active space
+            .transient, .fullScreenAuxiliary              // Makes it behave like a utility window (helps in fullscreen mode)
+        ]
+        
+        level = .statusBar
+        isMovable = false
+        ignoresMouseEvents = true
+        backgroundColor = .clear // TODO: validate that it joins all spaces with .green
         makeKeyAndOrderFront(nil)
         
         contentView?.wantsLayer = true
@@ -44,7 +63,7 @@ class SourceWindow: NSWindow {
         let webViewFrame = NSRect(x: 0, y: 0, width: 1000, height: 1000)
         webView = WKWebView(frame: webViewFrame)
         webView.wantsLayer = true
-        webView.loadHTMLString(htmlString, baseURL: nil)
+        webView.loadHTMLString(html, baseURL: nil)
         self.contentView?.addSubview(webView)
     }
     

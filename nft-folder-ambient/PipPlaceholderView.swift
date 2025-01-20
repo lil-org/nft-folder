@@ -95,28 +95,6 @@ class PipPlaceholderView: NSView {
         }
     }
     
-    private func createNewWebView() -> NSView {
-        // TODO: make auto reloading
-        // TODO: reuse desktop webview initializer
-        
-        let webConfiguration = WKWebViewConfiguration()
-//        webConfiguration.suppressesIncrementalRendering = true
-        let webView = WKWebView(frame: .zero, configuration: webConfiguration)
-//        webView.wantsLayer = true
-//        webView.layer?.backgroundColor = NSColor.red.cgColor
-        webView.translatesAutoresizingMaskIntoConstraints = false
-//        webView.setValue(true, forKey: "drawsTransparentBackground")
-        
-        //        if let token = currentPipToken {
-        //            NSLog("will loadHTMLString \(token.html.count)")
-        //            webView.loadHTMLString(token.html, baseURL: nil) // TODO: mb call it with a delay making sure webview did show up
-        //            NSLog("did loadHTMLString")
-        //        }
-        
-        displayedWebView = webView
-        return webView
-    }
-    
     private func webViewForStatusBarPlayer() -> WKWebView {
         let webConfiguration = WKWebViewConfiguration()
         webConfiguration.suppressesIncrementalRendering = true
@@ -125,10 +103,12 @@ class PipPlaceholderView: NSView {
         webView.layer?.backgroundColor = NSColor.clear.cgColor
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.setValue(true, forKey: "drawsTransparentBackground")
-                webView.configuration.preferences.setValue(true, forKey: "allowFileAccessFromFileURLs")
-                webView.configuration.defaultWebpagePreferences.allowsContentJavaScript = true
+        webView.configuration.preferences.setValue(true, forKey: "allowFileAccessFromFileURLs")
+        webView.configuration.defaultWebpagePreferences.allowsContentJavaScript = true
         return webView
     }
+    
+    var layerHost: AnyObject?
     
 }
 
@@ -151,36 +131,44 @@ extension PipPlaceholderView: AVPictureInPictureControllerDelegate {
     }
     
     func embedAnimatedWebView(in window: NSWindow) {
-            if let contentView = window.contentView {
-                contentView.wantsLayer = true
-            }
-            
-            let containerView = NSView(frame: .zero)
-            containerView.translatesAutoresizingMaskIntoConstraints = false
-            containerView.wantsLayer = true
-            
-            let webView = createNewWebView()
-            
-            containerView.addSubview(webView)
-            NSLayoutConstraint.activate([
-                webView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-                webView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-                webView.topAnchor.constraint(equalTo: containerView.topAnchor),
-                webView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
-            ])
-            
-            if let contentView = window.contentView {
-                contentView.addSubview(containerView)
-                NSLayoutConstraint.activate([
-                    containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-                    containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-                    containerView.topAnchor.constraint(equalTo: contentView.topAnchor),
-                    containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-                ])
-            }
-
-            window.orderFrontRegardless()
+        if let contentView = window.contentView {
+            contentView.wantsLayer = true
         }
+        
+        let containerView = NSView(frame: .zero)
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.wantsLayer = true
+        
+        
+        
+        if let layerHostClass = NSClassFromString("CALayerHost") as? NSObject.Type, let contextId = sharedSourceWindow?.getContextID() {
+            layerHost = layerHostClass.init()
+            layerHost?.setValue(contextId, forKey: "contextId")
+            
+            if let castedLayerHost = layerHost as? CALayer {
+                castedLayerHost.frame = containerView.bounds
+                containerView.layer?.addSublayer(castedLayerHost)
+                print("Renderer: Displaying remote layer with context ID \(contextId).")
+            } else {
+                print("Failed to cast CALayerHost.")
+            }
+        } else {
+            print("Failed to create CALayerHost.")
+        }
+        
+        
+        if let contentView = window.contentView {
+            contentView.addSubview(containerView)
+            NSLayoutConstraint.activate([
+                containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+                containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+                containerView.topAnchor.constraint(equalTo: contentView.topAnchor),
+                containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            ])
+        }
+        
+        window.orderFrontRegardless()
+    }
     
     func pictureInPictureControllerWillStartPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
         

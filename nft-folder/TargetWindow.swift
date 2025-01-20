@@ -4,6 +4,8 @@ import Cocoa
 import QuartzCore
 import WebKit
 
+var sharedSourceWindow: SourceWindow?
+
 class TargetWindow: NSWindow {
     
     var layerHost: AnyObject?
@@ -43,39 +45,5 @@ class TargetWindow: NSWindow {
 }
 
 func setupWindows() {
-    let sourceWindow = SourceWindow()
-    
-    DispatchQueue.main.async {
-        let contextId = sourceWindow.getContextID()
-        if contextId != 0 {
-            _ = TargetWindow(sourceContextId: contextId)
-        } else {
-            print("Error: Invalid context ID received.")
-        }
-    }
+    sharedSourceWindow = SourceWindow()
 }
-
-let htmlString = """
-<!DOCTYPE html>
-<html>
-<head>
-    <style>
-        body { margin: 0; overflow: hidden; background: #000; }
-        .box {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(45deg, #ff0000, #ff7300, #ffeb00, #00ff00, #0099ff, #4b0082, #8b00ff);
-            position: absolute;
-            animation: move 4s infinite alternate ease-in-out;
-        }
-        @keyframes move {
-            from { transform: translate(50px, 50px); }
-            to { transform: translate(250px, 400px); }
-        }
-    </style>
-</head>
-<body>
-    <div class="box"></div>
-</body>
-</html>
-"""

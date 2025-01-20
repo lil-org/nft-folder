@@ -27,6 +27,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private func createMainWindow() {
         let windowRect = NSRect(x: 0, y: 0, width: 100, height: 100) // TODO: try 0, 0 too
         
+        
+        html = TokenGenerator.generateRandomToken(specificCollectionId: nil, notTokenId: nil)!.html
+        
         window = NSWindow(
             contentRect: windowRect,
             styleMask: [.borderless],
@@ -51,9 +54,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        setupWindows()
-        return // TODO: tmp
-        
         cleanupDefaultsIfNeeded()
         createDirectoryIfNeeded()
         didFinishLaunching = true
@@ -78,6 +78,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         AvatarService.setup()
         
         createMainWindow()
+        
+        
+        setupWindows() // TODO: tmp, will only go in agent
     }
     
     private func cleanupDefaultsIfNeeded() {
