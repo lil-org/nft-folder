@@ -51,6 +51,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        setupWindows()
+        return // TODO: tmp
+        
         cleanupDefaultsIfNeeded()
         createDirectoryIfNeeded()
         didFinishLaunching = true
