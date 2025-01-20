@@ -446,7 +446,12 @@ struct WalletsListView: View {
     
     private func autoStartPlayer(id: String) -> Bool {
         if TokenGenerator.canGenerate(id: id) {
-            Navigator.shared.showPlayer(id: id)
+            
+            if let token = TokenGenerator.generateRandomToken(specificCollectionId: id, notTokenId: nil) {
+                AmbientAgent.start(generatedToken: token)
+            }
+            
+//            Navigator.shared.showPlayer(id: id)
             return true
         } else {
             return false

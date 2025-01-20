@@ -4,22 +4,16 @@ import AVKit
 import WebKit
 
 class PipPlaceholderView: NSView {
+    
     private var playerLayer: AVPlayerLayer?
     private var pipController: AVPictureInPictureController?
     private var currentPipToken: GeneratedToken?
     private var didSetupPlayer = false
-    private weak var displayedWebView: WKWebView?
+    private var displayedWebView: WKWebView?
     
-    override init(frame frameRect: NSRect) {
-        super.init(frame: frameRect)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleTogglePip(_:)), name: Notification.Name.togglePip, object: nil)
-    }
+    private var animationActivity: NSObjectProtocol?
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
-    func setupPlayer() {
+    private func setupPlayer() {
         playerLayer = AVPlayerLayer()
         guard let mp4Video = Bundle.main.url(forResource: "square", withExtension: "mp4"),
               let playerLayer = playerLayer else { return }
@@ -29,29 +23,45 @@ class PipPlaceholderView: NSView {
         let asset = AVAsset(url: mp4Video)
         let playerItem = AVPlayerItem(asset: asset)
         let player = AVPlayer(playerItem: playerItem)
+        
+        
+        
         player.isMuted = true
+        player.allowsExternalPlayback = true
         
         layer?.addSublayer(playerLayer)
         playerLayer.player = player
         
         pipController = AVPictureInPictureController(playerLayer: playerLayer)
+        pipController?.requiresLinearPlayback = true
         pipController?.delegate = self
+        pipController?.setValue(1, forKey: "controlsStyle")
     }
     
-    @objc private func handleTogglePip(_ notification: Notification) {
-        print("habdle toggle pip")
+    func handleTogglePip(generatedToken: GeneratedToken) {
+        NSLog("handleTogglePip")
         
-        guard let generatedToken = notification.object as? GeneratedToken else { return }
         let isPipActive = pipController?.isPictureInPictureActive == true
         let sameToken = currentPipToken?.html == generatedToken.html
         currentPipToken = generatedToken
         
         if isPipActive {
-            if sameToken {
-                pipController?.stopPictureInPicture()
-            } else {
-                displayedWebView?.loadHTMLString(generatedToken.html, baseURL: nil)
+            //            if sameToken {
+            //                pipController?.stopPictureInPicture()
+            //            } else {
+            NSLog("will loadHTMLString")
+            NSLog(displayedWebView.debugDescription)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
+                
+                NSApplication.shared.activate(ignoringOtherApps: true)
+                
+                self?.displayedWebView?.loadHTMLString(generatedToken.html, baseURL: nil)
+                
+                
+                NSLog("did load HTML")
             }
+            //            }
         } else {
             togglePip()
         }
@@ -59,6 +69,14 @@ class PipPlaceholderView: NSView {
     
     private func togglePip(retryCount: Int = 0) {
         print("will toggle pip")
+        
+        print("current windows are:")
+        
+        
+        NSLog(NSApplication.shared.windows.debugDescription)
+        
+        
+        
         if !didSetupPlayer {
             setupPlayer()
             didSetupPlayer = true
@@ -77,13 +95,24 @@ class PipPlaceholderView: NSView {
         }
     }
     
-    private func createNewCustomPipView() -> NSView {
+    private func createNewWebView() -> NSView {
         // TODO: make auto reloading
         // TODO: reuse desktop webview initializer
-        let webView = WKWebView()
-        if let token = currentPipToken {
-            webView.loadHTMLString(token.html, baseURL: nil)
-        }
+        
+        let webConfiguration = WKWebViewConfiguration()
+//        webConfiguration.suppressesIncrementalRendering = true
+        let webView = WKWebView(frame: .zero, configuration: webConfiguration)
+//        webView.wantsLayer = true
+//        webView.layer?.backgroundColor = NSColor.red.cgColor
+        webView.translatesAutoresizingMaskIntoConstraints = false
+//        webView.setValue(true, forKey: "drawsTransparentBackground")
+        
+        //        if let token = currentPipToken {
+        //            NSLog("will loadHTMLString \(token.html.count)")
+        //            webView.loadHTMLString(token.html, baseURL: nil) // TODO: mb call it with a delay making sure webview did show up
+        //            NSLog("did loadHTMLString")
+        //        }
+        
         displayedWebView = webView
         return webView
     }
@@ -96,6 +125,8 @@ class PipPlaceholderView: NSView {
         webView.layer?.backgroundColor = NSColor.clear.cgColor
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.setValue(true, forKey: "drawsTransparentBackground")
+                webView.configuration.preferences.setValue(true, forKey: "allowFileAccessFromFileURLs")
+                webView.configuration.defaultWebpagePreferences.allowsContentJavaScript = true
         return webView
     }
     
@@ -104,28 +135,63 @@ class PipPlaceholderView: NSView {
 extension PipPlaceholderView: AVPictureInPictureControllerDelegate {
     
     func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, failedToStartPictureInPictureWithError error: any Error) {
-        print("failedToStartPictureInPictureWithError", error)
+        NSLog("failedToStartPictureInPictureWithError")
     }
     
+    func pictureInPictureControllerDidStartPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
+        NSLog("pictureInPictureControllerDidStartPictureInPicture")
+        
+        NSLog(NSApplication.shared.windows.debugDescription)
+        
+        guard let window = NSApplication.shared.windows.last else { return }
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.embedAnimatedWebView(in: window)
+        }
+    }
+    
+    func embedAnimatedWebView(in window: NSWindow) {
+            if let contentView = window.contentView {
+                contentView.wantsLayer = true
+            }
+            
+            let containerView = NSView(frame: .zero)
+            containerView.translatesAutoresizingMaskIntoConstraints = false
+            containerView.wantsLayer = true
+            
+            let webView = createNewWebView()
+            
+            containerView.addSubview(webView)
+            NSLayoutConstraint.activate([
+                webView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+                webView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+                webView.topAnchor.constraint(equalTo: containerView.topAnchor),
+                webView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+            ])
+            
+            if let contentView = window.contentView {
+                contentView.addSubview(containerView)
+                NSLayoutConstraint.activate([
+                    containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+                    containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+                    containerView.topAnchor.constraint(equalTo: contentView.topAnchor),
+                    containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+                ])
+            }
+
+            window.orderFrontRegardless()
+        }
+    
     func pictureInPictureControllerWillStartPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
-        guard let window = NSApplication.shared.windows.first else { return }
-        let customPipView = createNewCustomPipView()
-        window.contentView?.addSubview(customPipView)
-        customPipView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            customPipView.topAnchor.constraint(equalTo: window.contentView!.topAnchor),
-            customPipView.bottomAnchor.constraint(equalTo: window.contentView!.bottomAnchor),
-            customPipView.leadingAnchor.constraint(equalTo: window.contentView!.leadingAnchor),
-            customPipView.trailingAnchor.constraint(equalTo: window.contentView!.trailingAnchor)
-        ])
+        
     }
     
     func pictureInPictureControllerWillStopPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
-        print("PiP will stop.")
+        NSLog("PiP will stop.")
     }
     
     func pictureInPictureControllerDidStopPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
-        print("PiP stopped.")
+        NSLog("PiP stopped.")
     }
     
     // TODO: restore from pip
