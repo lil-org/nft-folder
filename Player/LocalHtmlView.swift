@@ -116,22 +116,38 @@ struct LocalHtmlView: View {
     
     private func infoPopoverView() -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            Button(Strings.pip, action: showPip).buttonStyle(LinkButtonStyle()).fontWeight(Font.Weight.semibold)
+            Button(action: showPip) {
+                Text(Strings.pip)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .fontWeight(Font.Weight.semibold)
+            }
+            .buttonStyle(LinkButtonStyle())
             Divider()
             
             if playerModel.currentToken.screensaver != nil {
-                Button(Strings.setScreenSaver, action: getScreensaver).buttonStyle(LinkButtonStyle()).fontWeight(Font.Weight.semibold)
+                Button(action: getScreensaver) {
+                    Text(Strings.setScreenSaver)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .fontWeight(Font.Weight.semibold)
+                }
+                .buttonStyle(LinkButtonStyle())
                 Divider()
             }
             
-            Button(Strings.viewOnOpensea, action: viewOnWeb).buttonStyle(LinkButtonStyle()).fontWeight(Font.Weight.semibold)
+            Button(action: viewOnWeb) {
+                Text(Strings.viewOnOpensea)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .fontWeight(Font.Weight.semibold)
+            }
+            .buttonStyle(LinkButtonStyle())
             
             if let instructions = playerModel.currentToken.instructions {
                 Divider()
                 Text(instructions).font(.body)
             }
         }
-        .padding().frame(width: 230)
+        .padding()
+        .frame(width: 230)
     }
     
 }
