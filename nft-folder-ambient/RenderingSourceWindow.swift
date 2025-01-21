@@ -57,7 +57,6 @@ class RenderingSourceWindow: NSWindow {
         center()
         
         // TODO: refresh html when size changes are no longer happenning for a second or so
-        // TODO: or properly directly detect pip resize interaction is finished moment
     }
     
     func reloadDisplayedToken() {

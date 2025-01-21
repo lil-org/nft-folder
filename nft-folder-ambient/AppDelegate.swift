@@ -29,7 +29,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     private func createPipVideoSourceWindow() {
-        let windowRect = NSRect(x: 0, y: 0, width: 100, height: 100) // TODO: try 0, 0 too
+        let windowRect = NSRect(x: 0, y: 0, width: 100, height: 100)
         
         window = NSWindow(
             contentRect: windowRect,
