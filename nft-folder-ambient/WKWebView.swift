@@ -4,6 +4,16 @@ import WebKit
 
 extension WKWebView {
     
+    static func forPip() -> WKWebView {
+        let webConfiguration = WKWebViewConfiguration()
+        webConfiguration.suppressesIncrementalRendering = true
+        let webView = WKWebView(frame: .zero, configuration: webConfiguration)
+        webView.wantsLayer = true
+        webView.layer?.backgroundColor = .black
+        webView.setValue(true, forKey: "drawsTransparentBackground")
+        return webView
+    }
+    
     static func forStatusBarPlayer() -> WKWebView {
         let webConfiguration = WKWebViewConfiguration()
         webConfiguration.suppressesIncrementalRendering = true

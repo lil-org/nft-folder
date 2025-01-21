@@ -55,6 +55,9 @@ class RenderingSourceWindow: NSWindow {
     func updateSize(size: CGSize) {
         webView?.setFrameSize(size)
         center()
+        
+        // TODO: refresh html when size changes are no longer happenning for a second or so
+        // TODO: or properly directly detect pip resize interaction is finished moment
     }
     
     func reloadDisplayedToken() {
@@ -65,13 +68,11 @@ class RenderingSourceWindow: NSWindow {
     
     private func setupWebView() {
         guard let contentView = contentView else { return }
-        // TODO: setup like parent macos app
-        let webView = WKWebView(frame: contentView.bounds)
-        webView.wantsLayer = true
+        let webView = WKWebView.forPip()
         if let html = currentGeneratedToken?.html {
             webView.loadHTMLString(html, baseURL: nil)
         }
-        self.contentView?.addSubview(webView)
+        contentView.addSubview(webView)
         
         NSLayoutConstraint.activate([
             webView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
