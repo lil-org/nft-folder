@@ -9,7 +9,7 @@ var currentGeneratedToken: GeneratedToken?
 class AppDelegate: NSObject, NSApplicationDelegate {
     
     var window: NSWindow?
-    private weak var pipPlaceholderViewController: PipPlaceholderViewController?
+    private weak var pipVideoSourceViewController: PipVideoSourceViewController?
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         DistributedNotificationCenter.default().addObserver(
@@ -19,7 +19,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             object: nil, suspensionBehavior: .deliverImmediately
         )
 
-        createMainWindow()
+        createPipVideoSourceWindow()
         
         sharedSourceWindow = RenderingSourceWindow() // TODO: tmp, will only go in agent
     }
@@ -30,10 +30,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
               let token = try? JSONDecoder().decode(GeneratedToken.self, from: data) else { return }
         currentGeneratedToken = token
         sharedSourceWindow?.reloadDisplayedToken()
-        pipPlaceholderViewController?.didReceivePipNotificationWithToken(token)
+        pipVideoSourceViewController?.didReceivePipNotificationWithToken(token)
     }
     
-    private func createMainWindow() {
+    private func createPipVideoSourceWindow() {
         let windowRect = NSRect(x: 0, y: 0, width: 100, height: 100) // TODO: try 0, 0 too
         
         window = NSWindow(
@@ -50,12 +50,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window?.ignoresMouseEvents = true
         window?.backgroundColor = .clear
         
-        let viewController = PipPlaceholderViewController()
+        let viewController = PipVideoSourceViewController()
         window?.contentViewController = viewController
         window?.makeKeyAndOrderFront(nil) // TODO: not sure it's needed
         window?.contentView?.isHidden = true
         
-        self.pipPlaceholderViewController = viewController
+        self.pipVideoSourceViewController = viewController
     }
     
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {

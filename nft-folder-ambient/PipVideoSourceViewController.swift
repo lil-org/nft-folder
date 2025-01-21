@@ -2,7 +2,7 @@
 
 import Cocoa
 
-class PipPlaceholderViewController: NSViewController {
+class PipVideoSourceViewController: NSViewController {
 
     private weak var pipView: PipPlaceholderView?
     
