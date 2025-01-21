@@ -70,7 +70,7 @@ class RenderingSourceWindow: NSWindow {
     
     private func setupWebView() {
         guard let contentView = contentView else { return }
-        let webView = WKWebView.forPip()
+        let webView = WKWebView.forPip(withFrame: contentView.bounds)
         contentView.addSubview(webView)
         NSLayoutConstraint.activate([
             webView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),

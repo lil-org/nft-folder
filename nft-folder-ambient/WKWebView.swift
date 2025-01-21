@@ -4,10 +4,10 @@ import WebKit
 
 extension WKWebView {
     
-    static func forPip() -> WKWebView {
+    static func forPip(withFrame frame: CGRect) -> WKWebView {
         let webConfiguration = WKWebViewConfiguration()
         webConfiguration.suppressesIncrementalRendering = true
-        let webView = WKWebView(frame: .zero, configuration: webConfiguration)
+        let webView = WKWebView(frame: frame, configuration: webConfiguration)
         webView.wantsLayer = true
         webView.layer?.backgroundColor = .black
         webView.setValue(true, forKey: "drawsTransparentBackground")
