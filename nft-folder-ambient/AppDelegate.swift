@@ -2,7 +2,7 @@
 
 import Cocoa
 
-var sharedSourceWindow: SourceWindow? // TODO: refactor
+var sharedSourceWindow: RenderingSourceWindow? // TODO: refactor
 var currentGeneratedToken: GeneratedToken?
 
 @main
@@ -21,7 +21,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         createMainWindow()
         
-        sharedSourceWindow = SourceWindow() // TODO: tmp, will only go in agent
+        sharedSourceWindow = RenderingSourceWindow() // TODO: tmp, will only go in agent
     }
 
     @objc func receiveTokenNotification(_ notification: Notification) {

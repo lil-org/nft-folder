@@ -2,7 +2,7 @@ import Cocoa
 import QuartzCore
 import WebKit
 
-class SourceWindow: NSWindow {
+class RenderingSourceWindow: NSWindow {
     
     private var sourceLayer: CALayer!
     private var remoteContext: AnyObject?
@@ -71,7 +71,7 @@ class SourceWindow: NSWindow {
     
 }
 
-extension SourceWindow {
+extension RenderingSourceWindow {
     
     func setupLayerSharing() {
         let options: NSDictionary = [:]

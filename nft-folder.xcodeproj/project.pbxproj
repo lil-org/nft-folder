@@ -163,7 +163,7 @@
 		2C6BA82D2D3D38C90072B001 /* GeneratedToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE9A5772C3DAB03009AEAF4 /* GeneratedToken.swift */; };
 		2C6BA82E2D3D38DA0072B001 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
 		2C6BA8392D3E54BA0072B001 /* square.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2CF08B032D2B239300D82ACA /* square.mp4 */; };
-		2C6BA8452D3EED540072B001 /* CrossRendering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BA83E2D3EAE7F0072B001 /* CrossRendering.swift */; };
+		2C6BA8452D3EED540072B001 /* RenderingSourceWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BA83E2D3EAE7F0072B001 /* RenderingSourceWindow.swift */; };
 		2C7134D62D30460B001E33DC /* MobilePlaybackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7134D52D304609001E33DC /* MobilePlaybackController.swift */; };
 		2C88D95D2C3872DD00009C25 /* RandomGradientShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88D95C2C3872DD00009C25 /* RandomGradientShape.swift */; };
 		2C8A42EA2B1A272600BE4166 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A42E92B1A272600BE4166 /* Network.swift */; };
@@ -783,7 +783,7 @@
 		2C6BA81F2D3D2BFC0072B001 /* PipPlaceholderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipPlaceholderViewController.swift; sourceTree = "<group>"; };
 		2C6BA8292D3D31A50072B001 /* AmbientAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbientAgent.swift; sourceTree = "<group>"; };
 		2C6BA8332D3D87410072B001 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		2C6BA83E2D3EAE7F0072B001 /* CrossRendering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossRendering.swift; sourceTree = "<group>"; };
+		2C6BA83E2D3EAE7F0072B001 /* RenderingSourceWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderingSourceWindow.swift; sourceTree = "<group>"; };
 		2C7134D52D304609001E33DC /* MobilePlaybackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobilePlaybackController.swift; sourceTree = "<group>"; };
 		2C88D95C2C3872DD00009C25 /* RandomGradientShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomGradientShape.swift; sourceTree = "<group>"; };
 		2C8A42E92B1A272600BE4166 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
@@ -2865,7 +2865,7 @@
 				2C6BA81A2D3D2BFC0072B001 /* AppDelegate.swift */,
 				2C6BA81F2D3D2BFC0072B001 /* PipPlaceholderViewController.swift */,
 				2C17BDC32D3C36FF0015C58B /* PipPlaceholderView.swift */,
-				2C6BA83E2D3EAE7F0072B001 /* CrossRendering.swift */,
+				2C6BA83E2D3EAE7F0072B001 /* RenderingSourceWindow.swift */,
 				2C6BA81B2D3D2BFC0072B001 /* Assets.xcassets */,
 				2C6BA81D2D3D2BFC0072B001 /* Main.storyboard */,
 				2C6BA81E2D3D2BFC0072B001 /* nft_folder_ambient.entitlements */,
@@ -5705,7 +5705,7 @@
 				2C6BA82C2D3D38B20072B001 /* PipPlaceholderView.swift in Sources */,
 				2C6BA82E2D3D38DA0072B001 /* Notification.swift in Sources */,
 				2C6BA8212D3D2BFC0072B001 /* AppDelegate.swift in Sources */,
-				2C6BA8452D3EED540072B001 /* CrossRendering.swift in Sources */,
+				2C6BA8452D3EED540072B001 /* RenderingSourceWindow.swift in Sources */,
 				2C6BA8222D3D2BFC0072B001 /* PipPlaceholderViewController.swift in Sources */,
 				2C6BA82D2D3D38C90072B001 /* GeneratedToken.swift in Sources */,
 			);
