@@ -48,6 +48,18 @@ let projects: [ProjectToBundle] = {
     return result
 }()
 
+func reorderSuggestedItemsPuttingGeneratableToStart() {    
+    let ids = (try! FileManager.default.contentsOfDirectory(atPath: dir + "/Suggested Items/Suggested.bundle/Scripts/")).map { String($0.dropLast(5)) }
+    
+    let generative = bundledSuggestedItems.filter { ids.contains($0.id) }
+    let nonGenerative = bundledSuggestedItems.filter { !ids.contains($0.id) }
+    
+    let reordered = generative + nonGenerative
+    
+    let updatedSuggestedItemsData = try! encoder.encode(reordered)
+    try! updatedSuggestedItemsData.write(to: bundledSuggestedItemsUrl)
+}
+
 func cleanupModels() {
 
 }

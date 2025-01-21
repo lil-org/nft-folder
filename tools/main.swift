@@ -19,4 +19,6 @@ let fresh =
 //addMissingCollectionIds()
 //cleanupModels()
 
+//reorderSuggestedItemsPuttingGeneratableToStart()
+
 print("🟢 all done")
