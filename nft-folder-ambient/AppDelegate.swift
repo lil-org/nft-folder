@@ -52,6 +52,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.pipVideoSourceViewController = viewController
     }
     
+    func applicationWillTerminate(_ aNotification: Notification) {
+        DistributedNotificationCenter.default().removeObserver(self)
+    }
+    
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         return false
     }

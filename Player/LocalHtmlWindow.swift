@@ -15,8 +15,8 @@ class LocalHtmlWindow: NSWindow {
         return styleMask.contains(.fullScreen) && isOnActiveSpace
     }
     
-    init(id: String?, contentRect: NSRect, styleMask style: NSWindow.StyleMask, backing backingStoreType: NSWindow.BackingStoreType, defer flag: Bool) {
-        self.playerModel = PlayerModel(specificCollectionId: id, notTokenId: nil)
+    init(playerModel: PlayerModel, contentRect: NSRect, styleMask style: NSWindow.StyleMask, backing backingStoreType: NSWindow.BackingStoreType, defer flag: Bool) {
+        self.playerModel = playerModel
         super.init(contentRect: contentRect, styleMask: style, backing: backingStoreType, defer: flag)
         
         let htmlView = LocalHtmlView(playerModel: playerModel, windowNumber: windowNumber, playerMenuDelegate: self).background(.black)

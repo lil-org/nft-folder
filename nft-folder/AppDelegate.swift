@@ -39,7 +39,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         notificationCenter.post(name: .mustTerminate, object: currentInstanceId)
         notificationCenter.addObserver(self, selector: #selector(terminateInstance(_:)), name: .mustTerminate, object: nil, suspensionBehavior: .deliverImmediately)
         notificationCenter.addObserver(self, selector: #selector(processFinderMessage(_:)), name: .fromFinder, object: nil, suspensionBehavior: .deliverImmediately)
-        
+        notificationCenter.addObserver(self, selector: #selector(restoreFromPip(_:)), name: .restoreFromPip, object: nil, suspensionBehavior: .deliverImmediately)
         allDownloadsManager.start()
         StatusBarItem.shared.showIfNeeded()
         AvatarService.setup()
@@ -51,6 +51,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             Defaults.performCleanup(version: currentVersion)
             SharedDefaults.performCleanup(version: currentVersion)
             Defaults.cleanupVersion = 1
+        }
+    }
+    
+    @objc func restoreFromPip(_ notification: Notification) {
+        guard let jsonString = notification.object as? String,
+              let data = jsonString.data(using: .utf8),
+              let token = try? JSONDecoder().decode(GeneratedToken.self, from: data) else { return }
+        DispatchQueue.main.async {
+            Navigator.shared.showPlayer(model: PlayerModel(token: token))
         }
     }
     

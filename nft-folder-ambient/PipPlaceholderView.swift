@@ -22,6 +22,13 @@ class PipPlaceholderView: NSView {
         // TODO: play next random item in collection
     }
     
+    private func didClickRestoreFromPip() {
+        guard let token = currentGeneratedToken,
+              let data = try? JSONEncoder().encode(token),
+              let jsonString = String(data: data, encoding: .utf8) else { return }
+        DistributedNotificationCenter.default().post(name: .restoreFromPip, object: jsonString)
+    }
+    
     private func setupPlayer() {
         playerLayer = AVPlayerLayer()
         guard let mp4Video = Bundle.main.url(forResource: "square", withExtension: "mp4"),
@@ -88,7 +95,8 @@ extension PipPlaceholderView: AVPictureInPictureControllerDelegate {
     func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, failedToStartPictureInPictureWithError error: any Error) {}
     
     func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, restoreUserInterfaceForPictureInPictureStopWithCompletionHandler completionHandler: @escaping (Bool) -> Void) {
-        // TODO: restore big player from pip
+        didClickRestoreFromPip()
+        completionHandler(true)
     }
     
     func pictureInPictureControllerDidStartPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {

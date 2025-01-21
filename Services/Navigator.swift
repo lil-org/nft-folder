@@ -12,10 +12,10 @@ class Navigator: NSObject {
         showControlCenter(addWallet: true)
     }
     
-    func showPlayer(id: String?) {        
+    func showPlayer(model: PlayerModel) {
         Window.closeOtherPlayers()
         let window = LocalHtmlWindow(
-            id: id,
+            playerModel: model,
             contentRect: CGRect(origin: .zero, size: CGSize(width: 420, height: 420)),
             styleMask: [.closable, .fullSizeContentView, .titled, .resizable, .miniaturizable],
             backing: .buffered, defer: false)

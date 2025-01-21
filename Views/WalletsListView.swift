@@ -353,7 +353,7 @@ struct WalletsListView: View {
     }
     
     private func showPlayer(id: String?) {
-        Navigator.shared.showPlayer(id: id)
+        Navigator.shared.showPlayer(model: PlayerModel(specificCollectionId: id, notTokenId: nil))
     }
     
     private func eraseAllContent() {
@@ -464,7 +464,7 @@ struct WalletsListView: View {
     
     private func autoStartPlayer(id: String) -> Bool {
         if TokenGenerator.canGenerate(id: id) {
-            Navigator.shared.showPlayer(id: id)
+            Navigator.shared.showPlayer(model: PlayerModel(specificCollectionId: id, notTokenId: nil))
             return true
         } else {
             return false
