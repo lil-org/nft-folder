@@ -5,8 +5,6 @@ import Cocoa
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
     
-    var window: NSWindow?
-    
     private var didFinishLaunching = false
     private var initialMessage: ExtensionMessage?
     
