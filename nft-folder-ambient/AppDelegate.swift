@@ -52,7 +52,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         let viewController = PipVideoSourceViewController()
         window?.contentViewController = viewController
-        window?.makeKeyAndOrderFront(nil) // TODO: not sure it's needed
         window?.contentView?.isHidden = true
         
         self.pipVideoSourceViewController = viewController

@@ -33,7 +33,7 @@ class RenderingSourceWindow: NSWindow {
         ignoresMouseEvents = true
         backgroundColor = .clear
         center()
-        makeKeyAndOrderFront(nil)
+        orderFrontRegardless()
         
         contentView?.wantsLayer = true
         setupWebView()
