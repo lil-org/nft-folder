@@ -1,7 +1,6 @@
 // ∅ 2025 lil org
 
 import AVKit
-import WebKit
 
 class PipPlaceholderView: NSView {
     
@@ -9,9 +8,7 @@ class PipPlaceholderView: NSView {
     private var pipController: AVPictureInPictureController?
     private var currentPipToken: GeneratedToken?
     private var didSetupPlayer = false
-    private var displayedWebView: WKWebView?
-    
-    private var animationActivity: NSObjectProtocol?
+    private var layerHost: AnyObject?
     
     private func setupPlayer() {
         playerLayer = AVPlayerLayer()
@@ -23,8 +20,6 @@ class PipPlaceholderView: NSView {
         let asset = AVAsset(url: mp4Video)
         let playerItem = AVPlayerItem(asset: asset)
         let player = AVPlayer(playerItem: playerItem)
-        
-        
         
         player.isMuted = true
         player.allowsExternalPlayback = true
@@ -39,29 +34,14 @@ class PipPlaceholderView: NSView {
     }
     
     func handleTogglePip(generatedToken: GeneratedToken) {
-        NSLog("handleTogglePip")
-        
         let isPipActive = pipController?.isPictureInPictureActive == true
         let sameToken = currentPipToken?.html == generatedToken.html
         currentPipToken = generatedToken
         
         if isPipActive {
-            //            if sameToken {
-            //                pipController?.stopPictureInPicture()
-            //            } else {
-            NSLog("will loadHTMLString")
-            NSLog(displayedWebView.debugDescription)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
-                
-                NSApplication.shared.activate(ignoringOtherApps: true)
-                
-                self?.displayedWebView?.loadHTMLString(generatedToken.html, baseURL: nil)
-                
-                
-                NSLog("did load HTML")
+            if sameToken {
+                pipController?.stopPictureInPicture() // TODO: not sure if we want it like this on macos
             }
-            //            }
         } else {
             togglePip()
         }
@@ -91,21 +71,6 @@ class PipPlaceholderView: NSView {
         }
     }
     
-    private func webViewForStatusBarPlayer() -> WKWebView {
-        let webConfiguration = WKWebViewConfiguration()
-        webConfiguration.suppressesIncrementalRendering = true
-        let webView = WKWebView(frame: .zero, configuration: webConfiguration)
-        webView.wantsLayer = true
-        webView.layer?.backgroundColor = NSColor.clear.cgColor
-        webView.translatesAutoresizingMaskIntoConstraints = false
-        webView.setValue(true, forKey: "drawsTransparentBackground")
-        webView.configuration.preferences.setValue(true, forKey: "allowFileAccessFromFileURLs")
-        webView.configuration.defaultWebpagePreferences.allowsContentJavaScript = true
-        return webView
-    }
-    
-    var layerHost: AnyObject?
-    
 }
 
 extension PipPlaceholderView: AVPictureInPictureControllerDelegate {
@@ -133,23 +98,14 @@ extension PipPlaceholderView: AVPictureInPictureControllerDelegate {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.wantsLayer = true
         
-        
-        
         if let layerHostClass = NSClassFromString("CALayerHost") as? NSObject.Type, let contextId = sharedSourceWindow?.getContextID() {
             layerHost = layerHostClass.init()
             layerHost?.setValue(contextId, forKey: "contextId")
-            
             if let castedLayerHost = layerHost as? CALayer {
                 castedLayerHost.frame = containerView.bounds
                 containerView.layer?.addSublayer(castedLayerHost)
-                print("Renderer: Displaying remote layer with context ID \(contextId).")
-            } else {
-                print("Failed to cast CALayerHost.")
             }
-        } else {
-            print("Failed to create CALayerHost.")
         }
-        
         
         if let contentView = window.contentView {
             contentView.addSubview(containerView)

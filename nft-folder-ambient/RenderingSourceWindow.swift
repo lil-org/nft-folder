@@ -60,6 +60,7 @@ class RenderingSourceWindow: NSWindow {
     
     private func setupWebView() {
         let webViewFrame = NSRect(x: 0, y: 0, width: 1000, height: 1000)
+        // TODO: setup like parent macos app
         let webView = WKWebView(frame: webViewFrame)
         webView.wantsLayer = true
         if let html = currentGeneratedToken?.html {
