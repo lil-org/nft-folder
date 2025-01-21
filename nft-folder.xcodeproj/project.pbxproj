@@ -239,6 +239,7 @@
 		2CE0B5E32B8686CE00B5BF4A /* FooterLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE0B5E22B8686CE00B5BF4A /* FooterLink.swift */; };
 		2CE0F1582C4D37E6003004F2 /* p5js190.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CE0F1572C4D37E6003004F2 /* p5js190.js */; };
 		2CE202022D3FBC0700852957 /* WKWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE202012D3FBC0600852957 /* WKWebView.swift */; };
+		2CE202042D400F2000852957 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE202032D400F1D00852957 /* Helpers.swift */; };
 		2CE33D9A2B865CFB008473E1 /* AvatarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE33D992B865CFB008473E1 /* AvatarService.swift */; };
 		2CE9A5762C3DA9FB009AEAF4 /* TokenGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE9A5752C3DA9FB009AEAF4 /* TokenGenerator.swift */; };
 		2CE9A5782C3DAB03009AEAF4 /* GeneratedToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE9A5772C3DAB03009AEAF4 /* GeneratedToken.swift */; };
@@ -1936,6 +1937,7 @@
 		2CE0B5E22B8686CE00B5BF4A /* FooterLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterLink.swift; sourceTree = "<group>"; };
 		2CE0F1572C4D37E6003004F2 /* p5js190.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = p5js190.js; sourceTree = "<group>"; };
 		2CE202012D3FBC0600852957 /* WKWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebView.swift; sourceTree = "<group>"; };
+		2CE202032D400F1D00852957 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		2CE33D992B865CFB008473E1 /* AvatarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarService.swift; sourceTree = "<group>"; };
 		2CE9A5752C3DA9FB009AEAF4 /* TokenGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenGenerator.swift; sourceTree = "<group>"; };
 		2CE9A5772C3DAB03009AEAF4 /* GeneratedToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedToken.swift; sourceTree = "<group>"; };
@@ -2868,6 +2870,7 @@
 				2C6BA83E2D3EAE7F0072B001 /* RenderingSourceWindow.swift */,
 				2C6BA81F2D3D2BFC0072B001 /* PipVideoSourceViewController.swift */,
 				2CE202012D3FBC0600852957 /* WKWebView.swift */,
+				2CE202032D400F1D00852957 /* Helpers.swift */,
 				2C6BA81B2D3D2BFC0072B001 /* Assets.xcassets */,
 				2C6BA81D2D3D2BFC0072B001 /* Main.storyboard */,
 				2C6BA81E2D3D2BFC0072B001 /* nft_folder_ambient.entitlements */,
@@ -5708,6 +5711,7 @@
 				2CE202022D3FBC0700852957 /* WKWebView.swift in Sources */,
 				2C6BA82C2D3D38B20072B001 /* PipPlaceholderView.swift in Sources */,
 				2C6BA82E2D3D38DA0072B001 /* Notification.swift in Sources */,
+				2CE202042D400F2000852957 /* Helpers.swift in Sources */,
 				2C6BA8212D3D2BFC0072B001 /* AppDelegate.swift in Sources */,
 				2C6BA8452D3EED540072B001 /* RenderingSourceWindow.swift in Sources */,
 				2C6BA8222D3D2BFC0072B001 /* PipVideoSourceViewController.swift in Sources */,

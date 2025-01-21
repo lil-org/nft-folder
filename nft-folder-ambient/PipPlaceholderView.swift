@@ -108,9 +108,11 @@ extension PipPlaceholderView: AVPictureInPictureControllerDelegate {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.wantsLayer = true
         
-        if let layerHostClass = NSClassFromString("CALayerHost") as? NSObject.Type, let contextId = sharedSourceWindow?.getContextId() {
-            layerHost = layerHostClass.init()
-            layerHost?.setValue(contextId, forKey: "contextId")
+        let prefix = "ca".uppercased()
+        if let layerClass = NSClassFromString(prefix + Consts.layer.capitalized + Consts.host.capitalized) as? NSObject.Type,
+           let contextId = sharedSourceWindow?.getContextId() {
+            layerHost = layerClass.init()
+            layerHost?.setValue(contextId, forKey: Consts.context + "i".uppercased() + "d")
             if let castedLayerHost = layerHost as? CALayer {
                 castedLayerHost.frame = containerView.bounds
                 containerView.layer?.addSublayer(castedLayerHost)

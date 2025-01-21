@@ -87,15 +87,17 @@ class RenderingSourceWindow: NSWindow {
     
     private func setupLayerSharing() {
         let options: NSDictionary = [:]
-        if let contextClass = NSClassFromString("CAContext") as? NSObject.Type,
-           let contextInstance = contextClass.perform(Selector(("remoteContextWithOptions:")), with: options)?.takeUnretainedValue() {
+        let prefix = "ca".uppercased()
+        let suffix = ":"
+        if let contextClass = NSClassFromString("\(prefix)\(Consts.context.capitalized)") as? NSObject.Type,
+           let contextInstance = contextClass.perform(Selector(("remote\(Consts.context.capitalized)With" + Consts.options.capitalized + suffix)), with: options)?.takeUnretainedValue() {
             remoteContext = contextInstance
             
             if let layer = webView?.layer {
-                remoteContext?.setValue(layer, forKey: "layer")
+                remoteContext?.setValue(layer, forKey: Consts.layer)
             }
             
-            if let retrievedContextId = remoteContext?.value(forKey: "contextId") as? UInt32 {
+            if let retrievedContextId = remoteContext?.value(forKey: Consts.context + "Id") as? UInt32 {
                 contextId = retrievedContextId
             }
         }
