@@ -20,6 +20,7 @@ class PipPlaceholderView: NSView {
     
     private func didClickPlayButton() {
         // TODO: play next random item in collection
+        sharedSourceWindow?.forceRefresh()
     }
     
     private func sendRestoreFromPipNotification() {
@@ -61,6 +62,7 @@ class PipPlaceholderView: NSView {
                         let nowDate = Date()
                         if nowDate.timeIntervalSince(lastClickDate) > 0.5 {
                             self?.lastPlayClickDate = nowDate
+                            self?.didClickPlayButton()
                         }
                     }
                 }

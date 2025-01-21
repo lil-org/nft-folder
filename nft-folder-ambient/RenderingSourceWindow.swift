@@ -57,6 +57,10 @@ class RenderingSourceWindow: NSWindow {
         Defaults.pipWidth = size.width
     }
     
+    func forceRefresh() {
+        reloadDisplayedToken()
+    }
+    
     func reloadDisplayedToken() {
         if let html = currentGeneratedToken?.html {
             webView?.loadHTMLString(html, baseURL: nil)
