@@ -69,6 +69,10 @@ extension PipPlaceholderView: AVPictureInPictureControllerDelegate {
     
     func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, failedToStartPictureInPictureWithError error: any Error) {}
     
+    func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, restoreUserInterfaceForPictureInPictureStopWithCompletionHandler completionHandler: @escaping (Bool) -> Void) {
+        // TODO: restore big player from pip
+    }
+    
     func pictureInPictureControllerDidStartPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
         guard let window = NSApplication.shared.windows.last else { return }
         
@@ -131,7 +135,5 @@ extension PipPlaceholderView: AVPictureInPictureControllerDelegate {
         // TODO: remove itself from system pip window
         NSApplication.shared.terminate(nil)
     }
-    
-    // TODO: restore big player from pip
     
 }
