@@ -19,25 +19,20 @@ class SourceWindow: NSWindow {
             defer: false
         )
         
-        // TODO: tune in agent to make it always present
-        //        collectionBehavior = [
-        //                    .canJoinAllSpaces,  // Allows window across all spaces
-        //                    .stationary,        // Prevents window from being moved by Mission Control
-        //                    .fullScreenAuxiliary, // Allows overlaying on full-screen apps
-        //                    .ignoresCycle       // Avoids cycling through Mission Control spaces
-        //                ]
-        
         collectionBehavior = [
-            //                   .canJoinAllSpaces,      // Allow window to appear on all Spaces
-            .fullScreenNone,        // Prevent it from entering fullscreen mode
-            .moveToActiveSpace,     // Ensures it follows to the active space
-            .transient, .fullScreenAuxiliary              // Makes it behave like a utility window (helps in fullscreen mode)
+            .canJoinAllSpaces,
+            .stationary,
+            .ignoresCycle,
+            .fullScreenAuxiliary,
+            .canJoinAllApplications,
+            .fullScreenDisallowsTiling
         ]
         
         level = .statusBar
         isMovable = false
         ignoresMouseEvents = true
-        backgroundColor = .green // TODO: validate that it joins all spaces with .green
+        backgroundColor = .clear
+        center()
         makeKeyAndOrderFront(nil)
         
         contentView?.wantsLayer = true
