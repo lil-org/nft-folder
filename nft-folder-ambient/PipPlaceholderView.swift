@@ -151,8 +151,6 @@ extension PipPlaceholderView: AVPictureInPictureControllerDelegate {
     }
     
     func pictureInPictureControllerDidStopPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
-        // TODO: manually clean up source window and webview
-        // TODO: remove itself from system pip window
         NSApplication.shared.terminate(nil)
     }
     
