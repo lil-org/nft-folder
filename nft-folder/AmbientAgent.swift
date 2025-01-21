@@ -20,6 +20,7 @@ struct AmbientAgent {
                 NSLog("Failed to launch helper: \(error.localizedDescription)")
                 return
             }
+            // TODO: reduce or remove delay
             // Give the agent time to set up its notification observer
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
                 // Encode token

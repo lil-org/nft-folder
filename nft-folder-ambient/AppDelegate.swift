@@ -25,23 +25,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc func receiveTokenNotification(_ notification: Notification) {
-        NSLog("Agent: receiveTokenNotification.")
-        
         guard let jsonString = notification.object as? String,
-              let data = jsonString.data(using: .utf8) else {
-            NSLog("Agent: No valid JSON received in notification.")
-            return
-        }
-
-        do {
-            let token = try JSONDecoder().decode(GeneratedToken.self, from: data)
-            currentGeneratedToken = token
-            NSLog("Agent: Decoded token: \(token)")
-            sharedSourceWindow?.reloadDisplayedToken()
-            pipPlaceholderViewController?.didReceivePipNotificationWithToken(token)
-        } catch {
-            NSLog("Agent: Error decoding token: \(error.localizedDescription)")
-        }
+              let data = jsonString.data(using: .utf8),
+              let token = try? JSONDecoder().decode(GeneratedToken.self, from: data) else { return }
+        currentGeneratedToken = token
+        sharedSourceWindow?.reloadDisplayedToken()
+        pipPlaceholderViewController?.didReceivePipNotificationWithToken(token)
     }
     
     private func createMainWindow() {
@@ -65,7 +54,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window?.contentViewController = viewController
         window?.makeKeyAndOrderFront(nil) // TODO: not sure it's needed
         window?.contentView?.isHidden = true
-        NSLog("did create main window")
         
         self.pipPlaceholderViewController = viewController
     }

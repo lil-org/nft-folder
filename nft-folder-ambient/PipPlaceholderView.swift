@@ -73,10 +73,6 @@ class PipPlaceholderView: NSView {
         print("current windows are:")
         
         
-        NSLog(NSApplication.shared.windows.debugDescription)
-        
-        
-        
         if !didSetupPlayer {
             setupPlayer()
             didSetupPlayer = true
@@ -120,8 +116,6 @@ extension PipPlaceholderView: AVPictureInPictureControllerDelegate {
     
     func pictureInPictureControllerDidStartPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
         NSLog("pictureInPictureControllerDidStartPictureInPicture")
-        
-        NSLog(NSApplication.shared.windows.debugDescription)
         
         guard let window = NSApplication.shared.windows.last else { return }
         
