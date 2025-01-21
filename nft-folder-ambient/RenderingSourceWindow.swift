@@ -10,7 +10,7 @@ class RenderingSourceWindow: NSWindow {
     private var webView: WKWebView?
     
     init() {
-        let frame = NSRect(x: 0, y: 0, width: 300, height: 300)
+        let frame = NSRect(x: 0, y: 0, width: Defaults.pipWidth, height: Defaults.pipWidth)
         super.init(
             contentRect: frame,
             styleMask: [.borderless],
@@ -54,8 +54,7 @@ class RenderingSourceWindow: NSWindow {
     func updateSize(size: CGSize) {
         webView?.setFrameSize(size)
         center()
-        
-        // TODO: refresh html when size changes are no longer happenning for a second or so
+        Defaults.pipWidth = size.width
     }
     
     func reloadDisplayedToken() {
