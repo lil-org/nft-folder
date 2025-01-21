@@ -12,12 +12,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private weak var pipVideoSourceViewController: PipVideoSourceViewController?
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        DistributedNotificationCenter.default().addObserver(
-            self,
-            selector: #selector(receiveTokenNotification(_:)),
-            name: Notification.Name("MyTokenNotification"), // TODO: refactor
-            object: nil, suspensionBehavior: .deliverImmediately
-        )
+        DistributedNotificationCenter.default().addObserver(self, selector: #selector(receiveTokenNotification(_:)),
+                                                            name: .togglePip, object: nil, suspensionBehavior: .deliverImmediately)
 
         createPipVideoSourceWindow()
         sharedSourceWindow = RenderingSourceWindow()

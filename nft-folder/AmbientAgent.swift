@@ -24,7 +24,7 @@ struct AmbientAgent {
     
     private static func sendTokenNotification(generatedToken: GeneratedToken) {
         guard let data = try? JSONEncoder().encode(generatedToken), let jsonString = String(data: data, encoding: .utf8) else { return }
-        DistributedNotificationCenter.default().post(name: Notification.Name("MyTokenNotification"), object: jsonString)
+        DistributedNotificationCenter.default().post(name: .togglePip, object: jsonString)
     }
     
 }
