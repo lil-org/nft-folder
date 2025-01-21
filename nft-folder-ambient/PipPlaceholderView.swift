@@ -9,6 +9,8 @@ class PipPlaceholderView: NSView {
     private var currentPipToken: GeneratedToken?
     private var didSetupPlayer = false
     private var layerHost: AnyObject?
+    private var player: AVPlayer?
+    private var lastPlayClickDate = Date.distantPast
     
     private func setupPlayer() {
         playerLayer = AVPlayerLayer()
@@ -20,6 +22,7 @@ class PipPlaceholderView: NSView {
         let asset = AVAsset(url: mp4Video)
         let playerItem = AVPlayerItem(asset: asset)
         let player = AVPlayer(playerItem: playerItem)
+        self.player = player
         player.isMuted = true
         player.allowsExternalPlayback = true
         layer?.addSublayer(playerLayer)
@@ -28,19 +31,28 @@ class PipPlaceholderView: NSView {
         pipController = AVPictureInPictureController(playerLayer: playerLayer)
         pipController?.delegate = self
         
-        player.addObserver(self, forKeyPath: "rate", options: [.new, .old], context: nil)
+        player.addObserver(self, forKeyPath: "rate", options: [.new], context: nil)
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "rate" {
             if let newRate = change?[.newKey] as? Float {
-                if newRate == 0 {
-                    print("Player paused")
-                } else {
-                    print("Player playing")
+                if newRate == 1 && player?.status == .readyToPlay {
+                    DispatchQueue.main.async { [weak self] in
+                        self?.player?.pause()
+                        guard let lastClickDate = self?.lastPlayClickDate else { return }
+                        let nowDate = Date()
+                        if nowDate.timeIntervalSince(lastClickDate) > 0.5 {
+                            self?.lastPlayClickDate = nowDate
+                        }
+                    }
                 }
             }
         }
+    }
+    
+    private func didClickPlayButton() {
+        // TODO: play next random item in collection
     }
     
     func handleTogglePip(generatedToken: GeneratedToken) {
