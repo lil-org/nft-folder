@@ -118,7 +118,7 @@ extension PipPlaceholderView: AVPictureInPictureControllerDelegate {
                 if let containerView = containerView, let layerHost = self?.layerHost as? CALayer {
                     let newBounds = containerView.bounds
                     layerHost.frame = containerView.bounds
-                    sharedSourceWindow?.updateSize(bounds: newBounds)
+                    sharedSourceWindow?.updateSize(size: newBounds.size)
                 }
             }
         }
