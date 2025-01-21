@@ -75,22 +75,17 @@ extension RenderingSourceWindow {
     
     func setupLayerSharing() {
         let options: NSDictionary = [:]
-        
         if let contextClass = NSClassFromString("CAContext") as? NSObject.Type,
            let contextInstance = contextClass.perform(Selector(("remoteContextWithOptions:")), with: options)?.takeUnretainedValue() {
             remoteContext = contextInstance
+            
             if let layer = webView?.layer {
                 remoteContext?.setValue(layer, forKey: "layer")
             }
             
             if let retrievedContextId = remoteContext?.value(forKey: "contextId") as? UInt32 {
                 contextId = retrievedContextId
-                print("Renderer: CAContext's layer set for export with ID \(contextId).")
-            } else {
-                print("Failed to retrieve CAContext ID.")
             }
-        } else {
-            print("Failed to create CAContext.")
         }
     }
     
