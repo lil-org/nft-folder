@@ -4,7 +4,6 @@ import WebKit
 
 class RenderingSourceWindow: NSWindow {
     
-    private var sourceLayer: CALayer!
     private var remoteContext: AnyObject?
     private var contextId: UInt32 = 0
     
@@ -65,30 +64,28 @@ class RenderingSourceWindow: NSWindow {
         }
     }
     
+    func getContextId() -> UInt32 {
+        return contextId
+    }
+    
     private func setupWebView() {
         guard let contentView = contentView else { return }
         let webView = WKWebView.forPip()
-        if let html = currentGeneratedToken?.html {
-            webView.loadHTMLString(html, baseURL: nil)
-        }
         contentView.addSubview(webView)
-        
         NSLayoutConstraint.activate([
             webView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             webView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             webView.topAnchor.constraint(equalTo: contentView.topAnchor),
             webView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
-        
         self.webView = webView
         center()
+        if let html = currentGeneratedToken?.html {
+            webView.loadHTMLString(html, baseURL: nil)
+        }
     }
     
-}
-
-extension RenderingSourceWindow {
-    
-    func setupLayerSharing() {
+    private func setupLayerSharing() {
         let options: NSDictionary = [:]
         if let contextClass = NSClassFromString("CAContext") as? NSObject.Type,
            let contextInstance = contextClass.perform(Selector(("remoteContextWithOptions:")), with: options)?.takeUnretainedValue() {
@@ -102,10 +99,6 @@ extension RenderingSourceWindow {
                 contextId = retrievedContextId
             }
         }
-    }
-    
-    func getContextId() -> UInt32 {
-        return contextId
     }
     
 }
