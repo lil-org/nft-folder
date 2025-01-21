@@ -86,6 +86,10 @@ struct LocalHtmlView: View {
         }
     }
     
+    private func showPip() {
+        AmbientAgent.start(generatedToken: playerModel.currentToken)
+    }
+    
     private func listPopoverView() -> some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
@@ -112,6 +116,9 @@ struct LocalHtmlView: View {
     
     private func infoPopoverView() -> some View {
         VStack(alignment: .leading, spacing: 10) {
+            Button(Strings.pip, action: showPip).buttonStyle(LinkButtonStyle()).fontWeight(Font.Weight.semibold)
+            Divider()
+            
             if playerModel.currentToken.screensaver != nil {
                 Button(Strings.setScreenSaver, action: getScreensaver).buttonStyle(LinkButtonStyle()).fontWeight(Font.Weight.semibold)
                 Divider()
