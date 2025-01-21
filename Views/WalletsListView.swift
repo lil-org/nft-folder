@@ -69,6 +69,12 @@ struct WalletsListView: View {
                         }
                         
                         Button(action: {
+                            AmbientAgent.start(collectionId: nil)
+                        }) {
+                            Images.pip
+                        }
+                        
+                        Button(action: {
                             showPlayer(id: nil)
                         }) {
                             Images.shuffle
@@ -113,6 +119,12 @@ struct WalletsListView: View {
                                 }
                             }) {
                                 Images.openFinder
+                            }.frame(width: 23)
+                            
+                            Button(action: {
+                                AmbientAgent.start(collectionId: nil)
+                            }) {
+                                Images.pip
                             }.frame(width: 23)
                             
                             Button(action: {
@@ -366,9 +378,7 @@ struct WalletsListView: View {
             Divider()
             if TokenGenerator.canGenerate(id: item.id) {
                 Button(Strings.pip, action: {
-                    if let token = TokenGenerator.generateRandomToken(specificCollectionId: item.id, notTokenId: nil) {
-                        AmbientAgent.start(generatedToken: token)
-                    }
+                    AmbientAgent.start(collectionId: item.id)
                 })
                 Divider()
             }

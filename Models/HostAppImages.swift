@@ -21,5 +21,6 @@ extension Images {
     static let up = Image(systemName: "chevron.up")
     static let down = Image(systemName: "chevron.down")
     static let canGenerateIndicator = Image(systemName: "play.circle.fill")
+    static let pip = Image(systemName: "pip")
     
 }

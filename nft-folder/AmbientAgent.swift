@@ -6,6 +6,12 @@ struct AmbientAgent {
     
     private init() {}
     
+    static func start(collectionId: String?) {
+        if let token = TokenGenerator.generateRandomToken(specificCollectionId: collectionId, notTokenId: nil) {
+            start(generatedToken: token)
+        }
+    }
+    
     static func start(generatedToken: GeneratedToken) {
         let helperName = "nft-folder-ambient.app"
         let helperPath = Bundle.main.bundlePath.appending("/Contents/Helpers/\(helperName)")
