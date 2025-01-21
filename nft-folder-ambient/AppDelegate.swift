@@ -2,31 +2,26 @@
 
 import Cocoa
 
-var sharedSourceWindow: SourceWindow?
+var sharedSourceWindow: SourceWindow? // TODO: refactor
 var currentGeneratedToken: GeneratedToken?
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
     
     var window: NSWindow?
-    private var statusItem: NSStatusItem?
-    
     private weak var pipPlaceholderViewController: PipPlaceholderViewController?
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        
-        
-        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-                statusItem?.button?.title = "Agent"
-        
         DistributedNotificationCenter.default().addObserver(
             self,
             selector: #selector(receiveTokenNotification(_:)),
-            name: Notification.Name("MyTokenNotification"),
+            name: Notification.Name("MyTokenNotification"), // TODO: refactor
             object: nil, suspensionBehavior: .deliverImmediately
         )
 
         createMainWindow()
+        
+        sharedSourceWindow = SourceWindow() // TODO: tmp, will only go in agent
     }
 
     @objc func receiveTokenNotification(_ notification: Notification) {
@@ -42,6 +37,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             let token = try JSONDecoder().decode(GeneratedToken.self, from: data)
             currentGeneratedToken = token
             NSLog("Agent: Decoded token: \(token)")
+            sharedSourceWindow?.reloadDisplayedToken()
             pipPlaceholderViewController?.didReceivePipNotificationWithToken(token)
         } catch {
             NSLog("Agent: Error decoding token: \(error.localizedDescription)")

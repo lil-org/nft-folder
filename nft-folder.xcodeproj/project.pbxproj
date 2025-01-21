@@ -162,10 +162,7 @@
 		2C6BA82C2D3D38B20072B001 /* PipPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C17BDC32D3C36FF0015C58B /* PipPlaceholderView.swift */; };
 		2C6BA82D2D3D38C90072B001 /* GeneratedToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE9A5772C3DAB03009AEAF4 /* GeneratedToken.swift */; };
 		2C6BA82E2D3D38DA0072B001 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
-		2C6BA8372D3E54AC0072B001 /* PipPlaceholderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BA81F2D3D2BFC0072B001 /* PipPlaceholderViewController.swift */; };
-		2C6BA8382D3E54B00072B001 /* PipPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C17BDC32D3C36FF0015C58B /* PipPlaceholderView.swift */; };
 		2C6BA8392D3E54BA0072B001 /* square.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2CF08B032D2B239300D82ACA /* square.mp4 */; };
-		2C6BA83F2D3EAE840072B001 /* CrossRendering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BA83E2D3EAE7F0072B001 /* CrossRendering.swift */; };
 		2C6BA8452D3EED540072B001 /* CrossRendering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BA83E2D3EAE7F0072B001 /* CrossRendering.swift */; };
 		2C7134D62D30460B001E33DC /* MobilePlaybackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7134D52D304609001E33DC /* MobilePlaybackController.swift */; };
 		2C88D95D2C3872DD00009C25 /* RandomGradientShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88D95C2C3872DD00009C25 /* RandomGradientShape.swift */; };
@@ -2868,6 +2865,7 @@
 				2C6BA81A2D3D2BFC0072B001 /* AppDelegate.swift */,
 				2C6BA81F2D3D2BFC0072B001 /* PipPlaceholderViewController.swift */,
 				2C17BDC32D3C36FF0015C58B /* PipPlaceholderView.swift */,
+				2C6BA83E2D3EAE7F0072B001 /* CrossRendering.swift */,
 				2C6BA81B2D3D2BFC0072B001 /* Assets.xcassets */,
 				2C6BA81D2D3D2BFC0072B001 /* Main.storyboard */,
 				2C6BA81E2D3D2BFC0072B001 /* nft_folder_ambient.entitlements */,
@@ -3040,7 +3038,6 @@
 			children = (
 				2CA4CF542B07F75F00CC75F4 /* AppDelegate.swift */,
 				2C6BA8292D3D31A50072B001 /* AmbientAgent.swift */,
-				2C6BA83E2D3EAE7F0072B001 /* CrossRendering.swift */,
 				2CA4CF582B07F76000CC75F4 /* Assets.xcassets */,
 				2CA4CF5A2B07F76000CC75F4 /* Main.storyboard */,
 				2CA4CF5D2B07F76000CC75F4 /* nft_folder.entitlements */,
@@ -5777,13 +5774,11 @@
 				2C88D95D2C3872DD00009C25 /* RandomGradientShape.swift in Sources */,
 				2C91131A2B08F71200A8EE80 /* WalletDownloader.swift in Sources */,
 				2CF4C49E2B7FB26C000AB4A6 /* DetailedTokenMetadata.swift in Sources */,
-				2C6BA8372D3E54AC0072B001 /* PipPlaceholderViewController.swift in Sources */,
 				2C2B5AD12B84E2DA005C38B0 /* DownloadFileTask.swift in Sources */,
 				2C6BA82A2D3D31AA0072B001 /* AmbientAgent.swift in Sources */,
 				2C6359542D29C07F00E40241 /* Links.swift in Sources */,
 				2C672CB12BFCEFB500E57B21 /* IpfsUploader.swift in Sources */,
 				2CFA24732B19FB92009B58FD /* FileExtension.swift in Sources */,
-				2C6BA8382D3E54B00072B001 /* PipPlaceholderView.swift in Sources */,
 				2C4039F12B83B11100DB94D7 /* FileSaver.swift in Sources */,
 				2CA34B562B08B6A200DAB623 /* Codable.swift in Sources */,
 				2C9113282B09751D00A8EE80 /* WalletImageView.swift in Sources */,
@@ -5802,7 +5797,6 @@
 				2CA4CF552B07F75F00CC75F4 /* AppDelegate.swift in Sources */,
 				2C9C60352C2C5FE8001D9B51 /* SuggestedItemsService.swift in Sources */,
 				2C3B77632C3D773B000A9B52 /* DesktopWebView.swift in Sources */,
-				2C6BA83F2D3EAE840072B001 /* CrossRendering.swift in Sources */,
 				2C9974002C4AF12400C058E2 /* PlayerMenuDelegate.swift in Sources */,
 				2CE0B5E32B8686CE00B5BF4A /* FooterLink.swift in Sources */,
 				2C4DBFC12C3698D10097AD35 /* Chain.swift in Sources */,
@@ -6147,6 +6141,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "nft-folder-ambient/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Nft Player Agent";
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;

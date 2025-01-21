@@ -2,15 +2,13 @@ import Cocoa
 import QuartzCore
 import WebKit
 
-var html = ""
-
 class SourceWindow: NSWindow {
     
     private var sourceLayer: CALayer!
     private var remoteContext: AnyObject?
     private var contextId: UInt32 = 0
     
-    private var webView: WKWebView!
+    private var webView: WKWebView?
     
     init() {
         let frame = NSMakeRect(0, 0, 800, 600)
@@ -39,7 +37,7 @@ class SourceWindow: NSWindow {
         level = .statusBar
         isMovable = false
         ignoresMouseEvents = true
-        backgroundColor = .clear // TODO: validate that it joins all spaces with .green
+        backgroundColor = .green // TODO: validate that it joins all spaces with .green
         makeKeyAndOrderFront(nil)
         
         contentView?.wantsLayer = true
@@ -59,12 +57,21 @@ class SourceWindow: NSWindow {
         return false
     }
     
+    func reloadDisplayedToken() {
+        if let html = currentGeneratedToken?.html {
+            webView?.loadHTMLString(html, baseURL: nil)
+        }
+    }
+    
     private func setupWebView() {
         let webViewFrame = NSRect(x: 0, y: 0, width: 1000, height: 1000)
-        webView = WKWebView(frame: webViewFrame)
+        let webView = WKWebView(frame: webViewFrame)
         webView.wantsLayer = true
-        webView.loadHTMLString(html, baseURL: nil)
+        if let html = currentGeneratedToken?.html {
+            webView.loadHTMLString(html, baseURL: nil)
+        }
         self.contentView?.addSubview(webView)
+        self.webView = webView
     }
     
 }
@@ -77,7 +84,9 @@ extension SourceWindow {
         if let contextClass = NSClassFromString("CAContext") as? NSObject.Type,
            let contextInstance = contextClass.perform(Selector(("remoteContextWithOptions:")), with: options)?.takeUnretainedValue() {
             remoteContext = contextInstance
-            remoteContext?.setValue(webView.layer, forKey: "layer")
+            if let layer = webView?.layer {
+                remoteContext?.setValue(layer, forKey: "layer")
+            }
             
             if let retrievedContextId = remoteContext?.value(forKey: "contextId") as? UInt32 {
                 contextId = retrievedContextId

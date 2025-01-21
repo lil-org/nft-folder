@@ -448,9 +448,7 @@ struct WalletsListView: View {
         if TokenGenerator.canGenerate(id: id) {
             
             if let token = TokenGenerator.generateRandomToken(specificCollectionId: id, notTokenId: nil) {
-//                AmbientAgent.start(generatedToken: token)
-                
-                pipPlaceholderViewController?.didReceivePipNotificationWithToken(token)
+                AmbientAgent.start(generatedToken: token)
             }
             
 //            Navigator.shared.showPlayer(id: id)
