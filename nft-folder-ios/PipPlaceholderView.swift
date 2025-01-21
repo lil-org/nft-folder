@@ -115,7 +115,7 @@ class PipPlaceholderView: UIView {
 extension PipPlaceholderView: AVPictureInPictureControllerDelegate {
     
     func pictureInPictureControllerWillStartPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
-        guard let window = (UIApplication.shared.value(forKey: "windows") as? [UIWindow])?.last else { return }
+        guard let window = (UIApplication.shared.value(forKey: "windows") as? [UIWindow])?.first else { return }
         
         let customWebView = createNewWebView()
         window.addSubview(customWebView)
