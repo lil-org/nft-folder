@@ -22,7 +22,7 @@ class PipPlaceholderView: NSView {
         // TODO: play next random item in collection
     }
     
-    private func didClickRestoreFromPip() {
+    private func sendRestoreFromPipNotification() {
         guard let token = currentGeneratedToken,
               let data = try? JSONEncoder().encode(token),
               let jsonString = String(data: data, encoding: .utf8) else { return }
@@ -95,8 +95,16 @@ extension PipPlaceholderView: AVPictureInPictureControllerDelegate {
     func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, failedToStartPictureInPictureWithError error: any Error) {}
     
     func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, restoreUserInterfaceForPictureInPictureStopWithCompletionHandler completionHandler: @escaping (Bool) -> Void) {
-        didClickRestoreFromPip()
-        completionHandler(true)
+        if NSWorkspace.shared.runningApplications.contains(where: { $0.bundleIdentifier == "org.lil.nft-folder" }) {
+            sendRestoreFromPipNotification()
+            completionHandler(true)
+        } else {
+            NSWorkspace.shared.open(URL(string: "nft-folder://")!)
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(230)) { [weak self] in
+                self?.sendRestoreFromPipNotification()
+                completionHandler(true)
+            }
+        }
     }
     
     func pictureInPictureControllerDidStartPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
