@@ -35,7 +35,7 @@ struct WalletImageView: View {
         .onAppear {
             avatarLoader.loadAvatar(wallet: wallet)
         }
-        .onChange(of: wallet) { newWallet in
+        .onChange(of: wallet) { _, newWallet in
             avatarLoader.loadAvatar(wallet: newWallet)
         }
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in

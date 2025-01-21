@@ -32,31 +32,31 @@ struct PreferencesView: View {
                         VStack(alignment: .leading) {
                             Toggle(isOn: $maxFileSizeLimitPreference) {
                                 Text(Strings.maxFileSize50mb)
-                            }.onChange(of: maxFileSizeLimitPreference) { newValue in
+                            }.onChange(of: maxFileSizeLimitPreference) { _, newValue in
                                 Defaults.unlimitedFileSize = !newValue
                             }
                             
                             Toggle(isOn: $glbPreference) {
                                 Text(Strings.downloadGlb)
-                            }.onChange(of: glbPreference) { newValue in
+                            }.onChange(of: glbPreference) { _, newValue in
                                 Defaults.downloadGlb = newValue
                             }
                             
                             Toggle(isOn: $videoPreference) {
                                 Text(Strings.downloadVideo)
-                            }.onChange(of: videoPreference) { newValue in
+                            }.onChange(of: videoPreference) { _, newValue in
                                 Defaults.downloadVideo = newValue
                             }
                             
                             Toggle(isOn: $audioPreference) {
                                 Text(Strings.downloadAudio)
-                            }.onChange(of: audioPreference) { newValue in
+                            }.onChange(of: audioPreference) { _, newValue in
                                 Defaults.downloadAudio = newValue
                             }
                             
                             Toggle(isOn: $showInMenuBar) {
                                 Text(Strings.showInMenuBar)
-                            }.onChange(of: showInMenuBar) { newValue in
+                            }.onChange(of: showInMenuBar) { _, newValue in
                                 Defaults.hideFromMenuBar = !newValue
                                 if newValue {
                                     StatusBarItem.shared.showIfNeeded()
