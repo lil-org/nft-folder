@@ -20,17 +20,13 @@ class PipPlaceholderView: NSView {
         let asset = AVAsset(url: mp4Video)
         let playerItem = AVPlayerItem(asset: asset)
         let player = AVPlayer(playerItem: playerItem)
-        
         player.isMuted = true
         player.allowsExternalPlayback = true
-        
         layer?.addSublayer(playerLayer)
         playerLayer.player = player
         
         pipController = AVPictureInPictureController(playerLayer: playerLayer)
-        pipController?.requiresLinearPlayback = true
         pipController?.delegate = self
-        pipController?.setValue(1, forKey: "controlsStyle")
     }
     
     func handleTogglePip(generatedToken: GeneratedToken) {
@@ -48,15 +44,11 @@ class PipPlaceholderView: NSView {
     }
     
     private func togglePip(retryCount: Int = 0) {
-        print("will toggle pip")
-        
-        print("current windows are:")
-        
-        
         if !didSetupPlayer {
             setupPlayer()
             didSetupPlayer = true
         }
+        
         guard let pipController = pipController else { return }
         if pipController.isPictureInPictureActive {
             pipController.stopPictureInPicture()
@@ -131,7 +123,7 @@ extension PipPlaceholderView: AVPictureInPictureControllerDelegate {
     }
     
     func pictureInPictureControllerWillStopPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
-        NSLog("PiP will stop.")
+        
     }
     
     func pictureInPictureControllerDidStopPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
@@ -140,6 +132,6 @@ extension PipPlaceholderView: AVPictureInPictureControllerDelegate {
         NSApplication.shared.terminate(nil)
     }
     
-    // TODO: restore from pip
+    // TODO: restore big player from pip
     
 }
