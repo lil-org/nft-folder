@@ -2,13 +2,13 @@
 
 import Cocoa
 
-var sharedSourceWindow: RenderingSourceWindow? // TODO: refactor
+var sharedSourceWindow: RenderingSourceWindow?
 var currentGeneratedToken: GeneratedToken?
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
     
-    var window: NSWindow?
+    private var window: NSWindow?
     private weak var pipVideoSourceViewController: PipVideoSourceViewController?
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -20,8 +20,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         )
 
         createPipVideoSourceWindow()
-        
-        sharedSourceWindow = RenderingSourceWindow() // TODO: tmp, will only go in agent
+        sharedSourceWindow = RenderingSourceWindow()
     }
 
     @objc func receiveTokenNotification(_ notification: Notification) {

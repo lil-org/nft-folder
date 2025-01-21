@@ -6,11 +6,21 @@ class PipPlaceholderView: NSView {
     
     private var playerLayer: AVPlayerLayer?
     private var pipController: AVPictureInPictureController?
-    private var currentPipToken: GeneratedToken?
     private var didSetupPlayer = false
     private var layerHost: AnyObject?
     private var player: AVPlayer?
     private var lastPlayClickDate = Date.distantPast
+    
+    func handleTogglePip(generatedToken: GeneratedToken) {
+        let isPipActive = pipController?.isPictureInPictureActive == true
+        if !isPipActive {
+            togglePip()
+        }
+    }
+    
+    private func didClickPlayButton() {
+        // TODO: play next random item in collection
+    }
     
     private func setupPlayer() {
         playerLayer = AVPlayerLayer()
@@ -48,24 +58,6 @@ class PipPlaceholderView: NSView {
                     }
                 }
             }
-        }
-    }
-    
-    private func didClickPlayButton() {
-        // TODO: play next random item in collection
-    }
-    
-    func handleTogglePip(generatedToken: GeneratedToken) {
-        let isPipActive = pipController?.isPictureInPictureActive == true
-        let sameToken = currentPipToken?.html == generatedToken.html
-        currentPipToken = generatedToken
-        
-        if isPipActive {
-            if sameToken {
-                pipController?.stopPictureInPicture() // TODO: not sure if we want it like this on macos
-            }
-        } else {
-            togglePip()
         }
     }
     

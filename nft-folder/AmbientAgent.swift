@@ -15,9 +15,7 @@ struct AmbientAgent {
             sendTokenNotification(generatedToken: generatedToken)
         } else {
             NSWorkspace.shared.openApplication(at: helperURL, configuration: .init()) { _, _ in
-                // TODO: reduce or remove delay
-                // Give the agent time to set up its notification observer
-                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(230)) {
                     sendTokenNotification(generatedToken: generatedToken)
                 }
             }
