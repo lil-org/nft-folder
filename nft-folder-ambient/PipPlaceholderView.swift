@@ -27,6 +27,20 @@ class PipPlaceholderView: NSView {
         
         pipController = AVPictureInPictureController(playerLayer: playerLayer)
         pipController?.delegate = self
+        
+        player.addObserver(self, forKeyPath: "rate", options: [.new, .old], context: nil)
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "rate" {
+            if let newRate = change?[.newKey] as? Float {
+                if newRate == 0 {
+                    print("Player paused")
+                } else {
+                    print("Player playing")
+                }
+            }
+        }
     }
     
     func handleTogglePip(generatedToken: GeneratedToken) {
