@@ -75,13 +75,9 @@ class PipPlaceholderView: NSView {
 
 extension PipPlaceholderView: AVPictureInPictureControllerDelegate {
     
-    func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, failedToStartPictureInPictureWithError error: any Error) {
-        NSLog("failedToStartPictureInPictureWithError")
-    }
+    func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, failedToStartPictureInPictureWithError error: any Error) {}
     
     func pictureInPictureControllerDidStartPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
-        NSLog("pictureInPictureControllerDidStartPictureInPicture")
-        
         guard let window = NSApplication.shared.windows.last else { return }
         
         DispatchQueue.main.async { [weak self] in
@@ -98,7 +94,7 @@ extension PipPlaceholderView: AVPictureInPictureControllerDelegate {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.wantsLayer = true
         
-        if let layerHostClass = NSClassFromString("CALayerHost") as? NSObject.Type, let contextId = sharedSourceWindow?.getContextID() {
+        if let layerHostClass = NSClassFromString("CALayerHost") as? NSObject.Type, let contextId = sharedSourceWindow?.getContextId() {
             layerHost = layerHostClass.init()
             layerHost?.setValue(contextId, forKey: "contextId")
             if let castedLayerHost = layerHost as? CALayer {
@@ -115,6 +111,16 @@ extension PipPlaceholderView: AVPictureInPictureControllerDelegate {
                 containerView.topAnchor.constraint(equalTo: contentView.topAnchor),
                 containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
             ])
+            
+            containerView.postsFrameChangedNotifications = true
+            
+            NotificationCenter.default.addObserver(forName: NSView.frameDidChangeNotification, object: containerView, queue: .main) { [weak containerView, weak self] _ in
+                if let containerView = containerView, let layerHost = self?.layerHost as? CALayer {
+                    let newBounds = containerView.bounds
+                    layerHost.frame = containerView.bounds
+                    sharedSourceWindow?.updateSize(bounds: newBounds)
+                }
+            }
         }
         
         window.orderFrontRegardless()

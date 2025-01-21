@@ -52,6 +52,11 @@ class RenderingSourceWindow: NSWindow {
         return false
     }
     
+    func updateSize(bounds: CGRect) {
+        print("new size \(bounds)")
+        // TODO: implement
+    }
+    
     func reloadDisplayedToken() {
         if let html = currentGeneratedToken?.html {
             webView?.loadHTMLString(html, baseURL: nil)
@@ -90,7 +95,7 @@ extension RenderingSourceWindow {
         }
     }
     
-    func getContextID() -> UInt32 {
+    func getContextId() -> UInt32 {
         return contextId
     }
     
