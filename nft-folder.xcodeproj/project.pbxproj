@@ -311,7 +311,7 @@
 		};
 		2C6BA8252D3D2D3F0072B001 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = Contents/Helpers;
 			dstSubfolderSpec = 1;
 			files = (
@@ -6159,6 +6159,7 @@
 				MARKETING_VERSION = 2.0.25;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder.ambient";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -6191,6 +6192,7 @@
 				MARKETING_VERSION = 2.0.25;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder.ambient";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
