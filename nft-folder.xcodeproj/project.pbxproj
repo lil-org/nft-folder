@@ -162,7 +162,6 @@
 		2C6BA82C2D3D38B20072B001 /* PipPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C17BDC32D3C36FF0015C58B /* PipPlaceholderView.swift */; };
 		2C6BA82D2D3D38C90072B001 /* GeneratedToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE9A5772C3DAB03009AEAF4 /* GeneratedToken.swift */; };
 		2C6BA82E2D3D38DA0072B001 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
-		2C6BA8392D3E54BA0072B001 /* square.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2CF08B032D2B239300D82ACA /* square.mp4 */; };
 		2C6BA8452D3EED540072B001 /* RenderingSourceWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BA83E2D3EAE7F0072B001 /* RenderingSourceWindow.swift */; };
 		2C7134D62D30460B001E33DC /* MobilePlaybackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7134D52D304609001E33DC /* MobilePlaybackController.swift */; };
 		2C88D95D2C3872DD00009C25 /* RandomGradientShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88D95C2C3872DD00009C25 /* RandomGradientShape.swift */; };
@@ -5531,7 +5530,6 @@
 				2CA4CF592B07F76000CC75F4 /* Assets.xcassets in Resources */,
 				2CA4CF5C2B07F76000CC75F4 /* Main.storyboard in Resources */,
 				2CEF35B72C413DA000388574 /* three.js in Resources */,
-				2C6BA8392D3E54BA0072B001 /* square.mp4 in Resources */,
 				2CEF35BA2C413DA000388574 /* p5js100.js in Resources */,
 				2CEF35B62C413DA000388574 /* paper.js in Resources */,
 				2C4659942C308B47008CF97F /* Covers.xcassets in Resources */,
