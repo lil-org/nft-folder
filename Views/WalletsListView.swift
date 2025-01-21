@@ -269,7 +269,7 @@ struct WalletsListView: View {
                     VStack {
                         if TokenGenerator.canGenerate(id: item.id) {
                             HStack {
-                                Images.canGenerateIndicator.frame(width: 27, height: 27).onTapGesture {
+                                Images.canGenerateIndicator.shadow(color: .black, radius: 7).foregroundStyle(.white).frame(width: 27, height: 27).onTapGesture {
                                     didSelectSuggestedItem(item, noAutoPlayer: false)
                                 }
                                 Spacer()
@@ -364,6 +364,14 @@ struct WalletsListView: View {
         Group {
             Text(item.name)
             Divider()
+            if TokenGenerator.canGenerate(id: item.id) {
+                Button(Strings.pip, action: {
+                    if let token = TokenGenerator.generateRandomToken(specificCollectionId: item.id, notTokenId: nil) {
+                        AmbientAgent.start(generatedToken: token)
+                    }
+                })
+                Divider()
+            }
             Button(Strings.viewinFinder, action: {
                 didSelectSuggestedItem(item, noAutoPlayer: true)
             })

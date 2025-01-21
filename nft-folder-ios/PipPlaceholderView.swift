@@ -101,7 +101,7 @@ class PipPlaceholderView: UIView {
         }
     }
     
-    private func createNewCustomPipView() -> UIView {
+    private func createNewWebView() -> UIView {
         let webView = AutoReloadingWebView.new
         if let token = currentPipToken {
             webView.loadHTMLString(token.html, baseURL: nil)
@@ -116,14 +116,15 @@ extension PipPlaceholderView: AVPictureInPictureControllerDelegate {
     
     func pictureInPictureControllerWillStartPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
         guard let window = (UIApplication.shared.value(forKey: "windows") as? [UIWindow])?.first else { return }
-        let customPipView = createNewCustomPipView()
-        window.addSubview(customPipView)
-        customPipView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let customWebView = createNewWebView()
+        window.addSubview(customWebView)
+        customWebView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            customPipView.topAnchor.constraint(equalTo: window.topAnchor),
-            customPipView.bottomAnchor.constraint(equalTo: window.bottomAnchor),
-            customPipView.leadingAnchor.constraint(equalTo: window.leadingAnchor),
-            customPipView.trailingAnchor.constraint(equalTo: window.trailingAnchor)
+            customWebView.topAnchor.constraint(equalTo: window.topAnchor),
+            customWebView.bottomAnchor.constraint(equalTo: window.bottomAnchor),
+            customWebView.leadingAnchor.constraint(equalTo: window.leadingAnchor),
+            customWebView.trailingAnchor.constraint(equalTo: window.trailingAnchor)
         ])
     }
     
