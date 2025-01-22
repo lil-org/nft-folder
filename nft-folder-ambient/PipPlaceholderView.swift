@@ -13,15 +13,43 @@ class PipPlaceholderView: NSView {
     private var lastPlayClickDate = Date.distantPast
     private var nextCollectionButton: NSButton?
     
-    private func addFastForwardButton(to containerView: NSView) {
-        let nextCollectionButton = NSButton(image: Images.nextCollection, target: self, action: #selector(showAnotherCollectoin))
-        nextCollectionButton.bezelStyle = .circular
-        containerView.addSubview(nextCollectionButton)
+    private func addNextCollectionButton(to containerView: NSView) {
+        let buttonSize: CGFloat = 18
+
+        let effectView = NSVisualEffectView()
+        effectView.material = .hudWindow
+        effectView.appearance = NSAppearance(named: .vibrantLight)
+        effectView.blendingMode = .withinWindow
+        effectView.state = .active
+        effectView.wantsLayer = true
+        effectView.layer?.cornerRadius = buttonSize / 2
+        effectView.layer?.masksToBounds = true
+        effectView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let nextCollectionButton = NSButton(image: Images.nextCollection, target: self, action: #selector(showAnotherCollection))
+        nextCollectionButton.isBordered = false
+        nextCollectionButton.appearance = NSAppearance(named: .aqua)
+        nextCollectionButton.contentTintColor = .labelColor
+        nextCollectionButton.translatesAutoresizingMaskIntoConstraints = false
+        effectView.addSubview(nextCollectionButton)
+        containerView.addSubview(effectView)
+        
+        NSLayoutConstraint.activate([
+            nextCollectionButton.widthAnchor.constraint(equalToConstant: buttonSize),
+            nextCollectionButton.heightAnchor.constraint(equalToConstant: buttonSize),
+            effectView.widthAnchor.constraint(equalToConstant: buttonSize),
+            effectView.heightAnchor.constraint(equalToConstant: buttonSize),
+            effectView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -9),
+            effectView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 9),
+            nextCollectionButton.centerXAnchor.constraint(equalTo: effectView.centerXAnchor),
+            nextCollectionButton.centerYAnchor.constraint(equalTo: effectView.centerYAnchor),
+        ])
+        
         self.nextCollectionButton = nextCollectionButton
     }
     
-    @objc private func showAnotherCollectoin() {
-        sharedSourceWindow?.showAnotherCollectoin()
+    @objc private func showAnotherCollection() {
+        sharedSourceWindow?.showAnotherCollection()
     }
     
     func handleTogglePip(generatedToken: GeneratedToken) {
@@ -167,7 +195,7 @@ extension PipPlaceholderView: AVPictureInPictureControllerDelegate {
                 }
             }
             
-            addFastForwardButton(to: containerView)
+            addNextCollectionButton(to: containerView)
         }
         
         window.orderFrontRegardless()

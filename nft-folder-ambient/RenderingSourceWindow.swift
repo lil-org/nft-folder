@@ -66,7 +66,7 @@ class RenderingSourceWindow: NSWindow {
         }
     }
     
-    func showAnotherCollectoin() {
+    func showAnotherCollection() {
         let anotherCollectionToken = TokenGenerator.generateRandomToken(specificCollectionId: nil, notTokenId: nil)
         currentGeneratedToken = anotherCollectionToken
         reloadDisplayedToken()
