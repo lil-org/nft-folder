@@ -26,7 +26,8 @@ class PipPlaceholderView: NSView {
         effectView.layer?.masksToBounds = true
         effectView.translatesAutoresizingMaskIntoConstraints = false
         
-        let nextCollectionButton = NSButton(image: Images.nextCollection, target: self, action: #selector(showAnotherCollection))
+        let buttonImage = Images.nextCollection.withSymbolConfiguration(NSImage.SymbolConfiguration(pointSize: 8, weight: .light))!
+        let nextCollectionButton = NSButton(image: buttonImage, target: self, action: #selector(showAnotherCollection))
         nextCollectionButton.isBordered = false
         nextCollectionButton.appearance = NSAppearance(named: .aqua)
         nextCollectionButton.contentTintColor = .labelColor
