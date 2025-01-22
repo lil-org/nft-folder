@@ -12,6 +12,7 @@ class PipPlaceholderView: NSView {
     private var player: AVPlayer?
     private var lastPlayClickDate = Date.distantPast
     private var nextCollectionButton: NSButton?
+    private var nextCollectionButtonEffectView: NSVisualEffectView?
     
     private func addNextCollectionButton(to containerView: NSView) {
         let buttonSize: CGFloat = 18
@@ -19,6 +20,7 @@ class PipPlaceholderView: NSView {
         let effectView = NSVisualEffectView()
         effectView.material = .hudWindow
         effectView.appearance = NSAppearance(named: .vibrantLight)
+        effectView.isHidden = true
         effectView.blendingMode = .withinWindow
         effectView.state = .active
         effectView.wantsLayer = true
@@ -29,6 +31,7 @@ class PipPlaceholderView: NSView {
         let buttonImage = Images.nextCollection.withSymbolConfiguration(NSImage.SymbolConfiguration(pointSize: 8, weight: .light))!
         let nextCollectionButton = NSButton(image: buttonImage, target: self, action: #selector(showAnotherCollection))
         nextCollectionButton.isBordered = false
+        nextCollectionButton.isHidden = true
         nextCollectionButton.appearance = NSAppearance(named: .aqua)
         nextCollectionButton.contentTintColor = .labelColor
         nextCollectionButton.translatesAutoresizingMaskIntoConstraints = false
@@ -47,6 +50,12 @@ class PipPlaceholderView: NSView {
         ])
         
         self.nextCollectionButton = nextCollectionButton
+        self.nextCollectionButtonEffectView = effectView
+    }
+    
+    private func setNextCollectionControlsHidden(_ hidden: Bool) {
+        nextCollectionButton?.isHidden = hidden
+        nextCollectionButtonEffectView?.isHidden = hidden
     }
     
     @objc private func showAnotherCollection() {
@@ -62,6 +71,7 @@ class PipPlaceholderView: NSView {
     
     private func didClickPlayButton() {
         sharedSourceWindow?.showAnotherToken()
+        setNextCollectionControlsHidden(false)
     }
     
     private func sendRestoreFromPipNotification() {
