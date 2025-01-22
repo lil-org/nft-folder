@@ -13,6 +13,7 @@ struct Images {
     static var backTitleBar: NSImage { systemName("chevron.backward") }
     static var forwardTitleBar: NSImage { systemName("chevron.forward") }
     static var nextCollectionTitleBar: NSImage { systemName("forward.circle") }
+    static var nextCollection: NSImage { systemName("forward.fill") }
     static var playlistConfiguration: NSImage { systemName("line.3.horizontal.circle") }
     
     private static func named(_ name: String) -> NSImage {

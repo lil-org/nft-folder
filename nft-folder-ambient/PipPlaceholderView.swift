@@ -1,5 +1,6 @@
 // ∅ 2025 lil org
 
+import Cocoa
 import AVKit
 
 class PipPlaceholderView: NSView {
@@ -10,6 +11,18 @@ class PipPlaceholderView: NSView {
     private var layerHost: AnyObject?
     private var player: AVPlayer?
     private var lastPlayClickDate = Date.distantPast
+    private var nextCollectionButton: NSButton?
+    
+    private func addFastForwardButton(to containerView: NSView) {
+        let nextCollectionButton = NSButton(image: Images.nextCollection, target: self, action: #selector(showAnotherCollectoin))
+        nextCollectionButton.bezelStyle = .circular
+        containerView.addSubview(nextCollectionButton)
+        self.nextCollectionButton = nextCollectionButton
+    }
+    
+    @objc private func showAnotherCollectoin() {
+        sharedSourceWindow?.showAnotherCollectoin()
+    }
     
     func handleTogglePip(generatedToken: GeneratedToken) {
         let isPipActive = pipController?.isPictureInPictureActive == true
@@ -88,7 +101,6 @@ class PipPlaceholderView: NSView {
             }
         }
     }
-    
 }
 
 extension PipPlaceholderView: AVPictureInPictureControllerDelegate {
@@ -154,6 +166,8 @@ extension PipPlaceholderView: AVPictureInPictureControllerDelegate {
                     sharedSourceWindow?.updateSize(size: newBounds.size)
                 }
             }
+            
+            addFastForwardButton(to: containerView)
         }
         
         window.orderFrontRegardless()

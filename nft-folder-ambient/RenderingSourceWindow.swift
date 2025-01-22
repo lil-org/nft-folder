@@ -66,6 +66,12 @@ class RenderingSourceWindow: NSWindow {
         }
     }
     
+    func showAnotherCollectoin() {
+        let anotherCollectionToken = TokenGenerator.generateRandomToken(specificCollectionId: nil, notTokenId: nil)
+        currentGeneratedToken = anotherCollectionToken
+        reloadDisplayedToken()
+    }
+    
     func showAnotherToken() {
         let anotherToken = TokenGenerator.generateRandomToken(specificCollectionId: currentGeneratedToken?.fullCollectionId, notTokenId: currentGeneratedToken?.id)
         currentGeneratedToken = anotherToken
