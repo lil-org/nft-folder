@@ -41,6 +41,14 @@ struct RawHtmlGenerator {
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
             """
         
+        let tuning = {
+            if let nftFolderDisplayTuning = script.nftFolderDisplayTuning {
+                return "\n<script>\(nftFolderDisplayTuning)</script>\n"
+            } else {
+                return ""
+            }
+        }()
+        
         let html: String
         switch script.kind {
         case .svg:
@@ -70,7 +78,7 @@ struct RawHtmlGenerator {
             </head>
             <body></body>
             <script>\(tokenData)</script>
-            <script>\(script.value)</script>
+            <script>\(script.value)</script>\(tuning)
             </html>
             """
         case .js:
@@ -100,7 +108,7 @@ struct RawHtmlGenerator {
             </head>
             <body>
               <canvas></canvas>
-              <script>\(script.value)</script>
+              <script>\(script.value)</script>\(tuning)
             </body>
             </html>
             """
@@ -113,7 +121,7 @@ struct RawHtmlGenerator {
               <meta charset="utf-8">
               <script>\(libScript)</script>
               <script>\(tokenData)</script>
-              <script>\(script.value)</script>
+              <script>\(script.value)</script>\(tuning)
               <style type="text/css">
                 html {
                   height: 100%;
@@ -146,7 +154,7 @@ struct RawHtmlGenerator {
                 <meta charset="utf-8"/>
                 <script>\(libScript)</script>
                 <script>\(tokenData)</script>
-                <script>\(script.value)</script>
+                <script>\(script.value)</script>\(tuning)
                     <style type="text/css">
                     html {
                         height: 100%;
@@ -199,7 +207,7 @@ struct RawHtmlGenerator {
               </head>
               <body></body>
               <script>\(tokenData)</script>
-              <script>\(script.value)</script>
+              <script>\(script.value)</script>\(tuning)
             </html>
             """
         case .twemoji:
@@ -211,7 +219,7 @@ struct RawHtmlGenerator {
                 <meta charset="utf-8"/>
                 <script>\(libScript)</script>
                 <script>\(tokenData)</script>
-                <script>\(script.value)</script>
+                <script>\(script.value)</script>\(tuning)
                 <style type="text/css">
                     html {
                         height: 100%;
@@ -264,7 +272,7 @@ struct RawHtmlGenerator {
                 </style>
               </head>
               <body>
-                <script>\(script.value)</script>
+                <script>\(script.value)</script>\(tuning)
               </body>
             </html>
             """
@@ -297,7 +305,7 @@ struct RawHtmlGenerator {
                 <canvas></canvas>
               </body>
               <script>\(tokenData)</script>
-              <script>\(script.value)</script>
+              <script>\(script.value)</script>\(tuning)
             </html>
             """
         }
