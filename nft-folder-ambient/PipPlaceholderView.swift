@@ -11,56 +11,6 @@ class PipPlaceholderView: NSView {
     private var layerHost: AnyObject?
     private var player: AVPlayer?
     private var lastPlayClickDate = Date.distantPast
-    private var nextCollectionButton: NSButton?
-    private var nextCollectionButtonEffectView: NSVisualEffectView?
-    
-    private func addNextCollectionButton(to containerView: NSView) {
-        let buttonSize: CGFloat = 18
-
-        let effectView = NSVisualEffectView()
-        effectView.material = .hudWindow
-        effectView.appearance = NSAppearance(named: .vibrantLight)
-        effectView.isHidden = true
-        effectView.blendingMode = .withinWindow
-        effectView.state = .active
-        effectView.wantsLayer = true
-        effectView.layer?.cornerRadius = buttonSize / 2
-        effectView.layer?.masksToBounds = true
-        effectView.translatesAutoresizingMaskIntoConstraints = false
-        
-        let buttonImage = Images.nextCollection.withSymbolConfiguration(NSImage.SymbolConfiguration(pointSize: 8, weight: .light))!
-        let nextCollectionButton = NSButton(image: buttonImage, target: self, action: #selector(showAnotherCollection))
-        nextCollectionButton.isBordered = false
-        nextCollectionButton.isHidden = true
-        nextCollectionButton.appearance = NSAppearance(named: .aqua)
-        nextCollectionButton.contentTintColor = .labelColor
-        nextCollectionButton.translatesAutoresizingMaskIntoConstraints = false
-        effectView.addSubview(nextCollectionButton)
-        containerView.addSubview(effectView)
-        
-        NSLayoutConstraint.activate([
-            nextCollectionButton.widthAnchor.constraint(equalToConstant: buttonSize),
-            nextCollectionButton.heightAnchor.constraint(equalToConstant: buttonSize),
-            effectView.widthAnchor.constraint(equalToConstant: buttonSize),
-            effectView.heightAnchor.constraint(equalToConstant: buttonSize),
-            effectView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -9),
-            effectView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 9),
-            nextCollectionButton.centerXAnchor.constraint(equalTo: effectView.centerXAnchor),
-            nextCollectionButton.centerYAnchor.constraint(equalTo: effectView.centerYAnchor),
-        ])
-        
-        self.nextCollectionButton = nextCollectionButton
-        self.nextCollectionButtonEffectView = effectView
-    }
-    
-    private func setNextCollectionControlsHidden(_ hidden: Bool) {
-        nextCollectionButton?.isHidden = hidden
-        nextCollectionButtonEffectView?.isHidden = hidden
-    }
-    
-    @objc private func showAnotherCollection() {
-        sharedSourceWindow?.showAnotherCollection()
-    }
     
     func handleTogglePip(generatedToken: GeneratedToken) {
         let isPipActive = pipController?.isPictureInPictureActive == true
@@ -71,7 +21,6 @@ class PipPlaceholderView: NSView {
     
     private func didClickPlayButton() {
         sharedSourceWindow?.showAnotherToken()
-        setNextCollectionControlsHidden(false)
     }
     
     private func sendRestoreFromPipNotification() {
@@ -205,8 +154,6 @@ extension PipPlaceholderView: AVPictureInPictureControllerDelegate {
                     sharedSourceWindow?.updateSize(size: newBounds.size)
                 }
             }
-            
-            addNextCollectionButton(to: containerView)
         }
         
         window.orderFrontRegardless()
