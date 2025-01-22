@@ -36,7 +36,6 @@ class RenderingSourceWindow: NSWindow {
         
         contentView?.wantsLayer = true
         setupWebView()
-        contentView?.alphaValue = 0.001
         
         DispatchQueue.main.async { [weak self] in
             self?.setupLayerSharing()
