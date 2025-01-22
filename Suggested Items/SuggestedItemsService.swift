@@ -2,10 +2,15 @@
 
 import Foundation
 
+var alternativeResourcesPath: String?
+
 struct SuggestedItemsService {
     
     static let bundle: Bundle = {
-        if let bundleURL = Bundle.main.url(forResource: "Suggested", withExtension: "bundle"),
+        if let altPath = alternativeResourcesPath,
+           let altBundle = Bundle(url: URL(fileURLWithPath: altPath + "/Contents/Resources/Suggested.bundle")) {
+            return altBundle
+        } else if let bundleURL = Bundle.main.url(forResource: "Suggested", withExtension: "bundle"),
            let suggestedBundle = Bundle(url: bundleURL) {
             return suggestedBundle
         } else {

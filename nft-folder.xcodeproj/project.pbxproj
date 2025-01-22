@@ -41,7 +41,6 @@
 		2C08041F2D2991F200CA9AB2 /* tone.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CEF35B22C413D9F00388574 /* tone.js */; };
 		2C0804202D2991F200CA9AB2 /* twemoji.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CEF35B32C413DA000388574 /* twemoji.js */; };
 		2C086E872C2F3C3600D4268D /* BundledTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C086E862C2F3C3600D4268D /* BundledTokens.swift */; };
-		2C09BAE42C308145009BA300 /* Suggested.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2C09BAE32C308145009BA300 /* Suggested.bundle */; };
 		2C0D86C42B08E67000106915 /* WalletsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C32B08E67000106915 /* WalletsService.swift */; };
 		2C0D86C72B08E7BF00106915 /* EnsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C62B08E7BF00106915 /* EnsResponse.swift */; };
 		2C1B60B92B7D3245009949C2 /* DirectoryMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60B82B7D3245009949C2 /* DirectoryMonitor.swift */; };
@@ -214,6 +213,14 @@
 		2CA979AA2B627B3900DB3AC8 /* MinimalTokenMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA979A92B627B3900DB3AC8 /* MinimalTokenMetadata.swift */; };
 		2CA979AC2B62BA2400DB3AC8 /* NftGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA979AB2B62BA2400DB3AC8 /* NftGallery.swift */; };
 		2CAFA62B2B09C3610054160D /* MetadataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA62A2B09C3610054160D /* MetadataStorage.swift */; };
+		2CB2E00F2D41236B00BB572A /* Suggested.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2C09BAE32C308145009BA300 /* Suggested.bundle */; };
+		2CB2E0102D41236F00BB572A /* p5js100.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CEF35B42C413DA000388574 /* p5js100.js */; };
+		2CB2E0112D41236F00BB572A /* paper.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CEF35B02C413D9F00388574 /* paper.js */; };
+		2CB2E0122D41236F00BB572A /* regl.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CEF35AF2C413D9F00388574 /* regl.js */; };
+		2CB2E0132D41236F00BB572A /* three.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CEF35B12C413D9F00388574 /* three.js */; };
+		2CB2E0142D41236F00BB572A /* p5js190.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CE0F1572C4D37E6003004F2 /* p5js190.js */; };
+		2CB2E0152D41236F00BB572A /* tone.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CEF35B22C413D9F00388574 /* tone.js */; };
+		2CB2E0162D41236F00BB572A /* twemoji.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CEF35B32C413DA000388574 /* twemoji.js */; };
 		2CB308E32C30A2E800D914A5 /* BundledTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C086E862C2F3C3600D4268D /* BundledTokens.swift */; };
 		2CB308E42C30A2E800D914A5 /* SuggestedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFF885A2C288C9A0007045F /* SuggestedItem.swift */; };
 		2CB308E52C30A3C100D914A5 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A42E92B1A272600BE4166 /* Network.swift */; };
@@ -236,7 +243,6 @@
 		2CDDE0D32C1B1EAC002DB025 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDE0D22C1B1EAC002DB025 /* Language.swift */; };
 		2CDDE0D52C1B1EC4002DB025 /* MetadataKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDE0D42C1B1EC4002DB025 /* MetadataKind.swift */; };
 		2CE0B5E32B8686CE00B5BF4A /* FooterLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE0B5E22B8686CE00B5BF4A /* FooterLink.swift */; };
-		2CE0F1582C4D37E6003004F2 /* p5js190.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CE0F1572C4D37E6003004F2 /* p5js190.js */; };
 		2CE202022D3FBC0700852957 /* WKWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE202012D3FBC0600852957 /* WKWebView.swift */; };
 		2CE202042D400F2000852957 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE202032D400F1D00852957 /* Helpers.swift */; };
 		2CE33D9A2B865CFB008473E1 /* AvatarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE33D992B865CFB008473E1 /* AvatarService.swift */; };
@@ -245,12 +251,6 @@
 		2CE9A7712BAD8ECD00579BF7 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2CE9A7702BAD8ECD00579BF7 /* Localizable.xcstrings */; };
 		2CE9A7722BAD8ECD00579BF7 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2CE9A7702BAD8ECD00579BF7 /* Localizable.xcstrings */; };
 		2CEF35AD2C413AE700388574 /* RawHtmlGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF35AC2C413AE700388574 /* RawHtmlGenerator.swift */; };
-		2CEF35B52C413DA000388574 /* regl.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CEF35AF2C413D9F00388574 /* regl.js */; };
-		2CEF35B62C413DA000388574 /* paper.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CEF35B02C413D9F00388574 /* paper.js */; };
-		2CEF35B72C413DA000388574 /* three.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CEF35B12C413D9F00388574 /* three.js */; };
-		2CEF35B82C413DA000388574 /* tone.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CEF35B22C413D9F00388574 /* tone.js */; };
-		2CEF35B92C413DA000388574 /* twemoji.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CEF35B32C413DA000388574 /* twemoji.js */; };
-		2CEF35BA2C413DA000388574 /* p5js100.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CEF35B42C413DA000388574 /* p5js100.js */; };
 		2CF08AA92D2A937400D82ACA /* MobileCollectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08AA42D2A937400D82ACA /* MobileCollectionsView.swift */; };
 		2CF08AAA2D2A937400D82ACA /* MobileHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08AA52D2A937400D82ACA /* MobileHelpers.swift */; };
 		2CF08AAB2D2A937400D82ACA /* nft_folder_iosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08AA72D2A937400D82ACA /* nft_folder_iosApp.swift */; };
@@ -5504,6 +5504,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CB2E0102D41236F00BB572A /* p5js100.js in Resources */,
+				2CB2E0112D41236F00BB572A /* paper.js in Resources */,
+				2CB2E0122D41236F00BB572A /* regl.js in Resources */,
+				2CB2E0162D41236F00BB572A /* twemoji.js in Resources */,
+				2CB2E0132D41236F00BB572A /* three.js in Resources */,
+				2CB2E0142D41236F00BB572A /* p5js190.js in Resources */,
+				2CB2E0152D41236F00BB572A /* tone.js in Resources */,
+				2CB2E00F2D41236B00BB572A /* Suggested.bundle in Resources */,
 				2C6BA82B2D3D388A0072B001 /* square.mp4 in Resources */,
 				2C6BA8232D3D2BFC0072B001 /* Assets.xcassets in Resources */,
 				2C6BA8242D3D2BFC0072B001 /* Main.storyboard in Resources */,
@@ -5523,17 +5531,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CEF35B92C413DA000388574 /* twemoji.js in Resources */,
-				2CE0F1582C4D37E6003004F2 /* p5js190.js in Resources */,
-				2CEF35B82C413DA000388574 /* tone.js in Resources */,
-				2CEF35B52C413DA000388574 /* regl.js in Resources */,
 				2CA4CF592B07F76000CC75F4 /* Assets.xcassets in Resources */,
 				2CA4CF5C2B07F76000CC75F4 /* Main.storyboard in Resources */,
-				2CEF35B72C413DA000388574 /* three.js in Resources */,
-				2CEF35BA2C413DA000388574 /* p5js100.js in Resources */,
-				2CEF35B62C413DA000388574 /* paper.js in Resources */,
 				2C4659942C308B47008CF97F /* Covers.xcassets in Resources */,
-				2C09BAE42C308145009BA300 /* Suggested.bundle in Resources */,
 				2CE9A7712BAD8ECD00579BF7 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

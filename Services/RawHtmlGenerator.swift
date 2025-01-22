@@ -10,8 +10,14 @@ struct RawHtmlGenerator {
         if let libScript = libScriptsDict[kind.rawValue] {
             return libScript
         } else {
-            guard let url = Bundle.main.url(forResource: kind.rawValue, withExtension: "js"),
-                  let libScript = try? String(contentsOf: url) else { return "" }
+            let url: URL? = {
+                if let altPath = alternativeResourcesPath {
+                    return URL(fileURLWithPath: altPath + "/Contents/Resources/\(kind.rawValue).js")
+                } else {
+                    return Bundle.main.url(forResource: kind.rawValue, withExtension: "js")
+                }
+            }()
+            guard let url = url, let libScript = try? String(contentsOf: url) else { return "" }
             libScriptsDict[kind.rawValue] = libScript
             return libScript
         }

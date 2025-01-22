@@ -14,6 +14,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     override init() {
         super.init()
+        alternativeResourcesPath = AmbientAgent.helperAppPath
         let manager = NSAppleEventManager.shared()
         manager.setEventHandler(self, andSelector: #selector(self.getUrl(_:withReplyEvent:)),
                                 forEventClass: AEEventClass(kInternetEventClass),
