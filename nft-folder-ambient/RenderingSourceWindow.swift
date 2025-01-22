@@ -10,7 +10,7 @@ class RenderingSourceWindow: NSWindow {
     private var webView: WKWebView?
     
     init() {
-        let frame = NSRect(x: 0, y: 0, width: Defaults.pipWidth, height: Defaults.pipWidth)
+        let frame = NSRect(x: 0, y: 0, width: AgentDefaults.pipWidth, height: AgentDefaults.pipWidth)
         super.init(
             contentRect: frame,
             styleMask: [.borderless],
@@ -54,10 +54,12 @@ class RenderingSourceWindow: NSWindow {
     func updateSize(size: CGSize) {
         webView?.setFrameSize(size)
         center()
-        Defaults.pipWidth = size.width
+        AgentDefaults.pipWidth = size.width
     }
     
-    func forceRefresh() {
+    func showAnotherToken() {
+        let anotherToken = TokenGenerator.generateRandomToken(specificCollectionId: currentGeneratedToken?.fullCollectionId, notTokenId: currentGeneratedToken?.id)
+        currentGeneratedToken = anotherToken
         reloadDisplayedToken()
     }
     

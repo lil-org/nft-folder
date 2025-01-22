@@ -13,7 +13,7 @@ struct Consts {
     
 }
 
-struct Defaults {
+struct AgentDefaults {
     
     private static let userDefaults = UserDefaults.standard
     

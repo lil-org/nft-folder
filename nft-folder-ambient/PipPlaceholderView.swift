@@ -19,8 +19,7 @@ class PipPlaceholderView: NSView {
     }
     
     private func didClickPlayButton() {
-        // TODO: play next random item in collection
-        sharedSourceWindow?.forceRefresh()
+        sharedSourceWindow?.showAnotherToken()
     }
     
     private func sendRestoreFromPipNotification() {

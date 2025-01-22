@@ -221,6 +221,21 @@
 		2CB2E0142D41236F00BB572A /* p5js190.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CE0F1572C4D37E6003004F2 /* p5js190.js */; };
 		2CB2E0152D41236F00BB572A /* tone.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CEF35B22C413D9F00388574 /* tone.js */; };
 		2CB2E0162D41236F00BB572A /* twemoji.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CEF35B32C413DA000388574 /* twemoji.js */; };
+		2CB2E0172D413D7700BB572A /* TokenGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE9A5752C3DA9FB009AEAF4 /* TokenGenerator.swift */; };
+		2CB2E0182D413DE500BB572A /* SuggestedItemsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C60342C2C5FE8001D9B51 /* SuggestedItemsService.swift */; };
+		2CB2E0192D413DF000BB572A /* SuggestedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFF885A2C288C9A0007045F /* SuggestedItem.swift */; };
+		2CB2E01A2D413DFC00BB572A /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A42E92B1A272600BE4166 /* Network.swift */; };
+		2CB2E01B2D413E1000BB572A /* BundledTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C086E862C2F3C3600D4268D /* BundledTokens.swift */; };
+		2CB2E01C2D413E1700BB572A /* RawHtmlGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF35AC2C413AE700388574 /* RawHtmlGenerator.swift */; };
+		2CB2E01D2D413E2500BB572A /* Chain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4DBFC02C3698D10097AD35 /* Chain.swift */; };
+		2CB2E01E2D413E2D00BB572A /* NftGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA979AB2B62BA2400DB3AC8 /* NftGallery.swift */; };
+		2CB2E01F2D413E3600BB572A /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60CA2B7E2481009949C2 /* Images.swift */; };
+		2CB2E0202D413E3C00BB572A /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60BC2B7D3505009949C2 /* Strings.swift */; };
+		2CB2E0212D413E4600BB572A /* WatchOnlyWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B502B08B33C00DAB623 /* WatchOnlyWallet.swift */; };
+		2CB2E0222D413E5000BB572A /* CollectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF524012BB2ECD200C18344 /* CollectionInfo.swift */; };
+		2CB2E0232D413E5900BB572A /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF4C49F2B7FCDDC000AB4A6 /* Defaults.swift */; };
+		2CB2E0242D413E8C00BB572A /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA623E62BEE8A0200BD78FF /* UserDefaults.swift */; };
+		2CB2E0252D413E9C00BB572A /* Script.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C8DE82C3C890B00BC83E9 /* Script.swift */; };
 		2CB308E32C30A2E800D914A5 /* BundledTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C086E862C2F3C3600D4268D /* BundledTokens.swift */; };
 		2CB308E42C30A2E800D914A5 /* SuggestedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFF885A2C288C9A0007045F /* SuggestedItem.swift */; };
 		2CB308E52C30A3C100D914A5 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A42E92B1A272600BE4166 /* Network.swift */; };
@@ -5706,14 +5721,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CB2E01D2D413E2500BB572A /* Chain.swift in Sources */,
+				2CB2E01B2D413E1000BB572A /* BundledTokens.swift in Sources */,
+				2CB2E0182D413DE500BB572A /* SuggestedItemsService.swift in Sources */,
+				2CB2E01F2D413E3600BB572A /* Images.swift in Sources */,
+				2CB2E01E2D413E2D00BB572A /* NftGallery.swift in Sources */,
+				2CB2E0192D413DF000BB572A /* SuggestedItem.swift in Sources */,
+				2CB2E01A2D413DFC00BB572A /* Network.swift in Sources */,
 				2CE202022D3FBC0700852957 /* WKWebView.swift in Sources */,
 				2C6BA82C2D3D38B20072B001 /* PipPlaceholderView.swift in Sources */,
 				2C6BA82E2D3D38DA0072B001 /* Notification.swift in Sources */,
+				2CB2E0202D413E3C00BB572A /* Strings.swift in Sources */,
 				2CE202042D400F2000852957 /* Helpers.swift in Sources */,
 				2C6BA8212D3D2BFC0072B001 /* AppDelegate.swift in Sources */,
+				2CB2E0212D413E4600BB572A /* WatchOnlyWallet.swift in Sources */,
+				2CB2E0242D413E8C00BB572A /* UserDefaults.swift in Sources */,
+				2CB2E01C2D413E1700BB572A /* RawHtmlGenerator.swift in Sources */,
+				2CB2E0252D413E9C00BB572A /* Script.swift in Sources */,
+				2CB2E0232D413E5900BB572A /* Defaults.swift in Sources */,
 				2C6BA8452D3EED540072B001 /* RenderingSourceWindow.swift in Sources */,
 				2C6BA8222D3D2BFC0072B001 /* PipVideoSourceViewController.swift in Sources */,
+				2CB2E0172D413D7700BB572A /* TokenGenerator.swift in Sources */,
 				2C6BA82D2D3D38C90072B001 /* GeneratedToken.swift in Sources */,
+				2CB2E0222D413E5000BB572A /* CollectionInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
