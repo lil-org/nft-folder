@@ -8,6 +8,7 @@ class RenderingSourceWindow: NSWindow {
     private var contextId: UInt32 = 0
     
     private var webView: WKWebView?
+    private var reloadTimer: Timer?
     
     init() {
         let frame = NSRect(x: 0, y: 0, width: AgentDefaults.pipWidth, height: AgentDefaults.pipWidth)
@@ -54,6 +55,15 @@ class RenderingSourceWindow: NSWindow {
         webView?.setFrameSize(size)
         center()
         AgentDefaults.pipWidth = size.width
+        debounceNewSizeRender()
+    }
+    
+    private func debounceNewSizeRender() {
+        reloadTimer?.invalidate()
+        reloadTimer = Timer.scheduledTimer(withTimeInterval: 0.42, repeats: false) { [weak self, weak sharedSourceWindow] _ in
+            sharedSourceWindow?.reloadDisplayedToken()
+            self?.reloadTimer = nil
+        }
     }
     
     func showAnotherToken() {
