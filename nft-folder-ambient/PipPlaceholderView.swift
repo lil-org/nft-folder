@@ -10,6 +10,8 @@ class PipPlaceholderView: NSView {
     private var didSetupPlayer = false
     private var layerHost: AnyObject?
     private var player: AVPlayer?
+    
+    private var previousLastPlayClickDate = Date.distantPast
     private var lastPlayClickDate = Date.distantPast
     
     func handleTogglePip(generatedToken: GeneratedToken) {
@@ -61,6 +63,7 @@ class PipPlaceholderView: NSView {
                         guard let lastClickDate = self?.lastPlayClickDate else { return }
                         let nowDate = Date()
                         if nowDate.timeIntervalSince(lastClickDate) > 0.5 {
+                            self?.previousLastPlayClickDate = lastClickDate
                             self?.lastPlayClickDate = nowDate
                             self?.didClickPlayButton()
                         }
