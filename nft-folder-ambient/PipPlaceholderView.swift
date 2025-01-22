@@ -13,6 +13,7 @@ class PipPlaceholderView: NSView {
     
     private var previousLastPlayClickDate = Date.distantPast
     private var lastPlayClickDate = Date.distantPast
+    private var lastNextCollectionNavigation = Date.distantPast
     
     func handleTogglePip(generatedToken: GeneratedToken) {
         let isPipActive = pipController?.isPictureInPictureActive == true
@@ -23,6 +24,10 @@ class PipPlaceholderView: NSView {
     
     private func didClickPlayButton() {
         sharedSourceWindow?.showAnotherToken()
+    }
+    
+    private func didClickNextCollectionButton() {
+        sharedSourceWindow?.showAnotherCollection()
     }
     
     private func sendRestoreFromPipNotification() {
@@ -60,13 +65,20 @@ class PipPlaceholderView: NSView {
                 if newRate == 1 && player?.status == .readyToPlay {
                     DispatchQueue.main.async { [weak self] in
                         self?.player?.pause()
-                        guard let lastClickDate = self?.lastPlayClickDate else { return }
+                        guard let lastClickDate = self?.lastPlayClickDate,
+                              let previousLastClickDate = self?.previousLastPlayClickDate,
+                              let lastNextCollectionNavigation = self?.lastNextCollectionNavigation else { return }
+                        
                         let nowDate = Date()
-                        if nowDate.timeIntervalSince(lastClickDate) > 0.5 {
-                            self?.previousLastPlayClickDate = lastClickDate
-                            self?.lastPlayClickDate = nowDate
+                        if nowDate.timeIntervalSince(previousLastClickDate) < 0.23 && nowDate.timeIntervalSince(lastNextCollectionNavigation) > 0.5 {
+                            self?.lastNextCollectionNavigation = nowDate
+                            self?.didClickNextCollectionButton()
+                        } else if nowDate.timeIntervalSince(lastClickDate) > 0.5 {
                             self?.didClickPlayButton()
                         }
+                        
+                        self?.previousLastPlayClickDate = lastClickDate
+                        self?.lastPlayClickDate = nowDate
                     }
                 }
             }
