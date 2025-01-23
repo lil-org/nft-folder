@@ -14,6 +14,10 @@ func translateAppStoreMetadata(_ model: AI.Model) {
             write(englishText, englishOriginal: englishText, metadataKind: metadataKind, platform: platform, language: .english)
             write(russianText, englishOriginal: englishText, metadataKind: metadataKind, platform: platform, language: .russian)
             
+            if let russianOverrideText = overrideMetadata(kind: metadataKind, platform: platform, language: .russian) {
+                write(russianOverrideText, englishOriginal: englishText, metadataKind: metadataKind, platform: platform, language: .russian)
+            }
+            
             if let englishOverrideText = overrideMetadata(kind: metadataKind, platform: platform, language: .english) {
                 write(englishOverrideText, englishOriginal: englishText, metadataKind: metadataKind, platform: platform, language: .english)
             }
