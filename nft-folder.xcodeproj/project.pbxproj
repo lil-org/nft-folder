@@ -1941,6 +1941,7 @@
 		2CC943002B8248CE003219C7 /* ZoraResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoraResponse.swift; sourceTree = "<group>"; };
 		2CC943022B825907003219C7 /* ZoraRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoraRequest.swift; sourceTree = "<group>"; };
 		2CC971622D2F4214005A8C4C /* FourDirectionalPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourDirectionalPlayer.swift; sourceTree = "<group>"; };
+		2CCFE2172D426579000DF66D /* subtitle_override.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = subtitle_override.txt; sourceTree = "<group>"; };
 		2CCFED972B08246800D98A2E /* WalletsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsListView.swift; sourceTree = "<group>"; };
 		2CD0DA582C41B4CF00DB709C /* PrepareScreensavers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepareScreensavers.swift; sourceTree = "<group>"; };
 		2CD0DA5A2C41C7AF00DB709C /* thumbnail.heic */ = {isa = PBXFileReference; lastKnownFileType = file; name = thumbnail.heic; path = NftScreenSaverView/thumbnail.heic; sourceTree = "<group>"; };
@@ -2077,6 +2078,7 @@
 				2CA7EE932C1C752400C7AEB5 /* name.txt */,
 				2CA7EE9C2C1C782400C7AEB5 /* name_ru.txt */,
 				2CA7EE902C1C752400C7AEB5 /* subtitle.txt */,
+				2CCFE2172D426579000DF66D /* subtitle_override.txt */,
 				2CA7EE9D2C1C782400C7AEB5 /* subtitle_ru.txt */,
 				2CA7EE8F2C1C752400C7AEB5 /* marketing_url.txt */,
 				2C25BFE92C6CD6E30084FD7A /* apple_tv_privacy_policy.txt */,

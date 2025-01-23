@@ -13,6 +13,11 @@ func translateAppStoreMetadata(_ model: AI.Model) {
             let russianText = originalMetadata(kind: metadataKind, platform: platform, language: .russian)
             write(englishText, englishOriginal: englishText, metadataKind: metadataKind, platform: platform, language: .english)
             write(russianText, englishOriginal: englishText, metadataKind: metadataKind, platform: platform, language: .russian)
+            
+            if let englishOverrideText = overrideMetadata(kind: metadataKind, platform: platform, language: .english) {
+                write(englishOverrideText, englishOriginal: englishText, metadataKind: metadataKind, platform: platform, language: .english)
+            }
+            
             let notEmpty = !englishText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
             
             for language in Language.allCases where language != .english && language != .russian {
@@ -69,4 +74,14 @@ func originalMetadata(kind: MetadataKind, platform: Platform, language: Language
     let data = try! Data(contentsOf: url)
     let text = String(data: data, encoding: .utf8)!
     return text.trimmingCharacters(in: .whitespacesAndNewlines)
+}
+
+func overrideMetadata(kind: MetadataKind, platform: Platform, language: Language) -> String? {
+    let suffix = (kind.toTranslate && language == .russian ? "_ru" : "") + "_override"
+    let url = URL(fileURLWithPath: projectDir + "/app_store/\(platform.rawValue)/" + "\(kind.fileName)\(suffix).txt")
+    if let data = try? Data(contentsOf: url), let text = String(data: data, encoding: .utf8) {
+        return text.trimmingCharacters(in: .whitespacesAndNewlines)
+    } else {
+        return nil
+    }
 }
