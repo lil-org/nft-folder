@@ -861,7 +861,6 @@
 		2CB392002C1E15630011CC94 /* TranslateMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateMetadata.swift; sourceTree = "<group>"; };
 		2CB392022C1E162C0011CC94 /* TranslateStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateStrings.swift; sourceTree = "<group>"; };
 		2CB67BF62D32D22400C5D799 /* 0_APP_IPAD_PRO_3GEN_129_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0_APP_IPAD_PRO_3GEN_129_0.png; sourceTree = "<group>"; };
-		2CB67BF72D32D22400C5D799 /* 0_APP_IPAD_PRO_129_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0_APP_IPAD_PRO_129_0.png; sourceTree = "<group>"; };
 		2CB67BF82D32D22400C5D799 /* 0_APP_IPHONE_67_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0_APP_IPHONE_67_0.png; sourceTree = "<group>"; };
 		2CB67BF92D32D22400C5D799 /* 1_APP_IPHONE_67_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1_APP_IPHONE_67_1.png; sourceTree = "<group>"; };
 		2CB67BFA2D32D22400C5D799 /* 2_APP_IPHONE_67_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2_APP_IPHONE_67_2.png; sourceTree = "<group>"; };
@@ -3105,7 +3104,6 @@
 			isa = PBXGroup;
 			children = (
 				2CB67BF62D32D22400C5D799 /* 0_APP_IPAD_PRO_3GEN_129_0.png */,
-				2CB67BF72D32D22400C5D799 /* 0_APP_IPAD_PRO_129_0.png */,
 				2CB67BF82D32D22400C5D799 /* 0_APP_IPHONE_67_0.png */,
 				2CB67BF92D32D22400C5D799 /* 1_APP_IPHONE_67_1.png */,
 				2CB67BFA2D32D22400C5D799 /* 2_APP_IPHONE_67_2.png */,
