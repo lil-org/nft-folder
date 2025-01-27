@@ -1974,6 +1974,7 @@
 		2CF4C49F2B7FCDDC000AB4A6 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		2CF524012BB2ECD200C18344 /* CollectionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionInfo.swift; sourceTree = "<group>"; };
 		2CF7339D2B0ED50000B1AC68 /* ZoraApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoraApi.swift; sourceTree = "<group>"; };
+		2CF748E32D47DBB2004D1992 /* name_ru.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = name_ru.txt; sourceTree = "<group>"; };
 		2CFA24702B19F956009B58FD /* DataOrUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataOrUrl.swift; sourceTree = "<group>"; };
 		2CFA24722B19FB92009B58FD /* FileExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileExtension.swift; sourceTree = "<group>"; };
 		2CFF885A2C288C9A0007045F /* SuggestedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestedItem.swift; sourceTree = "<group>"; };
@@ -2076,6 +2077,7 @@
 				2CA7EE902C1C752400C7AEB5 /* subtitle.txt */,
 				2CA7EE9D2C1C782400C7AEB5 /* subtitle_ru.txt */,
 				2CA7EE8F2C1C752400C7AEB5 /* marketing_url.txt */,
+				2CF748E32D47DBB2004D1992 /* name_ru.txt */,
 				2C25BFE92C6CD6E30084FD7A /* apple_tv_privacy_policy.txt */,
 				2CA7EE942C1C752400C7AEB5 /* privacy_url.txt */,
 				2CA7EE922C1C752400C7AEB5 /* support_url.txt */,
