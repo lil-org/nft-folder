@@ -27,7 +27,7 @@ struct MetadataTask: AI.Task {
             
             if it does not fit, rewrite it to make sure it fits 30 symbols.
             
-            for example, if it does not fit, say "view art offline" instead of "view high-res art offline"
+            for example, if it does not fit, say "view art offline" instead of "view hi-res art offline"
             
             find a way to communicate the same meaning while fitting in 30 chars.
             """
