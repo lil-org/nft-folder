@@ -20,9 +20,9 @@ enum MetadataKind: String, CaseIterable {
     
     var toTranslate: Bool {
         switch self {
-        case .description, .keywords, .subtitle, .promotionalText, .releaseNotes:
+        case .description, .keywords, .subtitle, .promotionalText, .releaseNotes, .name:
             return true
-        case .marketingURL, .privacyURL, .supportURL, .appleTvPrivacyPolicy, .name:
+        case .marketingURL, .privacyURL, .supportURL, .appleTvPrivacyPolicy:
             return false
         }
     }
