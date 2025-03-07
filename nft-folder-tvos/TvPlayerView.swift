@@ -68,7 +68,6 @@ struct TvPlayerView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 200, height: 200)
-            Text(playerModel.currentToken.displayName)
             if showTutorial {
                 Divider()
                 Text("↔️↕️ " + Strings.navigate)
