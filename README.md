@@ -1,10 +1,10 @@
 # nft-folder
 
-macos / visionos / tvos
+ios / macos / visionos / tvos
 
 download on the [app store](https://folder.lil.org)
 
-![12345](https://github.com/lil-org/nft-folder/assets/7680193/90b52724-a9f4-45f8-a96b-5c1ebb0ad3ea)
+![nft folder on apple tv](https://github.com/user-attachments/assets/abe9fe36-fa9d-4a49-9567-c435d8da6c2a)
 
 ## how to sync nft folders
 
