@@ -162,12 +162,14 @@ lane :release_visionos do
 end
 
 lane :release_macos do
+  update_and_login
   platform :mac do
     gym(scheme: "nft-folder", output_directory: "fastlane/build/macos", clean: true)
     deliver(
       metadata_path: "./fastlane/metadata/macos",
       screenshots_path: "./fastlane/screenshots/macos",
-      overwrite_screenshots: true, 
+      overwrite_screenshots: true,
+      ignore_language_directory_validation: true,
       platform: "osx",
       run_precheck_before_submit: false,
       force: true,
