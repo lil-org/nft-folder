@@ -27,8 +27,6 @@ struct MetadataTask: AI.Task {
             
             if it does not fit, rewrite it to make sure it fits 30 symbols.
             
-            for example, if it does not fit, say "view art offline" instead of "view hi-res art offline"
-            
             find a way to communicate the same meaning while fitting in 30 chars.
             """
         default:
@@ -55,7 +53,7 @@ struct MetadataTask: AI.Task {
         switch metadataKind {
         case .name:
             clarifications = """
-            i prefer NFT to be spelled as Nft (in Russian: НФТ as Нфт). use a similar capitalization style for a translation.
+            i prefer NFT to be spelled as Nft. do not translate or transliterate Nft, keep it as is.
             """
         case .subtitle:
             clarifications = """
