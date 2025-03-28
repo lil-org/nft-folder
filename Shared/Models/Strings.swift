@@ -56,7 +56,7 @@ struct Strings {
 
     static let pip = "PiP"
     static let x = "𝕏"
-    static let warpcast = "Warpcast"
+    static let warpcast = "Farcaster"
     static let github = "GitHub"
     static let zora = "Zora"
     static let blockExplorer = "Blockscout"
