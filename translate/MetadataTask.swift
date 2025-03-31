@@ -27,7 +27,7 @@ struct MetadataTask: AI.Task {
             
             if it does not fit, rewrite it to make sure it fits 30 symbols.
             
-            find a way to communicate the same meaning while fitting in 30 chars.
+            find a way to communicate the same meaning while fitting in 30 chars. do not use word HD.
             """
         default:
             finalWarning = ""
@@ -54,6 +54,8 @@ struct MetadataTask: AI.Task {
         case .name:
             clarifications = """
             i prefer NFT to be spelled as Nft. do not translate or transliterate Nft, keep it as is.
+            
+            Only Arts is part of the name that should not be translated.
             """
         case .subtitle:
             clarifications = """
