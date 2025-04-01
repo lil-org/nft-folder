@@ -58,6 +58,7 @@ func write(_ newValue: String, englishOriginal: String, metadataKind: MetadataKi
     let toWrite: String
     if metadataKind == .subtitle && newValue.count > 30 {
         toWrite = englishOriginal
+        return
     } else if metadataKind == .keywords && newValue.count > 100 {
         toWrite = englishOriginal
     } else {
