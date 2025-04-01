@@ -144,4 +144,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return true
     }
     
+    @IBAction func didClickNewWindowItem(_ sender: Any) {
+        Navigator.shared.showControlCenter(addWallet: false)
+    }
+    
 }
