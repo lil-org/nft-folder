@@ -20,10 +20,10 @@ class WalletDownloader {
     }
     
     func study(wallet: WatchOnlyWallet) {
-        let shouldGoThroughZora = processBundledTokensAndSeeIfShouldGoThroughZora(wallet: wallet)
+        let shouldGoThroughNfts = processBundledTokensAndSeeIfShouldGoThroughNfts(wallet: wallet)
         
-        if shouldGoThroughZora {
-            goThroughZora(wallet: wallet)
+        if shouldGoThroughNfts {
+            goThroughNfts(wallet: wallet)
         } else {
             didStudy = true
         }
@@ -33,7 +33,7 @@ class WalletDownloader {
         }
     }
     
-    private func processBundledTokensAndSeeIfShouldGoThroughZora(wallet: WatchOnlyWallet) -> Bool {
+    private func processBundledTokensAndSeeIfShouldGoThroughNfts(wallet: WatchOnlyWallet) -> Bool {
         guard let collection = wallet.collections?.first else { return true }
         if let bundledTokens = SuggestedItemsService.bundledTokens(collectionId: wallet.id),
            let walletRootDirectory = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) {
@@ -98,15 +98,15 @@ class WalletDownloader {
         }
     }
     
-    private func goThroughZora(wallet: WatchOnlyWallet) {
-        goThroughZora(wallet: wallet, networkIndex: 0, endCursor: nil)
+    private func goThroughNfts(wallet: WatchOnlyWallet) {
+        goThroughNfts(wallet: wallet, networkIndex: 0, endCursor: nil)
     }
     
-    private func nextStepForZora(wallet: WatchOnlyWallet, networkIndex: Int, endCursor: String?, hasNextPage: Bool) {
+    private func nextStepForNfts(wallet: WatchOnlyWallet, networkIndex: Int, endCursor: String?, hasNextPage: Bool) {
         if hasNextPage {
-            goThroughZora(wallet: wallet, networkIndex: networkIndex, endCursor: endCursor)
+            goThroughNfts(wallet: wallet, networkIndex: networkIndex, endCursor: endCursor)
         } else if networkIndex + 1 < networks.count && !wallet.isCollection {
-            goThroughZora(wallet: wallet, networkIndex: networkIndex + 1, endCursor: nil)
+            goThroughNfts(wallet: wallet, networkIndex: networkIndex + 1, endCursor: nil)
         } else {
             didStudy = true
             if !fileDownloader.hasPendingTasks {
@@ -115,24 +115,24 @@ class WalletDownloader {
         }
     }
     
-    private func goThroughZora(wallet: WatchOnlyWallet, networkIndex: Int, endCursor: String?) {
+    private func goThroughNfts(wallet: WatchOnlyWallet, networkIndex: Int, endCursor: String?) {
         let network = wallet.collections?.first?.network ?? networks[networkIndex]
-        let completion: (ZoraResponseData?) -> Void = { [weak self] result in
+        let completion: (RawNftsResponseData?) -> Void = { [weak self] result in
             guard let result = result?.tokens, !result.nodes.isEmpty else {
-                self?.nextStepForZora(wallet: wallet, networkIndex: networkIndex, endCursor: nil, hasNextPage: false)
+                self?.nextStepForNfts(wallet: wallet, networkIndex: networkIndex, endCursor: nil, hasNextPage: false)
                 return
             }
             
             self?.processResultTokensNodes(result.nodes, wallet: wallet, network: network)
             
             if let endCursor = result.pageInfo.endCursor {
-                self?.nextStepForZora(wallet: wallet, networkIndex: networkIndex, endCursor: endCursor, hasNextPage: result.pageInfo.hasNextPage)
+                self?.nextStepForNfts(wallet: wallet, networkIndex: networkIndex, endCursor: endCursor, hasNextPage: result.pageInfo.hasNextPage)
             }
         }
         if wallet.isCollection {
-            ZoraApi.get(collection: wallet.address, networks: [network], endCursor: endCursor, completion: completion)
+            RawNftsApi.get(collection: wallet.address, networks: [network], endCursor: endCursor, completion: completion)
         } else {
-            ZoraApi.get(owner: wallet.address, networks: [network], endCursor: endCursor, completion: completion)
+            RawNftsApi.get(owner: wallet.address, networks: [network], endCursor: endCursor, completion: completion)
         }
     }
     

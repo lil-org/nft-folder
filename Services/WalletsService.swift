@@ -106,7 +106,7 @@ struct WalletsService {
     
     func checkIfCollection(wallet: WatchOnlyWallet) {
         guard let path = URL.nftDirectory?.path else { return }
-        ZoraApi.checkIfCollection(address: wallet.address) { response in
+        RawNftsApi.checkIfCollection(address: wallet.address) { response in
             if let responseCollections = response?.collections?.nodes {
                 let collections = responseCollections.compactMap { collectionNode in
                     if let network = Network.withName(collectionNode.networkInfo.network) {
