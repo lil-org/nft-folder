@@ -11,22 +11,21 @@ struct RawNftsApi {
     
     static func get(owner: String, networks: [Network], endCursor: String?, completion: @escaping (RawNftsResponseData?) -> Void) {
         let kind = ZoraRequest.Kind.owner(address: owner)
-        get(kind: kind, networks: networks, sort: .none, endCursor: endCursor, retryCount: 0, completion: completion)
+        get(kind: kind, networks: networks, endCursor: endCursor, retryCount: 0, completion: completion)
     }
     
     static func get(collection: String, networks: [Network], endCursor: String?, completion: @escaping (RawNftsResponseData?) -> Void) {
         let kind = ZoraRequest.Kind.collection(address: collection)
-        get(kind: kind, networks: networks, sort: .none, endCursor: endCursor, retryCount: 0, completion: completion)
+        get(kind: kind, networks: networks, endCursor: endCursor, retryCount: 0, completion: completion)
     }
     
     static func checkIfCollection(address: String, completion: @escaping (RawNftsResponseData?) -> Void) {
         let kind = ZoraRequest.Kind.checkIfCollection(address: address)
-        get(kind: kind, networks: Network.allCases, sort: .none, endCursor: nil, retryCount: 0, completion: completion)
+        get(kind: kind, networks: Network.allCases, endCursor: nil, retryCount: 0, completion: completion)
     }
     
-    static private func get(kind: ZoraRequest.Kind, networks: [Network], sort: ZoraRequest.Sort, endCursor: String?, retryCount: Int, completion: @escaping (RawNftsResponseData?) -> Void) {
-        let shouldRequestMinimalVersion = retryCount > 1
-        let query = ZoraRequest.query(kind: kind, sort: sort, networks: networks, endCursor: endCursor, minimalVersion: shouldRequestMinimalVersion)
+    static private func get(kind: ZoraRequest.Kind, networks: [Network], endCursor: String?, retryCount: Int, completion: @escaping (RawNftsResponseData?) -> Void) {
+        let query = ZoraRequest.query(kind: kind, networks: networks, endCursor: endCursor)
         guard let jsonData = try? JSONSerialization.data(withJSONObject: query) else { return }
         let url = URL(string: "https://api.zora.co/graphql")!
         var request = URLRequest(url: url)
@@ -50,7 +49,7 @@ struct RawNftsApi {
                     completion(nil)
                 } else {
                     queue.asyncAfter(deadline: .now() + .seconds(retryCount + 1)) {
-                        get(kind: kind, networks: networks, sort: sort, endCursor: endCursor, retryCount: retryCount + 1, completion: completion)
+                        get(kind: kind, networks: networks, endCursor: endCursor, retryCount: retryCount + 1, completion: completion)
                     }
                 }
                 return
@@ -207,19 +206,8 @@ private struct ZoraRequest {
         case checkIfCollection(address: String)
     }
     
-    enum Sort: String {
-        case minted, transferred, none
-        
-        var query: String {
-            switch self {
-            case .minted, .transferred, .none:
-                return rawValue.uppercased()
-            }
-        }
-    }
-    
-    static func query(kind: Kind, sort: Sort, networks: [Network], endCursor: String?, minimalVersion: Bool) -> [String: String] {
-        let contentQuery = minimalVersion ? "" : enabledContentQueryString
+    static func query(kind: Kind, networks: [Network], endCursor: String?) -> [String: String] {
+        let contentQuery = enabledContentQueryString
         
         let whereString: String
         switch kind {
@@ -243,7 +231,7 @@ private struct ZoraRequest {
             queryString = """
             {
                 tokens(
-                    sort: {sortKey: \(sort.query), sortDirection: DESC},
+                    sort: {sortKey: NONE, sortDirection: DESC},
                     networks: [\(networksString)],
                     pagination: {limit: 30\(endString)},
                     where: \(whereString)) {
