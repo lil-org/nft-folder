@@ -2,9 +2,10 @@
 
 import Foundation
 
+let tmpOnlyNetwork = Network.mainnet
+
 class WalletDownloader {
     
-    private var tmpOnlyNetwork = Network.mainnet
     private var didStudy = false
     private var completion: () -> Void
     private var bundledTokensIdsWithAddresses = Set<String>()
@@ -128,8 +129,7 @@ class WalletDownloader {
         }
         
         if wallet.isCollection {
-            // TODO: get collection tokens with opensea api
-            // RawNftsApi.get(collection: wallet.address, nextCursor: nextCursor, completion: completion)
+            RawNftsApi.get(contract: wallet.address, nextCursor: nextCursor, completion: completion)
         } else {
             RawNftsApi.get(owner: wallet.address, nextCursor: nextCursor, completion: completion)
         }

@@ -105,36 +105,29 @@ struct WalletsService {
     }
     
     func checkIfCollection(wallet: WatchOnlyWallet) {
-        // TODO: bring back collection check with new nfts api
-        //        guard let path = URL.nftDirectory?.path else { return }
-        //        RawNftsApi.checkIfCollection(address: wallet.address) { response in
-        //            if let responseCollections = response?.collections?.nodes {
-        //                let collections = responseCollections.compactMap { collectionNode in
-        //                    if let network = Network.withName(collectionNode.networkInfo.network) {
-        //                        return CollectionInfo(name: collectionNode.name, network: network, chain: nil)
-        //                    } else {
-        //                        return nil
-        //                    }
-        //                }
-        //
-        //                guard var collectionName = collections.first?.name else { return }
-        //                if hasWallet(folderName: collectionName) {
-        //                    collectionName += " " + wallet.address.suffix(4)
-        //                }
-        //
-        //                let updatedWallet = WatchOnlyWallet(address: wallet.address, name: collectionName, avatar: wallet.avatar, projectId: wallet.projectId, chain: nil, collections: collections)
-        //                DispatchQueue.main.async {
-        //                    var walletsUpdate = wallets
-        //                    if let index = walletsUpdate.firstIndex(where: { $0.id == updatedWallet.id }) {
-        //                        renameFolder(path: path, name: wallet.folderDisplayName, wallet: updatedWallet)
-        //                        walletsUpdate[index] = updatedWallet
-        //                        updateWithWallets(walletsUpdate)
-        //                        AllDownloadsManager.shared.downloadCollections(collectionsWallet: updatedWallet, initialWallet: wallet)
-        //                        NotificationCenter.default.post(name: .walletsUpdate, object: nil)
-        //                    }
-        //                }
-        //            }
-        //        }
+        guard let path = URL.nftDirectory?.path else { return }
+        RawNftsApi.getCollectionInfo(contract: wallet.address) { response in
+            if let response = response {
+                let collections = [CollectionInfo(name: response.name.isEmpty ? response.collection : response.name, network: tmpOnlyNetwork, chain: nil)]
+                
+                guard var collectionName = collections.first?.name else { return }
+                if hasWallet(folderName: collectionName) {
+                    collectionName += " " + wallet.address.suffix(4)
+                }
+                
+                let updatedWallet = WatchOnlyWallet(address: wallet.address, name: collectionName, avatar: wallet.avatar, projectId: wallet.projectId, chain: nil, collections: collections)
+                DispatchQueue.main.async {
+                    var walletsUpdate = wallets
+                    if let index = walletsUpdate.firstIndex(where: { $0.id == updatedWallet.id }) {
+                        renameFolder(path: path, name: wallet.folderDisplayName, wallet: updatedWallet)
+                        walletsUpdate[index] = updatedWallet
+                        updateWithWallets(walletsUpdate)
+                        AllDownloadsManager.shared.downloadCollections(collectionsWallet: updatedWallet, initialWallet: wallet)
+                        NotificationCenter.default.post(name: .walletsUpdate, object: nil)
+                    }
+                }
+            }
+        }
     }
     
     private func renameFolder(path: String, name: String, wallet: WatchOnlyWallet) {

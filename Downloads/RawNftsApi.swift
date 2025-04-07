@@ -25,6 +25,25 @@ struct RawNftsApi {
         getNfts(url: url, nextCursor: nextCursor, completion: completion)
     }
     
+    static func getCollectionInfo(contract: String, completion: @escaping (CollectionInfoResponse?) -> Void) {
+        guard let url = URL(string: "https://api.opensea.io/api/v2/chain/ethereum/contract/\(contract)") else {
+            completion(nil)
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        setupRequest(&request)
+        
+        let task = urlSession.dataTask(with: request) { data, response, error in
+            if let data = data, error == nil, let collectionInfo = try? JSONDecoder().decode(CollectionInfoResponse.self, from: data) {
+                completion(collectionInfo)
+            } else {
+                completion(nil)
+            }
+        }
+        task.resume()
+    }
+    
     private static func getNfts(url: URL, nextCursor: String?, retryCount: Int = 0, completion: @escaping (NftsResponse?) -> Void) {
         var request = URLRequest(url: url)
         if let nextCursor = nextCursor, var components = URLComponents(url: url, resolvingAgainstBaseURL: true) {
@@ -37,12 +56,7 @@ struct RawNftsApi {
             }
         }
         
-        request.httpMethod = "GET"
-        request.timeoutInterval = 10
-        request.allHTTPHeaderFields = [
-            "accept": "application/json",
-            "x-api-key": Secrets.openSea ?? ""
-        ]
+        setupRequest(&request)
         
         let task = urlSession.dataTask(with: request) { data, response, error in
             let maxRetryCount = 3
@@ -61,6 +75,22 @@ struct RawNftsApi {
         task.resume()
     }
     
+    private static func setupRequest(_ request: inout URLRequest) {
+        request.httpMethod = "GET"
+        request.timeoutInterval = 10
+        request.allHTTPHeaderFields = [
+            "accept": "application/json",
+            "x-api-key": Secrets.openSea ?? ""
+        ]
+    }
+    
+}
+
+struct CollectionInfoResponse: Codable {
+    let address: String
+    let chain: String
+    let collection: String
+    let name: String
 }
 
 struct NftsResponse: Codable {
