@@ -13,14 +13,24 @@ struct RawNftsApi {
             return
         }
         
-        let apiKey = Secrets.openSea ?? ""        
         var request = URLRequest(url: url)
+        if let nextCursor = nextCursor, var components = URLComponents(url: url, resolvingAgainstBaseURL: true) {
+            let queryItems: [URLQueryItem] = [
+                URLQueryItem(name: "next", value: nextCursor),
+            ]
+            components.queryItems = components.queryItems.map { $0 + queryItems } ?? queryItems
+            if let nextUrl = components.url {
+                request = URLRequest(url: nextUrl)
+            }
+        }
+        
         request.httpMethod = "GET"
         request.timeoutInterval = 10
         request.allHTTPHeaderFields = [
             "accept": "application/json",
-            "x-api-key": apiKey
+            "x-api-key": Secrets.openSea ?? ""
         ]
+        
         let task = urlSession.dataTask(with: request) { data, response, error in
             let maxRetryCount = 3
             guard let data = data, error == nil, let nftsResponse = try? JSONDecoder().decode(NftsResponse.self, from: data) else {
