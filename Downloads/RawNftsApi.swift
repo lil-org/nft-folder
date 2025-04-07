@@ -12,12 +12,14 @@ struct RawNftsApi {
             completion(nil)
             return
         }
+        
+        let apiKey = Secrets.openSea ?? ""        
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.timeoutInterval = 10
         request.allHTTPHeaderFields = [
             "accept": "application/json",
-            "x-api-key": "" // TODO: load a secret
+            "x-api-key": apiKey
         ]
         let task = urlSession.dataTask(with: request) { data, response, error in
             let maxRetryCount = 3

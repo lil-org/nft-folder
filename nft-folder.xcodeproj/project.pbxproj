@@ -41,6 +41,7 @@
 		2C08041F2D2991F200CA9AB2 /* tone.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CEF35B22C413D9F00388574 /* tone.js */; };
 		2C0804202D2991F200CA9AB2 /* twemoji.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CEF35B32C413DA000388574 /* twemoji.js */; };
 		2C086E872C2F3C3600D4268D /* BundledTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C086E862C2F3C3600D4268D /* BundledTokens.swift */; };
+		2C0CD5BC2DA3EE2900642A77 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0CD5BB2DA3EE2000642A77 /* Secrets.swift */; };
 		2C0D86C42B08E67000106915 /* WalletsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C32B08E67000106915 /* WalletsService.swift */; };
 		2C0D86C72B08E7BF00106915 /* EnsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C62B08E7BF00106915 /* EnsResponse.swift */; };
 		2C1B60B92B7D3245009949C2 /* DirectoryMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60B82B7D3245009949C2 /* DirectoryMonitor.swift */; };
@@ -348,6 +349,8 @@
 		2C0218022C53CC200012EC40 /* TvCollectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvCollectionsView.swift; sourceTree = "<group>"; };
 		2C086E862C2F3C3600D4268D /* BundledTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundledTokens.swift; sourceTree = "<group>"; };
 		2C09BAE32C308145009BA300 /* Suggested.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Suggested.bundle; sourceTree = "<group>"; };
+		2C0CD5BB2DA3EE2000642A77 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		2C0CD5BD2DA3EE3B00642A77 /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 		2C0D86C32B08E67000106915 /* WalletsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsService.swift; sourceTree = "<group>"; };
 		2C0D86C62B08E7BF00106915 /* EnsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnsResponse.swift; sourceTree = "<group>"; };
 		2C17BDC32D3C36FF0015C58B /* PipPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipPlaceholderView.swift; sourceTree = "<group>"; };
@@ -5114,6 +5117,8 @@
 			children = (
 				2CEF35AE2C413D8900388574 /* Generators */,
 				2CE9A7702BAD8ECD00579BF7 /* Localizable.xcstrings */,
+				2C0CD5BB2DA3EE2000642A77 /* Secrets.swift */,
+				2C0CD5BD2DA3EE3B00642A77 /* Secrets.plist */,
 				2CD488FE2B10C6FA00A53950 /* README.md */,
 				2C9C1B4C2C0F188D00A9DFFB /* SYNCING-CUSTOM-NFT-FOLDERS.md */,
 			);
@@ -5309,6 +5314,7 @@
 			buildConfigurationList = 2CA4CF602B07F76000CC75F4 /* Build configuration list for PBXNativeTarget "nft folder" */;
 			buildPhases = (
 				2CA34B5C2B08BE5500DAB623 /* ShellScript */,
+				2C0CD5BE2DA3EE9300642A77 /* ShellScript */,
 				2CA4CF4D2B07F75E00CC75F4 /* Sources */,
 				2CA4CF4E2B07F75E00CC75F4 /* Frameworks */,
 				2CA4CF4F2B07F75E00CC75F4 /* Resources */,
@@ -5553,6 +5559,27 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2C0CD5BE2DA3EE9300642A77 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$SRCROOT/nft-folder/Secrets.plist",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Secrets.plist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ -f \"${HOME}/Developer/secrets/nft-folder/Secrets.plist\" ]; then\n    cp -f \"${HOME}/Developer/secrets/nft-folder/Secrets.plist\" \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Secrets.plist\"\nelse\n    echo \"warning: 🟢🔴 YO BUNDLING EMPTY SECRETS\"\n    cp -f \"$SRCROOT/nft-folder/Secrets.plist\" \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Secrets.plist\"\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		2CA34B5C2B08BE5500DAB623 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -5829,6 +5856,7 @@
 				2C508C9D2B6830E6005F548A /* Notification.swift in Sources */,
 				2C086E872C2F3C3600D4268D /* BundledTokens.swift in Sources */,
 				2C8E246F2C24A6E200C13536 /* FirstMouseView.swift in Sources */,
+				2C0CD5BC2DA3EE2900642A77 /* Secrets.swift in Sources */,
 				2C8ADAA82C46F3FC008BC560 /* PlayerModel.swift in Sources */,
 				2C1B60C42B7D41D1009949C2 /* HostAppImages.swift in Sources */,
 				2CB308E72C30AD0000D914A5 /* NSImage.swift in Sources */,
