@@ -4,7 +4,7 @@ import Foundation
 
 class WalletDownloader {
     
-    private var networks = Network.allCases
+    private var tmpOnlyNetwork = Network.mainnet
     private var didStudy = false
     private var completion: () -> Void
     private var bundledTokensIdsWithAddresses = Set<String>()
@@ -99,14 +99,12 @@ class WalletDownloader {
     }
     
     private func goThroughNfts(wallet: WatchOnlyWallet) {
-        goThroughNfts(wallet: wallet, networkIndex: 0, endCursor: nil)
+        goThroughNfts(wallet: wallet, nextCursor: nil)
     }
     
-    private func nextStepForNfts(wallet: WatchOnlyWallet, networkIndex: Int, endCursor: String?, hasNextPage: Bool) {
-        if hasNextPage {
-            goThroughNfts(wallet: wallet, networkIndex: networkIndex, endCursor: endCursor)
-        } else if networkIndex + 1 < networks.count && !wallet.isCollection {
-            goThroughNfts(wallet: wallet, networkIndex: networkIndex + 1, endCursor: nil)
+    private func nextStepForNfts(wallet: WatchOnlyWallet, nextCursor: String?) {
+        if nextCursor != nil {
+            goThroughNfts(wallet: wallet, nextCursor: nextCursor)
         } else {
             didStudy = true
             if !fileDownloader.hasPendingTasks {
@@ -115,34 +113,34 @@ class WalletDownloader {
         }
     }
     
-    private func goThroughNfts(wallet: WatchOnlyWallet, networkIndex: Int, endCursor: String?) {
-        let network = wallet.collections?.first?.network ?? networks[networkIndex]
-        let completion: (RawNftsResponseData?) -> Void = { [weak self] result in
-            guard let result = result?.tokens, !result.nodes.isEmpty else {
-                self?.nextStepForNfts(wallet: wallet, networkIndex: networkIndex, endCursor: nil, hasNextPage: false)
+    private func goThroughNfts(wallet: WatchOnlyWallet, nextCursor: String?) {
+        let completion: (NftsResponse?) -> Void = { [weak self] result in
+            guard let nfts = result?.nfts, !nfts.isEmpty else {
+                self?.nextStepForNfts(wallet: wallet, nextCursor: nil)
                 return
             }
             
-            self?.processResultTokensNodes(result.nodes, wallet: wallet, network: network)
+            self?.processResultNfts(nfts, wallet: wallet)
             
-            if let endCursor = result.pageInfo.endCursor {
-                self?.nextStepForNfts(wallet: wallet, networkIndex: networkIndex, endCursor: endCursor, hasNextPage: result.pageInfo.hasNextPage)
+            if let nextCursor = result?.next {
+                self?.nextStepForNfts(wallet: wallet, nextCursor: nextCursor)
             }
         }
+        
         if wallet.isCollection {
-            RawNftsApi.get(collection: wallet.address, networks: [network], endCursor: endCursor, completion: completion)
+            // TODO: get collection tokens with opensea api
+            // RawNftsApi.get(collection: wallet.address, nextCursor: nextCursor, completion: completion)
         } else {
-            RawNftsApi.get(owner: wallet.address, networks: [network], endCursor: endCursor, completion: completion)
+            RawNftsApi.get(owner: wallet.address, nextCursor: nextCursor, completion: completion)
         }
     }
     
-    private func processResultTokensNodes(_ nodes: [Node], wallet: WatchOnlyWallet, network: Network) {
+    private func processResultNfts(_ nfts: [OpenSeaNft], wallet: WatchOnlyWallet) {
         guard let destination = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return }
-        let newNodes = bundledTokensIdsWithAddresses.isEmpty ? nodes : nodes.filter { !bundledTokensIdsWithAddresses.contains($0.token.tokenId + $0.token.collectionAddress) }
-        let tasks = newNodes.map { node -> DownloadFileTask in
-            let token = node.token
-            let minimal = MinimalTokenMetadata(tokenId: token.tokenId, collectionAddress: token.collectionAddress, chain: wallet.chain, network: network)
-            let detailed = token.detailedMetadata(network: network)
+        let newNodes = bundledTokensIdsWithAddresses.isEmpty ? nfts : nfts.filter { !bundledTokensIdsWithAddresses.contains($0.identifier + $0.contract) }
+        let tasks = newNodes.map { nft -> DownloadFileTask in
+            let minimal = MinimalTokenMetadata(tokenId: nft.identifier, collectionAddress: nft.contract, chain: wallet.chain, network: .mainnet)
+            let detailed = nft.detailedMetadata(network: tmpOnlyNetwork)
             return DownloadFileTask(walletRootDirectory: destination, minimalMetadata: minimal, detailedMetadata: detailed)
         }
         fileDownloader.addTasks(tasks, wallet: wallet)
