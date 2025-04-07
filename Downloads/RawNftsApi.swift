@@ -7,12 +7,25 @@ struct RawNftsApi {
     private static let urlSession = URLSession.shared
     private static let queue = DispatchQueue(label: "\(Bundle.hostBundleId).RawNftsApi", qos: .default)
     
-    static func get(owner: String, nextCursor: String?, retryCount: Int = 0, completion: @escaping (NftsResponse?) -> Void) {
+    static func get(owner: String, nextCursor: String?, completion: @escaping (NftsResponse?) -> Void) {
         guard let url = URL(string: "https://api.opensea.io/api/v2/chain/ethereum/account/\(owner)/nfts") else {
             completion(nil)
             return
         }
         
+        getNfts(url: url, nextCursor: nextCursor, completion: completion)
+    }
+    
+    static func get(contract: String, nextCursor: String?, completion: @escaping (NftsResponse?) -> Void) {
+        guard let url = URL(string: "https://api.opensea.io/api/v2/chain/ethereum/contract/\(contract)/nfts") else {
+            completion(nil)
+            return
+        }
+        
+        getNfts(url: url, nextCursor: nextCursor, completion: completion)
+    }
+    
+    private static func getNfts(url: URL, nextCursor: String?, retryCount: Int = 0, completion: @escaping (NftsResponse?) -> Void) {
         var request = URLRequest(url: url)
         if let nextCursor = nextCursor, var components = URLComponents(url: url, resolvingAgainstBaseURL: true) {
             let queryItems: [URLQueryItem] = [
@@ -38,7 +51,7 @@ struct RawNftsApi {
                     completion(nil)
                 } else {
                     queue.asyncAfter(deadline: .now() + .seconds(retryCount + 1)) {
-                        get(owner: owner, nextCursor: nextCursor, retryCount: retryCount + 1, completion: completion)
+                        getNfts(url: url, nextCursor: nextCursor, retryCount: retryCount + 1, completion: completion)
                     }
                 }
                 return
@@ -46,14 +59,6 @@ struct RawNftsApi {
             completion(nftsResponse)
         }
         task.resume()
-    }
-    
-    static func get(collection: String, nextCursor: String?, completion: @escaping () -> Void) {
-        // TODO: remake for opensea
-    }
-    
-    static func checkIfCollection(address: String, completion: @escaping () -> Void) {
-        // TODO: remake for opensea
     }
     
 }
