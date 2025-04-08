@@ -39,6 +39,8 @@ struct MobileCollectionsView: View {
                         Button(Strings.x) { UIApplication.shared.open(URL.x) }
                         Divider()
                         Button(Strings.rateOnTheAppStore) { UIApplication.shared.open(URL.writeAppStoreReview) }
+                        Divider()
+                        Button(Strings.changeAppIcon) { didClickToggleAppIcon() }
                     } label: {
                         Images.preferences
                     }
@@ -61,6 +63,14 @@ struct MobileCollectionsView: View {
                 selectedConfig = MobilePlayerConfig(initialItemId: nil, specificToken: token)
             }
         }.persistentSystemOverlays(.hidden)
+    }
+    
+    private func didClickToggleAppIcon() {
+        if UIApplication.shared.alternateIconName == nil {
+            UIApplication.shared.setAlternateIconName("AltAppIcon")
+        } else {
+            UIApplication.shared.setAlternateIconName(nil)
+        }
     }
     
     private func createGrid() -> some View {

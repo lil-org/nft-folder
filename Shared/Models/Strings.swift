@@ -50,6 +50,7 @@ struct Strings {
     static let sendFeedback = loc("Send Feedback")
     static let mail = loc("Mail")
     static let rateOnTheAppStore = loc("Rate on the App Store")
+    static let changeAppIcon = loc("Change App Icon")
     
     static let navigate = loc("Navigate")
     static let toggleInfo = loc("Toggle Info")
