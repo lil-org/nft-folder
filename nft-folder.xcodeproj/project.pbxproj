@@ -5928,7 +5928,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 178;
+				CURRENT_PROJECT_VERSION = 179;
 				DEVELOPMENT_TEAM = 8DXC3N7E7P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -5944,7 +5944,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.55;
+				MARKETING_VERSION = 2.0.56;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -5965,7 +5965,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 178;
+				CURRENT_PROJECT_VERSION = 179;
 				DEVELOPMENT_TEAM = 8DXC3N7E7P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -5981,7 +5981,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.55;
+				MARKETING_VERSION = 2.0.56;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -6026,7 +6026,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 178;
+				CURRENT_PROJECT_VERSION = 179;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 8DXC3N7E7P;
 				ENABLE_PREVIEWS = YES;
@@ -6038,7 +6038,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.55;
+				MARKETING_VERSION = 2.0.56;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = xros;
@@ -6056,7 +6056,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 178;
+				CURRENT_PROJECT_VERSION = 179;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 8DXC3N7E7P;
 				ENABLE_PREVIEWS = YES;
@@ -6068,7 +6068,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.55;
+				MARKETING_VERSION = 2.0.56;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = xros;
@@ -6089,7 +6089,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 178;
+				CURRENT_PROJECT_VERSION = 179;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=appletvos*]" = 8DXC3N7E7P;
@@ -6104,7 +6104,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.55;
+				MARKETING_VERSION = 2.0.56;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -6125,7 +6125,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 178;
+				CURRENT_PROJECT_VERSION = 179;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=appletvos*]" = 8DXC3N7E7P;
@@ -6140,7 +6140,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.55;
+				MARKETING_VERSION = 2.0.56;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -6187,7 +6187,7 @@
 				CODE_SIGN_ENTITLEMENTS = "nft-folder-ambient/nft_folder_ambient.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 178;
+				CURRENT_PROJECT_VERSION = 179;
 				DEVELOPMENT_TEAM = 8DXC3N7E7P;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -6203,7 +6203,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.0.55;
+				MARKETING_VERSION = 2.0.56;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder.ambient";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -6221,7 +6221,7 @@
 				CODE_SIGN_ENTITLEMENTS = "nft-folder-ambient/nft_folder_ambient.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 178;
+				CURRENT_PROJECT_VERSION = 179;
 				DEVELOPMENT_TEAM = 8DXC3N7E7P;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -6237,7 +6237,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.0.55;
+				MARKETING_VERSION = 2.0.56;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder.ambient";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -6253,7 +6253,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 178;
+				CURRENT_PROJECT_VERSION = 179;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 8DXC3N7E7P;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -6268,7 +6268,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.0.55;
+				MARKETING_VERSION = 2.0.56;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder.nft-finder-extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -6285,7 +6285,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 178;
+				CURRENT_PROJECT_VERSION = 179;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 8DXC3N7E7P;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -6300,7 +6300,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.0.55;
+				MARKETING_VERSION = 2.0.56;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder.nft-finder-extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -6442,7 +6442,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 178;
+				CURRENT_PROJECT_VERSION = 179;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 8DXC3N7E7P;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -6458,7 +6458,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.0.55;
+				MARKETING_VERSION = 2.0.56;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder";
 				PRODUCT_NAME = "Nft Folder";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -6477,7 +6477,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 178;
+				CURRENT_PROJECT_VERSION = 179;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 8DXC3N7E7P;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -6493,7 +6493,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.0.55;
+				MARKETING_VERSION = 2.0.56;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder";
 				PRODUCT_NAME = "Nft Folder";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -6509,7 +6509,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 178;
+				CURRENT_PROJECT_VERSION = 179;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=macosx*]" = 8DXC3N7E7P;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -6517,7 +6517,7 @@
 				INFOPLIST_KEY_NSPrincipalClass = nft_screen_saverView;
 				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 2.0.55;
+				MARKETING_VERSION = 2.0.56;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-screen-saver";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -6537,7 +6537,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 178;
+				CURRENT_PROJECT_VERSION = 179;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=macosx*]" = 8DXC3N7E7P;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -6545,7 +6545,7 @@
 				INFOPLIST_KEY_NSPrincipalClass = nft_screen_saverView;
 				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 2.0.55;
+				MARKETING_VERSION = 2.0.56;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-screen-saver";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
