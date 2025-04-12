@@ -186,7 +186,7 @@ lane :release do |options|
   platform = options[:platform]
 
   if platform.nil?
-    release_visionos
+    release_ios
     release_macos
     release_tvos
   elsif platform == "macos"
@@ -195,6 +195,8 @@ lane :release do |options|
     release_visionos
   elsif platform == "tvos"
     release_tvos
+  elsif platform == "ios"
+    release_ios
   end
 
   sh "rm -rf #{File.expand_path('build')}"
