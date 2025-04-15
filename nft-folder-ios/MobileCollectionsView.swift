@@ -67,7 +67,7 @@ struct MobileCollectionsView: View {
     
     private func didClickToggleAppIcon() {
         if UIApplication.shared.alternateIconName == nil {
-            UIApplication.shared.setAlternateIconName("AppIconNoggles")
+            UIApplication.shared.setAlternateIconName("AppIconLegacy")
         } else {
             UIApplication.shared.setAlternateIconName(nil)
         }
