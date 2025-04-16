@@ -16,7 +16,7 @@ struct VisionCollectionsView: View {
         ZStack {
             HStack {
                 Spacer()
-                Text(Consts.noggles)
+                Images.eyes.resizable().scaledToFit().frame(height: 23).opacity(0.69)
                 Spacer()
             }
             HStack {
