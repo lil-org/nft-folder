@@ -15,7 +15,15 @@ struct TvCollectionsView: View {
             ScrollView {
                 createGrid()
             }
-            .navigationTitle(Consts.noggles)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Images.eyes
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 32)
+                        .opacity(0.69)
+                }
+            }
             .navigationBarItems(trailing: HStack {
                 Button(action: {
                     showPreferencesAlert = true
