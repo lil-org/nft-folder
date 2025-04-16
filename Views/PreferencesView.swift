@@ -8,7 +8,6 @@ struct PreferencesView: View {
     @State private var glbPreference = Defaults.downloadGlb
     @State private var videoPreference = Defaults.downloadVideo
     @State private var audioPreference = Defaults.downloadAudio
-    @State private var showInMenuBar = !Defaults.hideFromMenuBar
     @State private var hasHiddenSuggestedItems = !Defaults.suggestedItemsToHide.isEmpty
     
     @State private var hoveringOverURL: URL? = nil
@@ -27,7 +26,7 @@ struct PreferencesView: View {
             VStack {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color(NSColor.windowBackgroundColor))
-                    .frame(height: 150)
+                    .frame(height: 130)
                     .overlay(
                         VStack(alignment: .leading) {
                             Toggle(isOn: $maxFileSizeLimitPreference) {
@@ -52,17 +51,6 @@ struct PreferencesView: View {
                                 Text(Strings.downloadAudio)
                             }.onChange(of: audioPreference) { _, newValue in
                                 Defaults.downloadAudio = newValue
-                            }
-                            
-                            Toggle(isOn: $showInMenuBar) {
-                                Text(Strings.showInMenuBar)
-                            }.onChange(of: showInMenuBar) { _, newValue in
-                                Defaults.hideFromMenuBar = !newValue
-                                if newValue {
-                                    StatusBarItem.shared.showIfNeeded()
-                                } else {
-                                    StatusBarItem.shared.hideFromMenuBar()
-                                }
                             }
                         }
                         .padding()

@@ -174,7 +174,6 @@
 		2C9973FE2C4AEAAB00C058E2 /* WebViewWithMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9973FD2C4AEAAB00C058E2 /* WebViewWithMenu.swift */; };
 		2C9974002C4AF12400C058E2 /* PlayerMenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9973FF2C4AF12400C058E2 /* PlayerMenuDelegate.swift */; };
 		2C9C60352C2C5FE8001D9B51 /* SuggestedItemsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C60342C2C5FE8001D9B51 /* SuggestedItemsService.swift */; };
-		2C9EF2E42B8A612F00297B32 /* StatusBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9EF2E32B8A612F00297B32 /* StatusBarItem.swift */; };
 		2CA34B3D2B082BDF00DAB623 /* WalletsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCFED972B08246800D98A2E /* WalletsListView.swift */; };
 		2CA34B512B08B33C00DAB623 /* WatchOnlyWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B502B08B33C00DAB623 /* WatchOnlyWallet.swift */; };
 		2CA34B562B08B6A200DAB623 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B552B08B6A200DAB623 /* Codable.swift */; };
@@ -781,7 +780,6 @@
 		2C9973FF2C4AF12400C058E2 /* PlayerMenuDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerMenuDelegate.swift; sourceTree = "<group>"; };
 		2C9C1B4C2C0F188D00A9DFFB /* SYNCING-CUSTOM-NFT-FOLDERS.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "SYNCING-CUSTOM-NFT-FOLDERS.md"; sourceTree = SOURCE_ROOT; };
 		2C9C60342C2C5FE8001D9B51 /* SuggestedItemsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestedItemsService.swift; sourceTree = "<group>"; };
-		2C9EF2E32B8A612F00297B32 /* StatusBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarItem.swift; sourceTree = "<group>"; };
 		2CA34B502B08B33C00DAB623 /* WatchOnlyWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchOnlyWallet.swift; sourceTree = "<group>"; };
 		2CA34B552B08B6A200DAB623 /* Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
 		2CA34B592B08B7CF00DAB623 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
@@ -2891,7 +2889,6 @@
 				2C5504DD2C106C4400DE145A /* Alerts.swift */,
 				2C424F452B9775E6007868F8 /* RightClickActivatingWindow.swift */,
 				2C60AAD02B8A4DE200F2C143 /* Window.swift */,
-				2C9EF2E32B8A612F00297B32 /* StatusBarItem.swift */,
 				2CE0B5E22B8686CE00B5BF4A /* FooterLink.swift */,
 				2CFA24722B19FB92009B58FD /* FileExtension.swift */,
 				2C8E246E2C24A6E200C13536 /* FirstMouseView.swift */,
@@ -5707,7 +5704,6 @@
 				2C4039F12B83B11100DB94D7 /* FileSaver.swift in Sources */,
 				2CA34B562B08B6A200DAB623 /* Codable.swift in Sources */,
 				2C9113282B09751D00A8EE80 /* WalletImageView.swift in Sources */,
-				2C9EF2E42B8A612F00297B32 /* StatusBarItem.swift in Sources */,
 				2C3B775F2C3D6DEC000A9B52 /* LocalHtmlView.swift in Sources */,
 				2C9973FE2C4AEAAB00C058E2 /* WebViewWithMenu.swift in Sources */,
 				2C5065FA2C0E10D600D9D01A /* AttestationResponse.swift in Sources */,

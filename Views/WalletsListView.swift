@@ -10,7 +10,6 @@ struct WalletsListView: View {
     private let uuid = UUID().uuidString
     
     @State private var isWaiting = false
-    @State private var inPopup: Bool
     @State private var showAddWalletPopup: Bool
     @State private var showSettingsPopup = false
     @State private var newWalletAddress = ""
@@ -24,9 +23,8 @@ struct WalletsListView: View {
     @State private var showMorePreferences = false
     @State private var cancellables = Set<AnyCancellable>()
     
-    init(showAddWalletPopup: Bool, inPopup: Bool) {
+    init(showAddWalletPopup: Bool) {
         self.showAddWalletPopup = showAddWalletPopup
-        self.inPopup = inPopup
     }
     
     var body: some View {
@@ -36,57 +34,6 @@ struct WalletsListView: View {
                     showAddWalletPopup = true
                 }).frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
-                if inPopup {
-                    HStack {
-                        Button(action: {
-                            Navigator.shared.showControlCenter(addWallet: false)
-                        }) {
-                            Images.extend
-                        }.keyboardShortcut(.return, modifiers: []).buttonStyle(LinkButtonStyle()).foregroundStyle(.secondary)
-                        Spacer()
-                        
-                        if isDownloading {
-                            Button(action: {
-                                AllDownloadsManager.shared.stopAllDownloads()
-                            }) {
-                                Images.pause
-                            }
-                        }
-                        
-                        Button(action: {
-                            NSApp.activate(ignoringOtherApps: true)
-                            showSettingsPopup = true
-                        }) {
-                            Images.gearshape
-                        }
-                        
-                        Button(action: {
-                            if let nftDirectory = URL.nftDirectory {
-                                NSWorkspace.shared.open(nftDirectory)
-                            }
-                        }) {
-                            Images.openFinder
-                        }
-                        
-                        Button(action: {
-                            AmbientAgent.start(collectionId: nil)
-                        }) {
-                            Images.pip
-                        }
-                        
-                        Button(action: {
-                            showPlayer(id: nil)
-                        }) {
-                            Images.shuffle
-                        }
-                        
-                        Button(action: {
-                            showAddWalletPopup = true
-                        }) {
-                            Images.plus
-                        }
-                    }.frame(height: 23).padding(.horizontal).padding(.top, 8)
-                }
                 ScrollView {
                     createGrid().frame(maxWidth: .infinity)
                 }.background(Color(nsColor: .controlBackgroundColor))

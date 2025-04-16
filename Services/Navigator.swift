@@ -41,7 +41,7 @@ class Navigator: NSObject {
     func showControlCenter(addWallet: Bool) {
         AllDownloadsManager.shared.checkFolders()
         Window.closeAllControlCenters()
-        let contentView = WalletsListView(showAddWalletPopup: addWallet, inPopup: false)
+        let contentView = WalletsListView(showAddWalletPopup: addWallet)
         let window = RightClickActivatingWindow(
             contentRect: CGRect(origin: .zero, size: CGSize(width: 777, height: 593)),
             styleMask: [.closable, .fullSizeContentView, .titled, .resizable, .miniaturizable],

@@ -30,7 +30,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         notificationCenter.addObserver(self, selector: #selector(terminateInstance(_:)), name: .mustTerminate, object: nil, suspensionBehavior: .deliverImmediately)
         notificationCenter.addObserver(self, selector: #selector(restoreFromPip(_:)), name: .restoreFromPip, object: nil, suspensionBehavior: .deliverImmediately)
         allDownloadsManager.start()
-        StatusBarItem.shared.showIfNeeded()
         AvatarService.setup()
     }
     

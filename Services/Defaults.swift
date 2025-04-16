@@ -115,13 +115,4 @@ struct Defaults {
         }
     }
     
-    static var hideFromMenuBar: Bool {
-        get {
-            userDefaults.bool(forKey: "hideFromMenuBar")
-        }
-        set {
-            userDefaults.set(newValue, forKey: "hideFromMenuBar")
-        }
-    }
-    
 }
