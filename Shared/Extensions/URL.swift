@@ -9,9 +9,6 @@ extension URL {
     static let arScheme = "ar://"
     static let ipfsGateway = "https://ipfs.decentralized-content.com/ipfs/"
     
-    static let easScanBase = "https://base.easscan.org"
-    static let attestationSchemaId = "0x24a31e6646f2d422a173165d76984a4ee1cfd2bea26be543ba15f7e9319bca4b"
-    
     private enum MetadataKind: String {
         case address, minimal, detailed, hashed
     }
@@ -22,11 +19,6 @@ extension URL {
         } else {
             return false
         }
-    }
-    
-    static func newAttestation(recipient: String, cid: String, folderType: UInt32) -> URL? {
-        let arguments = String.paddedHexString(cid: cid, folderType: folderType)
-        return URL(string: "\(easScanBase)/attestation/attestWithSchema/\(attestationSchemaId)#template=\(recipient)::0:false:\(arguments)")
     }
     
     static func nftDirectory(wallet: WatchOnlyWallet, createIfDoesNotExist: Bool) -> URL? {
@@ -40,11 +32,6 @@ extension URL {
             }
         }
         return addressDirectoryURL
-    }
-    
-    static func foldersForUpcomingTokens(wallet: WatchOnlyWallet) -> URL? {
-        guard let url = nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return nil }
-        return metadataDirectory(walletFolderURL: url, metadataKind: .address)?.appendingPathComponent("folders-for-tokens")
     }
     
     static func avatarOnDisk(wallet: WatchOnlyWallet) -> URL? {

@@ -29,7 +29,6 @@ class FileDownloader: NSObject {
     private var completion: () -> Void
     private var isCanceled = false
     
-    private var foldersForTokens: [Token: [String]]?
     private var wallet: WatchOnlyWallet?
     private var definitelyShouldNotCreateCollectionThumbnail = false
     private var maxSimultaneousDownloads: Int {
@@ -41,21 +40,9 @@ class FileDownloader: NSObject {
         super.init()
     }
     
-    func useFoldersForTokens(_ foldersForTokens: [Token: [String]], wallet: WatchOnlyWallet) {
-        self.foldersForTokens = foldersForTokens
-        self.wallet = wallet
-    }
-    
     func invalidateAndCancel() {
         isCanceled = true
         urlSession?.invalidateAndCancel()
-        if let foldersForTokens = foldersForTokens, let wallet = wallet,
-           let fileURL = URL.foldersForUpcomingTokens(wallet: wallet),
-           FileManager.default.fileExists(atPath: fileURL.path) {
-            let model = RemainingFoldersForTokens(dict: foldersForTokens)
-            let data = try? JSONEncoder().encode(model)
-            try? data?.write(to: fileURL, options: .atomic)
-        }
     }
     
     func addTasks(_ tasks: [DownloadFileTask], wallet: WatchOnlyWallet?) {
@@ -126,27 +113,11 @@ class FileDownloader: NSObject {
     }
     
     private func save(_ task: DownloadFileTask, tmpLocation: URL?, data: Data?, fileExtension: String) {
-        var tokenToRemove: Token?
-        var task = task
-        
-        if foldersForTokens != nil {
-            let token = Token(id: task.detailedMetadata.tokenId,
-                              address: task.detailedMetadata.collectionAddress,
-                              chainId: String(task.detailedMetadata.network.rawValue),
-                              comment: nil)
-            if let customFolders = foldersForTokens?[token] {
-                tokenToRemove = token
-                task.setCustomFolders(customFolders)
-            }
-        }
-        
         if let redirectURL = FileSaver.shared.saveForTask(task, tmpLocation: tmpLocation, data: data, fileExtension: fileExtension) {
             var updatedTask = task
             if updatedTask.setRedirectURL(redirectURL) {
                 addTasks([updatedTask], wallet: wallet)
             }
-        } else if let tokenToRemove = tokenToRemove {
-            foldersForTokens?.removeValue(forKey: tokenToRemove)
         }
     }
     

@@ -28,10 +28,6 @@ class WalletDownloader {
         } else {
             didStudy = true
         }
-        
-        if !wallet.isCollection {
-            getFolders(wallet: wallet)
-        }
     }
     
     private func processBundledTokensAndSeeIfShouldGoThroughNfts(wallet: WatchOnlyWallet) -> Bool {
@@ -85,20 +81,6 @@ class WalletDownloader {
         }
     }
     
-    private func getFolders(wallet: WatchOnlyWallet) {
-        FolderSyncService.getOnchainSyncedFolder(wallet: wallet) { [weak self] snapshot in
-            guard let snapshot = snapshot else { return }
-            self?.applyFolderSnapshotIfNeeded(snapshot, for: wallet)
-        }
-        
-        if let foldersFileURL = URL.foldersForUpcomingTokens(wallet: wallet),
-           FileManager.default.fileExists(atPath: foldersFileURL.path),
-           let data = try? Data(contentsOf: foldersFileURL),
-           let model = try? JSONDecoder().decode(RemainingFoldersForTokens.self, from: data) {
-            fileDownloader.useFoldersForTokens(model.dict, wallet: wallet)
-        }
-    }
-    
     private func goThroughNfts(wallet: WatchOnlyWallet) {
         goThroughNfts(wallet: wallet, nextCursor: nil)
     }
@@ -144,82 +126,6 @@ class WalletDownloader {
             return DownloadFileTask(walletRootDirectory: destination, minimalMetadata: minimal, detailedMetadata: detailed)
         }
         fileDownloader.addTasks(tasks, wallet: wallet)
-    }
-    
-    private func applyFolderSnapshotIfNeeded(_ snapshot: Snapshot, for wallet: WatchOnlyWallet) {
-        var allTokensToOrganize = [Token: [String]]()
-        
-        for folder in snapshot.folders where !folder.name.isEmpty {
-            for token in folder.tokens {
-                if let otherFolders = allTokensToOrganize[token] {
-                    allTokensToOrganize[token] = otherFolders + [folder.name]
-                } else {
-                    allTokensToOrganize[token] = [folder.name]
-                }
-            }
-        }
-        
-        FileDownloader.queue.async { [weak self] in
-            guard let foldersForUpcomingTokensFileURL = URL.foldersForUpcomingTokens(wallet: wallet) else { return }
-            try? FileManager.default.removeItem(at: foldersForUpcomingTokensFileURL)
-            
-            if let remaining = self?.organizeAlreadyDownloadedFiles(tokens: allTokensToOrganize, wallet: wallet) {
-                if let cid = snapshot.cid {
-                    Defaults.addKnownFolderCid(cid, isCidAttested: true, for: wallet)
-                }
-                
-                if !remaining.isEmpty {
-                    self?.fileDownloader.useFoldersForTokens(remaining, wallet: wallet)
-                    let model = RemainingFoldersForTokens(dict: remaining)
-                    let data = try? JSONEncoder().encode(model)
-                    try? data?.write(to: foldersForUpcomingTokensFileURL, options: .atomic)
-                }
-            }
-        }
-    }
-    
-    private func organizeAlreadyDownloadedFiles(tokens: [Token: [String]], wallet: WatchOnlyWallet) -> [Token: [String]] {
-        var wipTokens = tokens
-        guard let baseURL = URL.nftDirectory(wallet: wallet, createIfDoesNotExist: false) else { return [:] }
-        
-        let fileManager = FileManager.default
-        
-        func goThroughFolder(url: URL) {
-            guard let folderContents = try? fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil, options: .skipsHiddenFiles) else { return }
-            for content in folderContents {
-                if content.hasDirectoryPath {
-                    goThroughFolder(url: content)
-                } else if let metadata = MetadataStorage.minimalMetadata(filePath: content.path) {
-                    let token = Token(id: metadata.tokenId, address: metadata.collectionAddress, chainId: String(metadata.network.rawValue), comment: nil)
-                    if let folders = wipTokens[token], !folders.isEmpty {
-                        for (index, folder) in folders.enumerated() {
-                            let shouldCopyInsteadOfMoving = index < folders.count - 1
-                            let destinationFolderURL = baseURL.appendingPathComponent(folder)
-                            if !fileManager.fileExists(atPath: destinationFolderURL.path) {
-                                try? fileManager.createDirectory(at: destinationFolderURL, withIntermediateDirectories: false, attributes: nil)
-                            }
-                            
-                            let destinationTokenURL = destinationFolderURL.appending(component: content.lastPathComponent)
-                            if content != destinationTokenURL {
-                                if shouldCopyInsteadOfMoving {
-                                    try? fileManager.copyItem(at: content, to: destinationTokenURL)
-                                    MetadataStorage.store(minimalMetadata: metadata, filePath: destinationTokenURL.path)
-                                } else {
-                                    try? fileManager.moveItem(at: content, to: destinationTokenURL)
-                                }
-                            }
-                        }
-                        wipTokens.removeValue(forKey: token)
-                        if wipTokens.isEmpty {
-                            return
-                        }
-                    }
-                }
-            }
-        }
-        
-        goThroughFolder(url: baseURL)
-        return wipTokens
     }
     
     deinit {

@@ -23,46 +23,15 @@ class RightClickServiceProvider: NSObject {
                     } else {
                         continue
                     }
-                } else if let attributes = try? fileManager.attributesOfItem(atPath: url.path), let fileSize = attributes[.size] as? NSNumber {
-                    guard fileSize.intValue < Int.defaultFileSizeLimit else {
-                        showErrorAlert(fileURL: url, withRetry: false)
-                        return
-                    }
-                    sendIt(fileURL: url)
+                } else {
+                    showNoNftAlert()
                 }
             }
         }
     }
     
-    private func sendIt(fileURL: URL) {
-        IpfsUploader.upload(fileURL: fileURL) { [weak self] cid in
-            if let cid = cid, let url = URL(string: "https://zora.co/create?image=ipfs://\(cid)") {
-                NSWorkspace.shared.open(url)
-            } else {
-                self?.showErrorAlert(fileURL: fileURL, withRetry: true)
-            }
-        }
-    }
-    
-    func showErrorAlert(fileURL: URL, withRetry: Bool) {
-        let alert = NSAlert()
-        alert.messageText = Strings.didNotUpload
-        alert.informativeText = fileURL.lastPathComponent
-        alert.alertStyle = .warning
-        if withRetry {
-            alert.addButton(withTitle: Strings.retry)
-            alert.addButton(withTitle: Strings.cancel)
-            alert.buttons.last?.keyEquivalent = "\u{1b}"
-            let response = alert.runModal()
-            switch response {
-            case .alertFirstButtonReturn:
-                sendIt(fileURL: fileURL)
-            default:
-                break
-            }
-        } else {
-            _ = alert.runModal()
-        }
+    func showNoNftAlert() {
+        Alerts.showSomethingWentWrong()
     }
     
 }

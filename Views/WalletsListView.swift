@@ -373,12 +373,6 @@ struct WalletsListView: View {
                 })
             }
             
-            if !wallet.isCollection {
-                Divider()
-                Button(Strings.pushCustomFolders, action: {
-                    confirmFoldersPush(wallet: wallet)
-                })
-            }
             Divider()
             Button(Strings.hardReset, action: {
                 hardReset(wallet: wallet)
@@ -391,19 +385,6 @@ struct WalletsListView: View {
                 }
                 updateDisplayedWallets()
             })
-        }
-    }
-    
-    private func confirmFoldersPush(wallet: WatchOnlyWallet) {
-        Alerts.showConfirmation(message: Strings.pushCustomFolders + "?", text: wallet.folderDisplayName) { confirmed in
-            guard confirmed else { return }
-            FolderSyncService.pushCustomFolders(wallet: wallet) { url in
-                if let url = url {
-                    NSWorkspace.shared.open(url)
-                } else {
-                    Alerts.showSomethingWentWrong()
-                }
-            }
         }
     }
     

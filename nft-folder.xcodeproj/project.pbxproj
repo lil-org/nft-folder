@@ -97,7 +97,6 @@
 		2C4DBFC12C3698D10097AD35 /* Chain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4DBFC02C3698D10097AD35 /* Chain.swift */; };
 		2C4DBFC32C36CD1A0097AD35 /* Chain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4DBFC02C3698D10097AD35 /* Chain.swift */; };
 		2C5065F72C0DFC8700D9D01A /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5065F62C0DFC8700D9D01A /* String.swift */; };
-		2C5065FA2C0E10D600D9D01A /* AttestationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5065F92C0E10D600D9D01A /* AttestationResponse.swift */; };
 		2C508C9D2B6830E6005F548A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
 		2C5504DE2C106C4400DE145A /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5504DD2C106C4400DE145A /* Alerts.swift */; };
 		2C5695AA2C4195BE003B4335 /* ScriptJsonString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5695A92C4195BE003B4335 /* ScriptJsonString.swift */; };
@@ -135,7 +134,6 @@
 		2C63720C2C41805C001169E8 /* GeneratedToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE9A5772C3DAB03009AEAF4 /* GeneratedToken.swift */; };
 		2C63720D2C418060001169E8 /* Script.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C8DE82C3C890B00BC83E9 /* Script.swift */; };
 		2C63720E2C418068001169E8 /* RawHtmlGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF35AC2C413AE700388574 /* RawHtmlGenerator.swift */; };
-		2C672CB12BFCEFB500E57B21 /* IpfsUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C672CB02BFCEFB500E57B21 /* IpfsUploader.swift */; };
 		2C6BA8212D3D2BFC0072B001 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BA81A2D3D2BFC0072B001 /* AppDelegate.swift */; };
 		2C6BA8222D3D2BFC0072B001 /* PipVideoSourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BA81F2D3D2BFC0072B001 /* PipVideoSourceViewController.swift */; };
 		2C6BA8232D3D2BFC0072B001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C6BA81B2D3D2BFC0072B001 /* Assets.xcassets */; };
@@ -153,8 +151,6 @@
 		2C8ADAA82C46F3FC008BC560 /* PlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8ADAA72C46F3FC008BC560 /* PlayerModel.swift */; };
 		2C8C8DE92C3C890B00BC83E9 /* Script.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C8DE82C3C890B00BC83E9 /* Script.swift */; };
 		2C8E246F2C24A6E200C13536 /* FirstMouseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8E246E2C24A6E200C13536 /* FirstMouseView.swift */; };
-		2C8EDD032C0CFE3F003CB35D /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8EDD022C0CFE3F003CB35D /* Snapshot.swift */; };
-		2C8EDD052C0D00EA003CB35D /* FolderSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8EDD042C0D00EA003CB35D /* FolderSyncService.swift */; };
 		2C91131A2B08F71200A8EE80 /* WalletDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9113192B08F71200A8EE80 /* WalletDownloader.swift */; };
 		2C9113282B09751D00A8EE80 /* WalletImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9113272B09751D00A8EE80 /* WalletImageView.swift */; };
 		2C937BD22C3C8D1A00B3B6D1 /* Script.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C8DE82C3C890B00BC83E9 /* Script.swift */; };
@@ -228,7 +224,6 @@
 		2CC971632D2F4219005A8C4C /* FourDirectionalPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC971622D2F4214005A8C4C /* FourDirectionalPlayer.swift */; };
 		2CD0DA592C41B4CF00DB709C /* PrepareScreensavers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD0DA582C41B4CF00DB709C /* PrepareScreensavers.swift */; };
 		2CD0DA5B2C41C7AF00DB709C /* thumbnail.heic in Resources */ = {isa = PBXBuildFile; fileRef = 2CD0DA5A2C41C7AF00DB709C /* thumbnail.heic */; };
-		2CD4FC8A2B684A0900C965F6 /* IpfsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD4FC892B684A0900C965F6 /* IpfsResponse.swift */; };
 		2CDDE0D32C1B1EAC002DB025 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDE0D22C1B1EAC002DB025 /* Language.swift */; };
 		2CDDE0D52C1B1EC4002DB025 /* MetadataKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDE0D42C1B1EC4002DB025 /* MetadataKind.swift */; };
 		2CE0B5E32B8686CE00B5BF4A /* FooterLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE0B5E22B8686CE00B5BF4A /* FooterLink.swift */; };
@@ -367,7 +362,6 @@
 		2C4D31642C56B65E00C586D1 /* TvHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvHelpers.swift; sourceTree = "<group>"; };
 		2C4DBFC02C3698D10097AD35 /* Chain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chain.swift; sourceTree = "<group>"; };
 		2C5065F62C0DFC8700D9D01A /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
-		2C5065F92C0E10D600D9D01A /* AttestationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationResponse.swift; sourceTree = "<group>"; };
 		2C508C9C2B6830E6005F548A /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		2C5504DD2C106C4400DE145A /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
 		2C5695A92C4195BE003B4335 /* ScriptJsonString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptJsonString.swift; sourceTree = "<group>"; };
@@ -752,7 +746,6 @@
 		2C635AEC2D29CE8000E40241 /* secondary_second_sub_category.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = secondary_second_sub_category.txt; sourceTree = "<group>"; };
 		2C6372092C417FC2001169E8 /* nft-screen-saver-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "nft-screen-saver-Bridging-Header.h"; sourceTree = "<group>"; };
 		2C63720A2C417FC2001169E8 /* ScreenSaverHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSaverHelper.swift; sourceTree = "<group>"; };
-		2C672CB02BFCEFB500E57B21 /* IpfsUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IpfsUploader.swift; sourceTree = "<group>"; };
 		2C6BA80B2D3D2BF50072B001 /* nft-folder-ambient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nft-folder-ambient.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C6BA81A2D3D2BFC0072B001 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C6BA81B2D3D2BFC0072B001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -768,8 +761,6 @@
 		2C8ADAA72C46F3FC008BC560 /* PlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerModel.swift; sourceTree = "<group>"; };
 		2C8C8DE82C3C890B00BC83E9 /* Script.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Script.swift; sourceTree = "<group>"; };
 		2C8E246E2C24A6E200C13536 /* FirstMouseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstMouseView.swift; sourceTree = "<group>"; };
-		2C8EDD022C0CFE3F003CB35D /* Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
-		2C8EDD042C0D00EA003CB35D /* FolderSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderSyncService.swift; sourceTree = "<group>"; };
 		2C8FD1C62BF4B33C00B3D327 /* Appfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
 		2C8FD1C72BF4B33C00B3D327 /* Fastfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; };
 		2C9113192B08F71200A8EE80 /* WalletDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDownloader.swift; sourceTree = "<group>"; };
@@ -1896,7 +1887,6 @@
 		2CD0DA582C41B4CF00DB709C /* PrepareScreensavers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepareScreensavers.swift; sourceTree = "<group>"; };
 		2CD0DA5A2C41C7AF00DB709C /* thumbnail.heic */ = {isa = PBXFileReference; lastKnownFileType = file; name = thumbnail.heic; path = NftScreenSaverView/thumbnail.heic; sourceTree = "<group>"; };
 		2CD488FE2B10C6FA00A53950 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
-		2CD4FC892B684A0900C965F6 /* IpfsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IpfsResponse.swift; sourceTree = "<group>"; };
 		2CDDE0D22C1B1EAC002DB025 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		2CDDE0D42C1B1EC4002DB025 /* MetadataKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataKind.swift; sourceTree = "<group>"; };
 		2CE0B5E22B8686CE00B5BF4A /* FooterLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterLink.swift; sourceTree = "<group>"; };
@@ -2092,9 +2082,7 @@
 			isa = PBXGroup;
 			children = (
 				2C0D86C32B08E67000106915 /* WalletsService.swift */,
-				2C8EDD042C0D00EA003CB35D /* FolderSyncService.swift */,
 				2CE33D992B865CFB008473E1 /* AvatarService.swift */,
-				2C672CB02BFCEFB500E57B21 /* IpfsUploader.swift */,
 				2CAFA62A2B09C3610054160D /* MetadataStorage.swift */,
 				2C4039F02B83B11100DB94D7 /* FileSaver.swift */,
 				2CF4C49F2B7FCDDC000AB4A6 /* Defaults.swift */,
@@ -2109,17 +2097,14 @@
 		2C4D84102B1886D600952BF5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				2C5065F92C0E10D600D9D01A /* AttestationResponse.swift */,
 				2CFA24702B19F956009B58FD /* DataOrUrl.swift */,
 				2C1B60C32B7D41D1009949C2 /* HostAppImages.swift */,
 				2C8A42E92B1A272600BE4166 /* Network.swift */,
-				2CD4FC892B684A0900C965F6 /* IpfsResponse.swift */,
 				2C0D86C62B08E7BF00106915 /* EnsResponse.swift */,
 				2CA979A92B627B3900DB3AC8 /* MinimalTokenMetadata.swift */,
 				2C1FD2AA2B88B53F004F42B3 /* ContentRepresentation.swift */,
 				2CF4C49D2B7FB26C000AB4A6 /* DetailedTokenMetadata.swift */,
 				2C2B5AD02B84E2DA005C38B0 /* DownloadFileTask.swift */,
-				2C8EDD022C0CFE3F003CB35D /* Snapshot.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -5668,7 +5653,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CD4FC8A2B684A0900C965F6 /* IpfsResponse.swift in Sources */,
 				2C2329DA2B68367F00001936 /* RightClickServiceProvider.swift in Sources */,
 				2CA979AA2B627B3900DB3AC8 /* MinimalTokenMetadata.swift in Sources */,
 				2C1B60C62B7E1145009949C2 /* PreferencesView.swift in Sources */,
@@ -5699,16 +5683,13 @@
 				2C2B5AD12B84E2DA005C38B0 /* DownloadFileTask.swift in Sources */,
 				2C6BA82A2D3D31AA0072B001 /* AmbientAgent.swift in Sources */,
 				2C6359542D29C07F00E40241 /* Links.swift in Sources */,
-				2C672CB12BFCEFB500E57B21 /* IpfsUploader.swift in Sources */,
 				2CFA24732B19FB92009B58FD /* FileExtension.swift in Sources */,
 				2C4039F12B83B11100DB94D7 /* FileSaver.swift in Sources */,
 				2CA34B562B08B6A200DAB623 /* Codable.swift in Sources */,
 				2C9113282B09751D00A8EE80 /* WalletImageView.swift in Sources */,
 				2C3B775F2C3D6DEC000A9B52 /* LocalHtmlView.swift in Sources */,
 				2C9973FE2C4AEAAB00C058E2 /* WebViewWithMenu.swift in Sources */,
-				2C5065FA2C0E10D600D9D01A /* AttestationResponse.swift in Sources */,
 				2CEF35AD2C413AE700388574 /* RawHtmlGenerator.swift in Sources */,
-				2C8EDD032C0CFE3F003CB35D /* Snapshot.swift in Sources */,
 				2CF4C49B2B7F567B000AB4A6 /* Navigator.swift in Sources */,
 				2C3B77612C3D6F82000A9B52 /* LocalHtmlWindow.swift in Sources */,
 				2C1B60D62B7EBD18009949C2 /* AllDownloadsManager.swift in Sources */,
@@ -5733,7 +5714,6 @@
 				2C8C8DE92C3C890B00BC83E9 /* Script.swift in Sources */,
 				2CE33D9A2B865CFB008473E1 /* AvatarService.swift in Sources */,
 				2CA34B5A2B08B7CF00DAB623 /* URL.swift in Sources */,
-				2C8EDD052C0D00EA003CB35D /* FolderSyncService.swift in Sources */,
 				2CF7339E2B0ED50000B1AC68 /* RawNftsApi.swift in Sources */,
 				2CE9A5782C3DAB03009AEAF4 /* GeneratedToken.swift in Sources */,
 				2C60AAD12B8A4DE200F2C143 /* Window.swift in Sources */,
