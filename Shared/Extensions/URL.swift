@@ -7,7 +7,6 @@ extension URL {
     
     static let ipfsScheme = "ipfs://"
     static let arScheme = "ar://"
-    static let deeplinkScheme = "nft-folder://"
     static let ipfsGateway = "https://ipfs.decentralized-content.com/ipfs/"
     
     static let easScanBase = "https://base.easscan.org"

@@ -44,25 +44,15 @@
 		2C0CD5BC2DA3EE2900642A77 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0CD5BB2DA3EE2000642A77 /* Secrets.swift */; };
 		2C0D86C42B08E67000106915 /* WalletsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C32B08E67000106915 /* WalletsService.swift */; };
 		2C0D86C72B08E7BF00106915 /* EnsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D86C62B08E7BF00106915 /* EnsResponse.swift */; };
-		2C1B60B92B7D3245009949C2 /* DirectoryMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60B82B7D3245009949C2 /* DirectoryMonitor.swift */; };
 		2C1B60BD2B7D3505009949C2 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60BC2B7D3505009949C2 /* Strings.swift */; };
-		2C1B60BE2B7D3505009949C2 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60BC2B7D3505009949C2 /* Strings.swift */; };
 		2C1B60C42B7D41D1009949C2 /* HostAppImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60C32B7D41D1009949C2 /* HostAppImages.swift */; };
 		2C1B60C62B7E1145009949C2 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60C52B7E1145009949C2 /* PreferencesView.swift */; };
-		2C1B60C92B7E1DD7009949C2 /* NftGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA979AB2B62BA2400DB3AC8 /* NftGallery.swift */; };
 		2C1B60CB2B7E2481009949C2 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60CA2B7E2481009949C2 /* Images.swift */; };
-		2C1B60CC2B7E2481009949C2 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60CA2B7E2481009949C2 /* Images.swift */; };
-		2C1B60CE2B7E2699009949C2 /* HostAppMessenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60CD2B7E2699009949C2 /* HostAppMessenger.swift */; };
-		2C1B60D02B7E26CB009949C2 /* ExtensionMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60CF2B7E26CB009949C2 /* ExtensionMessage.swift */; };
-		2C1B60D12B7E26D1009949C2 /* ExtensionMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60CF2B7E26CB009949C2 /* ExtensionMessage.swift */; };
 		2C1B60D32B7EA27E009949C2 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60D22B7EA27E009949C2 /* Bundle.swift */; };
-		2C1B60D42B7EA27E009949C2 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60D22B7EA27E009949C2 /* Bundle.swift */; };
 		2C1B60D62B7EBD18009949C2 /* AllDownloadsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B60D52B7EBD18009949C2 /* AllDownloadsManager.swift */; };
 		2C1E2B8E2B877F290035E0CA /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1E2B8D2B877F290035E0CA /* Data.swift */; };
-		2C1E2B8F2B877FF00035E0CA /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1E2B8D2B877F290035E0CA /* Data.swift */; };
 		2C1FD2AB2B88B53F004F42B3 /* ContentRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1FD2AA2B88B53F004F42B3 /* ContentRepresentation.swift */; };
 		2C1FD2AD2B88D2EF004F42B3 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1FD2AC2B88D2EF004F42B3 /* Int.swift */; };
-		2C1FD2AE2B88D2EF004F42B3 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1FD2AC2B88D2EF004F42B3 /* Int.swift */; };
 		2C2329DA2B68367F00001936 /* RightClickServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2329D92B68367F00001936 /* RightClickServiceProvider.swift */; };
 		2C25BFEB2C6D28410084FD7A /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C25BFEA2C6D28410084FD7A /* Platform.swift */; };
 		2C2B5AD12B84E2DA005C38B0 /* DownloadFileTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2B5AD02B84E2DA005C38B0 /* DownloadFileTask.swift */; };
@@ -74,8 +64,6 @@
 		2C3B77612C3D6F82000A9B52 /* LocalHtmlWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3B77602C3D6F82000A9B52 /* LocalHtmlWindow.swift */; };
 		2C3B77632C3D773B000A9B52 /* DesktopWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3B77622C3D773B000A9B52 /* DesktopWebView.swift */; };
 		2C4039ED2B83A4F000DB94D7 /* SharedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4039EC2B83A4F000DB94D7 /* SharedDefaults.swift */; };
-		2C4039EE2B83A4F000DB94D7 /* SharedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4039EC2B83A4F000DB94D7 /* SharedDefaults.swift */; };
-		2C4039EF2B83A59300DB94D7 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B552B08B6A200DAB623 /* Codable.swift */; };
 		2C4039F12B83B11100DB94D7 /* FileSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4039F02B83B11100DB94D7 /* FileSaver.swift */; };
 		2C424F462B9775E6007868F8 /* RightClickActivatingWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C424F452B9775E6007868F8 /* RightClickActivatingWindow.swift */; };
 		2C460ECA2D29855A0083124E /* AutoReloadingWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9442952C5186530078C051 /* AutoReloadingWebView.swift */; };
@@ -107,13 +95,10 @@
 		2C4D31632C56B29000C586D1 /* TvGeneratedTokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4D31622C56B29000C586D1 /* TvGeneratedTokenView.swift */; };
 		2C4D31652C56B65E00C586D1 /* TvHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4D31642C56B65E00C586D1 /* TvHelpers.swift */; };
 		2C4DBFC12C3698D10097AD35 /* Chain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4DBFC02C3698D10097AD35 /* Chain.swift */; };
-		2C4DBFC22C3698D10097AD35 /* Chain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4DBFC02C3698D10097AD35 /* Chain.swift */; };
 		2C4DBFC32C36CD1A0097AD35 /* Chain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4DBFC02C3698D10097AD35 /* Chain.swift */; };
 		2C5065F72C0DFC8700D9D01A /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5065F62C0DFC8700D9D01A /* String.swift */; };
-		2C5065F82C0DFCF500D9D01A /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5065F62C0DFC8700D9D01A /* String.swift */; };
 		2C5065FA2C0E10D600D9D01A /* AttestationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5065F92C0E10D600D9D01A /* AttestationResponse.swift */; };
 		2C508C9D2B6830E6005F548A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
-		2C508C9E2B6830E6005F548A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C508C9C2B6830E6005F548A /* Notification.swift */; };
 		2C5504DE2C106C4400DE145A /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5504DD2C106C4400DE145A /* Alerts.swift */; };
 		2C5695AA2C4195BE003B4335 /* ScriptJsonString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5695A92C4195BE003B4335 /* ScriptJsonString.swift */; };
 		2C5695AC2C4195E1003B4335 /* LibScriptString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5695AB2C4195E1003B4335 /* LibScriptString.swift */; };
@@ -143,7 +128,6 @@
 		2C5A59D32C5153EF00788870 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2CE9A7702BAD8ECD00579BF7 /* Localizable.xcstrings */; };
 		2C60AAD12B8A4DE200F2C143 /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60AAD02B8A4DE200F2C143 /* Window.swift */; };
 		2C622BB92BF3C1EA0003B932 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C622BB82BF3C1EA0003B932 /* main.swift */; };
-		2C6359532D29C07F00E40241 /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6359522D29C07D00E40241 /* Links.swift */; };
 		2C6359542D29C07F00E40241 /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6359522D29C07D00E40241 /* Links.swift */; };
 		2C6359552D29C0E400E40241 /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6359522D29C07D00E40241 /* Links.swift */; };
 		2C6359562D29C5A400E40241 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2CE9A7702BAD8ECD00579BF7 /* Localizable.xcstrings */; };
@@ -187,7 +171,6 @@
 		2C9442922C515AC40078C051 /* RawHtmlGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF35AC2C413AE700388574 /* RawHtmlGenerator.swift */; };
 		2C9442932C517E870078C051 /* PlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8ADAA72C46F3FC008BC560 /* PlayerModel.swift */; };
 		2C98C4AD2BEE9E390040383D /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98C4AC2BEE9E390040383D /* Consts.swift */; };
-		2C98C4AE2BEE9E390040383D /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98C4AC2BEE9E390040383D /* Consts.swift */; };
 		2C9973FE2C4AEAAB00C058E2 /* WebViewWithMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9973FD2C4AEAAB00C058E2 /* WebViewWithMenu.swift */; };
 		2C9974002C4AF12400C058E2 /* PlayerMenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9973FF2C4AF12400C058E2 /* PlayerMenuDelegate.swift */; };
 		2C9C60352C2C5FE8001D9B51 /* SuggestedItemsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C60342C2C5FE8001D9B51 /* SuggestedItemsService.swift */; };
@@ -196,17 +179,11 @@
 		2CA34B512B08B33C00DAB623 /* WatchOnlyWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B502B08B33C00DAB623 /* WatchOnlyWallet.swift */; };
 		2CA34B562B08B6A200DAB623 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B552B08B6A200DAB623 /* Codable.swift */; };
 		2CA34B5A2B08B7CF00DAB623 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B592B08B7CF00DAB623 /* URL.swift */; };
-		2CA34B652B08C01300DAB623 /* FinderSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B642B08C01300DAB623 /* FinderSync.swift */; };
-		2CA34B6A2B08C01300DAB623 /* nft-finder-extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 2CA34B622B08C01300DAB623 /* nft-finder-extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		2CA34B6E2B08C02500DAB623 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B592B08B7CF00DAB623 /* URL.swift */; };
-		2CA34B702B08C02B00DAB623 /* WatchOnlyWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA34B502B08B33C00DAB623 /* WatchOnlyWallet.swift */; };
-		2CA34B732B08C71800DAB623 /* ExtensionAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CA34B722B08C71800DAB623 /* ExtensionAssets.xcassets */; };
 		2CA3C2A12B18C91600AF33D6 /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3C2A02B18C91600AF33D6 /* FileDownloader.swift */; };
 		2CA4CF552B07F75F00CC75F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA4CF542B07F75F00CC75F4 /* AppDelegate.swift */; };
 		2CA4CF592B07F76000CC75F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CA4CF582B07F76000CC75F4 /* Assets.xcassets */; };
 		2CA4CF5C2B07F76000CC75F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CA4CF5A2B07F76000CC75F4 /* Main.storyboard */; };
 		2CA623E72BEE8A0200BD78FF /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA623E62BEE8A0200BD78FF /* UserDefaults.swift */; };
-		2CA623E82BEE8A0200BD78FF /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA623E62BEE8A0200BD78FF /* UserDefaults.swift */; };
 		2CA7EE8A2C1C66D800C7AEB5 /* AI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA7EE892C1C66D800C7AEB5 /* AI.swift */; };
 		2CA7EEA22C1C9E4100C7AEB5 /* MetadataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA7EEA12C1C9E4000C7AEB5 /* MetadataTask.swift */; };
 		2CA7EEA32C1CC18300C7AEB5 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1E2B8D2B877F290035E0CA /* Data.swift */; };
@@ -262,7 +239,6 @@
 		2CE9A5762C3DA9FB009AEAF4 /* TokenGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE9A5752C3DA9FB009AEAF4 /* TokenGenerator.swift */; };
 		2CE9A5782C3DAB03009AEAF4 /* GeneratedToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE9A5772C3DAB03009AEAF4 /* GeneratedToken.swift */; };
 		2CE9A7712BAD8ECD00579BF7 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2CE9A7702BAD8ECD00579BF7 /* Localizable.xcstrings */; };
-		2CE9A7722BAD8ECD00579BF7 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2CE9A7702BAD8ECD00579BF7 /* Localizable.xcstrings */; };
 		2CEF35AD2C413AE700388574 /* RawHtmlGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF35AC2C413AE700388574 /* RawHtmlGenerator.swift */; };
 		2CF08AA92D2A937400D82ACA /* MobileCollectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08AA42D2A937400D82ACA /* MobileCollectionsView.swift */; };
 		2CF08AAA2D2A937400D82ACA /* MobileHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08AA52D2A937400D82ACA /* MobileHelpers.swift */; };
@@ -277,9 +253,7 @@
 		2CF4C49B2B7F567B000AB4A6 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF4C49A2B7F567B000AB4A6 /* Navigator.swift */; };
 		2CF4C49E2B7FB26C000AB4A6 /* DetailedTokenMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF4C49D2B7FB26C000AB4A6 /* DetailedTokenMetadata.swift */; };
 		2CF4C4A02B7FCDDC000AB4A6 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF4C49F2B7FCDDC000AB4A6 /* Defaults.swift */; };
-		2CF524002BB2EC9B00C18344 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A42E92B1A272600BE4166 /* Network.swift */; };
 		2CF524022BB2ECD200C18344 /* CollectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF524012BB2ECD200C18344 /* CollectionInfo.swift */; };
-		2CF524032BB2ECD200C18344 /* CollectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF524012BB2ECD200C18344 /* CollectionInfo.swift */; };
 		2CF7339E2B0ED50000B1AC68 /* RawNftsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7339D2B0ED50000B1AC68 /* RawNftsApi.swift */; };
 		2CFA24712B19F956009B58FD /* DataOrUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFA24702B19F956009B58FD /* DataOrUrl.swift */; };
 		2CFA24732B19FB92009B58FD /* FileExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFA24722B19FB92009B58FD /* FileExtension.swift */; };
@@ -293,13 +267,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 2C6BA80A2D3D2BF50072B001;
 			remoteInfo = "nft-folder-ambient";
-		};
-		2CA34B682B08C01300DAB623 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2CA4CF492B07F75E00CC75F4 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2CA34B612B08C01300DAB623;
-			remoteInfo = "nft-finder-extension";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -338,7 +305,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				2CA34B6A2B08C01300DAB623 /* nft-finder-extension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -354,13 +320,10 @@
 		2C0D86C32B08E67000106915 /* WalletsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsService.swift; sourceTree = "<group>"; };
 		2C0D86C62B08E7BF00106915 /* EnsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnsResponse.swift; sourceTree = "<group>"; };
 		2C17BDC32D3C36FF0015C58B /* PipPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipPlaceholderView.swift; sourceTree = "<group>"; };
-		2C1B60B82B7D3245009949C2 /* DirectoryMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryMonitor.swift; sourceTree = "<group>"; };
 		2C1B60BC2B7D3505009949C2 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		2C1B60C32B7D41D1009949C2 /* HostAppImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostAppImages.swift; sourceTree = "<group>"; };
 		2C1B60C52B7E1145009949C2 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		2C1B60CA2B7E2481009949C2 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
-		2C1B60CD2B7E2699009949C2 /* HostAppMessenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostAppMessenger.swift; sourceTree = "<group>"; };
-		2C1B60CF2B7E26CB009949C2 /* ExtensionMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionMessage.swift; sourceTree = "<group>"; };
 		2C1B60D22B7EA27E009949C2 /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		2C1B60D52B7EBD18009949C2 /* AllDownloadsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllDownloadsManager.swift; sourceTree = "<group>"; };
 		2C1E2B8D2B877F290035E0CA /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -822,11 +785,6 @@
 		2CA34B502B08B33C00DAB623 /* WatchOnlyWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchOnlyWallet.swift; sourceTree = "<group>"; };
 		2CA34B552B08B6A200DAB623 /* Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
 		2CA34B592B08B7CF00DAB623 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
-		2CA34B622B08C01300DAB623 /* nft-finder-extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "nft-finder-extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2CA34B642B08C01300DAB623 /* FinderSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderSync.swift; sourceTree = "<group>"; };
-		2CA34B662B08C01300DAB623 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2CA34B672B08C01300DAB623 /* nft_finder_extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = nft_finder_extension.entitlements; sourceTree = "<group>"; };
-		2CA34B722B08C71800DAB623 /* ExtensionAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ExtensionAssets.xcassets; sourceTree = "<group>"; };
 		2CA34B742B08CA8200DAB623 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2CA3C2A02B18C91600AF33D6 /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
 		2CA4CF512B07F75F00CC75F4 /* Nft Folder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nft Folder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2020,13 +1978,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2CA34B5F2B08C01300DAB623 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		2CA4CF4E2B07F75E00CC75F4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -2054,7 +2005,6 @@
 				2CF524012BB2ECD200C18344 /* CollectionInfo.swift */,
 				2C1B60CA2B7E2481009949C2 /* Images.swift */,
 				2C1B60BC2B7D3505009949C2 /* Strings.swift */,
-				2C1B60CF2B7E26CB009949C2 /* ExtensionMessage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2991,19 +2941,6 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		2CA34B632B08C01300DAB623 /* nft-finder-extension */ = {
-			isa = PBXGroup;
-			children = (
-				2CA34B642B08C01300DAB623 /* FinderSync.swift */,
-				2C1B60CD2B7E2699009949C2 /* HostAppMessenger.swift */,
-				2C1B60B82B7D3245009949C2 /* DirectoryMonitor.swift */,
-				2CA34B722B08C71800DAB623 /* ExtensionAssets.xcassets */,
-				2CA34B672B08C01300DAB623 /* nft_finder_extension.entitlements */,
-				2CA34B662B08C01300DAB623 /* Info.plist */,
-			);
-			path = "nft-finder-extension";
-			sourceTree = "<group>";
-		};
 		2CA4CF482B07F75E00CC75F4 = {
 			isa = PBXGroup;
 			children = (
@@ -3016,7 +2953,6 @@
 				2C9113262B093EE800A8EE80 /* Helpers */,
 				2C91131C2B08FCDF00A8EE80 /* Views */,
 				2CA34B4F2B08B32600DAB623 /* Shared */,
-				2CA34B632B08C01300DAB623 /* nft-finder-extension */,
 				2C9C60332C2C34D4001D9B51 /* Suggested Items */,
 				2CA7EE8C2C1C746900C7AEB5 /* app_store */,
 				2C46599A2C308F86008CF97F /* tools */,
@@ -3035,7 +2971,6 @@
 			isa = PBXGroup;
 			children = (
 				2CA4CF512B07F75F00CC75F4 /* Nft Folder.app */,
-				2CA34B622B08C01300DAB623 /* nft-finder-extension.appex */,
 				2C622BB62BF3C1EA0003B932 /* translate */,
 				2C4659992C308F86008CF97F /* tools */,
 				2CBC42352C41772E00279CED /* nft-screen-saver.saver */,
@@ -5292,23 +5227,6 @@
 			productReference = 2C6BA80B2D3D2BF50072B001 /* nft-folder-ambient.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2CA34B612B08C01300DAB623 /* nft-finder-extension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2CA34B6B2B08C01300DAB623 /* Build configuration list for PBXNativeTarget "nft-finder-extension" */;
-			buildPhases = (
-				2CA34B5E2B08C01300DAB623 /* Sources */,
-				2CA34B5F2B08C01300DAB623 /* Frameworks */,
-				2CA34B602B08C01300DAB623 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "nft-finder-extension";
-			productName = "nft-finder-extension";
-			productReference = 2CA34B622B08C01300DAB623 /* nft-finder-extension.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		2CA4CF502B07F75E00CC75F4 /* nft folder */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2CA4CF602B07F76000CC75F4 /* Build configuration list for PBXNativeTarget "nft folder" */;
@@ -5325,7 +5243,6 @@
 			);
 			dependencies = (
 				2C6BA8282D3D2D730072B001 /* PBXTargetDependency */,
-				2CA34B692B08C01300DAB623 /* PBXTargetDependency */,
 			);
 			name = "nft folder";
 			packageProductDependencies = (
@@ -5360,7 +5277,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1620;
-				LastUpgradeCheck = 1610;
+				LastUpgradeCheck = 1630;
 				TargetAttributes = {
 					2C2CB47B2D29545F00042E74 = {
 						CreatedOnToolsVersion = 16.2;
@@ -5380,9 +5297,6 @@
 					2C6BA80A2D3D2BF50072B001 = {
 						CreatedOnToolsVersion = 16.2;
 						LastSwiftMigration = 1620;
-					};
-					2CA34B612B08C01300DAB623 = {
-						CreatedOnToolsVersion = 15.0.1;
 					};
 					2CA4CF502B07F75E00CC75F4 = {
 						CreatedOnToolsVersion = 15.0.1;
@@ -5446,7 +5360,6 @@
 				2C5A59962C51073F00788870 /* nft-folder-vision */,
 				2C5A59AD2C51400100788870 /* nft-folder-tvos */,
 				2C2CB47B2D29545F00042E74 /* nft-folder-ios */,
-				2CA34B612B08C01300DAB623 /* nft-finder-extension */,
 				2CBC42342C41772E00279CED /* nft-screen-saver */,
 				2C622BB52BF3C1EA0003B932 /* translate */,
 				2C4659982C308F86008CF97F /* tools */,
@@ -5528,15 +5441,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2CA34B602B08C01300DAB623 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2CE9A7722BAD8ECD00579BF7 /* Localizable.xcstrings in Resources */,
-				2CA34B732B08C71800DAB623 /* ExtensionAssets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		2CA4CF4F2B07F75E00CC75F4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -5596,7 +5500,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/System/Library/CoreServices/pbs -flush\nkillall nft-folder\nkillall nft-finder-extension\nkillall nft-quick-look\nkillall Finder\n";
+			shellScript = "/System/Library/CoreServices/pbs -flush\nkillall nft-folder\nkillall nft-quick-look\nkillall Finder\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -5763,40 +5667,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2CA34B5E2B08C01300DAB623 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2CA34B652B08C01300DAB623 /* FinderSync.swift in Sources */,
-				2C98C4AE2BEE9E390040383D /* Consts.swift in Sources */,
-				2C5065F82C0DFCF500D9D01A /* String.swift in Sources */,
-				2C1E2B8F2B877FF00035E0CA /* Data.swift in Sources */,
-				2C1B60BE2B7D3505009949C2 /* Strings.swift in Sources */,
-				2C1B60CC2B7E2481009949C2 /* Images.swift in Sources */,
-				2C1B60D02B7E26CB009949C2 /* ExtensionMessage.swift in Sources */,
-				2C4039EF2B83A59300DB94D7 /* Codable.swift in Sources */,
-				2C508C9E2B6830E6005F548A /* Notification.swift in Sources */,
-				2C4DBFC22C3698D10097AD35 /* Chain.swift in Sources */,
-				2CA34B6E2B08C02500DAB623 /* URL.swift in Sources */,
-				2CA34B702B08C02B00DAB623 /* WatchOnlyWallet.swift in Sources */,
-				2CF524032BB2ECD200C18344 /* CollectionInfo.swift in Sources */,
-				2C1B60B92B7D3245009949C2 /* DirectoryMonitor.swift in Sources */,
-				2CF524002BB2EC9B00C18344 /* Network.swift in Sources */,
-				2C1B60C92B7E1DD7009949C2 /* NftGallery.swift in Sources */,
-				2CA623E82BEE8A0200BD78FF /* UserDefaults.swift in Sources */,
-				2C6359532D29C07F00E40241 /* Links.swift in Sources */,
-				2C1B60CE2B7E2699009949C2 /* HostAppMessenger.swift in Sources */,
-				2C1B60D42B7EA27E009949C2 /* Bundle.swift in Sources */,
-				2C4039EE2B83A4F000DB94D7 /* SharedDefaults.swift in Sources */,
-				2C1FD2AE2B88D2EF004F42B3 /* Int.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		2CA4CF4D2B07F75E00CC75F4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C1B60D12B7E26D1009949C2 /* ExtensionMessage.swift in Sources */,
 				2CD4FC8A2B684A0900C965F6 /* IpfsResponse.swift in Sources */,
 				2C2329DA2B68367F00001936 /* RightClickServiceProvider.swift in Sources */,
 				2CA979AA2B627B3900DB3AC8 /* MinimalTokenMetadata.swift in Sources */,
@@ -5893,11 +5767,6 @@
 			isa = PBXTargetDependency;
 			target = 2C6BA80A2D3D2BF50072B001 /* nft-folder-ambient */;
 			targetProxy = 2C6BA8272D3D2D730072B001 /* PBXContainerItemProxy */;
-		};
-		2CA34B692B08C01300DAB623 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2CA34B612B08C01300DAB623 /* nft-finder-extension */;
-			targetProxy = 2CA34B682B08C01300DAB623 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -6246,70 +6115,6 @@
 			};
 			name = Release;
 		};
-		2CA34B6C2B08C01300DAB623 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "nft-finder-extension/nft_finder_extension.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 182;
-				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 8DXC3N7E7P;
-				ENABLE_HARDENED_RUNTIME = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "nft-finder-extension/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Nft Finder Extension";
-				INFOPLIST_KEY_LSUIElement = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@executable_path/../../../../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.0.59;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder.nft-finder-extension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		2CA34B6D2B08C01300DAB623 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "nft-finder-extension/nft_finder_extension.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 182;
-				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 8DXC3N7E7P;
-				ENABLE_HARDENED_RUNTIME = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "nft-finder-extension/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Nft Finder Extension";
-				INFOPLIST_KEY_LSUIElement = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@executable_path/../../../../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.0.59;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder.nft-finder-extension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
 		2CA4CF5E2B07F76000CC75F4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -6449,6 +6254,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "nft-folder/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Nft Folder";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
@@ -6462,6 +6268,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder";
 				PRODUCT_NAME = "Nft Folder";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				REGISTER_APP_GROUPS = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -6484,6 +6291,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "nft-folder/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Nft Folder";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
@@ -6497,6 +6305,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.lil.nft-folder";
 				PRODUCT_NAME = "Nft Folder";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				REGISTER_APP_GROUPS = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -6610,15 +6419,6 @@
 			buildConfigurations = (
 				2C6BA8172D3D2BF60072B001 /* Debug */,
 				2C6BA8182D3D2BF60072B001 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		2CA34B6B2B08C01300DAB623 /* Build configuration list for PBXNativeTarget "nft-finder-extension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2CA34B6C2B08C01300DAB623 /* Debug */,
-				2CA34B6D2B08C01300DAB623 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
