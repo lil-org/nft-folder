@@ -29,7 +29,15 @@ struct MobileCollectionsView: View {
                     }
                 }
                 .navigationBarTitleDisplayMode(.inline)
-                .navigationTitle(Consts.noggles)
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        Images.eyes
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 21)
+                            .opacity(0.73)
+                    }
+                }
                 .toolbar {
                     Menu {
                         Text(Strings.sendFeedback)
