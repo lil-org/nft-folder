@@ -34,8 +34,8 @@ struct MobileCollectionsView: View {
                         Images.eyes
                             .resizable()
                             .scaledToFit()
-                            .frame(height: 21)
-                            .opacity(0.73)
+                            .frame(height: 20)
+                            .opacity(0.777)
                     }
                 }
                 .toolbar {
