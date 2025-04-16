@@ -6,6 +6,5 @@ struct Consts {
     
     static let playerFrameAutosaveName = "local html player"
     static let controlCenterFrameAutosaveName = "control center"
-    static let noggles = "⌐◨-◨"
     
 }
