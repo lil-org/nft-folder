@@ -13,10 +13,10 @@
 			<key>NSMenuItem</key>
 			<dict>
 				<key>default</key>
-				<string>⊕ Open on Zora</string>
+				<string>⛵︎ View on OpenSea</string>
 			</dict>
 			<key>NSMessage</key>
-			<string>rightClickMint</string>
+			<string>rightClickNftFile</string>
 			<key>NSRequiredContext</key>
 			<dict>
 				<key>NSApplicationIdentifier</key>

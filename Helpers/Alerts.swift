@@ -22,8 +22,12 @@ struct Alerts {
     }
     
     static func showSomethingWentWrong() {
+        showMessageAlert(Strings.somethingWentWrong)
+    }
+    
+    static func showMessageAlert(_ text: String) {
         let alert = NSAlert()
-        alert.messageText = Strings.somethingWentWrong
+        alert.messageText = text
         alert.alertStyle = .warning
         _ = alert.runModal()
     }

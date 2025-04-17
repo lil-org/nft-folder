@@ -27,6 +27,7 @@ struct Strings {
     static let retry = loc("Retry")
     static let nftFolder = loc("Nft Folder")
     static let somethingWentWrong = loc("Something went wrong")
+    static let thisWorksForFilesInsideNftFolder = loc("This works for files inside the nft folder")
     static let maxFileSize50mb = loc("Max file size 50 MB")
     static let downloadGlb = loc("Download .glb files")
     static let hideFromHere = loc("Hide")
