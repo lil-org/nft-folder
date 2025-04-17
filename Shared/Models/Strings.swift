@@ -29,7 +29,6 @@ struct Strings {
     static let somethingWentWrong = loc("Something went wrong")
     static let thisWorksForFilesInsideNftFolder = loc("This works for files inside the nft folder")
     static let maxFileSize50mb = loc("Max file size 50 MB")
-    static let downloadGlb = loc("Download .glb files")
     static let hideFromHere = loc("Hide")
     static let downloadVideo = loc("Download video")
     static let downloadAudio = loc("Download audio")

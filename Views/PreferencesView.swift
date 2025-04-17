@@ -5,7 +5,6 @@ import SwiftUI
 struct PreferencesView: View {
     
     @State private var maxFileSizeLimitPreference = !Defaults.unlimitedFileSize
-    @State private var glbPreference = Defaults.downloadGlb
     @State private var videoPreference = Defaults.downloadVideo
     @State private var audioPreference = Defaults.downloadAudio
     @State private var hasHiddenSuggestedItems = !Defaults.suggestedItemsToHide.isEmpty
@@ -26,19 +25,13 @@ struct PreferencesView: View {
             VStack {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color(NSColor.windowBackgroundColor))
-                    .frame(height: 130)
+                    .frame(height: 100)
                     .overlay(
                         VStack(alignment: .leading) {
                             Toggle(isOn: $maxFileSizeLimitPreference) {
                                 Text(Strings.maxFileSize50mb)
                             }.onChange(of: maxFileSizeLimitPreference) { _, newValue in
                                 Defaults.unlimitedFileSize = !newValue
-                            }
-                            
-                            Toggle(isOn: $glbPreference) {
-                                Text(Strings.downloadGlb)
-                            }.onChange(of: glbPreference) { _, newValue in
-                                Defaults.downloadGlb = newValue
                             }
                             
                             Toggle(isOn: $videoPreference) {

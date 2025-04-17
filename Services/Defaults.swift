@@ -15,7 +15,7 @@ struct Defaults {
     
     static func performCleanup(version: Int) {
         if version < 1 {
-            userDefaults.keepOnly(keys: ["cleanupVersion", "unlimitedFileSize", "downloadGlb"])
+            userDefaults.keepOnly(keys: ["cleanupVersion", "unlimitedFileSize"])
         }
     }
     
@@ -63,15 +63,6 @@ struct Defaults {
         }
         set {
             userDefaults.set(newValue, forKey: "unlimitedFileSize")
-        }
-    }
-    
-    static var downloadGlb: Bool {
-        get {
-            userDefaults.bool(forKey: "downloadGlb")
-        }
-        set {
-            userDefaults.set(newValue, forKey: "downloadGlb")
         }
     }
     

@@ -87,7 +87,7 @@ struct DownloadFileTask {
                 case .html:
                     return nil
                 case .glb:
-                    return Defaults.downloadGlb ? content.dataOrUrl : nil
+                    return nil
                 }
             }
         }
