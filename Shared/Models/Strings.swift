@@ -3,11 +3,7 @@
 import Foundation
 
 struct Strings {
-    
-    static let toolbarItemToolTip = loc("Click for NFT menu")
-    static let toolbarItemName = loc("NFT")
-    static let syncMenuItem = loc("Sync NFTs")
-    static let controlCenterMenuItem = loc("Control Center") + "..."
+        
     static let newFolder = loc("New Folder")
     static let removeFolder = loc("Remove Folder")
     static let hardReset = loc("Hard Reset")
@@ -23,7 +19,6 @@ struct Strings {
     static let pause = loc("Pause")
     static let stopAllDownloads = loc("Stop Downloads")
     static let newFolderMenuItem = newFolder
-    static let didNotUpload = loc("Did not upload")
     static let retry = loc("Retry")
     static let nftFolder = loc("Nft Folder")
     static let somethingWentWrong = loc("Something went wrong")
@@ -53,7 +48,7 @@ struct Strings {
     static let navigate = loc("Navigate")
     static let toggleInfo = loc("Toggle Info")
 
-    static let pip = "PiP"
+    static let pip = loc("Picture in Picture")
     static let x = "𝕏"
     static let warpcast = "Farcaster"
     static let github = "GitHub"
