@@ -49,6 +49,7 @@ struct Strings {
     static let toggleInfo = loc("Toggle Info")
 
     static let pip = loc("Picture in Picture")
+    static let airplay = "AirPlay"
     static let x = "𝕏"
     static let warpcast = "Farcaster"
     static let github = "GitHub"

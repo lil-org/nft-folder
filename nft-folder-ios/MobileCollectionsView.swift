@@ -39,6 +39,11 @@ struct MobileCollectionsView: View {
                     }
                 }
                 .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        AirPlayPicker()
+                    }
+                }
+                .toolbar {
                     Menu {
                         Text(Strings.sendFeedback)
                         Button(Strings.warpcast) { UIApplication.shared.open(URL.warpcast) }
@@ -146,6 +151,7 @@ struct MobileCollectionsView: View {
             }
         }
     }
+    
     private func didSelectPip(_ item: SuggestedItem) {
         let token = TokenGenerator.generateRandomToken(specificCollectionId: item.id, notTokenId: nil)
         NotificationCenter.default.post(name: Notification.Name.togglePip, object: token)
