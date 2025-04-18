@@ -54,11 +54,3 @@ class ExternalSceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
 }
-
-struct ExternalDisplayView: View {
-    
-    var body: some View {
-        Text(Strings.lilOrgLinkWithEmojis).font(.largeTitle).padding()
-    }
-    
-}
