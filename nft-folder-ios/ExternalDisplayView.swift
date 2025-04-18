@@ -1,28 +1,64 @@
 // ∅ 2025 lil org
 
-import SwiftUI
+import UIKit
+import WebKit
+
+fileprivate weak var currentDisplay: ExternalDisplayViewController?
 
 func updateExternalDisplayToken(_ token: GeneratedToken) {
-    ExternalDisplayManager.shared.currentToken = token
+    currentDisplay?.renderToken(token)
 }
 
-struct ExternalDisplayView: View {
+class ExternalDisplayViewController: UIViewController {
     
-    @ObservedObject private var externalDisplayManager = ExternalDisplayManager.shared
+    private var webView: WKWebView!
+    private var currentToken = GeneratedToken.empty
+    private var renderedTokenId = ""
+    private var willOrDidAppear = false
     
-    var body: some View {
-        VStack {
-            Text(Strings.lilOrgLinkWithEmojis).font(.largeTitle).padding()
-            Text(externalDisplayManager.currentToken.displayName).font(.headline).padding()
-        }
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        currentDisplay = self
+        renderCurrentItem()
     }
     
-}
-
-private class ExternalDisplayManager: ObservableObject {
+    required init?(coder: NSCoder) {
+        fatalError("yo")
+    }
     
-    static let shared = ExternalDisplayManager()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        willOrDidAppear = true
+        renderCurrentItem()
+    }
     
-    @Published var currentToken = GeneratedToken.empty
+    fileprivate func renderToken(_ token: GeneratedToken) {
+        currentToken = token
+        renderCurrentItem()
+    }
+    
+    private func renderCurrentItem() {
+        guard willOrDidAppear else { return }
+        
+        if webView == nil {
+            webView = AutoReloadingWebView.new
+            webView.isUserInteractionEnabled = false
+            webView.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(webView)
+            NSLayoutConstraint.activate([
+                webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                webView.topAnchor.constraint(equalTo: view.topAnchor),
+                webView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
+        }
+        
+        if currentToken.id == renderedTokenId {
+            return
+        } else {
+            renderedTokenId = currentToken.id
+            webView.loadHTMLString(currentToken.html, baseURL: nil)
+        }
+    }
     
 }

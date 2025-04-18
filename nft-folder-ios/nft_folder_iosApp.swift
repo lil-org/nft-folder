@@ -48,7 +48,7 @@ class ExternalSceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let ws = scene as? UIWindowScene else { return }
         let win = UIWindow(windowScene: ws)
-        win.rootViewController = UIHostingController(rootView: ExternalDisplayView())
+        win.rootViewController = ExternalDisplayViewController()
         win.isHidden = false
         window = win
     }
