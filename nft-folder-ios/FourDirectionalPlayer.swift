@@ -79,6 +79,7 @@ class FourDirectionalPlayerContainer: UIViewController, FourDirectionalPlayerDat
     }
     
     fileprivate func didRenderCoordinate(_ coordinate: (Int, Int)) {
+        guard renderedCoordinates.count < 2 else { return }
         renderedCoordinates.insert(PlayerCoordinate(x: coordinate.0, y: coordinate.1))
         didUpdateRenderedCoordinates()
     }

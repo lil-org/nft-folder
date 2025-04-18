@@ -37,8 +37,12 @@ struct MobilePlayerView: View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
             FourDirectionalPlayerContainerView(initialConfig: initialConfig, onCoordinateUpdate: { newCoordinate in
-                currentCoordinate = newCoordinate
-                currentToken = MobilePlaybackController.shared.getToken(uuid: initialConfig.id, coordinate: newCoordinate)
+                DispatchQueue.main.async {
+                    self.currentCoordinate = newCoordinate
+                    self.currentToken = MobilePlaybackController.shared.getToken(uuid: initialConfig.id, coordinate: newCoordinate)
+                    updateExternalDisplayToken(currentToken)
+                }
+                
             }).edgesIgnoringSafeArea(.all)
                 .onTapGesture {
                     showControls.toggle()
@@ -53,6 +57,7 @@ struct MobilePlayerView: View {
                     HStack {
                         Button(action: {
                             dismiss()
+                            updateExternalDisplayToken(GeneratedToken.empty)
                         }) {
                             makeCircularImageView(image: Images.close)
                         }
