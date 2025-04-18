@@ -9,6 +9,12 @@ struct Images {
     static let preferences = Image(systemName: "gearshape")
     static let play = Image(systemName: "play")
     
+    static let appIcon: UIImage? = {
+        let icons = (Bundle.main.infoDictionary?["CFBundleIcons"] as? [String: Any])?["CFBundlePrimaryIcon"] as? [String: Any]
+        let iconFiles = icons?["CFBundleIconFiles"] as? [String]
+        return UIImage(named: iconFiles?.last ?? "AppIcon")
+    }()
+    
 }
 
 extension Notification.Name {

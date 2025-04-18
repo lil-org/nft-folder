@@ -46,9 +46,7 @@ class ExternalDisplayViewController: UIViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 27
-        let icons = (Bundle.main.infoDictionary?["CFBundleIcons"] as? [String: Any])?["CFBundlePrimaryIcon"] as? [String: Any]
-        let iconFiles = icons?["CFBundleIconFiles"] as? [String]
-        imageView.image = UIImage(named: iconFiles?.last ?? "AppIcon")
+        imageView.image = Images.appIcon
         let label = UILabel()
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
