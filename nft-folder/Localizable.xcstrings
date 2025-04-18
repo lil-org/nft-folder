@@ -6062,6 +6062,22 @@
         }
       }
     },
+    "Select something in the app." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select something in the app."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выберите что-нибудь в приложении."
+          }
+        }
+      }
+    },
     "Send Feedback" : {
       "comment" : "11868261920640278234",
       "localizations" : {

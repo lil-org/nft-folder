@@ -50,7 +50,7 @@ class ExternalDisplayViewController: UIViewController {
         let label = UILabel()
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Select something in the app."
+        label.text = Strings.selectSomethingInTheApp
         label.font = .preferredFont(forTextStyle: .largeTitle)
         label.textAlignment = .center
         label.numberOfLines = 1
