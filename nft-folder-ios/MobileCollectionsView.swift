@@ -39,11 +39,6 @@ struct MobileCollectionsView: View {
                     }
                 }
                 .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
-                        AirPlayPicker()
-                    }
-                }
-                .toolbar {
                     Menu {
                         Text(Strings.sendFeedback)
                         Button(Strings.warpcast) { UIApplication.shared.open(URL.warpcast) }
