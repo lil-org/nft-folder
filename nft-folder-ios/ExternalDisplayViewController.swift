@@ -4,15 +4,16 @@ import UIKit
 import WebKit
 
 fileprivate weak var currentDisplay: ExternalDisplayViewController?
+fileprivate var currentToken = GeneratedToken.empty
 
 func updateExternalDisplayToken(_ token: GeneratedToken) {
-    currentDisplay?.renderToken(token)
+    currentToken = token
+    currentDisplay?.renderCurrentItem()
 }
 
 class ExternalDisplayViewController: UIViewController {
     
     private var webView: WKWebView!
-    private var currentToken = GeneratedToken.empty
     private var renderedTokenId = ""
     private var willOrDidAppear = false
     
@@ -37,7 +38,7 @@ class ExternalDisplayViewController: UIViewController {
         renderCurrentItem()
     }
     
-    private func renderCurrentItem() {
+    fileprivate func renderCurrentItem() {
         guard willOrDidAppear else { return }
         
         if webView == nil {
