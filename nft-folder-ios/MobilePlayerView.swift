@@ -14,6 +14,7 @@ struct MobilePlayerView: View {
     
     private let initialConfig: MobilePlayerConfig
     private let dismiss: () -> Void
+    private let buttonShapesEnabled = UIAccessibility.buttonShapesEnabled
     
     @State private var showControls = false
     @State private var isAllowedToHideStatusBar = false
@@ -79,7 +80,7 @@ struct MobilePlayerView: View {
                 
                 VStack {
                     Spacer()
-                    HStack(spacing: 20) {
+                    HStack(spacing: buttonShapesEnabled ? nil : 20) {
                         Button(action: {
                             goUp()
                         }) {
