@@ -27,9 +27,7 @@ struct MetadataTask: AI.Task {
             
             if it does not fit, rewrite it to make sure it fits 30 symbols.
             
-            find a way to communicate the same meaning while fitting in 30 chars.
-            
-            make sure to keep "Curated digital art" / "Избранное цифровое искусство" meaning. do not say "HD".
+            find a way to communicate the same meaning while fitting in 30 chars. do not say "HD".
             """
         default:
             finalWarning = ""
