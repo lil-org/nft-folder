@@ -23,7 +23,7 @@ struct VisionCollectionsView: View {
                 Spacer()
                 Menu {
                     Text(Strings.sendFeedback)
-                    Button(Strings.warpcast, action: { UIApplication.shared.open(URL.warpcast) })
+                    Button(Strings.farcaster, action: { UIApplication.shared.open(URL.farcaster) })
                     Button(Strings.github, action: { UIApplication.shared.open(URL.github) })
                     Button(Strings.mail, action: { UIApplication.shared.open(URL.mail) })
                     Button(Strings.x, action: { UIApplication.shared.open(URL.x) })

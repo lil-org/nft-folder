@@ -52,7 +52,7 @@ struct Strings {
     static let pip = loc("Picture in Picture")
     static let airplay = "AirPlay"
     static let x = "𝕏"
-    static let warpcast = "Farcaster"
+    static let farcaster = "Farcaster"
     static let github = "GitHub"
     static let zora = "Zora"
     static let blockExplorer = "Blockscout"
