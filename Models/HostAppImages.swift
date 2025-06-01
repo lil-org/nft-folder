@@ -9,7 +9,6 @@ extension Images {
     static let shuffle = Image(systemName: "shuffle")
     static let gearshape = Image(systemName: "gearshape")
     static let extend = Image(systemName: "arrow.down.backward.and.arrow.up.forward.circle.fill")
-    static let logo = Image("folderLogo")
     static let pause = Image(systemName: "pause.fill")
     static let sync = Image(systemName: "arrow.clockwise")
     static let ellipsis = Image(systemName: "ellipsis")

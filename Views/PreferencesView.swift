@@ -14,14 +14,10 @@ struct PreferencesView: View {
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
             HStack {
-                Images.logo
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 20, height: 20)
                 Text(Strings.nftFolder)
-                    .font(.system(size: 20))
+                    .font(.system(size: 20, weight: .semibold))
             }.padding(.top, 4)
-               
+            
             VStack {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color(NSColor.windowBackgroundColor))
@@ -46,7 +42,7 @@ struct PreferencesView: View {
                                 Defaults.downloadAudio = newValue
                             }
                         }
-                        .padding()
+                            .padding()
                     )
                     .padding(.horizontal).padding(.top)
             }
