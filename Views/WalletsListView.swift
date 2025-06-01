@@ -39,7 +39,7 @@ struct WalletsListView: View {
                 }.background(Color(nsColor: .controlBackgroundColor))
                     .toolbar {
                         ToolbarItemGroup(placement: .principal) {
-                            Images.eyes.resizable().scaledToFit().frame(height: 16).opacity(0.69)
+                            
                         }
                         
                         ToolbarItemGroup() {

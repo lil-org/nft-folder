@@ -16,13 +16,7 @@ struct TvCollectionsView: View {
                 createGrid()
             }
             .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Images.eyes
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 32)
-                        .opacity(0.69)
-                }
+                ToolbarItem(placement: .principal) {}
             }
             .navigationBarItems(trailing: HStack {
                 Button(action: {

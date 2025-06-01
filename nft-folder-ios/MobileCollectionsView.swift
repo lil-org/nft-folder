@@ -30,13 +30,7 @@ struct MobileCollectionsView: View {
                 }
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        Images.eyes
-                            .resizable()
-                            .scaledToFit()
-                            .frame(height: 20)
-                            .opacity(0.777)
-                    }
+                    ToolbarItem(placement: .principal) {}
                 }
                 .toolbar {
                     Menu {

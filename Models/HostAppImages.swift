@@ -23,6 +23,5 @@ extension Images {
     static let canGenerateIndicator = Image(systemName: "play.circle.fill")
     static let pip = Image(systemName: "pip")
     static let airplay = Image(systemName: "airplay.video")
-    static let eyes = Image("eyes")
     
 }
