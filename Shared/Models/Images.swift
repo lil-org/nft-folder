@@ -4,7 +4,6 @@ import Cocoa
 
 struct Images {
     
-    static var icon: NSImage { named("icon") }
     static var folder: NSImage { named("folder") }
     static var zora: NSImage { named("zora") }
     static var mintfun: NSImage { named("mintfun") }
