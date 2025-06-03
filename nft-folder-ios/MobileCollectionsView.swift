@@ -117,7 +117,7 @@ struct MobileCollectionsView: View {
     private func gridItemText(_ text: String, onTap: @escaping () -> Void) -> some View {
         HStack {
             Text(text)
-                .font(.system(size: 10, weight: .regular))
+                .font(.system(size: 9, weight: .regular))
                 .lineLimit(2)
                 .foregroundColor(.white)
                 .padding(.horizontal, 1)
