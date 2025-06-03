@@ -77,6 +77,7 @@ class PipPlaceholderView: UIView {
             }
         } else {
             togglePip()
+            
         }
     }
     

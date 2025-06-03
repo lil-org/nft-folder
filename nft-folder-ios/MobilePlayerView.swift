@@ -107,6 +107,7 @@ struct MobilePlayerView: View {
                         .keyboardShortcut(.downArrow, modifiers: [])
                         Button(action: {
                             startPip()
+                            Haptic.selectionChanged()
                         }) {
                             makeCircularImageView(image: Images.pip)
                         }

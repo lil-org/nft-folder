@@ -33,21 +33,32 @@ struct MobileCollectionsView: View {
                     ToolbarItem(placement: .principal) {}
                 }
                 .toolbar {
-                    Menu {
-                        Text(Strings.sendFeedback)
-                        Button(Strings.farcaster) { UIApplication.shared.open(URL.farcaster) }
-                        Button(Strings.github) { UIApplication.shared.open(URL.github) }
-                        Button(Strings.mail) { UIApplication.shared.open(URL.mail) }
-                        Button(Strings.x) { UIApplication.shared.open(URL.x) }
-                        Divider()
-                        Button(Strings.rateOnTheAppStore) { UIApplication.shared.open(URL.writeAppStoreReview) }
-                        Divider()
-                        Button(Strings.changeAppIcon) { didClickToggleAppIcon() }
-                    } label: {
-                        Images.preferences
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Menu {
+                            Text(Strings.sendFeedback)
+                            Button(Strings.farcaster) { UIApplication.shared.open(URL.farcaster) }
+                            Button(Strings.github) { UIApplication.shared.open(URL.github) }
+                            Button(Strings.mail) { UIApplication.shared.open(URL.mail) }
+                            Button(Strings.x) { UIApplication.shared.open(URL.x) }
+                            Divider()
+                            Button(Strings.rateOnTheAppStore) { UIApplication.shared.open(URL.writeAppStoreReview) }
+                            Divider()
+                            Button(Strings.changeAppIcon) { didClickToggleAppIcon() }
+                        } label: {
+                            Images.preferences
+                        }
                     }
-                    Button { showRandomPlayer() } label: {
-                        Images.shuffle
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        HStack {
+                            Button { showRandomPip() } label: {
+                                Images.pip
+                            }
+                            
+                            Button { showRandomPlayer() } label: {
+                                Images.shuffle
+                            }
+                        }
+                        
                     }
                 }
             }
@@ -144,6 +155,7 @@ struct MobileCollectionsView: View {
     private func didSelectPip(_ item: SuggestedItem) {
         let token = TokenGenerator.generateRandomToken(specificCollectionId: item.id, notTokenId: nil)
         NotificationCenter.default.post(name: Notification.Name.togglePip, object: token)
+        Haptic.selectionChanged()
     }
     
     private func didSelectSuggestedItem(_ item: SuggestedItem) {
@@ -153,6 +165,12 @@ struct MobileCollectionsView: View {
     
     private func showRandomPlayer() {
         selectedConfig = MobilePlayerConfig(initialItemId: nil)
+        Haptic.selectionChanged()
+    }
+    
+    private func showRandomPip() {
+        let token = TokenGenerator.generateRandomToken(specificCollectionId: nil, notTokenId: nil)
+        NotificationCenter.default.post(name: Notification.Name.togglePip, object: token)
         Haptic.selectionChanged()
     }
 }
