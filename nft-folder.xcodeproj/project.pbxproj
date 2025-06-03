@@ -5488,7 +5488,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/System/Library/CoreServices/pbs -flush\nkillall nft-folder\nkillall nft-quick-look\nkillall Finder\n";
+			shellScript = "/System/Library/CoreServices/pbs -flush\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
