@@ -13,25 +13,20 @@ struct FourDirectionalPlayerContainerView: UIViewControllerRepresentable {
 
     private let initialConfig: MobilePlayerConfig
     private let onCoordinateUpdate: ((PlayerCoordinate) -> Void)
-    private let isHorizontalPagingEnabled: Bool
 
     init(
         initialConfig: MobilePlayerConfig,
-        onCoordinateUpdate: @escaping (PlayerCoordinate) -> Void,
-        isHorizontalPagingEnabled: Bool
+        onCoordinateUpdate: @escaping (PlayerCoordinate) -> Void
     ) {
         self.initialConfig = initialConfig
         self.onCoordinateUpdate = onCoordinateUpdate
-        self.isHorizontalPagingEnabled = isHorizontalPagingEnabled
     }
 
     func makeUIViewController(context: Context) -> FourDirectionalPlayerContainer {
         return FourDirectionalPlayerContainer(initialConfig: initialConfig, onCoordinateUpdate: onCoordinateUpdate)
     }
 
-    func updateUIViewController(_ uiViewController: FourDirectionalPlayerContainer, context: Context) {
-        uiViewController.setHorizontalPagingEnabled(isHorizontalPagingEnabled)
-    }
+    func updateUIViewController(_ uiViewController: FourDirectionalPlayerContainer, context: Context) {}
 }
 
 class FourDirectionalPlayerContainer: UIViewController, FourDirectionalPlayerDataSource, MobilePlaybackControllerDisplay {
@@ -78,10 +73,6 @@ class FourDirectionalPlayerContainer: UIViewController, FourDirectionalPlayerDat
 
     func navigate(_ direction: PlaybackNavigationDirection) {
         horizontalVC.navigate(direction)
-    }
-
-    func setHorizontalPagingEnabled(_ isEnabled: Bool) {
-        horizontalVC.setPagingEnabled(isEnabled)
     }
 
     fileprivate func getHtml(x: Int, y: Int) -> String {
@@ -331,14 +322,6 @@ private class HorizontalPageViewController: UIPageViewController, UIPageViewCont
             changeCollection()
         case .up:
             return
-        }
-    }
-
-    func setPagingEnabled(_ isEnabled: Bool) {
-        for subview in view.subviews {
-            if let scrollView = subview as? UIScrollView {
-                scrollView.isScrollEnabled = isEnabled
-            }
         }
     }
 
