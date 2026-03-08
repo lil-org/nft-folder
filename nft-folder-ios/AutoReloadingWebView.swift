@@ -5,8 +5,10 @@ import WebKit
 
 class AutoReloadingWebView: WKWebView {
     
+    private static var isResizeReloadEnabled = true
+    
     private var lastLoadedHtmlString: String?
-    private var loadedForBounds: CGRect?
+    private var needsLoadWhenVisible = false
     
     static var new: AutoReloadingWebView {
         let webConfiguration = WKWebViewConfiguration()
@@ -22,40 +24,51 @@ class AutoReloadingWebView: WKWebView {
     
     override var bounds: CGRect {
         didSet {
-            if bounds != oldValue, let html = lastLoadedHtmlString {
-                loadHTMLString(html, baseURL: nil)
-            }
+            loadPendingContentIfNeeded(oldRect: oldValue)
         }
     }
     
     override var frame: CGRect {
         didSet {
-            if frame != oldValue, let html = lastLoadedHtmlString {
-                loadHTMLString(html, baseURL: nil)
-            }
+            loadPendingContentIfNeeded(oldRect: oldValue)
         }
     }
     
     @discardableResult override func loadHTMLString(_ string: String, baseURL: URL?) -> WKNavigation? {
         let newHtmlContent = lastLoadedHtmlString != string
-        let newBounds = bounds != loadedForBounds
         
         if newHtmlContent {
             lastLoadedHtmlString = string
         }
-        
-        loadedForBounds = bounds
-        
+
         if !hasVisibleSize {
+            needsLoadWhenVisible = true
             stopLoading()
+            return nil
         }
         
-        guard hasVisibleSize, newBounds || newHtmlContent else { return nil }
+        guard newHtmlContent || needsLoadWhenVisible else { return nil }
+        needsLoadWhenVisible = false
         return super.loadHTMLString(string, baseURL: baseURL)
     }
     
     private var hasVisibleSize: Bool {
         return bounds.size.width > 5 && bounds.size.height > 5
+    }
+    
+    static func setResizeReloadEnabled(_ isEnabled: Bool) {
+        isResizeReloadEnabled = isEnabled
+    }
+    
+    private func loadPendingContentIfNeeded(oldRect: CGRect) {
+        guard Self.isResizeReloadEnabled else { return }
+        guard !hasVisibleSize(oldRect), hasVisibleSize else { return }
+        guard needsLoadWhenVisible, let html = lastLoadedHtmlString else { return }
+        loadHTMLString(html, baseURL: nil)
+    }
+    
+    private func hasVisibleSize(_ rect: CGRect) -> Bool {
+        return rect.size.width > 5 && rect.size.height > 5
     }
     
 }

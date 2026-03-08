@@ -20,6 +20,11 @@ struct MobilePlayerView: View {
     @State private var isAllowedToHideStatusBar = false
     @State private var currentToken = GeneratedToken.empty
     @State private var currentCoordinate = PlayerCoordinate(x: 0, y: 0)
+    @State private var dismissDragOffsetX: CGFloat = 0
+    @State private var dismissDragOffsetY: CGFloat = 0
+    @State private var dismissDragScale: CGFloat = 1
+    @State private var dismissDragOpacity: CGFloat = 1
+    @State private var isDismissingInteractively = false
     
     init(config: MobilePlayerConfig, dismiss: @escaping () -> Void) {
         self.initialConfig = config
@@ -35,8 +40,54 @@ struct MobilePlayerView: View {
     }
     
     var body: some View {
+        let dismissDragGesture = DragGesture(minimumDistance: 3)
+            .onChanged { gesture in
+                let vertical = gesture.translation.height
+                let horizontal = abs(gesture.translation.width)
+                if !isDismissingInteractively {
+                    guard vertical > 0, vertical > horizontal * 0.8 else { return }
+                    isDismissingInteractively = true
+                }
+
+                let clampedVertical = max(0, vertical)
+                let progress = min(clampedVertical / 700, 1)
+                dismissDragOffsetX = gesture.translation.width * 0.22
+                dismissDragOffsetY = clampedVertical
+                dismissDragScale = 1 - progress * 0.14
+                dismissDragOpacity = 1 - progress * 0.35
+            }
+            .onEnded { _ in
+                let dismissThreshold: CGFloat = 120
+                guard isDismissingInteractively else { return }
+                if dismissDragOffsetY > dismissThreshold {
+                    withAnimation(.easeOut(duration: 0.18)) {
+                        dismissDragOffsetX = 0
+                        dismissDragOffsetY = UIScreen.main.bounds.height
+                        dismissDragScale = 0.82
+                        dismissDragOpacity = 0
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(170)) {
+                        dismiss()
+                        updateExternalDisplayToken(GeneratedToken.empty)
+                        dismissDragOffsetX = 0
+                        dismissDragOffsetY = 0
+                        dismissDragScale = 1
+                        dismissDragOpacity = 1
+                        isDismissingInteractively = false
+                    }
+                } else {
+                    withAnimation(.interactiveSpring(response: 0.3, dampingFraction: 0.85)) {
+                        dismissDragOffsetX = 0
+                        dismissDragOffsetY = 0
+                        dismissDragScale = 1
+                        dismissDragOpacity = 1
+                        isDismissingInteractively = false
+                    }
+                }
+            }
+
         ZStack {
-            Color.black.edgesIgnoringSafeArea(.all)
+            Color.black.opacity(dismissDragOpacity).edgesIgnoringSafeArea(.all)
             FourDirectionalPlayerContainerView(initialConfig: initialConfig, onCoordinateUpdate: { newCoordinate in
                 DispatchQueue.main.async {
                     self.currentCoordinate = newCoordinate
@@ -44,7 +95,7 @@ struct MobilePlayerView: View {
                     updateExternalDisplayToken(currentToken)
                 }
                 
-            }).edgesIgnoringSafeArea(.all)
+            }, isHorizontalPagingEnabled: !isDismissingInteractively).edgesIgnoringSafeArea(.all)
                 .onTapGesture {
                     showControls.toggle()
                 }
@@ -82,29 +133,22 @@ struct MobilePlayerView: View {
                     Spacer()
                     HStack(spacing: buttonShapesEnabled ? nil : 20) {
                         Button(action: {
-                            goUp()
+                            goBack()
                         }) {
                             makeCircularImageView(image: Images.back)
                         }
                         .keyboardShortcut(.leftArrow, modifiers: [])
                         Button(action: {
-                            goDown()
+                            goForward()
                         }) {
                             makeCircularImageView(image: Images.forward)
                         }
                         .keyboardShortcut(.rightArrow, modifiers: [])
                         Button(action: {
-                            goBack()
+                            changeCollection()
                         }) {
-                            makeCircularImageView(image: Images.up)
+                            makeCircularImageView(image: Images.changeCollection)
                         }
-                        .keyboardShortcut(.upArrow, modifiers: [])
-                        Button(action: {
-                            goForward()
-                        }) {
-                            makeCircularImageView(image: Images.down)
-                        }
-                        .keyboardShortcut(.downArrow, modifiers: [])
                         Button(action: {
                             startPip()
                             Haptic.selectionChanged()
@@ -117,7 +161,17 @@ struct MobilePlayerView: View {
                 }
             }
         }
+        .scaleEffect(dismissDragScale, anchor: .top)
+        .offset(x: dismissDragOffsetX, y: dismissDragOffsetY)
+        .simultaneousGesture(dismissDragGesture)
+        .onChange(of: isDismissingInteractively) { _, isDismissing in
+            AutoReloadingWebView.setResizeReloadEnabled(!isDismissing)
+        }
+        .onDisappear {
+            AutoReloadingWebView.setResizeReloadEnabled(true)
+        }
         .onAppear {
+            AutoReloadingWebView.setResizeReloadEnabled(true)
             if !isAllowedToHideStatusBar {
                 let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene
                 let window = scene?.windows.first
@@ -155,13 +209,9 @@ struct MobilePlayerView: View {
     private func goBack() {
         MobilePlaybackController.shared.goBack(uuid: initialConfig.id)
     }
-    
-    private func goUp() {
-        MobilePlaybackController.shared.goUp(uuid: initialConfig.id)
-    }
-    
-    private func goDown() {
-        MobilePlaybackController.shared.goDown(uuid: initialConfig.id)
+
+    private func changeCollection() {
+        MobilePlaybackController.shared.changeCollection(uuid: initialConfig.id)
     }
     
     private func viewOnWeb() {

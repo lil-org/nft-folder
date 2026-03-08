@@ -10,30 +10,36 @@ struct PlayerCoordinate: Hashable {
 }
 
 struct FourDirectionalPlayerContainerView: UIViewControllerRepresentable {
-    
+
     private let initialConfig: MobilePlayerConfig
     private let onCoordinateUpdate: ((PlayerCoordinate) -> Void)
-    
-    init(initialConfig: MobilePlayerConfig, onCoordinateUpdate: @escaping (PlayerCoordinate) -> Void) {
+    private let isHorizontalPagingEnabled: Bool
+
+    init(
+        initialConfig: MobilePlayerConfig,
+        onCoordinateUpdate: @escaping (PlayerCoordinate) -> Void,
+        isHorizontalPagingEnabled: Bool
+    ) {
         self.initialConfig = initialConfig
         self.onCoordinateUpdate = onCoordinateUpdate
+        self.isHorizontalPagingEnabled = isHorizontalPagingEnabled
     }
-    
+
     func makeUIViewController(context: Context) -> FourDirectionalPlayerContainer {
         return FourDirectionalPlayerContainer(initialConfig: initialConfig, onCoordinateUpdate: onCoordinateUpdate)
     }
-    
+
     func updateUIViewController(_ uiViewController: FourDirectionalPlayerContainer, context: Context) {
-        
+        uiViewController.setHorizontalPagingEnabled(isHorizontalPagingEnabled)
     }
 }
 
 class FourDirectionalPlayerContainer: UIViewController, FourDirectionalPlayerDataSource, MobilePlaybackControllerDisplay {
-    
+
     private let initialConfig: MobilePlayerConfig
     private let onCoordinateUpdate: ((PlayerCoordinate) -> Void)
-    
-    private lazy var verticalVC = VerticalPageViewController(fourDirectionalPlayerDataSource: self)
+
+    private lazy var horizontalVC = HorizontalPageViewController(fourDirectionalPlayerDataSource: self)
     private var renderedCoordinates = Set<PlayerCoordinate>()
 
     init(initialConfig: MobilePlayerConfig, onCoordinateUpdate: @escaping (PlayerCoordinate) -> Void) {
@@ -41,7 +47,7 @@ class FourDirectionalPlayerContainer: UIViewController, FourDirectionalPlayerDat
         self.onCoordinateUpdate = onCoordinateUpdate
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("yo")
     }
@@ -49,70 +55,74 @@ class FourDirectionalPlayerContainer: UIViewController, FourDirectionalPlayerDat
     override func viewDidLoad() {
         super.viewDidLoad()
         MobilePlaybackController.shared.subscribe(config: initialConfig, display: self)
-        addChild(verticalVC)
-        view.addSubview(verticalVC.view)
-        verticalVC.didMove(toParent: self)
-        verticalVC.view.translatesAutoresizingMaskIntoConstraints = false
+        addChild(horizontalVC)
+        view.addSubview(horizontalVC.view)
+        horizontalVC.didMove(toParent: self)
+        horizontalVC.view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            verticalVC.view.topAnchor.constraint(equalTo: view.topAnchor),
-            verticalVC.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            verticalVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            verticalVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            horizontalVC.view.topAnchor.constraint(equalTo: view.topAnchor),
+            horizontalVC.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            horizontalVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            horizontalVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         UIApplication.shared.isIdleTimerDisabled = true
     }
-    
+
     deinit {
         UIApplication.shared.isIdleTimerDisabled = false
     }
-    
+
     func getCurrentCoordinate() -> (Int, Int) {
-        return verticalVC.getCurrentCoordinate()
+        return horizontalVC.getCurrentCoordinate()
     }
-    
+
     func navigate(_ direction: PlaybackNavigationDirection) {
-        verticalVC.navigate(direction)
+        horizontalVC.navigate(direction)
     }
-    
+
+    func setHorizontalPagingEnabled(_ isEnabled: Bool) {
+        horizontalVC.setPagingEnabled(isEnabled)
+    }
+
     fileprivate func getHtml(x: Int, y: Int) -> String {
         return MobilePlaybackController.shared.getToken(uuid: initialConfig.id, coordinate: PlayerCoordinate(x: x, y: y)).html
     }
-    
+
     fileprivate func didRenderCoordinate(_ coordinate: (Int, Int)) {
         guard renderedCoordinates.count < 2 else { return }
         renderedCoordinates.insert(PlayerCoordinate(x: coordinate.0, y: coordinate.1))
         didUpdateRenderedCoordinates()
     }
-    
+
     fileprivate func didCleanupCoordinate(_ coordinate: (Int, Int)) {
         renderedCoordinates.remove(PlayerCoordinate(x: coordinate.0, y: coordinate.1))
         didUpdateRenderedCoordinates()
     }
-    
+
     private func didUpdateRenderedCoordinates() {
         if renderedCoordinates.count == 1, let coordinate = renderedCoordinates.first {
             onCoordinateUpdate(coordinate)
         }
     }
-    
+
 }
 
 private protocol FourDirectionalPlayerDataSource: AnyObject {
-    
+
     func getHtml(x: Int, y: Int) -> String
     func didRenderCoordinate(_ coordinate: (Int, Int))
     func didCleanupCoordinate(_ coordinate: (Int, Int))
-    
+
 }
 
 private class SpecificPageViewController: UIViewController {
-    
+
     private weak var fourDirectionalPlayerDataSource: FourDirectionalPlayerDataSource?
     private var webView: WKWebView!
-    
+
     private(set) var horizontalIndex: Int
     private(set) var verticalIndex: Int
-    
+
     private var renderedCoordinate: (Int, Int)?
     private var willOrDidAppear = false
 
@@ -127,18 +137,18 @@ private class SpecificPageViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("yo")
     }
-    
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         cleanupDisplayedContent()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         willOrDidAppear = true
         renderCurrentItem()
     }
-    
+
     private func cleanupDisplayedContent() {
         webView.loadHTMLString("", baseURL: nil)
         if let renderedCoordinate = renderedCoordinate {
@@ -146,18 +156,18 @@ private class SpecificPageViewController: UIViewController {
         }
         renderedCoordinate = nil
     }
-    
+
     func update(horizontalIndex: Int) {
         self.horizontalIndex = horizontalIndex
     }
-    
+
     func update(verticalIndex: Int) {
         self.verticalIndex = verticalIndex
     }
-    
+
     func renderCurrentItem() {
         guard willOrDidAppear else { return }
-        
+
         if webView == nil {
             webView = AutoReloadingWebView.new
             webView.isUserInteractionEnabled = false
@@ -170,7 +180,7 @@ private class SpecificPageViewController: UIViewController {
                 webView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
             ])
         }
-        
+
         let newCoordinate = (horizontalIndex, verticalIndex)
         if let renderedCoordinate = renderedCoordinate, renderedCoordinate == newCoordinate {
             return
@@ -182,38 +192,41 @@ private class SpecificPageViewController: UIViewController {
             fourDirectionalPlayerDataSource?.didRenderCoordinate(newCoordinate)
         }
     }
-    
+
 }
 
 private class HorizontalPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
-    
+
     let pageA: SpecificPageViewController
     let pageB: SpecificPageViewController
     let pageC: SpecificPageViewController
-    
-    init(verticalIndex: Int, fourDirectionalPlayerDataSource: FourDirectionalPlayerDataSource) {
-        pageA = SpecificPageViewController(horizontalIndex: 0, verticalIndex: verticalIndex, fourDirectionalPlayerDataSource: fourDirectionalPlayerDataSource)
-        pageB = SpecificPageViewController(horizontalIndex: 1, verticalIndex: verticalIndex, fourDirectionalPlayerDataSource: fourDirectionalPlayerDataSource)
-        pageC = SpecificPageViewController(horizontalIndex: -1, verticalIndex: verticalIndex, fourDirectionalPlayerDataSource: fourDirectionalPlayerDataSource)
-        super.init(transitionStyle: .scroll, navigationOrientation: .vertical, options: nil)
+
+    private var isNavigating = false
+
+    init(fourDirectionalPlayerDataSource: FourDirectionalPlayerDataSource) {
+        pageA = SpecificPageViewController(horizontalIndex: 0, verticalIndex: 0, fourDirectionalPlayerDataSource: fourDirectionalPlayerDataSource)
+        pageB = SpecificPageViewController(horizontalIndex: 1, verticalIndex: 0, fourDirectionalPlayerDataSource: fourDirectionalPlayerDataSource)
+        pageC = SpecificPageViewController(horizontalIndex: -1, verticalIndex: 0, fourDirectionalPlayerDataSource: fourDirectionalPlayerDataSource)
+        super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("yo")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource = self
         delegate = self
         setViewControllers([pageA], direction: .forward, animated: false, completion: nil)
     }
-    
-    func getVerticalIndex() -> Int {
-        return pageA.verticalIndex
+
+    func getCurrentCoordinate() -> (Int, Int) {
+        guard let currentPage = viewControllers?.first as? SpecificPageViewController else { return (0, 0) }
+        return (currentPage.horizontalIndex, currentPage.verticalIndex)
     }
-    
-    func update(currentHorizontalIndex: Int) {
+
+    private func update(currentHorizontalIndex: Int) {
         guard let currentPage = viewControllers?.first as? SpecificPageViewController else { return }
         switch currentPage {
         case pageA:
@@ -232,13 +245,21 @@ private class HorizontalPageViewController: UIPageViewController, UIPageViewCont
             break
         }
     }
-    
-    func update(verticalIndex: Int) {
+
+    private func update(verticalIndex: Int) {
         pageA.update(verticalIndex: verticalIndex)
         pageB.update(verticalIndex: verticalIndex)
         pageC.update(verticalIndex: verticalIndex)
     }
-    
+
+    private func changeCollection() {
+        let coordinate = getCurrentCoordinate()
+        update(verticalIndex: coordinate.1 + 1)
+        if let currentPage = viewControllers?.first as? SpecificPageViewController {
+            currentPage.renderCurrentItem()
+        }
+    }
+
     func pageViewController(_ pvc: UIPageViewController, viewControllerBefore vc: UIViewController) -> UIViewController? {
         switch vc {
         case pageA:
@@ -275,10 +296,10 @@ private class HorizontalPageViewController: UIPageViewController, UIPageViewCont
         guard let destinationPage = pendingViewControllers.first as? SpecificPageViewController else { return }
         destinationPage.renderCurrentItem()
     }
-    
-    func navigate(_ direction: UIPageViewController.NavigationDirection, completion: @escaping () -> Void) {
+
+    private func navigate(_ direction: UIPageViewController.NavigationDirection, completion: @escaping () -> Void) {
         guard let currentPage = viewControllers?.first as? SpecificPageViewController else { return }
-        
+
         let targetViewControllers: [UIViewController]
         switch direction {
         case .reverse:
@@ -290,119 +311,35 @@ private class HorizontalPageViewController: UIPageViewController, UIPageViewCont
         default:
             return
         }
-        
+
         pageViewController(self, willTransitionTo: targetViewControllers)
         setViewControllers(targetViewControllers, direction: direction, animated: true) { _ in
             completion()
         }
     }
-    
-}
 
-private class VerticalPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
-    
-    let horizontal1: HorizontalPageViewController
-    let horizontal2: HorizontalPageViewController
-    let horizontal3: HorizontalPageViewController
-    
-    private var isNavigating = false
-    private var latestHorizontalIndexes = [Int: Int]()
-
-    init(fourDirectionalPlayerDataSource: FourDirectionalPlayerDataSource) {
-        horizontal1 = HorizontalPageViewController(verticalIndex: 0, fourDirectionalPlayerDataSource: fourDirectionalPlayerDataSource)
-        horizontal2 = HorizontalPageViewController(verticalIndex: 1, fourDirectionalPlayerDataSource: fourDirectionalPlayerDataSource)
-        horizontal3 = HorizontalPageViewController(verticalIndex: -1, fourDirectionalPlayerDataSource: fourDirectionalPlayerDataSource)
-        super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("yo")
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        dataSource = self
-        delegate = self
-        setViewControllers([horizontal1], direction: .forward, animated: false, completion: nil)
-    }
-
-    func getCurrentCoordinate() -> (Int, Int) {
-        guard let currentHorizontalController = viewControllers?.first as? HorizontalPageViewController,
-              let currentPage = currentHorizontalController.viewControllers?.first as? SpecificPageViewController else { return (0, 0) }
-        return (currentPage.horizontalIndex, currentPage.verticalIndex)
-    }
-    
     func navigate(_ direction: PlaybackNavigationDirection) {
-        guard !isNavigating, let currentHorizontalController = viewControllers?.first as? HorizontalPageViewController else { return }
-        
-        isNavigating = true
-        
-        let pageViewControllerDirection: UIPageViewController.NavigationDirection
-        let targetViewControllers: [UIViewController]
-        
+        guard !isNavigating else { return }
+
         switch direction {
-        case .up:
-            guard let targetViewController = pageViewController(self, viewControllerBefore: currentHorizontalController) else { return }
-            pageViewControllerDirection = .reverse
-            targetViewControllers = [targetViewController]
-        case .down:
-            guard let targetViewController = pageViewController(self, viewControllerAfter: currentHorizontalController) else { return }
-            pageViewControllerDirection = .forward
-            targetViewControllers = [targetViewController]
         case .back, .forward:
-            currentHorizontalController.navigate(direction == .back ? .reverse : .forward) { [weak self] in
+            isNavigating = true
+            navigate(direction == .back ? .reverse : .forward) { [weak self] in
                 self?.isNavigating = false
             }
+        case .down, .nextCollection:
+            changeCollection()
+        case .up:
             return
-        }
-        
-        pageViewController(self, willTransitionTo: targetViewControllers)
-        setViewControllers(targetViewControllers, direction: pageViewControllerDirection, animated: true) { [weak self] _ in
-            self?.isNavigating = false
-        }
-    }
-    
-    func pageViewController(_ pvc: UIPageViewController, viewControllerBefore vc: UIViewController) -> UIViewController? {
-        switch vc {
-        case horizontal1:
-            horizontal3.update(verticalIndex: horizontal1.getVerticalIndex() - 1)
-            return horizontal3
-        case horizontal2:
-            horizontal1.update(verticalIndex: horizontal2.getVerticalIndex() - 1)
-            return horizontal1
-        case horizontal3:
-            horizontal2.update(verticalIndex: horizontal3.getVerticalIndex() - 1)
-            return horizontal2
-        default:
-            return horizontal1
         }
     }
 
-    func pageViewController(_ pvc: UIPageViewController, viewControllerAfter vc: UIViewController) -> UIViewController? {
-        switch vc {
-        case horizontal1:
-            horizontal2.update(verticalIndex: horizontal1.getVerticalIndex() + 1)
-            return horizontal2
-        case horizontal2:
-            horizontal3.update(verticalIndex: horizontal2.getVerticalIndex() + 1)
-            return horizontal3
-        case horizontal3:
-            horizontal1.update(verticalIndex: horizontal3.getVerticalIndex() + 1)
-            return horizontal1
-        default:
-            return horizontal1
+    func setPagingEnabled(_ isEnabled: Bool) {
+        for subview in view.subviews {
+            if let scrollView = subview as? UIScrollView {
+                scrollView.isScrollEnabled = isEnabled
+            }
         }
     }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-        guard let currentHorizontalController = viewControllers?.first as? HorizontalPageViewController,
-              let currentPage = currentHorizontalController.viewControllers?.first as? SpecificPageViewController,
-              let destinationHorizontalController = pendingViewControllers.first as? HorizontalPageViewController,
-              let destinationPage = destinationHorizontalController.viewControllers?.first as? SpecificPageViewController else { return }
-        latestHorizontalIndexes[currentPage.verticalIndex] = currentPage.horizontalIndex
-        let destinationHorizontalIndex = latestHorizontalIndexes[destinationPage.verticalIndex] ?? 0
-        destinationHorizontalController.update(currentHorizontalIndex: destinationHorizontalIndex)
-        destinationPage.renderCurrentItem()
-    }
-    
+
 }

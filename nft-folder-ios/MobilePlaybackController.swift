@@ -10,7 +10,7 @@ protocol MobilePlaybackControllerDisplay: AnyObject {
 }
 
 enum PlaybackNavigationDirection {
-    case up, down, back, forward
+    case up, down, back, forward, nextCollection
 }
 
 class MobilePlaybackController {
@@ -51,6 +51,11 @@ class MobilePlaybackController {
     func goDown(uuid: UUID) {
         guard let display = displays[uuid] else { return }
         display.navigate(.down)
+    }
+
+    func changeCollection(uuid: UUID) {
+        guard let display = displays[uuid] else { return }
+        display.navigate(.nextCollection)
     }
     
     func subscribe(config: MobilePlayerConfig, display: MobilePlaybackControllerDisplay) {
