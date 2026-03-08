@@ -36,7 +36,6 @@ struct MobileCollectionsView: View {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Menu {
                             Text(Strings.sendFeedback)
-                            Button(Strings.farcaster) { UIApplication.shared.open(URL.farcaster) }
                             Button(Strings.github) { UIApplication.shared.open(URL.github) }
                             Button(Strings.mail) { UIApplication.shared.open(URL.mail) }
                             Button(Strings.x) { UIApplication.shared.open(URL.x) }
